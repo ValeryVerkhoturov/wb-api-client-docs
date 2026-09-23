@@ -1,19 +1,19 @@
 # Python
 
-Package: [`valeryverkhoturov-wb-api-client`](https://pypi.org/project/valeryverkhoturov-wb-api-client/) on PyPI.
+Пакет: [`valeryverkhoturov-wb-api-client`](https://pypi.org/project/valeryverkhoturov-wb-api-client/) на PyPI.
 
 - **Python:** 3.9+
 - **HTTP:** `urllib3`
-- **Models:** `pydantic` v2
-- **Secret wrapper:** `pydantic.SecretStr`
+- **Модели:** `pydantic` v2
+- **Обёртка секретов:** `pydantic.SecretStr`
 
-## Install
+## Установка
 
 ```bash
 pip install valeryverkhoturov-wb-api-client
 ```
 
-For projects on Poetry / uv / PDM, add the dependency the usual way:
+Для проектов на Poetry / uv / PDM добавляется как обычная зависимость:
 
 ::: code-group
 
@@ -34,21 +34,21 @@ poetry add valeryverkhoturov-wb-api-client
 
 :::
 
-## Import shape
+## Форма импортов
 
-The distribution installs one top-level package `wb_api_client` with 13 sub-modules — one per WB API category. Each sub-module is a self-contained SDK with its own `Configuration`, `ApiClient`, and `api` namespace.
+Дистрибутив ставит один пакет `wb_api_client` с 13 под-модулями — по одному на категорию WB API. Каждый под-модуль — самостоятельный SDK со своими `Configuration`, `ApiClient` и пространством `api`.
 
 ```python
 from wb_api_client.<slug> import Configuration, ApiClient
 from wb_api_client.<slug>.api import DefaultApi
 ```
 
-## Sub-modules
+## Под-модули
 
-| Slug | Category |
+| Слаг | Категория |
 |---|---|
-| `general` | Общее — ping, seller info, user management |
-| `items` | Работа с товарами (Content) |
+| `general` | Общее — ping, инфо о продавце, управление пользователями |
+| `items` | Работа с товарами (Контент) |
 | `orders_fbs` | Заказы FBS |
 | `orders_dbw` | Заказы DBW |
 | `dbs` | DBS |
@@ -61,49 +61,49 @@ from wb_api_client.<slug>.api import DefaultApi
 | `reports` | Отчёты |
 | `finances` | Документы и бухгалтерия |
 
-The exact `Api` classes per sub-module (some categories have `DefaultApi`, some have `CSVApi`, some have `WBAPIApi`) are documented in the per-release README: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
+Точные классы `Api` в каждом под-модуле (где-то `DefaultApi`, где-то `CSVApi`, где-то `WBAPIApi`) описаны в README, который перегенерируется каждый релиз: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
 
-## Auth
+## Авторизация
 
 ```python
 from wb_api_client.items import Configuration, ApiClient
 from wb_api_client.items.api import DefaultApi
 
-cfg = Configuration(access_token="<your WB JWT>")   # wrapped in SecretStr
+cfg = Configuration(access_token="<ваш JWT WB>")   # оборачивается в SecretStr
 client = ApiClient(cfg)
 api = DefaultApi(client)
 ```
 
-Passing a bare string is fine — it's auto-wrapped. If you want the raw token back for logging / diagnostics:
+Обычная строка тоже подойдёт — она автоматически оборачивается. Чтобы прочитать сырое значение (например, для диагностики):
 
 ```python
 cfg.access_token                     # SecretStr(**********)
-cfg.access_token.get_secret_value()  # "<your WB JWT>"
+cfg.access_token.get_secret_value()  # "<ваш JWT WB>"
 ```
 
 ## Async / sync
 
-The generated client is **synchronous** (urllib3). If you need async, run calls in a thread pool:
+Сгенерированный клиент — **синхронный** (urllib3). Если нужна асинхронность — запускайте вызовы в тред-пуле:
 
 ```python
 import asyncio
 result = await asyncio.to_thread(api.get_v1_seller_info)
 ```
 
-A native-async variant is not on the roadmap — openapi-generator's async-python template lags the sync one.
+Нативно-асинхронный вариант в планах нет — asynс-python-шаблон openapi-generator отстаёт от синхронного.
 
-## Type hints
+## Типизация
 
-Every model is a pydantic v2 model. Editors and type-checkers see full types:
+Каждая модель — pydantic v2. IDE и статические анализаторы видят полные типы:
 
 ```python
-from wb_api_client.items.models import Product   # dataclass-like pydantic model
+from wb_api_client.items.models import Product   # pydantic-модель, dataclass-like
 p: Product = Product.model_validate(some_dict)
 ```
 
-## Testing against the client
+## Тестирование против клиента
 
-The `Configuration` object accepts a `host` override so you can point at a mock server:
+У `Configuration` есть параметр `host` — можно направить на мок-сервер:
 
 ```python
 cfg = Configuration(
@@ -112,8 +112,8 @@ cfg = Configuration(
 )
 ```
 
-## See also
+## См. также
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
-- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md)
+- [Аутентификация](/guides/authentication)
+- [Обработка ошибок](/guides/error-handling)
+- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md)

@@ -1,13 +1,13 @@
 # TypeScript
 
-Package: [`@valeryverkhoturov/wb-api-client`](https://www.npmjs.com/package/@valeryverkhoturov/wb-api-client) on npm.
+Пакет: [`@valeryverkhoturov/wb-api-client`](https://www.npmjs.com/package/@valeryverkhoturov/wb-api-client) на npm.
 
 - **Node:** 18+
 - **HTTP:** `axios`
-- **Types:** first-class TypeScript, ships `.d.ts`
-- **Secret wrapper:** inlined `SecretString` class
+- **Типы:** first-class TypeScript, поставляются `.d.ts`
+- **Обёртка секретов:** встроенный класс `SecretString`
 
-## Install
+## Установка
 
 ::: code-group
 
@@ -29,9 +29,9 @@ bun add @valeryverkhoturov/wb-api-client
 
 :::
 
-## Import shape
+## Форма импортов
 
-Every sub-module is a subpath export. Import from `@valeryverkhoturov/wb-api-client/<slug>`:
+Каждый под-модуль — отдельный subpath-экспорт. Импортируйте из `@valeryverkhoturov/wb-api-client/<slug>`:
 
 ```ts
 import {
@@ -40,32 +40,30 @@ import {
 } from "@valeryverkhoturov/wb-api-client/items";
 ```
 
-You never import from the root `@valeryverkhoturov/wb-api-client` — there's no barrel to avoid pulling in 13 SDKs when you only need one.
+Импорт с корня `@valeryverkhoturov/wb-api-client` не поддерживается — barrel-экспорта нет специально, чтобы не тянуть в бандл все 13 SDK, когда нужен один.
 
-## Sub-modules
+## Под-модули
 
-Sub-path per category:
+По под-модулю на категорию: `general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
 
-`general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
+Полный список классов `Api` на каждый модуль — в per-release README: [clients/typescript/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md).
 
-Full list of `Api` classes per module lives in the per-release README: [clients/typescript/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md).
-
-## Auth
+## Авторизация
 
 ```ts
 import { Configuration, DefaultApi } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
+cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
 const res = await api.someEndpoint();
 console.log(res.data);
 ```
 
-The `setAccessToken` method wraps the value in a `SecretString` internally. Direct assignment (`cfg.accessToken = "..."`) is not supported — always go through the setter so redaction is guaranteed.
+`setAccessToken` внутри оборачивает значение в `SecretString`. Прямое присваивание (`cfg.accessToken = "..."`) не поддерживается — всегда используйте сеттер, чтобы гарантировать маскирование.
 
-To read the raw value back (e.g. for a diagnostic log):
+Получить сырое значение обратно (например, для диагностического лога):
 
 ```ts
 cfg.accessToken.exposeSecret();
@@ -73,7 +71,7 @@ cfg.accessToken.exposeSecret();
 
 ## User-Agent
 
-The client sends `ValeryVerkhoturov/wb-api-client/typescript` on every request — WB uses this as a coarse-grained routing signal. To add your own app identifier without replacing it:
+Клиент отправляет `ValeryVerkhoturov/wb-api-client/typescript` в каждом запросе — WB использует это как грубый сигнал маршрутизации. Чтобы добавить свой идентификатор приложения, не убирая базовый:
 
 ```ts
 const cfg = new Configuration({});
@@ -90,22 +88,22 @@ cfg.baseOptions = {
 
 ## ESM / CJS
 
-The package publishes dual entry points — `import` from ESM code, `require` from CommonJS. TypeScript `"module": "NodeNext"` or `"module": "bundler"` in your `tsconfig.json` picks the right one automatically.
+Пакет публикует dual entry points — `import` из ESM-кода, `require` из CommonJS. В `tsconfig.json` `"module": "NodeNext"` или `"module": "bundler"` выбирают правильный автоматически.
 
-## Bundler support
+## Поддержка бандлеров
 
-The subpath exports are declared in `package.json` `exports`. Modern bundlers (Vite, Rollup, esbuild, Webpack 5+, Turbopack) respect them out of the box. Webpack 4 does not — upgrade or add a manual alias.
+Subpath-экспорты описаны в `package.json` через `exports`. Современные бандлеры (Vite, Rollup, esbuild, Webpack 5+, Turbopack) их уважают из коробки. Webpack 4 — нет; обновляйте или пропишите алиас руками.
 
-## Testing
+## Тестирование
 
-Point at a mock server via `basePath`:
+Направьте на мок-сервер через `basePath`:
 
 ```ts
 const cfg = new Configuration({ basePath: "http://localhost:8080" });
 ```
 
-## See also
+## См. также
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
-- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md)
+- [Аутентификация](/guides/authentication)
+- [Обработка ошибок](/guides/error-handling)
+- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md)

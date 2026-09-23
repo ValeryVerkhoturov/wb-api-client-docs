@@ -1,13 +1,13 @@
 # Java
 
-Coordinates: `io.github.valeryverkhoturov:wb-api-client` on [Maven Central](https://central.sonatype.com/artifact/io.github.valeryverkhoturov/wb-api-client).
+Координаты: `io.github.valeryverkhoturov:wb-api-client` на [Maven Central](https://central.sonatype.com/artifact/io.github.valeryverkhoturov/wb-api-client).
 
-- **Java:** 8+ (compiled with `-source 1.8 -target 1.8`)
+- **Java:** 8+ (компилируется с `-source 1.8 -target 1.8`)
 - **HTTP:** OkHttp 4
 - **JSON:** Gson + gson-fire
-- **Secret wrapper:** per-sub-module `SecretString`
+- **Обёртка секретов:** `SecretString` в каждом под-пакете
 
-## Install
+## Установка
 
 ::: code-group
 
@@ -37,11 +37,11 @@ libraryDependencies += "io.github.valeryverkhoturov" % "wb-api-client" % "LATEST
 
 :::
 
-Replace `LATEST` with the current `1.YYYYMMDD.N` version from [releases](https://github.com/ValeryVerkhoturov/wb-api-client/releases).
+Замените `LATEST` на актуальную версию `1.YYYYMMDD.N` со [страницы релизов](https://github.com/ValeryVerkhoturov/wb-api-client/releases).
 
-## Package layout
+## Раскладка пакетов
 
-Base package: `io.github.valeryverkhoturov.wbapi`. Each WB category lives in a sub-package with its own `ApiClient`, models, and `api` classes.
+Базовый пакет: `io.github.valeryverkhoturov.wbapi`. Каждая категория WB — свой под-пакет со своим `ApiClient`, моделями и классами `api`.
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
@@ -49,13 +49,13 @@ import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
 ```
 
-## Sub-packages
+## Под-пакеты
 
 `general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
 
-Full per-module API class listing: [clients/java/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/java/README.md).
+Полный список API-классов на модуль: [clients/java/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/java/README.md).
 
-## Auth
+## Авторизация
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
@@ -63,29 +63,29 @@ import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
 
 DefaultApi api = new DefaultApi(client);
 ```
 
-`setBearerToken` requires a `SecretString`, not a bare `String` — that's deliberate. The compile-time constraint pushes callers to think about where the raw token comes from.
+`setBearerToken` принимает именно `SecretString`, а не голую `String` — это сделано специально. Проверка на этапе компиляции заставляет подумать, откуда берётся сырое значение.
 
-To read the raw value back:
+Получить сырое значение обратно:
 
 ```java
 SecretString token = /* ... */;
 String raw = token.exposeSecret();
 ```
 
-## One `SecretString` per sub-package — why?
+## Один `SecretString` на под-пакет — почему
 
-The wrapper is generated into each sub-package rather than shared across the whole library because openapi-generator emits fully isolated SDKs per spec — there is no shared "core" module. Consolidating would require an additional generator pass with cross-module coupling. The cost is a class per sub-package; the benefit is the client remains a pure openapi-generator output with only surgical patches.
+Обёртка генерируется в каждый под-пакет, а не расшарена на всю библиотеку, потому что openapi-generator создаёт полностью изолированные SDK на каждую спецификацию — общего «core»-модуля нет. Объединение потребовало бы дополнительного прохода генерации с межмодульными зависимостями. Цена — один класс на под-пакет; плюс в том, что клиент остаётся чистым выхлопом openapi-generator с минимальными точечными правками.
 
-Practically: `import io.github.valeryverkhoturov.wbapi.items.SecretString` vs `.orders_fbs.SecretString` — pick the one that matches the sub-module you're using.
+На практике: выбирайте `import io.github.valeryverkhoturov.wbapi.items.SecretString` или `.orders_fbs.SecretString` — в зависимости от того, каким под-модулем пользуетесь.
 
-## Custom OkHttp client
+## Свой OkHttp-клиент
 
-Wire your own instance for proxying, interceptors, or custom timeouts:
+Подставьте свой экземпляр для прокси, интерсепторов или кастомных таймаутов:
 
 ```java
 import okhttp3.OkHttpClient;
@@ -100,21 +100,21 @@ ApiClient client = new ApiClient(http);
 client.setBearerToken(new SecretString(TOKEN));
 ```
 
-## Java 8 vs newer
+## Java 8 vs новее
 
-The generator emits Java-8-compatible code with `threetenbp` for date/time. If you're on Java 11+, this still works — no need to add a "modern" dependency. If you'd rather use `java.time` directly, the models expose the underlying string values via `set*ToString` / `get*ToString` methods where applicable.
+Генератор выдаёт Java-8-совместимый код с `threetenbp` для дат и времени. На Java 11+ это по-прежнему работает — «современную» зависимость дополнительно ставить не нужно. Если хочется работать с `java.time` напрямую, модели предоставляют доступ к исходным строковым значениям через методы `set*ToString` / `get*ToString`, где это применимо.
 
-## Testing
+## Тестирование
 
-Override the base path:
+Переопределите base path:
 
 ```java
 ApiClient client = new ApiClient();
 client.setBasePath("http://localhost:8080");
 ```
 
-## See also
+## См. также
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
-- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/java/README.md)
+- [Аутентификация](/guides/authentication)
+- [Обработка ошибок](/guides/error-handling)
+- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/java/README.md)

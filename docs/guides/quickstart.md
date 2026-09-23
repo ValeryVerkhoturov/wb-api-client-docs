@@ -1,21 +1,21 @@
-# Quickstart
+# Быстрый старт
 
-Five minutes: get a token, install the client for your language, make your first API call.
+Пять минут: получить токен, установить клиент для своего языка, сделать первый вызов.
 
-## 1. Get a WB API token
+## 1. Получите API-токен WB
 
-The client libraries are transports — you still need a Wildberries seller account and a personal API token.
+Клиентские библиотеки — это только транспорт; вам всё равно нужен аккаунт продавца Wildberries и персональный API-токен.
 
-1. Sign in at [seller.wildberries.ru](https://seller.wildberries.ru).
-2. Open **Настройки → Доступ к API** (Settings → API access).
-3. Create a token with the scopes you need. For a first test, tick **Контент** (Content) — that's what powers the `items` sub-module.
-4. Copy the JWT. You won't be able to view it again.
+1. Войдите на [seller.wildberries.ru](https://seller.wildberries.ru).
+2. Откройте **Настройки → Доступ к API**.
+3. Создайте токен с нужными правами. Для первого теста поставьте галочку **Контент** — это то, что использует под-модуль `items`.
+4. Скопируйте JWT. Повторно посмотреть его не получится.
 
-Tokens are per-seller and per-scope. If you need to call multiple API categories (`items`, `orders_fbs`, `analytics`, …) create tokens with the union of scopes you need — or one token per scope if you want to keep blast radius small.
+Токены выдаются на продавца и на набор прав. Если нужно вызывать несколько категорий API (`items`, `orders_fbs`, `analytics`, …), создайте токен с объединением прав — или по токену на каждую категорию, если хотите уменьшить радиус поражения при утечке.
 
-## 2. Install
+## 2. Установка
 
-Every SDK ships one package per language. All 13 API categories are inside as sub-modules.
+Один пакет на язык, внутри которого 13 категорий API как отдельные под-модули.
 
 ::: code-group
 
@@ -45,11 +45,11 @@ composer require valeryverkhoturov/wb-api-client
 
 :::
 
-`LATEST` for Java: check the [releases page](https://github.com/ValeryVerkhoturov/wb-api-client/releases) for the current `1.YYYYMMDD.N` version and paste it in.
+`LATEST` для Java: посмотрите текущую версию `1.YYYYMMDD.N` на [странице релизов](https://github.com/ValeryVerkhoturov/wb-api-client/releases) и подставьте её.
 
-## 3. First call — list your seller info
+## 3. Первый вызов — данные о продавце
 
-The `general` sub-module has a `getV1SellerInfo` endpoint that's cheap to call and confirms both your token and your network path.
+В под-модуле `general` есть эндпоинт `getV1SellerInfo` — он дёшев и подтверждает, что и токен, и сетевой путь работают.
 
 ::: code-group
 
@@ -57,7 +57,7 @@ The `general` sub-module has a `getV1SellerInfo` endpoint that's cheap to call a
 from wb_api_client.general import Configuration, ApiClient
 from wb_api_client.general.api import DefaultApi
 
-cfg = Configuration(access_token="<your WB JWT>")
+cfg = Configuration(access_token="<ваш JWT WB>")
 api = DefaultApi(ApiClient(cfg))
 
 info = api.get_v1_seller_info()
@@ -71,7 +71,7 @@ import {
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
+cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
 const info = await api.getV1SellerInfo();
@@ -90,7 +90,7 @@ import (
 
 func main() {
     cfg := wbgeneral.NewConfiguration()
-    cfg.SetAccessToken("<your WB JWT>")
+    cfg.SetAccessToken("<ваш JWT WB>")
     client := wbgeneral.NewAPIClient(cfg)
 
     info, _, err := client.DefaultAPI.GetV1SellerInfo(context.Background()).Execute()
@@ -107,7 +107,7 @@ import io.github.valeryverkhoturov.wbapi.general.SecretString;
 import io.github.valeryverkhoturov.wbapi.general.api.DefaultApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
 System.out.println(api.getV1SellerInfo());
@@ -120,7 +120,7 @@ use ValeryVerkhoturov\WbApiClient\General\Api\DefaultApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
 print_r($api->getV1SellerInfo());
@@ -128,20 +128,20 @@ print_r($api->getV1SellerInfo());
 
 :::
 
-If that returns your seller data — you're wired up.
+Если вернулись данные о вашем продавце — всё подключено.
 
-## 4. Where to go next
+## 4. Дальше
 
-- **[Authentication](/guides/authentication)** — how the secret-string wrapper works, why you should never print your token, and how to expose the raw value when you actually need to.
-- **[Error handling](/guides/error-handling)** — WB's status codes, retry strategy for 429/5xx, and how errors surface in each language.
-- **[Language pages](/languages/python)** — every sub-module, install snippet, and the shape of each `Api` class.
+- **[Аутентификация](/guides/authentication)** — как устроен SecretString, зачем не выводить токен и как получить сырое значение, когда оно действительно нужно.
+- **[Обработка ошибок](/guides/error-handling)** — коды ответов WB, стратегия ретраев на 429/5xx и как ошибки выглядят в каждом языке.
+- **[Страницы языков](/languages/python)** — все под-модули, сниппеты установки и форма каждого класса `Api`.
 
-## Troubleshooting the first call
+## Что делать, если первый вызов не проходит
 
-| Symptom | Likely cause | Fix |
+| Симптом | Вероятная причина | Что делать |
 |---|---|---|
-| `401 Unauthorized` | Token wrong / expired / not for this scope | Regenerate in Seller portal; ensure the scope matches the module (e.g. `Контент` for `items`) |
-| `403 Forbidden` | Token valid but scope insufficient | Add the required scope to the token, or make a new one |
-| `429 Too Many Requests` | You've hit WB's rate limit | Wait for `Retry-After` and back off; the SDK does not auto-retry |
-| Connection hangs | Corporate proxy / TLS interception | Set `HTTPS_PROXY` env var; most clients honor it |
-| `ImportError` / `Cannot find module` | Installed the wrong package name | Package is `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client` — the bare `wb-api-client` name is a different project |
+| `401 Unauthorized` | Токен неверен / просрочен / без нужных прав | Перевыпустите в кабинете продавца; убедитесь, что права токена подходят под модуль (например, «Контент» для `items`) |
+| `403 Forbidden` | Токен валиден, но прав недостаточно | Добавьте нужные права токену или создайте новый |
+| `429 Too Many Requests` | Упёрлись в лимит WB | Дождитесь `Retry-After` и откладывайте повторные запросы; SDK не ретраит сам |
+| Зависает соединение | Корпоративный прокси / MITM TLS | Задайте переменную `HTTPS_PROXY`; большинство клиентов её учитывает |
+| `ImportError` / `Cannot find module` | Установлено не то имя пакета | Правильное имя — `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client`. Пакет с «голым» именем `wb-api-client` — это другой проект |

@@ -3,38 +3,38 @@ layout: home
 
 hero:
   name: wb-api-client
-  text: Wildberries Seller API — in every language you ship.
-  tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, and PHP. One version across every ecosystem. Bearer tokens redacted by default.
+  text: Wildberries Seller API — на языке вашего проекта.
+  tagline: Автоматически сгенерированные SDK для Python, TypeScript, Go, Java и PHP. Одна версия для всех экосистем. Bearer-токен маскируется по умолчанию.
   actions:
     - theme: brand
-      text: Quickstart
+      text: Быстрый старт
       link: /guides/quickstart
     - theme: alt
-      text: Source on GitHub
+      text: Исходники на GitHub
       link: https://github.com/ValeryVerkhoturov/wb-api-client
 
 features:
   - icon: 🧩
-    title: 13 API categories, one package
-    details: Every category — items, orders (FBS/DBW/FBW/DBS), promotion, analytics, finances, and the rest — ships as an isolated sub-module inside a single per-language package. No cross-category name clashes.
+    title: 13 категорий API, один пакет
+    details: Все категории — товары, заказы (FBS / DBW / FBW / DBS), продвижение, аналитика, финансы и остальные — поставляются как изолированные под-модули внутри одного пакета на язык. Никаких коллизий имён между категориями.
   - icon: 🔐
-    title: Secret redaction, built in
-    details: Your bearer JWT is wrapped in a per-language SecretString so it stays out of logs, prints, and debuggers unless you explicitly ask for the raw value.
+    title: Маскирование секретов из коробки
+    details: Ваш bearer-токен обёрнут в языко-специфичный SecretString, поэтому он не попадает в логи, print, дампы отладчика и Sentry, пока вы явно не запросите значение.
   - icon: 📆
-    title: Daily upstream sync
-    details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, and Packagist automatically — with a matching git tag.
+    title: Ежедневная синхронизация с апстримом
+    details: CI-задача каждый день скачивает спецификации WB. Если что-то изменилось, автоматически публикуется новый релиз на PyPI, npm, Go, Maven Central и Packagist — с соответствующим git-тегом.
   - icon: 🧬
-    title: One version, five ecosystems
-    details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer all pick the latest without prerelease dance.
+    title: Одна версия, пять экосистем
+    details: 1.YYYYMMDD.N — валидный стабильный semver в каждом языке. pip / npm / go get / mvn / composer подхватывают последнюю версию без прелиз-плясок.
   - icon: 🛡️
-    title: Bearer auth, everywhere
-    details: The upstream YAMLs conflate an API-key scheme with a bearer JWT. A post-processing pass strips that duplication so every generated client exposes exactly one auth path.
+    title: Bearer-авторизация везде
+    details: Апстрим-YAML путает apiKey-схему с bearer JWT. Пост-обработка убирает дублирование, и в каждом сгенерированном клиенте остаётся ровно один способ авторизации.
   - icon: 🧪
-    title: Deterministic regeneration
-    details: Pinned openapi-generator + formatter versions + hidden generation timestamps. PRs that break determinism are caught by a per-PR regen check.
+    title: Детерминированная генерация
+    details: Зафиксированные версии openapi-generator и форматтеров, скрытые метки времени. Проверка на PR перегенерирует всё с нуля и падает, если результат отличается.
 ---
 
-## Install
+## Установка
 
 ::: code-group
 
@@ -64,7 +64,7 @@ composer require valeryverkhoturov/wb-api-client
 
 :::
 
-## Call something
+## Первый вызов
 
 ::: code-group
 
@@ -72,7 +72,7 @@ composer require valeryverkhoturov/wb-api-client
 from wb_api_client.items import Configuration, ApiClient
 from wb_api_client.items.api import DefaultApi
 
-cfg = Configuration(access_token="<your WB JWT>")
+cfg = Configuration(access_token="<ваш JWT WB>")
 api = DefaultApi(ApiClient(cfg))
 ```
 
@@ -80,7 +80,7 @@ api = DefaultApi(ApiClient(cfg))
 import { Configuration, DefaultApi } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
+cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 ```
 
@@ -88,7 +88,7 @@ const api = new DefaultApi(cfg);
 import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
 
 cfg := wbitems.NewConfiguration()
-cfg.SetAccessToken("<your WB JWT>")
+cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 ```
 
@@ -98,7 +98,7 @@ import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 ```
 
@@ -109,10 +109,10 @@ use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 ```
 
 :::
 
-Full tour of every sub-module, per-language: [Python](/languages/python) · [TypeScript](/languages/typescript) · [Go](/languages/go) · [Java](/languages/java) · [PHP](/languages/php).
+Подробно по каждому языку и всем 13 под-модулям: [Python](/languages/python) · [TypeScript](/languages/typescript) · [Go](/languages/go) · [Java](/languages/java) · [PHP](/languages/php).

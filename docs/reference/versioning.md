@@ -1,20 +1,20 @@
-# Versioning
+# Версионирование
 
-All five language packages share one version string per release: **`1.YYYYMMDD.N`**.
+Все пять языковых пакетов делят одну версионную строку на релиз: **`1.YYYYMMDD.N`**.
 
-## Format
+## Формат
 
-| Field | Value | Why |
+| Часть | Значение | Почему |
 |---|---|---|
-| `MAJOR` | `1` — fixed | Keeps Go's module path free of the `/vN` suffix that `MAJOR ≥ 2` would require. Any real breaking change to the pipeline surfaces as a major-version bump of the *code repo*, not a new module path. |
-| `MINOR` | `YYYYMMDD` (UTC release date) | Monotonic across days — `20260919 < 20260920 < 20261001`. Sorts as an integer under semver rules. |
-| `PATCH` | `N` — same-day counter | `0` for the first release of a day, `1`, `2`, … for repeats (rare). |
+| `MAJOR` | `1` — зафиксирован | Позволяет пути Go-модуля обходиться без суффикса `/vN`, который требовался бы при `MAJOR ≥ 2`. Любое действительно ломающее изменение пайплайна отражается мажором *репозитория кода*, а не новым путём модуля. |
+| `MINOR` | `YYYYMMDD` (UTC-дата релиза) | Монотонно растёт по дням — `20260919 < 20260920 < 20261001`. Сортируется как целое по правилам semver. |
+| `PATCH` | `N` — счётчик за день | `0` для первого релиза за день, далее `1`, `2`, … (редко). |
 
-Example: `1.20260921.0` — first release cut on 21 Sep 2026 UTC.
+Пример: `1.20260921.0` — первый релиз 21 сентября 2026 (UTC).
 
-## Where the number comes from
+## Как считается номер
 
-The daily-check workflow computes it inline:
+Прямо в workflow daily-check:
 
 ```bash
 today="$(date -u +%Y%m%d)"
@@ -22,11 +22,11 @@ n="$(git tag --list "v1.${today}.*" | wc -l | tr -d ' ')"
 version="1.${today}.${n}"
 ```
 
-The resulting string goes into every language's manifest — `pyproject.toml`, `package.json`, `go.mod` tag, `pom.xml`, `composer.json` — verbatim. No language sees a translated form.
+Полученная строка вставляется в каждый языковой манифест — `pyproject.toml`, `package.json`, тег `go.mod`, `pom.xml`, `composer.json` — как есть. Никакой язык не видит переведённой формы.
 
-## What "latest" resolves to
+## Что резолвится как «последняя»
 
-Because every release is a **stable** (non-prerelease) version, `@latest` / `LATEST` / `^1.0.0` all pick the highest published:
+Все релизы — **стабильные** (не prerelease), поэтому `@latest` / `LATEST` / `^1.0.0` берут максимальную опубликованную:
 
 ::: code-group
 
@@ -43,7 +43,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 ```
 
 ```xml [Java]
-<version>[1.0.0,)</version>   <!-- range: any 1.x -->
+<version>[1.0.0,)</version>   <!-- диапазон: любая 1.x -->
 ```
 
 ```bash [PHP]
@@ -52,9 +52,9 @@ composer require valeryverkhoturov/wb-api-client
 
 :::
 
-## Pinning a version
+## Фиксация версии
 
-Pin the exact `1.YYYYMMDD.N` when reproducibility matters (CI, production deploys):
+Фиксируйте точный `1.YYYYMMDD.N`, когда важна воспроизводимость (CI, production):
 
 ::: code-group
 
@@ -80,25 +80,25 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
 
 :::
 
-## Release cadence
+## Каденция релизов
 
-New versions get cut only when upstream specs actually change. Concretely: `daily-check.yml` runs at 06:15 UTC, checksum-diffs `swaggers/` against the previous run, and only re-generates + tags if anything moved. A quiet week produces no releases; a WB portal deploy typically produces one the next morning.
+Новые версии выпускаются только когда апстрим-спецификации реально меняются. Технически: `daily-check.yml` запускается в 06:15 UTC, сверяет `swaggers/checksums.txt` с предыдущим прогоном и перегенерирует + тегает только если что-то изменилось. Спокойная неделя = ноль релизов; выкатка портала WB обычно даёт один релиз следующим утром.
 
-Manually forcing a release (e.g. to pick up a client-side fix): `Actions → Daily upstream check → Run workflow` with `force: true`.
+Ручной форс-релиз (например, чтобы забрать client-side фикс): `Actions → Daily upstream check → Run workflow` с `force: true`.
 
-## Deprecations
+## Депрекации
 
-WB removes fields on their own schedule. When they do:
+WB убирает поля по собственному графику. Когда это случается:
 
-1. Their spec drops the field.
-2. Next daily-check regenerates without the field.
-3. A new version publishes with the field gone.
-4. Callers on the previous version keep working (their local models still have it, they just get nulls).
+1. Из спецификации пропадает поле.
+2. На следующем прогоне daily-check перегенерирует без поля.
+3. Публикуется новая версия без поля.
+4. Клиенты на предыдущей версии продолжают работать — в их локальных моделях поле есть, просто приходят null'ы.
 
-There is no formal deprecation window — the upstream contract is the source of truth. Pin an old version if you need time to migrate.
+Формального окна депрекации нет — источник истины — контракт апстрима. Если нужно время на миграцию, фиксируйте старую версию.
 
-## Multi-language version drift — impossible by construction
+## Расхождение версий между языками — невозможно по построению
 
-Because the same `1.YYYYMMDD.N` is stamped into every language's manifest in the same generate.sh invocation, and every language is regenerated in every release run, you cannot end up with "Python 1.20260921.0 but Go 1.20260919.0" from a single upstream state — they're always in lockstep.
+Одна и та же строка `1.YYYYMMDD.N` вставляется в манифест каждого языка в одном и том же вызове generate.sh, и все языки перегенерируются в каждом релизном прогоне — поэтому получить «Python 1.20260921.0, а Go 1.20260919.0» из одного апстрим-состояния невозможно.
 
-The only way to skew: a language's publish step fails (e.g. Maven Central rejects a signature). The tag exists and the source is on GitHub; a manual re-run of the failed publish job for that specific language fixes it.
+Единственный способ уплыть: сломается публикация одного языка (например, Maven Central отклонит подпись). Тег и исходник уже в GitHub; ручной перезапуск конкретного publish-job для этого языка чинит ситуацию.

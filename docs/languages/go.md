@@ -1,48 +1,48 @@
 # Go
 
-Module: `github.com/ValeryVerkhoturov/wb-api-client/clients/go` — resolved from git tags on the [main repo](https://github.com/ValeryVerkhoturov/wb-api-client).
+Модуль: `github.com/ValeryVerkhoturov/wb-api-client/clients/go` — резолвится из git-тегов [основного репозитория](https://github.com/ValeryVerkhoturov/wb-api-client).
 
 - **Go:** 1.22+
-- **HTTP:** `net/http` (standard library)
-- **Secret wrapper:** [`github.com/negrel/secrecy`](https://github.com/negrel/secrecy)
+- **HTTP:** `net/http` (стандартная библиотека)
+- **Обёртка секретов:** [`github.com/negrel/secrecy`](https://github.com/negrel/secrecy)
 
-## Install
+## Установка
 
 ```bash
 go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 ```
 
-Pin a specific version by tag:
+Зафиксировать конкретную версию по тегу:
 
 ```bash
 go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
 ```
 
-`proxy.golang.org` fetches directly from the pushed tag — no separate registry.
+`proxy.golang.org` берёт код прямо из пушнутого тега — отдельный реестр не нужен.
 
-## Why the module path stays under `/clients/go`
+## Почему модуль лежит под `/clients/go`
 
-The main repo hosts five language clients; Go's convention is one module per repo, so the module path includes the sub-directory. Version tags cover all five languages simultaneously — Go picks up whichever tag exists on the commit that produced its sources.
+Основной репозиторий хостит пять языковых клиентов; в Go принято «один модуль на репозиторий», поэтому путь модуля включает под-каталог. Теги релизов покрывают все пять языков одновременно — Go подхватывает нужный тег.
 
-Because `MAJOR = 1` is fixed (see [versioning](/reference/versioning)), there's no `/v2` suffix now or later.
+Поскольку `MAJOR = 1` зафиксирован (см. [версионирование](/reference/versioning)), суффикса `/v2` не будет ни сейчас, ни в будущем.
 
-## Import shape
+## Форма импортов
 
-One Go package per WB API category, each with its own `Configuration`, `APIClient`, and `*API` types.
+По одному Go-пакету на категорию WB API, у каждого свои `Configuration`, `APIClient` и типы `*API`.
 
 ```go
 import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
 ```
 
-Alias each sub-module (`wbitems`, `wbfbs`, `wbanalytics`, …) so call sites are readable — they all export the same identifier names.
+Давайте каждому под-модулю алиас (`wbitems`, `wbfbs`, `wbanalytics`, …) — иначе имена конфликтуют: во всех модулях экспортируются одни и те же идентификаторы.
 
-## Sub-modules
+## Под-модули
 
 `general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
 
-Per-module `*API` structs and endpoint methods are enumerated in the per-release README: [clients/go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md).
+Структуры `*API` и методы эндпоинтов на модуль перечислены в per-release README: [clients/go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md).
 
-## Auth
+## Авторизация
 
 ```go
 package main
@@ -56,7 +56,7 @@ import (
 
 func main() {
     cfg := wbitems.NewConfiguration()
-    cfg.SetAccessToken("<your WB JWT>")   // wrapped in *secrecy.SecretString
+    cfg.SetAccessToken("<ваш JWT WB>")   // оборачивается в *secrecy.SecretString
     client := wbitems.NewAPIClient(cfg)
 
     v, _, err := client.DefaultAPI.SomeEndpoint(context.Background()).Execute()
@@ -67,17 +67,17 @@ func main() {
 }
 ```
 
-`SetAccessToken` is the ONLY path — the openapi-generator-default `ContextAccessToken` context-value channel is stripped so there's no way to accidentally bypass the wrapper.
+`SetAccessToken` — единственный путь: стандартный для openapi-generator канал `ContextAccessToken` через `context.Value` вырезан, случайно обойти обёртку не получится.
 
-To read the raw value back:
+Получить сырое значение обратно:
 
 ```go
 cfg.AccessToken.ExposeSecret()
 ```
 
-## Contexts
+## Контексты
 
-Every call takes a `context.Context`. Wire your app's deadline/cancellation through — the client honors it:
+Каждый вызов принимает `context.Context`. Прокидывайте дедлайн и отмену из своего приложения — клиент их уважает:
 
 ```go
 ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
@@ -85,9 +85,9 @@ defer cancel()
 v, _, err := client.DefaultAPI.SomeEndpoint(ctx).Execute()
 ```
 
-## Custom HTTP client
+## Свой HTTP-клиент
 
-Wire an `*http.Client` for proxying, custom timeouts, or a transport wrapper:
+Подставьте `*http.Client` для прокси, кастомных таймаутов или транспорт-обёртки:
 
 ```go
 cfg := wbitems.NewConfiguration()
@@ -99,9 +99,9 @@ cfg.HTTPClient = &http.Client{
 }
 ```
 
-## Testing
+## Тестирование
 
-Override the host at Configuration construction:
+Переопределите хост при создании Configuration:
 
 ```go
 cfg := wbitems.NewConfiguration()
@@ -109,8 +109,8 @@ cfg.Host = "localhost:8080"
 cfg.Scheme = "http"
 ```
 
-## See also
+## См. также
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
-- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md)
+- [Аутентификация](/guides/authentication)
+- [Обработка ошибок](/guides/error-handling)
+- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md)

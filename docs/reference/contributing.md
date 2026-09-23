@@ -1,58 +1,58 @@
-# Contributing
+# Участие в разработке
 
-## Reporting issues
+## Сообщения об ошибках
 
-Bugs, spec-drift oddities, generator quirks: open an issue on the main code repo — [`ValeryVerkhoturov/wb-api-client/issues`](https://github.com/ValeryVerkhoturov/wb-api-client/issues).
+Баги, странности спецификации, кривости генератора — заводите issue в основном репозитории кода: [`ValeryVerkhoturov/wb-api-client/issues`](https://github.com/ValeryVerkhoturov/wb-api-client/issues).
 
-Include:
-- Which language client (Python / TypeScript / Go / Java / PHP)
-- Which sub-module (`items`, `orders_fbs`, `analytics`, …)
-- Version string from the manifest (`1.YYYYMMDD.N`)
-- Minimal reproduction — one API call, one exception, one expected-vs-actual
+Что приложить:
+- Какой языковой клиент (Python / TypeScript / Go / Java / PHP)
+- Какой под-модуль (`items`, `orders_fbs`, `analytics`, …)
+- Версию из манифеста (`1.YYYYMMDD.N`)
+- Минимальный воспроизводимый пример — один вызов API, одно исключение, ожидание против факта
 
-Docs-site issues (typos, missing content, broken examples) go on the docs repo: [`ValeryVerkhoturov/wb-api-client-docs/issues`](https://github.com/ValeryVerkhoturov/wb-api-client-docs/issues).
+Проблемы сайта документации (опечатки, недостающее, битые примеры) — в репозиторий документации: [`ValeryVerkhoturov/wb-api-client-docs/issues`](https://github.com/ValeryVerkhoturov/wb-api-client-docs/issues).
 
-## Do NOT hand-edit generated code
+## Сгенерированный код руками НЕ редактируется
 
-Every file under `clients/` in the main repo is generated. Editing there gets overwritten on the next daily-check run — the PR check will also flag it before merge.
+Каждый файл под `clients/` в основном репозитории — сгенерирован. Правка там переписывается на следующем прогоне daily-check — PR-check тоже отметит правку до мерджа.
 
-If you find something wrong in generated output, the fix goes in one of:
+Если нашли ошибку в сгенерированном выходе, чинить нужно в одном из:
 
-- **`scripts/post-process.py`** — a new pass, if the fix applies to the spec before generation.
-- **`scripts/inject-secret.py`** — if the fix is in the generated `Configuration` / `ApiClient` boilerplate.
-- **`generator-configs/*.yaml`** — if it's an openapi-generator option toggle.
-- **`templates/{lang}/*`** — if it's in the top-level manifest.
+- **`scripts/post-process.py`** — новый проход, если правка применяется к спецификации до генерации.
+- **`scripts/inject-secret.py`** — если правка внутри сгенерированного `Configuration` / `ApiClient`.
+- **`generator-configs/*.yaml`** — если это флаг openapi-generator.
+- **`templates/{lang}/*`** — если это топ-уровневый манифест.
 
-The [architecture reference](/reference/architecture) has the full pipeline map.
+Карта пайплайна — в [справочнике по архитектуре](/reference/architecture).
 
-## Local development
+## Локальная разработка
 
 ```bash
 git clone --recurse-submodules https://github.com/ValeryVerkhoturov/wb-api-client
 cd wb-api-client
 
-./scripts/download-swaggers.sh                # pull upstream (may 498 locally)
+./scripts/download-swaggers.sh                # тянет апстрим (локально может отдать 498)
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, black, flask
 python  scripts/post-process.py               # -> swaggers/processed/
 ./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php}
-make verify                                    # build + format check every language
+make verify                                   # сборка + проверка форматирования на каждом языке
 ```
 
-`generate.sh` always regenerates all five languages. For per-language iteration during debugging, comment out the other four loops rather than adding a flag — the script is <200 lines and doesn't need argument plumbing.
+`generate.sh` всегда регенерирует все пять языков. Для одноязычной итерации при отладке комментируйте оставшиеся четыре цикла, а не добавляйте флаг — скрипт меньше 200 строк и без параметризации.
 
-Formatting runs inside Docker so contributors don't need language runtimes installed. `make verify-<lang>` and `make {black,prettier,gofmt,spotless,php-cs-fixer}` are individual targets. `make help` lists everything.
+Форматирование гоняется в Docker, поэтому языковые рантаймы на хосте не нужны. `make verify-<lang>` и `make {black,prettier,gofmt,spotless,php-cs-fixer}` — отдельные цели. `make help` перечисляет всё.
 
-## PR flow
+## Flow с PR
 
-1. Fork the main repo.
-2. Make your change to `scripts/`, `templates/`, `generator-configs/`, or a workflow.
-3. Regenerate locally so `clients/` matches.
-4. Commit `swaggers/`, `clients/`, and your source changes together.
-5. Open a PR. The PR-check workflow will regenerate from scratch and fail if `git diff` is non-empty against your commit — that catches non-determinism.
+1. Форкните основной репозиторий.
+2. Внесите изменение в `scripts/`, `templates/`, `generator-configs/` или воркфлоу.
+3. Перегенерируйте локально, чтобы `clients/` совпало.
+4. Закоммитьте `swaggers/`, `clients/` и свои правки исходников одним коммитом.
+5. Откройте PR. PR-check-workflow перегенерирует всё с нуля и упадёт, если `git diff` непустой относительно вашего коммита — это ловит недетерминированность.
 
-## Contributing to the docs site
+## Участие в документации
 
-This site lives in [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs).
+Этот сайт живёт в [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs).
 
 ```bash
 git clone https://github.com/ValeryVerkhoturov/wb-api-client-docs
@@ -63,8 +63,8 @@ npm run docs:dev
 # → http://localhost:5173/wb-api-client-docs/
 ```
 
-Push to `main`; the deploy workflow builds and publishes to GitHub Pages automatically.
+Пушьте в `main`; workflow деплоя сам собирает и публикует на GitHub Pages.
 
-## License
+## Лицензия
 
-Both repos are Apache 2.0. Contributions are assumed to be under the same license.
+Оба репозитория — Apache 2.0. Ваши правки считаются переданными под той же лицензией.

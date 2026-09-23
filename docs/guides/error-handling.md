@@ -1,24 +1,24 @@
-# Error handling
+# Обработка ошибок
 
-WB returns standard HTTP status codes plus a JSON body. The clients surface these as language-native exceptions — you don't get a raw `Response` unless you explicitly ask for one.
+WB возвращает стандартные HTTP-коды и JSON в теле. Клиенты превращают их в языко-нативные исключения — сырой `Response` вы получите только если явно об этом попросите.
 
-## Status codes worth handling
+## Коды, за которыми стоит следить
 
-| Code | Meaning | Right response |
+| Код | Значение | Правильная реакция |
 |---|---|---|
-| `200`–`204` | Success | Parse the body (or don't, for 204) |
-| `400` | Request malformed | Fix the request; not retriable |
-| `401` | Missing / bad / expired token | Refresh the token; do NOT retry with the same token |
-| `403` | Token lacks scope for this endpoint | Regenerate token with correct scope; not retriable |
-| `404` | Resource doesn't exist | Business-logic decision — not always an error |
-| `409` | Conflict (e.g. supply already delivered) | Business-logic; specific WB schemas per endpoint |
-| `429` | Rate-limited | Read `Retry-After`, back off, retry |
-| `498` | WBAAS anti-bot challenge | Never fires against these clients (correct UA) — if you see it, something is proxying/rewriting |
-| `5xx` | Upstream problem | Retry with exponential backoff, cap attempts |
+| `200`–`204` | Успех | Разобрать тело (или ничего не делать при 204) |
+| `400` | Некорректный запрос | Починить запрос; ретрай бесполезен |
+| `401` | Нет токена / плохой / просрочен | Обновить токен; НЕ ретраить с тем же |
+| `403` | Токену не хватает прав на эндпоинт | Перевыпустить с нужной галочкой; ретрай бесполезен |
+| `404` | Ресурса нет | Бизнес-логика — не всегда ошибка |
+| `409` | Конфликт (напр. поставка уже доставлена) | Бизнес-логика; у WB своя схема на каждый эндпоинт |
+| `429` | Rate-limit | Прочитать `Retry-After`, подождать, повторить |
+| `498` | Anti-bot WBAAS | С этими клиентами не должно возникать (корректный UA); если увидели — что-то проксирует/переписывает запрос |
+| `5xx` | Проблема на стороне WB | Ретрай с экспоненциальной задержкой, лимит по попыткам |
 
-## Retry pattern
+## Паттерн ретраев
 
-The clients don't retry on your behalf — that's a policy decision. A minimal retriable-error handler:
+Клиенты сами не ретраят — это осознанное решение (политика ретраев — дело приложения). Минимальный хендлер для ретраибельных ошибок:
 
 ::: code-group
 
@@ -100,11 +100,11 @@ func withRetry[T any](ctx context.Context, fn func() (T, *http.Response, error))
 
 :::
 
-## Reading the WB error body
+## Как прочитать тело ошибки
 
-Every non-2xx response has a JSON body. Its shape varies per endpoint (some WB APIs use `{code, message}`, others use category-specific schemas like `Http409SupplyDeliverError`).
+У любого не-2xx ответа есть JSON. Форма зависит от эндпоинта: где-то `{code, message}`, где-то категория-специфичная схема вроде `Http409SupplyDeliverError`.
 
-The generated exception types include the parsed body. Pattern in each language:
+Сгенерированные типы исключений хранят распарсенное тело. Паттерн в каждом языке:
 
 ::: code-group
 
@@ -113,7 +113,7 @@ try:
     api.some_endpoint(...)
 except ApiException as e:
     print(e.status, e.reason)
-    print(e.body)  # str; often JSON — json.loads(e.body)
+    print(e.body)  # str; обычно JSON — json.loads(e.body)
 ```
 
 ```ts [TypeScript]
@@ -138,21 +138,20 @@ if err != nil {
 
 :::
 
-## Rate limits
+## Rate-лимиты
 
-WB publishes limits at [dev.wildberries.ru](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov). They differ per API category — content APIs are ~100/min, analytics can be much stricter. If you're hitting `429` regularly, batch smarter (bigger page sizes, cache lookups) before adding retry.
+Лимиты WB опубликованы на [dev.wildberries.ru](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov). Они разные по категориям — контент ~100/мин, аналитика заметно строже. Если регулярно ловите `429`, сначала уменьшите число запросов (большие страницы, кэш) — и только потом добавляйте ретраи.
 
-## Client-side timeouts
+## Таймауты на стороне клиента
 
-Not all endpoints answer quickly. `analytics` and `reports` in particular can take tens of seconds to produce a large report. Bump the transport timeout accordingly.
+Не все эндпоинты быстрые. `analytics` и `reports` могут генерировать большие отчёты десятками секунд. Задавайте адекватный таймаут транспорта.
 
 ::: code-group
 
 ```python [Python]
 cfg = Configuration(access_token=TOKEN)
-# urllib3 pool retries + timeout
 cfg.retries = 0
-# per-call timeout via keyword:
+# per-call таймаут через параметр:
 api.some_report(..., _request_timeout=(5.0, 120.0))  # (connect, read)
 ```
 

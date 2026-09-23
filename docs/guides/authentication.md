@@ -1,86 +1,86 @@
-# Authentication
+# Аутентификация
 
-Every Wildberries Seller API call takes a **bearer JWT** in the `Authorization` header. The clients handle the header for you; you just hand them the token.
+Каждый вызов Wildberries Seller API требует **bearer JWT** в заголовке `Authorization`. Клиенты сами подставляют заголовок; вы передаёте только токен.
 
-## Where the token comes from
+## Откуда берётся токен
 
-Tokens are minted in the seller portal:
+Токены выпускаются в кабинете продавца:
 
 1. [seller.wildberries.ru](https://seller.wildberries.ru) → **Настройки → Доступ к API**.
-2. **Создать новый токен** — pick the scopes (Контент, Маркетплейс, Аналитика, …), a lifetime, and whether it's a test-sandbox token.
-3. Copy the JWT immediately. It's shown once.
+2. **Создать новый токен** — выберите права (Контент, Маркетплейс, Аналитика, …), срок жизни и sandbox-режим при желании.
+3. Немедленно скопируйте JWT. Его показывают один раз.
 
-Each scope corresponds roughly to one or more sub-modules in the clients. If a call returns `403`, the token is valid but lacks the scope — regenerate with the missing checkbox ticked.
+Каждой галочке прав примерно соответствует одна или несколько категорий (под-модулей) в клиенте. Если пришёл `403` — токен валиден, но прав не хватает; перевыпустите с нужной галочкой.
 
-## Secret-string wrappers
+## Обёртки SecretString
 
-Once you have the token, don't pass it around as a plain string. Every client wraps the value in a language-native "secret string" type so it redacts under logs, `print`, debuggers, and error dumps — unless you explicitly ask for the raw value.
+Получив токен, не носите его по коду как обычную строку. Каждый клиент оборачивает значение в языко-специфичный «секретный» тип — он маскирует токен в логах, `print`-выводе, отладчике и дампах ошибок, пока вы явно не запросите значение.
 
-| Language | Wrapper | Setter | Redacted under | Explicit expose |
+| Язык | Обёртка | Сеттер | Маскируется в | Явное значение |
 |---|---|---|---|---|
 | Python | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)` | `print(cfg.access_token)` → `**********` | `.get_secret_value()` |
-| TypeScript | inlined `SecretString` class | `Configuration.setAccessToken(…)` | `console.log(new SecretString("…"))` → `<REDACTED>` | `.exposeSecret()` |
+| TypeScript | встроенный класс `SecretString` | `Configuration.setAccessToken(…)` | `console.log(new SecretString("…"))` → `<REDACTED>` | `.exposeSecret()` |
 | Go | [`secrecy.SecretString`](https://github.com/negrel/secrecy) | `Configuration.SetAccessToken(…)` | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()` |
-| Java | per-sub-module `SecretString` | `ApiClient.setBearerToken(SecretString)` | `System.out.println(s)` → `<REDACTED>` | `.exposeSecret()` |
-| PHP | per-sub-module `SecretString` | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'` | `->exposeSecret()` |
+| Java | `SecretString` в каждом под-пакете | `ApiClient.setBearerToken(SecretString)` | `System.out.println(s)` → `<REDACTED>` | `.exposeSecret()` |
+| PHP | `SecretString` в каждом под-пространстве | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'` | `->exposeSecret()` |
 
-### Why bother?
+### Зачем это нужно
 
-Real incidents behind this design:
+Реальные ситуации, ради которых это сделано:
 
-- Logger middleware that dumps the request config on error.
-- `print(config)` sprinkled in during debugging and never removed.
-- Exceptions serialized to Sentry / a bug tracker with the full HTTP client context attached.
-- IDE debuggers displaying object internals in a shared screen-share.
+- Логгер-middleware, который в трейсе ошибки дампит всю конфигурацию запроса.
+- `print(config)`, оставленный в коде после отладки.
+- Исключения, сериализованные в Sentry / трекер вместе с полным контекстом HTTP-клиента.
+- Отладчик IDE, показывающий поля объекта на демо-встрече по шаринг-скрину.
 
-The wrapper flips all of those from a token leak into a `<REDACTED>` marker. The one-line cost is the wrapper type at the boundary.
+Обёртка превращает каждый из этих сценариев из утечки токена в безобидную метку `<REDACTED>`. Цена — одна строка кода в точке ввода.
 
-### Examples of the redaction firing
+### Как это выглядит на практике
 
 ::: code-group
 
 ```python [Python]
 from wb_api_client.items import Configuration
 cfg = Configuration(access_token="eyJhbGciOi...")
-print(cfg.access_token)           # SecretStr('**********')
-print(cfg.access_token.get_secret_value())  # eyJhbGciOi...  (opt-in)
+print(cfg.access_token)                       # SecretStr('**********')
+print(cfg.access_token.get_secret_value())    # eyJhbGciOi...  (по запросу)
 ```
 
 ```ts [TypeScript]
 import { Configuration } from "@valeryverkhoturov/wb-api-client/items";
 const cfg = new Configuration({});
 cfg.setAccessToken("eyJhbGciOi...");
-console.log(cfg.accessToken);      // SecretString { <REDACTED> }
-console.log(cfg.accessToken.exposeSecret()); // eyJhbGciOi...  (opt-in)
+console.log(cfg.accessToken);                 // SecretString { <REDACTED> }
+console.log(cfg.accessToken.exposeSecret());  // eyJhbGciOi...  (по запросу)
 ```
 
 ```go [Go]
 import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("eyJhbGciOi...")
-fmt.Printf("%v\n", cfg.AccessToken)         // <!SECRET_LEAKED!>
-fmt.Println(cfg.AccessToken.ExposeSecret()) // eyJhbGciOi...  (opt-in)
+fmt.Printf("%v\n", cfg.AccessToken)           // <!SECRET_LEAKED!>
+fmt.Println(cfg.AccessToken.ExposeSecret())   // eyJhbGciOi...  (по запросу)
 ```
 
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
 SecretString s = new SecretString("eyJhbGciOi...");
-System.out.println(s);            // <REDACTED>
-System.out.println(s.exposeSecret()); // eyJhbGciOi...  (opt-in)
+System.out.println(s);                        // <REDACTED>
+System.out.println(s.exposeSecret());         // eyJhbGciOi...  (по запросу)
 ```
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 $s = new SecretString('eyJhbGciOi...');
-var_dump($s);                     // object(...) { ['value']=> '<REDACTED>' }
-echo $s->exposeSecret();          // eyJhbGciOi...  (opt-in)
+var_dump($s);                                 // object(...) { ['value']=> '<REDACTED>' }
+echo $s->exposeSecret();                      // eyJhbGciOi...  (по запросу)
 ```
 
 :::
 
-## Multiple sub-modules, one token
+## Один токен на несколько под-модулей
 
-If you use several sub-modules in the same process, each has its own `Configuration` / `ApiClient` — because each sub-module is a self-contained SDK generated from a different upstream spec. Reuse the token string; construct a config per module.
+Если в процессе вы используете сразу несколько под-модулей, у каждого — свой `Configuration` / `ApiClient`. Так задумано: openapi-generator создаёт полностью изолированные SDK на каждую спецификацию. Переиспользуйте строку токена, но конструируйте конфиг на каждый модуль.
 
 ::: code-group
 
@@ -88,7 +88,7 @@ If you use several sub-modules in the same process, each has its own `Configurat
 from wb_api_client.items import Configuration as ItemsCfg, ApiClient as ItemsClient
 from wb_api_client.orders_fbs import Configuration as OrdCfg, ApiClient as OrdClient
 
-TOKEN = "<your WB JWT>"
+TOKEN = "<ваш JWT WB>"
 items_api = ItemsClient(ItemsCfg(access_token=TOKEN))
 orders_api = OrdClient(OrdCfg(access_token=TOKEN))
 ```
@@ -97,28 +97,28 @@ orders_api = OrdClient(OrdCfg(access_token=TOKEN))
 import { Configuration as ItemsCfg } from "@valeryverkhoturov/wb-api-client/items";
 import { Configuration as OrdCfg } from "@valeryverkhoturov/wb-api-client/orders_fbs";
 
-const TOKEN = "<your WB JWT>";
+const TOKEN = "<ваш JWT WB>";
 const itemsCfg = new ItemsCfg({}); itemsCfg.setAccessToken(TOKEN);
 const ordCfg   = new OrdCfg({});   ordCfg.setAccessToken(TOKEN);
 ```
 
 :::
 
-## Rotating tokens
+## Ротация токенов
 
-WB tokens don't rotate on the wire — you have to swap them. Best practice:
+Токены WB не ротируются сами — их нужно заменять вручную. Хорошая практика:
 
-1. Store the token in a secret manager (SSM, Vault, GitHub Actions secret) — never in source.
-2. Read it into an env var at process start; construct the config once.
-3. On rotation: kill the process (or the connection pool) and start fresh with the new token. The clients cache the token per Configuration instance.
+1. Держите токен в секрет-менеджере (SSM, Vault, GitHub Actions secret) — не в исходниках.
+2. Читайте в переменную окружения при старте процесса и конструируйте конфиг один раз.
+3. На ротации: убейте процесс (или пул соединений) и запустите заново с новым токеном. Клиент кэширует токен на уровне экземпляра Configuration.
 
-## Common auth failures
+## Типичные ошибки авторизации
 
-| Response | Meaning |
+| Ответ | Значение |
 |---|---|
-| `401 Unauthorized` — `token expired` | Token past its expiry; mint a new one |
-| `401 Unauthorized` — `invalid signature` | Wrong Authorization header format, or token from a different environment (sandbox vs prod) |
-| `403 Forbidden` — `no access to resource` | Token valid, scope missing — regenerate with the right box ticked |
-| `429 Too Many Requests` | Rate-limited; the token itself is fine |
+| `401 Unauthorized` — `token expired` | Срок токена истёк; выпустите новый |
+| `401 Unauthorized` — `invalid signature` | Неверный формат заголовка Authorization или токен от другой среды (sandbox / prod) |
+| `403 Forbidden` — `no access to resource` | Токен валиден, прав не хватает — перевыпустите с правильной галочкой |
+| `429 Too Many Requests` | Rate-limit; сам токен в порядке |
 
-See the [error-handling guide](/guides/error-handling) for retry patterns.
+Ретраи и работа с ошибками — в [руководстве по обработке ошибок](/guides/error-handling).
