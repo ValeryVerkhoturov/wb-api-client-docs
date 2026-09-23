@@ -2,7 +2,7 @@
 
 Package: [`valeryverkhoturov-wb-api-client`](https://pypi.org/project/valeryverkhoturov-wb-api-client/) on PyPI.
 
-- **Python:** 3.8+
+- **Python:** 3.9+
 - **HTTP:** `urllib3`
 - **Models:** `pydantic` v2
 - **Secret wrapper:** `pydantic.SecretStr`
