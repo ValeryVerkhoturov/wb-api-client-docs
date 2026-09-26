@@ -1,6 +1,6 @@
 # Versioning
 
-All five language packages share one version string per release: **`1.YYYYMMDD.N`**.
+All six language packages share one version string per release: **`1.YYYYMMDD.N`**.
 
 ## Format
 

@@ -89,15 +89,15 @@ Keys in `ДопПараметры` match the names from the spec. When a name is
 
 Every method returns an `ОтветAPI`:
 
-| Property / method | Type | Description |
-| --- | --- | --- |
-| `КодСостояния` | Число | HTTP status code |
-| `Данные` | Произвольный | body parsed from JSON |
-| `Тело` | Строка | raw response body |
-| `Заголовки` | Соответствие | response headers |
-| `Успешно()` | Булево | 2xx |
-| `ЭтоОшибка()` | Булево | 4xx or 5xx |
-| `Заголовок(Имя)` | Строка | case-insensitive header lookup |
+| Property / method | Type         | Description                    |
+| ----------------- | ------------ | ------------------------------ |
+| `КодСостояния`    | Число        | HTTP status code               |
+| `Данные`          | Произвольный | body parsed from JSON          |
+| `Тело`            | Строка       | raw response body              |
+| `Заголовки`       | Соответствие | response headers               |
+| `Успешно()`       | Булево       | 2xx                            |
+| `ЭтоОшибка()`     | Булево       | 4xx or 5xx                     |
+| `Заголовок(Имя)`  | Строка       | case-insensitive header lookup |
 
 When the body is not JSON (`text/plain`, `application/zip`), `Данные` is `Неопределено` and the content stays in `Тело`.
 

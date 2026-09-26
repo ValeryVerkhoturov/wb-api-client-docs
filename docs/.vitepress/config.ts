@@ -6,7 +6,7 @@ import { editorialFonts } from "vitepress-editorial-modernist/config";
 
 // Docs for https://github.com/ValeryVerkhoturov/wb-api-client — a
 // code-generation pipeline that produces client libraries for the
-// Wildberries Seller API in five languages. The per-language `README.md`
+// Wildberries Seller API in six languages. The per-language `README.md`
 // files inside that repo are the source of truth for module listings;
 // this site is the narrative layer around them (quickstart, auth
 // deep-dive, versioning policy, architecture).
