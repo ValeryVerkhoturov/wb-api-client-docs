@@ -6,7 +6,7 @@ import { editorialFonts } from "vitepress-editorial-modernist/config";
 
 // Docs for https://github.com/ValeryVerkhoturov/wb-api-client — a
 // code-generation pipeline that produces client libraries for the
-// Wildberries Seller API in five languages. The per-language `README.md`
+// Wildberries Seller API in six languages. The per-language `README.md`
 // files inside that repo are the source of truth for module listings;
 // this site is the narrative layer around them (quickstart, auth
 // deep-dive, versioning policy, architecture).
@@ -163,8 +163,8 @@ export default defineConfig({
       pageData.description ||
       leadParagraph(pageData.relativePath) ||
       (isEnglish
-        ? "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP."
-        : "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java и PHP.");
+        ? "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript."
+        : "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP и OneScript.");
 
     // Also drives <meta name="description">, which VitePress renders from
     // pageData — otherwise every page carries the site-wide one.
@@ -236,7 +236,7 @@ export default defineConfig({
       label: "Русский",
       lang: "ru-RU",
       description:
-        "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java и PHP.",
+        "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP и OneScript.",
       themeConfig: {
         nav: [
           { text: "Руководства", link: "/guides/quickstart" },
@@ -264,6 +264,7 @@ export default defineConfig({
                 { text: "Go", link: "/languages/go" },
                 { text: "Java", link: "/languages/java" },
                 { text: "PHP", link: "/languages/php" },
+                { text: "OneScript (1С)", link: "/languages/onescript" },
               ],
             },
           ],
@@ -331,7 +332,7 @@ export default defineConfig({
       lang: "en-US",
       link: "/en/",
       description:
-        "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP.",
+        "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript.",
       themeConfig: {
         nav: [
           { text: "Guides", link: "/en/guides/quickstart" },
@@ -359,6 +360,7 @@ export default defineConfig({
                 { text: "Go", link: "/en/languages/go" },
                 { text: "Java", link: "/en/languages/java" },
                 { text: "PHP", link: "/en/languages/php" },
+                { text: "OneScript (1С)", link: "/en/languages/onescript" },
               ],
             },
           ],

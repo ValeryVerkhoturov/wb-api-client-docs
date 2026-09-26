@@ -6,7 +6,7 @@ Bugs, spec-drift oddities, generator quirks: open an issue on the main code repo
 
 Include:
 
-- Which language client (Python / TypeScript / Go / Java / PHP)
+- Which language client (Python / TypeScript / Go / Java / PHP / OneScript)
 - Which sub-module (`items`, `orders_fbs`, `analytics`, …)
 - Version string from the manifest (`1.YYYYMMDD.N`)
 - Minimal reproduction — one API call, one exception, one expected-vs-actual
@@ -35,13 +35,13 @@ cd wb-api-client
 ./scripts/download-swaggers.sh                # pull upstream (may 498 locally)
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, black, flask
 python  scripts/post-process.py               # -> swaggers/processed/
-./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php}
+./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript}
 make verify                                    # build + format check every language
 ```
 
-`generate.sh` always regenerates all five languages. For per-language iteration during debugging, comment out the other four loops rather than adding a flag — the script is <200 lines and doesn't need argument plumbing.
+`generate.sh` always regenerates all six languages. For per-language iteration during debugging, comment out the other five loops rather than adding a flag — the script is <200 lines and doesn't need argument plumbing.
 
-Formatting runs inside Docker so contributors don't need language runtimes installed. `make verify-<lang>` and `make {black,prettier,gofmt,spotless,php-cs-fixer}` are individual targets. `make help` lists everything.
+Formatting runs inside Docker so contributors don't need language runtimes installed. `make verify-<lang>` and `make {black,prettier,gofmt,spotless,php-cs-fixer}` are individual targets. OneScript has no formatter, so `make verify-onescript` compiles every module with `oscript -check` and loads the package instead. `make help` lists everything.
 
 ## PR flow
 
