@@ -16,13 +16,13 @@
 
 Получив токен, не носите его по коду как обычную строку. Каждый клиент оборачивает значение в языко-специфичный «секретный» тип — он маскирует токен в логах, `print`-выводе, отладчике и дампах ошибок, пока вы явно не запросите значение.
 
-| Язык | Обёртка | Сеттер | Маскируется в | Явное значение |
-|---|---|---|---|---|
-| Python | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)` | `print(cfg.access_token)` → `**********` | `.get_secret_value()` |
-| TypeScript | встроенный класс `SecretString` | `Configuration.setAccessToken(…)` | `console.log(new SecretString("…"))` → `<REDACTED>` | `.exposeSecret()` |
-| Go | [`secrecy.SecretString`](https://github.com/negrel/secrecy) | `Configuration.SetAccessToken(…)` | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()` |
-| Java | `SecretString` в каждом под-пакете | `ApiClient.setBearerToken(SecretString)` | `System.out.println(s)` → `<REDACTED>` | `.exposeSecret()` |
-| PHP | `SecretString` в каждом под-пространстве | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'` | `->exposeSecret()` |
+| Язык       | Обёртка                                                                                      | Сеттер                                              | Маскируется в                                             | Явное значение        |
+| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                     | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
+| TypeScript | встроенный класс `SecretString`                                                              | `Configuration.setAccessToken(…)`                   | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
+| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
+| Java       | `SecretString` в каждом под-пакете                                                           | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
+| PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
 
 ### Зачем это нужно
 
@@ -114,11 +114,11 @@ const ordCfg   = new OrdCfg({});   ordCfg.setAccessToken(TOKEN);
 
 ## Типичные ошибки авторизации
 
-| Ответ | Значение |
-|---|---|
-| `401 Unauthorized` — `token expired` | Срок токена истёк; выпустите новый |
-| `401 Unauthorized` — `invalid signature` | Неверный формат заголовка Authorization или токен от другой среды (sandbox / prod) |
-| `403 Forbidden` — `no access to resource` | Токен валиден, прав не хватает — перевыпустите с правильной галочкой |
-| `429 Too Many Requests` | Rate-limit; сам токен в порядке |
+| Ответ                                     | Значение                                                                           |
+| ----------------------------------------- | ---------------------------------------------------------------------------------- |
+| `401 Unauthorized` — `token expired`      | Срок токена истёк; выпустите новый                                                 |
+| `401 Unauthorized` — `invalid signature`  | Неверный формат заголовка Authorization или токен от другой среды (sandbox / prod) |
+| `403 Forbidden` — `no access to resource` | Токен валиден, прав не хватает — перевыпустите с правильной галочкой               |
+| `429 Too Many Requests`                   | Rate-limit; сам токен в порядке                                                    |
 
 Ретраи и работа с ошибками — в [руководстве по обработке ошибок](/guides/error-handling).

@@ -4,11 +4,11 @@ All five language packages share one version string per release: **`1.YYYYMMDD.N
 
 ## Format
 
-| Field | Value | Why |
-|---|---|---|
-| `MAJOR` | `1` — fixed | Keeps Go's module path free of the `/vN` suffix that `MAJOR ≥ 2` would require. Any real breaking change to the pipeline surfaces as a major-version bump of the *code repo*, not a new module path. |
-| `MINOR` | `YYYYMMDD` (UTC release date) | Monotonic across days — `20260919 < 20260920 < 20261001`. Sorts as an integer under semver rules. |
-| `PATCH` | `N` — same-day counter | `0` for the first release of a day, `1`, `2`, … for repeats (rare). |
+| Field   | Value                         | Why                                                                                                                                                                                                  |
+| ------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MAJOR` | `1` — fixed                   | Keeps Go's module path free of the `/vN` suffix that `MAJOR ≥ 2` would require. Any real breaking change to the pipeline surfaces as a major-version bump of the _code repo_, not a new module path. |
+| `MINOR` | `YYYYMMDD` (UTC release date) | Monotonic across days — `20260919 < 20260920 < 20261001`. Sorts as an integer under semver rules.                                                                                                    |
+| `PATCH` | `N` — same-day counter        | `0` for the first release of a day, `1`, `2`, … for repeats (rare).                                                                                                                                  |
 
 Example: `1.20260921.0` — first release cut on 21 Sep 2026 UTC.
 

@@ -4,17 +4,17 @@ WB returns standard HTTP status codes plus a JSON body. The clients surface thes
 
 ## Status codes worth handling
 
-| Code | Meaning | Right response |
-|---|---|---|
-| `200`–`204` | Success | Parse the body (or don't, for 204) |
-| `400` | Request malformed | Fix the request; not retriable |
-| `401` | Missing / bad / expired token | Refresh the token; do NOT retry with the same token |
-| `403` | Token lacks scope for this endpoint | Regenerate token with correct scope; not retriable |
-| `404` | Resource doesn't exist | Business-logic decision — not always an error |
-| `409` | Conflict (e.g. supply already delivered) | Business-logic; specific WB schemas per endpoint |
-| `429` | Rate-limited | Read `Retry-After`, back off, retry |
-| `498` | WBAAS anti-bot challenge | Never fires against these clients (correct UA) — if you see it, something is proxying/rewriting |
-| `5xx` | Upstream problem | Retry with exponential backoff, cap attempts |
+| Code        | Meaning                                  | Right response                                                                                  |
+| ----------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `200`–`204` | Success                                  | Parse the body (or don't, for 204)                                                              |
+| `400`       | Request malformed                        | Fix the request; not retriable                                                                  |
+| `401`       | Missing / bad / expired token            | Refresh the token; do NOT retry with the same token                                             |
+| `403`       | Token lacks scope for this endpoint      | Regenerate token with correct scope; not retriable                                              |
+| `404`       | Resource doesn't exist                   | Business-logic decision — not always an error                                                   |
+| `409`       | Conflict (e.g. supply already delivered) | Business-logic; specific WB schemas per endpoint                                                |
+| `429`       | Rate-limited                             | Read `Retry-After`, back off, retry                                                             |
+| `498`       | WBAAS anti-bot challenge                 | Never fires against these clients (correct UA) — if you see it, something is proxying/rewriting |
+| `5xx`       | Upstream problem                         | Retry with exponential backoff, cap attempts                                                    |
 
 ## Retry pattern
 

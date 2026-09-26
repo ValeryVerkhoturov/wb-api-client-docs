@@ -5,6 +5,7 @@
 Баги, странности спецификации, кривости генератора — заводите issue в основном репозитории кода: [`ValeryVerkhoturov/wb-api-client/issues`](https://github.com/ValeryVerkhoturov/wb-api-client/issues).
 
 Что приложить:
+
 - Какой языковой клиент (Python / TypeScript / Go / Java / PHP)
 - Какой под-модуль (`items`, `orders_fbs`, `analytics`, …)
 - Версию из манифеста (`1.YYYYMMDD.N`)

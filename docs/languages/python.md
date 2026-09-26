@@ -45,21 +45,21 @@ from wb_api_client.<slug>.api import DefaultApi
 
 ## Под-модули
 
-| Слаг | Категория |
-|---|---|
-| `general` | Общее — ping, инфо о продавце, управление пользователями |
-| `items` | Работа с товарами (Контент) |
-| `orders_fbs` | Заказы FBS |
-| `orders_dbw` | Заказы DBW |
-| `dbs` | DBS |
-| `in_store_pickup` | Самовывоз |
-| `orders_fbw` | Поставки FBW |
-| `promotion` | Маркетинг и продвижение |
-| `communications` | Общение с покупателями |
-| `rates` | Тарифы |
-| `analytics` | Аналитика и данные |
-| `reports` | Отчёты |
-| `finances` | Документы и бухгалтерия |
+| Слаг              | Категория                                                |
+| ----------------- | -------------------------------------------------------- |
+| `general`         | Общее — ping, инфо о продавце, управление пользователями |
+| `items`           | Работа с товарами (Контент)                              |
+| `orders_fbs`      | Заказы FBS                                               |
+| `orders_dbw`      | Заказы DBW                                               |
+| `dbs`             | DBS                                                      |
+| `in_store_pickup` | Самовывоз                                                |
+| `orders_fbw`      | Поставки FBW                                             |
+| `promotion`       | Маркетинг и продвижение                                  |
+| `communications`  | Общение с покупателями                                   |
+| `rates`           | Тарифы                                                   |
+| `analytics`       | Аналитика и данные                                       |
+| `reports`         | Отчёты                                                   |
+| `finances`        | Документы и бухгалтерия                                  |
 
 Точные классы `Api` в каждом под-модуле (где-то `DefaultApi`, где-то `CSVApi`, где-то `WBAPIApi`) описаны в README, который перегенерируется каждый релиз: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
 

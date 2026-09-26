@@ -5,6 +5,7 @@
 Bugs, spec-drift oddities, generator quirks: open an issue on the main code repo — [`ValeryVerkhoturov/wb-api-client/issues`](https://github.com/ValeryVerkhoturov/wb-api-client/issues).
 
 Include:
+
 - Which language client (Python / TypeScript / Go / Java / PHP)
 - Which sub-module (`items`, `orders_fbs`, `analytics`, …)
 - Version string from the manifest (`1.YYYYMMDD.N`)
