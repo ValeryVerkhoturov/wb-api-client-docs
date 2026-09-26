@@ -1,0 +1,933 @@
+/* ============================================================================
+   Editorial modernism
+   ----------------------------------------------------------------------------
+   Swiss grid discipline with a printed-page voice: warm paper, ink-black type,
+   a single vermilion accent, hairline rules instead of boxes, and a high-
+   contrast Didone display face (Playfair Display) against a neutral grotesque
+   (Inter) and a technical mono (JetBrains Mono).
+
+   Nothing is rounded. Nothing has a shadow. Hierarchy comes from scale,
+   weight, spacing and rules — the way it does on paper.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- 1. Tokens */
+
+:root {
+  --ed-font-display: "Playfair Display", "Iowan Old Style", "Palatino Linotype",
+    Georgia, serif;
+  --ed-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ed-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
+    Menlo, Consolas, monospace;
+
+  /* Letterspaced small caps used for labels, nav, buttons, tabs. */
+  --ed-label-size: 11px;
+  --ed-label-tracking: 0.16em;
+
+  /* Paper & ink. */
+  --ed-paper: #f6f3ec;
+  --ed-paper-2: #efeade;
+  --ed-paper-3: #e7e1d2;
+  --ed-ink: #17150f;
+  --ed-ink-2: #58533f;
+  --ed-ink-3: #8b8472;
+  --ed-rule: rgba(23, 21, 15, 0.16);
+  --ed-rule-soft: rgba(23, 21, 15, 0.08);
+  --ed-rule-strong: rgba(23, 21, 15, 0.42);
+  --ed-accent: #c2381c;
+  --ed-accent-deep: #96280f;
+  --ed-accent-soft: rgba(194, 56, 28, 0.1);
+
+  /* --- default-theme bindings ------------------------------------------- */
+  --vp-font-family-base: var(--ed-font-sans);
+  --vp-font-family-mono: var(--ed-font-mono);
+
+  --vp-c-bg: var(--ed-paper);
+  --vp-c-bg-alt: var(--ed-paper-2);
+  --vp-c-bg-soft: var(--ed-paper-2);
+  --vp-c-bg-elv: var(--ed-paper);
+
+  --vp-c-text-1: var(--ed-ink);
+  --vp-c-text-2: var(--ed-ink-2);
+  --vp-c-text-3: var(--ed-ink-3);
+
+  --vp-c-divider: var(--ed-rule);
+  --vp-c-border: var(--ed-rule);
+  --vp-c-gutter: var(--ed-rule);
+
+  --vp-c-brand-1: var(--ed-accent);
+  --vp-c-brand-2: var(--ed-accent-deep);
+  --vp-c-brand-3: var(--ed-accent);
+  --vp-c-brand-soft: var(--ed-accent-soft);
+
+  --vp-c-default-1: var(--ed-ink);
+  --vp-c-default-2: var(--ed-ink-2);
+  --vp-c-default-3: var(--ed-ink-3);
+  --vp-c-default-soft: var(--ed-paper-3);
+
+  --vp-c-tip-1: var(--ed-ink);
+  --vp-c-tip-soft: var(--ed-paper-2);
+  --vp-c-note-1: var(--ed-ink);
+  --vp-c-note-soft: var(--ed-paper-2);
+  --vp-c-warning-1: #8a5a00;
+  --vp-c-warning-soft: rgba(138, 90, 0, 0.08);
+  --vp-c-danger-1: var(--ed-accent-deep);
+  --vp-c-danger-soft: var(--ed-accent-soft);
+
+  --vp-code-block-bg: var(--ed-paper-2);
+  --vp-code-tab-divider: var(--ed-rule);
+  --vp-code-tab-text-color: var(--ed-ink-3);
+  --vp-code-tab-hover-text-color: var(--ed-ink);
+  --vp-code-tab-active-text-color: var(--ed-ink);
+  --vp-code-tab-active-bar-color: var(--ed-accent);
+  --vp-code-copy-code-bg: var(--ed-paper-3);
+  --vp-code-copy-code-hover-bg: var(--ed-paper);
+  --vp-code-copy-code-border-color: var(--ed-rule);
+
+  --vp-custom-block-info-bg: var(--ed-paper-2);
+  --vp-custom-block-tip-bg: var(--ed-paper-2);
+  --vp-custom-block-warning-bg: rgba(138, 90, 0, 0.07);
+  --vp-custom-block-danger-bg: var(--ed-accent-soft);
+
+  --vp-home-hero-name-color: var(--ed-accent);
+
+  --vp-button-brand-bg: var(--ed-ink);
+  --vp-button-brand-border: var(--ed-ink);
+  --vp-button-brand-text: var(--ed-paper);
+  --vp-button-brand-hover-bg: var(--ed-accent);
+  --vp-button-brand-hover-border: var(--ed-accent);
+  --vp-button-brand-hover-text: var(--ed-paper);
+  --vp-button-brand-active-bg: var(--ed-accent-deep);
+  --vp-button-brand-active-border: var(--ed-accent-deep);
+  --vp-button-brand-active-text: var(--ed-paper);
+
+  --vp-button-alt-bg: transparent;
+  --vp-button-alt-border: var(--ed-rule-strong);
+  --vp-button-alt-text: var(--ed-ink);
+  --vp-button-alt-hover-bg: transparent;
+  --vp-button-alt-hover-border: var(--ed-ink);
+  --vp-button-alt-hover-text: var(--ed-ink);
+  --vp-button-alt-active-bg: var(--ed-paper-3);
+  --vp-button-alt-active-border: var(--ed-ink);
+  --vp-button-alt-active-text: var(--ed-ink);
+
+  /* Decorative labels live in CSS, so they must be localised here.
+     Root locale is Russian; `html[lang^="en"]` below carries the English. */
+  --ed-label-runhead: "Wildberries Seller API · SDK";
+  --ed-label-features: "Что внутри";
+  --ed-label-docs: "docs";
+
+  --vp-layout-max-width: 1440px;
+  --vp-nav-height: 68px;
+  --vp-local-search-highlight-bg: var(--ed-accent-soft);
+  --vp-local-search-highlight-text: var(--ed-accent-deep);
+}
+
+.dark {
+  --ed-paper: #131210;
+  --ed-paper-2: #1b1a16;
+  --ed-paper-3: #24221c;
+  --ed-ink: #f3f0e7;
+  --ed-ink-2: #a9a394;
+  --ed-ink-3: #7d7867;
+  --ed-rule: rgba(243, 240, 231, 0.16);
+  --ed-rule-soft: rgba(243, 240, 231, 0.08);
+  --ed-rule-strong: rgba(243, 240, 231, 0.45);
+  --ed-accent: #ff6f4a;
+  --ed-accent-deep: #ff9273;
+  --ed-accent-soft: rgba(255, 111, 74, 0.14);
+
+  --vp-c-warning-1: #d9a441;
+  --vp-c-warning-soft: rgba(217, 164, 65, 0.12);
+  --vp-custom-block-warning-bg: rgba(217, 164, 65, 0.09);
+  --vp-c-danger-1: var(--ed-accent);
+
+  --vp-code-block-bg: #100f0d;
+  --vp-code-copy-code-bg: var(--ed-paper-3);
+  --vp-code-copy-code-hover-bg: var(--ed-paper-2);
+
+  --vp-button-brand-bg: var(--ed-ink);
+  --vp-button-brand-border: var(--ed-ink);
+  --vp-button-brand-text: var(--ed-paper);
+  --vp-button-brand-hover-bg: var(--ed-accent);
+  --vp-button-brand-hover-border: var(--ed-accent);
+  --vp-button-brand-hover-text: #17150f;
+  --vp-button-brand-active-bg: var(--ed-accent-deep);
+  --vp-button-brand-active-border: var(--ed-accent-deep);
+  --vp-button-brand-active-text: #17150f;
+}
+
+html[lang^="en"] {
+  --ed-label-features: "What you get";
+}
+
+/* ------------------------------------------------------------- 2. Sharp edges */
+
+.VPButton,
+.VPFeature,
+.VPImage,
+.vp-doc div[class*="language-"],
+.vp-doc .custom-block,
+.vp-doc img,
+.vp-doc table,
+.vp-doc kbd,
+.VPNavBarSearchButton,
+.DocSearch-Button,
+.VPLocalSearchBox .search-bar,
+.VPLocalSearchBox .result,
+.VPMenu,
+.VPFlyout .menu,
+.VPNavScreen,
+.VPBadge,
+.VPSwitch,
+.VPSwitch .check,
+.VPSwitch .icon,
+.VPTeamMembersItem,
+.vp-doc [class*="language-"] > button.copy,
+.vp-doc [class*="language-"] > span.lang {
+  border-radius: 0 !important;
+}
+
+::selection {
+  background: var(--ed-accent-soft);
+  color: var(--ed-accent-deep);
+}
+
+/* --------------------------------------------------------- 3. Masthead / nav */
+
+.VPNavBar:not(.home.top) .divider-line,
+.VPNavBar .divider {
+  background-color: var(--ed-rule);
+}
+
+.VPNavBar .content-body {
+  background-color: transparent !important;
+}
+
+.VPNavBar:not(.top) {
+  background-color: color-mix(in srgb, var(--ed-paper) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+}
+
+.VPNavBarTitle .title {
+  border-bottom: 0;
+  font-family: var(--ed-font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.VPNavBarTitle .title::after {
+  content: var(--ed-label-docs);
+  margin-left: 10px;
+  color: var(--ed-accent);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup .VPFlyout .button {
+  font-family: var(--ed-font-mono);
+  font-size: var(--ed-label-size);
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPNavBarMenuLink.active {
+  color: var(--ed-accent);
+}
+
+.VPNavBarSearchButton,
+.DocSearch-Button {
+  border: 1px solid var(--ed-rule);
+  background: transparent;
+}
+
+/* ------------------------------------------------------------------ 4. Hero */
+
+.VPHome {
+  padding-bottom: 0;
+}
+
+.VPHero {
+  padding-bottom: 64px;
+}
+
+.VPHero .container {
+  position: relative;
+  max-width: 1152px;
+  border-top: 2px solid var(--ed-ink);
+  padding-top: 28px;
+}
+
+/* Running head: the paper's name, set like a colophon. */
+.VPHero .container::before {
+  content: var(--ed-label-runhead);
+  position: absolute;
+  top: -2px;
+  right: 0;
+  transform: translateY(-140%);
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPHero .main {
+  width: 100%;
+}
+
+.VPHero .heading {
+  display: block;
+}
+
+/* The package name becomes a kicker above the headline. */
+.VPHero .name,
+.VPHero .name.clip {
+  display: block;
+  max-width: none;
+  margin-bottom: 22px;
+  color: var(--ed-accent);
+  -webkit-text-fill-color: var(--ed-accent);
+  font-family: var(--ed-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPHero .text {
+  display: block;
+  max-width: 17ch;
+  color: var(--ed-ink);
+  font-family: var(--ed-font-display);
+  font-size: clamp(42px, 8.2vw, 96px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.VPHero .tagline {
+  max-width: 46ch;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ed-rule);
+  color: var(--ed-ink-2);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.62;
+}
+
+.VPHero .actions {
+  margin-top: 40px;
+  padding-top: 0;
+}
+
+.VPButton {
+  border-width: 1px;
+  font-family: var(--ed-font-mono);
+  font-size: var(--ed-label-size);
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.VPButton.medium {
+  padding: 0 22px;
+  line-height: 42px;
+}
+
+@media (min-width: 960px) {
+  .VPHero .text {
+    max-width: 14ch;
+  }
+
+  /* Headline left, lede set in the second column — an asymmetric spread. */
+  .VPHero .main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    column-gap: 64px;
+    align-items: start;
+  }
+
+  .VPHero .heading {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .VPHero .tagline {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 10px;
+  }
+
+  .VPHero .actions {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 32px;
+  }
+}
+
+/* -------------------------------------------------------------- 5. Features */
+
+.VPFeatures {
+  padding-top: 0;
+}
+
+.VPFeatures .container {
+  max-width: 1152px;
+  border-top: 1px solid var(--ed-ink);
+  padding-top: 18px;
+  counter-reset: ed-feature;
+}
+
+.VPFeatures .container::before {
+  content: var(--ed-label-features);
+  display: block;
+  margin-bottom: 40px;
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPFeatures .items {
+  margin: 0 -24px;
+}
+
+.VPFeatures .item {
+  padding: 0 24px 44px;
+  counter-increment: ed-feature;
+}
+
+/* Cards become columns of a grid, separated by rules. The extra
+   ancestor outranks the default theme's scoped `[data-v-*]` rules. */
+.VPFeatures .VPFeature {
+  border: 0;
+  border-top: 1px solid var(--ed-rule);
+  background: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.VPFeatures .VPFeature .box {
+  padding: 18px 0 0;
+}
+
+.VPFeature .box::before {
+  content: counter(ed-feature, decimal-leading-zero);
+  display: block;
+  margin-bottom: 14px;
+  color: var(--ed-accent);
+  font-family: var(--ed-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* The emoji slot is retired in favour of the numeral. */
+.VPFeature .icon {
+  display: none;
+}
+
+.VPFeature .title {
+  font-family: var(--ed-font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+.VPFeature .details {
+  margin-top: 10px;
+  color: var(--ed-ink-2);
+  font-size: 14px;
+  line-height: 1.66;
+}
+
+.VPFeatures a.VPFeature:hover {
+  border-top-color: var(--ed-accent);
+}
+
+/* ------------------------------------------------- 6. Home body copy (below) */
+
+.VPHomeContent .vp-doc,
+.VPHome .vp-doc {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+}
+
+@media (min-width: 640px) {
+  .VPHomeContent .vp-doc,
+  .VPHome .vp-doc {
+    padding: 24px 48px 96px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHomeContent .vp-doc,
+  .VPHome .vp-doc {
+    padding: 24px 64px 112px;
+  }
+}
+
+/* --------------------------------------------------------- 7. Body typography */
+
+.VPDoc .content-container {
+  max-width: 736px;
+}
+
+.vp-doc h1 {
+  position: relative;
+  margin-top: 8px;
+  padding-top: 26px;
+  font-family: var(--ed-font-display);
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 2px;
+  background: var(--ed-accent);
+}
+
+/* First paragraph after the title reads as a lede. */
+.vp-doc h1 + p {
+  margin-top: 22px;
+  color: var(--ed-ink-2);
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.vp-doc h2 {
+  margin: 64px 0 20px;
+  border-top: 1px solid var(--ed-rule);
+  padding-top: 22px;
+  font-family: var(--ed-font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.vp-doc h3 {
+  margin: 40px 0 14px;
+  font-family: var(--ed-font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.vp-doc h4 {
+  margin: 28px 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vp-doc p,
+.vp-doc li {
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.vp-doc a {
+  color: var(--ed-ink);
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-decoration-color: var(--ed-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--ed-accent);
+}
+
+.vp-doc strong {
+  font-weight: 600;
+}
+
+/* Ordered lists get the same numeral treatment as the features. */
+.vp-doc ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: ed-item;
+}
+
+.vp-doc ol > li {
+  position: relative;
+  padding-left: 38px;
+  counter-increment: ed-item;
+}
+
+.vp-doc ol > li::before {
+  content: counter(ed-item, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--ed-accent);
+  font-family: var(--ed-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.vp-doc ul {
+  padding-left: 20px;
+}
+
+.vp-doc ul > li::marker {
+  color: var(--ed-ink-3);
+}
+
+/* Pull quote. */
+.vp-doc blockquote {
+  border-left: 2px solid var(--ed-accent);
+  padding-left: 22px;
+}
+
+.vp-doc blockquote > p {
+  font-family: var(--ed-font-display);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ed-ink);
+}
+
+.vp-doc hr {
+  border-top: 1px solid var(--ed-rule);
+  margin: 56px 0;
+}
+
+/* Tables: horizontal rules only, like a printed index. */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  overflow-x: auto;
+}
+
+.vp-doc tr,
+.vp-doc tr:nth-child(2n) {
+  background: transparent;
+  border-top: 1px solid var(--ed-rule-soft);
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 0;
+  padding: 12px 16px 12px 0;
+  text-align: left;
+}
+
+.vp-doc th {
+  border-bottom: 1px solid var(--ed-ink);
+  color: var(--ed-ink);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.vp-doc td {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------- 8. Code */
+
+.vp-doc :not(pre) > code {
+  border: 1px solid var(--ed-rule-soft);
+  background: var(--ed-paper-2);
+  padding: 1px 4px;
+  font-size: 13px;
+}
+
+.vp-doc a > code {
+  color: inherit;
+}
+
+.vp-doc div[class*="language-"] {
+  border: 1px solid var(--ed-rule);
+  margin: 22px 0;
+}
+
+.vp-doc [class*="language-"] code {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.vp-doc [class*="language-"] > span.lang,
+.vp-doc [class*="language-"] > button.copy + span.lang {
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+/* Code-group tabs read as a contents strip. */
+.vp-doc .vp-code-group .tabs {
+  border-bottom: 1px solid var(--ed-rule);
+  background: transparent;
+  box-shadow: none;
+  gap: 4px;
+}
+
+.vp-doc .vp-code-group .tabs label {
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.vp-doc .vp-code-group div[class*="language-"] {
+  border-top: 0;
+  margin-top: 0;
+}
+
+/* Custom blocks: a rule and a label, no tinted card. */
+.vp-doc .custom-block {
+  border: 0;
+  border-left: 2px solid var(--vp-c-text-3);
+  padding: 14px 18px;
+  font-size: 14px;
+}
+
+.vp-doc .custom-block .custom-block-title {
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.vp-doc .custom-block.tip,
+.vp-doc .custom-block.info {
+  border-left-color: var(--ed-ink);
+}
+
+.vp-doc .custom-block.warning {
+  border-left-color: var(--vp-c-warning-1);
+}
+
+.vp-doc .custom-block.danger {
+  border-left-color: var(--ed-accent);
+}
+
+.vp-doc .custom-block a {
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------- 9. Sidebar */
+
+.VPSidebar {
+  border-right: 1px solid var(--ed-rule);
+  background: var(--vp-c-bg);
+  padding-top: 28px;
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPSidebarItem.level-0 {
+  border-top: 1px solid var(--ed-rule);
+  padding-top: 14px;
+}
+
+.VPSidebarItem.level-0 .items {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.VPSidebarItem.level-1 .link .text,
+.VPSidebarItem.level-2 .link .text {
+  padding: 5px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--ed-accent);
+  font-weight: 500;
+}
+
+.VPSidebarItem.is-active > .item .indicator {
+  background-color: var(--ed-accent);
+}
+
+/* --------------------------------------------------------- 10. Aside & footer */
+
+.VPDocAsideOutline .outline-title {
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPDocAsideOutline .outline-marker {
+  background-color: var(--ed-accent);
+}
+
+.VPDocAside .outline-link {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.VPDoc .aside-curtain {
+  background: var(--vp-c-bg);
+}
+
+.VPDocFooter .edit-link-button,
+.VPDocFooter .prev-next .desc,
+.VPDocFooter .prev-next .title {
+  font-family: var(--ed-font-sans);
+}
+
+.VPDocFooter .prev-next {
+  border-top: 1px solid var(--ed-rule);
+}
+
+.VPDocFooter .pager-link {
+  border: 0;
+  border-top: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  padding: 18px 0 0;
+  transition: border-color 0.2s ease;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-top-color: var(--ed-accent);
+}
+
+.VPDocFooter .pager-link .desc {
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  text-transform: uppercase;
+}
+
+.VPDocFooter .pager-link .title {
+  font-family: var(--ed-font-display);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.VPLastUpdated,
+.VPDocFooterLastUpdated {
+  font-family: var(--ed-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.VPFooter {
+  border-top: 1px solid var(--ed-ink);
+  background: transparent;
+  padding: 28px 24px;
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  color: var(--ed-ink-3);
+  font-family: var(--ed-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ed-label-tracking);
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+.VPFooter .message a,
+.VPFooter .copyright a {
+  color: var(--ed-ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--ed-accent);
+  text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------------- 11. Search & mobile */
+
+.VPLocalSearchBox .search-bar {
+  border: 1px solid var(--ed-rule);
+}
+
+.VPLocalSearchBox .search-input {
+  font-family: var(--ed-font-sans);
+}
+
+.VPLocalSearchBox .title {
+  font-weight: 500;
+}
+
+.VPLocalNav {
+  border-bottom: 1px solid var(--ed-rule);
+  background: color-mix(in srgb, var(--ed-paper) 88%, transparent);
+}
+
+.VPLocalNav button .text {
+  font-family: var(--ed-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.VPNavScreenMenuLink,
+.VPNavScreenMenuGroupSection .title {
+  font-family: var(--ed-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 959px) {
+  .VPHero .container::before {
+    display: none;
+  }
+
+  .VPHero .tagline {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 639px) {
+  .VPFeatures .items {
+    margin: 0;
+  }
+
+  .VPFeatures .item {
+    padding: 0 0 36px;
+  }
+
+  .vp-doc h2 {
+    margin-top: 48px;
+    font-size: 26px;
+  }
+}

@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: wb-api-client
-  text: Wildberries Seller API — in every language you ship.
+  text: Wildberries API, in your language.
   tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, and PHP. One version across every ecosystem. Bearer tokens redacted by default.
   actions:
     - theme: brand
@@ -14,23 +14,17 @@ hero:
       link: https://github.com/ValeryVerkhoturov/wb-api-client
 
 features:
-  - icon: 🧩
-    title: 13 API categories, one package
+  - title: 13 API categories, one package
     details: Every category — items, orders (FBS/DBW/FBW/DBS), promotion, analytics, finances, and the rest — ships as an isolated sub-module inside a single per-language package. No cross-category name clashes.
-  - icon: 🔐
-    title: Secret redaction, built in
+  - title: Secret redaction, built in
     details: Your bearer JWT is wrapped in a per-language SecretString so it stays out of logs, prints, and debuggers unless you explicitly ask for the raw value.
-  - icon: 📆
-    title: Daily upstream sync
+  - title: Daily upstream sync
     details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, and Packagist automatically — with a matching git tag.
-  - icon: 🧬
-    title: One version, five ecosystems
+  - title: One version, five ecosystems
     details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer all pick the latest without prerelease dance.
-  - icon: 🛡️
-    title: Bearer auth, everywhere
+  - title: Bearer auth, everywhere
     details: The upstream YAMLs conflate an API-key scheme with a bearer JWT. A post-processing pass strips that duplication so every generated client exposes exactly one auth path.
-  - icon: 🧪
-    title: Deterministic regeneration
+  - title: Deterministic regeneration
     details: Pinned openapi-generator + formatter versions + hidden generation timestamps. PRs that break determinism are caught by a per-PR regen check.
 ---
 
