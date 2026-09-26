@@ -121,4 +121,4 @@ WB tokens don't rotate on the wire — you have to swap them. Best practice:
 | `403 Forbidden` — `no access to resource` | Token valid, scope missing — regenerate with the right box ticked |
 | `429 Too Many Requests` | Rate-limited; the token itself is fine |
 
-See the [error-handling guide](/guides/error-handling) for retry patterns.
+See the [error-handling guide](/en/guides/error-handling) for retry patterns.

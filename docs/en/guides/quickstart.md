@@ -132,9 +132,9 @@ If that returns your seller data — you're wired up.
 
 ## 4. Where to go next
 
-- **[Authentication](/guides/authentication)** — how the secret-string wrapper works, why you should never print your token, and how to expose the raw value when you actually need to.
-- **[Error handling](/guides/error-handling)** — WB's status codes, retry strategy for 429/5xx, and how errors surface in each language.
-- **[Language pages](/languages/python)** — every sub-module, install snippet, and the shape of each `Api` class.
+- **[Authentication](/en/guides/authentication)** — how the secret-string wrapper works, why you should never print your token, and how to expose the raw value when you actually need to.
+- **[Error handling](/en/guides/error-handling)** — WB's status codes, retry strategy for 429/5xx, and how errors surface in each language.
+- **[Language pages](/en/languages/python)** — every sub-module, install snippet, and the shape of each `Api` class.
 
 ## Troubleshooting the first call
 

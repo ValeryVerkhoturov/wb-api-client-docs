@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import { editorialFonts } from "vitepress-editorial-modernist/config";
 
 // Docs for https://github.com/ValeryVerkhoturov/wb-api-client — a
 // code-generation pipeline that produces client libraries for the
@@ -27,25 +28,9 @@ export default defineConfig({
     ["meta", { name: "theme-color", content: "#c2381c" }],
     ["meta", { property: "og:title", content: "wb-api-client" }],
 
-    // Editorial pairing: a Didone display face against a technical mono.
-    // Inter (body/UI) is already self-hosted by VitePress. Both families
-    // below ship Cyrillic subsets — the root locale is Russian.
-    ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
-    [
-      "link",
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
-    ],
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css2" +
-          "?family=Playfair+Display:ital,wght@0,400..700;1,400..600" +
-          "&family=JetBrains+Mono:wght@400;500" +
-          "&display=swap",
-      },
-    ],
+    // Playfair Display + JetBrains Mono, the faces the theme sets its
+    // display and label type in. Both ship Cyrillic subsets.
+    ...editorialFonts,
   ],
 
   themeConfig: {

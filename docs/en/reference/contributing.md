@@ -23,7 +23,7 @@ If you find something wrong in generated output, the fix goes in one of:
 - **`generator-configs/*.yaml`** — if it's an openapi-generator option toggle.
 - **`templates/{lang}/*`** — if it's in the top-level manifest.
 
-The [architecture reference](/reference/architecture) has the full pipeline map.
+The [architecture reference](/en/reference/architecture) has the full pipeline map.
 
 ## Local development
 

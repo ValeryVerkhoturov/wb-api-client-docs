@@ -103,6 +103,6 @@ $config = (new Configuration())
 
 ## See also
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
+- [Authentication guide](/en/guides/authentication)
+- [Error handling](/en/guides/error-handling)
 - [Sibling repo readme](https://github.com/ValeryVerkhoturov/wb-api-client-php#readme)

@@ -1,0 +1,11 @@
+/* Decorative labels the theme sets in CSS. Root locale is Russian;
+   `html[lang^="en"]` carries the English. */
+
+:root {
+  --ed-label-runhead: "Wildberries Seller API · SDK";
+  --ed-label-features: "Что внутри";
+}
+
+html[lang^="en"] {
+  --ed-label-features: "What you get";
+}

@@ -106,6 +106,6 @@ const cfg = new Configuration({ basePath: "http://localhost:8080" });
 
 ## See also
 
-- [Authentication guide](/guides/authentication)
-- [Error handling](/guides/error-handling)
+- [Authentication guide](/en/guides/authentication)
+- [Error handling](/en/guides/error-handling)
 - [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md)

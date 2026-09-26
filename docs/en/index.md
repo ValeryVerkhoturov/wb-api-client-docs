@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Quickstart
-      link: /guides/quickstart
+      link: /en/guides/quickstart
     - theme: alt
       text: Source on GitHub
       link: https://github.com/ValeryVerkhoturov/wb-api-client
@@ -109,4 +109,4 @@ $api = new DefaultApi(new Client(), $config);
 
 :::
 
-Full tour of every sub-module, per-language: [Python](/languages/python) · [TypeScript](/languages/typescript) · [Go](/languages/go) · [Java](/languages/java) · [PHP](/languages/php).
+Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php).

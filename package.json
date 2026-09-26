@@ -10,6 +10,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress": "^1.5.0"
+    "vitepress": "^1.5.0",
+    "vitepress-editorial-modernist": "^0.1.0"
   }
 }
