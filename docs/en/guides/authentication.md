@@ -16,13 +16,13 @@ Each scope corresponds roughly to one or more sub-modules in the clients. If a c
 
 Once you have the token, don't pass it around as a plain string. Every client wraps the value in a language-native "secret string" type so it redacts under logs, `print`, debuggers, and error dumps — unless you explicitly ask for the raw value.
 
-| Language | Wrapper | Setter | Redacted under | Explicit expose |
-|---|---|---|---|---|
-| Python | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)` | `print(cfg.access_token)` → `**********` | `.get_secret_value()` |
-| TypeScript | inlined `SecretString` class | `Configuration.setAccessToken(…)` | `console.log(new SecretString("…"))` → `<REDACTED>` | `.exposeSecret()` |
-| Go | [`secrecy.SecretString`](https://github.com/negrel/secrecy) | `Configuration.SetAccessToken(…)` | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()` |
-| Java | per-sub-module `SecretString` | `ApiClient.setBearerToken(SecretString)` | `System.out.println(s)` → `<REDACTED>` | `.exposeSecret()` |
-| PHP | per-sub-module `SecretString` | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'` | `->exposeSecret()` |
+| Language   | Wrapper                                                                                      | Setter                                              | Redacted under                                            | Explicit expose       |
+| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                     | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
+| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`                   | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
+| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
+| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
+| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
 
 ### Why bother?
 
@@ -114,11 +114,11 @@ WB tokens don't rotate on the wire — you have to swap them. Best practice:
 
 ## Common auth failures
 
-| Response | Meaning |
-|---|---|
-| `401 Unauthorized` — `token expired` | Token past its expiry; mint a new one |
-| `401 Unauthorized` — `invalid signature` | Wrong Authorization header format, or token from a different environment (sandbox vs prod) |
-| `403 Forbidden` — `no access to resource` | Token valid, scope missing — regenerate with the right box ticked |
-| `429 Too Many Requests` | Rate-limited; the token itself is fine |
+| Response                                  | Meaning                                                                                    |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `401 Unauthorized` — `token expired`      | Token past its expiry; mint a new one                                                      |
+| `401 Unauthorized` — `invalid signature`  | Wrong Authorization header format, or token from a different environment (sandbox vs prod) |
+| `403 Forbidden` — `no access to resource` | Token valid, scope missing — regenerate with the right box ticked                          |
+| `429 Too Many Requests`                   | Rate-limited; the token itself is fine                                                     |
 
 See the [error-handling guide](/en/guides/error-handling) for retry patterns.

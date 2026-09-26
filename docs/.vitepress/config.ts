@@ -115,8 +115,19 @@ export default defineConfig({
     ["meta", { name: "theme-color", content: "#c2381c" }],
 
     // SVG for everything modern, PNG for Safari/iOS and legacy tabs.
-    ["link", { rel: "icon", type: "image/svg+xml", href: `${BASE}favicon.svg` }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: `${BASE}favicon-32.png` }],
+    [
+      "link",
+      { rel: "icon", type: "image/svg+xml", href: `${BASE}favicon.svg` },
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: `${BASE}favicon-32.png`,
+      },
+    ],
     ["link", { rel: "apple-touch-icon", href: `${BASE}apple-touch-icon.png` }],
 
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
@@ -165,14 +176,24 @@ export default defineConfig({
         "meta",
         {
           property: "og:type",
-          content: pageData.frontmatter.layout === "home" ? "website" : "article",
+          content:
+            pageData.frontmatter.layout === "home" ? "website" : "article",
         },
       ],
       ["meta", { property: "og:site_name", content: "wb-api-client" }],
       ["meta", { property: "og:url", content: url }],
-      ["meta", { property: "og:title", content: title ? `${title} · wb-api-client` : "wb-api-client" }],
+      [
+        "meta",
+        {
+          property: "og:title",
+          content: title ? `${title} · wb-api-client` : "wb-api-client",
+        },
+      ],
       ["meta", { property: "og:description", content: description }],
-      ["meta", { property: "og:locale", content: isEnglish ? "en_US" : "ru_RU" }],
+      [
+        "meta",
+        { property: "og:locale", content: isEnglish ? "en_US" : "ru_RU" },
+      ],
       [
         "meta",
         {
@@ -193,7 +214,13 @@ export default defineConfig({
         ["link", { rel: "alternate", hreflang: "ru", href: russian }],
         ["link", { rel: "alternate", hreflang: "en", href: english }],
         ["link", { rel: "alternate", hreflang: "x-default", href: russian }],
-        ["meta", { property: "og:locale:alternate", content: isEnglish ? "ru_RU" : "en_US" }],
+        [
+          "meta",
+          {
+            property: "og:locale:alternate",
+            content: isEnglish ? "ru_RU" : "en_US",
+          },
+        ],
       );
     }
 
@@ -246,7 +273,10 @@ export default defineConfig({
               items: [
                 { text: "Версионирование", link: "/reference/versioning" },
                 { text: "Архитектура", link: "/reference/architecture" },
-                { text: "Участие в разработке", link: "/reference/contributing" },
+                {
+                  text: "Участие в разработке",
+                  link: "/reference/contributing",
+                },
               ],
             },
           ],

@@ -138,10 +138,10 @@ If that returns your seller data — you're wired up.
 
 ## Troubleshooting the first call
 
-| Symptom | Likely cause | Fix |
-|---|---|---|
-| `401 Unauthorized` | Token wrong / expired / not for this scope | Regenerate in Seller portal; ensure the scope matches the module (e.g. `Контент` for `items`) |
-| `403 Forbidden` | Token valid but scope insufficient | Add the required scope to the token, or make a new one |
-| `429 Too Many Requests` | You've hit WB's rate limit | Wait for `Retry-After` and back off; the SDK does not auto-retry |
-| Connection hangs | Corporate proxy / TLS interception | Set `HTTPS_PROXY` env var; most clients honor it |
-| `ImportError` / `Cannot find module` | Installed the wrong package name | Package is `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client` — the bare `wb-api-client` name is a different project |
+| Symptom                              | Likely cause                               | Fix                                                                                                                                      |
+| ------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `401 Unauthorized`                   | Token wrong / expired / not for this scope | Regenerate in Seller portal; ensure the scope matches the module (e.g. `Контент` for `items`)                                            |
+| `403 Forbidden`                      | Token valid but scope insufficient         | Add the required scope to the token, or make a new one                                                                                   |
+| `429 Too Many Requests`              | You've hit WB's rate limit                 | Wait for `Retry-After` and back off; the SDK does not auto-retry                                                                         |
+| Connection hangs                     | Corporate proxy / TLS interception         | Set `HTTPS_PROXY` env var; most clients honor it                                                                                         |
+| `ImportError` / `Cannot find module` | Installed the wrong package name           | Package is `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client` — the bare `wb-api-client` name is a different project |

@@ -1,0 +1,30 @@
+name: Checks
+
+# Runs on every push and pull request, including the pushes to main that
+# also trigger the Pages deploy — formatting is cheap enough to verify on
+# both, and a failure here is a signal, not a blocked deploy.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # `npm run format` locally fixes anything this reports.
+      - name: Check formatting
+        run: npm run format:check

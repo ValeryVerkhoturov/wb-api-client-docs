@@ -14,7 +14,7 @@ concurrency:
 permissions:
   contents: read
   pages: write
-  id-token: write     # required by actions/deploy-pages OIDC flow
+  id-token: write # required by actions/deploy-pages OIDC flow
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # `lastUpdated: true` needs history
+          fetch-depth: 0 # `lastUpdated: true` needs history
 
       - uses: actions/setup-node@v4
         with:

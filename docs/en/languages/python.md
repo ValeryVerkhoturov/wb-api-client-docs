@@ -45,21 +45,21 @@ from wb_api_client.<slug>.api import DefaultApi
 
 ## Sub-modules
 
-| Slug | Category |
-|---|---|
-| `general` | Общее — ping, seller info, user management |
-| `items` | Работа с товарами (Content) |
-| `orders_fbs` | Заказы FBS |
-| `orders_dbw` | Заказы DBW |
-| `dbs` | DBS |
-| `in_store_pickup` | Самовывоз |
-| `orders_fbw` | Поставки FBW |
-| `promotion` | Маркетинг и продвижение |
-| `communications` | Общение с покупателями |
-| `rates` | Тарифы |
-| `analytics` | Аналитика и данные |
-| `reports` | Отчёты |
-| `finances` | Документы и бухгалтерия |
+| Slug              | Category                                   |
+| ----------------- | ------------------------------------------ |
+| `general`         | Общее — ping, seller info, user management |
+| `items`           | Работа с товарами (Content)                |
+| `orders_fbs`      | Заказы FBS                                 |
+| `orders_dbw`      | Заказы DBW                                 |
+| `dbs`             | DBS                                        |
+| `in_store_pickup` | Самовывоз                                  |
+| `orders_fbw`      | Поставки FBW                               |
+| `promotion`       | Маркетинг и продвижение                    |
+| `communications`  | Общение с покупателями                     |
+| `rates`           | Тарифы                                     |
+| `analytics`       | Аналитика и данные                         |
+| `reports`         | Отчёты                                     |
+| `finances`        | Документы и бухгалтерия                    |
 
 The exact `Api` classes per sub-module (some categories have `DefaultApi`, some have `CSVApi`, some have `WBAPIApi`) are documented in the per-release README: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
 
