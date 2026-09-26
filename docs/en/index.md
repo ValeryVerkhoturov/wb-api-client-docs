@@ -4,7 +4,7 @@ layout: home
 hero:
   name: wb-api-client
   text: Wildberries API, in your language.
-  tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, and PHP. One version across every ecosystem. Bearer tokens redacted by default.
+  tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, PHP and OneScript (1С). One version across every ecosystem. Bearer tokens redacted by default.
   actions:
     - theme: brand
       text: Quickstart
@@ -19,9 +19,9 @@ features:
   - title: Secret redaction, built in
     details: Your bearer JWT is wrapped in a per-language SecretString so it stays out of logs, prints, and debuggers unless you explicitly ask for the raw value.
   - title: Daily upstream sync
-    details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, and Packagist automatically — with a matching git tag.
-  - title: One version, five ecosystems
-    details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer all pick the latest without prerelease dance.
+    details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, Packagist and hub.oscript.io automatically — with a matching git tag.
+  - title: One version, six ecosystems
+    details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer / opm all pick the latest without prerelease dance.
   - title: Bearer auth, everywhere
     details: The upstream YAMLs conflate an API-key scheme with a bearer JWT. A post-processing pass strips that duplication so every generated client exposes exactly one auth path.
   - title: Deterministic regeneration
@@ -54,6 +54,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 
 ```bash [PHP]
 composer require valeryverkhoturov/wb-api-client
+```
+
+```bash [OneScript]
+opm install wb-api-client
 ```
 
 :::
@@ -107,6 +111,14 @@ $config = (new Configuration())
 $api = new DefaultApi(new Client(), $config);
 ```
 
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый КарточкиТоваровApi(Настройки);
+```
+
 :::
 
-Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php).
+Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php) · [OneScript](/en/languages/onescript).
