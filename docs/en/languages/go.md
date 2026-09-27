@@ -15,7 +15,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 Pin a specific version by tag:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
+go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
 ```
 
 `proxy.golang.org` fetches directly from the pushed tag — no separate registry.

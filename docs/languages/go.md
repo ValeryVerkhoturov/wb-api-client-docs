@@ -15,7 +15,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 Зафиксировать конкретную версию по тегу:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
+go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
 ```
 
 `proxy.golang.org` берёт код прямо из пушнутого тега — отдельный реестр не нужен.
