@@ -1,6 +1,6 @@
 # Versioning
 
-All five language packages share one version string per release: **`1.YYYYMMDD.N`**.
+All six language packages share one version string per release: **`1.YYYYMMDD.N`**.
 
 ## Format
 
@@ -50,6 +50,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 composer require valeryverkhoturov/wb-api-client
 ```
 
+```bash [OneScript]
+opm install wb-api-client
+```
+
 :::
 
 ## Pinning a version
@@ -76,6 +80,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
 
 ```json [PHP]
 "valeryverkhoturov/wb-api-client": "1.20260921.0"
+```
+
+```bsl [OneScript]
+.ЗависитОт("wb-api-client", "1.20260921.0")
 ```
 
 :::

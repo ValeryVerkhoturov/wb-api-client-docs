@@ -23,6 +23,7 @@
 | Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
 | Java       | `SecretString` в каждом под-пакете                                                           | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
 | PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
+| OneScript  | класс `СекретнаяСтрока`                                                                      | `Конфигурация.УстановитьТокен(…)`                   | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
 
 ### Зачем это нужно
 
@@ -74,6 +75,12 @@ use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 $s = new SecretString('eyJhbGciOi...');
 var_dump($s);                                 // object(...) { ['value']=> '<REDACTED>' }
 echo $s->exposeSecret();                      // eyJhbGciOi...  (по запросу)
+```
+
+```bsl [OneScript]
+С = Новый СекретнаяСтрока("eyJhbGciOi...");
+Сообщить(С);                                  // СекретнаяСтрока
+Сообщить(С.Раскрыть());                       // eyJhbGciOi...  (по запросу)
 ```
 
 :::

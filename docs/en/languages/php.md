@@ -17,7 +17,7 @@ composer require valeryverkhoturov/wb-api-client
 
 PHP is the odd language out here: Packagist requires `composer.json` at the **root** of the crawled repo, so the PHP client lives in its own repository — [`ValeryVerkhoturov/wb-api-client-php`](https://github.com/ValeryVerkhoturov/wb-api-client-php) — instead of under `clients/php` in the main mono-repo.
 
-That sibling repo is mounted as a `clients/php` git submodule in the main repo, so daily-check regenerates all five languages in one place, then commits + tags both repos in lockstep. From a Composer consumer's perspective this is transparent — you just `composer require` and go.
+That sibling repo is mounted as a `clients/php` git submodule in the main repo, so daily-check regenerates all six languages in one place, then commits + tags both repos in lockstep. From a Composer consumer's perspective this is transparent — you just `composer require` and go.
 
 ## Namespace shape
 

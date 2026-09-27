@@ -23,6 +23,7 @@ Once you have the token, don't pass it around as a plain string. Every client wr
 | Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
 | Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
 | PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
+| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`                   | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
 
 ### Why bother?
 
@@ -74,6 +75,12 @@ use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 $s = new SecretString('eyJhbGciOi...');
 var_dump($s);                     // object(...) { ['value']=> '<REDACTED>' }
 echo $s->exposeSecret();          // eyJhbGciOi...  (opt-in)
+```
+
+```bsl [OneScript]
+С = Новый СекретнаяСтрока("eyJhbGciOi...");
+Сообщить(С);                      // СекретнаяСтрока
+Сообщить(С.Раскрыть());           // eyJhbGciOi...  (opt-in)
 ```
 
 :::

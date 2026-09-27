@@ -43,6 +43,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
 composer require valeryverkhoturov/wb-api-client
 ```
 
+```bash [OneScript]
+opm install wb-api-client
+```
+
 :::
 
 `LATEST` for Java: check the [releases page](https://github.com/ValeryVerkhoturov/wb-api-client/releases) for the current `1.YYYYMMDD.N` version and paste it in.
@@ -124,6 +128,16 @@ $config = (new Configuration())
 $api = new DefaultApi(new Client(), $config);
 
 print_r($api->getV1SellerInfo());
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый ИнформацияОПродавцеApi(Настройки);
+
+Сообщить(Клиент.GetV1SellerInfo().Тело);
 ```
 
 :::

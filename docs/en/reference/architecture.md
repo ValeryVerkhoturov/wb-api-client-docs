@@ -7,19 +7,19 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ```
 download-swaggers.sh   →  swaggers/*.yaml         (raw upstream, checksummed)
 post-process.py        →  swaggers/processed/     (8 passes)
-generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 5 langs)
+generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 6 langs)
     ├── inject-secret.py           (SecretString wrapper per lang)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (canonicalize formatting)
     └── gen-readmes.py             (per-language README.md)
-     ↓ committed at v<version>, single tag covers all 5 languages
-publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist
+     ↓ committed at v<version>, single tag covers all 6 languages
+publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io
 ```
 
 Every step is a plain shell script or Python file, so nothing is hidden behind opaque tooling.
 
 ## Why generate?
 
-WB ships OpenAPI specs. Hand-writing 13 clients × 5 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
+WB ships OpenAPI specs. Hand-writing 13 clients × 6 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
 
 The downside is that generator output is generator output — sometimes ugly, sometimes carrying artifacts from spec quirks. Which is why there's a post-processing layer.
 
@@ -37,13 +37,13 @@ The downside is that generator output is generator output — sometimes ugly, so
 ## generate.sh
 
 - Runs `openapi-generator-cli` (pinned Docker image) per spec per language, into scratch directories.
-- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces.
+- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, and for OneScript a class-name prefix (the language has no namespaces).
 - Runs `inject-secret.py` to patch every generated `Configuration` / `ApiClient` with the language-native secret-string wrapper.
 - Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`. All inside Docker — no host runtime needed.
 - Substitutes `__VERSION__` in top-level manifests (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`) with the passed version.
 - Runs `gen-readmes.py` to emit a per-language `README.md`.
 
-The result: `clients/{python,typescript,go,java,php}/` — five ready-to-publish packages.
+The result: `clients/{python,typescript,go,java,php,onescript}/` — six ready-to-publish packages.
 
 ## Determinism
 
@@ -63,12 +63,22 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 - Go — no-op. `proxy.golang.org` fetches directly from the pushed tag.
 - Java — GPG-signed deploy to Maven Central via `central-publishing-maven-plugin`.
 - PHP — ping the Packagist update-package API.
+- OneScript — `opm build` then `opm push` to hub.oscript.io.
 
 Reusable workflows (`workflow_call`) would be cleaner, but PyPI + npm trusted publishing don't support them — both the OIDC token's `job_workflow_ref` (callee) and the Sigstore attestation cert's `workflow_ref` (caller) have to point at the same file, which is impossible with `workflow_call`. Hence `workflow_dispatch`.
 
-## The PHP submodule
+## The sibling repositories
 
-PHP lives in its own repo — [`ValeryVerkhoturov/wb-api-client-php`](https://github.com/ValeryVerkhoturov/wb-api-client-php) — mounted here as the `clients/php` submodule. Reason: Packagist requires `composer.json` at the ROOT of the crawled repo. Every daily run commits both repos in lockstep with the same tag.
+Two languages live in their own repos, mounted here as git submodules:
+
+- [`ValeryVerkhoturov/wb-api-client-php`](https://github.com/ValeryVerkhoturov/wb-api-client-php) → `clients/php`. Reason: Packagist requires `composer.json` at the ROOT of the crawled repo.
+- [`ValeryVerkhoturov/wb-api-client-1c`](https://github.com/ValeryVerkhoturov/wb-api-client-1c) → `clients/onescript`. So 1C users can clone just the client and install it from a tag.
+
+Every daily run commits and tags both siblings BEFORE the main repo — otherwise the submodule pointers recorded in the release commit would reference commits their remotes have never seen, and a fresh `git clone --recurse-submodules` would fail.
+
+## The OneScript generator
+
+openapi-generator ships no OneScript target, so it lives in a separate repo — [`ValeryVerkhoturov/onescript-openapi-generator`](https://github.com/ValeryVerkhoturov/onescript-openapi-generator). It is an ordinary plugin: the class extends `DefaultCodegen`, registers through `META-INF/services`, and is loaded next to `openapi-generator-cli.jar`, so `-g onescript` resolves like a built-in generator. The main repo pins it by commit — the OneScript equivalent of pinning the Docker image tag for the other languages.
 
 ## What's not generated
 

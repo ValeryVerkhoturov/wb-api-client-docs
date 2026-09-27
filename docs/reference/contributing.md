@@ -6,7 +6,7 @@
 
 Что приложить:
 
-- Какой языковой клиент (Python / TypeScript / Go / Java / PHP)
+- Какой языковой клиент (Python / TypeScript / Go / Java / PHP / OneScript)
 - Какой под-модуль (`items`, `orders_fbs`, `analytics`, …)
 - Версию из манифеста (`1.YYYYMMDD.N`)
 - Минимальный воспроизводимый пример — один вызов API, одно исключение, ожидание против факта
@@ -35,13 +35,13 @@ cd wb-api-client
 ./scripts/download-swaggers.sh                # тянет апстрим (локально может отдать 498)
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, black, flask
 python  scripts/post-process.py               # -> swaggers/processed/
-./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php}
+./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript}
 make verify                                   # сборка + проверка форматирования на каждом языке
 ```
 
-`generate.sh` всегда регенерирует все пять языков. Для одноязычной итерации при отладке комментируйте оставшиеся четыре цикла, а не добавляйте флаг — скрипт меньше 200 строк и без параметризации.
+`generate.sh` всегда регенерирует все шесть языков. Для одноязычной итерации при отладке комментируйте оставшиеся пять циклов, а не добавляйте флаг — скрипт меньше 200 строк и без параметризации.
 
-Форматирование гоняется в Docker, поэтому языковые рантаймы на хосте не нужны. `make verify-<lang>` и `make {black,prettier,gofmt,spotless,php-cs-fixer}` — отдельные цели. `make help` перечисляет всё.
+Форматирование гоняется в Docker, поэтому языковые рантаймы на хосте не нужны. `make verify-<lang>` и `make {black,prettier,gofmt,spotless,php-cs-fixer}` — отдельные цели. У OneScript форматтера нет, поэтому `make verify-onescript` вместо него компилирует каждый модуль через `oscript -check` и загружает пакет целиком. `make help` перечисляет всё.
 
 ## Flow с PR
 
