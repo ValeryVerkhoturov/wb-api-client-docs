@@ -1,0 +1,126 @@
+---
+title: "Создание карточек товаров"
+description: "Метод создаёт карточки товаров c указанием описаний и характеристик товаров."
+---
+
+# Создание карточек товаров
+
+```http
+POST /content/v2/cards/upload
+```
+
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Создание карточек товаров · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+
+Метод создаёт карточки товаров c указанием описаний и характеристик товаров.
+
+Есть две формы запроса: для создания отдельных и объединённых карточек товаров
+
+Габариты товаров можно указать только в `сантиметрах`, вес товара с упаковкой — в `килограммах`.
+
+Создание карточки товара происходит асинхронно. Синхронизация новой карточки с сервисами может занимать до 30 минут. В течение этого времени невозможно добавить остатки на склады и настроить цены.
+Одним запросом можно создать максимум 100 отдельных карточек товаров или 100 групп [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров по 30 карточек в каждой. Максимальный размер запроса 10 Мб.
+Если ответ `Успешно` (`200`), но какие-то карточки не создались, проверьте [список несозданных карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList).
+
+В песочнице карточка товара создаётся сразу, без ожидания.
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+
+| Период | Лимит       | Интервал | Всплеск    |
+| ------ | ----------- | -------- | ---------- |
+| 1 мин  | 10 запросов | 6 сек    | 5 запросов |
+
+## Request body
+
+`application/json` — schema `object[]`, optional
+
+## Responses
+
+| Code  | Description                            | Schema                         |
+| ----- | -------------------------------------- | ------------------------------ |
+| `200` | Успешно                                | `responseItemList`             |
+| `400` | Неправильный запрос                    | `responseBodyContentError400`  |
+| `401` | Не авторизован                         | `object`                       |
+| `402` | Требуется платёж                       | `object`                       |
+| `403` | Доступ запрещён                        | `object`                       |
+| `413` | Превышен лимит объёма данных в запросе | `PostV2CardsUploadResponse413` |
+| `429` | Слишком много запросов                 | `object`                       |
+
+## Call examples
+
+Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.
+
+::: code-group
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DefaultApi,
+} from "@valeryverkhoturov/wb-api-client/items";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new DefaultApi(cfg);
+
+const { data } = await api.postV2CardsUpload(postV2CardsUploadRequestInner);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbitems.NewConfiguration()
+cfg.SetAccessToken("<your WB JWT>")
+client := wbitems.NewAPIClient(cfg)
+
+result, _, err := client.DefaultApi.PostV2CardsUpload(context.Background()).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.items.ApiClient;
+import io.github.valeryverkhoturov.wbapi.items.SecretString;
+import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<your WB JWT>"));
+DefaultApi api = new DefaultApi(client);
+
+System.out.println(api.postV2CardsUpload(postV2CardsUploadRequestInner));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\Items\Configuration;
+use ValeryVerkhoturov\WbApiClient\Items\SecretString;
+use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+$api = new DefaultApi(new Client(), $config);
+
+print_r($api->postV2CardsUpload());
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый СозданиеКарточекТоваровApi(Настройки);
+
+Сообщить(Клиент.PostV2CardsUpload(Тело).Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.Items.Api;
+using ValeryVerkhoturov.WbApiClient.Items.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<your WB JWT>");
+var api = new DefaultApi(config);
+
+Console.WriteLine(api.PostV2CardsUpload());
+```
+
+:::

@@ -1,0 +1,130 @@
+---
+title: "Закрепить GTIN за сборочным заданием"
+description: "Метод обновляет GTIN, уникальный ID товара в Беларуси, в идентификаторах маркировки сборочного задания. У одного сборочного задания может быть только один…"
+---
+
+# Закрепить GTIN за сборочным заданием
+
+```http
+PUT /api/v3/dbw/orders/{orderId}/meta/gtin
+```
+
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-dbw`](/reference/api/orders-dbw/) · **Раздел:** Идентификаторы маркировки DBW · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaGtin)
+
+Метод обновляет GTIN, уникальный ID товара в Беларуси, в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails). У одного сборочного задания может быть только один GTIN.
+Закрепить GTIN можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) есть поле `gtin`.
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **закрепления идентификаторов маркировки DBW**:
+
+| Период                                                         | Лимит         | Интервал | Всплеск     |
+| -------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 мин                                                          | 1000 запросов | 60 мс    | 20 запросов |
+| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+
+## Тело запроса
+
+`application/json` — схема `object`, обязательно
+
+## Ответы
+
+| Код   | Описание                                     | Схема    |
+| ----- | -------------------------------------------- | -------- |
+| `204` | Обновлено                                    | —        |
+| `400` | Неправильный запрос                          | `Error`  |
+| `401` | Не авторизован                               | `object` |
+| `402` | Требуется платёж                             | `object` |
+| `403` | Доступ запрещён                              | `Error`  |
+| `404` | Не найдено                                   | `Error`  |
+| `409` | Ошибка добавления идентификаторов маркировки | `Error`  |
+| `429` | Слишком много запросов                       | `object` |
+
+## Примеры вызова
+
+Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.
+
+::: code-group
+
+```python [Python]
+from wb_api_client.orders_dbw import Configuration, ApiClient
+from wb_api_client.orders_dbw.api import DBWApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = DBWApi(ApiClient(cfg))
+
+result = api.put_v3_dbw_orders_order_id_meta_gtin(order_id=..., put_v3_dbw_orders_order_id_meta_gtin_request=...)
+print(result)
+```
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DBWApi,
+} from "@valeryverkhoturov/wb-api-client/orders-dbw";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new DBWApi(cfg);
+
+const { data } = await api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbordersdbw.NewConfiguration()
+cfg.SetAccessToken("<ваш JWT WB>")
+client := wbordersdbw.NewAPIClient(cfg)
+
+result, _, err := client.DBWAPI.PutV3DbwOrdersOrderIdMetaGtin(context.Background(), orderId).PutV3DbwOrdersOrderIdMetaGtinRequest(putV3DbwOrdersOrderIdMetaGtinRequest).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
+DbwApi api = new DbwApi(client);
+
+System.out.println(api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
+$api = new DBWApi(new Client(), $config);
+
+print_r($api->putV3DbwOrdersOrderIdMetaGtin($order_id, $put_v3_dbw_orders_order_id_meta_gtin_request));
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<ваш JWT WB>");
+Клиент = Новый ИдентификаторыМаркировкиDBWApi(Настройки);
+
+Сообщить(Клиент.PutV3DbwOrdersOrderIdMetaGtin(orderId, Тело).Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.OrdersDbw.Api;
+using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+var api = new DBWApi(config);
+
+Console.WriteLine(api.PutV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest));
+```
+
+:::

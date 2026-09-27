@@ -1,0 +1,124 @@
+---
+title: "Категории документов"
+description: "Метод возвращает категории документов для получения списка документов продавца."
+---
+
+# Категории документов
+
+```http
+GET /api/v1/documents/categories
+```
+
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
+
+Метод возвращает категории документов для получения [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+
+| Тип                | Период | Лимит    | Интервал | Всплеск    |
+| ------------------ | ------ | -------- | -------- | ---------- |
+| Персональный       | 10 сек | 1 запрос | 10 сек   | 5 запросов |
+| Сервисный          | 10 сек | 1 запрос | 10 сек   | 5 запросов |
+| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 5 запросов |
+| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос   |
+
+## Responses
+
+| Code  | Description            | Schema          |
+| ----- | ---------------------- | --------------- |
+| `200` | Успешно                | `GetCategories` |
+| `401` | Не авторизован         | `object`        |
+| `402` | Требуется платёж       | `object`        |
+| `403` | Доступ запрещён        | `object`        |
+| `429` | Слишком много запросов | `object`        |
+
+## Call examples
+
+Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.
+
+::: code-group
+
+```python [Python]
+from wb_api_client.finances import Configuration, ApiClient
+from wb_api_client.finances.api import DefaultApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = DefaultApi(ApiClient(cfg))
+
+result = api.get_v1_documents_categories(locale=...)
+print(result)
+```
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DefaultApi,
+} from "@valeryverkhoturov/wb-api-client/finances";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new DefaultApi(cfg);
+
+const { data } = await api.getV1DocumentsCategories(locale);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbfinances.NewConfiguration()
+cfg.SetAccessToken("<your WB JWT>")
+client := wbfinances.NewAPIClient(cfg)
+
+result, _, err := client.DefaultApi.GetV1DocumentsCategories(context.Background()).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.finances.ApiClient;
+import io.github.valeryverkhoturov.wbapi.finances.SecretString;
+import io.github.valeryverkhoturov.wbapi.finances.api.DefaultApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<your WB JWT>"));
+DefaultApi api = new DefaultApi(client);
+
+System.out.println(api.getV1DocumentsCategories(locale));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\Finances\Configuration;
+use ValeryVerkhoturov\WbApiClient\Finances\SecretString;
+use ValeryVerkhoturov\WbApiClient\Finances\Api\DefaultApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+$api = new DefaultApi(new Client(), $config);
+
+print_r($api->getV1DocumentsCategories());
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый ДокументыApi(Настройки);
+
+Сообщить(Клиент.GetV1DocumentsCategories().Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.Finances.Api;
+using ValeryVerkhoturov.WbApiClient.Finances.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<your WB JWT>");
+var api = new DefaultApi(config);
+
+Console.WriteLine(api.GetV1DocumentsCategories());
+```
+
+:::

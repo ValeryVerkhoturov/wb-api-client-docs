@@ -1,0 +1,121 @@
+---
+title: "Получить данные СПОТ для списка поставок"
+description: "Метод возвращает данные СПОТ для списка поставок."
+---
+
+# Получить данные СПОТ для списка поставок
+
+```http
+POST /api/marketplace/v3/fbs/supplies/spot/list
+```
+
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Поставки FBS · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList)
+
+Метод возвращает данные СПОТ для списка поставок.
+
+Вы можете получить данные СПОТ, только если выполняются все условия:
+
+- поставка находится на этапе доставки
+- продавец зарегистрирован в любой стране ЕАЭС кроме РФ
+- склад назначения находится в РФ
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+
+| Период                                                         | Лимит        | Интервал | Всплеск     |
+| -------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
+| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+
+## Тело запроса
+
+`application/json` — схема `object`, обязательно
+
+## Ответы
+
+| Код   | Описание               | Схема                    |
+| ----- | ---------------------- | ------------------------ |
+| `200` | Успешно                | `SupplySpotDataResponse` |
+| `400` | Неправильный запрос    | `ApiErrorV3`             |
+| `401` | Не авторизован         | `object`                 |
+| `403` | Доступ запрещён        | `object`                 |
+| `429` | Слишком много запросов | `object`                 |
+
+## Примеры вызова
+
+Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.
+
+::: code-group
+
+```ts [TypeScript]
+import {
+  Configuration,
+  FBSApi,
+} from "@valeryverkhoturov/wb-api-client/orders-fbs";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new FBSApi(cfg);
+
+const { data } = await api.postV3FbsSuppliesSpotList(postV3FbsSuppliesSpotListRequest);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbordersfbs.NewConfiguration()
+cfg.SetAccessToken("<ваш JWT WB>")
+client := wbordersfbs.NewAPIClient(cfg)
+
+result, _, err := client.FBSAPI.PostV3FbsSuppliesSpotList(context.Background()).PostV3FbsSuppliesSpotListRequest(postV3FbsSuppliesSpotListRequest).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
+FbsApi api = new FbsApi(client);
+
+System.out.println(api.postV3FbsSuppliesSpotList(postV3FbsSuppliesSpotListRequest));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
+$api = new FBSApi(new Client(), $config);
+
+print_r($api->postV3FbsSuppliesSpotList($post_v3_fbs_supplies_spot_list_request));
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<ваш JWT WB>");
+Клиент = Новый ПоставкиFBSApi(Настройки);
+
+Сообщить(Клиент.PostV3FbsSuppliesSpotList(Тело).Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.OrdersFbs.Api;
+using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+var api = new FBSApi(config);
+
+Console.WriteLine(api.PostV3FbsSuppliesSpotList(postV3FbsSuppliesSpotListRequest));
+```
+
+:::

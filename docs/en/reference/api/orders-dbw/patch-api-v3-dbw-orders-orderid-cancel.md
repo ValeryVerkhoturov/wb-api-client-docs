@@ -1,0 +1,132 @@
+---
+title: "Отменить сборочное задание"
+description: "Метод отменяет сборочное задание и переводит в статус cancel — отменено продавцом."
+---
+
+# Отменить сборочное задание
+
+```http
+PATCH /api/v3/dbw/orders/{orderId}/cancel
+```
+
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdCancel)
+
+Метод отменяет [сборочное задание](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders) и переводит в [статус](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `cancel` — отменено продавцом.
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов DBW:
+
+- получение и обновление списка контактов
+- получение и удаление идентификаторов маркировки
+- управление сборочными заданиями
+
+| Тип                                                            | Период | Лимит        | Интервал | Всплеск     |
+| -------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |
+| Персональный                                                   | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
+| Сервисный                                                      | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
+| Базовый с секретом                                             | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
+| Базовый                                                        | 1 ч    | 10 запросов  | 6 мин    | 1 запрос    |
+| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+
+## Responses
+
+| Code  | Description               | Schema   |
+| ----- | ------------------------- | -------- |
+| `204` | Отменено                  | —        |
+| `400` | Неправильный запрос       | `Error`  |
+| `401` | Не авторизован            | `object` |
+| `402` | Требуется платёж          | `object` |
+| `403` | Доступ запрещён           | `Error`  |
+| `404` | Не найдено                | `Error`  |
+| `409` | Ошибка обновления статуса | `Error`  |
+| `429` | Слишком много запросов    | `object` |
+
+## Call examples
+
+Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.
+
+::: code-group
+
+```python [Python]
+from wb_api_client.orders_dbw import Configuration, ApiClient
+from wb_api_client.orders_dbw.api import DBWApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = DBWApi(ApiClient(cfg))
+
+result = api.patch_v3_dbw_orders_order_id_cancel(order_id=...)
+print(result)
+```
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DBWApi,
+} from "@valeryverkhoturov/wb-api-client/orders-dbw";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new DBWApi(cfg);
+
+const { data } = await api.patchV3DbwOrdersOrderIdCancel(orderId);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbordersdbw.NewConfiguration()
+cfg.SetAccessToken("<your WB JWT>")
+client := wbordersdbw.NewAPIClient(cfg)
+
+result, _, err := client.DBWAPI.PatchV3DbwOrdersOrderIdCancel(context.Background(), orderId).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<your WB JWT>"));
+DbwApi api = new DbwApi(client);
+
+System.out.println(api.patchV3DbwOrdersOrderIdCancel(orderId));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+$api = new DBWApi(new Client(), $config);
+
+print_r($api->patchV3DbwOrdersOrderIdCancel($order_id));
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый СборочныеЗаданияDBWApi(Настройки);
+
+Сообщить(Клиент.PatchV3DbwOrdersOrderIdCancel(orderId).Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.OrdersDbw.Api;
+using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<your WB JWT>");
+var api = new DBWApi(config);
+
+Console.WriteLine(api.PatchV3DbwOrdersOrderIdCancel(orderId));
+```
+
+:::

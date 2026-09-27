@@ -1,0 +1,132 @@
+---
+title: "Получить остатки товаров"
+description: "Метод возвращает данные об остатках товаров на складах продавца."
+---
+
+# Получить остатки товаров
+
+```http
+POST /api/v3/stocks/{warehouseId}
+```
+
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Остатки на складах продавца · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId)
+
+Метод возвращает данные об остатках товаров на [складах продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses).
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **остатков на складах продавца** кроме метода [удаления остатков](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId):
+
+| Период                                                         | Лимит        | Интервал | Всплеск     |
+| -------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
+| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+
+---
+
+В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+
+## Request body
+
+`application/json` — schema `object`, required
+
+## Responses
+
+| Code  | Description            | Schema                               |
+| ----- | ---------------------- | ------------------------------------ |
+| `200` | Успешно                | `PostV3StocksWarehouseIdResponse200` |
+| `400` | Неправильный запрос    | `Error`                              |
+| `401` | Не авторизован         | `object`                             |
+| `402` | Требуется платёж       | `object`                             |
+| `403` | Доступ запрещён        | `Error`                              |
+| `404` | Не найдено             | `Error`                              |
+| `429` | Слишком много запросов | `object`                             |
+
+## Call examples
+
+Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.
+
+::: code-group
+
+```python [Python]
+from wb_api_client.items import Configuration, ApiClient
+from wb_api_client.items.api import Api
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = Api(ApiClient(cfg))
+
+result = api.post_v3_stocks_warehouse_id(warehouse_id=..., post_v3_stocks_warehouse_id_request=...)
+print(result)
+```
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DefaultApi,
+} from "@valeryverkhoturov/wb-api-client/items";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new DefaultApi(cfg);
+
+const { data } = await api.postV3StocksWarehouseId(warehouseId, postV3StocksWarehouseIdRequest);
+console.log(data);
+```
+
+```go [Go]
+cfg := wbitems.NewConfiguration()
+cfg.SetAccessToken("<your WB JWT>")
+client := wbitems.NewAPIClient(cfg)
+
+result, _, err := client.DefaultApi.PostV3StocksWarehouseId(context.Background(), warehouseId).PostV3StocksWarehouseIdRequest(postV3StocksWarehouseIdRequest).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.items.ApiClient;
+import io.github.valeryverkhoturov.wbapi.items.SecretString;
+import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<your WB JWT>"));
+DefaultApi api = new DefaultApi(client);
+
+System.out.println(api.postV3StocksWarehouseId(warehouseId, postV3StocksWarehouseIdRequest));
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\Items\Configuration;
+use ValeryVerkhoturov\WbApiClient\Items\SecretString;
+use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+$api = new DefaultApi(new Client(), $config);
+
+print_r($api->postV3StocksWarehouseId($warehouse_id, $post_v3_stocks_warehouse_id_request));
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<your WB JWT>");
+Клиент = Новый ОстаткиНаСкладахПродавцаApi(Настройки);
+
+Сообщить(Клиент.PostV3StocksWarehouseId(warehouseId, Тело).Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.Items.Api;
+using ValeryVerkhoturov.WbApiClient.Items.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<your WB JWT>");
+var api = new DefaultApi(config);
+
+Console.WriteLine(api.PostV3StocksWarehouseId(warehouseId, postV3StocksWarehouseIdRequest));
+```
+
+:::

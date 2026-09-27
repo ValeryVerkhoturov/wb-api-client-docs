@@ -1,0 +1,113 @@
+---
+title: "Лимиты закреплённых отзывов"
+description: "Метод возвращает лимиты закреплённых отзывов по тарифу и подписке."
+---
+
+# Лимиты закреплённых отзывов
+
+```http
+GET /api/feedbacks/v1/pins/limits
+```
+
+**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Закреплённые отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getFeedbacksV1PinsLimits)
+
+Метод возвращает лимиты закреплённых отзывов по тарифу и подписке.
+
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Вопросы и отзывы**:
+
+| Тип                | Период | Лимит      | Интервал | Всплеск    |
+| ------------------ | ------ | ---------- | -------- | ---------- |
+| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
+| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
+| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
+| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+
+## Ответы
+
+| Код   | Описание               | Схема                                 |
+| ----- | ---------------------- | ------------------------------------- |
+| `200` | Успешно                | `GetFeedbacksV1PinsLimitsResponse200` |
+| `401` | Не авторизован         | `object`                              |
+| `402` | Требуется платёж       | `object`                              |
+| `403` | Доступ запрещён        | `object`                              |
+| `429` | Слишком много запросов | `object`                              |
+
+## Примеры вызова
+
+Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.
+
+::: code-group
+
+```ts [TypeScript]
+import {
+  Configuration,
+  DefaultApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new DefaultApi(cfg);
+
+const { data } = await api.getFeedbacksV1PinsLimits();
+console.log(data);
+```
+
+```go [Go]
+cfg := wbcommunications.NewConfiguration()
+cfg.SetAccessToken("<ваш JWT WB>")
+client := wbcommunications.NewAPIClient(cfg)
+
+result, _, err := client.DefaultApi.GetFeedbacksV1PinsLimits(context.Background()).Execute()
+if err != nil {
+    panic(err)
+}
+fmt.Printf("%+v\n", result)
+```
+
+```java [Java]
+import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
+import io.github.valeryverkhoturov.wbapi.communications.SecretString;
+import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+
+ApiClient client = new ApiClient();
+client.setBearerToken(new SecretString("<ваш JWT WB>"));
+DefaultApi api = new DefaultApi(client);
+
+System.out.println(api.getFeedbacksV1PinsLimits());
+```
+
+```php [PHP]
+use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
+use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use GuzzleHttp\Client;
+
+$config = (new Configuration())
+    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
+$api = new DefaultApi(new Client(), $config);
+
+print_r($api->getFeedbacksV1PinsLimits());
+```
+
+```bsl [OneScript]
+#Использовать "wb-api-client"
+
+Настройки = Новый Конфигурация();
+Настройки.УстановитьТокен("<ваш JWT WB>");
+Клиент = Новый ЗакреплённыеОтзывыApi(Настройки);
+
+Сообщить(Клиент.GetFeedbacksV1PinsLimits().Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.Communications.Api;
+using ValeryVerkhoturov.WbApiClient.Communications.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+var api = new DefaultApi(config);
+
+Console.WriteLine(api.GetFeedbacksV1PinsLimits());
+```
+
+:::

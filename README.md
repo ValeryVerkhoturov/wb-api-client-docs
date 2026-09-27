@@ -41,7 +41,35 @@ docs/
     versioning.md
     architecture.md
     contributing.md
+    api/                 # GENERATED — endpoint reference, do not edit
+      index.md
+      <module>/index.md
+      <module>/<method>-<path>.md
+  en/                    # English mirror of everything above
+  .vitepress/
+    api-sidebar.ts       # GENERATED — sidebar for reference/api
 .github/workflows/deploy.yml
+```
+
+## The API reference is generated
+
+`docs/reference/api/`, `docs/en/reference/api/` and
+`docs/.vitepress/api-sidebar.ts` are written by
+[`scripts/gen-api-reference.py`](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/scripts/gen-api-reference.py)
+in the **wb-api-client** repo — 305 operations across 13 modules, one page
+each, in both locales. Hand-edits there are lost on the next upstream spec
+change, so fix the generator instead.
+
+The generator formats what it writes with this repo's own pinned Prettier
+before it finishes, so the generated pages pass `npm run format:check` along
+with everything else — they are not excluded from it.
+
+They are regenerated and pushed here automatically by that repo's
+`daily-check.yml` whenever Wildberries changes a spec, which triggers the
+Pages deploy below. To rebuild them by hand from a wb-api-client checkout:
+
+```bash
+make reference DOCS=../wb-api-client-docs
 ```
 
 ## Publishing

@@ -4,6 +4,12 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 import { editorialFonts } from "vitepress-editorial-modernist/config";
 
+// Endpoint reference: one page per API operation, generated into
+// docs/reference/api/ (and /en/) by scripts/gen-api-reference.py in the
+// wb-api-client repo. Both the pages and this sidebar are regenerated
+// there on every upstream spec change — do not hand-edit either.
+import { apiSidebar } from "./api-sidebar";
+
 // Docs for https://github.com/ValeryVerkhoturov/wb-api-client — a
 // code-generation pipeline that produces client libraries for the
 // Wildberries Seller API in seven languages. The per-language `README.md`
@@ -241,6 +247,7 @@ export default defineConfig({
         nav: [
           { text: "Руководства", link: "/guides/quickstart" },
           { text: "Языки", link: "/languages/python" },
+          { text: "Справочник API", link: "/reference/api/" },
           { text: "Справочник", link: "/reference/versioning" },
           { text: "Релизы", link: `${CODE_REPO}/releases` },
         ],
@@ -269,6 +276,7 @@ export default defineConfig({
               ],
             },
           ],
+          "/reference/api/": apiSidebar.ru,
           "/reference/": [
             {
               text: "Справочник",
@@ -338,6 +346,7 @@ export default defineConfig({
         nav: [
           { text: "Guides", link: "/en/guides/quickstart" },
           { text: "Languages", link: "/en/languages/python" },
+          { text: "API reference", link: "/en/reference/api/" },
           { text: "Reference", link: "/en/reference/versioning" },
           { text: "Releases", link: `${CODE_REPO}/releases` },
         ],
@@ -366,6 +375,7 @@ export default defineConfig({
               ],
             },
           ],
+          "/en/reference/api/": apiSidebar.en,
           "/en/reference/": [
             {
               text: "Reference",
