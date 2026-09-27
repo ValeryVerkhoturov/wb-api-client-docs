@@ -1,8 +1,10 @@
-import { existsSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-
 import { defineConfig } from "vitepress";
 import { editorialFonts } from "vitepress-editorial-modernist/config";
+
+// Markdown twin of every page, llms.txt and llms-full.txt, all written
+// into dist once the HTML build is done.
+import { generateLlmsFiles } from "./llms";
+import { counterpart, leadParagraph, mdPath, urlPath } from "./page-meta";
 
 // Endpoint reference: one page per API operation, generated into
 // docs/reference/api/ (and /en/) by scripts/gen-api-reference.py in the
@@ -29,79 +31,6 @@ const CODE_REPO = "https://github.com/ValeryVerkhoturov/wb-api-client";
 const SITE = "https://valeryverkhoturov.github.io";
 const BASE = "/wb-api-client-docs/";
 const ORIGIN = `${SITE}${BASE}`;
-
-const DOCS_ROOT = fileURLToPath(new URL("..", import.meta.url));
-
-// `guides/quickstart.md` -> `guides/quickstart`, `en/index.md` -> `en`.
-// Mirrors `cleanUrls: true`, so the result is the live URL path.
-function urlPath(relativePath: string): string {
-  return relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
-}
-
-// First real paragraph of a page, flattened to plain text — the lede that
-// follows the h1 on every guide and reference page. Used as the meta and
-// og:description so each page describes itself instead of repeating the
-// site blurb. Home pages are frontmatter-driven and have none.
-function leadParagraph(relativePath: string): string | undefined {
-  let source: string;
-  try {
-    source = readFileSync(`${DOCS_ROOT}${relativePath}`, "utf-8");
-  } catch {
-    return undefined;
-  }
-
-  const body = source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "");
-  const lines: string[] = [];
-  let fenced = false;
-
-  for (const raw of body.split(/\r?\n/)) {
-    const line = raw.trim();
-
-    if (line.startsWith("```")) {
-      fenced = !fenced;
-      continue;
-    }
-    if (fenced) continue;
-
-    // Headings, containers, tables, lists, quotes and images are not prose.
-    const skip =
-      !line ||
-      /^[#>|]/.test(line) ||
-      line.startsWith(":::") ||
-      line.startsWith("![") ||
-      line.startsWith("<") ||
-      /^([-*+]|\d+\.)\s/.test(line);
-
-    if (skip) {
-      if (lines.length) break; // paragraph ended
-      continue;
-    }
-    lines.push(line);
-  }
-
-  if (!lines.length) return undefined;
-
-  const text = lines
-    .join(" ")
-    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1") // links and images -> their text
-    .replace(/[`*_]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  if (text.length <= 160) return text;
-  const cut = text.slice(0, 160);
-  return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
-}
-
-// Every page exists twice — at the root in Russian and under /en/ in
-// English. Returns the counterpart's relative path, or undefined when the
-// translation is missing, so a half-translated page never claims a pair.
-function counterpart(relativePath: string): string | undefined {
-  const other = relativePath.startsWith("en/")
-    ? relativePath.slice(3)
-    : `en/${relativePath}`;
-  return existsSync(`${DOCS_ROOT}${other}`) ? other : undefined;
-}
 
 export default defineConfig({
   title: "wb-api-client",
@@ -186,6 +115,17 @@ export default defineConfig({
 
     const head: [string, Record<string, string>][] = [
       ["link", { rel: "canonical", href: url }],
+
+      // The same page as Markdown. Agents that follow it get the prose
+      // without the app shell around it; browsers ignore the link.
+      [
+        "link",
+        {
+          rel: "alternate",
+          type: "text/markdown",
+          href: `${ORIGIN}${mdPath(path)}`,
+        },
+      ],
       [
         "meta",
         {
@@ -239,6 +179,15 @@ export default defineConfig({
     }
 
     pageData.frontmatter.head = [...(pageData.frontmatter.head ?? []), ...head];
+  },
+
+  // Runs after the HTML and sitemap are on disk, and writes alongside
+  // them: `<url>.md` for every page, plus llms.txt and llms-full.txt per
+  // locale. Nothing here touches the HTML build, so a failure in it is a
+  // failure of the whole build — which is what we want, since a stale
+  // Markdown mirror is worse than none.
+  buildEnd(siteConfig) {
+    generateLlmsFiles(siteConfig.outDir, ORIGIN);
   },
 
   themeConfig: {
