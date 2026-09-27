@@ -7,19 +7,19 @@
 ```
 download-swaggers.sh   →  swaggers/*.yaml         (сырой апстрим, checksummed)
 post-process.py        →  swaggers/processed/     (8 проходов)
-generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 6 языков)
+generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 языков)
     ├── inject-secret.py           (SecretString-обёртка на каждый язык)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (канонизация форматирования)
     └── gen-readmes.py             (README.md на каждый язык)
-     ↓ коммитится тегом v<version>, один тег покрывает все 6 языков
-publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io
+     ↓ коммитится тегом v<version>, один тег покрывает все 7 языков
+publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
 ```
 
 Каждый шаг — обычный shell-скрипт или Python-файл, ничего не скрыто за непрозрачной тулингой.
 
 ## Зачем генерировать
 
-WB выпускает OpenAPI-спецификации. Написать 13 клиентов × 6 языков вручную — уплывут за неделю. Плюс генерации из спецификации: каждое поле, каждый enum, каждая обёртка ответа — ровно то, что задокументировал WB. И повторная синхронизация стоит нуля усилий после сборки пайплайна.
+WB выпускает OpenAPI-спецификации. Написать 13 клиентов × 7 языков вручную — уплывут за неделю. Плюс генерации из спецификации: каждое поле, каждый enum, каждая обёртка ответа — ровно то, что задокументировал WB. И повторная синхронизация стоит нуля усилий после сборки пайплайна.
 
 Минус — выхлоп генератора остаётся выхлопом генератора: местами уродливым, местами со следами кривостей спецификации. Именно поэтому есть слой пост-обработки.
 
@@ -37,13 +37,13 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 ## generate.sh
 
 - Гоняет `openapi-generator-cli` (закреплённый Docker-образ) для каждой спецификации и каждого языка во временные каталоги.
-- Склеивает пер-спецификационные SDK в единое дерево на язык — Python-пакеты под `wb_api_client.<slug>`, TypeScript subpath-экспорты, Go под-пакеты, Java под-пакеты, PHP под-пространства, OneScript — по префиксу имени класса (пространств имён в языке нет).
+- Склеивает пер-спецификационные SDK в единое дерево на язык — Python-пакеты под `wb_api_client.<slug>`, TypeScript subpath-экспорты, Go под-пакеты, Java под-пакеты, PHP под-пространства, OneScript — по префиксу имени класса (пространств имён в языке нет), C# — пространства имён.
 - Запускает `inject-secret.py`, чтобы патчить каждый сгенерированный `Configuration` / `ApiClient` соответствующей языковой обёрткой секрета.
-- Запускает закреплённый форматтер: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`. Всё внутри Docker — без языковых рантаймов на хосте.
+- Запускает закреплённый форматтер: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. Всё внутри Docker — без языковых рантаймов на хосте.
 - Подставляет `__VERSION__` в топ-уровневые манифесты (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`).
 - Запускает `gen-readmes.py`, чтобы выпустить README на каждый язык.
 
-Итог: `clients/{python,typescript,go,java,php,onescript}/` — шесть пакетов, готовых к публикации.
+Итог: `clients/{python,typescript,go,java,php,onescript,csharp}/` — семь пакетов, готовых к публикации.
 
 ## Детерминизм
 
@@ -64,6 +64,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 - Java — подписанный GPG-деплой в Maven Central через `central-publishing-maven-plugin`.
 - PHP — пинг API `packagist.org/api/update-package`.
 - OneScript — `opm build` и `opm push` в hub.oscript.io.
+- C# — `dotnet pack` и `dotnet nuget push` в NuGet.
 
 Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, но PyPI и npm trusted publishing их не поддерживают: и OIDC-claim `job_workflow_ref` (callee), и Sigstore-attestation `workflow_ref` (caller) должны указывать на один и тот же файл, что с `workflow_call` невозможно. Поэтому — `workflow_dispatch`.
 

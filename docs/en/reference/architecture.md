@@ -7,19 +7,19 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ```
 download-swaggers.sh   →  swaggers/*.yaml         (raw upstream, checksummed)
 post-process.py        →  swaggers/processed/     (8 passes)
-generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 6 langs)
+generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
     ├── inject-secret.py           (SecretString wrapper per lang)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (canonicalize formatting)
     └── gen-readmes.py             (per-language README.md)
-     ↓ committed at v<version>, single tag covers all 6 languages
-publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io
+     ↓ committed at v<version>, single tag covers all 7 languages
+publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
 ```
 
 Every step is a plain shell script or Python file, so nothing is hidden behind opaque tooling.
 
 ## Why generate?
 
-WB ships OpenAPI specs. Hand-writing 13 clients × 6 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
+WB ships OpenAPI specs. Hand-writing 13 clients × 7 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
 
 The downside is that generator output is generator output — sometimes ugly, sometimes carrying artifacts from spec quirks. Which is why there's a post-processing layer.
 
@@ -37,13 +37,13 @@ The downside is that generator output is generator output — sometimes ugly, so
 ## generate.sh
 
 - Runs `openapi-generator-cli` (pinned Docker image) per spec per language, into scratch directories.
-- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, and for OneScript a class-name prefix (the language has no namespaces).
+- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, for OneScript a class-name prefix (the language has no namespaces), and C# namespaces.
 - Runs `inject-secret.py` to patch every generated `Configuration` / `ApiClient` with the language-native secret-string wrapper.
-- Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`. All inside Docker — no host runtime needed.
+- Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. All inside Docker — no host runtime needed.
 - Substitutes `__VERSION__` in top-level manifests (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`) with the passed version.
 - Runs `gen-readmes.py` to emit a per-language `README.md`.
 
-The result: `clients/{python,typescript,go,java,php,onescript}/` — six ready-to-publish packages.
+The result: `clients/{python,typescript,go,java,php,onescript,csharp}/` — seven ready-to-publish packages.
 
 ## Determinism
 
@@ -64,6 +64,7 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 - Java — GPG-signed deploy to Maven Central via `central-publishing-maven-plugin`.
 - PHP — ping the Packagist update-package API.
 - OneScript — `opm build` then `opm push` to hub.oscript.io.
+- C# — `dotnet pack` then `dotnet nuget push` to NuGet.
 
 Reusable workflows (`workflow_call`) would be cleaner, but PyPI + npm trusted publishing don't support them — both the OIDC token's `job_workflow_ref` (callee) and the Sigstore attestation cert's `workflow_ref` (caller) have to point at the same file, which is impossible with `workflow_call`. Hence `workflow_dispatch`.
 

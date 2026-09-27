@@ -16,14 +16,15 @@ Each scope corresponds roughly to one or more sub-modules in the clients. If a c
 
 Once you have the token, don't pass it around as a plain string. Every client wraps the value in a language-native "secret string" type so it redacts under logs, `print`, debuggers, and error dumps — unless you explicitly ask for the raw value.
 
-| Language   | Wrapper                                                                                      | Setter                                              | Redacted under                                            | Explicit expose       |
-| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- | --------------------- |
-| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                     | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
-| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`                   | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
-| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
-| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
-| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
-| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`                   | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
+| Language   | Wrapper                                                                                      | Setter                                                  | Redacted under                                            | Explicit expose       |
+| ---------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
+| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`                       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
+| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
+| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(SecretString)`                | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
+| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessTokenSecret(SecretString)`     | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
+| C#         | per-namespace `SecretString`                                                                 | `Configuration.AccessTokenSecret = new SecretString(…)` | `Console.WriteLine(cfg.AccessTokenSecret)` → `<REDACTED>` | `.ExposeSecret()`     |
+| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`                       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
 
 ### Why bother?
 
@@ -81,6 +82,12 @@ echo $s->exposeSecret();          // eyJhbGciOi...  (opt-in)
 С = Новый СекретнаяСтрока("eyJhbGciOi...");
 Сообщить(С);                      // СекретнаяСтрока
 Сообщить(С.Раскрыть());           // eyJhbGciOi...  (opt-in)
+```
+
+```csharp [C#]
+var s = new SecretString("eyJhbGciOi...");
+Console.WriteLine($"{s}");        // <REDACTED>
+Console.WriteLine(s.ExposeSecret()); // eyJhbGciOi...  (opt-in)
 ```
 
 :::

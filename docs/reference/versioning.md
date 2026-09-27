@@ -1,6 +1,6 @@
 # Версионирование
 
-Все шесть языковых пакетов делят одну версионную строку на релиз: **`1.YYYYMMDD.N`**.
+Все семь языковых пакетов делят одну версионную строку на релиз: **`1.YYYYMMDD.N`**.
 
 ## Формат
 
@@ -54,6 +54,10 @@ composer require valeryverkhoturov/wb-api-client
 opm install wb-api-client
 ```
 
+```bash [C#]
+dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
 :::
 
 ## Фиксация версии
@@ -63,27 +67,31 @@ opm install wb-api-client
 ::: code-group
 
 ```txt [Python]
-valeryverkhoturov-wb-api-client==1.20260921.0
+valeryverkhoturov-wb-api-client==1.20260926.0
 ```
 
 ```json [TypeScript]
-"@valeryverkhoturov/wb-api-client": "1.20260921.0"
+"@valeryverkhoturov/wb-api-client": "1.20260926.0"
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
+go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
 ```
 
 ```xml [Java]
-<version>1.20260921.0</version>
+<version>1.20260926.0</version>
 ```
 
 ```json [PHP]
-"valeryverkhoturov/wb-api-client": "1.20260921.0"
+"valeryverkhoturov/wb-api-client": "1.20260926.0"
 ```
 
 ```bsl [OneScript]
-.ЗависитОт("wb-api-client", "1.20260921.0")
+.ЗависитОт("wb-api-client", "1.20260926.0")
+```
+
+```xml [C#]
+<PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="1.20260926.0" />
 ```
 
 :::
