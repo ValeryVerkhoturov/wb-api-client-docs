@@ -27,7 +27,7 @@ git clone --branch v1.20260926.0 https://github.com/ValeryVerkhoturov/wb-api-cli
 
 Like PHP, OneScript lives in its own repository — [`ValeryVerkhoturov/wb-api-client-1c`](https://github.com/ValeryVerkhoturov/wb-api-client-1c) — mounted into the mono-repo as a `clients/onescript` git submodule. That lets 1C users clone just the client instead of dragging along the whole pipeline, and install it straight from a tag.
 
-Daily-check regenerates all six languages in one place, then commits and tags both sibling repos under the same `v<version>` tag.
+Daily-check regenerates all seven languages in one place, then commits and tags both sibling repos under the same `v<version>` tag.
 
 ## How categories are separated
 

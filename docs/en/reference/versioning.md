@@ -1,6 +1,6 @@
 # Versioning
 
-All six language packages share one version string per release: **`1.YYYYMMDD.N`**.
+All seven language packages share one version string per release: **`1.YYYYMMDD.N`**.
 
 ## Format
 
@@ -54,6 +54,10 @@ composer require valeryverkhoturov/wb-api-client
 opm install wb-api-client
 ```
 
+```bash [C#]
+dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
 :::
 
 ## Pinning a version
@@ -84,6 +88,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260921.0
 
 ```bsl [OneScript]
 .ЗависитОт("wb-api-client", "1.20260921.0")
+```
+
+```xml [C#]
+<PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="1.20260921.0" />
 ```
 
 :::

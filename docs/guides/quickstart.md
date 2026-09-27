@@ -47,6 +47,10 @@ composer require valeryverkhoturov/wb-api-client
 opm install wb-api-client
 ```
 
+```bash [C#]
+dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
 :::
 
 `LATEST` для Java: посмотрите текущую версию `1.YYYYMMDD.N` на [странице релизов](https://github.com/ValeryVerkhoturov/wb-api-client/releases) и подставьте её.
@@ -138,6 +142,17 @@ print_r($api->getV1SellerInfo());
 Клиент = Новый ИнформацияОПродавцеApi(Настройки);
 
 Сообщить(Клиент.GetV1SellerInfo().Тело);
+```
+
+```csharp [C#]
+using ValeryVerkhoturov.WbApiClient.General.Api;
+using ValeryVerkhoturov.WbApiClient.General.Client;
+
+var config = new Configuration();
+config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+var api = new DefaultApi(config);
+
+Console.WriteLine(api.GetV1SellerInfo());
 ```
 
 :::

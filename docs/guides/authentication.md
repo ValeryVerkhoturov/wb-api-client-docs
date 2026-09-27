@@ -16,14 +16,15 @@
 
 Получив токен, не носите его по коду как обычную строку. Каждый клиент оборачивает значение в языко-специфичный «секретный» тип — он маскирует токен в логах, `print`-выводе, отладчике и дампах ошибок, пока вы явно не запросите значение.
 
-| Язык       | Обёртка                                                                                      | Сеттер                                              | Маскируется в                                             | Явное значение        |
-| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- | --------------------- |
-| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                     | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
-| TypeScript | встроенный класс `SecretString`                                                              | `Configuration.setAccessToken(…)`                   | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
-| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                   | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
-| Java       | `SecretString` в каждом под-пакете                                                           | `ApiClient.setBearerToken(SecretString)`            | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
-| PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessTokenSecret(SecretString)` | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
-| OneScript  | класс `СекретнаяСтрока`                                                                      | `Конфигурация.УстановитьТокен(…)`                   | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
+| Язык       | Обёртка                                                                                      | Сеттер                                                  | Маскируется в                                             | Явное значение        |
+| ---------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
+| TypeScript | встроенный класс `SecretString`                                                              | `Configuration.setAccessToken(…)`                       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
+| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
+| Java       | `SecretString` в каждом под-пакете                                                           | `ApiClient.setBearerToken(SecretString)`                | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
+| PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessTokenSecret(SecretString)`     | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
+| C#         | `SecretString` в каждом пространстве имён                                                    | `Configuration.AccessTokenSecret = new SecretString(…)` | `Console.WriteLine(cfg.AccessTokenSecret)` → `<REDACTED>` | `.ExposeSecret()`     |
+| OneScript  | класс `СекретнаяСтрока`                                                                      | `Конфигурация.УстановитьТокен(…)`                       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
 
 ### Зачем это нужно
 
@@ -81,6 +82,12 @@ echo $s->exposeSecret();                      // eyJhbGciOi...  (по запро
 С = Новый СекретнаяСтрока("eyJhbGciOi...");
 Сообщить(С);                                  // СекретнаяСтрока
 Сообщить(С.Раскрыть());                       // eyJhbGciOi...  (по запросу)
+```
+
+```csharp [C#]
+var s = new SecretString("eyJhbGciOi...");
+Console.WriteLine($"{s}");                    // <REDACTED>
+Console.WriteLine(s.ExposeSecret());          // eyJhbGciOi...  (по запросу)
 ```
 
 :::
