@@ -120,6 +120,14 @@ export default defineConfig({
   head: [
     ["meta", { name: "theme-color", content: "#c2381c" }],
 
+    [
+      "meta",
+      {
+        name: "google-site-verification",
+        content: "QeUgZ7euC0vgFZldM7fXdho3lp1r6NiRmxxnCDurWS8",
+      },
+    ],
+
     // SVG for everything modern, PNG for Safari/iOS and legacy tabs.
     [
       "link",
