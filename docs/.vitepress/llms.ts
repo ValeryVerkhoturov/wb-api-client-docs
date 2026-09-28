@@ -48,6 +48,7 @@ const SECTIONS = [
       "guides/quickstart",
       "guides/authentication",
       "guides/error-handling",
+      "guides/custom-headers",
     ],
   },
   {
