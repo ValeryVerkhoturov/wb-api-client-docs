@@ -2,7 +2,7 @@
 
 Пакет: [`wb-api-client`](https://hub.oscript.io/package/wb-api-client) на hub.oscript.io.
 
-- **OneScript:** 1.9.0+
+- **OneScript:** 2.0.0+
 - **HTTP:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3
 - **Зависимости:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3 — транспорт, [jason](https://hub.oscript.io/package/jason) 0.6.0 — сериализация моделей
 - **Обёртка секретов:** класс `СекретнаяСтрока`
