@@ -3,8 +3,8 @@
 Package: [`wb-api-client`](https://hub.oscript.io/package/wb-api-client) on hub.oscript.io.
 
 - **OneScript:** 1.9.0+
-- **HTTP:** the built-in `HTTPСоединение`
-- **Dependencies:** none — standard library only
+- **HTTP:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3
+- **Dependencies:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3 — transport, [jason](https://hub.oscript.io/package/jason) 0.6.0 — model serialization
 - **Secret wrapper:** `СекретнаяСтрока` class
 
 ## Install
