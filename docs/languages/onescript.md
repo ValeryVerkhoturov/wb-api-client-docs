@@ -1,6 +1,6 @@
 # OneScript (1С)
 
-Пакет: [`wb-api-client`](https://hub.oscript.io/package/wb-api-client) на hub.oscript.io.
+Пакет: [`wb-api-client`](https://hub.oscript.io/pools/default/packages/wb-api-client) на hub.oscript.io.
 
 - **OneScript:** 2.0.0+
 - **HTTP:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3
