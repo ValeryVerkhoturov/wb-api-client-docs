@@ -57,6 +57,14 @@ export default defineConfig({
       },
     ],
 
+    [
+      "meta",
+      {
+        name: "yandex-verification",
+        content: "ba96bcb6b83dd2c3",
+      },
+    ],
+
     // SVG for everything modern, PNG for Safari/iOS and legacy tabs.
     [
       "link",
