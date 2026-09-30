@@ -1,6 +1,6 @@
 ---
 title: "Получить предметы, которые не хранятся на складах WB"
-description: "Метод доступен по Персональному токену"
+description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
 ---
 
 # Получить предметы, которые не хранятся на складах WB
@@ -9,10 +9,12 @@ description: "Метод доступен по Персональному ток
 GET /api/marketplace/v3/fbs/settings/autoreturns/subcategories/restricted
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+**Персональному** токену,
+**Сервисному** токену,
+**Базовому** токену **с секретом**
 
 Метод возвращает список ID предметов, товары которых не могут храниться на складах WB и будут возвращены в ПВЗ автоматически.
 
@@ -32,13 +34,13 @@ GET /api/marketplace/v3/fbs/settings/autoreturns/subcategories/restricted
 
 ## Ответы
 
-| Код   | Описание               | Схема                                                                      |
-| ----- | ---------------------- | -------------------------------------------------------------------------- |
-| `200` | Успешно                | `GetMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestrictedResponse200` |
-| `400` | Неправильный запрос    | `ApiErrorV3`                                                               |
-| `401` | Не авторизован         | `object`                                                                   |
-| `403` | Доступ запрещён        | `Response4XX`                                                              |
-| `429` | Слишком много запросов | `object`                                                                   |
+| Код   | Описание               | Схема                                                           |
+| ----- | ---------------------- | --------------------------------------------------------------- |
+| `200` | Успешно                | `GetV3FbsSettingsAutoreturnsSubcategoriesRestrictedResponse200` |
+| `400` | Неправильный запрос    | `ApiErrorV3`                                                    |
+| `401` | Не авторизован         | `object`                                                        |
+| `403` | Доступ запрещён        | `Response4XX`                                                   |
+| `429` | Слишком много запросов | `object`                                                        |
 
 ## Примеры вызова
 
@@ -53,7 +55,7 @@ from wb_api_client.orders_fbs.api import Api
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = Api(ApiClient(cfg))
 
-result = api.get_marketplace_v3_fbs_settings_autoreturns_subcategories_restricted(next=..., limit=...)
+result = api.get_v3_fbs_settings_autoreturns_subcategories_restricted(next=..., limit=...)
 print(result)
 ```
 
@@ -67,7 +69,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.getMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit);
+const { data } = await api.getV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit);
 console.log(data);
 ```
 
@@ -76,7 +78,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted(context.Background()).Next(next).Limit(limit).Execute()
+result, _, err := client.DefaultApi.GetV3FbsSettingsAutoreturnsSubcategoriesRestricted(context.Background()).Next(next).Limit(limit).Execute()
 if err != nil {
     panic(err)
 }
@@ -92,7 +94,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.getMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit));
+System.out.println(api.getV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit));
 ```
 
 ```php [PHP]
@@ -105,7 +107,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->getMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted($next, $limit));
+print_r($api->getV3FbsSettingsAutoreturnsSubcategoriesRestricted($next, $limit));
 ```
 
 ```bsl [OneScript]
@@ -115,7 +117,7 @@ print_r($api->getMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted($nex
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый НастройкиАвтовозвратаApi(Настройки);
 
-Сообщить(Клиент.GetMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit).Тело);
+Сообщить(Клиент.GetV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit).Тело);
 ```
 
 ```csharp [C#]
@@ -126,7 +128,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.GetMarketplaceV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit));
+Console.WriteLine(api.GetV3FbsSettingsAutoreturnsSubcategoriesRestricted(next, limit));
 ```
 
 :::

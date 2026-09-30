@@ -9,10 +9,10 @@ description: "Метод позволяет открепить отзывы в �
 DELETE /api/feedbacks/v1/pins
 ```
 
-**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Закреплённые отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/deleteFeedbacksV1Pins)
+**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Закреплённые отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/deleteV1Pins)
 
 Метод позволяет открепить отзывы в карточке товара или в группе [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек.
-Чтобы получить `pinId` — ID операций закрепления, используйте метод [Список закреплённых и откреплённых отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getFeedbacksV1Pins).
+Чтобы получить `pinId` — ID операций закрепления, используйте метод [Список закреплённых и откреплённых отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1Pins).
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Вопросы и отзывы**:
 
@@ -29,14 +29,14 @@ DELETE /api/feedbacks/v1/pins
 
 ## Ответы
 
-| Код   | Описание               | Схема                              |
-| ----- | ---------------------- | ---------------------------------- |
-| `200` | Успешно                | `DeleteFeedbacksV1PinsResponse200` |
-| `400` | Неправильный запрос    | `respond.ResultErr`                |
-| `401` | Не авторизован         | `object`                           |
-| `402` | Требуется платёж       | `object`                           |
-| `403` | Доступ запрещён        | `object`                           |
-| `429` | Слишком много запросов | `object`                           |
+| Код   | Описание               | Схема                     |
+| ----- | ---------------------- | ------------------------- |
+| `200` | Успешно                | `DeleteV1PinsResponse200` |
+| `400` | Неправильный запрос    | `respond.ResultErr`       |
+| `401` | Не авторизован         | `object`                  |
+| `402` | Требуется платёж       | `object`                  |
+| `403` | Доступ запрещён        | `object`                  |
+| `429` | Слишком много запросов | `object`                  |
 
 ## Примеры вызова
 
@@ -54,7 +54,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.deleteFeedbacksV1Pins(requestBody);
+const { data } = await api.deleteV1Pins(requestBody);
 console.log(data);
 ```
 
@@ -63,7 +63,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.DeleteFeedbacksV1Pins(context.Background()).RequestBody(requestBody).Execute()
+result, _, err := client.DefaultApi.DeleteV1Pins(context.Background()).RequestBody(requestBody).Execute()
 if err != nil {
     panic(err)
 }
@@ -79,7 +79,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.deleteFeedbacksV1Pins(requestBody));
+System.out.println(api.deleteV1Pins(requestBody));
 ```
 
 ```php [PHP]
@@ -92,7 +92,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->deleteFeedbacksV1Pins($request_body));
+print_r($api->deleteV1Pins($request_body));
 ```
 
 ```bsl [OneScript]
@@ -102,7 +102,7 @@ print_r($api->deleteFeedbacksV1Pins($request_body));
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый ЗакреплённыеОтзывыApi(Настройки);
 
-Сообщить(Клиент.DeleteFeedbacksV1Pins(Тело).Тело);
+Сообщить(Клиент.DeleteV1Pins(Тело).Тело);
 ```
 
 ```csharp [C#]
@@ -113,7 +113,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.DeleteFeedbacksV1Pins(requestBody));
+Console.WriteLine(api.DeleteV1Pins(requestBody));
 ```
 
 :::

@@ -1,6 +1,6 @@
 ---
 title: "Обновить настройки автовозврата продавца"
-description: "Метод доступен по Персональному токену"
+description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
 ---
 
 # Обновить настройки автовозврата продавца
@@ -9,10 +9,12 @@ description: "Метод доступен по Персональному ток
 PATCH /api/marketplace/v3/fbs/settings/autoreturns
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/patchMarketplaceV3FbsSettingsAutoreturns)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/patchV3FbsSettingsAutoreturns)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+**Персональному** токену,
+**Сервисному** токену,
+**Базовому** токену **с секретом**
 
 Метод устанавливает настройки автовозврата продавца для малогабаритных товаров — `"cargoType":1`.
 
@@ -50,7 +52,7 @@ from wb_api_client.orders_fbs.api import Api
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = Api(ApiClient(cfg))
 
-result = api.patch_marketplace_v3_fbs_settings_autoreturns(patch_marketplace_v3_fbs_settings_autoreturns_request=...)
+result = api.patch_v3_fbs_settings_autoreturns(patch_v3_fbs_settings_autoreturns_request=...)
 print(result)
 ```
 
@@ -64,7 +66,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.patchMarketplaceV3FbsSettingsAutoreturns(patchMarketplaceV3FbsSettingsAutoreturnsRequest);
+const { data } = await api.patchV3FbsSettingsAutoreturns(patchV3FbsSettingsAutoreturnsRequest);
 console.log(data);
 ```
 
@@ -73,7 +75,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PatchMarketplaceV3FbsSettingsAutoreturns(context.Background()).Execute()
+result, _, err := client.DefaultApi.PatchV3FbsSettingsAutoreturns(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -89,7 +91,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.patchMarketplaceV3FbsSettingsAutoreturns(patchMarketplaceV3FbsSettingsAutoreturnsRequest));
+System.out.println(api.patchV3FbsSettingsAutoreturns(patchV3FbsSettingsAutoreturnsRequest));
 ```
 
 ```php [PHP]
@@ -102,7 +104,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->patchMarketplaceV3FbsSettingsAutoreturns());
+print_r($api->patchV3FbsSettingsAutoreturns());
 ```
 
 ```bsl [OneScript]
@@ -112,7 +114,7 @@ print_r($api->patchMarketplaceV3FbsSettingsAutoreturns());
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый НастройкиАвтовозвратаApi(Настройки);
 
-Сообщить(Клиент.PatchMarketplaceV3FbsSettingsAutoreturns(Тело).Тело);
+Сообщить(Клиент.PatchV3FbsSettingsAutoreturns(Тело).Тело);
 ```
 
 ```csharp [C#]
@@ -123,7 +125,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.PatchMarketplaceV3FbsSettingsAutoreturns());
+Console.WriteLine(api.PatchV3FbsSettingsAutoreturns());
 ```
 
 :::

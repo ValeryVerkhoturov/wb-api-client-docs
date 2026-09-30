@@ -1,17 +1,17 @@
 ---
-title: "Код ТН ВЭД предмета"
-description: "Метод возвращает список кодов ТН ВЭД по ID предмета и фрагменту кода ТН ВЭД."
+title: "Список кодов ОКПД2"
+description: "Метод возвращает справочный список всех кодов ОКПД2. Чтобы найти код по его фрагменту, укажите первые цифры кода через точку в параметре search."
 ---
 
-# Код ТН ВЭД предмета
+# Список кодов ОКПД2
 
 ```http
-GET /content/v2/directory/tnved
+GET /api/content/v2/directory/okpd/all
 ```
 
-**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Категории, предметы и характеристики · [Документация WB ↗](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryTnved)
+**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Категории, предметы и характеристики · [Документация WB ↗](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryOkpdAll)
 
-Метод возвращает список кодов ТН ВЭД по ID [предмета](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll) и фрагменту кода ТН ВЭД.
+Метод возвращает справочный список всех кодов ОКПД2. Чтобы найти код по его фрагменту, укажите первые цифры кода через точку в параметре `search`.
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Контент**:
 
@@ -27,27 +27,22 @@ GET /content/v2/directory/tnved
 - [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
 - [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
----
-
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
-
 ## Параметры
 
-| Имя         | Где   | Тип       | Обяз. | Описание                                                                                                                                                      |
-| ----------- | ----- | --------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `subjectID` | query | `integer` | да    | ID предмета                                                                                                                                                   |
-| `search`    | query | `integer` | нет   | Поиск по коду ТН ВЭД. Работает только в паре с `subjectID`                                                                                                    |
-| `locale`    | query | `string`  | нет   | Язык полей ответа: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
+| Имя      | Где   | Тип      | Обяз. | Описание                                                                                                 |
+| -------- | ----- | -------- | ----- | -------------------------------------------------------------------------------------------------------- |
+| `search` | query | `number` | нет   | Поиск по фрагменту кода ОКПД2. Укажите первые цифры кода через точку, чтобы найти код по этому фрагменту |
+| `locale` | query | `string` | нет   | Язык полей ответа: - `ru` — русский                                                                      |
 
 ## Ответы
 
-| Код   | Описание               | Схема                            |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV2DirectoryTnvedResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`    |
-| `401` | Не авторизован         | `object`                         |
-| `403` | Доступ запрещён        | `responseBodyContentError403`    |
-| `429` | Слишком много запросов | `object`                         |
+| Код   | Описание               | Схема                              |
+| ----- | ---------------------- | ---------------------------------- |
+| `200` | Успешно                | `GetV2DirectoryOkpdAllResponse200` |
+| `400` | Неправильный запрос    | `responseBodyContentError400`      |
+| `401` | Не авторизован         | `object`                           |
+| `403` | Доступ запрещён        | `responseBodyContentError403`      |
+| `429` | Слишком много запросов | `object`                           |
 
 ## Примеры вызова
 
@@ -62,7 +57,7 @@ from wb_api_client.items.api import Api
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = Api(ApiClient(cfg))
 
-result = api.get_v2_directory_tnved(subject_id=..., search=..., locale=...)
+result = api.get_v2_directory_okpd_all(search=..., locale=...)
 print(result)
 ```
 
@@ -76,7 +71,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.getV2DirectoryTnved(subjectID, search, locale);
+const { data } = await api.getV2DirectoryOkpdAll(search, locale);
 console.log(data);
 ```
 
@@ -85,7 +80,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV2DirectoryTnved(context.Background()).SubjectID(subjectID).Execute()
+result, _, err := client.DefaultApi.GetV2DirectoryOkpdAll(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -101,7 +96,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.getV2DirectoryTnved(subjectID, search, locale));
+System.out.println(api.getV2DirectoryOkpdAll(search, locale));
 ```
 
 ```php [PHP]
@@ -114,7 +109,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->getV2DirectoryTnved($subject_id));
+print_r($api->getV2DirectoryOkpdAll());
 ```
 
 ```bsl [OneScript]
@@ -124,7 +119,7 @@ print_r($api->getV2DirectoryTnved($subject_id));
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый КатегорииПредметыИХарактеристикиApi(Настройки);
 
-Сообщить(Клиент.GetV2DirectoryTnved(subjectID).Тело);
+Сообщить(Клиент.GetV2DirectoryOkpdAll().Тело);
 ```
 
 ```csharp [C#]
@@ -135,7 +130,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.GetV2DirectoryTnved(subjectID));
+Console.WriteLine(api.GetV2DirectoryOkpdAll());
 ```
 
 :::

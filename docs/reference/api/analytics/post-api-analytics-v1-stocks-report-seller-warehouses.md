@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/analytics/v1/stocks-report/seller-warehouses
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** История остатков · [Документация WB ↗](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postAnalyticsV1StocksReportSellerWarehouses)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** История остатков · [Документация WB ↗](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postV1StocksReportSellerWarehouses)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,
@@ -33,14 +33,14 @@ POST /api/analytics/v1/stocks-report/seller-warehouses
 
 ## Ответы
 
-| Код   | Описание               | Схема                                                    |
-| ----- | ---------------------- | -------------------------------------------------------- |
-| `200` | Успешно                | `PostAnalyticsV1StocksReportSellerWarehousesResponse200` |
-| `204` | Нет данных             | —                                                        |
-| `400` | Неправильный запрос    | `ErrorObject400`                                         |
-| `401` | Не авторизован         | `object`                                                 |
-| `403` | Доступ запрещён        | `ErrorObject403`                                         |
-| `429` | Слишком много запросов | `object`                                                 |
+| Код   | Описание               | Схема                                           |
+| ----- | ---------------------- | ----------------------------------------------- |
+| `200` | Успешно                | `PostV1StocksReportSellerWarehousesResponse200` |
+| `204` | Нет данных             | —                                               |
+| `400` | Неправильный запрос    | `ErrorObject400`                                |
+| `401` | Не авторизован         | `object`                                        |
+| `403` | Доступ запрещён        | `ErrorObject403`                                |
+| `429` | Слишком много запросов | `object`                                        |
 
 ## Примеры вызова
 
@@ -58,7 +58,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.postAnalyticsV1StocksReportSellerWarehouses(inventoryRequest);
+const { data } = await api.postV1StocksReportSellerWarehouses(inventoryRequest);
 console.log(data);
 ```
 
@@ -67,7 +67,7 @@ cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostAnalyticsV1StocksReportSellerWarehouses(context.Background()).InventoryRequest(inventoryRequest).Execute()
+result, _, err := client.DefaultApi.PostV1StocksReportSellerWarehouses(context.Background()).InventoryRequest(inventoryRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -83,7 +83,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.postAnalyticsV1StocksReportSellerWarehouses(inventoryRequest));
+System.out.println(api.postV1StocksReportSellerWarehouses(inventoryRequest));
 ```
 
 ```php [PHP]
@@ -96,7 +96,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->postAnalyticsV1StocksReportSellerWarehouses($inventory_request));
+print_r($api->postV1StocksReportSellerWarehouses($inventory_request));
 ```
 
 ```bsl [OneScript]
@@ -106,7 +106,7 @@ print_r($api->postAnalyticsV1StocksReportSellerWarehouses($inventory_request));
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый ИсторияОстатковApi(Настройки);
 
-Сообщить(Клиент.PostAnalyticsV1StocksReportSellerWarehouses(Тело).Тело);
+Сообщить(Клиент.PostV1StocksReportSellerWarehouses(Тело).Тело);
 ```
 
 ```csharp [C#]
@@ -117,7 +117,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.PostAnalyticsV1StocksReportSellerWarehouses(inventoryRequest));
+Console.WriteLine(api.PostV1StocksReportSellerWarehouses(inventoryRequest));
 ```
 
 :::

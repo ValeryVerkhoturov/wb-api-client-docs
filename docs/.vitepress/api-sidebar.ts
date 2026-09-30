@@ -94,8 +94,20 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/items/get-content-v2-directory-vat",
         },
         {
-          text: "ТНВЭД-код",
+          text: "Код ТН ВЭД предмета",
           link: "/reference/api/items/get-content-v2-directory-tnved",
+        },
+        {
+          text: "Список кодов ТН ВЭД",
+          link: "/reference/api/items/get-api-content-v2-directory-tnved-all",
+        },
+        {
+          text: "Код ОКПД2 предмета",
+          link: "/reference/api/items/get-api-content-v2-directory-okpd",
+        },
+        {
+          text: "Список кодов ОКПД2",
+          link: "/reference/api/items/get-api-content-v2-directory-okpd-all",
         },
         {
           text: "Бренды",
@@ -1398,8 +1410,20 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/items/get-content-v2-directory-vat",
         },
         {
-          text: "ТНВЭД-код",
+          text: "Код ТН ВЭД предмета",
           link: "/en/reference/api/items/get-content-v2-directory-tnved",
+        },
+        {
+          text: "Список кодов ТН ВЭД",
+          link: "/en/reference/api/items/get-api-content-v2-directory-tnved-all",
+        },
+        {
+          text: "Код ОКПД2 предмета",
+          link: "/en/reference/api/items/get-api-content-v2-directory-okpd",
+        },
+        {
+          text: "Список кодов ОКПД2",
+          link: "/en/reference/api/items/get-api-content-v2-directory-okpd-all",
         },
         {
           text: "Бренды",

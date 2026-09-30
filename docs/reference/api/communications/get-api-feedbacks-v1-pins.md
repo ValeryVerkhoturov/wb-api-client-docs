@@ -9,7 +9,7 @@ description: "Метод предоставляет список закрепл�
 GET /api/feedbacks/v1/pins
 ```
 
-**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Закреплённые отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getFeedbacksV1Pins)
+**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Закреплённые отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1Pins)
 
 Метод предоставляет список закреплённых и откреплённых отзывов.
 
@@ -40,14 +40,14 @@ GET /api/feedbacks/v1/pins
 
 ## Ответы
 
-| Код   | Описание               | Схема                           |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `GetFeedbacksV1PinsResponse200` |
-| `400` | Неправильный запрос    | `respond.ResultErr`             |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `object`                        |
-| `429` | Слишком много запросов | `object`                        |
+| Код   | Описание               | Схема                  |
+| ----- | ---------------------- | ---------------------- |
+| `200` | Успешно                | `GetV1PinsResponse200` |
+| `400` | Неправильный запрос    | `respond.ResultErr`    |
+| `401` | Не авторизован         | `object`               |
+| `402` | Требуется платёж       | `object`               |
+| `403` | Доступ запрещён        | `object`               |
+| `429` | Слишком много запросов | `object`               |
 
 ## Примеры вызова
 
@@ -65,7 +65,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.getFeedbacksV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit);
+const { data } = await api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit);
 console.log(data);
 ```
 
@@ -74,7 +74,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetFeedbacksV1Pins(context.Background()).Execute()
+result, _, err := client.DefaultApi.GetV1Pins(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -90,7 +90,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.getFeedbacksV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit));
+System.out.println(api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit));
 ```
 
 ```php [PHP]
@@ -103,7 +103,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->getFeedbacksV1Pins());
+print_r($api->getV1Pins());
 ```
 
 ```bsl [OneScript]
@@ -113,7 +113,7 @@ print_r($api->getFeedbacksV1Pins());
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый ЗакреплённыеОтзывыApi(Настройки);
 
-Сообщить(Клиент.GetFeedbacksV1Pins().Тело);
+Сообщить(Клиент.GetV1Pins().Тело);
 ```
 
 ```csharp [C#]
@@ -124,7 +124,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.GetFeedbacksV1Pins());
+Console.WriteLine(api.GetV1Pins());
 ```
 
 :::

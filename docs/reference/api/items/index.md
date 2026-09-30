@@ -1,11 +1,11 @@
 ---
 title: "Работа с товарами"
-description: "Операций модуля `items` — 52."
+description: "Операций модуля `items` — 55."
 ---
 
 # Работа с товарами · `items`
 
-Операций модуля `items` — 52.
+Операций модуля `items` — 55.
 
 [Документация WB ↗](https://dev.wildberries.ru/openapi/item-management) · [Все модули](/reference/api/)
 
@@ -34,7 +34,10 @@ description: "Операций модуля `items` — 52."
 | `GET` | `/content/v2/directory/countries`       | [Страна производства](/reference/api/items/get-content-v2-directory-countries)          |
 | `GET` | `/content/v2/directory/seasons`         | [Сезон](/reference/api/items/get-content-v2-directory-seasons)                          |
 | `GET` | `/content/v2/directory/vat`             | [Ставка НДС](/reference/api/items/get-content-v2-directory-vat)                         |
-| `GET` | `/content/v2/directory/tnved`           | [ТНВЭД-код](/reference/api/items/get-content-v2-directory-tnved)                        |
+| `GET` | `/content/v2/directory/tnved`           | [Код ТН ВЭД предмета](/reference/api/items/get-content-v2-directory-tnved)              |
+| `GET` | `/api/content/v2/directory/tnved/all`   | [Список кодов ТН ВЭД](/reference/api/items/get-api-content-v2-directory-tnved-all)      |
+| `GET` | `/api/content/v2/directory/okpd`        | [Код ОКПД2 предмета](/reference/api/items/get-api-content-v2-directory-okpd)            |
+| `GET` | `/api/content/v2/directory/okpd/all`    | [Список кодов ОКПД2](/reference/api/items/get-api-content-v2-directory-okpd-all)        |
 | `GET` | `/api/content/v1/brands`                | [Бренды](/reference/api/items/get-api-content-v1-brands)                                |
 
 ## Ярлыки

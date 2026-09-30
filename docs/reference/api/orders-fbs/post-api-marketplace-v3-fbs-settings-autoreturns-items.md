@@ -1,6 +1,6 @@
 ---
 title: "Получить настройки автовозврата товаров"
-description: "Метод доступен по Персональному токену"
+description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
 ---
 
 # Получить настройки автовозврата товаров
@@ -9,10 +9,12 @@ description: "Метод доступен по Персональному ток
 POST /api/marketplace/v3/fbs/settings/autoreturns/items
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/postMarketplaceV3FbsSettingsAutoreturnsItems)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Настройки автовозврата · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/postV3FbsSettingsAutoreturnsItems)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+**Персональному** токену,
+**Сервисному** токену,
+**Базовому** токену **с секретом**
 
 Метод возвращает настройки автовозврата товаров.
 
@@ -29,13 +31,13 @@ POST /api/marketplace/v3/fbs/settings/autoreturns/items
 
 ## Ответы
 
-| Код   | Описание               | Схема                                                     |
-| ----- | ---------------------- | --------------------------------------------------------- |
-| `200` | Успешно                | `PostMarketplaceV3FbsSettingsAutoreturnsItemsResponse200` |
-| `400` | Неправильный запрос    | `ApiErrorV3`                                              |
-| `401` | Не авторизован         | `object`                                                  |
-| `403` | Доступ запрещён        | `Response4XX`                                             |
-| `429` | Слишком много запросов | `object`                                                  |
+| Код   | Описание               | Схема                                          |
+| ----- | ---------------------- | ---------------------------------------------- |
+| `200` | Успешно                | `PostV3FbsSettingsAutoreturnsItemsResponse200` |
+| `400` | Неправильный запрос    | `ApiErrorV3`                                   |
+| `401` | Не авторизован         | `object`                                       |
+| `403` | Доступ запрещён        | `Response4XX`                                  |
+| `429` | Слишком много запросов | `object`                                       |
 
 ## Примеры вызова
 
@@ -50,7 +52,7 @@ from wb_api_client.orders_fbs.api import Api
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = Api(ApiClient(cfg))
 
-result = api.post_marketplace_v3_fbs_settings_autoreturns_items(post_marketplace_v3_fbs_settings_autoreturns_items_request=...)
+result = api.post_v3_fbs_settings_autoreturns_items(post_v3_fbs_settings_autoreturns_items_request=...)
 print(result)
 ```
 
@@ -64,7 +66,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.postMarketplaceV3FbsSettingsAutoreturnsItems(postMarketplaceV3FbsSettingsAutoreturnsItemsRequest);
+const { data } = await api.postV3FbsSettingsAutoreturnsItems(postV3FbsSettingsAutoreturnsItemsRequest);
 console.log(data);
 ```
 
@@ -73,7 +75,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostMarketplaceV3FbsSettingsAutoreturnsItems(context.Background()).Execute()
+result, _, err := client.DefaultApi.PostV3FbsSettingsAutoreturnsItems(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -89,7 +91,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.postMarketplaceV3FbsSettingsAutoreturnsItems(postMarketplaceV3FbsSettingsAutoreturnsItemsRequest));
+System.out.println(api.postV3FbsSettingsAutoreturnsItems(postV3FbsSettingsAutoreturnsItemsRequest));
 ```
 
 ```php [PHP]
@@ -102,7 +104,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->postMarketplaceV3FbsSettingsAutoreturnsItems());
+print_r($api->postV3FbsSettingsAutoreturnsItems());
 ```
 
 ```bsl [OneScript]
@@ -112,7 +114,7 @@ print_r($api->postMarketplaceV3FbsSettingsAutoreturnsItems());
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый НастройкиАвтовозвратаApi(Настройки);
 
-Сообщить(Клиент.PostMarketplaceV3FbsSettingsAutoreturnsItems(Тело).Тело);
+Сообщить(Клиент.PostV3FbsSettingsAutoreturnsItems(Тело).Тело);
 ```
 
 ```csharp [C#]
@@ -123,7 +125,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.PostMarketplaceV3FbsSettingsAutoreturnsItems());
+Console.WriteLine(api.PostV3FbsSettingsAutoreturnsItems());
 ```
 
 :::

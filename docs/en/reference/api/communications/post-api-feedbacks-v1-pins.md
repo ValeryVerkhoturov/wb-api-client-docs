@@ -9,10 +9,10 @@ description: "Метод позволяет закрепить отзывы в �
 POST /api/feedbacks/v1/pins
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Закреплённые отзывы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/postFeedbacksV1Pins)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Закреплённые отзывы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/postV1Pins)
 
 Метод позволяет закрепить отзывы в карточке товара или в группе [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек.
-Чтобы получить ID отзывов, используйте метод [Список закреплённых и откреплённых отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getFeedbacksV1Pins).
+Чтобы получить ID отзывов, используйте метод [Список закреплённых и откреплённых отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1Pins).
 
 Метод доступен по [подписке Джем](https://seller.wildberries.ru/monetization/jam) или c [тарифной опцией](https://seller.wildberries.ru/tariff-constructor) \*\*Закрепление отзыва\*\*.
 
@@ -31,14 +31,14 @@ POST /api/feedbacks/v1/pins
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `PostFeedbacksV1PinsResponse200` |
-| `400` | Неправильный запрос    | `respond.ResultErr`              |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `respond.ResultErr`              |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description            | Schema                  |
+| ----- | ---------------------- | ----------------------- |
+| `200` | Успешно                | `PostV1PinsResponse200` |
+| `400` | Неправильный запрос    | `respond.ResultErr`     |
+| `401` | Не авторизован         | `object`                |
+| `402` | Требуется платёж       | `object`                |
+| `403` | Доступ запрещён        | `respond.ResultErr`     |
+| `429` | Слишком много запросов | `object`                |
 
 ## Call examples
 
@@ -56,7 +56,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
 const api = new DefaultApi(cfg);
 
-const { data } = await api.postFeedbacksV1Pins(openapiPinReviewItem);
+const { data } = await api.postV1Pins(openapiPinReviewItem);
 console.log(data);
 ```
 
@@ -65,7 +65,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostFeedbacksV1Pins(context.Background()).OpenapiPinReviewItem(openapiPinReviewItem).Execute()
+result, _, err := client.DefaultApi.PostV1Pins(context.Background()).OpenapiPinReviewItem(openapiPinReviewItem).Execute()
 if err != nil {
     panic(err)
 }
@@ -81,7 +81,7 @@ ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
 DefaultApi api = new DefaultApi(client);
 
-System.out.println(api.postFeedbacksV1Pins(openapiPinReviewItem));
+System.out.println(api.postV1Pins(openapiPinReviewItem));
 ```
 
 ```php [PHP]
@@ -94,7 +94,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->postFeedbacksV1Pins($openapi_pin_review_item));
+print_r($api->postV1Pins($openapi_pin_review_item));
 ```
 
 ```bsl [OneScript]
@@ -104,7 +104,7 @@ print_r($api->postFeedbacksV1Pins($openapi_pin_review_item));
 Настройки.УстановитьТокен("<your WB JWT>");
 Клиент = Новый ЗакреплённыеОтзывыApi(Настройки);
 
-Сообщить(Клиент.PostFeedbacksV1Pins(Тело).Тело);
+Сообщить(Клиент.PostV1Pins(Тело).Тело);
 ```
 
 ```csharp [C#]
@@ -115,7 +115,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.PostFeedbacksV1Pins(openapiPinReviewItem));
+Console.WriteLine(api.PostV1Pins(openapiPinReviewItem));
 ```
 
 :::
