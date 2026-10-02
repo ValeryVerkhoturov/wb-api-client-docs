@@ -1,11 +1,11 @@
 ---
 title: "Заказы FBS"
-description: "Module `orders-fbs` has 47 operations."
+description: "Module `orders-fbs` has 46 operations."
 ---
 
 # Заказы FBS · `orders-fbs`
 
-Module `orders-fbs` has 47 operations.
+Module `orders-fbs` has 46 operations.
 
 [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-fbs) · [All modules](/en/reference/api/)
 
@@ -71,7 +71,6 @@ Module `orders-fbs` has 47 operations.
 | `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`         | [Получить ID сборочных заданий поставки](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)    |
 | `GET`    | `/api/marketplace/v3/fbs/shipping-points`                   | [Получить список пунктов отгрузки поставок](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points)         |
 | `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`          | [Установить параметры отгрузки поставок](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method) |
-| `PATCH`  | `/api/marketplace/v3/fbs/supplies/waybill`                  | [Установить ID ЭТрН поставок](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-waybill)                    |
 | `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                       | [Передать поставку в доставку](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                          |
 | `GET`    | `/api/v3/supplies/{supplyId}/barcode`                       | [Получить QR-код поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-barcode)                                |
 | `GET`    | `/api/v3/supplies/{supplyId}/trbx`                          | [Получить список грузомест поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-trbx)                         |

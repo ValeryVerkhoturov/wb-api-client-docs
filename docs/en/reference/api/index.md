@@ -1,17 +1,17 @@
 ---
 title: "API reference"
-description: "All 308 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
+description: "All 307 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
 ---
 
 # API reference
 
-All 308 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
+All 307 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
 
 | Module                                                  | Category                | Operations |
 | ------------------------------------------------------- | ----------------------- | ---------- |
 | [`general`](/en/reference/api/general/)                 | Общее                   | 10         |
 | [`items`](/en/reference/api/items/)                     | Работа с товарами       | 55         |
-| [`orders-fbs`](/en/reference/api/orders-fbs/)           | Заказы FBS              | 47         |
+| [`orders-fbs`](/en/reference/api/orders-fbs/)           | Заказы FBS              | 46         |
 | [`orders-dbw`](/en/reference/api/orders-dbw/)           | Заказы DBW              | 16         |
 | [`dbs`](/en/reference/api/dbs/)                         | DBS                     | 21         |
 | [`in-store-pickup`](/en/reference/api/in-store-pickup/) | Самовывоз               | 18         |

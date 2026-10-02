@@ -13,13 +13,11 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 Метод устанавливает способ доставки, дату и пункт отгрузки у поставок.
 
-Для доставки транспортной компанией `"shippingType":"transportCompany"` укажите ID ЭТрН — электронной транспортной накладной — с помощью метода установки [ID ЭТрН поставки](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesWaybill).
-
-Добавленный к поставке ID ЭТрН сбрасывается, если поменять способ доставки `"shippingType":"transportCompany"` на `selfShipping`. Если вы хотите изменить способ доставки обратно на `transportCompany`, [добавьте ID ЭТрН](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesWaybill) заново.
-
 Параметры отгрузки нужно указать до передачи поставки в доставку. Вы можете обновлять параметры отгрузки до сканирования поставки и её коробов в пункте отгрузки. Когда поставка будет отсканирована, метод начнёт возвращать ошибку `409`.
 
 В запросе можно указать максимум 100 поставок. Результат обработки возвращается для каждой поставки отдельно.
+
+Доступно только для продавцов из РФ.
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 

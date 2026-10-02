@@ -17,6 +17,8 @@ GET /api/marketplace/v3/fbs/shipping-points
 - по типам товаров, которые принимает пункт отгрузки
   Используйте данные из этого метода, чтобы устанавливать [параметры отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
 
+Доступно только для продавцов из РФ.
+
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
 | Период                                                         | Лимит        | Интервал | Всплеск     |

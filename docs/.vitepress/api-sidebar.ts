@@ -412,10 +412,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method",
         },
         {
-          text: "Установить ID ЭТрН поставок",
-          link: "/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-waybill",
-        },
-        {
           text: "Передать поставку в доставку",
           link: "/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver",
         },
@@ -1726,10 +1722,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Установить параметры отгрузки поставок",
           link: "/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method",
-        },
-        {
-          text: "Установить ID ЭТрН поставок",
-          link: "/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-waybill",
         },
         {
           text: "Передать поставку в доставку",
