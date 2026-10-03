@@ -13,6 +13,15 @@ Tokens are minted in the seller portal:
 
 Each category you tick corresponds roughly to one or more sub-modules in the clients. If a call returns `403`, the token is valid but lacks the category — regenerate with it ticked.
 
+Which token type to pick:
+
+- **Personal** — for your own programs and on-premise systems (including local 1C installations). Grants access to sensitive data, so it must not be shared with third parties or used in cloud services.
+- **Base** — access to a limited set of data. Good for testing the integration on real data and for cases where a personal token doesn't fit.
+- **Test** — works only with the [WB API sandbox](https://dev.wildberries.ru/openapi/sandbox) and generated test data; real seller data is not accessible.
+- **Service** — created for a specific cloud service from the [Solutions for Business catalog](https://seller.wildberries.ru/auth-services); categories and access levels are filled in automatically.
+
+Every token lives 180 days from creation, after which you need to mint a new one. You can check a token's validity and categories by decoding the JWT — it's a plain [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519) token. Don't paste it into online decoders: anyone can intercept it that way.
+
 ## Secret-string wrappers
 
 Once you have the token, don't pass it around as a plain string. Every client wraps the value in a language-native "secret string" type so it redacts under logs, `print`, debuggers, and error dumps — unless you explicitly ask for the raw value.
@@ -121,7 +130,7 @@ const ordCfg   = new OrdCfg({});   ordCfg.setAccessToken(TOKEN);
 
 ## Rotating tokens
 
-WB tokens don't rotate on the wire — you have to swap them. Best practice:
+WB tokens don't rotate on the wire and live at most 180 days — you have to swap them. Best practice:
 
 1. Store the token in a secret manager (SSM, Vault, GitHub Actions secret) — never in source.
 2. Read it into an env var at process start; construct the config once.

@@ -4,17 +4,20 @@ WB returns standard HTTP status codes plus a JSON body. The clients surface thes
 
 ## Status codes worth handling
 
-| Code        | Meaning                                  | Right response                                                                                  |
-| ----------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `200`–`204` | Success                                  | Parse the body (or don't, for 204)                                                              |
-| `400`       | Request malformed                        | Fix the request; not retriable                                                                  |
-| `401`       | Missing / bad / expired token            | Refresh the token; do NOT retry with the same token                                             |
-| `403`       | Token lacks scope for this endpoint      | Regenerate token with correct scope; not retriable                                              |
-| `404`       | Resource doesn't exist                   | Business-logic decision — not always an error                                                   |
-| `409`       | Conflict (e.g. supply already delivered) | Business-logic; specific WB schemas per endpoint                                                |
-| `429`       | Rate-limited                             | Read `Retry-After`, back off, retry                                                             |
-| `498`       | WBAAS anti-bot challenge                 | Never fires against these clients (correct UA) — if you see it, something is proxying/rewriting |
-| `5xx`       | Upstream problem                         | Retry with exponential backoff, cap attempts                                                    |
+| Code        | Meaning                                  | Right response                                                                                                                                      |
+| ----------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `200`–`204` | Success                                  | Parse the body (or don't, for 204)                                                                                                                  |
+| `400`       | Request malformed                        | Fix the request; not retriable                                                                                                                      |
+| `401`       | Missing / bad / expired token            | Refresh the token; do NOT retry with the same token                                                                                                 |
+| `402`       | Service balance is out of funds          | Only returned to services from the "Solutions for Business" catalog — top up the balance                                                            |
+| `403`       | Token lacks scope for this endpoint      | Check: token category matches the method, the method is allowed for the token type, the token wasn't issued by a deleted user. Regenerate if needed |
+| `404`       | Resource doesn't exist                   | Check the URL; business-logic decision — not always an error. Useful details in the body's `detail` field                                           |
+| `409`       | Conflict (e.g. supply already delivered) | Business-logic; specific WB schemas per endpoint                                                                                                    |
+| `413`       | Request body exceeds the limit           | Reduce the number of objects in the request                                                                                                         |
+| `422`       | Request parameter processing error       | Check the request data — fields must not contradict each other                                                                                      |
+| `429`       | Rate-limited                             | Wait `X-Ratelimit-Retry` seconds from the response, then retry                                                                                      |
+| `498`       | WBAAS anti-bot challenge                 | Never fires against these clients (correct UA) — if you see it, something is proxying/rewriting                                                     |
+| `5xx`       | Upstream problem                         | Retry with exponential backoff, cap attempts                                                                                                        |
 
 ## Retry pattern
 
@@ -33,7 +36,9 @@ def with_retry(fn, *, max_attempts=5, base=1.0):
         except ApiException as e:
             if e.status not in (429, 500, 502, 503, 504) or attempt == max_attempts:
                 raise
-            retry_after = float(e.headers.get("Retry-After") or 0) or base * 2 ** attempt
+            retry_after = float(
+                e.headers.get("X-Ratelimit-Retry") or e.headers.get("Retry-After") or 0
+            ) or base * 2 ** attempt
             time.sleep(retry_after)
 ```
 
@@ -51,7 +56,9 @@ async function withRetry<T>(
       const e = err as AxiosError;
       const status = e.response?.status ?? 0;
       if (![429, 500, 502, 503, 504].includes(status) || attempt === maxAttempts) throw err;
-      const retryAfterHeader = e.response?.headers?.["retry-after"];
+      const retryAfterHeader =
+        e.response?.headers?.["x-ratelimit-retry"] ??
+        e.response?.headers?.["retry-after"];
       const delay = retryAfterHeader
         ? Number(retryAfterHeader) * 1000
         : base * 2 ** attempt;
@@ -84,7 +91,9 @@ func withRetry[T any](ctx context.Context, fn func() (T, *http.Response, error))
         }
         delay := time.Duration(1<<attempt) * time.Second
         if resp != nil {
-            if ra := resp.Header.Get("Retry-After"); ra != "" {
+            ra := resp.Header.Get("X-Ratelimit-Retry")
+            if ra == "" { ra = resp.Header.Get("Retry-After") }
+            if ra != "" {
                 if d, e := time.ParseDuration(ra + "s"); e == nil { delay = d }
             }
         }
@@ -140,7 +149,20 @@ if err != nil {
 
 ## Rate limits
 
-WB publishes limits at [dev.wildberries.ru](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov). They differ per API category — content APIs are ~100/min, analytics can be much stricter. If you're hitting `429` regularly, batch smarter (bigger page sizes, cache lookups) before adding retry.
+WB throttles requests with a token-bucket algorithm. Limits are per method — see the "Request limit" table on each method's page in the [official docs](https://dev.wildberries.ru/openapi/api-information): period, max requests per period, interval between requests, and burst (how many requests can be sent back-to-back without a pause).
+
+Useful response headers:
+
+- `X-Ratelimit-Remaining` — how many requests you can still send without a pause. Decreases after each request and refills over time. Present in every response except `429`.
+- `X-Ratelimit-Retry` — only on `429`: how many seconds to wait before retrying. Retrying earlier just gets you another `429`.
+- `X-Ratelimit-Limit` and `X-Ratelimit-Reset` — only on `429`: the maximum burst and how many seconds until it refills.
+
+Two caveats:
+
+- Limits depend on the token type: personal and service tokens get higher limits, base and test tokens get lower ones.
+- In some categories (e.g. Marketplace) one request that fails with a `4xx` counts as ten — `X-Ratelimit-Remaining` drops by 10 at once.
+
+If you're hitting `429` regularly, batch smarter (bigger page sizes, cache lookups) before adding retry.
 
 ## Client-side timeouts
 
