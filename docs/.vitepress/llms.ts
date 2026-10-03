@@ -79,8 +79,9 @@ const LOCALES = [
     blurb:
       "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP, OneScript и C#. Одна версия на все семь экосистем, bearer-токен маскируется по умолчанию.",
     mirror:
-      "Любая страница сайта доступна в Markdown по её адресу с суффиксом `.md` — например `guides/quickstart.md`. Это относится и к 638 страницам справочника API, которые ниже не перечислены поштучно: страница модуля перечисляет все свои операции.",
+      "Любая страница сайта доступна в Markdown по её адресу с суффиксом `.md` — например `guides/quickstart.md`. Это относится и к {apiPages} справочника API, которые ниже не перечислены поштучно: страница модуля перечисляет все свои операции.",
     api: "Справочник API",
+    packages: "Пакеты",
     full: "Все обзорные страницы одним файлом, без справочника по операциям",
     otherLabel: "The same index in English",
   },
@@ -91,14 +92,72 @@ const LOCALES = [
     blurb:
       "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript and C#. One version across all seven ecosystems, bearer tokens redacted by default.",
     mirror:
-      "Every page on the site is also served as Markdown at its own address plus `.md` — `guides/quickstart.md`, for instance. That includes the 638 endpoint reference pages, which are not listed individually below: each module page lists its own operations.",
+      "Every page on the site is also served as Markdown at its own address plus `.md` — `guides/quickstart.md`, for instance. That includes the {apiPages} endpoint reference pages, which are not listed individually below: each module page lists its own operations.",
     api: "API reference",
+    packages: "Packages",
     full: "Every narrative page in one file, endpoint reference excluded",
     otherLabel: "Этот же указатель на русском",
   },
 ];
 
 type Locale = (typeof LOCALES)[number];
+
+// The installable artifacts, one per ecosystem. An agent reading llms.txt
+// should reach a working install straight from here, without scraping the
+// language pages for the registry URL.
+const PACKAGES: [name: string, url: string, install: string][] = [
+  [
+    "Python",
+    "https://pypi.org/project/valeryverkhoturov-wb-api-client/",
+    "pip install valeryverkhoturov-wb-api-client",
+  ],
+  [
+    "TypeScript",
+    "https://www.npmjs.com/package/@valeryverkhoturov/wb-api-client",
+    "npm install @valeryverkhoturov/wb-api-client",
+  ],
+  [
+    "Go",
+    "https://pkg.go.dev/github.com/ValeryVerkhoturov/wb-api-client/clients/go",
+    "go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest",
+  ],
+  [
+    "Java",
+    "https://central.sonatype.com/artifact/io.github.valeryverkhoturov/wb-api-client",
+    "Maven Central: io.github.valeryverkhoturov:wb-api-client",
+  ],
+  [
+    "PHP",
+    "https://packagist.org/packages/valeryverkhoturov/wb-api-client",
+    "composer require valeryverkhoturov/wb-api-client",
+  ],
+  [
+    "OneScript",
+    "https://hub.oscript.io/pools/default/packages/wb-api-client",
+    "opm install wb-api-client",
+  ],
+  [
+    "C#",
+    "https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient",
+    "dotnet add package ValeryVerkhoturov.WbApiClient",
+  ],
+];
+
+// Endpoint pages live one file per operation under reference/api/<module>/
+// (plus index pages, which don't count). Counted at build time so the
+// mirror blurb in llms.txt never drifts from what the generator last pushed.
+function countApiPages(prefix: string): number {
+  return sources().filter(
+    (path) =>
+      path.startsWith(`${prefix}reference/api/`) && !path.endsWith("index.md"),
+  ).length;
+}
+
+// Russian numerals govern the noun's case: «к 1 странице», but «к 2/5/638
+// страницам». 11–14 take the plural form too, hence the % 100 guard.
+function ruPagesDative(n: number): string {
+  return n % 10 === 1 && n % 100 !== 11 ? `${n} странице` : `${n} страницам`;
+}
 
 // Every Markdown source under docs/, as paths relative to it. `public/`
 // holds assets only and `.vitepress/` is the build itself.
@@ -265,7 +324,13 @@ function llmsIndex(locale: Locale, origin: string): string {
   const label = (section: (typeof SECTIONS)[number]) =>
     p ? section.en : section.ru;
 
-  const lines = ["# wb-api-client", "", `> ${locale.blurb}`, "", locale.mirror];
+  const apiPages = countApiPages(p);
+  const mirror = locale.mirror.replace(
+    "{apiPages}",
+    p ? String(apiPages) : ruPagesDative(apiPages),
+  );
+
+  const lines = ["# wb-api-client", "", `> ${locale.blurb}`, "", mirror];
 
   for (const section of SECTIONS) {
     lines.push("", `## ${label(section)}`, "");
@@ -282,6 +347,11 @@ function llmsIndex(locale: Locale, origin: string): string {
   );
   for (const slug of apiModules(p)) {
     lines.push(entry(`${p}reference/api/${slug}/index.md`, origin));
+  }
+
+  lines.push("", `## ${locale.packages}`, "");
+  for (const [name, url, install] of PACKAGES) {
+    lines.push(`- [${name}](${url}): \`${install}\``);
   }
 
   lines.push(
