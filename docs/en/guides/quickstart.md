@@ -6,12 +6,14 @@ Five minutes: get a token, install the client for your language, make your first
 
 The client libraries are transports — you still need a Wildberries seller account and a personal API token.
 
-1. Sign in at [seller.wildberries.ru](https://seller.wildberries.ru).
-2. Open **Настройки → Доступ к API** (Settings → API access).
-3. Create a token with the scopes you need. For a first test, tick **Контент** (Content) — that's what powers the `items` sub-module.
-4. Copy the JWT. You won't be able to view it again.
+1. Sign in at [seller.wildberries.ru](https://seller.wildberries.ru) and open the [Интеграции по API](https://seller.wildberries.ru/api-integrations) (API integrations) section.
+2. Click **+ Создать токен** (+ Create token) and pick the **Для интеграции вручную** (Manual integration) tab.
+3. Choose the token type — **персональный** (personal) or **базовый** (base) for normal work, **тестовый** (test) for the sandbox.
+4. Fill in the name, pick the method categories and the access level (**Чтение и запись** — read & write, or **Только чтение** — read only). For a first test, **Контент** (Content) is enough — that's what powers the `items` sub-module.
+5. For a personal token, tick the **Я понимаю, что не следует передавать токен третьим лицам** ("I understand the token must not be shared with third parties") checkbox and click **Создать** (Create).
+6. Click **Скопировать и закрыть** (Copy and close) — the token lands on your clipboard. You won't be able to view it again.
 
-Tokens are per-seller and per-scope. If you need to call multiple API categories (`items`, `orders_fbs`, `analytics`, …) create tokens with the union of scopes you need — or one token per scope if you want to keep blast radius small.
+Only pick the categories you plan to work with. If you need to call multiple API categories (`items`, `orders_fbs`, `analytics`, …) create a token with the union of categories — or one token per category to keep blast radius small.
 
 ## 2. Install
 

@@ -6,11 +6,12 @@ Every Wildberries Seller API call takes a **bearer JWT** in the `Authorization` 
 
 Tokens are minted in the seller portal:
 
-1. [seller.wildberries.ru](https://seller.wildberries.ru) → **Настройки → Доступ к API**.
-2. **Создать новый токен** — pick the scopes (Контент, Маркетплейс, Аналитика, …), a lifetime, and whether it's a test-sandbox token.
-3. Copy the JWT immediately. It's shown once.
+1. [seller.wildberries.ru](https://seller.wildberries.ru) → the [Интеграции по API](https://seller.wildberries.ru/api-integrations) (API integrations) section.
+2. **+ Создать токен** (+ Create token) → the **Для интеграции вручную** (Manual integration) tab → choose the token type: **персональный** (personal), **базовый** (base), or **тестовый** (test) for the sandbox.
+3. Fill in the name, pick the method categories (Контент, Маркетплейс, Аналитика, …) and the access level — **Чтение и запись** (read & write) or **Только чтение** (read only).
+4. **Создать** (Create) → **Скопировать и закрыть** (Copy and close). The token is shown once — save it immediately.
 
-Each scope corresponds roughly to one or more sub-modules in the clients. If a call returns `403`, the token is valid but lacks the scope — regenerate with the missing checkbox ticked.
+Each category you tick corresponds roughly to one or more sub-modules in the clients. If a call returns `403`, the token is valid but lacks the category — regenerate with it ticked.
 
 ## Secret-string wrappers
 
