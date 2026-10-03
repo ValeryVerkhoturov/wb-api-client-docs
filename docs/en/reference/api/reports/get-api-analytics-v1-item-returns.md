@@ -19,9 +19,9 @@ GET /api/analytics/v1/item-returns
 | ---------- | ----- | --------------- | ---- | ------------------------------------------------------------------------------------ |
 | `dateFrom` | query | `string<date>`  | yes  | Дата начала отчётного периода                                                        |
 | `dateTo`   | query | `string<date>`  | yes  | Дата окончания отчётного периода                                                     |
-| `status`   | query | `string`        | yes  | Статус возврата: - `archive` — архивный - `active` — активный                        |
-| `limit`    | query | `integer<date>` | yes  | Количество возвратов в ответе                                                        |
-| `offset`   | query | `integer<date>` | yes  | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента |
+| `status`   | query | `string`        | no   | Статус возврата: - `archive` — архивный - `active` — активный                        |
+| `limit`    | query | `integer<date>` | no   | Количество возвратов в ответе                                                        |
+| `offset`   | query | `integer<date>` | no   | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента |
 
 ## Responses
 
@@ -69,7 +69,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1GoodsReturn(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Status(status).Limit(limit).Offset(offset).Execute()
+result, _, err := client.DefaultApi.GetV1GoodsReturn(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Execute()
 if err != nil {
     panic(err)
 }
@@ -98,7 +98,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
 $api = new DefaultApi(new Client(), $config);
 
-print_r($api->getV1GoodsReturn($date_from, $date_to, $status, $limit, $offset));
+print_r($api->getV1GoodsReturn($date_from, $date_to));
 ```
 
 ```bsl [OneScript]
@@ -108,7 +108,7 @@ print_r($api->getV1GoodsReturn($date_from, $date_to, $status, $limit, $offset));
 Настройки.УстановитьТокен("<your WB JWT>");
 Клиент = Новый ОтчётОВозвратахИПеремещенииТоваровApi(Настройки);
 
-Сообщить(Клиент.GetV1GoodsReturn(dateFrom, dateTo, status, limit, offset).Тело);
+Сообщить(Клиент.GetV1GoodsReturn(dateFrom, dateTo).Тело);
 ```
 
 ```csharp [C#]
@@ -119,7 +119,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
 var api = new DefaultApi(config);
 
-Console.WriteLine(api.GetV1GoodsReturn(dateFrom, dateTo, status, limit, offset));
+Console.WriteLine(api.GetV1GoodsReturn(dateFrom, dateTo));
 ```
 
 :::
