@@ -29,9 +29,8 @@ the Markdown mirrors and `llms.txt`, so a broken build means broken output, not 
 ```
 docs/
   index.md                # landing page (Russian)
-  guides/                 # quickstart, authentication, error-handling, custom-headers
+  guides/                 # quickstart, auth, errors, custom headers + versioning/architecture/contributing
   languages/              # one page per SDK language
-  reference/              # versioning, architecture, contributing + api/
   reference/api/          # GENERATED — do not edit (see below)
   en/                     # English mirror of everything above
   public/                 # favicons, og images, robots.txt

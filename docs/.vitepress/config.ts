@@ -213,7 +213,6 @@ export default defineConfig({
           { text: "Руководства", link: "/guides/quickstart" },
           { text: "Языки", link: "/languages/python" },
           { text: "Справочник API", link: "/reference/api/" },
-          { text: "Справочник", link: "/reference/versioning" },
           { text: "Релизы", link: `${CODE_REPO}/releases` },
         ],
         sidebar: {
@@ -225,6 +224,17 @@ export default defineConfig({
                 { text: "Аутентификация", link: "/guides/authentication" },
                 { text: "Обработка ошибок", link: "/guides/error-handling" },
                 { text: "Свои заголовки", link: "/guides/custom-headers" },
+              ],
+            },
+            {
+              text: "Справочник",
+              items: [
+                { text: "Версионирование", link: "/guides/versioning" },
+                { text: "Архитектура", link: "/guides/architecture" },
+                {
+                  text: "Участие в разработке",
+                  link: "/guides/contributing",
+                },
               ],
             },
           ],
@@ -243,19 +253,6 @@ export default defineConfig({
             },
           ],
           "/reference/api/": apiSidebar.ru,
-          "/reference/": [
-            {
-              text: "Справочник",
-              items: [
-                { text: "Версионирование", link: "/reference/versioning" },
-                { text: "Архитектура", link: "/reference/architecture" },
-                {
-                  text: "Участие в разработке",
-                  link: "/reference/contributing",
-                },
-              ],
-            },
-          ],
         },
         editLink: {
           pattern:
@@ -313,7 +310,6 @@ export default defineConfig({
           { text: "Guides", link: "/en/guides/quickstart" },
           { text: "Languages", link: "/en/languages/python" },
           { text: "API reference", link: "/en/reference/api/" },
-          { text: "Reference", link: "/en/reference/versioning" },
           { text: "Releases", link: `${CODE_REPO}/releases` },
         ],
         sidebar: {
@@ -325,6 +321,14 @@ export default defineConfig({
                 { text: "Authentication", link: "/en/guides/authentication" },
                 { text: "Error handling", link: "/en/guides/error-handling" },
                 { text: "Custom headers", link: "/en/guides/custom-headers" },
+              ],
+            },
+            {
+              text: "Reference",
+              items: [
+                { text: "Versioning", link: "/en/guides/versioning" },
+                { text: "Architecture", link: "/en/guides/architecture" },
+                { text: "Contributing", link: "/en/guides/contributing" },
               ],
             },
           ],
@@ -343,16 +347,6 @@ export default defineConfig({
             },
           ],
           "/en/reference/api/": apiSidebar.en,
-          "/en/reference/": [
-            {
-              text: "Reference",
-              items: [
-                { text: "Versioning", link: "/en/reference/versioning" },
-                { text: "Architecture", link: "/en/reference/architecture" },
-                { text: "Contributing", link: "/en/reference/contributing" },
-              ],
-            },
-          ],
         },
         editLink: {
           pattern:

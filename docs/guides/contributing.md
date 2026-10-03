@@ -24,7 +24,7 @@
 - **`generator-configs/*.yaml`** — если это флаг openapi-generator.
 - **`templates/{lang}/*`** — если это топ-уровневый манифест.
 
-Карта пайплайна — в [справочнике по архитектуре](/reference/architecture).
+Карта пайплайна — в [справочнике по архитектуре](/guides/architecture).
 
 ## Локальная разработка
 

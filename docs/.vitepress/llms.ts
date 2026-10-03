@@ -67,11 +67,7 @@ const SECTIONS = [
   {
     ru: "Справочник",
     en: "Reference",
-    pages: [
-      "reference/versioning",
-      "reference/architecture",
-      "reference/contributing",
-    ],
+    pages: ["guides/versioning", "guides/architecture", "guides/contributing"],
   },
 ];
 

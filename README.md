@@ -31,6 +31,10 @@ docs/
     quickstart.md
     authentication.md
     error-handling.md
+    custom-headers.md
+    versioning.md
+    architecture.md
+    contributing.md
   languages/
     python.md
     typescript.md
@@ -38,9 +42,6 @@ docs/
     java.md
     php.md
   reference/
-    versioning.md
-    architecture.md
-    contributing.md
     api/                 # GENERATED — endpoint reference, do not edit
       index.md
       <module>/index.md

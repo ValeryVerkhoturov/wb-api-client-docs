@@ -24,7 +24,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
 
 The main repo hosts seven language clients; Go's convention is one module per repo, so the module path includes the sub-directory. Version tags cover all seven languages simultaneously — Go picks up whichever tag exists on the commit that produced its sources.
 
-Because `MAJOR = 1` is fixed (see [versioning](/en/reference/versioning)), there's no `/v2` suffix now or later.
+Because `MAJOR = 1` is fixed (see [versioning](/en/guides/versioning)), there's no `/v2` suffix now or later.
 
 ## Import shape
 
