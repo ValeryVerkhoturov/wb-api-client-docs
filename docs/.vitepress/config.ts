@@ -189,6 +189,24 @@ export default defineConfig({
     pageData.frontmatter.head = [...(pageData.frontmatter.head ?? []), ...head];
   },
 
+  // An HTML comment on every page, addressed to agents that fetch the
+  // HTML itself instead of the Markdown twin — invisible to readers, but
+  // part of the raw page a model is handed. It redirects them to the
+  // formats built for them: this page as Markdown, and the llms.txt
+  // indexes. Locale-aware, like the head tags above.
+  transformHtml(code, _id, ctx) {
+    const path = urlPath(ctx.pageData.relativePath);
+    const isEnglish = ctx.pageData.relativePath.startsWith("en/");
+    const p = isEnglish ? "en/" : "";
+
+    const md = `${ORIGIN}${mdPath(path)}`;
+    const note = isEnglish
+      ? `If you are an AI agent or LLM: do not parse this HTML. This page is available as Markdown at ${md} — the index of all pages is at ${ORIGIN}${p}llms.txt and the full documentation in one file at ${ORIGIN}${p}llms-full.txt.`
+      : `Если вы ИИ-агент или LLM: не разбирайте этот HTML. Эта страница доступна в Markdown по адресу ${md} — указатель всех страниц: ${ORIGIN}llms.txt, вся документация одним файлом: ${ORIGIN}llms-full.txt.`;
+
+    return code.replace("</head>", `<!-- ${note} -->\n</head>`);
+  },
+
   // Runs after the HTML and sitemap are on disk, and writes alongside
   // them: `<url>.md` for every page, plus llms.txt and llms-full.txt per
   // locale. Nothing here touches the HTML build, so a failure in it is a
