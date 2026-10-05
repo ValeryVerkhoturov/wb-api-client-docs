@@ -1,6 +1,6 @@
 ---
 title: "Получить отчёт"
-description: "Метод возвращает отчёт с данными продаж, сгруппированных по регионам стран."
+description: "Метод будет отключен 3 ноября."
 ---
 
 # Получить отчёт
@@ -11,9 +11,7 @@ GET /api/v1/analytics/region-sale
 
 **Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Продажи по регионам · [WB documentation ↗](https://dev.wildberries.ru/openapi/reports#tag/salesByRegions/operation/getV1AnalyticsRegionSale)
 
-Метод возвращает отчёт с [данными продаж, сгруппированных по регионам стран](https://seller.wildberries.ru/analytics-reports/region-sale).
-
-Можно получить отчёт максимум за 31 день.
+Метод будет отключен [3 ноября](https://dev.wildberries.ru/release-notes?id=590).
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
 
