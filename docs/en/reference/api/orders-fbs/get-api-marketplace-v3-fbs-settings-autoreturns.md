@@ -27,12 +27,13 @@ GET /api/marketplace/v3/fbs/settings/autoreturns
 
 ## Responses
 
-| Code  | Description            | Schema                                   |
-| ----- | ---------------------- | ---------------------------------------- |
-| `200` | Успешно                | `GetV3FbsSettingsAutoreturnsResponse200` |
-| `401` | Не авторизован         | `object`                                 |
-| `403` | Доступ запрещён        | `Response4XX`                            |
-| `429` | Слишком много запросов | `object`                                 |
+| Code  | Description                      | Schema                                   |
+| ----- | -------------------------------- | ---------------------------------------- |
+| `200` | Успешно                          | `GetV3FbsSettingsAutoreturnsResponse200` |
+| `401` | Не авторизован                   | `object`                                 |
+| `403` | Доступ запрещён                  | `Response4XX`                            |
+| `406` | Неприменимо для данного аккаунта | `ApiErrorV3`                             |
+| `429` | Слишком много запросов           | `object`                                 |
 
 ## Call examples
 
