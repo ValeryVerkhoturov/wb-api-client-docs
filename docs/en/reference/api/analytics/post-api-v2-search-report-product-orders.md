@@ -17,7 +17,7 @@ POST /api/v2/search-report/product/orders
 - о позициях товара в результатах поиска по каждому запросу
   Данные указаны в рамках периода для [запрошенного товара](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductSearchTexts) и сгруппированы по дням. Максимальный период — 7 дней.
 
-Данные отчёта обновляются 1 раз в час.
+Данные отчёта обновляются 1 раз в 2 часа.
 
 Можно получить отчёт максимум за последние 365 дней с момента выполнения запроса
 
