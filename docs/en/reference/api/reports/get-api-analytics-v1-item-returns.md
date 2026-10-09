@@ -17,8 +17,8 @@ GET /api/analytics/v1/item-returns
 
 | Name       | In    | Type            | Req. | Description                                                                          |
 | ---------- | ----- | --------------- | ---- | ------------------------------------------------------------------------------------ |
-| `dateFrom` | query | `string<date>`  | yes  | Дата начала отчётного периода                                                        |
-| `dateTo`   | query | `string<date>`  | yes  | Дата окончания отчётного периода                                                     |
+| `dateFrom` | query | `string`        | yes  | Дата начала отчётного периода                                                        |
+| `dateTo`   | query | `string`        | yes  | Дата окончания отчётного периода                                                     |
 | `status`   | query | `string`        | no   | Статус возврата: - `archive` — архивный - `active` — активный                        |
 | `limit`    | query | `integer<date>` | no   | Количество возвратов в ответе                                                        |
 | `offset`   | query | `integer<date>` | no   | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента |

@@ -30,11 +30,11 @@ GET /adv/v3/fullstats
 
 ## Parameters
 
-| Name        | In    | Type           | Req. | Description                       |
-| ----------- | ----- | -------------- | ---- | --------------------------------- |
-| `ids`       | query | `string`       | yes  | ID кампаний, максимум 50 значений |
-| `beginDate` | query | `string<date>` | yes  | Дата начала интервала             |
-| `endDate`   | query | `string<date>` | yes  | Дата окончания интервала          |
+| Name        | In    | Type     | Req. | Description                       |
+| ----------- | ----- | -------- | ---- | --------------------------------- |
+| `ids`       | query | `string` | yes  | ID кампаний, максимум 50 значений |
+| `beginDate` | query | `string` | yes  | Дата начала интервала             |
+| `endDate`   | query | `string` | yes  | Дата окончания интервала          |
 
 ## Responses
 

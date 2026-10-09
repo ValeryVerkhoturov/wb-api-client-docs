@@ -24,16 +24,16 @@ GET /api/v1/documents/list
 
 ## Parameters
 
-| Name          | In    | Type           | Req. | Description                                                                                                                                            |
-| ------------- | ----- | -------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `beginTime`   | query | `string<date>` | no   | Начало периода. Только вместе с `endTime`                                                                                                              |
-| `endTime`     | query | `string<date>` | no   | Конец периода. Только вместе с `beginTime`                                                                                                             |
-| `sort`        | query | `string`       | no   | Сортировка: - `date` — по дате создания документа - `category` — по категории (только при `locale=ru`) Только вместе с `order`                         |
-| `order`       | query | `string`       | no   | Сортировка: - `desc` — по убыванию - `asc` — по возрастанию Только вместе с `sort`                                                                     |
-| `category`    | query | `string`       | no   | ID [категории документов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name` |
-| `serviceName` | query | `string`       | no   | Уникальный ID документа                                                                                                                                |
-| `limit`       | query | `integer`      | no   | Максимальное количество строк ответа                                                                                                                   |
-| `offset`      | query | `integer`      | no   | После какой строки выдавать данные                                                                                                                     |
+| Name          | In    | Type      | Req. | Description                                                                                                                                            |
+| ------------- | ----- | --------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `beginTime`   | query | `string`  | no   | Начало периода. Только вместе с `endTime`                                                                                                              |
+| `endTime`     | query | `string`  | no   | Конец периода. Только вместе с `beginTime`                                                                                                             |
+| `sort`        | query | `string`  | no   | Сортировка: - `date` — по дате создания документа - `category` — по категории (только при `locale=ru`) Только вместе с `order`                         |
+| `order`       | query | `string`  | no   | Сортировка: - `desc` — по убыванию - `asc` — по возрастанию Только вместе с `sort`                                                                     |
+| `category`    | query | `string`  | no   | ID [категории документов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name` |
+| `serviceName` | query | `string`  | no   | Уникальный ID документа                                                                                                                                |
+| `limit`       | query | `integer` | no   | Максимальное количество строк ответа                                                                                                                   |
+| `offset`      | query | `integer` | no   | После какой строки выдавать данные                                                                                                                     |
 
 ## Responses
 

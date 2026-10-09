@@ -15,10 +15,10 @@ GET /api/v1/analytics/goods-return
 
 ## Parameters
 
-| Name       | In    | Type           | Req. | Description                      |
-| ---------- | ----- | -------------- | ---- | -------------------------------- |
-| `dateFrom` | query | `string<date>` | yes  | Дата начала отчётного периода    |
-| `dateTo`   | query | `string<date>` | yes  | Дата окончания отчётного периода |
+| Name       | In    | Type     | Req. | Description                      |
+| ---------- | ----- | -------- | ---- | -------------------------------- |
+| `dateFrom` | query | `string` | yes  | Дата начала отчётного периода    |
+| `dateTo`   | query | `string` | yes  | Дата окончания отчётного периода |
 
 ## Responses
 

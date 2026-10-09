@@ -24,16 +24,16 @@ GET /api/v1/documents/list
 
 ## Параметры
 
-| Имя           | Где   | Тип            | Обяз. | Описание                                                                                                                                               |
-| ------------- | ----- | -------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `beginTime`   | query | `string<date>` | нет   | Начало периода. Только вместе с `endTime`                                                                                                              |
-| `endTime`     | query | `string<date>` | нет   | Конец периода. Только вместе с `beginTime`                                                                                                             |
-| `sort`        | query | `string`       | нет   | Сортировка: - `date` — по дате создания документа - `category` — по категории (только при `locale=ru`) Только вместе с `order`                         |
-| `order`       | query | `string`       | нет   | Сортировка: - `desc` — по убыванию - `asc` — по возрастанию Только вместе с `sort`                                                                     |
-| `category`    | query | `string`       | нет   | ID [категории документов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name` |
-| `serviceName` | query | `string`       | нет   | Уникальный ID документа                                                                                                                                |
-| `limit`       | query | `integer`      | нет   | Максимальное количество строк ответа                                                                                                                   |
-| `offset`      | query | `integer`      | нет   | После какой строки выдавать данные                                                                                                                     |
+| Имя           | Где   | Тип       | Обяз. | Описание                                                                                                                                               |
+| ------------- | ----- | --------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `beginTime`   | query | `string`  | нет   | Начало периода. Только вместе с `endTime`                                                                                                              |
+| `endTime`     | query | `string`  | нет   | Конец периода. Только вместе с `beginTime`                                                                                                             |
+| `sort`        | query | `string`  | нет   | Сортировка: - `date` — по дате создания документа - `category` — по категории (только при `locale=ru`) Только вместе с `order`                         |
+| `order`       | query | `string`  | нет   | Сортировка: - `desc` — по убыванию - `asc` — по возрастанию Только вместе с `sort`                                                                     |
+| `category`    | query | `string`  | нет   | ID [категории документов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name` |
+| `serviceName` | query | `string`  | нет   | Уникальный ID документа                                                                                                                                |
+| `limit`       | query | `integer` | нет   | Максимальное количество строк ответа                                                                                                                   |
+| `offset`      | query | `integer` | нет   | После какой строки выдавать данные                                                                                                                     |
 
 ## Ответы
 
