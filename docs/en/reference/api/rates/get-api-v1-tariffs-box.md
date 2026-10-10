@@ -70,6 +70,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client/clients/go/rates"
+)
+
 cfg := wbrates.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbrates.NewAPIClient(cfg)

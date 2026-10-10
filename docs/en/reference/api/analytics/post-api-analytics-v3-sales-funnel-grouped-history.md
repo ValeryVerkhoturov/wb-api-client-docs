@@ -89,6 +89,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client/clients/go/analytics"
+)
+
 cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbanalytics.NewAPIClient(cfg)

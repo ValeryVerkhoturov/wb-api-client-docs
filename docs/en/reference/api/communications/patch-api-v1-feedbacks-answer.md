@@ -72,6 +72,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+)
+
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbcommunications.NewAPIClient(cfg)

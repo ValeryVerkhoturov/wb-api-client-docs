@@ -66,6 +66,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/dbs"
+)
+
 cfg := wbdbs.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbdbs.NewAPIClient(cfg)

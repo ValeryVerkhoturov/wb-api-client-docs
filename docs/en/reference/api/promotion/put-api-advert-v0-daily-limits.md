@@ -70,6 +70,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+)
+
 cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbpromotion.NewAPIClient(cfg)

@@ -74,6 +74,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client/clients/go/in_store_pickup"
+)
+
 cfg := wbinstorepickup.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbinstorepickup.NewAPIClient(cfg)

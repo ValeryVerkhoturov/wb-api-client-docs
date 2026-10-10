@@ -80,6 +80,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+)
+
 cfg := wbfinances.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbfinances.NewAPIClient(cfg)

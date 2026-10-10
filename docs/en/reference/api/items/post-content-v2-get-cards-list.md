@@ -111,6 +111,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+)
+
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbitems.NewAPIClient(cfg)

@@ -71,6 +71,13 @@ console.log(data);
 ```
 
 ```go [Go]
+import (
+	"context"
+	"fmt"
+
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbw"
+)
+
 cfg := wbordersfbw.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbordersfbw.NewAPIClient(cfg)
