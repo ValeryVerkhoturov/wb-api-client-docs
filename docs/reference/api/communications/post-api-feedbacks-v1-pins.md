@@ -57,6 +57,20 @@ result = api.post_v1_pins(openapi_pin_review_item=...)
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.postV1Pins(openapiPinReviewItem);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")

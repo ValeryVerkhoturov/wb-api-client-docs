@@ -69,6 +69,20 @@ result = api.get_v1_feedbacks(is_answered=..., take=..., skip=..., nm_id=..., or
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.getV1Feedbacks(isAnswered, take, skip, nmId, order, dateFrom, dateTo);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

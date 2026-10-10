@@ -46,7 +46,7 @@ Base package: `io.github.valeryverkhoturov.wbapi`. Each WB category lives in a s
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 ```
 
 ## Sub-packages
@@ -60,12 +60,12 @@ Full per-module API class listing: [clients/java/README.md](https://github.com/V
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
 
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 ```
 
 `setBearerToken` requires a `SecretString`, not a bare `String` — that's deliberate. The compile-time constraint pushes callers to think about where the raw token comes from.

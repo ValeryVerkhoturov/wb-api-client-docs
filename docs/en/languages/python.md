@@ -36,11 +36,11 @@ poetry add valeryverkhoturov-wb-api-client
 
 ## Import shape
 
-The distribution installs one top-level package `wb_api_client` with 13 sub-modules — one per WB API category. Each sub-module is a self-contained SDK with its own `Configuration`, `ApiClient`, and `api` namespace.
+The distribution installs one top-level package `wb_api_client` with 13 sub-modules — one per WB API category. Each sub-module is a self-contained SDK with its own `Configuration`, `ApiClient`, and exactly one API class named after the module (`GeneralApi`, `ItemsApi`, `OrdersFbsApi`, and so on).
 
 ```python
 from wb_api_client.<slug> import Configuration, ApiClient
-from wb_api_client.<slug>.api import DefaultApi
+from wb_api_client.<slug>.api import <Module>Api
 ```
 
 ## Sub-modules
@@ -61,17 +61,17 @@ from wb_api_client.<slug>.api import DefaultApi
 | `reports`         | Отчёты                                     |
 | `finances`        | Документы и бухгалтерия                    |
 
-The exact `Api` classes per sub-module (some categories have `DefaultApi`, some have `CSVApi`, some have `WBAPIApi`) are documented in the per-release README: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
+Each sub-module exposes a single API class named after the module: `general` → `GeneralApi`, `items` → `ItemsApi`, `orders_fbs` → `OrdersFbsApi`, and so on. The full list is in the per-release README: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
 
 ## Auth
 
 ```python
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<your WB JWT>")   # wrapped in SecretStr
 client = ApiClient(cfg)
-api = DefaultApi(client)
+api = ItemsApi(client)
 ```
 
 Passing a bare string is fine — it's auto-wrapped. If you want the raw token back for logging / diagnostics:

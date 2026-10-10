@@ -26,7 +26,7 @@ Root namespace: `ValeryVerkhoturov\WbApiClient\`. Every WB category is a PascalC
 ```php
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 ```
 
 ## Sub-namespaces
@@ -43,13 +43,13 @@ require 'vendor/autoload.php';
 
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
 
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 $result = $api->someEndpoint();
 ```
@@ -88,7 +88,7 @@ $http = new Client([
     'proxy'    => getenv('HTTPS_PROXY') ?: null,
 ]);
 
-$api = new DefaultApi($http, $config);
+$api = new ItemsApi($http, $config);
 ```
 
 ## Testing

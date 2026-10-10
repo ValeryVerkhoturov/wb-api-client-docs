@@ -36,7 +36,7 @@ Every sub-module is a subpath export. Import from `@valeryverkhoturov/wb-api-cli
 ```ts
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 ```
 
@@ -53,11 +53,11 @@ Full list of `Api` classes per module lives in the per-release README: [clients/
 ## Auth
 
 ```ts
-import { Configuration, DefaultApi } from "@valeryverkhoturov/wb-api-client/items";
+import { Configuration, ItemsApi } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const res = await api.someEndpoint();
 console.log(res.data);

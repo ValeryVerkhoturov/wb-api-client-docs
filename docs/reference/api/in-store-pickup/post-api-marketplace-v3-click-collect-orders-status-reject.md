@@ -56,6 +56,20 @@ result = api.post_v3_click_collect_orders_status_reject(api_orders_request_v2=..
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  InStorePickupApi,
+} from "@valeryverkhoturov/wb-api-client/in-store-pickup";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new InStorePickupApi(cfg);
+
+const { data } = await api.postV3ClickCollectOrdersStatusReject(apiOrdersRequestV2);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbinstorepickup.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")

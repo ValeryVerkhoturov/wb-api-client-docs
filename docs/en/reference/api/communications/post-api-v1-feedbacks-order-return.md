@@ -57,6 +57,20 @@ result = api.post_v1_feedbacks_order_return(post_v1_feedbacks_order_return_reque
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.postV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequest);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

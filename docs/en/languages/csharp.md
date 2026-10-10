@@ -44,7 +44,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
 
-var api = new WBAPIApi(config);
+var api = new GeneralApi(config);
 var ping = api.GetPing();
 
 Console.WriteLine(ping.Status);
@@ -101,7 +101,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 var fbsConfig = new Configuration();
 fbsConfig.AccessTokenSecret = new SecretString("<your WB JWT>");
 
-var fbs = new FBSApi(fbsConfig);
+var fbs = new OrdersFbsApi(fbsConfig);
 
 try
 {
@@ -132,7 +132,7 @@ services.AddSingleton(_ =>
     return config;
 });
 
-services.AddTransient<WBAPIApi>();
+services.AddTransient<GeneralApi>();
 ```
 
 No DI-specific package is needed: the client is built on RestSharp rather than `IHttpClientFactory`.

@@ -46,7 +46,7 @@ libraryDependencies += "io.github.valeryverkhoturov" % "wb-api-client" % "LATEST
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 ```
 
 ## Под-пакеты
@@ -60,12 +60,12 @@ import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
 
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 ```
 
 `setBearerToken` принимает именно `SecretString`, а не голую `String` — это сделано специально. Проверка на этапе компиляции заставляет подумать, откуда берётся сырое значение.

@@ -49,6 +49,20 @@ result = api.get_v1_seller_chats()
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.getV1SellerChats();
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

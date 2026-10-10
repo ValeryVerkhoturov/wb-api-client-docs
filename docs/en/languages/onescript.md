@@ -33,7 +33,7 @@ Daily-check regenerates all seven languages in one place, then commits and tags 
 
 OneScript has no namespaces: every class name is global. Categories are therefore separated by **name**, not by import path:
 
-- **API classes** are named after the spec's tag: `КарточкиТоваровApi`, `СборочныеЗаданияFBSApi`, `ФинансовыеОтчётыApi`. Tag names are unique across all 13 specs, so they need no prefix.
+- **API classes** are named after the category — one class per category: `GeneralApi`, `ItemsApi`, `OrdersFbsApi`, `FinancesApi`. The names are unique across all 13 specs, so they need no prefix.
 - **Model classes** carry the category as a prefix: `ItemsResponse4XX`, `OrdersFbsResponse4XX`. Without it they would collide — `Response4XX` alone appears in 12 of the 13 specs.
 
 Files are grouped under `src/Классы/<Category>/` and `src/Модели/<Category>/`, but the directories are for humans only: `lib.config` is what resolves a class.
@@ -48,7 +48,7 @@ A single `#Использовать` brings in every category at once.
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
 
-Клиент = Новый ПроверкаПодключенияКWBAPIApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 Ответ = Клиент.GetPing();
 
 Сообщить(Ответ.КодСостояния);
@@ -69,7 +69,7 @@ The token does not leak when printed: the object exposes no property holding the
 Required parameters are positional; optional ones arrive as a single collection in the last argument:
 
 ```bsl
-Клиент = Новый КарточкиТоваровApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 // Request body only
 Ответ = Клиент.PostV2CardsDeleteTrash(Тело);

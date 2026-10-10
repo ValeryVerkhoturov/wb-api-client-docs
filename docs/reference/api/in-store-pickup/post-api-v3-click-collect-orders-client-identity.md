@@ -60,6 +60,20 @@ result = api.post_v3_click_collect_orders_client_identity(api_check_identity_req
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  InStorePickupApi,
+} from "@valeryverkhoturov/wb-api-client/in-store-pickup";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new InStorePickupApi(cfg);
+
+const { data } = await api.postV3ClickCollectOrdersClientIdentity(apiCheckIdentityRequest);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbinstorepickup.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")

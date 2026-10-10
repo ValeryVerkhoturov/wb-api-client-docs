@@ -20,19 +20,19 @@ The common case: the header belongs on every request. Set it once, when you buil
 
 ```python [Python]
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 client = ApiClient(Configuration(access_token="<your WB JWT>"))
 client.set_default_header("X-Gateway-Token", "<gateway credentials>")
 client.set_default_header("X-Request-Source", "erp-sync")
 
-api = DefaultApi(client)
+api = ItemsApi(client)
 ```
 
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({
@@ -45,7 +45,7 @@ const cfg = new Configuration({
 });
 cfg.setAccessToken("<your WB JWT>");
 
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 ```
 
 ```go [Go]
@@ -62,20 +62,20 @@ client := wbitems.NewAPIClient(cfg)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
 client.addDefaultHeader("X-Gateway-Token", "<gateway credentials>");
 client.addDefaultHeader("X-Request-Source", "erp-sync");
 
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 ```
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
@@ -89,7 +89,7 @@ $http = new Client([
     ],
 ]);
 
-$api = new DefaultApi($http, $config);
+$api = new ItemsApi($http, $config);
 ```
 
 ```bsl [OneScript]
@@ -100,7 +100,7 @@ $api = new DefaultApi($http, $config);
 Настройки.ДополнительныеЗаголовки.Вставить("X-Gateway-Token", "<gateway credentials>");
 Настройки.ДополнительныеЗаголовки.Вставить("X-Request-Source", "erp-sync");
 
-Клиент = Новый КарточкиТоваровApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 ```
 
 ```csharp [C#]
@@ -112,7 +112,7 @@ config.AccessTokenSecret = new SecretString("<your WB JWT>");
 config.DefaultHeaders["X-Gateway-Token"] = "<gateway credentials>";
 config.DefaultHeaders["X-Request-Source"] = "erp-sync";
 
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 ```
 
 :::

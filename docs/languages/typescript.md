@@ -36,7 +36,7 @@ bun add @valeryverkhoturov/wb-api-client
 ```ts
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 ```
 
@@ -51,11 +51,11 @@ import {
 ## Авторизация
 
 ```ts
-import { Configuration, DefaultApi } from "@valeryverkhoturov/wb-api-client/items";
+import { Configuration, ItemsApi } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const res = await api.someEndpoint();
 console.log(res.data);

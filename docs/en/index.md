@@ -72,18 +72,18 @@ dotnet add package ValeryVerkhoturov.WbApiClient
 
 ```python [Python]
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DefaultApi(ApiClient(cfg))
+api = ItemsApi(ApiClient(cfg))
 ```
 
 ```ts [TypeScript]
-import { Configuration, DefaultApi } from "@valeryverkhoturov/wb-api-client/items";
+import { Configuration, ItemsApi } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 ```
 
 ```go [Go]
@@ -97,22 +97,22 @@ client := wbitems.NewAPIClient(cfg)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 ```
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 ```
 
 ```bsl [OneScript]
@@ -120,7 +120,7 @@ $api = new DefaultApi(new Client(), $config);
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый КарточкиТоваровApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 ```
 
 ```csharp [C#]
@@ -129,7 +129,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 ```
 
 :::

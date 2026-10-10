@@ -36,11 +36,11 @@ poetry add valeryverkhoturov-wb-api-client
 
 ## Форма импортов
 
-Дистрибутив ставит один пакет `wb_api_client` с 13 под-модулями — по одному на категорию WB API. Каждый под-модуль — самостоятельный SDK со своими `Configuration`, `ApiClient` и пространством `api`.
+Дистрибутив ставит один пакет `wb_api_client` с 13 под-модулями — по одному на категорию WB API. Каждый под-модуль — самостоятельный SDK со своими `Configuration`, `ApiClient` и ровно одним API-классом, названным по модулю (`GeneralApi`, `ItemsApi`, `OrdersFbsApi` и т.д.).
 
 ```python
 from wb_api_client.<slug> import Configuration, ApiClient
-from wb_api_client.<slug>.api import DefaultApi
+from wb_api_client.<slug>.api import <Module>Api
 ```
 
 ## Под-модули
@@ -61,17 +61,17 @@ from wb_api_client.<slug>.api import DefaultApi
 | `reports`         | Отчёты                                                   |
 | `finances`        | Документы и бухгалтерия                                  |
 
-Точные классы `Api` в каждом под-модуле (где-то `DefaultApi`, где-то `CSVApi`, где-то `WBAPIApi`) описаны в README, который перегенерируется каждый релиз: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
+В каждом под-модуле ровно один класс API, названный по модулю: `general` → `GeneralApi`, `items` → `ItemsApi`, `orders_fbs` → `OrdersFbsApi` и так далее. Полный список — в README, который перегенерируется каждый релиз: [clients/python/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md).
 
 ## Авторизация
 
 ```python
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")   # оборачивается в SecretStr
 client = ApiClient(cfg)
-api = DefaultApi(client)
+api = ItemsApi(client)
 ```
 
 Обычная строка тоже подойдёт — она автоматически оборачивается. Чтобы прочитать сырое значение (например, для диагностики):

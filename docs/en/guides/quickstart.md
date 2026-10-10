@@ -65,10 +65,10 @@ The `general` sub-module has a `getV1SellerInfo` endpoint that's cheap to call a
 
 ```python [Python]
 from wb_api_client.general import Configuration, ApiClient
-from wb_api_client.general.api import DefaultApi
+from wb_api_client.general.api import GeneralApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DefaultApi(ApiClient(cfg))
+api = GeneralApi(ApiClient(cfg))
 
 info = api.get_v1_seller_info()
 print(info)
@@ -77,12 +77,12 @@ print(info)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  GeneralApi,
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new GeneralApi(cfg);
 
 const info = await api.getV1SellerInfo();
 console.log(info.data);
@@ -103,7 +103,7 @@ func main() {
     cfg.SetAccessToken("<your WB JWT>")
     client := wbgeneral.NewAPIClient(cfg)
 
-    info, _, err := client.DefaultAPI.GetV1SellerInfo(context.Background()).Execute()
+    info, _, err := client.GeneralAPI.GetV1SellerInfo(context.Background()).Execute()
     if err != nil {
         panic(err)
     }
@@ -114,11 +114,11 @@ func main() {
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.SecretString;
-import io.github.valeryverkhoturov.wbapi.general.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV1SellerInfo());
 ```
@@ -126,12 +126,12 @@ System.out.println(api.getV1SellerInfo());
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
 use ValeryVerkhoturov\WbApiClient\General\SecretString;
-use ValeryVerkhoturov\WbApiClient\General\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new GeneralApi(new Client(), $config);
 
 print_r($api->getV1SellerInfo());
 ```
@@ -141,7 +141,7 @@ print_r($api->getV1SellerInfo());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ИнформацияОПродавцеApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 
 Сообщить(Клиент.GetV1SellerInfo().Тело);
 ```
@@ -152,7 +152,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetV1SellerInfo());
 ```

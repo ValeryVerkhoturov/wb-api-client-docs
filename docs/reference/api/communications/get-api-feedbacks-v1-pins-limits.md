@@ -49,6 +49,20 @@ result = api.get_v1_pins_limits()
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.getV1PinsLimits();
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")

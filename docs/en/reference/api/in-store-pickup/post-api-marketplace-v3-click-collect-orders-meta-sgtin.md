@@ -59,6 +59,20 @@ result = api.post_v3_click_collect_orders_meta_sgtin(api_orders_sgtins_set_reque
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  InStorePickupApi,
+} from "@valeryverkhoturov/wb-api-client/in-store-pickup";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new InStorePickupApi(cfg);
+
+const { data } = await api.postV3ClickCollectOrdersMetaSgtin(apiOrdersSGTINsSetRequest);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbinstorepickup.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

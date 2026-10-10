@@ -58,6 +58,20 @@ result = api.get_v1_questions_count(date_from=..., date_to=..., is_answered=...)
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<your WB JWT>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.getV1QuestionsCount(dateFrom, dateTo, isAnswered);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

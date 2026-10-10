@@ -57,6 +57,20 @@ result = api.patch_v1_feedbacks_answer(patch_v1_feedbacks_answer_request=...)
 print(result)
 ```
 
+```ts [TypeScript]
+import {
+  Configuration,
+  CommunicationsApi,
+} from "@valeryverkhoturov/wb-api-client/communications";
+
+const cfg = new Configuration({});
+cfg.setAccessToken("<ваш JWT WB>");
+const api = new CommunicationsApi(cfg);
+
+const { data } = await api.patchV1FeedbacksAnswer(patchV1FeedbacksAnswerRequest);
+console.log(data);
+```
+
 ```go [Go]
 cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
