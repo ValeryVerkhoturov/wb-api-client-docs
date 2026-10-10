@@ -9,7 +9,7 @@ description: "Метод временно отключён"
 GET /api/tariffs/v1/acceptance/coefficients
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на поставку · [WB documentation ↗](https://dev.wildberries.ru/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на поставку · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/rates/get-api-tariffs-v1-acceptance-coefficients) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
 
 Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbrates "github.com/ValeryVerkhoturov/wb-api-client/clients/go/rates"
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/rates"
 )
 
 cfg := wbrates.NewConfiguration()

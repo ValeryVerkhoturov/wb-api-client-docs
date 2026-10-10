@@ -9,7 +9,7 @@ description: "Метод возвращает данные отзыва по е�
 GET /api/v1/feedback
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedback)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/get-api-v1-feedback) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1Feedback)
 
 Метод возвращает данные [отзыва](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks) по его ID.
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

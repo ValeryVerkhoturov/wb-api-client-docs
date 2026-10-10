@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт с расширенно
 GET /api/v2/nm-report/downloads/file/{downloadId}
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** Аналитика продавца CSV · [Документация WB ↗](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** Аналитика продавца CSV · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/analytics/get-api-v2-nm-report-downloads-file-downloadid) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId)
 
 Метод возвращает отчёт с расширенной аналитикой продавца по ID [задания на генерацию](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads).
 
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client/clients/go/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

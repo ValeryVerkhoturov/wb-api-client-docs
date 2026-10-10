@@ -9,7 +9,7 @@ description: "Метод возвращает идентификаторы ма�
 POST /api/marketplace/v3/dbw/orders/meta/details
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-dbw`](/reference/api/orders-dbw/) · **Раздел:** Идентификаторы маркировки DBW · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-dbw`](/reference/api/orders-dbw/) · **Раздел:** Идентификаторы маркировки DBW · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-dbw/post-api-marketplace-v3-dbw-orders-meta-details) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails)
 
 Метод возвращает идентификаторы маркировки [сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrders) и статусы их проверки.
 
@@ -83,7 +83,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_dbw"
+	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_dbw"
 )
 
 cfg := wbordersdbw.NewConfiguration()

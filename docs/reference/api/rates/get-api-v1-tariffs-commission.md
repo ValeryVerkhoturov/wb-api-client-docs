@@ -9,7 +9,7 @@ description: "Метод возвращает данные о комиссии W
 GET /api/v1/tariffs/commission
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Комиссии · [Документация WB ↗](https://dev.wildberries.ru/openapi/rates#tag/fees/operation/getV1TariffsCommission)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Комиссии · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/rates/get-api-v1-tariffs-commission) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/fees/operation/getV1TariffsCommission)
 
 Метод возвращает данные о [комиссии](https://seller.wildberries.ru/dynamic-product-categories/commission) WB по [родительским категориям товаров](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll) согласно модели продаж.
 
@@ -68,7 +68,7 @@ import (
 	"context"
 	"fmt"
 
-	wbrates "github.com/ValeryVerkhoturov/wb-api-client/clients/go/rates"
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/rates"
 )
 
 cfg := wbrates.NewConfiguration()

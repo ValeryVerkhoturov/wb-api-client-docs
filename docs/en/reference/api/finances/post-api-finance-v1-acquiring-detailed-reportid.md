@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/finance/v1/acquiring/detailed/{reportId}
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Финансовые отчёты · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Финансовые отчёты · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/post-api-finance-v1-acquiring-detailed-reportid) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,
@@ -82,7 +82,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

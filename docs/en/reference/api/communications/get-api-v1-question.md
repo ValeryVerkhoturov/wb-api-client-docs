@@ -9,7 +9,7 @@ description: "Метод возвращает данные вопроса по �
 GET /api/v1/question
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Question)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/get-api-v1-question) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/getV1Question)
 
 Метод возвращает данные [вопроса](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Questions) по его ID. Далее вы можете [работать с этим вопросом](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/patchV1Questions).
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

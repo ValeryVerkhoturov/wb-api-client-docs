@@ -9,7 +9,7 @@ description: "Метод меняет места размещения в кам�
 PUT /adv/v0/auction/placements
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Управление кампаниями · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/putV0AuctionPlacements)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Управление кампаниями · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/put-adv-v0-auction-placements) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/putV0AuctionPlacements)
 
 Метод меняет места размещения в кампаниях с ручной ставкой и моделью оплаты за показы — `cpm`.
 
@@ -74,7 +74,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод возвращает список документов 
 GET /api/v1/documents/list
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/get-api-v1-documents-list) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList)
 
 Метод возвращает список документов продавца. Вы можете получить [один](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload) или [несколько](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/postV1DocumentsDownloadAll) документов из полученного списка.
 
@@ -82,7 +82,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

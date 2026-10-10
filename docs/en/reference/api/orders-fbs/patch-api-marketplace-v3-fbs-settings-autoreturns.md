@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 PATCH /api/marketplace/v3/fbs/settings/autoreturns
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Настройки автовозврата · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/patchV3FbsSettingsAutoreturns)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Настройки автовозврата · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-settings-autoreturns) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/patchV3FbsSettingsAutoreturns)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

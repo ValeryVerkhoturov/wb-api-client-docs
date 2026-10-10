@@ -9,7 +9,7 @@ description: "Устанавливает скидки для товаров в �
 POST /api/v2/upload/task/club-discount
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskClubDiscount)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/post-api-v2-upload-task-club-discount) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskClubDiscount)
 
 Устанавливает скидки для товаров в рамках подписки [WB Клуб](https://seller.wildberries.ru/help-center/article/A-337).
 
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

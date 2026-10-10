@@ -9,7 +9,7 @@ description: "Метод возвращает сформированный QR-к
 GET /api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot)
 
 Метод возвращает сформированный QR-код СПОТ для поставки в формате PNG, кодировка base64.
 Вы можете получить QR-код, когда в методе [получения данных СПОТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) будет признак `"status":"completed"`.
@@ -74,7 +74,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

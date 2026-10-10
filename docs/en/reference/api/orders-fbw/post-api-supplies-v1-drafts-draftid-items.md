@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/supplies/v1/drafts/{draftId}/items
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Черновики поставок · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-fbw#tag/supplyDrafts/operation/postV1DraftsDraftIdItems)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Черновики поставок · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbw/post-api-supplies-v1-drafts-draftid-items) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/postV1DraftsDraftIdItems)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,
@@ -85,7 +85,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbw"
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbw"
 )
 
 cfg := wbordersfbw.NewConfiguration()

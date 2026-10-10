@@ -9,7 +9,7 @@ description: "Метод обновляет список контактов ск
 PUT /api/v3/dbw/warehouses/{warehouseId}/contacts
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Склады продавца · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/putV3DbwWarehousesWarehouseIdContacts)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Склады продавца · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/put-api-v3-dbw-warehouses-warehouseid-contacts) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/putV3DbwWarehousesWarehouseIdContacts)
 
 Метод обновляет список контактов [склада продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/getV3Warehouses).
 
@@ -81,7 +81,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

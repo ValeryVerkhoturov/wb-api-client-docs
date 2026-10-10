@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV1UploadTaskB2bWholesale)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/post-api-discounts-prices-v1-upload-task-b2b-wholesale) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV1UploadTaskB2bWholesale)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,
@@ -73,7 +73,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о платн
 POST /api/v3/dbs/groups/info
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`dbs`](/reference/api/dbs/) · **Раздел:** Сборочные задания DBS · [Документация WB ↗](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsGroupsInfo)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`dbs`](/reference/api/dbs/) · **Раздел:** Сборочные задания DBS · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/dbs/post-api-v3-dbs-groups-info) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsGroupsInfo)
 
 Метод возвращает информацию о платной доставке сборочных заданий, которые поступили на один склад (`warehouseId`) в рамках одной транзакции покупателя (`orderUid`).
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

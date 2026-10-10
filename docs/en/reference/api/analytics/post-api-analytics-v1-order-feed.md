@@ -9,7 +9,7 @@ description: "Метод формирует набор данных о зака�
 POST /api/analytics/v1/order-feed
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Лента заказов · [WB documentation ↗](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Лента заказов · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/post-api-analytics-v1-order-feed) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed)
 
 Метод формирует набор данных о заказах и продажах.
 
@@ -84,7 +84,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client/clients/go/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод создаёт задание на генерацию �
 GET /api/v1/warehouse_remains
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт об остатках на складах · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт об остатках на складах · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-warehouse-remains) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains)
 
 Метод создаёт [задание на генерацию](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdStatus) отчёта об [остатках на складах WB](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload).
 
@@ -85,7 +85,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

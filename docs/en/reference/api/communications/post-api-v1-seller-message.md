@@ -9,7 +9,7 @@ description: "Метод отправляет сообщения в чат с п
 POST /api/v1/seller/message
 ```
 
-**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage)
+**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/post-api-v1-seller-message) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage)
 
 Метод отправляет сообщения в [чат с покупателем](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats).
 
@@ -73,7 +73,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

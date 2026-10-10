@@ -9,7 +9,7 @@ description: "Метод возвращает список поисковых к
 POST /adv/v0/normquery/get-bids
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetBids)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/post-adv-v0-normquery-get-bids) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetBids)
 
 Метод возвращает список поисковых кластеров со ставками по:
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

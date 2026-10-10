@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о прода
 GET /api/v1/supplier/sales
 ```
 
-**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Основные отчёты · [WB documentation ↗](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierSales)
+**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Основные отчёты · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/reports/get-api-v1-supplier-sales) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierSales)
 
 Метод возвращает информацию о продажах и возвратах.
 Данные обновляются раз в 30 минут.
@@ -94,7 +94,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод проверяет: 1. Успешно ли запрос
 GET /ping
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Проверка подключения к WB API · [WB documentation ↗](https://dev.wildberries.ru/openapi/api-information#tag/connectionCheck/operation/getPing)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Проверка подключения к WB API · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/general/get-ping) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/connectionCheck/operation/getPing)
 
 Метод проверяет:
 
@@ -91,7 +91,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client/clients/go/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
 )
 
 cfg := wbgeneral.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о товар
 GET /api/v1/supplies/{ID}/goods
 ```
 
-**База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация о поставках · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesIdGoods)
+**База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация о поставках · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-fbw/get-api-v1-supplies-id-goods) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesIdGoods)
 
 Метод возвращает информацию о товарах в поставке.
 
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbw"
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbw"
 )
 
 cfg := wbordersfbw.NewConfiguration()

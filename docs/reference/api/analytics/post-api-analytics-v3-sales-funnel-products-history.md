@@ -9,7 +9,7 @@ description: "Метод возвращает статистику карточ�
 POST /api/analytics/v3/sales-funnel/products/history
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** Воронка продаж · [Документация WB ↗](https://dev.wildberries.ru/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProductsHistory)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`analytics`](/reference/api/analytics/) · **Раздел:** Воронка продаж · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/analytics/post-api-analytics-v3-sales-funnel-products-history) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProductsHistory)
 
 Метод возвращает статистику карточек товаров по дням или неделям.
 Можно получить данные максимум за последнюю неделю.
@@ -88,7 +88,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client/clients/go/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

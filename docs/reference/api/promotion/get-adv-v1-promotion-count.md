@@ -9,7 +9,7 @@ description: "Метод возвращает списки всех реклам
 GET /adv/v1/promotion/count
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Кампании · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Кампании · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-promotion-count) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV1PromotionCount)
 
 Метод возвращает списки всех [рекламных кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.
 
@@ -67,7 +67,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод обновляет IMEI в идентификатора
 PUT /api/v3/dbw/orders/{orderId}/meta/imei
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-dbw`](/reference/api/orders-dbw/) · **Раздел:** Идентификаторы маркировки DBW · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaImei)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-dbw`](/reference/api/orders-dbw/) · **Раздел:** Идентификаторы маркировки DBW · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-dbw/put-api-v3-dbw-orders-orderid-meta-imei) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaImei)
 
 Метод обновляет IMEI в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails).
 У одного сборочного задания может быть только один IMEI. Если у устройства два IMEI — \*\*IMEI\*\* и \*\*IMEI2\*\* или \*\*IMEI1\*\* и \*\*IMEI2\*\* — укажите только \*\*IMEI\*\* или \*\*IMEI1\*\*. \*\*IMEI2\*\* указывать не нужно.
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_dbw"
+	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_dbw"
 )
 
 cfg := wbordersdbw.NewConfiguration()

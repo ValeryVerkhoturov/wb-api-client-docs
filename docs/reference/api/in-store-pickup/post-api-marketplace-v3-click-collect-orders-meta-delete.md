@@ -9,7 +9,7 @@ description: "Метод удаляет значения указанных ид
 POST /api/marketplace/v3/click-collect/orders/meta/delete
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`in-store-pickup`](/reference/api/in-store-pickup/) · **Раздел:** Идентификаторы маркировки Самовывоз · [Документация WB ↗](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDelete)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`in-store-pickup`](/reference/api/in-store-pickup/) · **Раздел:** Идентификаторы маркировки Самовывоз · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-delete) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDelete)
 
 Метод удаляет значения указанных [идентификаторов маркировки сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
 
@@ -83,7 +83,7 @@ import (
 	"context"
 	"fmt"
 
-	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client/clients/go/in_store_pickup"
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/in_store_pickup"
 )
 
 cfg := wbinstorepickup.NewConfiguration()

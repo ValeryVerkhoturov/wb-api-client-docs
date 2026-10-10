@@ -9,7 +9,7 @@ description: "Метод создаёт задание на загрузку т�
 POST /api/v1/calendar/promotions/upload
 ```
 
-**База:** `https://dp-calendar-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Календарь акций · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/postV1CalendarPromotionsUpload)
+**База:** `https://dp-calendar-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Календарь акций · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-api-v1-calendar-promotions-upload) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/postV1CalendarPromotionsUpload)
 
 Метод создаёт задание на загрузку товара в [акцию](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails).
 Состояние загрузки можно проверить с помощью [отдельных методов](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryTasks).
@@ -73,7 +73,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

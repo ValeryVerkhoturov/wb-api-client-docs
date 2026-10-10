@@ -39,7 +39,7 @@ npm install @valeryverkhoturov/wb-api-client
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
 ```
 
 ```xml [Java]
@@ -75,7 +75,7 @@ valeryverkhoturov-wb-api-client==1.20260926.0
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 ```
 
 ```xml [Java]

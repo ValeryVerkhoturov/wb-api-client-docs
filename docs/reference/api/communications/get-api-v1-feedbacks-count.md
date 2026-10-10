@@ -9,7 +9,7 @@ description: "Метод возвращает количество обрабо�
 GET /api/v1/feedbacks/count
 ```
 
-**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Отзывы · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1FeedbacksCount)
+**База:** `https://feedbacks-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Отзывы · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/communications/get-api-v1-feedbacks-count) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1FeedbacksCount)
 
 Метод возвращает количество обработанных или необработанных [отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks) за заданный период.
 Отзыв считается обработанным, если выполняется одно из условий:
@@ -81,7 +81,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

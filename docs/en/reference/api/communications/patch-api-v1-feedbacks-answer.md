@@ -9,7 +9,7 @@ description: "Метод позволяет отредактировать уж�
 PATCH /api/v1/feedbacks/answer
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/patchV1FeedbacksAnswer)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/patch-api-v1-feedbacks-answer) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/patchV1FeedbacksAnswer)
 
 Метод позволяет отредактировать уже отправленный [ответ на отзыв](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/postV1FeedbacksAnswer) покупателя.
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

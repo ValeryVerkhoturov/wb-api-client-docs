@@ -9,7 +9,7 @@ description: "Метод создаёт карточки товаров, при�
 POST /content/v2/cards/upload/add
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Создание карточек товаров · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Создание карточек товаров · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/post-content-v2-cards-upload-add) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
 
 Метод создаёт карточки товаров, присоединяя их к существующим отдельным карточкам и группам [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек. В одной группе объединённых карточек товаров может быть не более 30 карточек, соответственно, создать с присоединением можно не более 29 карточек товаров за один запрос.
 Габариты товаров можно указать только в `сантиметрах`, вес товара с упаковкой — в `килограммах`.
@@ -91,7 +91,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

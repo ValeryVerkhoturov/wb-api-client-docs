@@ -9,7 +9,7 @@ description: "Метод добавляет данные СПОТ в поста�
 PUT /api/marketplace/v3/fbs/supplies/{supplyId}/spot
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Поставки FBS · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/putV3FbsSuppliesSupplyIdSpot)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Поставки FBS · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/putV3FbsSuppliesSupplyIdSpot)
 
 Метод добавляет данные СПОТ в поставку.
 
@@ -80,7 +80,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

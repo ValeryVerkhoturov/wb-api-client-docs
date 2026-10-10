@@ -7,7 +7,7 @@ description: "Module `promotion` has 42 operations."
 
 Module `promotion` has 42 operations.
 
-[WB documentation ↗](https://dev.wildberries.ru/openapi/promotion) · [All modules](/en/reference/api/)
+[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [All modules](/en/reference/api/)
 
 Узнать больше о маркетинге и продвижении можно в [справочном центре](https://seller.wildberries.ru/instructions/category/59d92bd3-6ea0-40f2-b762-ca8835d7d42e?goBackOption=prevRoute&categoryId=479385c6-de01-4b4d-ad4e-ed941e65582e)
 

@@ -9,7 +9,7 @@ description: "Метод возвращает список и характери
 GET /content/v2/tags
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/getV2Tags)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/get-content-v2-tags) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/getV2Tags)
 
 Метод возвращает список и характеристики всех ярлыков продавца для группировки и фильтрации товаров.
 
@@ -72,7 +72,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

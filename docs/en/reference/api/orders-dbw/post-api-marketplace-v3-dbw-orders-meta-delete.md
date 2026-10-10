@@ -9,7 +9,7 @@ description: "Метод удаляет значение указанных ид
 POST /api/marketplace/v3/dbw/orders/meta/delete
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Идентификаторы маркировки DBW · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDelete)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Идентификаторы маркировки DBW · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-dbw/post-api-marketplace-v3-dbw-orders-meta-delete) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDelete)
 
 Метод удаляет значение указанных [идентификаторов маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) для переданного ключа.
 
@@ -83,7 +83,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_dbw"
+	wbordersdbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_dbw"
 )
 
 cfg := wbordersdbw.NewConfiguration()

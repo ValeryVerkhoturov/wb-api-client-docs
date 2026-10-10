@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт об остатках �
 GET /api/v1/warehouse_remains/tasks/{task_id}/download
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт об остатках на складах · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт об остатках на складах · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-warehouse-remains-tasks-task-id-download) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload)
 
 Метод возвращает отчёт об [остатках на складах WB](https://seller.wildberries.ru/analytics-reports/warehouse-remains) по ID [задания на генерацию](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains).
 
@@ -77,7 +77,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

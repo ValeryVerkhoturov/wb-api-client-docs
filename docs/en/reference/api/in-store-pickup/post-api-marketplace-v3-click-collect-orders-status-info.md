@@ -9,7 +9,7 @@ description: "Метод возвращает статусы сборочных 
 POST /api/marketplace/v3/click-collect/orders/status/info
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [WB documentation ↗](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-info) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo)
 
 Метод возвращает статусы [сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) по их ID.
 
@@ -79,7 +79,7 @@ import (
 	"context"
 	"fmt"
 
-	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client/clients/go/in_store_pickup"
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/in_store_pickup"
 )
 
 cfg := wbinstorepickup.NewConfiguration()

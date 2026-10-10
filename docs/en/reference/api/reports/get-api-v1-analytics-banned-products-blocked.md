@@ -9,7 +9,7 @@ description: "Метод возвращает список заблокиров�
 GET /api/v1/analytics/banned-products/blocked
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Заблокированные карточки · [WB documentation ↗](https://dev.wildberries.ru/openapi/reports#tag/blockedItems/operation/getV1AnalyticsBannedProducsBlocked)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Заблокированные карточки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/reports/get-api-v1-analytics-banned-products-blocked) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/blockedItems/operation/getV1AnalyticsBannedProducsBlocked)
 
 Метод возвращает список [заблокированных карточек товаров продавца](https://seller.wildberries.ru/analytics-reports/banned-products) с причинами блокировки.
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

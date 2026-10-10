@@ -9,7 +9,7 @@ description: "Метод возвращает список отзывов по �
 GET /api/v1/feedbacks
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/get-api-v1-feedbacks) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks)
 
 Метод возвращает список отзывов по заданным фильтрам. Вы можете:
 
@@ -88,7 +88,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

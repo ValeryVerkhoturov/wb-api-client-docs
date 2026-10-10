@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о: - счё�
 GET /adv/v1/balance
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/getV1Balance)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/get-adv-v1-balance) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Balance)
 
 Метод возвращает информацию о:
 
@@ -73,7 +73,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

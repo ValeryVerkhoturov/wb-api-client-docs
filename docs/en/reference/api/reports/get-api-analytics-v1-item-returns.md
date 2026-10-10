@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт о возвратах �
 GET /api/analytics/v1/item-returns
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт о возвратах и перемещении товаров · [WB documentation ↗](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1GoodsReturn)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт о возвратах и перемещении товаров · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/reports/get-api-analytics-v1-item-returns) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1GoodsReturn)
 
 Метод возвращает отчёт о [возвратах товаров продавцу](https://seller.wildberries.ru/return-transfer-reports).
 
@@ -69,7 +69,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

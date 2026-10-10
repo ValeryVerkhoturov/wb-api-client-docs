@@ -9,7 +9,7 @@ description: "Метод возвращает список складов для
 GET /api/v3/passes/offices
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Пропуска FBS · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsPasses/operation/getV3PassesOffices)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Пропуска FBS · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-fbs/get-api-v3-passes-offices) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsPasses/operation/getV3PassesOffices)
 
 Метод возвращает список складов для привязки к [пропуску продавца](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsPasses/operation/getV3Passes).
 
@@ -72,7 +72,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

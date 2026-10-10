@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о завер
 GET /api/v3/dbs/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [WB documentation ↗](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/dbs/get-api-v3-dbs-orders) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
 
 Метод возвращает информацию о завершенных [сборочных заданиях](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) после продажи или отмены заказа.
 
@@ -80,7 +80,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

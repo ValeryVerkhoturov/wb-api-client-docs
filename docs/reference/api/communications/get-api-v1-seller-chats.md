@@ -9,7 +9,7 @@ description: "Метод возвращает список всех чатов �
 GET /api/v1/seller/chats
 ```
 
-**База:** `https://buyer-chat-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Чат с покупателями · [Документация WB ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats)
+**База:** `https://buyer-chat-api.wildberries.ru` · **Модуль:** [`communications`](/reference/api/communications/) · **Раздел:** Чат с покупателями · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/communications/get-api-v1-seller-chats) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats)
 
 Метод возвращает список всех чатов продавца. По этим данным можно получить [события чатов](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents) или [отправить сообщение покупателю](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage).
 
@@ -68,7 +68,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

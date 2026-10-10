@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о завер
 GET /api/v3/click-collect/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [WB documentation ↗](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/in-store-pickup/get-api-v3-click-collect-orders) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrders)
 
 Метод возвращает информацию о завершённых сборочных заданиях после продажи или отмены заказа.
 
@@ -82,7 +82,7 @@ import (
 	"context"
 	"fmt"
 
-	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client/clients/go/in_store_pickup"
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/in_store_pickup"
 )
 
 cfg := wbinstorepickup.NewConfiguration()

@@ -1,6 +1,6 @@
 # Go
 
-Модуль: `github.com/ValeryVerkhoturov/wb-api-client/clients/go` — резолвится из git-тегов [основного репозитория](https://github.com/ValeryVerkhoturov/wb-api-client).
+Модуль: `github.com/ValeryVerkhoturov/wb-api-client-go` — резолвится из git-тегов [отдельного репозитория](https://github.com/ValeryVerkhoturov/wb-api-client-go).
 
 - **Go:** 1.22+
 - **HTTP:** `net/http` (стандартная библиотека)
@@ -9,20 +9,20 @@
 ## Установка
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
 ```
 
 Зафиксировать конкретную версию по тегу:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 ```
 
 `proxy.golang.org` берёт код прямо из пушнутого тега — отдельный реестр не нужен.
 
-## Почему модуль лежит под `/clients/go`
+## Почему модуль живёт в отдельном репозитории
 
-Основной репозиторий хостит семь языковых клиентов; в Go принято «один модуль на репозиторий», поэтому путь модуля включает под-каталог. Теги релизов покрывают все семь языков одновременно — Go подхватывает нужный тег.
+В Go принято «один модуль на репозиторий», поэтому клиент лежит в [wb-api-client-go](https://github.com/ValeryVerkhoturov/wb-api-client-go) с `go.mod` в корне. Релизные теги (`vX.Y.Z`) пушатся в этот репозиторий тем же пайплайном, что и в основной — Go подхватывает нужный тег.
 
 Поскольку `MAJOR = 1` зафиксирован (см. [версионирование](/guides/versioning)), суффикса `/v2` не будет ни сейчас, ни в будущем.
 
@@ -31,7 +31,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
 По одному Go-пакету на категорию WB API, у каждого свои `Configuration`, `APIClient` и типы `*API`.
 
 ```go
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 ```
 
 Давайте каждому под-модулю алиас (`wbitems`, `wbfbs`, `wbanalytics`, …) — иначе имена конфликтуют: во всех модулях экспортируются одни и те же идентификаторы.
@@ -40,7 +40,7 @@ import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
 
 `general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
 
-Структуры `*API` и методы эндпоинтов на модуль перечислены в per-release README: [clients/go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md).
+Структуры `*API` и методы эндпоинтов на модуль перечислены в per-release README: [wb-api-client-go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client-go#readme).
 
 ## Авторизация
 
@@ -51,7 +51,7 @@ import (
     "context"
     "fmt"
 
-    wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 func main() {
@@ -113,4 +113,4 @@ cfg.Scheme = "http"
 
 - [Аутентификация](/guides/authentication)
 - [Обработка ошибок](/guides/error-handling)
-- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md)
+- [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client-go#readme)

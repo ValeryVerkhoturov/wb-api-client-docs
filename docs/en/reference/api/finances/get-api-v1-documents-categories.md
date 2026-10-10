@@ -9,7 +9,7 @@ description: "Метод возвращает категории докумен�
 GET /api/v1/documents/categories
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/get-api-v1-documents-categories) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
 
 Метод возвращает категории документов для получения [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
 
@@ -68,7 +68,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

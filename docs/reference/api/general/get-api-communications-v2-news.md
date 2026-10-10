@@ -9,7 +9,7 @@ description: "Метод позволяет получать новости по
 GET /api/communications/v2/news
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** API новостей · [Документация WB ↗](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** API новостей · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-communications-v2-news) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
 
 Метод позволяет получать новости портала продавцов.
 Для получения успешного ответа необходимо указать
@@ -77,7 +77,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client/clients/go/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
 )
 
 cfg := wbgeneral.NewConfiguration()

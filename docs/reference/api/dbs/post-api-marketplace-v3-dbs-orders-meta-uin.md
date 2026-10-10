@@ -9,7 +9,7 @@ description: "Метод обновляет УИН, уникальные иде�
 POST /api/marketplace/v3/dbs/orders/meta/uin
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`dbs`](/reference/api/dbs/) · **Раздел:** Идентификаторы маркировки DBS · [Документация WB ↗](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`dbs`](/reference/api/dbs/) · **Раздел:** Идентификаторы маркировки DBS · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/dbs/post-api-marketplace-v3-dbs-orders-meta-uin) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
 
 Метод обновляет УИН, уникальные идентификационные номера, в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
 У одного сборочного задания может быть только один УИН.
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

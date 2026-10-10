@@ -9,7 +9,7 @@ description: "Метод создает повторное задание на �
 POST /api/v2/nm-report/downloads/retry
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [WB documentation ↗](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/post-api-v2-nm-report-downloads-retry) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry)
 
 Метод создает повторное [задание на генерацию](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) отчёта с расширенной аналитикой продавца. Необходимо, если при генерации отчёта вы [получили статус](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads) `FAILED`.
 
@@ -72,7 +72,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client/clients/go/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод возвращает данные об остатках
 POST /api/v3/stocks/{warehouseId}
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Остатки на складах продавца · [Документация WB ↗](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Остатки на складах продавца · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/items/post-api-v3-stocks-warehouseid) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId)
 
 Метод возвращает данные об остатках товаров на [складах продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses).
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

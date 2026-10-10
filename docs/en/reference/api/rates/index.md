@@ -7,7 +7,7 @@ description: "Module `rates` has 5 operations."
 
 Module `rates` has 5 operations.
 
-[WB documentation ↗](https://dev.wildberries.ru/openapi/rates) · [All modules](/en/reference/api/)
+[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/rates/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates) · [All modules](/en/reference/api/)
 
 Узнать больше о тарифах можно в [справочном центре](https://seller.wildberries.ru/instructions/ru/ru/material/fees-site-section)
 

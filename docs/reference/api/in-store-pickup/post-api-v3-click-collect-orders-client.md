@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о покуп
 POST /api/v3/click-collect/orders/client
 ```
 
-**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`in-store-pickup`](/reference/api/in-store-pickup/) · **Раздел:** Сборочные задания Самовывоз · [Документация WB ↗](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClient)
+**База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`in-store-pickup`](/reference/api/in-store-pickup/) · **Раздел:** Сборочные задания Самовывоз · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/in-store-pickup/post-api-v3-click-collect-orders-client) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClient)
 
 Метод возвращает информацию о покупателе по ID сборочного задания.
 
@@ -80,7 +80,7 @@ import (
 	"context"
 	"fmt"
 
-	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client/clients/go/in_store_pickup"
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/in_store_pickup"
 )
 
 cfg := wbinstorepickup.NewConfiguration()

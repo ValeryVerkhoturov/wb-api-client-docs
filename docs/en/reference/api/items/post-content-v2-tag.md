@@ -9,7 +9,7 @@ description: "Метод добавляет один ярлык продавца
 POST /content/v2/tag
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/postV2Tag)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/post-content-v2-tag) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/postV2Tag)
 
 Метод добавляет один ярлык продавца. Можно создать максимум 15 ярлыков для одного продавца. Максимальная длина ярлыка — 15 символов.
 
@@ -79,7 +79,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод добавляет и удаляет карточки �
 PATCH /adv/v0/auction/nms
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Управление кампаниями · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/patchV0AuctionNms)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Управление кампаниями · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/patch-adv-v0-auction-nms) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/patchV0AuctionNms)
 
 Метод добавляет и удаляет карточки товаров в кампаниях.
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

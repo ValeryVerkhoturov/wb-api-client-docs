@@ -9,7 +9,7 @@ description: "Метод возвращает заявки покупателе�
 GET /api/v1/claims
 ```
 
-**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Возвраты покупателями · [WB documentation ↗](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims)
+**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Возвраты покупателями · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/get-api-v1-claims) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims)
 
 Метод возвращает заявки покупателей на возврат товаров за последние 14 дней. Вы можете [отвечать на эти заявки](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/patchV1Claim).
 
@@ -69,7 +69,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client/clients/go/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

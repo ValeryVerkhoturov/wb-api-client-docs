@@ -7,7 +7,7 @@ description: "Операций модуля `orders-fbw` — 14."
 
 Операций модуля `orders-fbw` — 14.
 
-[Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbw) · [Все модули](/reference/api/)
+[Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-fbw/) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw) · [Все модули](/reference/api/)
 
 Узнать больше о поставках FBW можно в [справочном центре](https://seller.wildberries.ru/instructions/subcategory/5a8e1202-0865-45b7-acae-5d0afc7add56?goBackOption=prevRoute&categoryId=479385c6-de01-4b4d-ad4e-ed941e65582e)
 

@@ -9,7 +9,7 @@ description: "Метод загружает один документ из сп�
 GET /api/v1/documents/download
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/get-api-v1-documents-download) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload)
 
 Метод загружает один документ из [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

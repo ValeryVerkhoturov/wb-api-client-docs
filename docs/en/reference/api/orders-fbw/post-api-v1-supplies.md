@@ -9,7 +9,7 @@ description: "Метод возвращает список поставок, п�
 POST /api/v1/supplies
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация о поставках · [WB documentation ↗](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation/operation/postV1Supplies)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация о поставках · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbw/post-api-v1-supplies) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/postV1Supplies)
 
 Метод возвращает список поставок, по умолчанию — последние 1000 поставок.
 
@@ -80,7 +80,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbw"
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbw"
 )
 
 cfg := wbordersfbw.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод удаляет значение указанных ид
 POST /api/marketplace/v3/dbs/orders/meta/delete
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [WB documentation ↗](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDelete)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/dbs/post-api-marketplace-v3-dbs-orders-meta-delete) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDelete)
 
 Метод удаляет значение указанных [идентификаторов маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
 
@@ -84,7 +84,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client/clients/go/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

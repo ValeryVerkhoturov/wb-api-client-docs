@@ -9,7 +9,7 @@ description: "Метод будет отключен 26 октября."
 GET /api/v1/analytics/goods-return
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о возвратах и перемещении товаров · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1AnalyticsGoodsReturn)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о возвратах и перемещении товаров · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-analytics-goods-return) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1AnalyticsGoodsReturn)
 
 Метод будет отключен [26 октября](https://dev.wildberries.ru/release-notes?id=577).
 
@@ -67,7 +67,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

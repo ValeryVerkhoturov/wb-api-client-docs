@@ -9,7 +9,7 @@ description: "Метод временно отключён"
 GET /api/v1/warehouses
 ```
 
-**База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация для формирования поставок · [Документация WB ↗](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
+**База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация для формирования поставок · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/orders-fbw/get-api-v1-warehouses) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
 
 Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
@@ -72,7 +72,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client/clients/go/orders_fbw"
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/orders_fbw"
 )
 
 cfg := wbordersfbw.NewConfiguration()

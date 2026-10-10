@@ -9,7 +9,7 @@ description: "Метод создаёт кампанию: - с ручной ст
 POST /adv/v2/seacat/save-ad
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/postV2SeacatSaveAd)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/post-adv-v2-seacat-save-ad) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV2SeacatSaveAd)
 
 Метод создаёт кампанию:
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

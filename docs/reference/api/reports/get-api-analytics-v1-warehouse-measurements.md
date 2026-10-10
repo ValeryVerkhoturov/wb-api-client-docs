@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт о замерах ск�
 GET /api/analytics/v1/warehouse-measurements
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёты об удержаниях · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/retentionReports/operation/getV1WarehouseMeasurements)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёты об удержаниях · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-analytics-v1-warehouse-measurements) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1WarehouseMeasurements)
 
 Метод возвращает отчёт о [замерах склада](https://seller.wildberries.ru/analytics-reports/dimensions-penalties/warehouse-measurements)
 
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

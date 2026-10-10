@@ -9,7 +9,7 @@ description: "Метод возвращает данные виджета бал
 GET /api/v1/account/balance
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Баланс · [WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/balance/operation/getV1AccountBalance)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Баланс · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/get-api-v1-account-balance) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/balance/operation/getV1AccountBalance)
 
 Метод возвращает данные виджета баланса на [главной странице](https://seller.wildberries.ru) портала продавцов.
 
@@ -68,7 +68,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client/clients/go/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 GET /api/v1/users
 ```
 
-**База:** `https://user-management-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** Управление пользователями продавца · [Документация WB ↗](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement/operation/getV1Users)
+**База:** `https://user-management-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** Управление пользователями продавца · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-v1-users) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/getV1Users)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену
@@ -86,7 +86,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client/clients/go/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
 )
 
 cfg := wbgeneral.NewConfiguration()

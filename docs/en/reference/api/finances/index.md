@@ -7,7 +7,7 @@ description: "Module `finances` has 11 operations."
 
 Module `finances` has 11 operations.
 
-[WB documentation ↗](https://dev.wildberries.ru/openapi/documents-and-accounting) · [All modules](/en/reference/api/)
+[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/finances/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting) · [All modules](/en/reference/api/)
 
 Узнать больше о документах и бухгалтерии можно в [справочном центре](https://seller.wildberries.ru/instructions/category/ba929b64-1f89-4426-82d7-ce998ee552bd?goBackOption=prevRoute&categoryId=3c971375-9939-45e8-ab82-376019be8942)
 

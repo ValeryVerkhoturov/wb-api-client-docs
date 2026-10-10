@@ -9,7 +9,7 @@ description: "Для товаров, которые поставляются н�
 GET /api/v1/tariffs/pallet
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на остаток · [WB documentation ↗](https://dev.wildberries.ru/openapi/rates#tag/stockRates/operation/getV1TariffsPallet)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на остаток · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/rates/get-api-v1-tariffs-pallet) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/stockRates/operation/getV1TariffsPallet)
 
 Для товаров, которые поставляются на склад WB на монопаллетах, метод возвращает [стоимость](https://seller.wildberries.ru/dynamic-product-categories):
 
@@ -74,7 +74,7 @@ import (
 	"context"
 	"fmt"
 
-	wbrates "github.com/ValeryVerkhoturov/wb-api-client/clients/go/rates"
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/rates"
 )
 
 cfg := wbrates.NewConfiguration()

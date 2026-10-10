@@ -49,7 +49,7 @@ const api = new ItemsApi(cfg);
 ```
 
 ```go [Go]
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")

@@ -9,7 +9,7 @@ description: "Метод возвращает тарифы: - на перево�
 GET /api/v1/tariffs/return
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Стоимость возврата продавцу · [WB documentation ↗](https://dev.wildberries.ru/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Стоимость возврата продавцу · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/rates/get-api-v1-tariffs-return) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
 
 Метод возвращает [тарифы](https://seller.wildberries.ru/dynamic-product-categories/return-cost):
 
@@ -71,7 +71,7 @@ import (
 	"context"
 	"fmt"
 
-	wbrates "github.com/ValeryVerkhoturov/wb-api-client/clients/go/rates"
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/rates"
 )
 
 cfg := wbrates.NewConfiguration()

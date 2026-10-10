@@ -7,7 +7,7 @@ description: "Module `in-store-pickup` has 18 operations."
 
 Module `in-store-pickup` has 18 operations.
 
-[WB documentation ↗](https://dev.wildberries.ru/openapi/in-store-pickup) · [All modules](/en/reference/api/)
+[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/in-store-pickup/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup) · [All modules](/en/reference/api/)
 
 Управление [сборочными заданиями](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) и [идентификаторами маркировки](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers) Самовывоза.
 

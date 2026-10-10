@@ -9,7 +9,7 @@ description: "Метод заменяет данные ярлыка: имя и �
 PATCH /content/v2/tag/{id}
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/patchV2TagId)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/patch-content-v2-tag-id) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/patchV2TagId)
 
 Метод заменяет данные ярлыка: имя и цвет.
 
@@ -85,7 +85,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

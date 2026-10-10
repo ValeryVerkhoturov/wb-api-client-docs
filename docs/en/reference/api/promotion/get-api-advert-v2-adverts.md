@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о рекла
 GET /api/advert/v2/adverts
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Кампании · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Кампании · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/get-api-advert-v2-adverts) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV2Adverts)
 
 Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID.
 
@@ -76,7 +76,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

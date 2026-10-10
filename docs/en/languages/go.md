@@ -1,6 +1,6 @@
 # Go
 
-Module: `github.com/ValeryVerkhoturov/wb-api-client/clients/go` — resolved from git tags on the [main repo](https://github.com/ValeryVerkhoturov/wb-api-client).
+Module: `github.com/ValeryVerkhoturov/wb-api-client-go` — resolved from git tags on its [dedicated repo](https://github.com/ValeryVerkhoturov/wb-api-client-go).
 
 - **Go:** 1.22+
 - **HTTP:** `net/http` (standard library)
@@ -9,20 +9,20 @@ Module: `github.com/ValeryVerkhoturov/wb-api-client/clients/go` — resolved fro
 ## Install
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
 ```
 
 Pin a specific version by tag:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 ```
 
 `proxy.golang.org` fetches directly from the pushed tag — no separate registry.
 
-## Why the module path stays under `/clients/go`
+## Why the module lives in its own repo
 
-The main repo hosts seven language clients; Go's convention is one module per repo, so the module path includes the sub-directory. Version tags cover all seven languages simultaneously — Go picks up whichever tag exists on the commit that produced its sources.
+Go's convention is one module per repo, so the client lives in [wb-api-client-go](https://github.com/ValeryVerkhoturov/wb-api-client-go) with `go.mod` at its root. Release tags (`vX.Y.Z`) are pushed to that repo by the same pipeline that tags the main one — Go picks up whichever tag matches the release.
 
 Because `MAJOR = 1` is fixed (see [versioning](/en/guides/versioning)), there's no `/v2` suffix now or later.
 
@@ -31,7 +31,7 @@ Because `MAJOR = 1` is fixed (see [versioning](/en/guides/versioning)), there's 
 One Go package per WB API category, each with its own `Configuration`, `APIClient`, and `*API` types.
 
 ```go
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 ```
 
 Alias each sub-module (`wbitems`, `wbfbs`, `wbanalytics`, …) so call sites are readable — they all export the same identifier names.
@@ -40,7 +40,7 @@ Alias each sub-module (`wbitems`, `wbfbs`, `wbanalytics`, …) so call sites are
 
 `general`, `items`, `orders_fbs`, `orders_dbw`, `dbs`, `in_store_pickup`, `orders_fbw`, `promotion`, `communications`, `rates`, `analytics`, `reports`, `finances`.
 
-Per-module `*API` structs and endpoint methods are enumerated in the per-release README: [clients/go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md).
+Per-module `*API` structs and endpoint methods are enumerated in the per-release README: [wb-api-client-go/README.md](https://github.com/ValeryVerkhoturov/wb-api-client-go#readme).
 
 ## Auth
 
@@ -51,7 +51,7 @@ import (
     "context"
     "fmt"
 
-    wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 func main() {
@@ -113,4 +113,4 @@ cfg.Scheme = "http"
 
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
-- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/go/README.md)
+- [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client-go#readme)

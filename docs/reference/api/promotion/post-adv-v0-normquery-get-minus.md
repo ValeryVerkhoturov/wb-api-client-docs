@@ -9,7 +9,7 @@ description: "Метод возвращает список минус-фраз �
 POST /adv/v0/normquery/get-minus
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetMinus)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v0-normquery-get-minus) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetMinus)
 
 Метод возвращает список минус-фраз по:
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

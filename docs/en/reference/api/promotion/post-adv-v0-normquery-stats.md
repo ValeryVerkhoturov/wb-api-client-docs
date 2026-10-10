@@ -9,7 +9,7 @@ description: "Метод формирует статистику по поиск
 POST /adv/v0/normquery/stats
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Статистика · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/statistics/operation/postV0NormqueryStats)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Статистика · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/post-adv-v0-normquery-stats) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV0NormqueryStats)
 
 Метод формирует статистику по поисковым кластерам за указанный период.
 Можно использовать для кампаний с моделями оплаты `cpm` — за показы и `cpc` — за клики.
@@ -73,7 +73,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

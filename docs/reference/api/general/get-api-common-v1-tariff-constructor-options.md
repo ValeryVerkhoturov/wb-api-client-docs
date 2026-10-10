@@ -9,7 +9,7 @@ description: "Информацию об опциях Конструктора т
 GET /api/common/v1/tariff-constructor/options
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** Информация о продавце · [Документация WB ↗](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation/operation/getV1TariffConstructorOptions)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** Информация о продавце · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-common-v1-tariff-constructor-options) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1TariffConstructorOptions)
 
 Информацию об опциях Конструктора тарифов можно получить с токеном любой [категории](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov)
 
@@ -79,7 +79,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client/clients/go/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
 )
 
 cfg := wbgeneral.NewConfiguration()

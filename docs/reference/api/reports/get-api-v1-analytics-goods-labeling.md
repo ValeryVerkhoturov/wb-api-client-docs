@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт о штрафах за 
 GET /api/v1/analytics/goods-labeling
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёты об удержаниях · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/retentionReports/operation/getV1AnalyticsGoodsLabeling)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёты об удержаниях · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-analytics-goods-labeling) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1AnalyticsGoodsLabeling)
 
 Метод возвращает отчёт о штрафах за отсутствие обязательной маркировки товаров.
 В отчёте представлены фотографии товаров, на которых маркировка отсутствует либо не считывается.
@@ -72,7 +72,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

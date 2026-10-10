@@ -9,7 +9,7 @@ description: "Метод загружает набор медиафайлов в
 POST /content/v3/media/save
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Медиафайлы · [WB documentation ↗](https://dev.wildberries.ru/openapi/item-management#tag/mediaFiles/operation/postV3MediaSave)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Медиафайлы · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/post-content-v3-media-save) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/mediaFiles/operation/postV3MediaSave)
 
 Метод загружает набор медиафайлов в карточку товара через указание ссылок в запросе.
 
@@ -97,7 +97,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

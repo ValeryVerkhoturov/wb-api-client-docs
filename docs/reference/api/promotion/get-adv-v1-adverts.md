@@ -9,7 +9,7 @@ description: "Метод возвращает список всех медиак
 GET /adv/v1/adverts
 ```
 
-**База:** `https://advert-media-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Медиа · [Документация WB ↗](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Adverts)
+**База:** `https://advert-media-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Медиа · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-adverts) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Adverts)
 
 Метод возвращает список всех [медиакампаний](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Advert) продавца по их типам и статусам.
 
@@ -79,7 +79,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

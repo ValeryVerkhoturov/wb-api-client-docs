@@ -7,7 +7,7 @@ description: "Операций модуля `dbs` — 21."
 
 Операций модуля `dbs` — 21.
 
-[Документация WB ↗](https://dev.wildberries.ru/openapi/dbs) · [Все модули](/reference/api/)
+[Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/dbs/) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/dbs) · [Все модули](/reference/api/)
 
 Узнать больше о модели DBS можно в [справочном центре](https://seller.wildberries.ru/instructions/category/6572e024-7428-4db1-86a8-a4c7dbebbfcf?goBackOption=prevRoute&categoryId=5a8e1202-0865-45b7-acae-5d0afc7add56)
 

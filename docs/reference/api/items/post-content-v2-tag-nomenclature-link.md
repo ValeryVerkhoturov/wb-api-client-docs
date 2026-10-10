@@ -9,7 +9,7 @@ description: "Метод добавляет или снимает ярлык с 
 POST /content/v2/tag/nomenclature/link
 ```
 
-**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Ярлыки · [Документация WB ↗](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/postV2TagNomenclatureLink)
+**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Ярлыки · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/items/post-content-v2-tag-nomenclature-link) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/postV2TagNomenclatureLink)
 
 Метод добавляет или снимает ярлык с карточки товара. К карточке можно добавить максимум 15 ярлыков.
 При удалении ярлыка из карточки товара он не удаляется из [списка ярлыков](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/getV2Tags) продавца.
@@ -78,7 +78,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client/clients/go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 )
 
 cfg := wbitems.NewConfiguration()

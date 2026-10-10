@@ -118,8 +118,8 @@ const PACKAGES: [name: string, url: string, install: string][] = [
   ],
   [
     "Go",
-    "https://pkg.go.dev/github.com/ValeryVerkhoturov/wb-api-client/clients/go",
-    "go get github.com/ValeryVerkhoturov/wb-api-client/clients/go@latest",
+    "https://pkg.go.dev/github.com/ValeryVerkhoturov/wb-api-client-go",
+    "go get github.com/ValeryVerkhoturov/wb-api-client-go@latest",
   ],
   [
     "Java",

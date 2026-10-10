@@ -9,7 +9,7 @@ description: "Метод возвращает количество медиак�
 GET /adv/v1/count
 ```
 
-**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Медиа · [WB documentation ↗](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Count)
+**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Медиа · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/get-adv-v1-count) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Count)
 
 Метод возвращает количество [медиакампаний](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Advert) продавца с группировкой по статусам.
 
@@ -67,7 +67,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client/clients/go/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

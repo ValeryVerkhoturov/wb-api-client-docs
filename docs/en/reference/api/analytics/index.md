@@ -7,7 +7,7 @@ description: "Module `analytics` has 20 operations."
 
 Module `analytics` has 20 operations.
 
-[WB documentation ↗](https://dev.wildberries.ru/openapi/analytics) · [All modules](/en/reference/api/)
+[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics) · [All modules](/en/reference/api/)
 
 Узнать больше об аналитике и данных можно в [справочном центре](https://seller.wildberries.ru/instructions/ru/ru/subcategory/seller-analytics)
 

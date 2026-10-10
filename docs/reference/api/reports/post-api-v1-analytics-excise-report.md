@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт с операциями
 POST /api/v1/analytics/excise-report
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о товарах c обязательной маркировкой · [Документация WB ↗](https://dev.wildberries.ru/openapi/reports#tag/reportOnItemsWithMandatoryLabeling/operation/postV1AnalyticsExciseReport)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о товарах c обязательной маркировкой · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/post-api-v1-analytics-excise-report) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/reportOnItemsWithMandatoryLabeling/operation/postV1AnalyticsExciseReport)
 
 Метод возвращает отчёт с [операциями по товарам с обязательной маркировкой](https://seller.wildberries.ru/analytics-reports/excise-report).
 
@@ -75,7 +75,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client/clients/go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
 )
 
 cfg := wbreports.NewConfiguration()

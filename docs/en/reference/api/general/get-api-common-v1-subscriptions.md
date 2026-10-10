@@ -9,7 +9,7 @@ description: "Информацию о подписке Джем можно по�
 GET /api/common/v1/subscriptions
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [WB documentation ↗](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation/operation/getV1Subscriptions)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/general/get-api-common-v1-subscriptions) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1Subscriptions)
 
 Информацию о подписке Джем можно получить с токеном любой [категории](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov)
 
@@ -81,7 +81,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client/clients/go/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
 )
 
 cfg := wbgeneral.NewConfiguration()
