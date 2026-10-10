@@ -47,10 +47,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.orders_fbs import Configuration, ApiClient
-from wb_api_client.orders_fbs.api import Api
+from wb_api_client.orders_fbs.api import OrdersFbsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = Api(ApiClient(cfg))
+api = OrdersFbsApi(ApiClient(cfg))
 
 result = api.patch_v3_fbs_settings_autoreturns(patch_v3_fbs_settings_autoreturns_request=...)
 print(result)
@@ -59,12 +59,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.patchV3FbsSettingsAutoreturns(patchV3FbsSettingsAutoreturnsRequest);
 console.log(data);
@@ -75,7 +75,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PatchV3FbsSettingsAutoreturns(context.Background()).Execute()
+result, _, err := client.OrdersFbsAPI.PatchV3FbsSettingsAutoreturns(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -85,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.patchV3FbsSettingsAutoreturns(patchV3FbsSettingsAutoreturnsRequest));
 ```
@@ -97,12 +97,12 @@ System.out.println(api.patchV3FbsSettingsAutoreturns(patchV3FbsSettingsAutoretur
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->patchV3FbsSettingsAutoreturns());
 ```
@@ -112,7 +112,7 @@ print_r($api->patchV3FbsSettingsAutoreturns());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый НастройкиАвтовозвратаApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.PatchV3FbsSettingsAutoreturns(Тело).Тело);
 ```
@@ -123,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.PatchV3FbsSettingsAutoreturns());
 ```

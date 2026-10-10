@@ -48,10 +48,10 @@ PATCH /api/v3/dbw/orders/{orderId}/cancel
 
 ```python [Python]
 from wb_api_client.orders_dbw import Configuration, ApiClient
-from wb_api_client.orders_dbw.api import DBWApi
+from wb_api_client.orders_dbw.api import OrdersDbwApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DBWApi(ApiClient(cfg))
+api = OrdersDbwApi(ApiClient(cfg))
 
 result = api.patch_v3_dbw_orders_order_id_cancel(order_id=...)
 print(result)
@@ -60,12 +60,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBWApi,
+  OrdersDbwApi,
 } from "@valeryverkhoturov/wb-api-client/orders-dbw";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DBWApi(cfg);
+const api = new OrdersDbwApi(cfg);
 
 const { data } = await api.patchV3DbwOrdersOrderIdCancel(orderId);
 console.log(data);
@@ -76,7 +76,7 @@ cfg := wbordersdbw.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersdbw.NewAPIClient(cfg)
 
-result, _, err := client.DBWAPI.PatchV3DbwOrdersOrderIdCancel(context.Background(), orderId).Execute()
+result, _, err := client.OrdersDbwAPI.PatchV3DbwOrdersOrderIdCancel(context.Background(), orderId).Execute()
 if err != nil {
     panic(err)
 }
@@ -86,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DbwApi api = new DbwApi(client);
+OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.patchV3DbwOrdersOrderIdCancel(orderId));
 ```
@@ -98,12 +98,12 @@ System.out.println(api.patchV3DbwOrdersOrderIdCancel(orderId));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\OrdersDbwApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DBWApi(new Client(), $config);
+$api = new OrdersDbwApi(new Client(), $config);
 
 print_r($api->patchV3DbwOrdersOrderIdCancel($order_id));
 ```
@@ -113,7 +113,7 @@ print_r($api->patchV3DbwOrdersOrderIdCancel($order_id));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый СборочныеЗаданияDBWApi(Настройки);
+Клиент = Новый OrdersDbwApi(Настройки);
 
 Сообщить(Клиент.PatchV3DbwOrdersOrderIdCancel(orderId).Тело);
 ```
@@ -124,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DBWApi(config);
+var api = new OrdersDbwApi(config);
 
 Console.WriteLine(api.PatchV3DbwOrdersOrderIdCancel(orderId));
 ```

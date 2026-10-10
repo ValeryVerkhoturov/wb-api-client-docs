@@ -50,10 +50,10 @@ POST /api/marketplace/v3/dbs/orders/meta/imei
 
 ```python [Python]
 from wb_api_client.dbs import Configuration, ApiClient
-from wb_api_client.dbs.api import DBSApi
+from wb_api_client.dbs.api import DbsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DBSApi(ApiClient(cfg))
+api = DbsApi(ApiClient(cfg))
 
 result = api.post_v3_dbs_orders_meta_imei(api_orders_imei_set_request=...)
 print(result)
@@ -62,12 +62,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBSApi,
+  DbsApi,
 } from "@valeryverkhoturov/wb-api-client/dbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DBSApi(cfg);
+const api = new DbsApi(cfg);
 
 const { data } = await api.postV3DbsOrdersMetaImei(apiOrdersIMEISetRequest);
 console.log(data);
@@ -78,7 +78,7 @@ cfg := wbdbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbdbs.NewAPIClient(cfg)
 
-result, _, err := client.DBSAPI.PostV3DbsOrdersMetaImei(context.Background()).ApiOrdersIMEISetRequest(apiOrdersIMEISetRequest).Execute()
+result, _, err := client.DbsAPI.PostV3DbsOrdersMetaImei(context.Background()).ApiOrdersIMEISetRequest(apiOrdersIMEISetRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -100,12 +100,12 @@ System.out.println(api.postV3DbsOrdersMetaImei(apiOrdersIMEISetRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Dbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\Dbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\Dbs\Api\DBSApi;
+use ValeryVerkhoturov\WbApiClient\Dbs\Api\DbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DBSApi(new Client(), $config);
+$api = new DbsApi(new Client(), $config);
 
 print_r($api->postV3DbsOrdersMetaImei($api_orders_imei_set_request));
 ```
@@ -115,7 +115,7 @@ print_r($api->postV3DbsOrdersMetaImei($api_orders_imei_set_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ИдентификаторыМаркировкиDBSApi(Настройки);
+Клиент = Новый DbsApi(Настройки);
 
 Сообщить(Клиент.PostV3DbsOrdersMetaImei(Тело).Тело);
 ```
@@ -126,7 +126,7 @@ using ValeryVerkhoturov.WbApiClient.Dbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DBSApi(config);
+var api = new DbsApi(config);
 
 Console.WriteLine(api.PostV3DbsOrdersMetaImei(apiOrdersIMEISetRequest));
 ```

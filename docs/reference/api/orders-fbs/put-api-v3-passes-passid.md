@@ -46,15 +46,26 @@ PUT /api/v3/passes/{passId}
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.orders_fbs import Configuration, ApiClient
+from wb_api_client.orders_fbs.api import OrdersFbsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = OrdersFbsApi(ApiClient(cfg))
+
+result = api.put_v3_passes_pass_id(pass_id=..., put_v3_passes_pass_id_request=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  FBSApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new FBSApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.putV3PassesPassId(passId, putV3PassesPassIdRequest);
 console.log(data);
@@ -65,7 +76,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.FBSAPI.PutV3PassesPassId(context.Background(), passId).PutV3PassesPassIdRequest(putV3PassesPassIdRequest).Execute()
+result, _, err := client.OrdersFbsAPI.PutV3PassesPassId(context.Background(), passId).PutV3PassesPassIdRequest(putV3PassesPassIdRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -75,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-FbsApi api = new FbsApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.putV3PassesPassId(passId, putV3PassesPassIdRequest));
 ```
@@ -87,12 +98,12 @@ System.out.println(api.putV3PassesPassId(passId, putV3PassesPassIdRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new FBSApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->putV3PassesPassId($pass_id, $put_v3_passes_pass_id_request));
 ```
@@ -102,7 +113,7 @@ print_r($api->putV3PassesPassId($pass_id, $put_v3_passes_pass_id_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ПропускаFBSApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.PutV3PassesPassId(passId, Тело).Тело);
 ```
@@ -113,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new FBSApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.PutV3PassesPassId(passId, putV3PassesPassIdRequest));
 ```

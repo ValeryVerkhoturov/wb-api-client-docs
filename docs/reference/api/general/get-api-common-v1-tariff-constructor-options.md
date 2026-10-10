@@ -51,10 +51,10 @@ GET /api/common/v1/tariff-constructor/options
 
 ```python [Python]
 from wb_api_client.general import Configuration, ApiClient
-from wb_api_client.general.api import Api
+from wb_api_client.general.api import GeneralApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = GeneralApi(ApiClient(cfg))
 
 result = api.get_v1_tariff_constructor_options(locale=...)
 print(result)
@@ -63,12 +63,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  GeneralApi,
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new GeneralApi(cfg);
 
 const { data } = await api.getV1TariffConstructorOptions(locale);
 console.log(data);
@@ -79,7 +79,7 @@ cfg := wbgeneral.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbgeneral.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1TariffConstructorOptions(context.Background()).Execute()
+result, _, err := client.GeneralAPI.GetV1TariffConstructorOptions(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -89,11 +89,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.SecretString;
-import io.github.valeryverkhoturov.wbapi.general.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV1TariffConstructorOptions(locale));
 ```
@@ -101,12 +101,12 @@ System.out.println(api.getV1TariffConstructorOptions(locale));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
 use ValeryVerkhoturov\WbApiClient\General\SecretString;
-use ValeryVerkhoturov\WbApiClient\General\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new GeneralApi(new Client(), $config);
 
 print_r($api->getV1TariffConstructorOptions());
 ```
@@ -116,7 +116,7 @@ print_r($api->getV1TariffConstructorOptions());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ИнформацияОПродавцеApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 
 Сообщить(Клиент.GetV1TariffConstructorOptions().Тело);
 ```
@@ -127,7 +127,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetV1TariffConstructorOptions());
 ```

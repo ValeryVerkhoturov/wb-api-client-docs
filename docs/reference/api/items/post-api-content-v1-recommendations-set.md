@@ -46,10 +46,10 @@ POST /api/content/v1/recommendations/set
 
 ```python [Python]
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DefaultApi(ApiClient(cfg))
+api = ItemsApi(ApiClient(cfg))
 
 result = api.post_v1_recommendations_set(set_recom_req=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.postV1RecommendationsSet(setRecomReq);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1RecommendationsSet(context.Background()).SetRecomReq(setRecomReq).Execute()
+result, _, err := client.ItemsAPI.PostV1RecommendationsSet(context.Background()).SetRecomReq(setRecomReq).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV1RecommendationsSet(setRecomReq));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.postV1RecommendationsSet(setRecomReq));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->postV1RecommendationsSet($set_recom_req));
 ```
@@ -111,7 +111,7 @@ print_r($api->postV1RecommendationsSet($set_recom_req));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый РекомендацииApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PostV1RecommendationsSet(Тело).Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PostV1RecommendationsSet(setRecomReq));
 ```

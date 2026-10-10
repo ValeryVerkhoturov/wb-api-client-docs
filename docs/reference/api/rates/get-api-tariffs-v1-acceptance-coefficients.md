@@ -48,10 +48,10 @@ GET /api/tariffs/v1/acceptance/coefficients
 
 ```python [Python]
 from wb_api_client.rates import Configuration, ApiClient
-from wb_api_client.rates.api import Api
+from wb_api_client.rates.api import RatesApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = RatesApi(ApiClient(cfg))
 
 result = api.get_v1_acceptance_coefficients(warehouse_ids=...)
 print(result)
@@ -60,12 +60,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  RatesApi,
 } from "@valeryverkhoturov/wb-api-client/rates";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new RatesApi(cfg);
 
 const { data } = await api.getV1AcceptanceCoefficients(warehouseIDs);
 console.log(data);
@@ -76,7 +76,7 @@ cfg := wbrates.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbrates.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1AcceptanceCoefficients(context.Background()).Execute()
+result, _, err := client.RatesAPI.GetV1AcceptanceCoefficients(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -86,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.rates.ApiClient;
 import io.github.valeryverkhoturov.wbapi.rates.SecretString;
-import io.github.valeryverkhoturov.wbapi.rates.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.rates.api.RatesApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+RatesApi api = new RatesApi(client);
 
 System.out.println(api.getV1AcceptanceCoefficients(warehouseIDs));
 ```
@@ -98,12 +98,12 @@ System.out.println(api.getV1AcceptanceCoefficients(warehouseIDs));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Rates\Configuration;
 use ValeryVerkhoturov\WbApiClient\Rates\SecretString;
-use ValeryVerkhoturov\WbApiClient\Rates\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Rates\Api\RatesApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new RatesApi(new Client(), $config);
 
 print_r($api->getV1AcceptanceCoefficients());
 ```
@@ -113,7 +113,7 @@ print_r($api->getV1AcceptanceCoefficients());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ТарифыНаПоставкуApi(Настройки);
+Клиент = Новый RatesApi(Настройки);
 
 Сообщить(Клиент.GetV1AcceptanceCoefficients().Тело);
 ```
@@ -124,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.Rates.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new RatesApi(config);
 
 Console.WriteLine(api.GetV1AcceptanceCoefficients());
 ```

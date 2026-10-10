@@ -53,10 +53,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.orders_fbs import Configuration, ApiClient
-from wb_api_client.orders_fbs.api import FBSApi
+from wb_api_client.orders_fbs.api import OrdersFbsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = FBSApi(ApiClient(cfg))
+api = OrdersFbsApi(ApiClient(cfg))
 
 result = api.put_v3_orders_order_id_meta_sgtin(order_id=..., put_v3_orders_order_id_meta_sgtin_request=...)
 print(result)
@@ -65,12 +65,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  FBSApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new FBSApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.putV3OrdersOrderIdMetaSgtin(orderId, putV3OrdersOrderIdMetaSgtinRequest);
 console.log(data);
@@ -81,7 +81,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.FBSAPI.PutV3OrdersOrderIdMetaSgtin(context.Background(), orderId).PutV3OrdersOrderIdMetaSgtinRequest(putV3OrdersOrderIdMetaSgtinRequest).Execute()
+result, _, err := client.OrdersFbsAPI.PutV3OrdersOrderIdMetaSgtin(context.Background(), orderId).PutV3OrdersOrderIdMetaSgtinRequest(putV3OrdersOrderIdMetaSgtinRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -91,11 +91,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-FbsApi api = new FbsApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.putV3OrdersOrderIdMetaSgtin(orderId, putV3OrdersOrderIdMetaSgtinRequest));
 ```
@@ -103,12 +103,12 @@ System.out.println(api.putV3OrdersOrderIdMetaSgtin(orderId, putV3OrdersOrderIdMe
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new FBSApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->putV3OrdersOrderIdMetaSgtin($order_id, $put_v3_orders_order_id_meta_sgtin_request));
 ```
@@ -118,7 +118,7 @@ print_r($api->putV3OrdersOrderIdMetaSgtin($order_id, $put_v3_orders_order_id_met
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ИдентификаторыМаркировкиFBSApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.PutV3OrdersOrderIdMetaSgtin(orderId, Тело).Тело);
 ```
@@ -129,7 +129,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new FBSApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.PutV3OrdersOrderIdMetaSgtin(orderId, putV3OrdersOrderIdMetaSgtinRequest));
 ```

@@ -51,15 +51,26 @@ POST /api/v3/supplies
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.orders_fbs import Configuration, ApiClient
+from wb_api_client.orders_fbs.api import OrdersFbsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = OrdersFbsApi(ApiClient(cfg))
+
+result = api.post_v3_supplies(post_v3_supplies_request=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  FBSApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new FBSApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.postV3Supplies(postV3SuppliesRequest);
 console.log(data);
@@ -70,7 +81,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.FBSAPI.PostV3Supplies(context.Background()).PostV3SuppliesRequest(postV3SuppliesRequest).Execute()
+result, _, err := client.OrdersFbsAPI.PostV3Supplies(context.Background()).PostV3SuppliesRequest(postV3SuppliesRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -80,11 +91,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-FbsApi api = new FbsApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.postV3Supplies(postV3SuppliesRequest));
 ```
@@ -92,12 +103,12 @@ System.out.println(api.postV3Supplies(postV3SuppliesRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new FBSApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->postV3Supplies($post_v3_supplies_request));
 ```
@@ -107,7 +118,7 @@ print_r($api->postV3Supplies($post_v3_supplies_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ПоставкиFBSApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.PostV3Supplies(Тело).Тело);
 ```
@@ -118,7 +129,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new FBSApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.PostV3Supplies(postV3SuppliesRequest));
 ```

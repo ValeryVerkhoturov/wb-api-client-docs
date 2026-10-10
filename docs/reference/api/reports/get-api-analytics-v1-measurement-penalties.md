@@ -48,15 +48,26 @@ GET /api/analytics/v1/measurement-penalties
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.reports import Configuration, ApiClient
+from wb_api_client.reports.api import ReportsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = ReportsApi(ApiClient(cfg))
+
+result = api.get_v1_measurement_penalties(date_to=..., limit=..., date_from=..., offset=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ReportsApi,
 } from "@valeryverkhoturov/wb-api-client/reports";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ReportsApi(cfg);
 
 const { data } = await api.getV1MeasurementPenalties(dateTo, limit, dateFrom, offset);
 console.log(data);
@@ -67,7 +78,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1MeasurementPenalties(context.Background()).DateTo(dateTo).Limit(limit).Execute()
+result, _, err := client.ReportsAPI.GetV1MeasurementPenalties(context.Background()).DateTo(dateTo).Limit(limit).Execute()
 if err != nil {
     panic(err)
 }
@@ -77,11 +88,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.reports.ApiClient;
 import io.github.valeryverkhoturov.wbapi.reports.SecretString;
-import io.github.valeryverkhoturov.wbapi.reports.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.getV1MeasurementPenalties(dateTo, limit, dateFrom, offset));
 ```
@@ -89,12 +100,12 @@ System.out.println(api.getV1MeasurementPenalties(dateTo, limit, dateFrom, offset
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Reports\Configuration;
 use ValeryVerkhoturov\WbApiClient\Reports\SecretString;
-use ValeryVerkhoturov\WbApiClient\Reports\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Reports\Api\ReportsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ReportsApi(new Client(), $config);
 
 print_r($api->getV1MeasurementPenalties($date_to, $limit));
 ```
@@ -104,7 +115,7 @@ print_r($api->getV1MeasurementPenalties($date_to, $limit));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ОтчётыОбУдержанияхApi(Настройки);
+Клиент = Новый ReportsApi(Настройки);
 
 Сообщить(Клиент.GetV1MeasurementPenalties(dateTo, limit).Тело);
 ```
@@ -115,7 +126,7 @@ using ValeryVerkhoturov.WbApiClient.Reports.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ReportsApi(config);
 
 Console.WriteLine(api.GetV1MeasurementPenalties(dateTo, limit));
 ```

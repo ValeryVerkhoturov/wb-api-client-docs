@@ -57,27 +57,13 @@ GET /api/v1/feedbacks/archive
 
 ```python [Python]
 from wb_api_client.communications import Configuration, ApiClient
-from wb_api_client.communications.api import DefaultApi
+from wb_api_client.communications.api import CommunicationsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DefaultApi(ApiClient(cfg))
+api = CommunicationsApi(ApiClient(cfg))
 
 result = api.get_v1_feedbacks_archive(take=..., skip=..., nm_id=..., order=...)
 print(result)
-```
-
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/communications";
-
-const cfg = new Configuration({});
-cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
-
-const { data } = await api.getV1FeedbacksArchive(take, skip, nmId, order);
-console.log(data);
 ```
 
 ```go [Go]
@@ -85,7 +71,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1FeedbacksArchive(context.Background()).Take(take).Skip(skip).Execute()
+result, _, err := client.CommunicationsAPI.GetV1FeedbacksArchive(context.Background()).Take(take).Skip(skip).Execute()
 if err != nil {
     panic(err)
 }
@@ -95,11 +81,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
 import io.github.valeryverkhoturov.wbapi.communications.SecretString;
-import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.getV1FeedbacksArchive(take, skip, nmId, order));
 ```
@@ -107,12 +93,12 @@ System.out.println(api.getV1FeedbacksArchive(take, skip, nmId, order));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
 use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
-use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\CommunicationsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new CommunicationsApi(new Client(), $config);
 
 print_r($api->getV1FeedbacksArchive($take, $skip));
 ```
@@ -122,7 +108,7 @@ print_r($api->getV1FeedbacksArchive($take, $skip));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ОтзывыApi(Настройки);
+Клиент = Новый CommunicationsApi(Настройки);
 
 Сообщить(Клиент.GetV1FeedbacksArchive(take, skip).Тело);
 ```
@@ -133,7 +119,7 @@ using ValeryVerkhoturov.WbApiClient.Communications.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new CommunicationsApi(config);
 
 Console.WriteLine(api.GetV1FeedbacksArchive(take, skip));
 ```

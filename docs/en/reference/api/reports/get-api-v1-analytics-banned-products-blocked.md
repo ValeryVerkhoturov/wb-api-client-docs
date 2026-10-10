@@ -46,15 +46,26 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.reports import Configuration, ApiClient
+from wb_api_client.reports.api import ReportsApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = ReportsApi(ApiClient(cfg))
+
+result = api.get_v1_analytics_banned_producs_blocked(sort=..., order=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ReportsApi,
 } from "@valeryverkhoturov/wb-api-client/reports";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new ReportsApi(cfg);
 
 const { data } = await api.getV1AnalyticsBannedProducsBlocked(sort, order);
 console.log(data);
@@ -65,7 +76,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1AnalyticsBannedProducsBlocked(context.Background()).Sort(sort).Order(order).Execute()
+result, _, err := client.ReportsAPI.GetV1AnalyticsBannedProducsBlocked(context.Background()).Sort(sort).Order(order).Execute()
 if err != nil {
     panic(err)
 }
@@ -75,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.reports.ApiClient;
 import io.github.valeryverkhoturov.wbapi.reports.SecretString;
-import io.github.valeryverkhoturov.wbapi.reports.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.getV1AnalyticsBannedProducsBlocked(sort, order));
 ```
@@ -87,12 +98,12 @@ System.out.println(api.getV1AnalyticsBannedProducsBlocked(sort, order));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Reports\Configuration;
 use ValeryVerkhoturov\WbApiClient\Reports\SecretString;
-use ValeryVerkhoturov\WbApiClient\Reports\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Reports\Api\ReportsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ReportsApi(new Client(), $config);
 
 print_r($api->getV1AnalyticsBannedProducsBlocked($sort, $order));
 ```
@@ -102,7 +113,7 @@ print_r($api->getV1AnalyticsBannedProducsBlocked($sort, $order));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ЗаблокированныеКарточкиApi(Настройки);
+Клиент = Новый ReportsApi(Настройки);
 
 Сообщить(Клиент.GetV1AnalyticsBannedProducsBlocked(sort, order).Тело);
 ```
@@ -113,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.Reports.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new ReportsApi(config);
 
 Console.WriteLine(api.GetV1AnalyticsBannedProducsBlocked(sort, order));
 ```

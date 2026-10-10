@@ -47,10 +47,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.orders_dbw import Configuration, ApiClient
-from wb_api_client.orders_dbw.api import DBWApi
+from wb_api_client.orders_dbw.api import OrdersDbwApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DBWApi(ApiClient(cfg))
+api = OrdersDbwApi(ApiClient(cfg))
 
 result = api.post_v3_dbw_orders_delivery_date(delivery_dates_request=...)
 print(result)
@@ -59,12 +59,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBWApi,
+  OrdersDbwApi,
 } from "@valeryverkhoturov/wb-api-client/orders-dbw";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DBWApi(cfg);
+const api = new OrdersDbwApi(cfg);
 
 const { data } = await api.postV3DbwOrdersDeliveryDate(deliveryDatesRequest);
 console.log(data);
@@ -75,7 +75,7 @@ cfg := wbordersdbw.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbordersdbw.NewAPIClient(cfg)
 
-result, _, err := client.DBWAPI.PostV3DbwOrdersDeliveryDate(context.Background()).DeliveryDatesRequest(deliveryDatesRequest).Execute()
+result, _, err := client.OrdersDbwAPI.PostV3DbwOrdersDeliveryDate(context.Background()).DeliveryDatesRequest(deliveryDatesRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -85,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DbwApi api = new DbwApi(client);
+OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.postV3DbwOrdersDeliveryDate(deliveryDatesRequest));
 ```
@@ -97,12 +97,12 @@ System.out.println(api.postV3DbwOrdersDeliveryDate(deliveryDatesRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\OrdersDbwApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DBWApi(new Client(), $config);
+$api = new OrdersDbwApi(new Client(), $config);
 
 print_r($api->postV3DbwOrdersDeliveryDate($delivery_dates_request));
 ```
@@ -112,7 +112,7 @@ print_r($api->postV3DbwOrdersDeliveryDate($delivery_dates_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СборочныеЗаданияDBWApi(Настройки);
+Клиент = Новый OrdersDbwApi(Настройки);
 
 Сообщить(Клиент.PostV3DbwOrdersDeliveryDate(Тело).Тело);
 ```
@@ -123,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DBWApi(config);
+var api = new OrdersDbwApi(config);
 
 Console.WriteLine(api.PostV3DbwOrdersDeliveryDate(deliveryDatesRequest));
 ```

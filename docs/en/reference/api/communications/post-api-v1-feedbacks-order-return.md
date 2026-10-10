@@ -48,27 +48,13 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.communications import Configuration, ApiClient
-from wb_api_client.communications.api import DefaultApi
+from wb_api_client.communications.api import CommunicationsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DefaultApi(ApiClient(cfg))
+api = CommunicationsApi(ApiClient(cfg))
 
 result = api.post_v1_feedbacks_order_return(post_v1_feedbacks_order_return_request=...)
 print(result)
-```
-
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/communications";
-
-const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
-
-const { data } = await api.postV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequest);
-console.log(data);
 ```
 
 ```go [Go]
@@ -76,7 +62,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1FeedbacksOrderReturn(context.Background()).PostV1FeedbacksOrderReturnRequest(postV1FeedbacksOrderReturnRequest).Execute()
+result, _, err := client.CommunicationsAPI.PostV1FeedbacksOrderReturn(context.Background()).PostV1FeedbacksOrderReturnRequest(postV1FeedbacksOrderReturnRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -86,11 +72,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
 import io.github.valeryverkhoturov.wbapi.communications.SecretString;
-import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.postV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequest));
 ```
@@ -98,12 +84,12 @@ System.out.println(api.postV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequ
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
 use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
-use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\CommunicationsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new CommunicationsApi(new Client(), $config);
 
 print_r($api->postV1FeedbacksOrderReturn($post_v1_feedbacks_order_return_request));
 ```
@@ -113,7 +99,7 @@ print_r($api->postV1FeedbacksOrderReturn($post_v1_feedbacks_order_return_request
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ОтзывыApi(Настройки);
+Клиент = Новый CommunicationsApi(Настройки);
 
 Сообщить(Клиент.PostV1FeedbacksOrderReturn(Тело).Тело);
 ```
@@ -124,7 +110,7 @@ using ValeryVerkhoturov.WbApiClient.Communications.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new CommunicationsApi(config);
 
 Console.WriteLine(api.PostV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequest));
 ```

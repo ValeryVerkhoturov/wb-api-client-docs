@@ -48,10 +48,10 @@ GET /api/v1/documents/download
 
 ```python [Python]
 from wb_api_client.finances import Configuration, ApiClient
-from wb_api_client.finances.api import DefaultApi
+from wb_api_client.finances.api import FinancesApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DefaultApi(ApiClient(cfg))
+api = FinancesApi(ApiClient(cfg))
 
 result = api.get_v1_documents_download(service_name=..., extension=...)
 print(result)
@@ -60,12 +60,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  FinancesApi,
 } from "@valeryverkhoturov/wb-api-client/finances";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new FinancesApi(cfg);
 
 const { data } = await api.getV1DocumentsDownload(serviceName, extension);
 console.log(data);
@@ -76,7 +76,7 @@ cfg := wbfinances.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbfinances.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1DocumentsDownload(context.Background()).ServiceName(serviceName).Extension(extension).Execute()
+result, _, err := client.FinancesAPI.GetV1DocumentsDownload(context.Background()).ServiceName(serviceName).Extension(extension).Execute()
 if err != nil {
     panic(err)
 }
@@ -86,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.finances.ApiClient;
 import io.github.valeryverkhoturov.wbapi.finances.SecretString;
-import io.github.valeryverkhoturov.wbapi.finances.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.finances.api.FinancesApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+FinancesApi api = new FinancesApi(client);
 
 System.out.println(api.getV1DocumentsDownload(serviceName, extension));
 ```
@@ -98,12 +98,12 @@ System.out.println(api.getV1DocumentsDownload(serviceName, extension));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Finances\Configuration;
 use ValeryVerkhoturov\WbApiClient\Finances\SecretString;
-use ValeryVerkhoturov\WbApiClient\Finances\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Finances\Api\FinancesApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new FinancesApi(new Client(), $config);
 
 print_r($api->getV1DocumentsDownload($service_name, $extension));
 ```
@@ -113,7 +113,7 @@ print_r($api->getV1DocumentsDownload($service_name, $extension));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ДокументыApi(Настройки);
+Клиент = Новый FinancesApi(Настройки);
 
 Сообщить(Клиент.GetV1DocumentsDownload(serviceName, extension).Тело);
 ```
@@ -124,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.Finances.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new FinancesApi(config);
 
 Console.WriteLine(api.GetV1DocumentsDownload(serviceName, extension));
 ```

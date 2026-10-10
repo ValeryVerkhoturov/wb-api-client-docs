@@ -45,15 +45,26 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.reports import Configuration, ApiClient
+from wb_api_client.reports.api import ReportsApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = ReportsApi(ApiClient(cfg))
+
+result = api.get_v1_paid_storage_tasks_task_id_status(task_id=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ReportsApi,
 } from "@valeryverkhoturov/wb-api-client/reports";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new ReportsApi(cfg);
 
 const { data } = await api.getV1PaidStorageTasksTaskIdStatus(taskId);
 console.log(data);
@@ -64,7 +75,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1PaidStorageTasksTaskIdStatus(context.Background(), taskId).Execute()
+result, _, err := client.ReportsAPI.GetV1PaidStorageTasksTaskIdStatus(context.Background(), taskId).Execute()
 if err != nil {
     panic(err)
 }
@@ -74,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.reports.ApiClient;
 import io.github.valeryverkhoturov.wbapi.reports.SecretString;
-import io.github.valeryverkhoturov.wbapi.reports.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.getV1PaidStorageTasksTaskIdStatus(taskId));
 ```
@@ -86,12 +97,12 @@ System.out.println(api.getV1PaidStorageTasksTaskIdStatus(taskId));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Reports\Configuration;
 use ValeryVerkhoturov\WbApiClient\Reports\SecretString;
-use ValeryVerkhoturov\WbApiClient\Reports\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Reports\Api\ReportsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ReportsApi(new Client(), $config);
 
 print_r($api->getV1PaidStorageTasksTaskIdStatus($task_id));
 ```
@@ -101,7 +112,7 @@ print_r($api->getV1PaidStorageTasksTaskIdStatus($task_id));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ПлатноеХранениеApi(Настройки);
+Клиент = Новый ReportsApi(Настройки);
 
 Сообщить(Клиент.GetV1PaidStorageTasksTaskIdStatus(task_id).Тело);
 ```
@@ -112,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.Reports.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new ReportsApi(config);
 
 Console.WriteLine(api.GetV1PaidStorageTasksTaskIdStatus(taskId));
 ```

@@ -48,15 +48,26 @@ GET /api/supplies/v1/drafts
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.orders_fbw import Configuration, ApiClient
+from wb_api_client.orders_fbw.api import OrdersFbwApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = OrdersFbwApi(ApiClient(cfg))
+
+result = api.get_v1_drafts(limit=..., offset=..., sort=..., order=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  OrdersFbwApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbw";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new OrdersFbwApi(cfg);
 
 const { data } = await api.getV1Drafts(limit, offset, sort, order);
 console.log(data);
@@ -67,7 +78,7 @@ cfg := wbordersfbw.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbw.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1Drafts(context.Background()).Execute()
+result, _, err := client.OrdersFbwAPI.GetV1Drafts(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -77,11 +88,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbw.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbw.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbw.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbw.api.OrdersFbwApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+OrdersFbwApi api = new OrdersFbwApi(client);
 
 System.out.println(api.getV1Drafts(limit, offset, sort, order));
 ```
@@ -89,12 +100,12 @@ System.out.println(api.getV1Drafts(limit, offset, sort, order));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbw\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbw\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbw\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbw\Api\OrdersFbwApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new OrdersFbwApi(new Client(), $config);
 
 print_r($api->getV1Drafts());
 ```
@@ -104,7 +115,7 @@ print_r($api->getV1Drafts());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ЧерновикиПоставокApi(Настройки);
+Клиент = Новый OrdersFbwApi(Настройки);
 
 Сообщить(Клиент.GetV1Drafts().Тело);
 ```
@@ -115,7 +126,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbw.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new OrdersFbwApi(config);
 
 Console.WriteLine(api.GetV1Drafts());
 ```

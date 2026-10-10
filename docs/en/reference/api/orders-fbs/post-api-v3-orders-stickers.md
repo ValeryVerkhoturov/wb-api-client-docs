@@ -69,10 +69,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.orders_fbs import Configuration, ApiClient
-from wb_api_client.orders_fbs.api import FBSApi
+from wb_api_client.orders_fbs.api import OrdersFbsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = FBSApi(ApiClient(cfg))
+api = OrdersFbsApi(ApiClient(cfg))
 
 result = api.post_v3_orders_stickers(type=..., width=..., height=..., post_v3_orders_stickers_request=...)
 print(result)
@@ -81,12 +81,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  FBSApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new FBSApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.postV3OrdersStickers(type, width, height, postV3OrdersStickersRequest);
 console.log(data);
@@ -97,7 +97,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.FBSAPI.PostV3OrdersStickers(context.Background()).Width(width).Height(height).Execute()
+result, _, err := client.OrdersFbsAPI.PostV3OrdersStickers(context.Background()).Width(width).Height(height).Execute()
 if err != nil {
     panic(err)
 }
@@ -107,11 +107,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-FbsApi api = new FbsApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.postV3OrdersStickers(type, width, height, postV3OrdersStickersRequest));
 ```
@@ -119,12 +119,12 @@ System.out.println(api.postV3OrdersStickers(type, width, height, postV3OrdersSti
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new FBSApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->postV3OrdersStickers($type, $width, $height));
 ```
@@ -134,7 +134,7 @@ print_r($api->postV3OrdersStickers($type, $width, $height));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СборочныеЗаданияFBSApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.PostV3OrdersStickers(type, width, height, Тело).Тело);
 ```
@@ -145,7 +145,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new FBSApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.PostV3OrdersStickers(type, width, height));
 ```

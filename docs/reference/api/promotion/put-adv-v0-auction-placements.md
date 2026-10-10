@@ -46,10 +46,10 @@ PUT /adv/v0/auction/placements
 
 ```python [Python]
 from wb_api_client.promotion import Configuration, ApiClient
-from wb_api_client.promotion.api import Api
+from wb_api_client.promotion.api import PromotionApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = PromotionApi(ApiClient(cfg))
 
 result = api.put_v0_auction_placements(put_v0_auction_placements_request=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  PromotionApi,
 } from "@valeryverkhoturov/wb-api-client/promotion";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new PromotionApi(cfg);
 
 const { data } = await api.putV0AuctionPlacements(putV0AuctionPlacementsRequest);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbpromotion.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PutV0AuctionPlacements(context.Background()).PutV0AuctionPlacementsRequest(putV0AuctionPlacementsRequest).Execute()
+result, _, err := client.PromotionAPI.PutV0AuctionPlacements(context.Background()).PutV0AuctionPlacementsRequest(putV0AuctionPlacementsRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.promotion.ApiClient;
 import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
-import io.github.valeryverkhoturov.wbapi.promotion.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.putV0AuctionPlacements(putV0AuctionPlacementsRequest));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.putV0AuctionPlacements(putV0AuctionPlacementsRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Promotion\Configuration;
 use ValeryVerkhoturov\WbApiClient\Promotion\SecretString;
-use ValeryVerkhoturov\WbApiClient\Promotion\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Promotion\Api\PromotionApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new PromotionApi(new Client(), $config);
 
 print_r($api->putV0AuctionPlacements($put_v0_auction_placements_request));
 ```
@@ -111,7 +111,7 @@ print_r($api->putV0AuctionPlacements($put_v0_auction_placements_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый УправлениеКампаниямиApi(Настройки);
+Клиент = Новый PromotionApi(Настройки);
 
 Сообщить(Клиент.PutV0AuctionPlacements(Тело).Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.Promotion.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new PromotionApi(config);
 
 Console.WriteLine(api.PutV0AuctionPlacements(putV0AuctionPlacementsRequest));
 ```

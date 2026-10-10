@@ -49,15 +49,26 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.items import Configuration, ApiClient
+from wb_api_client.items.api import ItemsApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = ItemsApi(ApiClient(cfg))
+
+result = api.get_v2_cards_limits()
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.getV2CardsLimits();
 console.log(data);
@@ -68,7 +79,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV2CardsLimits(context.Background()).Execute()
+result, _, err := client.ItemsAPI.GetV2CardsLimits(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -78,11 +89,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.getV2CardsLimits());
 ```
@@ -90,12 +101,12 @@ System.out.println(api.getV2CardsLimits());
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->getV2CardsLimits());
 ```
@@ -105,7 +116,7 @@ print_r($api->getV2CardsLimits());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СозданиеКарточекТоваровApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.GetV2CardsLimits().Тело);
 ```
@@ -116,7 +127,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.GetV2CardsLimits());
 ```

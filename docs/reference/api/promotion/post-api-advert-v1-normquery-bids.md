@@ -47,10 +47,10 @@ POST /api/advert/v1/normquery/bids
 
 ```python [Python]
 from wb_api_client.promotion import Configuration, ApiClient
-from wb_api_client.promotion.api import Api
+from wb_api_client.promotion.api import PromotionApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = PromotionApi(ApiClient(cfg))
 
 result = api.post_v1_normquery_bids(v1_set_norm_query_bids_request=...)
 print(result)
@@ -59,12 +59,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  PromotionApi,
 } from "@valeryverkhoturov/wb-api-client/promotion";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new PromotionApi(cfg);
 
 const { data } = await api.postV1NormqueryBids(v1SetNormQueryBidsRequest);
 console.log(data);
@@ -75,7 +75,7 @@ cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbpromotion.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1NormqueryBids(context.Background()).V1SetNormQueryBidsRequest(v1SetNormQueryBidsRequest).Execute()
+result, _, err := client.PromotionAPI.PostV1NormqueryBids(context.Background()).V1SetNormQueryBidsRequest(v1SetNormQueryBidsRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -85,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.promotion.ApiClient;
 import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
-import io.github.valeryverkhoturov.wbapi.promotion.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.postV1NormqueryBids(v1SetNormQueryBidsRequest));
 ```
@@ -97,12 +97,12 @@ System.out.println(api.postV1NormqueryBids(v1SetNormQueryBidsRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Promotion\Configuration;
 use ValeryVerkhoturov\WbApiClient\Promotion\SecretString;
-use ValeryVerkhoturov\WbApiClient\Promotion\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Promotion\Api\PromotionApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new PromotionApi(new Client(), $config);
 
 print_r($api->postV1NormqueryBids($v1_set_norm_query_bids_request));
 ```
@@ -112,7 +112,7 @@ print_r($api->postV1NormqueryBids($v1_set_norm_query_bids_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ПоисковыеКластерыApi(Настройки);
+Клиент = Новый PromotionApi(Настройки);
 
 Сообщить(Клиент.PostV1NormqueryBids(Тело).Тело);
 ```
@@ -123,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.Promotion.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new PromotionApi(config);
 
 Console.WriteLine(api.PostV1NormqueryBids(v1SetNormQueryBidsRequest));
 ```

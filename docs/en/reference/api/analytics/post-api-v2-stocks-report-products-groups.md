@@ -47,15 +47,26 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.analytics import Configuration, ApiClient
+from wb_api_client.analytics.api import AnalyticsApi
+
+cfg = Configuration(access_token="<your WB JWT>")
+api = AnalyticsApi(ApiClient(cfg))
+
+result = api.post_v2_stocks_report_products_groups(table_group_request_st=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  AnalyticsApi,
 } from "@valeryverkhoturov/wb-api-client/analytics";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new AnalyticsApi(cfg);
 
 const { data } = await api.postV2StocksReportProductsGroups(tableGroupRequestSt);
 console.log(data);
@@ -66,7 +77,7 @@ cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV2StocksReportProductsGroups(context.Background()).TableGroupRequestSt(tableGroupRequestSt).Execute()
+result, _, err := client.AnalyticsAPI.PostV2StocksReportProductsGroups(context.Background()).TableGroupRequestSt(tableGroupRequestSt).Execute()
 if err != nil {
     panic(err)
 }
@@ -76,11 +87,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.analytics.ApiClient;
 import io.github.valeryverkhoturov.wbapi.analytics.SecretString;
-import io.github.valeryverkhoturov.wbapi.analytics.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.analytics.api.AnalyticsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+AnalyticsApi api = new AnalyticsApi(client);
 
 System.out.println(api.postV2StocksReportProductsGroups(tableGroupRequestSt));
 ```
@@ -88,12 +99,12 @@ System.out.println(api.postV2StocksReportProductsGroups(tableGroupRequestSt));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Analytics\Configuration;
 use ValeryVerkhoturov\WbApiClient\Analytics\SecretString;
-use ValeryVerkhoturov\WbApiClient\Analytics\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Analytics\Api\AnalyticsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new AnalyticsApi(new Client(), $config);
 
 print_r($api->postV2StocksReportProductsGroups($table_group_request_st));
 ```
@@ -103,7 +114,7 @@ print_r($api->postV2StocksReportProductsGroups($table_group_request_st));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ИсторияОстатковApi(Настройки);
+Клиент = Новый AnalyticsApi(Настройки);
 
 Сообщить(Клиент.PostV2StocksReportProductsGroups(Тело).Тело);
 ```
@@ -114,7 +125,7 @@ using ValeryVerkhoturov.WbApiClient.Analytics.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new AnalyticsApi(config);
 
 Console.WriteLine(api.PostV2StocksReportProductsGroups(tableGroupRequestSt));
 ```

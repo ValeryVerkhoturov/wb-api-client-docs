@@ -44,10 +44,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.promotion import Configuration, ApiClient
-from wb_api_client.promotion.api import DefaultApi
+from wb_api_client.promotion.api import PromotionApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DefaultApi(ApiClient(cfg))
+api = PromotionApi(ApiClient(cfg))
 
 result = api.post_v1_stats(post_v1_stats_request_inner=...)
 print(result)
@@ -56,12 +56,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  PromotionApi,
 } from "@valeryverkhoturov/wb-api-client/promotion";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new PromotionApi(cfg);
 
 const { data } = await api.postV1Stats(postV1StatsRequestInner);
 console.log(data);
@@ -72,7 +72,7 @@ cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbpromotion.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1Stats(context.Background()).PostV1StatsRequestInner(postV1StatsRequestInner).Execute()
+result, _, err := client.PromotionAPI.PostV1Stats(context.Background()).PostV1StatsRequestInner(postV1StatsRequestInner).Execute()
 if err != nil {
     panic(err)
 }
@@ -82,11 +82,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.promotion.ApiClient;
 import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
-import io.github.valeryverkhoturov.wbapi.promotion.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.postV1Stats(postV1StatsRequestInner));
 ```
@@ -94,12 +94,12 @@ System.out.println(api.postV1Stats(postV1StatsRequestInner));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Promotion\Configuration;
 use ValeryVerkhoturov\WbApiClient\Promotion\SecretString;
-use ValeryVerkhoturov\WbApiClient\Promotion\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Promotion\Api\PromotionApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new PromotionApi(new Client(), $config);
 
 print_r($api->postV1Stats($post_v1_stats_request_inner));
 ```
@@ -109,7 +109,7 @@ print_r($api->postV1Stats($post_v1_stats_request_inner));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СтатистикаApi(Настройки);
+Клиент = Новый PromotionApi(Настройки);
 
 Сообщить(Клиент.PostV1Stats(Тело).Тело);
 ```
@@ -120,7 +120,7 @@ using ValeryVerkhoturov.WbApiClient.Promotion.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new PromotionApi(config);
 
 Console.WriteLine(api.PostV1Stats(postV1StatsRequestInner));
 ```

@@ -78,15 +78,26 @@ POST /content/v2/cards/error/list
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.items import Configuration, ApiClient
+from wb_api_client.items.api import ItemsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = ItemsApi(ApiClient(cfg))
+
+result = api.post_v2_cards_error_list(request_public_viewer_public_errors_table_list_v2=..., locale=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.postV2CardsErrorList(requestPublicViewerPublicErrorsTableListV2, locale);
 console.log(data);
@@ -97,7 +108,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV2CardsErrorList(context.Background()).RequestPublicViewerPublicErrorsTableListV2(requestPublicViewerPublicErrorsTableListV2).Locale(locale).Execute()
+result, _, err := client.ItemsAPI.PostV2CardsErrorList(context.Background()).RequestPublicViewerPublicErrorsTableListV2(requestPublicViewerPublicErrorsTableListV2).Locale(locale).Execute()
 if err != nil {
     panic(err)
 }
@@ -107,11 +118,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV2CardsErrorList(requestPublicViewerPublicErrorsTableListV2, locale));
 ```
@@ -119,12 +130,12 @@ System.out.println(api.postV2CardsErrorList(requestPublicViewerPublicErrorsTable
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->postV2CardsErrorList($request_public_viewer_public_errors_table_list_v2));
 ```
@@ -134,7 +145,7 @@ print_r($api->postV2CardsErrorList($request_public_viewer_public_errors_table_li
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый КарточкиТоваровApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PostV2CardsErrorList(Тело).Тело);
 ```
@@ -145,7 +156,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PostV2CardsErrorList(requestPublicViewerPublicErrorsTableListV2));
 ```

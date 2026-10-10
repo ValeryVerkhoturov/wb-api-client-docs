@@ -47,27 +47,13 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.in_store_pickup import Configuration, ApiClient
-from wb_api_client.in_store_pickup.api import Api
+from wb_api_client.in_store_pickup.api import InStorePickupApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = Api(ApiClient(cfg))
+api = InStorePickupApi(ApiClient(cfg))
 
 result = api.post_v3_click_collect_orders_status_prepare(api_orders_request_v2=...)
 print(result)
-```
-
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/in-store-pickup";
-
-const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
-
-const { data } = await api.postV3ClickCollectOrdersStatusPrepare(apiOrdersRequestV2);
-console.log(data);
 ```
 
 ```go [Go]
@@ -75,7 +61,7 @@ cfg := wbinstorepickup.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbinstorepickup.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV3ClickCollectOrdersStatusPrepare(context.Background()).Execute()
+result, _, err := client.InStorePickupAPI.PostV3ClickCollectOrdersStatusPrepare(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -85,11 +71,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.in_store_pickup.ApiClient;
 import io.github.valeryverkhoturov.wbapi.in_store_pickup.SecretString;
-import io.github.valeryverkhoturov.wbapi.in_store_pickup.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.in_store_pickup.api.InStorePickupApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+InStorePickupApi api = new InStorePickupApi(client);
 
 System.out.println(api.postV3ClickCollectOrdersStatusPrepare(apiOrdersRequestV2));
 ```
@@ -97,12 +83,12 @@ System.out.println(api.postV3ClickCollectOrdersStatusPrepare(apiOrdersRequestV2)
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\InStorePickup\Configuration;
 use ValeryVerkhoturov\WbApiClient\InStorePickup\SecretString;
-use ValeryVerkhoturov\WbApiClient\InStorePickup\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\InStorePickup\Api\InStorePickupApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new InStorePickupApi(new Client(), $config);
 
 print_r($api->postV3ClickCollectOrdersStatusPrepare());
 ```
@@ -112,7 +98,7 @@ print_r($api->postV3ClickCollectOrdersStatusPrepare());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СборочныеЗаданияСамовывозApi(Настройки);
+Клиент = Новый InStorePickupApi(Настройки);
 
 Сообщить(Клиент.PostV3ClickCollectOrdersStatusPrepare(Тело).Тело);
 ```
@@ -123,7 +109,7 @@ using ValeryVerkhoturov.WbApiClient.InStorePickup.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new InStorePickupApi(config);
 
 Console.WriteLine(api.PostV3ClickCollectOrdersStatusPrepare());
 ```

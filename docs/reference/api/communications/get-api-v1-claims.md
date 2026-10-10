@@ -39,18 +39,15 @@ GET /api/v1/claims
 
 ::: code-group
 
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/communications";
+```python [Python]
+from wb_api_client.communications import Configuration, ApiClient
+from wb_api_client.communications.api import CommunicationsApi
 
-const cfg = new Configuration({});
-cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = CommunicationsApi(ApiClient(cfg))
 
-const { data } = await api.getV1Claims(isArchive, id, limit, offset, nmId);
-console.log(data);
+result = api.get_v1_claims(is_archive=..., id=..., limit=..., offset=..., nm_id=...)
+print(result)
 ```
 
 ```go [Go]
@@ -58,7 +55,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1Claims(context.Background()).Execute()
+result, _, err := client.CommunicationsAPI.GetV1Claims(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -68,11 +65,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
 import io.github.valeryverkhoturov.wbapi.communications.SecretString;
-import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.getV1Claims(isArchive, id, limit, offset, nmId));
 ```
@@ -80,12 +77,12 @@ System.out.println(api.getV1Claims(isArchive, id, limit, offset, nmId));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
 use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
-use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\CommunicationsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new CommunicationsApi(new Client(), $config);
 
 print_r($api->getV1Claims($is_archive));
 ```
@@ -95,7 +92,7 @@ print_r($api->getV1Claims($is_archive));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ВозвратыПокупателямиApi(Настройки);
+Клиент = Новый CommunicationsApi(Настройки);
 
 Сообщить(Клиент.GetV1Claims(is_archive).Тело);
 ```
@@ -106,7 +103,7 @@ using ValeryVerkhoturov.WbApiClient.Communications.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new CommunicationsApi(config);
 
 Console.WriteLine(api.GetV1Claims(isArchive));
 ```

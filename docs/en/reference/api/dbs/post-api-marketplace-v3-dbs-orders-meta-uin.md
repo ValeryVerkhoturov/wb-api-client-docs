@@ -50,10 +50,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.dbs import Configuration, ApiClient
-from wb_api_client.dbs.api import DBSApi
+from wb_api_client.dbs.api import DbsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DBSApi(ApiClient(cfg))
+api = DbsApi(ApiClient(cfg))
 
 result = api.post_v3_dbs_orders_meta_uin(api_orders_uin_set_request=...)
 print(result)
@@ -62,12 +62,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBSApi,
+  DbsApi,
 } from "@valeryverkhoturov/wb-api-client/dbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DBSApi(cfg);
+const api = new DbsApi(cfg);
 
 const { data } = await api.postV3DbsOrdersMetaUin(apiOrdersUINSetRequest);
 console.log(data);
@@ -78,7 +78,7 @@ cfg := wbdbs.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbdbs.NewAPIClient(cfg)
 
-result, _, err := client.DBSAPI.PostV3DbsOrdersMetaUin(context.Background()).ApiOrdersUINSetRequest(apiOrdersUINSetRequest).Execute()
+result, _, err := client.DbsAPI.PostV3DbsOrdersMetaUin(context.Background()).ApiOrdersUINSetRequest(apiOrdersUINSetRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -100,12 +100,12 @@ System.out.println(api.postV3DbsOrdersMetaUin(apiOrdersUINSetRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Dbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\Dbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\Dbs\Api\DBSApi;
+use ValeryVerkhoturov\WbApiClient\Dbs\Api\DbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DBSApi(new Client(), $config);
+$api = new DbsApi(new Client(), $config);
 
 print_r($api->postV3DbsOrdersMetaUin($api_orders_uin_set_request));
 ```
@@ -115,7 +115,7 @@ print_r($api->postV3DbsOrdersMetaUin($api_orders_uin_set_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ИдентификаторыМаркировкиDBSApi(Настройки);
+Клиент = Новый DbsApi(Настройки);
 
 Сообщить(Клиент.PostV3DbsOrdersMetaUin(Тело).Тело);
 ```
@@ -126,7 +126,7 @@ using ValeryVerkhoturov.WbApiClient.Dbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DBSApi(config);
+var api = new DbsApi(config);
 
 Console.WriteLine(api.PostV3DbsOrdersMetaUin(apiOrdersUINSetRequest));
 ```

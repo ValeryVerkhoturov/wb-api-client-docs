@@ -55,18 +55,15 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ::: code-group
 
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/communications";
+```python [Python]
+from wb_api_client.communications import Configuration, ApiClient
+from wb_api_client.communications.api import CommunicationsApi
 
-const cfg = new Configuration({});
-cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+cfg = Configuration(access_token="<your WB JWT>")
+api = CommunicationsApi(ApiClient(cfg))
 
-const { data } = await api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit);
-console.log(data);
+result = api.get_v1_pins(state=..., pin_on=..., imt_id=..., nm_id=..., feedback_id=..., date_from=..., date_to=..., next=..., limit=...)
+print(result)
 ```
 
 ```go [Go]
@@ -74,7 +71,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1Pins(context.Background()).Execute()
+result, _, err := client.CommunicationsAPI.GetV1Pins(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +81,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
 import io.github.valeryverkhoturov.wbapi.communications.SecretString;
-import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit));
 ```
@@ -96,12 +93,12 @@ System.out.println(api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
 use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
-use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\CommunicationsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new CommunicationsApi(new Client(), $config);
 
 print_r($api->getV1Pins());
 ```
@@ -111,7 +108,7 @@ print_r($api->getV1Pins());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ЗакреплённыеОтзывыApi(Настройки);
+Клиент = Новый CommunicationsApi(Настройки);
 
 Сообщить(Клиент.GetV1Pins().Тело);
 ```
@@ -122,7 +119,7 @@ using ValeryVerkhoturov.WbApiClient.Communications.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new CommunicationsApi(config);
 
 Console.WriteLine(api.GetV1Pins());
 ```

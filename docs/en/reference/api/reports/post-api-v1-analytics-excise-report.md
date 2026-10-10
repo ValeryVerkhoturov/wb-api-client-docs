@@ -47,10 +47,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.reports import Configuration, ApiClient
-from wb_api_client.reports.api import CApi
+from wb_api_client.reports.api import ReportsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = CApi(ApiClient(cfg))
+api = ReportsApi(ApiClient(cfg))
 
 result = api.post_v1_analytics_excise_report(date_from=..., date_to=..., excise_report_request=...)
 print(result)
@@ -59,12 +59,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  CApi,
+  ReportsApi,
 } from "@valeryverkhoturov/wb-api-client/reports";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new CApi(cfg);
+const api = new ReportsApi(cfg);
 
 const { data } = await api.postV1AnalyticsExciseReport(dateFrom, dateTo, exciseReportRequest);
 console.log(data);
@@ -75,7 +75,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.CAPI.PostV1AnalyticsExciseReport(context.Background()).Execute()
+result, _, err := client.ReportsAPI.PostV1AnalyticsExciseReport(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -85,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.reports.ApiClient;
 import io.github.valeryverkhoturov.wbapi.reports.SecretString;
-import io.github.valeryverkhoturov.wbapi.reports.api.CApi;
+import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-CApi api = new CApi(client);
+ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.postV1AnalyticsExciseReport(dateFrom, dateTo, exciseReportRequest));
 ```
@@ -97,12 +97,12 @@ System.out.println(api.postV1AnalyticsExciseReport(dateFrom, dateTo, exciseRepor
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Reports\Configuration;
 use ValeryVerkhoturov\WbApiClient\Reports\SecretString;
-use ValeryVerkhoturov\WbApiClient\Reports\Api\CApi;
+use ValeryVerkhoturov\WbApiClient\Reports\Api\ReportsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new CApi(new Client(), $config);
+$api = new ReportsApi(new Client(), $config);
 
 print_r($api->postV1AnalyticsExciseReport($date_from, $date_to));
 ```
@@ -112,7 +112,7 @@ print_r($api->postV1AnalyticsExciseReport($date_from, $date_to));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый ОтчётОТоварахCОбязательнойМаркировкойApi(Настройки);
+Клиент = Новый ReportsApi(Настройки);
 
 Сообщить(Клиент.PostV1AnalyticsExciseReport(dateFrom, dateTo, Тело).Тело);
 ```
@@ -123,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.Reports.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new CApi(config);
+var api = new ReportsApi(config);
 
 Console.WriteLine(api.PostV1AnalyticsExciseReport(dateFrom, dateTo));
 ```

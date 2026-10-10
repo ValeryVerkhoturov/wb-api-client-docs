@@ -49,10 +49,10 @@ GET /api/communications/v2/news
 
 ```python [Python]
 from wb_api_client.general import Configuration, ApiClient
-from wb_api_client.general.api import APIApi
+from wb_api_client.general.api import GeneralApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = APIApi(ApiClient(cfg))
+api = GeneralApi(ApiClient(cfg))
 
 result = api.get_v2_news(var_from=..., from_id=...)
 print(result)
@@ -61,12 +61,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  APIApi,
+  GeneralApi,
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new APIApi(cfg);
+const api = new GeneralApi(cfg);
 
 const { data } = await api.getV2News(from, fromID);
 console.log(data);
@@ -77,7 +77,7 @@ cfg := wbgeneral.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbgeneral.NewAPIClient(cfg)
 
-result, _, err := client.APIAPI.GetV2News(context.Background()).Execute()
+result, _, err := client.GeneralAPI.GetV2News(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -87,11 +87,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.SecretString;
-import io.github.valeryverkhoturov.wbapi.general.api.ApiApi;
+import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-ApiApi api = new ApiApi(client);
+GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV2News(from, fromID));
 ```
@@ -99,12 +99,12 @@ System.out.println(api.getV2News(from, fromID));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
 use ValeryVerkhoturov\WbApiClient\General\SecretString;
-use ValeryVerkhoturov\WbApiClient\General\Api\APIApi;
+use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new APIApi(new Client(), $config);
+$api = new GeneralApi(new Client(), $config);
 
 print_r($api->getV2News());
 ```
@@ -114,7 +114,7 @@ print_r($api->getV2News());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый APIНовостейApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 
 Сообщить(Клиент.GetV2News().Тело);
 ```
@@ -125,7 +125,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new APIApi(config);
+var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetV2News());
 ```

@@ -45,27 +45,13 @@ POST /api/v1/seller/message
 
 ```python [Python]
 from wb_api_client.communications import Configuration, ApiClient
-from wb_api_client.communications.api import Api
+from wb_api_client.communications.api import CommunicationsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = CommunicationsApi(ApiClient(cfg))
 
 result = api.post_v1_seller_message(reply_sign=..., message=..., file=...)
 print(result)
-```
-
-```ts [TypeScript]
-import {
-  Configuration,
-  DefaultApi,
-} from "@valeryverkhoturov/wb-api-client/communications";
-
-const cfg = new Configuration({});
-cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
-
-const { data } = await api.postV1SellerMessage(replySign, message, file);
-console.log(data);
 ```
 
 ```go [Go]
@@ -73,7 +59,7 @@ cfg := wbcommunications.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbcommunications.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1SellerMessage(context.Background()).ReplySign(replySign).Message(message).File(file).Execute()
+result, _, err := client.CommunicationsAPI.PostV1SellerMessage(context.Background()).ReplySign(replySign).Message(message).File(file).Execute()
 if err != nil {
     panic(err)
 }
@@ -83,11 +69,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.communications.ApiClient;
 import io.github.valeryverkhoturov.wbapi.communications.SecretString;
-import io.github.valeryverkhoturov.wbapi.communications.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.postV1SellerMessage(replySign, message, _file));
 ```
@@ -95,12 +81,12 @@ System.out.println(api.postV1SellerMessage(replySign, message, _file));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Communications\Configuration;
 use ValeryVerkhoturov\WbApiClient\Communications\SecretString;
-use ValeryVerkhoturov\WbApiClient\Communications\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Communications\Api\CommunicationsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new CommunicationsApi(new Client(), $config);
 
 print_r($api->postV1SellerMessage($reply_sign));
 ```
@@ -110,7 +96,7 @@ print_r($api->postV1SellerMessage($reply_sign));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ЧатСПокупателямиApi(Настройки);
+Клиент = Новый CommunicationsApi(Настройки);
 
 Сообщить(Клиент.PostV1SellerMessage(replySign).Тело);
 ```
@@ -121,7 +107,7 @@ using ValeryVerkhoturov.WbApiClient.Communications.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new CommunicationsApi(config);
 
 Console.WriteLine(api.PostV1SellerMessage(replySign));
 ```

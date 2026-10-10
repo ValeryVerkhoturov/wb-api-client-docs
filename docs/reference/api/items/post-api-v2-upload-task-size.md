@@ -50,15 +50,26 @@ POST /api/v2/upload/task/size
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.items import Configuration, ApiClient
+from wb_api_client.items.api import ItemsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = ItemsApi(ApiClient(cfg))
+
+result = api.post_v2_upload_task_size(post_v2_upload_task_size_request=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.postV2UploadTaskSize(postV2UploadTaskSizeRequest);
 console.log(data);
@@ -69,7 +80,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV2UploadTaskSize(context.Background()).Execute()
+result, _, err := client.ItemsAPI.PostV2UploadTaskSize(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -79,11 +90,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV2UploadTaskSize(postV2UploadTaskSizeRequest));
 ```
@@ -91,12 +102,12 @@ System.out.println(api.postV2UploadTaskSize(postV2UploadTaskSizeRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->postV2UploadTaskSize($post_v2_upload_task_size_request));
 ```
@@ -106,7 +117,7 @@ print_r($api->postV2UploadTaskSize($post_v2_upload_task_size_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ЦеныИСкидкиApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PostV2UploadTaskSize(Тело).Тело);
 ```
@@ -117,7 +128,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PostV2UploadTaskSize(postV2UploadTaskSizeRequest));
 ```

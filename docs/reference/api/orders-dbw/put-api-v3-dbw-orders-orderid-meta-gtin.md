@@ -46,10 +46,10 @@ PUT /api/v3/dbw/orders/{orderId}/meta/gtin
 
 ```python [Python]
 from wb_api_client.orders_dbw import Configuration, ApiClient
-from wb_api_client.orders_dbw.api import DBWApi
+from wb_api_client.orders_dbw.api import OrdersDbwApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DBWApi(ApiClient(cfg))
+api = OrdersDbwApi(ApiClient(cfg))
 
 result = api.put_v3_dbw_orders_order_id_meta_gtin(order_id=..., put_v3_dbw_orders_order_id_meta_gtin_request=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBWApi,
+  OrdersDbwApi,
 } from "@valeryverkhoturov/wb-api-client/orders-dbw";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DBWApi(cfg);
+const api = new OrdersDbwApi(cfg);
 
 const { data } = await api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbordersdbw.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersdbw.NewAPIClient(cfg)
 
-result, _, err := client.DBWAPI.PutV3DbwOrdersOrderIdMetaGtin(context.Background(), orderId).PutV3DbwOrdersOrderIdMetaGtinRequest(putV3DbwOrdersOrderIdMetaGtinRequest).Execute()
+result, _, err := client.OrdersDbwAPI.PutV3DbwOrdersOrderIdMetaGtin(context.Background(), orderId).PutV3DbwOrdersOrderIdMetaGtinRequest(putV3DbwOrdersOrderIdMetaGtinRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DbwApi api = new DbwApi(client);
+OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrde
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\OrdersDbwApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DBWApi(new Client(), $config);
+$api = new OrdersDbwApi(new Client(), $config);
 
 print_r($api->putV3DbwOrdersOrderIdMetaGtin($order_id, $put_v3_dbw_orders_order_id_meta_gtin_request));
 ```
@@ -111,7 +111,7 @@ print_r($api->putV3DbwOrdersOrderIdMetaGtin($order_id, $put_v3_dbw_orders_order_
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ИдентификаторыМаркировкиDBWApi(Настройки);
+Клиент = Новый OrdersDbwApi(Настройки);
 
 Сообщить(Клиент.PutV3DbwOrdersOrderIdMetaGtin(orderId, Тело).Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DBWApi(config);
+var api = new OrdersDbwApi(config);
 
 Console.WriteLine(api.PutV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest));
 ```

@@ -46,10 +46,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.analytics import Configuration, ApiClient
-from wb_api_client.analytics.api import CSVApi
+from wb_api_client.analytics.api import AnalyticsApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = CSVApi(ApiClient(cfg))
+api = AnalyticsApi(ApiClient(cfg))
 
 result = api.get_v2_nm_report_downloads(filter_download_ids=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  CSVApi,
+  AnalyticsApi,
 } from "@valeryverkhoturov/wb-api-client/analytics";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new CSVApi(cfg);
+const api = new AnalyticsApi(cfg);
 
 const { data } = await api.getV2NmReportDownloads(filterDownloadIds);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.CSVAPI.GetV2NmReportDownloads(context.Background()).Execute()
+result, _, err := client.AnalyticsAPI.GetV2NmReportDownloads(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.analytics.ApiClient;
 import io.github.valeryverkhoturov.wbapi.analytics.SecretString;
-import io.github.valeryverkhoturov.wbapi.analytics.api.CsvApi;
+import io.github.valeryverkhoturov.wbapi.analytics.api.AnalyticsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-CsvApi api = new CsvApi(client);
+AnalyticsApi api = new AnalyticsApi(client);
 
 System.out.println(api.getV2NmReportDownloads(filterDownloadIds));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.getV2NmReportDownloads(filterDownloadIds));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Analytics\Configuration;
 use ValeryVerkhoturov\WbApiClient\Analytics\SecretString;
-use ValeryVerkhoturov\WbApiClient\Analytics\Api\CSVApi;
+use ValeryVerkhoturov\WbApiClient\Analytics\Api\AnalyticsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new CSVApi(new Client(), $config);
+$api = new AnalyticsApi(new Client(), $config);
 
 print_r($api->getV2NmReportDownloads());
 ```
@@ -111,7 +111,7 @@ print_r($api->getV2NmReportDownloads());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый АналитикаПродавцаCSVApi(Настройки);
+Клиент = Новый AnalyticsApi(Настройки);
 
 Сообщить(Клиент.GetV2NmReportDownloads().Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.Analytics.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new CSVApi(config);
+var api = new AnalyticsApi(config);
 
 Console.WriteLine(api.GetV2NmReportDownloads());
 ```

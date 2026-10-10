@@ -63,10 +63,10 @@ GET /ping
 
 ```python [Python]
 from wb_api_client.general import Configuration, ApiClient
-from wb_api_client.general.api import WBAPIApi
+from wb_api_client.general.api import GeneralApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = WBAPIApi(ApiClient(cfg))
+api = GeneralApi(ApiClient(cfg))
 
 result = api.get_ping()
 print(result)
@@ -75,12 +75,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  WBAPIApi,
+  GeneralApi,
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new WBAPIApi(cfg);
+const api = new GeneralApi(cfg);
 
 const { data } = await api.getPing();
 console.log(data);
@@ -91,7 +91,7 @@ cfg := wbgeneral.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbgeneral.NewAPIClient(cfg)
 
-result, _, err := client.WBAPIAPI.GetPing(context.Background()).Execute()
+result, _, err := client.GeneralAPI.GetPing(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -101,11 +101,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.SecretString;
-import io.github.valeryverkhoturov.wbapi.general.api.WbApiApi;
+import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-WbApiApi api = new WbApiApi(client);
+GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getPing());
 ```
@@ -113,12 +113,12 @@ System.out.println(api.getPing());
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
 use ValeryVerkhoturov\WbApiClient\General\SecretString;
-use ValeryVerkhoturov\WbApiClient\General\Api\WBAPIApi;
+use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new WBAPIApi(new Client(), $config);
+$api = new GeneralApi(new Client(), $config);
 
 print_r($api->getPing());
 ```
@@ -128,7 +128,7 @@ print_r($api->getPing());
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ПроверкаПодключенияКWBAPIApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 
 Сообщить(Клиент.GetPing().Тело);
 ```
@@ -139,7 +139,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new WBAPIApi(config);
+var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetPing());
 ```

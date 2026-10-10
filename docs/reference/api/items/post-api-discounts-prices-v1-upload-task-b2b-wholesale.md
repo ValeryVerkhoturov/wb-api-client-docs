@@ -43,15 +43,26 @@ POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.items import Configuration, ApiClient
+from wb_api_client.items.api import ItemsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = ItemsApi(ApiClient(cfg))
+
+result = api.post_v1_upload_task_b2b_wholesale(post_v1_upload_task_b2b_wholesale_request=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.postV1UploadTaskB2bWholesale(postV1UploadTaskB2bWholesaleRequest);
 console.log(data);
@@ -62,7 +73,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1UploadTaskB2bWholesale(context.Background()).Execute()
+result, _, err := client.ItemsAPI.PostV1UploadTaskB2bWholesale(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -72,11 +83,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV1UploadTaskB2bWholesale(postV1UploadTaskB2bWholesaleRequest));
 ```
@@ -84,12 +95,12 @@ System.out.println(api.postV1UploadTaskB2bWholesale(postV1UploadTaskB2bWholesale
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->postV1UploadTaskB2bWholesale($post_v1_upload_task_b2b_wholesale_request));
 ```
@@ -99,7 +110,7 @@ print_r($api->postV1UploadTaskB2bWholesale($post_v1_upload_task_b2b_wholesale_re
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ЦеныИСкидкиApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PostV1UploadTaskB2bWholesale(Тело).Тело);
 ```
@@ -110,7 +121,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PostV1UploadTaskB2bWholesale(postV1UploadTaskB2bWholesaleRequest));
 ```

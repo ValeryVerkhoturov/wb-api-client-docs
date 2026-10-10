@@ -52,10 +52,10 @@ PUT /api/v3/stocks/{warehouseId}
 
 ```python [Python]
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import Api
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = ItemsApi(ApiClient(cfg))
 
 result = api.put_v3_stocks_warehouse_id(warehouse_id=..., put_v3_stocks_warehouse_id_request=...)
 print(result)
@@ -64,12 +64,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.putV3StocksWarehouseId(warehouseId, putV3StocksWarehouseIdRequest);
 console.log(data);
@@ -80,7 +80,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PutV3StocksWarehouseId(context.Background(), warehouseId).Execute()
+result, _, err := client.ItemsAPI.PutV3StocksWarehouseId(context.Background(), warehouseId).Execute()
 if err != nil {
     panic(err)
 }
@@ -90,11 +90,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.putV3StocksWarehouseId(warehouseId, putV3StocksWarehouseIdRequest));
 ```
@@ -102,12 +102,12 @@ System.out.println(api.putV3StocksWarehouseId(warehouseId, putV3StocksWarehouseI
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->putV3StocksWarehouseId($warehouse_id));
 ```
@@ -117,7 +117,7 @@ print_r($api->putV3StocksWarehouseId($warehouse_id));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ОстаткиНаСкладахПродавцаApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PutV3StocksWarehouseId(warehouseId, Тело).Тело);
 ```
@@ -128,7 +128,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PutV3StocksWarehouseId(warehouseId));
 ```

@@ -50,10 +50,10 @@ POST /content/v2/tag/nomenclature/link
 
 ```python [Python]
 from wb_api_client.items import Configuration, ApiClient
-from wb_api_client.items.api import DefaultApi
+from wb_api_client.items.api import ItemsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DefaultApi(ApiClient(cfg))
+api = ItemsApi(ApiClient(cfg))
 
 result = api.post_v2_tag_nomenclature_link(post_v2_tag_nomenclature_link_request=...)
 print(result)
@@ -62,12 +62,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  ItemsApi,
 } from "@valeryverkhoturov/wb-api-client/items";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new ItemsApi(cfg);
 
 const { data } = await api.postV2TagNomenclatureLink(postV2TagNomenclatureLinkRequest);
 console.log(data);
@@ -78,7 +78,7 @@ cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbitems.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV2TagNomenclatureLink(context.Background()).PostV2TagNomenclatureLinkRequest(postV2TagNomenclatureLinkRequest).Execute()
+result, _, err := client.ItemsAPI.PostV2TagNomenclatureLink(context.Background()).PostV2TagNomenclatureLinkRequest(postV2TagNomenclatureLinkRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -88,11 +88,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.SecretString;
-import io.github.valeryverkhoturov.wbapi.items.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV2TagNomenclatureLink(postV2TagNomenclatureLinkRequest));
 ```
@@ -100,12 +100,12 @@ System.out.println(api.postV2TagNomenclatureLink(postV2TagNomenclatureLinkReques
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
 use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-use ValeryVerkhoturov\WbApiClient\Items\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new ItemsApi(new Client(), $config);
 
 print_r($api->postV2TagNomenclatureLink($post_v2_tag_nomenclature_link_request));
 ```
@@ -115,7 +115,7 @@ print_r($api->postV2TagNomenclatureLink($post_v2_tag_nomenclature_link_request))
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ЯрлыкиApi(Настройки);
+Клиент = Новый ItemsApi(Настройки);
 
 Сообщить(Клиент.PostV2TagNomenclatureLink(Тело).Тело);
 ```
@@ -126,7 +126,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new ItemsApi(config);
 
 Console.WriteLine(api.PostV2TagNomenclatureLink(postV2TagNomenclatureLinkRequest));
 ```

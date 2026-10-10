@@ -46,10 +46,10 @@ GET /api/v1/tariffs/pallet
 
 ```python [Python]
 from wb_api_client.rates import Configuration, ApiClient
-from wb_api_client.rates.api import Api
+from wb_api_client.rates.api import RatesApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = RatesApi(ApiClient(cfg))
 
 result = api.get_v1_tariffs_pallet(var_date=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  RatesApi,
 } from "@valeryverkhoturov/wb-api-client/rates";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new RatesApi(cfg);
 
 const { data } = await api.getV1TariffsPallet(date);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbrates.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbrates.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV1TariffsPallet(context.Background()).Execute()
+result, _, err := client.RatesAPI.GetV1TariffsPallet(context.Background()).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.rates.ApiClient;
 import io.github.valeryverkhoturov.wbapi.rates.SecretString;
-import io.github.valeryverkhoturov.wbapi.rates.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.rates.api.RatesApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+RatesApi api = new RatesApi(client);
 
 System.out.println(api.getV1TariffsPallet(date));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.getV1TariffsPallet(date));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Rates\Configuration;
 use ValeryVerkhoturov\WbApiClient\Rates\SecretString;
-use ValeryVerkhoturov\WbApiClient\Rates\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Rates\Api\RatesApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new RatesApi(new Client(), $config);
 
 print_r($api->getV1TariffsPallet($date));
 ```
@@ -111,7 +111,7 @@ print_r($api->getV1TariffsPallet($date));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ТарифыНаОстатокApi(Настройки);
+Клиент = Новый RatesApi(Настройки);
 
 Сообщить(Клиент.GetV1TariffsPallet(date).Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.Rates.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new RatesApi(config);
 
 Console.WriteLine(api.GetV1TariffsPallet(date));
 ```

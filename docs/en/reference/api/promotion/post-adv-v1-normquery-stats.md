@@ -45,10 +45,10 @@ Arguments are shown as parameter names — substitute your own values. Languages
 
 ```python [Python]
 from wb_api_client.promotion import Configuration, ApiClient
-from wb_api_client.promotion.api import DefaultApi
+from wb_api_client.promotion.api import PromotionApi
 
 cfg = Configuration(access_token="<your WB JWT>")
-api = DefaultApi(ApiClient(cfg))
+api = PromotionApi(ApiClient(cfg))
 
 result = api.post_v1_normquery_stats(v1_get_norm_query_stats_request=...)
 print(result)
@@ -57,12 +57,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  PromotionApi,
 } from "@valeryverkhoturov/wb-api-client/promotion";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
-const api = new DefaultApi(cfg);
+const api = new PromotionApi(cfg);
 
 const { data } = await api.postV1NormqueryStats(v1GetNormQueryStatsRequest);
 console.log(data);
@@ -73,7 +73,7 @@ cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbpromotion.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1NormqueryStats(context.Background()).V1GetNormQueryStatsRequest(v1GetNormQueryStatsRequest).Execute()
+result, _, err := client.PromotionAPI.PostV1NormqueryStats(context.Background()).V1GetNormQueryStatsRequest(v1GetNormQueryStatsRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -83,11 +83,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.promotion.ApiClient;
 import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
-import io.github.valeryverkhoturov.wbapi.promotion.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<your WB JWT>"));
-DefaultApi api = new DefaultApi(client);
+PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.postV1NormqueryStats(v1GetNormQueryStatsRequest));
 ```
@@ -95,12 +95,12 @@ System.out.println(api.postV1NormqueryStats(v1GetNormQueryStatsRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Promotion\Configuration;
 use ValeryVerkhoturov\WbApiClient\Promotion\SecretString;
-use ValeryVerkhoturov\WbApiClient\Promotion\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Promotion\Api\PromotionApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new PromotionApi(new Client(), $config);
 
 print_r($api->postV1NormqueryStats($v1_get_norm_query_stats_request));
 ```
@@ -110,7 +110,7 @@ print_r($api->postV1NormqueryStats($v1_get_norm_query_stats_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<your WB JWT>");
-Клиент = Новый СтатистикаApi(Настройки);
+Клиент = Новый PromotionApi(Настройки);
 
 Сообщить(Клиент.PostV1NormqueryStats(Тело).Тело);
 ```
@@ -121,7 +121,7 @@ using ValeryVerkhoturov.WbApiClient.Promotion.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
-var api = new DefaultApi(config);
+var api = new PromotionApi(config);
 
 Console.WriteLine(api.PostV1NormqueryStats(v1GetNormQueryStatsRequest));
 ```

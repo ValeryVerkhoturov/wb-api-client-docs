@@ -48,10 +48,10 @@ POST /api/finance/v1/sales-reports/list
 
 ```python [Python]
 from wb_api_client.finances import Configuration, ApiClient
-from wb_api_client.finances.api import Api
+from wb_api_client.finances.api import FinancesApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = FinancesApi(ApiClient(cfg))
 
 result = api.post_v1_sales_reports_list(sales_report_list_req=...)
 print(result)
@@ -60,12 +60,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  FinancesApi,
 } from "@valeryverkhoturov/wb-api-client/finances";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new FinancesApi(cfg);
 
 const { data } = await api.postV1SalesReportsList(salesReportListReq);
 console.log(data);
@@ -76,7 +76,7 @@ cfg := wbfinances.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbfinances.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV1SalesReportsList(context.Background()).SalesReportListReq(salesReportListReq).Execute()
+result, _, err := client.FinancesAPI.PostV1SalesReportsList(context.Background()).SalesReportListReq(salesReportListReq).Execute()
 if err != nil {
     panic(err)
 }
@@ -86,11 +86,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.finances.ApiClient;
 import io.github.valeryverkhoturov.wbapi.finances.SecretString;
-import io.github.valeryverkhoturov.wbapi.finances.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.finances.api.FinancesApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+FinancesApi api = new FinancesApi(client);
 
 System.out.println(api.postV1SalesReportsList(salesReportListReq));
 ```
@@ -98,12 +98,12 @@ System.out.println(api.postV1SalesReportsList(salesReportListReq));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Finances\Configuration;
 use ValeryVerkhoturov\WbApiClient\Finances\SecretString;
-use ValeryVerkhoturov\WbApiClient\Finances\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Finances\Api\FinancesApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new FinancesApi(new Client(), $config);
 
 print_r($api->postV1SalesReportsList($sales_report_list_req));
 ```
@@ -113,7 +113,7 @@ print_r($api->postV1SalesReportsList($sales_report_list_req));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ФинансовыеОтчётыApi(Настройки);
+Клиент = Новый FinancesApi(Настройки);
 
 Сообщить(Клиент.PostV1SalesReportsList(Тело).Тело);
 ```
@@ -124,7 +124,7 @@ using ValeryVerkhoturov.WbApiClient.Finances.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new FinancesApi(config);
 
 Console.WriteLine(api.PostV1SalesReportsList(salesReportListReq));
 ```

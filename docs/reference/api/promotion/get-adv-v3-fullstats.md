@@ -54,10 +54,10 @@ GET /adv/v3/fullstats
 
 ```python [Python]
 from wb_api_client.promotion import Configuration, ApiClient
-from wb_api_client.promotion.api import DefaultApi
+from wb_api_client.promotion.api import PromotionApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DefaultApi(ApiClient(cfg))
+api = PromotionApi(ApiClient(cfg))
 
 result = api.get_v3_fullstats(ids=..., begin_date=..., end_date=...)
 print(result)
@@ -66,12 +66,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  PromotionApi,
 } from "@valeryverkhoturov/wb-api-client/promotion";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new PromotionApi(cfg);
 
 const { data } = await api.getV3Fullstats(ids, beginDate, endDate);
 console.log(data);
@@ -82,7 +82,7 @@ cfg := wbpromotion.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbpromotion.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.GetV3Fullstats(context.Background()).Ids(ids).BeginDate(beginDate).EndDate(endDate).Execute()
+result, _, err := client.PromotionAPI.GetV3Fullstats(context.Background()).Ids(ids).BeginDate(beginDate).EndDate(endDate).Execute()
 if err != nil {
     panic(err)
 }
@@ -92,11 +92,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.promotion.ApiClient;
 import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
-import io.github.valeryverkhoturov.wbapi.promotion.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.getV3Fullstats(ids, beginDate, endDate));
 ```
@@ -104,12 +104,12 @@ System.out.println(api.getV3Fullstats(ids, beginDate, endDate));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Promotion\Configuration;
 use ValeryVerkhoturov\WbApiClient\Promotion\SecretString;
-use ValeryVerkhoturov\WbApiClient\Promotion\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Promotion\Api\PromotionApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new PromotionApi(new Client(), $config);
 
 print_r($api->getV3Fullstats($ids, $begin_date, $end_date));
 ```
@@ -119,7 +119,7 @@ print_r($api->getV3Fullstats($ids, $begin_date, $end_date));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый СтатистикаApi(Настройки);
+Клиент = Новый PromotionApi(Настройки);
 
 Сообщить(Клиент.GetV3Fullstats(ids, beginDate, endDate).Тело);
 ```
@@ -130,7 +130,7 @@ using ValeryVerkhoturov.WbApiClient.Promotion.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new PromotionApi(config);
 
 Console.WriteLine(api.GetV3Fullstats(ids, beginDate, endDate));
 ```

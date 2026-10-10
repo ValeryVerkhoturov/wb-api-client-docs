@@ -55,10 +55,10 @@ POST /api/marketplace/v3/dbw/orders/meta/details
 
 ```python [Python]
 from wb_api_client.orders_dbw import Configuration, ApiClient
-from wb_api_client.orders_dbw.api import DBWApi
+from wb_api_client.orders_dbw.api import OrdersDbwApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = DBWApi(ApiClient(cfg))
+api = OrdersDbwApi(ApiClient(cfg))
 
 result = api.post_v3_dbw_orders_meta_details(api_orders_request_v2=...)
 print(result)
@@ -67,12 +67,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DBWApi,
+  OrdersDbwApi,
 } from "@valeryverkhoturov/wb-api-client/orders-dbw";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DBWApi(cfg);
+const api = new OrdersDbwApi(cfg);
 
 const { data } = await api.postV3DbwOrdersMetaDetails(apiOrdersRequestV2);
 console.log(data);
@@ -83,7 +83,7 @@ cfg := wbordersdbw.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersdbw.NewAPIClient(cfg)
 
-result, _, err := client.DBWAPI.PostV3DbwOrdersMetaDetails(context.Background()).ApiOrdersRequestV2(apiOrdersRequestV2).Execute()
+result, _, err := client.OrdersDbwAPI.PostV3DbwOrdersMetaDetails(context.Background()).ApiOrdersRequestV2(apiOrdersRequestV2).Execute()
 if err != nil {
     panic(err)
 }
@@ -93,11 +93,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_dbw.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_dbw.api.DbwApi;
+import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DbwApi api = new DbwApi(client);
+OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.postV3DbwOrdersMetaDetails(apiOrdersRequestV2));
 ```
@@ -105,12 +105,12 @@ System.out.println(api.postV3DbwOrdersMetaDetails(apiOrdersRequestV2));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersDbw\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\DBWApi;
+use ValeryVerkhoturov\WbApiClient\OrdersDbw\Api\OrdersDbwApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DBWApi(new Client(), $config);
+$api = new OrdersDbwApi(new Client(), $config);
 
 print_r($api->postV3DbwOrdersMetaDetails($api_orders_request_v2));
 ```
@@ -120,7 +120,7 @@ print_r($api->postV3DbwOrdersMetaDetails($api_orders_request_v2));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ИдентификаторыМаркировкиDBWApi(Настройки);
+Клиент = Новый OrdersDbwApi(Настройки);
 
 Сообщить(Клиент.PostV3DbwOrdersMetaDetails(Тело).Тело);
 ```
@@ -131,7 +131,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersDbw.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DBWApi(config);
+var api = new OrdersDbwApi(config);
 
 Console.WriteLine(api.PostV3DbwOrdersMetaDetails(apiOrdersRequestV2));
 ```

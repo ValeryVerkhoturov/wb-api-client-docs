@@ -45,15 +45,26 @@ POST /api/analytics/v2/item-rating
 
 ::: code-group
 
+```python [Python]
+from wb_api_client.analytics import Configuration, ApiClient
+from wb_api_client.analytics.api import AnalyticsApi
+
+cfg = Configuration(access_token="<ваш JWT WB>")
+api = AnalyticsApi(ApiClient(cfg))
+
+result = api.post_v2_item_rating(item_rating_request=...)
+print(result)
+```
+
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  AnalyticsApi,
 } from "@valeryverkhoturov/wb-api-client/analytics";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new AnalyticsApi(cfg);
 
 const { data } = await api.postV2ItemRating(itemRatingRequest);
 console.log(data);
@@ -64,7 +75,7 @@ cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.PostV2ItemRating(context.Background()).ItemRatingRequest(itemRatingRequest).Execute()
+result, _, err := client.AnalyticsAPI.PostV2ItemRating(context.Background()).ItemRatingRequest(itemRatingRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -74,11 +85,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.analytics.ApiClient;
 import io.github.valeryverkhoturov.wbapi.analytics.SecretString;
-import io.github.valeryverkhoturov.wbapi.analytics.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.analytics.api.AnalyticsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+AnalyticsApi api = new AnalyticsApi(client);
 
 System.out.println(api.postV2ItemRating(itemRatingRequest));
 ```
@@ -86,12 +97,12 @@ System.out.println(api.postV2ItemRating(itemRatingRequest));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Analytics\Configuration;
 use ValeryVerkhoturov\WbApiClient\Analytics\SecretString;
-use ValeryVerkhoturov\WbApiClient\Analytics\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\Analytics\Api\AnalyticsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new AnalyticsApi(new Client(), $config);
 
 print_r($api->postV2ItemRating($item_rating_request));
 ```
@@ -101,7 +112,7 @@ print_r($api->postV2ItemRating($item_rating_request));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ОценкаТовараApi(Настройки);
+Клиент = Новый AnalyticsApi(Настройки);
 
 Сообщить(Клиент.PostV2ItemRating(Тело).Тело);
 ```
@@ -112,7 +123,7 @@ using ValeryVerkhoturov.WbApiClient.Analytics.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new AnalyticsApi(config);
 
 Console.WriteLine(api.PostV2ItemRating(itemRatingRequest));
 ```

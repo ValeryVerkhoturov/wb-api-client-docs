@@ -46,10 +46,10 @@ DELETE /api/v1/user
 
 ```python [Python]
 from wb_api_client.general import Configuration, ApiClient
-from wb_api_client.general.api import Api
+from wb_api_client.general.api import GeneralApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = Api(ApiClient(cfg))
+api = GeneralApi(ApiClient(cfg))
 
 result = api.delete_v1_user(deleted_user_id=...)
 print(result)
@@ -58,12 +58,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  DefaultApi,
+  GeneralApi,
 } from "@valeryverkhoturov/wb-api-client/general";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new DefaultApi(cfg);
+const api = new GeneralApi(cfg);
 
 const { data } = await api.deleteV1User(deletedUserID);
 console.log(data);
@@ -74,7 +74,7 @@ cfg := wbgeneral.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbgeneral.NewAPIClient(cfg)
 
-result, _, err := client.DefaultApi.DeleteV1User(context.Background()).DeletedUserID(deletedUserID).Execute()
+result, _, err := client.GeneralAPI.DeleteV1User(context.Background()).DeletedUserID(deletedUserID).Execute()
 if err != nil {
     panic(err)
 }
@@ -84,11 +84,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.SecretString;
-import io.github.valeryverkhoturov.wbapi.general.api.DefaultApi;
+import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-DefaultApi api = new DefaultApi(client);
+GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.deleteV1User(deletedUserID));
 ```
@@ -96,12 +96,12 @@ System.out.println(api.deleteV1User(deletedUserID));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
 use ValeryVerkhoturov\WbApiClient\General\SecretString;
-use ValeryVerkhoturov\WbApiClient\General\Api\DefaultApi;
+use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new DefaultApi(new Client(), $config);
+$api = new GeneralApi(new Client(), $config);
 
 print_r($api->deleteV1User($deleted_user_id));
 ```
@@ -111,7 +111,7 @@ print_r($api->deleteV1User($deleted_user_id));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый УправлениеПользователямиПродавцаApi(Настройки);
+Клиент = Новый GeneralApi(Настройки);
 
 Сообщить(Клиент.DeleteV1User(deletedUserID).Тело);
 ```
@@ -122,7 +122,7 @@ using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new DefaultApi(config);
+var api = new GeneralApi(config);
 
 Console.WriteLine(api.DeleteV1User(deletedUserID));
 ```

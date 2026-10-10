@@ -59,10 +59,10 @@ DELETE /api/v3/orders/{orderId}/meta
 
 ```python [Python]
 from wb_api_client.orders_fbs import Configuration, ApiClient
-from wb_api_client.orders_fbs.api import FBSApi
+from wb_api_client.orders_fbs.api import OrdersFbsApi
 
 cfg = Configuration(access_token="<ваш JWT WB>")
-api = FBSApi(ApiClient(cfg))
+api = OrdersFbsApi(ApiClient(cfg))
 
 result = api.delete_v3_orders_order_id_meta(order_id=..., key=...)
 print(result)
@@ -71,12 +71,12 @@ print(result)
 ```ts [TypeScript]
 import {
   Configuration,
-  FBSApi,
+  OrdersFbsApi,
 } from "@valeryverkhoturov/wb-api-client/orders-fbs";
 
 const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
-const api = new FBSApi(cfg);
+const api = new OrdersFbsApi(cfg);
 
 const { data } = await api.deleteV3OrdersOrderIdMeta(orderId, key);
 console.log(data);
@@ -87,7 +87,7 @@ cfg := wbordersfbs.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbordersfbs.NewAPIClient(cfg)
 
-result, _, err := client.FBSAPI.DeleteV3OrdersOrderIdMeta(context.Background(), orderId).Key(key).Execute()
+result, _, err := client.OrdersFbsAPI.DeleteV3OrdersOrderIdMeta(context.Background(), orderId).Key(key).Execute()
 if err != nil {
     panic(err)
 }
@@ -97,11 +97,11 @@ fmt.Printf("%+v\n", result)
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.orders_fbs.ApiClient;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
-import io.github.valeryverkhoturov.wbapi.orders_fbs.api.FbsApi;
+import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
 client.setBearerToken(new SecretString("<ваш JWT WB>"));
-FbsApi api = new FbsApi(client);
+OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.deleteV3OrdersOrderIdMeta(orderId, key));
 ```
@@ -109,12 +109,12 @@ System.out.println(api.deleteV3OrdersOrderIdMeta(orderId, key));
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\Configuration;
 use ValeryVerkhoturov\WbApiClient\OrdersFbs\SecretString;
-use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\FBSApi;
+use ValeryVerkhoturov\WbApiClient\OrdersFbs\Api\OrdersFbsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
-$api = new FBSApi(new Client(), $config);
+$api = new OrdersFbsApi(new Client(), $config);
 
 print_r($api->deleteV3OrdersOrderIdMeta($order_id, $key));
 ```
@@ -124,7 +124,7 @@ print_r($api->deleteV3OrdersOrderIdMeta($order_id, $key));
 
 Настройки = Новый Конфигурация();
 Настройки.УстановитьТокен("<ваш JWT WB>");
-Клиент = Новый ИдентификаторыМаркировкиFBSApi(Настройки);
+Клиент = Новый OrdersFbsApi(Настройки);
 
 Сообщить(Клиент.DeleteV3OrdersOrderIdMeta(orderId, key).Тело);
 ```
@@ -135,7 +135,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
-var api = new FBSApi(config);
+var api = new OrdersFbsApi(config);
 
 Console.WriteLine(api.DeleteV3OrdersOrderIdMeta(orderId, key));
 ```
