@@ -176,3 +176,7 @@ If that returns your seller data — you're wired up.
 | `429 Too Many Requests`              | You've hit WB's rate limit                    | Wait `X-Ratelimit-Retry` seconds from the response and back off; the SDK does not auto-retry                                             |
 | Connection hangs                     | Corporate proxy / TLS interception            | Set `HTTPS_PROXY` env var; most clients honor it                                                                                         |
 | `ImportError` / `Cannot find module` | Installed the wrong package name              | Package is `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client` — the bare `wb-api-client` name is a different project |
+
+<p align="center">
+  <img src="/pics/blueberry-football-ascii-animated.webp" width="240" alt="wb-api-client logo">
+</p>

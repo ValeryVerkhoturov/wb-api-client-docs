@@ -69,3 +69,7 @@ Push to `main`; the deploy workflow builds and publishes to GitHub Pages automat
 ## License
 
 Both repos are Apache 2.0. Contributions are assumed to be under the same license.
+
+<p align="center">
+  <img src="/pics/blueberry-twerk-ascii-animated.webp" width="240" alt="wb-api-client logo">
+</p>

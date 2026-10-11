@@ -69,3 +69,7 @@ npm run docs:dev
 ## Лицензия
 
 Оба репозитория — Apache 2.0. Ваши правки считаются переданными под той же лицензией.
+
+<p align="center">
+  <img src="/pics/blueberry-twerk-ascii-animated.webp" width="240" alt="wb-api-client logo">
+</p>
