@@ -7,7 +7,7 @@ description: "Операций модуля `general` — 10."
 
 Операций модуля `general` — 10.
 
-[Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [Все модули](/reference/api/)
+[Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [Все модули](/reference/api/)
 
 В этом разделе:
 

@@ -9,7 +9,7 @@ description: "Метод возвращает данные о комиссии W
 GET /api/v1/tariffs/commission
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Комиссии · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/rates/get-api-v1-tariffs-commission) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/fees/operation/getV1TariffsCommission)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Комиссии · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/fees/operation/getV1TariffsCommission)
 
 Метод возвращает данные о [комиссии](https://seller.wildberries.ru/dynamic-product-categories/commission) WB по [родительским категориям товаров](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll) согласно модели продаж.
 

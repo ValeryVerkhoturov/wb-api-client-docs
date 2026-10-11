@@ -7,7 +7,7 @@ description: "Module `orders-fbs` has 46 operations."
 
 Module `orders-fbs` has 46 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbs/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs) · [All modules](/en/reference/api/)
 
 С помощью методов раздела Заказы FBS (Fulfillment by Seller) вы можете:
 

@@ -7,7 +7,7 @@ description: "Module `reports` has 24 operations."
 
 Module `reports` has 24 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/reports/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [All modules](/en/reference/api/)
 
 Узнать больше об отчётах можно в [справочном центре](https://seller.wildberries.ru/instructions/subcategory/5f2162c5-069b-416d-a4e1-48da2a76e6b0)
 

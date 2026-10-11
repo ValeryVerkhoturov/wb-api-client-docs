@@ -7,7 +7,7 @@ description: "Операций модуля `in-store-pickup` — 18."
 
 Операций модуля `in-store-pickup` — 18.
 
-[Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/in-store-pickup/) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup) · [Все модули](/reference/api/)
+[Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup) · [Все модули](/reference/api/)
 
 Управление [сборочными заданиями](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) и [идентификаторами маркировки](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers) Самовывоза.
 

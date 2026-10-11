@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/advert/v1/normquery/bids
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-api-advert-v1-normquery-bids) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,

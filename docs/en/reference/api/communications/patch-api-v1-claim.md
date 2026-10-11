@@ -9,7 +9,7 @@ description: "Метод отправляет ответ на заявку по�
 PATCH /api/v1/claim
 ```
 
-**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Возвраты покупателями · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/patch-api-v1-claim) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersReturns/operation/patchV1Claim)
+**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Возвраты покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersReturns/operation/patchV1Claim)
 
 Метод отправляет ответ на [заявку](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) покупателя на возврат товаров.
 

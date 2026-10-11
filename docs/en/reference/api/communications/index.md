@@ -7,7 +7,7 @@ description: "Module `communications` has 25 operations."
 
 Module `communications` has 25 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/communications/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication) · [All modules](/en/reference/api/)
 
 Узнать больше об общении с покупателями можно в [справочном центре](https://seller.wildberries.ru/instructions/category/f7f6c465-dd12-422d-80a0-a6d9562115d5?goBackOption=prevRoute&categoryId=30817062-14cc-4a82-bc78-3600c2b0685b)
 

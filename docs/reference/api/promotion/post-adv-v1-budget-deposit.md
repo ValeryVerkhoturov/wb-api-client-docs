@@ -9,7 +9,7 @@ description: "Метод пополняет бюджет кампании. Чт�
 POST /adv/v1/budget/deposit
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Финансы · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v1-budget-deposit) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV1BudgetDeposit)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Финансы · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV1BudgetDeposit)
 
 Метод пополняет [бюджет](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV2Budget) кампании.
 Чтобы запустить кампанию после пополнения бюджета, используйте метод [Запуск кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV0Start).

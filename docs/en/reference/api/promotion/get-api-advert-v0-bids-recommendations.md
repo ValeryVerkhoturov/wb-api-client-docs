@@ -9,7 +9,7 @@ description: "Метод возвращает рекомендуемые ста�
 GET /api/advert/v0/bids/recommendations
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/promotion/get-api-advert-v0-bids-recommendations) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0BidsRecommendations)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0BidsRecommendations)
 
 Метод возвращает рекомендуемые ставки для карточек товаров и поисковых кластеров кампании.
 Можно использовать для кампаний с типами оплаты `cpm` — за показы и `cpc` — за клики.

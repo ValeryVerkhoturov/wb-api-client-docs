@@ -9,7 +9,7 @@ description: "Метод возвращает статистику карточ�
 POST /api/analytics/v3/sales-funnel/grouped/history
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/post-api-analytics-v3-sales-funnel-grouped-history) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelGroupedHistory)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelGroupedHistory)
 
 Метод возвращает статистику карточек товаров по дням или неделям.
 Карточки товаров сгруппированы по предметам, брендам и ярлыкам.

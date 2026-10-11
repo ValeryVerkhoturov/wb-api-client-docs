@@ -7,7 +7,7 @@ description: "Операций модуля `finances` — 11."
 
 Операций модуля `finances` — 11.
 
-[Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/finances/) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting) · [Все модули](/reference/api/)
+[Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting) · [Все модули](/reference/api/)
 
 Узнать больше о документах и бухгалтерии можно в [справочном центре](https://seller.wildberries.ru/instructions/category/ba929b64-1f89-4426-82d7-ce998ee552bd?goBackOption=prevRoute&categoryId=3c971375-9939-45e8-ab82-376019be8942)
 

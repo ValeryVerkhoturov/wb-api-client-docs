@@ -9,7 +9,7 @@ description: "Метод возвращает категории докумен�
 GET /api/v1/documents/categories
 ```
 
-**База:** `https://documents-api.wildberries.ru` · **Модуль:** [`finances`](/reference/api/finances/) · **Раздел:** Документы · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/finances/get-api-v1-documents-categories) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
+**База:** `https://documents-api.wildberries.ru` · **Модуль:** [`finances`](/reference/api/finances/) · **Раздел:** Документы · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
 
 Метод возвращает категории документов для получения [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
 

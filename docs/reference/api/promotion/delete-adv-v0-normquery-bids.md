@@ -9,7 +9,7 @@ description: "Метод удаляет ставки с поисковых кл�
 DELETE /adv/v0/normquery/bids
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/delete-adv-v0-normquery-bids) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/deleteV0NormqueryBids)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Поисковые кластеры · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/deleteV0NormqueryBids)
 
 Метод удаляет ставки с поисковых кластеров.
 Можно использовать только для кампаний с:

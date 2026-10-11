@@ -9,7 +9,7 @@ description: "Метод формирует отчёт о товарах, сра
 POST /api/analytics/v3/sales-funnel/products
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/post-api-analytics-v3-sales-funnel-products) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProducts)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProducts)
 
 Метод формирует отчёт о товарах, сравнивая ключевые показатели за текущий период с аналогичным прошлым.
 

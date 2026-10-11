@@ -7,7 +7,7 @@ description: "Module `items` has 55 operations."
 
 Module `items` has 55 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/items/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management) · [All modules](/en/reference/api/)
 
 С помощью методов этого раздела вы можете:
 

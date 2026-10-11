@@ -9,7 +9,7 @@ description: "Метод временно отключён"
 GET /api/tariffs/v1/acceptance/coefficients
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Тарифы на поставку · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/rates/get-api-tariffs-v1-acceptance-coefficients) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Тарифы на поставку · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
 
 Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 

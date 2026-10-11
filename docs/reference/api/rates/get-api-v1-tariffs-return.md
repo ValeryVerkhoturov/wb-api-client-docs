@@ -9,7 +9,7 @@ description: "Метод возвращает тарифы: - на перево�
 GET /api/v1/tariffs/return
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Стоимость возврата продавцу · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/rates/get-api-v1-tariffs-return) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Стоимость возврата продавцу · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
 
 Метод возвращает [тарифы](https://seller.wildberries.ru/dynamic-product-categories/return-cost):
 

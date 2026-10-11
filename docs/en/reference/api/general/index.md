@@ -7,7 +7,7 @@ description: "Module `general` has 10 operations."
 
 Module `general` has 10 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/general/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [All modules](/en/reference/api/)
 
 В этом разделе:
 

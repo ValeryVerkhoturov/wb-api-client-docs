@@ -9,7 +9,7 @@ description: "Метод возвращает количество медиак�
 GET /adv/v1/count
 ```
 
-**База:** `https://advert-media-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Медиа · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-count) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Count)
+**База:** `https://advert-media-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Медиа · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Count)
 
 Метод возвращает количество [медиакампаний](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Advert) продавца с группировкой по статусам.
 

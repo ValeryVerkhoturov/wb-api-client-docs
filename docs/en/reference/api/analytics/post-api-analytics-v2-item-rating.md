@@ -9,7 +9,7 @@ description: "Метод доступен по Персональному ток
 POST /api/analytics/v2/item-rating
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Оценка товара · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/analytics/post-api-analytics-v2-item-rating) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/itemRating/operation/postV2ItemRating)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Оценка товара · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/itemRating/operation/postV2ItemRating)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,

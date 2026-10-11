@@ -7,7 +7,7 @@ description: "Module `orders-fbw` has 14 operations."
 
 Module `orders-fbw` has 14 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbw/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw) · [All modules](/en/reference/api/)
 
 Узнать больше о поставках FBW можно в [справочном центре](https://seller.wildberries.ru/instructions/subcategory/5a8e1202-0865-45b7-acae-5d0afc7add56?goBackOption=prevRoute&categoryId=479385c6-de01-4b4d-ad4e-ed941e65582e)
 

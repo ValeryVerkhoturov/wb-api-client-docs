@@ -9,7 +9,7 @@ description: "Метод заменяет данные ярлыка: имя и �
 PATCH /content/v2/tag/{id}
 ```
 
-**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Ярлыки · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/items/patch-content-v2-tag-id) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/patchV2TagId)
+**База:** `https://content-api.wildberries.ru` · **Модуль:** [`items`](/reference/api/items/) · **Раздел:** Ярлыки · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/patchV2TagId)
 
 Метод заменяет данные ярлыка: имя и цвет.
 

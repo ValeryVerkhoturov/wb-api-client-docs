@@ -9,7 +9,7 @@ description: "Метод будет отключен 16 ноября."
 GET /adv/v1/budget
 ```
 
-**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Финансы · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-budget) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Budget)
+**База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Финансы · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Budget)
 
 Метод будет отключен [16 ноября](https://dev.wildberries.ru/release-notes?id=582).
 

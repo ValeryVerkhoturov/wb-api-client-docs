@@ -9,7 +9,7 @@ description: "Метод возвращает информацию о заказ
 GET /api/v1/supplier/orders
 ```
 
-**База:** `https://statistics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Основные отчёты · [Документация библиотеки ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-supplier-orders) · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierOrders)
+**База:** `https://statistics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Основные отчёты · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierOrders)
 
 Метод возвращает информацию о заказах.
 Данные обновляются раз в 30 минут.

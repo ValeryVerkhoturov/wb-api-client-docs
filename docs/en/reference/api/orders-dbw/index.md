@@ -7,7 +7,7 @@ description: "Module `orders-dbw` has 16 operations."
 
 Module `orders-dbw` has 16 operations.
 
-[Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-dbw/) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw) · [All modules](/en/reference/api/)
 
 С помощью методов Заказы DBW (Деливери WB) вы можете:
 

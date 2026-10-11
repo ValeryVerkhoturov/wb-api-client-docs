@@ -9,7 +9,7 @@ description: "Метод будет отключен 3 ноября."
 GET /api/v1/analytics/region-sale
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Продажи по регионам · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/reports/get-api-v1-analytics-region-sale) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/salesByRegions/operation/getV1AnalyticsRegionSale)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Продажи по регионам · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/salesByRegions/operation/getV1AnalyticsRegionSale)
 
 Метод будет отключен [3 ноября](https://dev.wildberries.ru/release-notes?id=590).
 

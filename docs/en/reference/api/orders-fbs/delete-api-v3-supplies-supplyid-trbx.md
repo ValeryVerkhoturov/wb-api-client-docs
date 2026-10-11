@@ -9,7 +9,7 @@ description: "Метод удаляет грузоместа из поставк
 DELETE /api/v3/supplies/{supplyId}/trbx
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Library doc ↗](https://valeryverkhoturov.github.io/wb-api-client-docs/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid-trbx) · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/deleteV3SuppliesSupplyIdTrbx)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/deleteV3SuppliesSupplyIdTrbx)
 
 Метод удаляет грузоместа из поставки.
 
