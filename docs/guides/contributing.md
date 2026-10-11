@@ -64,7 +64,7 @@ npm run docs:dev
 # → http://localhost:5173/wb-api-client-docs/
 ```
 
-Пушьте в `main`; workflow деплоя сам собирает и публикует на GitHub Pages.
+При пуше в `main` workflow деплоя сам собирает и публикует на GitHub Pages.
 
 ## Лицензия
 
