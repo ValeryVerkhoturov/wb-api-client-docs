@@ -65,6 +65,14 @@ export default defineConfig({
       },
     ],
 
+    [
+      "meta",
+      {
+        name: "algolia-site-verification",
+        content: "F738D846799177F1",
+      },
+    ],
+
     // SVG for everything modern, PNG for Safari/iOS and legacy tabs.
     [
       "link",
