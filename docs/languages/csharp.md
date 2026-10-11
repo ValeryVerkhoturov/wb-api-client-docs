@@ -146,3 +146,7 @@ services.AddTransient<GeneralApi>();
 - [Аутентификация](/guides/authentication)
 - [Обработка ошибок](/guides/error-handling)
 - [Пакет на NuGet](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient)
+
+<p align="center">
+  <img src="/pics/blueberry-csharp-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

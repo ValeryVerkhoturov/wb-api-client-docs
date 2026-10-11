@@ -178,5 +178,5 @@ Console.WriteLine(api.GetV1SellerInfo());
 | `ImportError` / `Cannot find module` | Установлено не то имя пакета                     | Правильное имя — `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client`. Пакет с «голым» именем `wb-api-client` — это другой проект |
 
 <p align="center">
-  <img src="/pics/blueberry-football-ascii-animated.webp" width="240" alt="wb-api-client logo">
+  <img src="/pics/blueberry-football-ascii-animated.webp" width="240" alt="wb-api-client mascot">
 </p>

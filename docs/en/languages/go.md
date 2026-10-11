@@ -114,3 +114,7 @@ cfg.Scheme = "http"
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
 - [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client-go#readme)
+
+<p align="center">
+  <img src="/pics/blueberry-golang-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

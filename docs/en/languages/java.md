@@ -118,3 +118,7 @@ client.setBasePath("http://localhost:8080");
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
 - [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/java/README.md)
+
+<p align="center">
+  <img src="/pics/blueberry-java-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

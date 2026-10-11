@@ -191,3 +191,7 @@ cfg.HTTPClient = &http.Client{Timeout: 120 * time.Second}
 ```
 
 :::
+
+<p align="center">
+  <img src="/pics/blueberry-firefighter-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

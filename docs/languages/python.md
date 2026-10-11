@@ -117,3 +117,7 @@ cfg = Configuration(
 - [Аутентификация](/guides/authentication)
 - [Обработка ошибок](/guides/error-handling)
 - [Полный справочник по модулям на GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md)
+
+<p align="center">
+  <img src="/pics/blueberry-python-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

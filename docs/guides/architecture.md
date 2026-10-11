@@ -109,5 +109,5 @@ Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, н
 Файл [`CLAUDE.md`](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/CLAUDE.md) в основном репозитории — рабочая, машиночитаемая версия того же содержимого, поддерживается в актуальном состоянии, потому что CI сам её читает.
 
 <p align="center">
-  <img src="/pics/blueberry-academic-cap-ascii-animated.webp" width="240" alt="wb-api-client logo">
+  <img src="/pics/blueberry-academic-cap-ascii-animated.webp" width="240" alt="wb-api-client mascot">
 </p>

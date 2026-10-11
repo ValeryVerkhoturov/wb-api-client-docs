@@ -146,3 +146,7 @@ const ordCfg   = new OrdCfg({});   ordCfg.setAccessToken(TOKEN);
 | `429 Too Many Requests`                   | Rate-limit; сам токен в порядке                                                    |
 
 Ретраи и работа с ошибками — в [руководстве по обработке ошибок](/guides/error-handling).
+
+<p align="center">
+  <img src="/pics/blueberry-guard-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

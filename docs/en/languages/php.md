@@ -106,3 +106,7 @@ $config = (new Configuration())
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
 - [Sibling repo readme](https://github.com/ValeryVerkhoturov/wb-api-client-php#readme)
+
+<p align="center">
+  <img src="/pics/blueberry-php-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

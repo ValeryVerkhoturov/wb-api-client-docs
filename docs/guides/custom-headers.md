@@ -178,3 +178,7 @@ const tags = await api.getV2Tags({
 3. Проверьте, что ваш логгер запросов не пишет заголовки целиком — либо внесите свои имена заголовков в список маскируемых.
 
 Если вы логируете запросы через middleware, добавьте имена этих заголовков в тот же фильтр, где у вас уже лежит `Authorization`.
+
+<p align="center">
+  <img src="/pics/blueberry-gear-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

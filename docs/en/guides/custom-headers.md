@@ -178,3 +178,7 @@ So the same rules apply to them as to the WB token:
 3. Check that your request logger does not dump headers wholesale — or add your header names to its redaction list.
 
 If you log requests through middleware, add these header names to the same filter that already holds `Authorization`.
+
+<p align="center">
+  <img src="/pics/blueberry-gear-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

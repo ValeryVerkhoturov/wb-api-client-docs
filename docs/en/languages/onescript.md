@@ -171,3 +171,7 @@ openapi-generator ships no OneScript target, so one was written separately: [`Va
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
 - [Sibling repo readme](https://github.com/ValeryVerkhoturov/wb-api-client-1c#readme)
+
+<p align="center">
+  <img src="/pics/blueberry-1c-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

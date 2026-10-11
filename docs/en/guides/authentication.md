@@ -146,3 +146,7 @@ WB tokens don't rotate on the wire and live at most 180 days — you have to swa
 | `429 Too Many Requests`                   | Rate-limited; the token itself is fine                                                     |
 
 See the [error-handling guide](/en/guides/error-handling) for retry patterns.
+
+<p align="center">
+  <img src="/pics/blueberry-guard-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

@@ -142,3 +142,7 @@ No DI-specific package is needed: the client is built on RestSharp rather than `
 - [Authentication guide](/en/guides/authentication)
 - [Error handling](/en/guides/error-handling)
 - [Package on NuGet](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient)
+
+<p align="center">
+  <img src="/pics/blueberry-csharp-animated.webp" width="240" alt="wb-api-client mascot">
+</p>

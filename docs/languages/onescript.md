@@ -171,3 +171,7 @@ git clone --branch v1.20260926.0 https://github.com/ValeryVerkhoturov/wb-api-cli
 - [Аутентификация](/guides/authentication)
 - [Обработка ошибок](/guides/error-handling)
 - [README соседнего репозитория](https://github.com/ValeryVerkhoturov/wb-api-client-1c#readme)
+
+<p align="center">
+  <img src="/pics/blueberry-1c-animated.webp" width="240" alt="wb-api-client mascot">
+</p>
