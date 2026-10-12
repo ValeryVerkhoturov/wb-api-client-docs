@@ -148,5 +148,5 @@ const ordCfg   = new OrdCfg({});   ordCfg.setAccessToken(TOKEN);
 Ретраи и работа с ошибками — в [руководстве по обработке ошибок](/guides/error-handling).
 
 <p align="center">
-  <img src="/pics/blueberry-guard-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-guard-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

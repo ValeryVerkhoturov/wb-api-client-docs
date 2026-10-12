@@ -108,5 +108,5 @@ $config = (new Configuration())
 - [Sibling repo readme](https://github.com/ValeryVerkhoturov/wb-api-client-php#readme)
 
 <p align="center">
-  <img src="/pics/blueberry-php-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-php-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

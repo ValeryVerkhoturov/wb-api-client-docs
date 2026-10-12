@@ -137,5 +137,5 @@ var api = new ItemsApi(config);
 Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php) · [OneScript](/en/languages/onescript) · [C#](/en/languages/csharp).
 
 <p align="center">
-  <img src="/pics/blueberry-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

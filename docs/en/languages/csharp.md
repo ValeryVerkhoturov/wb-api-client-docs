@@ -144,5 +144,5 @@ No DI-specific package is needed: the client is built on RestSharp rather than `
 - [Package on NuGet](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient)
 
 <p align="center">
-  <img src="/pics/blueberry-csharp-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-csharp-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

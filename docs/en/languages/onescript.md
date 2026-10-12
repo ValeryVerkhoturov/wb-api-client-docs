@@ -173,5 +173,5 @@ openapi-generator ships no OneScript target, so one was written separately: [`Va
 - [Sibling repo readme](https://github.com/ValeryVerkhoturov/wb-api-client-1c#readme)
 
 <p align="center">
-  <img src="/pics/blueberry-1c-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-1c-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

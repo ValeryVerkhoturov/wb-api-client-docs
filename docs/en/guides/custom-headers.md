@@ -180,5 +180,5 @@ So the same rules apply to them as to the WB token:
 If you log requests through middleware, add these header names to the same filter that already holds `Authorization`.
 
 <p align="center">
-  <img src="/pics/blueberry-gear-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-gear-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

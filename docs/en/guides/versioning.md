@@ -120,5 +120,5 @@ Because the same `1.YYYYMMDD.N` is stamped into every language's manifest in the
 The only way to skew: a language's publish step fails (e.g. Maven Central rejects a signature). The tag exists and the source is on GitHub; a manual re-run of the failed publish job for that specific language fixes it.
 
 <p align="center">
-  <img src="/pics/blueberry-calendar-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-calendar-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

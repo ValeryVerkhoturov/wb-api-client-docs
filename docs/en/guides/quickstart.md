@@ -178,5 +178,5 @@ If that returns your seller data — you're wired up.
 | `ImportError` / `Cannot find module` | Installed the wrong package name              | Package is `valeryverkhoturov-wb-api-client` / `@valeryverkhoturov/wb-api-client` — the bare `wb-api-client` name is a different project |
 
 <p align="center">
-  <img src="/pics/blueberry-football-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-football-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

@@ -193,5 +193,5 @@ cfg.HTTPClient = &http.Client{Timeout: 120 * time.Second}
 :::
 
 <p align="center">
-  <img src="/pics/blueberry-firefighter-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-firefighter-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

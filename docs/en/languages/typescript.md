@@ -111,5 +111,5 @@ const cfg = new Configuration({ basePath: "http://localhost:8080" });
 - [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/typescript/README.md)
 
 <p align="center">
-  <img src="/pics/blueberry-typescript-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-typescript-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

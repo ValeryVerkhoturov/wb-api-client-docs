@@ -119,5 +119,5 @@ cfg = Configuration(
 - [Full per-module reference on GitHub](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/clients/python/README.md)
 
 <p align="center">
-  <img src="/pics/blueberry-python-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-python-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

@@ -180,5 +180,5 @@ const tags = await api.getV2Tags({
 Если вы логируете запросы через middleware, добавьте имена этих заголовков в тот же фильтр, где у вас уже лежит `Authorization`.
 
 <p align="center">
-  <img src="/pics/blueberry-gear-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-gear-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

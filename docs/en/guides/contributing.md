@@ -71,5 +71,5 @@ Push to `main`; the deploy workflow builds and publishes to GitHub Pages automat
 Both repos are Apache 2.0. Contributions are assumed to be under the same license.
 
 <p align="center">
-  <img src="/pics/blueberry-laptop-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-laptop-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

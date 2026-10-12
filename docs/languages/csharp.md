@@ -148,5 +148,5 @@ services.AddTransient<GeneralApi>();
 - [Пакет на NuGet](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient)
 
 <p align="center">
-  <img src="/pics/blueberry-csharp-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-csharp-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

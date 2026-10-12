@@ -110,5 +110,5 @@ Everything under `clients/` is generated output — never hand-edit it, regenera
 The main-repo [`CLAUDE.md`](https://github.com/ValeryVerkhoturov/wb-api-client/blob/main/CLAUDE.md) is a working, machine-readable version of the same content — kept up to date because CI itself reads it.
 
 <p align="center">
-  <img src="/pics/blueberry-academic-cap-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-academic-cap-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

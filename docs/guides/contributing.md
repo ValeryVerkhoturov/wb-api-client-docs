@@ -71,5 +71,5 @@ npm run docs:dev
 Оба репозитория — Apache 2.0. Ваши правки считаются переданными под той же лицензией.
 
 <p align="center">
-  <img src="/pics/blueberry-laptop-ascii-animated.webp" width="240" alt="wb-api-client mascot">
+  <img src="/pics/blueberry-laptop-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">
 </p>

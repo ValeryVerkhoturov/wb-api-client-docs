@@ -120,5 +120,5 @@ WB убирает поля по собственному графику. Ког�
 Единственный способ уплыть: сломается публикация одного языка (например, Maven Central отклонит подпись). Тег и исходник уже в GitHub; ручной перезапуск конкретного publish-job для этого языка чинит ситуацию.
 
 <p align="center">
-  <img src="/pics/blueberry-calendar-ascii-animated.webp" width="240" alt="wb-api-client logo">
+  <img src="/pics/blueberry-calendar-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client logo">
 </p>
