@@ -1,11 +1,11 @@
 ---
 title: "Заказы FBS"
-description: "Module `orders-fbs` has 46 operations."
+description: "Module `orders-fbs` has 47 operations."
 ---
 
 # Заказы FBS · `orders-fbs`
 
-Module `orders-fbs` has 46 operations.
+Module `orders-fbs` has 47 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs) · [All modules](/en/reference/api/)
 
@@ -61,26 +61,27 @@ Module `orders-fbs` has 46 operations.
 
 ## Поставки FBS
 
-| Method   | Path                                                        | Operation                                                                                                                    |
-| -------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `POST`   | `/api/v3/supplies`                                          | [Создать новую поставку](/en/reference/api/orders-fbs/post-api-v3-supplies)                                                  |
-| `GET`    | `/api/v3/supplies`                                          | [Получить список поставок](/en/reference/api/orders-fbs/get-api-v3-supplies)                                                 |
-| `PATCH`  | `/api/marketplace/v3/supplies/{supplyId}/orders`            | [Добавить сборочные задания к поставке](/en/reference/api/orders-fbs/patch-api-marketplace-v3-supplies-supplyid-orders)      |
-| `GET`    | `/api/v3/supplies/{supplyId}`                               | [Получить информацию о поставке](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid)                                  |
-| `DELETE` | `/api/v3/supplies/{supplyId}`                               | [Удалить поставку](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid)                                             |
-| `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`         | [Получить ID сборочных заданий поставки](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)    |
-| `GET`    | `/api/marketplace/v3/fbs/shipping-points`                   | [Получить список пунктов отгрузки поставок](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points)         |
-| `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`          | [Установить параметры отгрузки поставок](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method) |
-| `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                       | [Передать поставку в доставку](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                          |
-| `GET`    | `/api/v3/supplies/{supplyId}/barcode`                       | [Получить QR-код поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-barcode)                                |
-| `GET`    | `/api/v3/supplies/{supplyId}/trbx`                          | [Получить список грузомест поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-trbx)                         |
-| `POST`   | `/api/v3/supplies/{supplyId}/trbx`                          | [Добавить грузоместа к поставке](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx)                            |
-| `DELETE` | `/api/v3/supplies/{supplyId}/trbx`                          | [Удалить грузоместа из поставки](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid-trbx)                          |
-| `POST`   | `/api/v3/supplies/{supplyId}/trbx/stickers`                 | [Получить стикеры грузомест поставки](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx-stickers)              |
-| `GET`    | `/api/marketplace/v3/fbs/dictionaries/countries/oksm`       | [Получить список стран ОКСМ](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-dictionaries-countries-oksm)            |
-| `PUT`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/spot`          | [Добавить данные СПОТ в поставку](/en/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot)            |
-| `POST`   | `/api/marketplace/v3/fbs/supplies/spot/list`                | [Получить данные СПОТ для списка поставок](/en/reference/api/orders-fbs/post-api-marketplace-v3-fbs-supplies-spot-list)      |
-| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot` | [Получить QR-код СПОТ](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot)              |
+| Method   | Path                                                          | Operation                                                                                                                                        |
+| -------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `POST`   | `/api/v3/supplies`                                            | [Создать новую поставку](/en/reference/api/orders-fbs/post-api-v3-supplies)                                                                      |
+| `GET`    | `/api/v3/supplies`                                            | [Получить список поставок](/en/reference/api/orders-fbs/get-api-v3-supplies)                                                                     |
+| `PATCH`  | `/api/marketplace/v3/supplies/{supplyId}/orders`              | [Добавить сборочные задания к поставке](/en/reference/api/orders-fbs/patch-api-marketplace-v3-supplies-supplyid-orders)                          |
+| `PATCH`  | `/api/marketplace/v3/fbs/supplies/{supplyId}/orders/transfer` | [Перевести сборочные задания из доставки на сборку](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-supplyid-orders-transfer) |
+| `GET`    | `/api/v3/supplies/{supplyId}`                                 | [Получить информацию о поставке](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid)                                                      |
+| `DELETE` | `/api/v3/supplies/{supplyId}`                                 | [Удалить поставку](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid)                                                                 |
+| `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`           | [Получить ID сборочных заданий поставки](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)                        |
+| `GET`    | `/api/marketplace/v3/fbs/shipping-points`                     | [Получить список пунктов отгрузки поставок](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points)                             |
+| `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`            | [Установить параметры отгрузки поставок](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method)                     |
+| `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                         | [Передать поставку в доставку](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                                              |
+| `GET`    | `/api/v3/supplies/{supplyId}/barcode`                         | [Получить QR-код поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-barcode)                                                    |
+| `GET`    | `/api/v3/supplies/{supplyId}/trbx`                            | [Получить список грузомест поставки](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-trbx)                                             |
+| `POST`   | `/api/v3/supplies/{supplyId}/trbx`                            | [Добавить грузоместа к поставке](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx)                                                |
+| `DELETE` | `/api/v3/supplies/{supplyId}/trbx`                            | [Удалить грузоместа из поставки](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid-trbx)                                              |
+| `POST`   | `/api/v3/supplies/{supplyId}/trbx/stickers`                   | [Получить стикеры грузомест поставки](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx-stickers)                                  |
+| `GET`    | `/api/marketplace/v3/fbs/dictionaries/countries/oksm`         | [Получить список стран ОКСМ](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-dictionaries-countries-oksm)                                |
+| `PUT`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/spot`            | [Добавить данные СПОТ в поставку](/en/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot)                                |
+| `POST`   | `/api/marketplace/v3/fbs/supplies/spot/list`                  | [Получить данные СПОТ для списка поставок](/en/reference/api/orders-fbs/post-api-marketplace-v3-fbs-supplies-spot-list)                          |
+| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot`   | [Получить QR-код СПОТ](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot)                                  |
 
 ## Настройки автовозврата
 
