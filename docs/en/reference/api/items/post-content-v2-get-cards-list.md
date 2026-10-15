@@ -51,7 +51,7 @@ POST /content/v2/get/cards/list
   Каждое изменение результата проверки обновляет дату и время изменения карточки в поле ответа `updatedAt`.
   Чтобы получить новые результаты проверки, используйте выгрузку с пагинацией с сортировкой по возрастанию.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит        | Интервал | Всплеск    |
 | ------ | ------------ | -------- | ---------- |

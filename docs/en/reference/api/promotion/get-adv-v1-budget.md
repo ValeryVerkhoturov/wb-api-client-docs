@@ -13,7 +13,7 @@ GET /adv/v1/budget
 
 Метод будет отключен [16 ноября](https://dev.wildberries.ru/release-notes?id=582).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит     | Интервал | Всплеск   |
 | ------------------ | ------ | --------- | -------- | --------- |

@@ -14,7 +14,7 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot
 Метод возвращает сформированный QR-код СПОТ для поставки в формате PNG, кодировка base64.
 Вы можете получить QR-код, когда в методе [получения данных СПОТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) будет признак `"status":"completed"`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
 | Период                                                         | Лимит        | Интервал | Всплеск     |
 | -------------------------------------------------------------- | ------------ | -------- | ----------- |

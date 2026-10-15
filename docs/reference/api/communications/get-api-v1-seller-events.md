@@ -17,7 +17,7 @@ GET /api/v1/seller/events
 1. Сделайте первый запрос без параметра `next`.
 2. Повторяйте запрос со значением параметра `next` из ответа на предыдущий запрос, пока `totalEvents` не станет равным `0`. Это будет означать, что вы получили все события.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск     |
 | ------------------ | ------ | ----------- | -------- | ----------- |

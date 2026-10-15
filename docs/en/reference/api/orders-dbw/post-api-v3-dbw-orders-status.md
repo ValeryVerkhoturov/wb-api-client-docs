@@ -38,7 +38,7 @@ POST /api/v3/dbw/orders/status
 - `canceled\_by\_missed\_call` — отмена заказа по причине недозвона
 - `postponed\_delivery` — курьерская доставка отложена
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для следующих методов DBW:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
 
 - получение и обновление списка контактов
 - получение и удаление идентификаторов маркировки

@@ -1,6 +1,6 @@
 ---
 title: "Минимальные ставки для карточек товаров"
-description: "Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты аккаунта продавца — по типу оплаты и местам размещения."
+description: "Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты профиля продавца — по типу оплаты и местам размещения."
 ---
 
 # Минимальные ставки для карточек товаров
@@ -11,9 +11,9 @@ POST /api/advert/v1/bids/min
 
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV1BidsMin)
 
-Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты [аккаунта продавца](https://cmp.wildberries.ru/campaigns/finances) — по типу оплаты и местам размещения.
+Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) — по типу оплаты и местам размещения.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск    |
 | ------------------ | ------ | ----------- | -------- | ---------- |

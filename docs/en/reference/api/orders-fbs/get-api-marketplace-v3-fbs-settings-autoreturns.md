@@ -18,7 +18,7 @@ GET /api/marketplace/v3/fbs/settings/autoreturns
 
 Метод возвращает информацию о настройках автовозврата, установленных продавцом.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
 | Период                                                         | Лимит        | Интервал | Всплеск     |
 | -------------------------------------------------------------- | ------------ | -------- | ----------- |
@@ -27,13 +27,13 @@ GET /api/marketplace/v3/fbs/settings/autoreturns
 
 ## Responses
 
-| Code  | Description                      | Schema                                   |
-| ----- | -------------------------------- | ---------------------------------------- |
-| `200` | Успешно                          | `GetV3FbsSettingsAutoreturnsResponse200` |
-| `401` | Не авторизован                   | `object`                                 |
-| `403` | Доступ запрещён                  | `Response4XX`                            |
-| `406` | Неприменимо для данного аккаунта | `ApiErrorV3`                             |
-| `429` | Слишком много запросов           | `object`                                 |
+| Code  | Description                     | Schema                                   |
+| ----- | ------------------------------- | ---------------------------------------- |
+| `200` | Успешно                         | `GetV3FbsSettingsAutoreturnsResponse200` |
+| `401` | Не авторизован                  | `object`                                 |
+| `403` | Доступ запрещён                 | `Response4XX`                            |
+| `406` | Неприменимо для данного профиля | `ApiErrorV3`                             |
+| `429` | Слишком много запросов          | `object`                                 |
 
 ## Call examples
 

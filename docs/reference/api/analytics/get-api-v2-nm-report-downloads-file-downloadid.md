@@ -16,7 +16,7 @@ GET /api/v2/nm-report/downloads/file/{downloadId}
 Можно получить отчёт, который сгенерирован за последние 48 часов.
 Отчёт будет загружен внутри архива ZIP в формате CSV.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит     | Интервал | Всплеск   |
 | ------------------ | ------ | --------- | -------- | --------- |

@@ -13,7 +13,7 @@ GET /api/content/v2/directory/okpd/all
 
 Метод возвращает справочный список всех кодов ОКПД2. Чтобы найти код по его фрагменту, укажите первые цифры кода через точку в параметре `search`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Контент**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
 
 | Период               | Лимит        | Интервал | Всплеск    |
 | -------------------- | ------------ | -------- | ---------- |

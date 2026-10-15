@@ -15,7 +15,7 @@ GET /api/v1/seller-info
 
 Метод позволяет получать наименование продавца и ID его профиля.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит    | Интервал | Всплеск     |
 | ------------------ | ------ | -------- | -------- | ----------- |

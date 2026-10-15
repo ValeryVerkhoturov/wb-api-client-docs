@@ -13,7 +13,7 @@ GET /api/v3/warehouses
 
 Метод возвращает список всех складов продавца. Может использоваться для работы с [остатками товаров](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **складов продавца**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **складов продавца**:
 
 | Период                                                          | Лимит        | Интервал | Всплеск     |
 | --------------------------------------------------------------- | ------------ | -------- | ----------- |

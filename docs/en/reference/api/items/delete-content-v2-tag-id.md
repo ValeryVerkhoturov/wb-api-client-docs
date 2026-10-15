@@ -13,7 +13,7 @@ DELETE /content/v2/tag/{id}
 
 Метод удаляет ярлык из [списка ярлыков](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/getV2Tags) продавца.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **Ярлыков**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Ярлыков**:
 
 | Тип                | Период | Лимит        | Интервал | Всплеск    |
 | ------------------ | ------ | ------------ | -------- | ---------- |

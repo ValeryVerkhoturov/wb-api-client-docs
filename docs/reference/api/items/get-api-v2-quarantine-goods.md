@@ -21,7 +21,7 @@ GET /api/v2/quarantine/goods
 
 В [песочнице](https://dev.wildberries.ru/sandbox) товары автоматически удаляются из карантина через 3 дня.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Цены и скидки**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск    |
 | ------------------ | ------ | ----------- | -------- | ---------- |

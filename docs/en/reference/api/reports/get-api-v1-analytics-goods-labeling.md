@@ -16,7 +16,7 @@ GET /api/v1/analytics/goods-labeling
 
 Можно получить данные максимум за 31 день. Данные доступны с марта 2024.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит    | Интервал | Всплеск     |
 | ------------------ | ------ | -------- | -------- | ----------- |

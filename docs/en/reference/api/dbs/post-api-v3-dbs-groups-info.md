@@ -13,7 +13,7 @@ POST /api/v3/dbs/groups/info
 
 Метод возвращает информацию о платной доставке сборочных заданий, которые поступили на один склад (`warehouseId`) в рамках одной транзакции покупателя (`orderUid`).
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий DBS**:
+[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
 
 | Период                                                          | Лимит        | Интервал | Всплеск     |
 | --------------------------------------------------------------- | ------------ | -------- | ----------- |

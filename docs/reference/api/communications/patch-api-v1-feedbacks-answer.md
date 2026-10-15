@@ -17,7 +17,7 @@ PATCH /api/v1/feedbacks/answer
 
 ID отзыва не валидируется. Если в запросе вы передали некорректный ID, вы не получите ошибку.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Вопросы и отзывы**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
 
 | Тип                | Период | Лимит      | Интервал | Всплеск    |
 | ------------------ | ------ | ---------- | -------- | ---------- |

@@ -37,7 +37,7 @@ POST /content/v2/get/cards/trash
 2. Укажите в первом запросе сохранённые поля `"cursor":{"trashedAt":"\*\*\*","nmID":"\*\*\*"}`. Продолжайте использовать сортировку по возрастанию.
 3. Сохраните поля `"cursor":{"trashedAt":"\*\*\*","nmID":\*\*\*}` из последнего ответа текущей выгрузки.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Контент**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
 
 | Период               | Лимит        | Интервал | Всплеск    |
 | -------------------- | ------------ | -------- | ---------- |

@@ -19,7 +19,7 @@ DELETE /api/supplies/v1/drafts/{draftId}/items
 
 Баркоды не валидируются. Если в запросе вы передали некорректные баркоды, вы не получите ошибку. При этом корректные баркоды будут удалены из черновика.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит       | Интервал | Всплеск     |
 | ------ | ----------- | -------- | ----------- |

@@ -15,7 +15,7 @@ GET /api/v2/buffer/tasks
 
 Необработанная загрузка — это загрузка скидок в [календаре акций](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar). Такие скидки применятся к товарам только в момент старта акции.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Цены и скидки**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск    |
 | ------------------ | ------ | ----------- | -------- | ---------- |

@@ -23,7 +23,7 @@ POST /content/v2/cards/moveNm
 
 Объединить можно карточки товаров только в рамках одного предмета
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Контент**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
 
 | Период               | Лимит        | Интервал | Всплеск    |
 | -------------------- | ------------ | -------- | ---------- |

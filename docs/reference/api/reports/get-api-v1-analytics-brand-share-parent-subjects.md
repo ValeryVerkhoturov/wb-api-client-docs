@@ -15,7 +15,7 @@ GET /api/v1/analytics/brand-share/parent-subjects
 
 Можно получить отчёт максимум за 365 дней. Данные доступны с 1 ноября 2022.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит    | Интервал | Всплеск     |
 | ------------------ | ------ | -------- | -------- | ----------- |

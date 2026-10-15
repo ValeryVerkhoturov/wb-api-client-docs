@@ -13,7 +13,7 @@ GET /api/content/v1/brands
 
 Метод возвращает список брендов по ID предмета.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит    | Интервал | Всплеск    |
 | ------------------ | ------ | -------- | -------- | ---------- |

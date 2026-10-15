@@ -15,7 +15,7 @@ GET /api/v3/dbw/warehouses/{warehouseId}/contacts
 
 Только для складов с типом доставки `3` — Деливери WB ([DBW](https://dev.wildberries.ru/openapi/orders-dbw)).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для следующих методов DBW:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
 
 - получение и обновление списка контактов
 - получение и удаление идентификаторов маркировки

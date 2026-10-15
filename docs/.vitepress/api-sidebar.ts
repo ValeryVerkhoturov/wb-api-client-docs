@@ -878,7 +878,7 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/promotion/get-api-advert-v1-config",
         },
         {
-          text: "Установить ставки для поисковых кластеров в валюте аккаунта продавца",
+          text: "Установить ставки для поисковых кластеров в валюте профиля продавца",
           link: "/reference/api/promotion/post-api-advert-v1-normquery-bids",
         },
         {
@@ -2194,7 +2194,7 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/promotion/get-api-advert-v1-config",
         },
         {
-          text: "Установить ставки для поисковых кластеров в валюте аккаунта продавца",
+          text: "Установить ставки для поисковых кластеров в валюте профиля продавца",
           link: "/en/reference/api/promotion/post-api-advert-v1-normquery-bids",
         },
         {

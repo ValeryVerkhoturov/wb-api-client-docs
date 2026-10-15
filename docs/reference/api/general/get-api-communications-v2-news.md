@@ -16,7 +16,7 @@ GET /api/communications/v2/news
 один из параметров `from` или `fromID`.
 За один запрос можно получить не более 100 новостей.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит    | Интервал | Всплеск     |
 | ------------------ | ------ | -------- | -------- | ----------- |

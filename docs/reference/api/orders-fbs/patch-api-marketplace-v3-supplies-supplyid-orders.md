@@ -24,7 +24,7 @@ PATCH /api/marketplace/v3/supplies/{supplyId}/orders
 - `isB2b` — B2B-продажа
   После этого в поставку можно добавить сборочные задания только с такими же признаками `crossBorderType`, `cargoType`, `isB2b`, как у поставки.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
 | Период                                                          | Лимит        | Интервал | Всплеск     |
 | --------------------------------------------------------------- | ------------ | -------- | ----------- |

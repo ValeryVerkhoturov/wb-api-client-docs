@@ -17,7 +17,7 @@ PUT /api/advert/v0/daily-limits
 
 Метод включает, выключает и обновляет дневной лимит кампаний.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип          | Период | Лимит      | Интервал | Всплеск    |
 | ------------ | ------ | ---------- | -------- | ---------- |

@@ -17,7 +17,7 @@ DELETE /api/supplies/v1/drafts/{draftId}
 
 Метод удаляет черновик поставки по его ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит       | Интервал | Всплеск     |
 | ------ | ----------- | -------- | ----------- |

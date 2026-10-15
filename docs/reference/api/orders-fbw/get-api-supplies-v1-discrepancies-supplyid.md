@@ -44,7 +44,7 @@ GET /api/supplies/v1/discrepancies/{supplyId}
 - `"discrepancyType": "shortage"`
 - `"discrepancyLabel": "re-sorting"`
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит    | Интервал | Всплеск  |
 | ------ | -------- | -------- | -------- |

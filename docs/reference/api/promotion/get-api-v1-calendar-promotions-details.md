@@ -13,7 +13,7 @@ GET /api/v1/calendar/promotions/details
 
 Метод возвращает подробную информацию об [акции](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails) по ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов категории **Календарь акций**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Календарь акций**:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск    |
 | ------------------ | ------ | ----------- | -------- | ---------- |

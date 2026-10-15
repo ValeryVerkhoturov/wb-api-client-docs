@@ -21,7 +21,7 @@ POST /api/analytics/v1/stocks-report/seller-warehouses
 
 1 строка ответа — данные об 1 размере товара на 1 складе продавца.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит     | Интервал | Всплеск  |
 | ------ | --------- | -------- | -------- |

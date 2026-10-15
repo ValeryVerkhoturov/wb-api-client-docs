@@ -14,7 +14,7 @@ POST /adv/v1/normquery/stats
 Метод формирует статистику по поисковым кластерам за указанный период с детализацией по дням.
 Можно использовать для кампаний с моделями оплаты `cpm` — за показы и `cpc` — за клики.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск     |
 | ------------------ | ------ | ----------- | -------- | ----------- |

@@ -14,7 +14,7 @@ POST /api/v3/passes
 Метод создаёт [пропуск продавца](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsPasses/operation/getV3Passes) с привязкой к складу WB.
 Пропуск действует 48 часов со времени создания.
 
-Максимум 1 запрос в 10 [минут](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца.
+Максимум 1 запрос в 10 [минут](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца.
 Один запрос с кодами ответов `4XX` учитывается как 10 запросов.
 
 ---

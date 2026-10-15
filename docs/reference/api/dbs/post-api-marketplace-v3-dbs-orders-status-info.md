@@ -36,7 +36,7 @@ POST /api/marketplace/v3/dbs/orders/status/info
 - `ready\_for\_pickup` — заказ прибыл на ПВЗ
 - `canceled\_by\_missed\_call` — отмена по причине недозвона
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **сборочных заданий DBS**:
+[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
 
 | Период                                                          | Лимит        | Интервал | Всплеск     |
 | --------------------------------------------------------------- | ------------ | -------- | ----------- |

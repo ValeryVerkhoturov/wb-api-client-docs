@@ -16,7 +16,7 @@ POST /api/marketplace/v3/dbs/orders/meta/sgtin
 
 Получить загруженные маркировки можно в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **закрепления идентификаторов маркировки DBS**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки DBS**:
 
 | Тип                                                             | Период | Лимит        | Интервал | Всплеск     |
 | --------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |

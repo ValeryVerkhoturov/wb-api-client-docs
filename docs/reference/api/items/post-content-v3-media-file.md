@@ -23,7 +23,7 @@ POST /content/v3/media/file
 \* максимальный размер — 50 Мб
 \* форматы — MOV, MP4
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для всех методов **Медиафайлов**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Медиафайлов**:
 
 | Тип                | Период | Лимит        | Интервал | Всплеск    |
 | ------------------ | ------ | ------------ | -------- | ---------- |

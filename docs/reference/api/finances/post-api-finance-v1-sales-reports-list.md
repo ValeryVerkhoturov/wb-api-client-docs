@@ -19,7 +19,7 @@ POST /api/finance/v1/sales-reports/list
 
 Данные доступны с 29 января 2024 года.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит    | Интервал | Всплеск  |
 | ------ | -------- | -------- | -------- |

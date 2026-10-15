@@ -18,7 +18,7 @@ POST /api/advert/v2/budget
 - `9` — активна
 - `11` — на паузе
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск   |
 | ------------------ | ------ | ----------- | -------- | --------- |

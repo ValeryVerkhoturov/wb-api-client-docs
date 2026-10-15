@@ -25,7 +25,7 @@ POST /api/v1/invite
 - при одинаковых значениях `"disabled": true` доступ не будет выдан
 - при одинаковых значениях `"disabled": false` доступ будет выдан
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Период | Лимит    | Интервал | Всплеск    |
 | ------ | -------- | -------- | ---------- |

@@ -77,15 +77,15 @@ Module `promotion` has 42 operations.
 
 ## Поисковые кластеры
 
-| Method   | Path                            | Operation                                                                                                                             |
-| -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `POST`   | `/adv/v0/normquery/get-bids`    | [Список ставок поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-get-bids)                                       |
-| `POST`   | `/api/advert/v1/normquery/bids` | [Установить ставки для поисковых кластеров в валюте аккаунта продавца](/en/reference/api/promotion/post-api-advert-v1-normquery-bids) |
-| `POST`   | `/adv/v0/normquery/bids`        | [Установить ставки для поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-bids)                                   |
-| `DELETE` | `/adv/v0/normquery/bids`        | [Удалить ставки поисковых кластеров](/en/reference/api/promotion/delete-adv-v0-normquery-bids)                                        |
-| `POST`   | `/adv/v0/normquery/get-minus`   | [Список минус-фраз кампаний](/en/reference/api/promotion/post-adv-v0-normquery-get-minus)                                             |
-| `POST`   | `/adv/v0/normquery/set-minus`   | [Установка и удаление минус-фраз](/en/reference/api/promotion/post-adv-v0-normquery-set-minus)                                        |
-| `POST`   | `/adv/v0/normquery/list`        | [Списки активных и неактивных поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-list)                            |
+| Method   | Path                            | Operation                                                                                                                            |
+| -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `POST`   | `/adv/v0/normquery/get-bids`    | [Список ставок поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-get-bids)                                      |
+| `POST`   | `/api/advert/v1/normquery/bids` | [Установить ставки для поисковых кластеров в валюте профиля продавца](/en/reference/api/promotion/post-api-advert-v1-normquery-bids) |
+| `POST`   | `/adv/v0/normquery/bids`        | [Установить ставки для поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-bids)                                  |
+| `DELETE` | `/adv/v0/normquery/bids`        | [Удалить ставки поисковых кластеров](/en/reference/api/promotion/delete-adv-v0-normquery-bids)                                       |
+| `POST`   | `/adv/v0/normquery/get-minus`   | [Список минус-фраз кампаний](/en/reference/api/promotion/post-adv-v0-normquery-get-minus)                                            |
+| `POST`   | `/adv/v0/normquery/set-minus`   | [Установка и удаление минус-фраз](/en/reference/api/promotion/post-adv-v0-normquery-set-minus)                                       |
+| `POST`   | `/adv/v0/normquery/list`        | [Списки активных и неактивных поисковых кластеров](/en/reference/api/promotion/post-adv-v0-normquery-list)                           |
 
 ## Медиа
 

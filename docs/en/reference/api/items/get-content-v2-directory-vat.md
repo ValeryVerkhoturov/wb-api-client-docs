@@ -13,7 +13,7 @@ GET /content/v2/directory/vat
 
 Метод возвращает возможные значения [характеристики](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) предмета `Ставка НДС`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца для методов **Характеристик**:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **Характеристик**:
 
 | Тип                | Период | Лимит        | Интервал | Всплеск    |
 | ------------------ | ------ | ------------ | -------- | ---------- |

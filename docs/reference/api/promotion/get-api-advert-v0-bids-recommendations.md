@@ -14,7 +14,7 @@ GET /api/advert/v0/bids/recommendations
 Метод возвращает рекомендуемые ставки для карточек товаров и поисковых кластеров кампании.
 Можно использовать для кампаний с типами оплаты `cpm` — за показы и `cpc` — за клики.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один аккаунт продавца:
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
 | Тип                | Период | Лимит       | Интервал | Всплеск    |
 | ------------------ | ------ | ----------- | -------- | ---------- |
