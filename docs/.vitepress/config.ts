@@ -4,6 +4,7 @@ import { editorialFonts } from "vitepress-editorial-modernist/config";
 // Markdown twin of every page, llms.txt and llms-full.txt, all written
 // into dist once the HTML build is done.
 import { generateLlmsFiles } from "./llms";
+import { generateOgImages } from "./og";
 import {
   breadcrumbTrail,
   counterpart,
@@ -50,6 +51,16 @@ const LANGUAGES = [
   "OneScript",
   "C#",
 ];
+
+// Share card per page. The file itself is drawn at the end of the build
+// by og.ts, from the title and description this hook resolves; naming it
+// here is what lets the two agree without either knowing the other's
+// logic. Directory pages ("", "en/", "reference/api/") would collide with
+// their own children, so they take an index card.
+function ogImage(path: string): string {
+  const route = path === "" || path.endsWith("/") ? `${path}index` : path;
+  return `og/${route}.png`;
+}
 
 // Where the site actually lives. Used for the sitemap, canonical URLs,
 // hreflang pairs and absolute og:image URLs — all of which need an origin
@@ -166,9 +177,12 @@ export default defineConfig({
     let description = signature ? `${signature} — ${base}` : base;
 
     if (isReference && description.length < 120) {
+      // Not every upstream summary ends in a full stop, and without one
+      // the tail runs straight into it mid-sentence.
+      const stop = /[.!?…]$/.test(description) ? "" : ".";
       description += isEnglish
-        ? " Wildberries Seller API reference in wb-api-client."
-        : " Справочник Wildberries Seller API в wb-api-client.";
+        ? `${stop} Wildberries Seller API reference in wb-api-client.`
+        : `${stop} Справочник Wildberries Seller API в wb-api-client.`;
     }
 
     // Frontmatter descriptions are Markdown, and the generated ones put
@@ -227,11 +241,12 @@ export default defineConfig({
         "meta",
         {
           property: "og:image",
-          content: `${ORIGIN}${isEnglish ? "og-en.png" : "og.png"}`,
+          content: `${ORIGIN}${ogImage(path)}`,
         },
       ],
       ["meta", { property: "og:image:width", content: "1200" }],
       ["meta", { property: "og:image:height", content: "630" }],
+      ["meta", { property: "og:image:alt", content: title || "wb-api-client" }],
     ];
 
     const other = counterpart(pageData.relativePath);
@@ -331,8 +346,9 @@ export default defineConfig({
   // locale. Nothing here touches the HTML build, so a failure in it is a
   // failure of the whole build — which is what we want, since a stale
   // Markdown mirror is worse than none.
-  buildEnd(siteConfig) {
+  async buildEnd(siteConfig) {
     generateLlmsFiles(siteConfig.outDir, ORIGIN);
+    await generateOgImages(siteConfig.outDir, ORIGIN);
   },
 
   themeConfig: {
