@@ -1,3 +1,7 @@
+---
+description: "TypeScript-клиент Wildberries Seller API: пакет @valeryverkhoturov/wb-api-client с npm, типы .d.ts, axios, 13 категорий API."
+---
+
 # TypeScript
 
 Пакет: [`@valeryverkhoturov/wb-api-client`](https://www.npmjs.com/package/@valeryverkhoturov/wb-api-client) на npm.

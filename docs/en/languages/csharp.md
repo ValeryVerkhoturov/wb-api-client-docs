@@ -1,3 +1,7 @@
+---
+description: "C# client for the Wildberries Seller API: ValeryVerkhoturov.WbApiClient on NuGet, 13 API categories, bearer token wrapped in SecretString."
+---
+
 # C#
 
 Package: [`ValeryVerkhoturov.WbApiClient`](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient) on NuGet.

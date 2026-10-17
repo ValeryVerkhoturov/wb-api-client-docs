@@ -1,3 +1,7 @@
+---
+description: "Go-клиент Wildberries Seller API: модуль github.com/ValeryVerkhoturov/wb-api-client-go, 13 категорий API, маскирование bearer-токена."
+---
+
 # Go
 
 Модуль: `github.com/ValeryVerkhoturov/wb-api-client-go` — резолвится из git-тегов [отдельного репозитория](https://github.com/ValeryVerkhoturov/wb-api-client-go).

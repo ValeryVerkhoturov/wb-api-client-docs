@@ -1,5 +1,6 @@
 ---
 layout: home
+title: SDKs for the Wildberries Seller API
 
 hero:
   name: wb-api-client
@@ -27,6 +28,8 @@ features:
   - title: Deterministic regeneration
     details: Pinned openapi-generator + formatter versions + hidden generation timestamps. PRs that break determinism are caught by a per-PR regen check.
 ---
+
+wb-api-client is a set of client libraries for the Wildberries Seller API: 13 categories (items, orders across FBS / DBW / FBW / DBS, promotion, analytics, finances and the rest) in seven languages, sharing one version and rebuilt from the official WB specs every day.
 
 ## Install
 

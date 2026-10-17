@@ -1,3 +1,7 @@
+---
+description: "Java client for the Wildberries Seller API: io.github.valeryverkhoturov:wb-api-client on Maven Central, 13 API categories, SecretString."
+---
+
 # Java
 
 Coordinates: `io.github.valeryverkhoturov:wb-api-client` on [Maven Central](https://central.sonatype.com/artifact/io.github.valeryverkhoturov/wb-api-client).

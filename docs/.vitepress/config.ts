@@ -4,7 +4,14 @@ import { editorialFonts } from "vitepress-editorial-modernist/config";
 // Markdown twin of every page, llms.txt and llms-full.txt, all written
 // into dist once the HTML build is done.
 import { generateLlmsFiles } from "./llms";
-import { counterpart, leadParagraph, mdPath, urlPath } from "./page-meta";
+import {
+  breadcrumbTrail,
+  counterpart,
+  endpointSignature,
+  leadParagraph,
+  mdPath,
+  urlPath,
+} from "./page-meta";
 
 // Endpoint reference: one page per API operation, generated into
 // docs/reference/api/ (and /en/) by scripts/gen-api-reference.py in the
@@ -24,6 +31,25 @@ import { apiSidebar } from "./api-sidebar";
 //   /en/       — English translation, kept feature-parity with root
 
 const CODE_REPO = "https://github.com/ValeryVerkhoturov/wb-api-client";
+
+// Named once for the structured data below, which repeats them on every
+// page. The licence is the SPDX canonical URL rather than the repo's own
+// LICENSE file, because consumers match it against a known identifier.
+const AUTHOR = {
+  "@type": "Person",
+  name: "Valery Verkhoturov",
+  url: "https://github.com/ValeryVerkhoturov",
+} as const;
+const LICENSE = "https://www.apache.org/licenses/LICENSE-2.0";
+const LANGUAGES = [
+  "Python",
+  "TypeScript",
+  "Go",
+  "Java",
+  "PHP",
+  "OneScript",
+  "C#",
+];
 
 // Where the site actually lives. Used for the sitemap, canonical URLs,
 // hreflang pairs and absolute og:image URLs — all of which need an origin
@@ -115,7 +141,7 @@ export default defineConfig({
 
     // `??` is not enough here: VitePress leaves `description` as "" rather
     // than undefined on pages that do not set one.
-    const description =
+    const base =
       pageData.frontmatter.description ||
       // A home page has no prose lede — its pitch is the hero tagline.
       pageData.frontmatter.hero?.tagline ||
@@ -124,6 +150,39 @@ export default defineConfig({
       (isEnglish
         ? "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript, C#."
         : "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP, OneScript и C#.");
+
+    // The endpoint pages take their description from the upstream spec's
+    // own summary, which is written for a reference table rather than a
+    // search result: often a fragment, and often the same fragment on
+    // dozens of operations ("Метод доступен по Персональному токену" sits
+    // on forty of them). Leading with the operation makes every one of
+    // them unique and says what the page actually is, and the tail fills
+    // in only when the result would still be too short to read as a
+    // snippet. Fixing the summaries themselves belongs upstream, in the
+    // generator — this just stops them reaching Google as duplicates.
+    const signature = endpointSignature(pageData.relativePath);
+    const isReference = path.includes("reference/api/");
+
+    let description = signature ? `${signature} — ${base}` : base;
+
+    if (isReference && description.length < 120) {
+      description += isEnglish
+        ? " Wildberries Seller API reference in wb-api-client."
+        : " Справочник Wildberries Seller API в wb-api-client.";
+    }
+
+    // Frontmatter descriptions are Markdown, and the generated ones put
+    // the module name in backticks — which reach a search result as the
+    // backticks themselves. `leadParagraph` already strips this from the
+    // leads it extracts; do the same to the ones that bypass it.
+    description = description.replace(/[`*_]/g, "").replace(/\s+/g, " ").trim();
+
+    // Google shows about 160 characters; cut on a word so the tail is not
+    // a half word.
+    if (description.length > 160) {
+      const cut = description.slice(0, 160);
+      description = `${cut.slice(0, cut.lastIndexOf(" "))}…`;
+    }
 
     // Also drives <meta name="description">, which VitePress renders from
     // pageData — otherwise every page carries the site-wide one.
@@ -193,6 +252,58 @@ export default defineConfig({
         ],
       );
     }
+
+    // Structured data, one block per page. The home pages describe the
+    // project itself; every other page carries the trail above it, which
+    // is what lets a result show a breadcrumb instead of a bare URL.
+    // `<` is escaped because this is inlined into a <script> element.
+    const jsonLd =
+      pageData.frontmatter.layout === "home"
+        ? {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": `${url}#website`,
+                url,
+                name: "wb-api-client",
+                description,
+                inLanguage: isEnglish ? "en-US" : "ru-RU",
+                publisher: AUTHOR,
+              },
+              {
+                "@type": "SoftwareSourceCode",
+                "@id": `${url}#software`,
+                name: "wb-api-client",
+                description,
+                url,
+                codeRepository: CODE_REPO,
+                programmingLanguage: LANGUAGES,
+                license: LICENSE,
+                author: AUTHOR,
+                inLanguage: isEnglish ? "en-US" : "ru-RU",
+              },
+            ],
+          }
+        : {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { name: "wb-api-client", path: isEnglish ? "en/" : "" },
+              ...breadcrumbTrail(pageData.relativePath),
+            ].map((crumb, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: crumb.name,
+              item: `${ORIGIN}${crumb.path}`,
+            })),
+          };
+
+    head.push([
+      "script",
+      { type: "application/ld+json" },
+      JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+    ]);
 
     pageData.frontmatter.head = [...(pageData.frontmatter.head ?? []), ...head];
   },

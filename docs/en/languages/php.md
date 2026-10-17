@@ -1,3 +1,7 @@
+---
+description: "PHP client for the Wildberries Seller API: valeryverkhoturov/wb-api-client on Packagist, Guzzle, 13 API categories, SecretString."
+---
+
 # PHP
 
 Package: [`valeryverkhoturov/wb-api-client`](https://packagist.org/packages/valeryverkhoturov/wb-api-client) on Packagist.

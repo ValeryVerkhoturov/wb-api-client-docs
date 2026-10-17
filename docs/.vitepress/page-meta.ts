@@ -123,3 +123,63 @@ export function pageTitle(source: string): string | undefined {
     /^#\s+(.+?)\s*$/m.exec(stripFrontmatter(source))?.[1]
   );
 }
+
+// The operation a generated endpoint page documents, as `GET /adv/v1/advert`.
+// Every one of those pages opens with it in an ```http fence, directly
+// under the h1; a page without one (a category index, a guide) has no
+// signature and gets undefined.
+export function endpointSignature(relativePath: string): string | undefined {
+  let source: string;
+  try {
+    source = readFileSync(`${DOCS_ROOT}${relativePath}`, "utf-8");
+  } catch {
+    return undefined;
+  }
+
+  const match = /^```http\r?\n([A-Z]+)\s+(\S+)\r?\n```/m.exec(
+    stripFrontmatter(source),
+  );
+  return match ? `${match[1]} ${match[2]}` : undefined;
+}
+
+// The same, read off disk — undefined when the file is not there, which
+// is how the crumb walk below tests whether a directory is a page.
+function titleOf(relativePath: string): string | undefined {
+  try {
+    return pageTitle(readFileSync(`${DOCS_ROOT}${relativePath}`, "utf-8"));
+  } catch {
+    return undefined;
+  }
+}
+
+// The pages above this one, for BreadcrumbList structured data: every
+// ancestor directory that is itself a page, then the page. A directory
+// without an `index.md` — `guides/`, `languages/`, `reference/` — is a
+// path segment and not a page, so it is not a crumb. The home page is
+// left to the caller, which owns the site name and the origin.
+export function breadcrumbTrail(
+  relativePath: string,
+): { name: string; path: string }[] {
+  const prefix = relativePath.startsWith("en/") ? "en/" : "";
+  const rest = relativePath.slice(prefix.length);
+
+  // A home page's trail is one crumb, which is no trail at all.
+  if (rest === "index.md") return [];
+
+  const trail: { name: string; path: string }[] = [];
+  const segments = rest.split("/");
+
+  for (let i = 0; i < segments.length - 1; i += 1) {
+    const dir = `${prefix}${segments.slice(0, i + 1).join("/")}`;
+    const name = titleOf(`${dir}/index.md`);
+    if (name) trail.push({ name, path: `${dir}/` });
+  }
+
+  // An index page is already the last crumb the loop pushed.
+  if (!rest.endsWith("index.md")) {
+    const name = titleOf(relativePath);
+    if (name) trail.push({ name, path: urlPath(relativePath) });
+  }
+
+  return trail;
+}

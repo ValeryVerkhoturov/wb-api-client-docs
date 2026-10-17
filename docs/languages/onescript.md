@@ -1,3 +1,7 @@
+---
+description: "OneScript-клиент (1С) Wildberries Seller API: пакет wb-api-client с hub.oscript.io, 13 категорий API, маскирование bearer-токена."
+---
+
 # OneScript (1С)
 
 Пакет: [`wb-api-client`](https://hub.oscript.io/pools/default/packages/wb-api-client) на hub.oscript.io.

@@ -1,3 +1,7 @@
+---
+description: "C#-клиент Wildberries Seller API: пакет ValeryVerkhoturov.WbApiClient с NuGet, 13 категорий API, bearer-токен в SecretString."
+---
+
 # C#
 
 Пакет: [`ValeryVerkhoturov.WbApiClient`](https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient) на NuGet.

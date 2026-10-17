@@ -1,3 +1,7 @@
+---
+description: "Go client for the Wildberries Seller API: module github.com/ValeryVerkhoturov/wb-api-client-go, 13 API categories, redacted bearer token."
+---
+
 # Go
 
 Module: `github.com/ValeryVerkhoturov/wb-api-client-go` — resolved from git tags on its [dedicated repo](https://github.com/ValeryVerkhoturov/wb-api-client-go).

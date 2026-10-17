@@ -1,3 +1,7 @@
+---
+description: "PHP-клиент Wildberries Seller API: пакет valeryverkhoturov/wb-api-client с Packagist, Guzzle, 13 категорий API, SecretString."
+---
+
 # PHP
 
 Пакет: [`valeryverkhoturov/wb-api-client`](https://packagist.org/packages/valeryverkhoturov/wb-api-client) на Packagist.

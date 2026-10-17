@@ -1,3 +1,7 @@
+---
+description: "TypeScript client for the Wildberries Seller API: @valeryverkhoturov/wb-api-client on npm, first-class .d.ts types, axios, 13 API categories."
+---
+
 # TypeScript
 
 Package: [`@valeryverkhoturov/wb-api-client`](https://www.npmjs.com/package/@valeryverkhoturov/wb-api-client) on npm.
