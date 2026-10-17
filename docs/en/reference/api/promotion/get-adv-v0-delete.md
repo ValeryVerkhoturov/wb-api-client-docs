@@ -26,9 +26,9 @@ GET /adv/v0/delete
 
 ## Parameters
 
-| Name | In    | Type      | Req. | Description |
-| ---- | ----- | --------- | ---- | ----------- |
-| `id` | query | `integer` | yes  | ID кампании |
+| Name | In    | Type             | Req. | Description |
+| ---- | ----- | ---------------- | ---- | ----------- |
+| `id` | query | `integer<int64>` | yes  | ID кампании |
 
 ## Responses
 

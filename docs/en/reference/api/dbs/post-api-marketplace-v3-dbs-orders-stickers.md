@@ -31,11 +31,11 @@ POST /api/marketplace/v3/dbs/orders/stickers
 
 ## Parameters
 
-| Name     | In    | Type      | Req. | Description    |
-| -------- | ----- | --------- | ---- | -------------- |
-| `type`   | query | `string`  | yes  | Формат стикера |
-| `width`  | query | `integer` | yes  | Ширина стикера |
-| `height` | query | `integer` | yes  | Высота стикера |
+| Name     | In    | Type             | Req. | Description    |
+| -------- | ----- | ---------------- | ---- | -------------- |
+| `type`   | query | `string`         | yes  | Формат стикера |
+| `width`  | query | `integer<int64>` | yes  | Ширина стикера |
+| `height` | query | `integer<int64>` | yes  | Высота стикера |
 
 ## Request body
 

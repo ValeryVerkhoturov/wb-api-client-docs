@@ -24,10 +24,10 @@ POST /api/v1/supplies
 
 ## Parameters
 
-| Name     | In    | Type      | Req. | Description                           |
-| -------- | ----- | --------- | ---- | ------------------------------------- |
-| `limit`  | query | `integer` | no   | Количество записей в ответе           |
-| `offset` | query | `integer` | no   | После какого элемента выдавать данные |
+| Name     | In    | Type             | Req. | Description                           |
+| -------- | ----- | ---------------- | ---- | ------------------------------------- |
+| `limit`  | query | `integer<int64>` | no   | Количество записей в ответе           |
+| `offset` | query | `integer<int64>` | no   | После какого элемента выдавать данные |
 
 ## Request body
 

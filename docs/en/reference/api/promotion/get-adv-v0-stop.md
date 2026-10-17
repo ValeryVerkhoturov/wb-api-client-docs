@@ -27,9 +27,9 @@ GET /adv/v0/stop
 
 ## Parameters
 
-| Name | In    | Type      | Req. | Description |
-| ---- | ----- | --------- | ---- | ----------- |
-| `id` | query | `integer` | yes  | ID кампании |
+| Name | In    | Type             | Req. | Description |
+| ---- | ----- | ---------------- | ---- | ----------- |
+| `id` | query | `integer<int64>` | yes  | ID кампании |
 
 ## Responses
 

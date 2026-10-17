@@ -1,6 +1,6 @@
 ---
 title: "Опции приёмки"
-description: "Метод временно отключён"
+description: "Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)"
 ---
 
 # Опции приёмки
@@ -11,7 +11,7 @@ POST /api/v1/acceptance/options
 
 **Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация для формирования поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/postV1AcceptanceOptions)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
@@ -28,9 +28,9 @@ POST /api/v1/acceptance/options
 
 ## Parameters
 
-| Name          | In    | Type      | Req. | Description                                                                                             |
-| ------------- | ----- | --------- | ---- | ------------------------------------------------------------------------------------------------------- |
-| `warehouseID` | query | `integer` | no   | ID склада. Если параметр не указан, возвращаются данные по всем складам. \*\*Максимум одно значение\*\* |
+| Name          | In    | Type             | Req. | Description                                                                                             |
+| ------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------- |
+| `warehouseID` | query | `integer<int64>` | no   | ID склада. Если параметр не указан, возвращаются данные по всем складам. \*\*Максимум одно значение\*\* |
 
 ## Request body
 

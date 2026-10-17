@@ -26,17 +26,17 @@ GET /api/v1/warehouse_remains
 
 ## Parameters
 
-| Name             | In    | Type      | Req. | Description                                                                                                                                        |
-| ---------------- | ----- | --------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `locale`         | query | `string`  | no   | Язык полей ответа `subjectName` и `warehouseName`: - `ru` — русский - `en` — английский - `zh` — китайский. Значения `warehouseName` на английском |
-| `groupByBrand`   | query | `boolean` | no   | Разбивка по брендам                                                                                                                                |
-| `groupBySubject` | query | `boolean` | no   | Разбивка по предметам                                                                                                                              |
-| `groupBySa`      | query | `boolean` | no   | Разбивка по артикулам продавца                                                                                                                     |
-| `groupByNm`      | query | `boolean` | no   | Разбивка по артикулам WB. Если `groupByNm=true`, в ответе будет поле `volume`                                                                      |
-| `groupByBarcode` | query | `boolean` | no   | Разбивка по баркодам                                                                                                                               |
-| `groupBySize`    | query | `boolean` | no   | Разбивка по размерам                                                                                                                               |
-| `filterPics`     | query | `integer` | no   | Фильтр по фото: - `-1` — без фото - `0` — не применять фильтр - `1` — с фото                                                                       |
-| `filterVolume`   | query | `integer` | no   | Фильтр по объёму: - `-1` — без габаритов - `0` — не применять фильтр - `3` — свыше трёх литров                                                     |
+| Name             | In    | Type             | Req. | Description                                                                                                                                        |
+| ---------------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locale`         | query | `string`         | no   | Язык полей ответа `subjectName` и `warehouseName`: - `ru` — русский - `en` — английский - `zh` — китайский. Значения `warehouseName` на английском |
+| `groupByBrand`   | query | `boolean`        | no   | Разбивка по брендам                                                                                                                                |
+| `groupBySubject` | query | `boolean`        | no   | Разбивка по предметам                                                                                                                              |
+| `groupBySa`      | query | `boolean`        | no   | Разбивка по артикулам продавца                                                                                                                     |
+| `groupByNm`      | query | `boolean`        | no   | Разбивка по артикулам WB. Если `groupByNm=true`, в ответе будет поле `volume`                                                                      |
+| `groupByBarcode` | query | `boolean`        | no   | Разбивка по баркодам                                                                                                                               |
+| `groupBySize`    | query | `boolean`        | no   | Разбивка по размерам                                                                                                                               |
+| `filterPics`     | query | `integer<int64>` | no   | Фильтр по фото: - `-1` — без фото - `0` — не применять фильтр - `1` — с фото                                                                       |
+| `filterVolume`   | query | `integer<int64>` | no   | Фильтр по объёму: - `-1` — без габаритов - `0` — не применять фильтр - `3` — свыше трёх литров                                                     |
 
 ## Responses
 

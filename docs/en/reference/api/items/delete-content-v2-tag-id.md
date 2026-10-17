@@ -28,9 +28,9 @@ DELETE /content/v2/tag/{id}
 
 ## Parameters
 
-| Name | In   | Type      | Req. | Description        |
-| ---- | ---- | --------- | ---- | ------------------ |
-| `id` | path | `integer` | yes  | Числовой ID ярлыка |
+| Name | In   | Type             | Req. | Description        |
+| ---- | ---- | ---------------- | ---- | ------------------ |
+| `id` | path | `integer<int64>` | yes  | Числовой ID ярлыка |
 
 ## Responses
 

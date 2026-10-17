@@ -1,6 +1,6 @@
 ---
 title: "Список складов"
-description: "Метод временно отключён"
+description: "Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)"
 ---
 
 # Список складов
@@ -11,7 +11,7 @@ GET /api/v1/warehouses
 
 **Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация для формирования поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 

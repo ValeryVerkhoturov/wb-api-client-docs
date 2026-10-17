@@ -28,11 +28,11 @@ GET /api/v1/feedbacks/count
 
 ## Parameters
 
-| Name         | In    | Type      | Req. | Description                                                       |
-| ------------ | ----- | --------- | ---- | ----------------------------------------------------------------- |
-| `dateFrom`   | query | `integer` | no   | Дата начала периода в формате Unix timestamp                      |
-| `dateTo`     | query | `integer` | no   | Дата конца периода в формате Unix timestamp                       |
-| `isAnswered` | query | `boolean` | yes  | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
+| Name         | In    | Type             | Req. | Description                                                       |
+| ------------ | ----- | ---------------- | ---- | ----------------------------------------------------------------- |
+| `dateFrom`   | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp                      |
+| `dateTo`     | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp                       |
+| `isAnswered` | query | `boolean`        | yes  | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
 
 ## Responses
 

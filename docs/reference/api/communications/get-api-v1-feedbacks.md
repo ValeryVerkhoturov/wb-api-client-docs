@@ -31,15 +31,15 @@ GET /api/v1/feedbacks
 
 ## Параметры
 
-| Имя          | Где   | Тип       | Обяз. | Описание                                                          |
-| ------------ | ----- | --------- | ----- | ----------------------------------------------------------------- |
-| `isAnswered` | query | `boolean` | да    | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
-| `nmId`       | query | `integer` | нет   | Артикул WB                                                        |
-| `take`       | query | `integer` | да    | Количество отзывов (max. 5 000)                                   |
-| `skip`       | query | `integer` | да    | Количество отзывов для пропуска (max. 199990)                     |
-| `order`      | query | `string`  | нет   | Сортировка отзывов по дате (dateAsc/dateDesc)                     |
-| `dateFrom`   | query | `integer` | нет   | Дата начала периода в формате Unix timestamp                      |
-| `dateTo`     | query | `integer` | нет   | Дата конца периода в формате Unix timestamp                       |
+| Имя          | Где   | Тип              | Обяз. | Описание                                                          |
+| ------------ | ----- | ---------------- | ----- | ----------------------------------------------------------------- |
+| `isAnswered` | query | `boolean`        | да    | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
+| `nmId`       | query | `integer<int64>` | нет   | Артикул WB                                                        |
+| `take`       | query | `integer<int64>` | да    | Количество отзывов (max. 5 000)                                   |
+| `skip`       | query | `integer<int64>` | да    | Количество отзывов для пропуска (max. 199990)                     |
+| `order`      | query | `string`         | нет   | Сортировка отзывов по дате (dateAsc/dateDesc)                     |
+| `dateFrom`   | query | `integer<int64>` | нет   | Дата начала периода в формате Unix timestamp                      |
+| `dateTo`     | query | `integer<int64>` | нет   | Дата конца периода в формате Unix timestamp                       |
 
 ## Ответы
 

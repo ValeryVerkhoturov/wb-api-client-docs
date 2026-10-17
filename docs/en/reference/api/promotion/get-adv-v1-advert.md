@@ -24,9 +24,9 @@ GET /adv/v1/advert
 
 ## Parameters
 
-| Name | In    | Type      | Req. | Description      |
-| ---- | ----- | --------- | ---- | ---------------- |
-| `id` | query | `integer` | yes  | ID медиакампании |
+| Name | In    | Type             | Req. | Description      |
+| ---- | ----- | ---------------- | ---- | ---------------- |
+| `id` | query | `integer<int64>` | yes  | ID медиакампании |
 
 ## Responses
 

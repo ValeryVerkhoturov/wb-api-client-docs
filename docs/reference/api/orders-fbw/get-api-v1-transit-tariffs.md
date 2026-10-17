@@ -1,6 +1,6 @@
 ---
 title: "Транзитные направления"
-description: "Метод временно отключён"
+description: "Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)"
 ---
 
 # Транзитные направления
@@ -11,7 +11,7 @@ GET /api/v1/transit-tariffs
 
 **База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация для формирования поставок · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1TransitTariffs)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 

@@ -28,10 +28,10 @@ GET /api/v3/dbw/orders
 
 ## Parameters
 
-| Name       | In    | Type      | Req. | Description                                  |
-| ---------- | ----- | --------- | ---- | -------------------------------------------- |
-| `dateFrom` | query | `integer` | yes  | Дата начала периода в формате Unix timestamp |
-| `dateTo`   | query | `integer` | yes  | Дата конца периода в формате Unix timestamp  |
+| Name       | In    | Type             | Req. | Description                                  |
+| ---------- | ----- | ---------------- | ---- | -------------------------------------------- |
+| `dateFrom` | query | `integer<int64>` | yes  | Дата начала периода в формате Unix timestamp |
+| `dateTo`   | query | `integer<int64>` | yes  | Дата конца периода в формате Unix timestamp  |
 
 ## Responses
 

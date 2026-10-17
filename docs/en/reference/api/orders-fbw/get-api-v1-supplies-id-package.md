@@ -24,9 +24,9 @@ GET /api/v1/supplies/{ID}/package
 
 ## Parameters
 
-| Name | In   | Type      | Req. | Description |
-| ---- | ---- | --------- | ---- | ----------- |
-| `ID` | path | `integer` | yes  | ID поставки |
+| Name | In   | Type             | Req. | Description |
+| ---- | ---- | ---------------- | ---- | ----------- |
+| `ID` | path | `integer<int64>` | yes  | ID поставки |
 
 ## Responses
 

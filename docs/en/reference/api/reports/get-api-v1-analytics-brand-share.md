@@ -26,10 +26,10 @@ GET /api/v1/analytics/brand-share
 
 ## Parameters
 
-| Name       | In    | Type      | Req. | Description               |
-| ---------- | ----- | --------- | ---- | ------------------------- |
-| `parentId` | query | `integer` | yes  | ID родительской категории |
-| `brand`    | query | `string`  | yes  | Бренд                     |
+| Name       | In    | Type             | Req. | Description               |
+| ---------- | ----- | ---------------- | ---- | ------------------------- |
+| `parentId` | query | `integer<int64>` | yes  | ID родительской категории |
+| `brand`    | query | `string`         | yes  | Бренд                     |
 
 ## Responses
 

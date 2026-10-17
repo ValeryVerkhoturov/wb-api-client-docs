@@ -30,12 +30,12 @@ GET /api/v1/feedbacks/archive
 
 ## Parameters
 
-| Name    | In    | Type      | Req. | Description                                   |
-| ------- | ----- | --------- | ---- | --------------------------------------------- |
-| `nmId`  | query | `integer` | no   | Артикул WB                                    |
-| `take`  | query | `integer` | yes  | Количество отзывов (max. 5 000)               |
-| `skip`  | query | `integer` | yes  | Количество отзывов для пропуска               |
-| `order` | query | `string`  | no   | Сортировка отзывов по дате (dateAsc/dateDesc) |
+| Name    | In    | Type             | Req. | Description                                   |
+| ------- | ----- | ---------------- | ---- | --------------------------------------------- |
+| `nmId`  | query | `integer<int64>` | no   | Артикул WB                                    |
+| `take`  | query | `integer<int64>` | yes  | Количество отзывов (max. 5 000)               |
+| `skip`  | query | `integer<int64>` | yes  | Количество отзывов для пропуска               |
+| `order` | query | `string`         | no   | Сортировка отзывов по дате (dateAsc/dateDesc) |
 
 ## Responses
 
