@@ -1,5 +1,5 @@
 ---
-description: "Python client for the Wildberries Seller API: valeryverkhoturov-wb-api-client on PyPI, 13 API categories, bearer token wrapped in SecretString."
+description: "Python client for the Wildberries Seller API: valeryverkhoturov-wb-api-client on PyPI, 13 API categories, redacted token."
 ---
 
 # Python

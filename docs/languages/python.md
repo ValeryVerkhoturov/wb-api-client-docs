@@ -1,5 +1,5 @@
 ---
-description: "Python-клиент Wildberries Seller API: пакет valeryverkhoturov-wb-api-client с PyPI, 13 категорий API, bearer-токен в SecretString."
+description: "Python-клиент Wildberries Seller API: пакет valeryverkhoturov-wb-api-client с PyPI, 13 категорий API, маскирование токена."
 ---
 
 # Python

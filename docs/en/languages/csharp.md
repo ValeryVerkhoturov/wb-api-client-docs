@@ -1,5 +1,5 @@
 ---
-description: "C# client for the Wildberries Seller API: ValeryVerkhoturov.WbApiClient on NuGet, 13 API categories, bearer token wrapped in SecretString."
+description: "C# client for the Wildberries Seller API: ValeryVerkhoturov.WbApiClient on NuGet, 13 API categories, redacted token."
 ---
 
 # C#

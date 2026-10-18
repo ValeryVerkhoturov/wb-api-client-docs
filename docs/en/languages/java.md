@@ -1,5 +1,5 @@
 ---
-description: "Java client for the Wildberries Seller API: io.github.valeryverkhoturov:wb-api-client on Maven Central, 13 API categories, SecretString."
+description: "Java client for the Wildberries Seller API: io.github.valeryverkhoturov:wb-api-client on Maven Central, 13 API categories, redacted token."
 ---
 
 # Java
