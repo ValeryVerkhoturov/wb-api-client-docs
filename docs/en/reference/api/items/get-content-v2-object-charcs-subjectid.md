@@ -45,7 +45,7 @@ GET /content/v2/object/charcs/{subjectId}
 | Code  | Description            | Schema                                  |
 | ----- | ---------------------- | --------------------------------------- |
 | `200` | Успешно                | `GetV2ObjectCharcsSubjectIdResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`           |
+| `400` | Неправильный запрос    | `object`                                |
 | `401` | Не авторизован         | `object`                                |
 | `403` | Доступ запрещён        | `responseBodyContentError403`           |
 | `429` | Слишком много запросов | `object`                                |

@@ -1,6 +1,6 @@
 ---
 title: "Опции приёмки"
-description: "Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)"
+description: "Метод временно отключён"
 ---
 
 # Опции приёмки
@@ -11,7 +11,7 @@ POST /api/v1/acceptance/options
 
 **База:** `https://supplies-api.wildberries.ru` · **Модуль:** [`orders-fbw`](/reference/api/orders-fbw/) · **Раздел:** Информация для формирования поставок · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/postV1AcceptanceOptions)
 
-Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 

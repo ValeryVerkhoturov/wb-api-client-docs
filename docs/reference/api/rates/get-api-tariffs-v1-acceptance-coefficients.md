@@ -1,6 +1,6 @@
 ---
 title: "Тарифы на поставку"
-description: "Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)"
+description: "Метод временно отключён"
 ---
 
 # Тарифы на поставку
@@ -11,7 +11,7 @@ GET /api/tariffs/v1/acceptance/coefficients
 
 **База:** `https://common-api.wildberries.ru` · **Модуль:** [`rates`](/reference/api/rates/) · **Раздел:** Тарифы на поставку · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
 
-Метод ]временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
