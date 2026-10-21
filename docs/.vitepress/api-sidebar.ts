@@ -408,6 +408,10 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids",
         },
         {
+          text: "Получить список пунктов отгрузки поставки",
+          link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points",
+        },
+        {
           text: "Получить список пунктов отгрузки поставок",
           link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points",
         },
@@ -1722,6 +1726,10 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Получить ID сборочных заданий поставки",
           link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids",
+        },
+        {
+          text: "Получить список пунктов отгрузки поставки",
+          link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points",
         },
         {
           text: "Получить список пунктов отгрузки поставок",

@@ -1,11 +1,11 @@
 ---
 title: "Заказы FBS"
-description: "Module `orders-fbs` has 47 operations."
+description: "Module `orders-fbs` has 48 operations."
 ---
 
 # Заказы FBS · `orders-fbs`
 
-Module `orders-fbs` has 47 operations.
+Module `orders-fbs` has 48 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs) · [All modules](/en/reference/api/)
 
@@ -70,6 +70,7 @@ Module `orders-fbs` has 47 operations.
 | `GET`    | `/api/v3/supplies/{supplyId}`                                 | [Получить информацию о поставке](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid)                                                      |
 | `DELETE` | `/api/v3/supplies/{supplyId}`                                 | [Удалить поставку](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid)                                                                 |
 | `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`           | [Получить ID сборочных заданий поставки](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)                        |
+| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points` | [Получить список пунктов отгрузки поставки](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points)           |
 | `GET`    | `/api/marketplace/v3/fbs/shipping-points`                     | [Получить список пунктов отгрузки поставок](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points)                             |
 | `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`            | [Установить параметры отгрузки поставок](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method)                     |
 | `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                         | [Передать поставку в доставку](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                                              |

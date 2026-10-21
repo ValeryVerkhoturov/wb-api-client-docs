@@ -1,6 +1,6 @@
 ---
 title: "Получить список пунктов отгрузки поставок"
-description: "Метод возвращает доступные пункты отгрузки поставок с фильтрами: - по населённым пунктам России - по типам товаров, которые принимает пункт отгрузки…"
+description: "Метод будет отключен 20 ноября."
 ---
 
 # Получить список пунктов отгрузки поставок
@@ -11,13 +11,7 @@ GET /api/marketplace/v3/fbs/shipping-points
 
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
 
-Метод возвращает доступные пункты отгрузки поставок с фильтрами:
-
-- по населённым пунктам России
-- по типам товаров, которые принимает пункт отгрузки
-  Используйте данные из этого метода, чтобы устанавливать [параметры отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
-
-Доступно только для продавцов из РФ.
+Метод будет отключен [20 ноября](https://dev.wildberries.ru/release-notes?id=585).
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
