@@ -13,6 +13,15 @@ GET /api/analytics/v1/item-returns
 
 Метод возвращает отчёт о [возвратах товаров продавцу](https://seller.wildberries.ru/return-transfer-reports).
 
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+
+| Тип                | Период | Лимит     | Интервал | Всплеск     |
+| ------------------ | ------ | --------- | -------- | ----------- |
+| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
+| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
+| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
+| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос    |
+
 ## Parameters
 
 | Name       | In    | Type            | Req. | Description                                                                          |

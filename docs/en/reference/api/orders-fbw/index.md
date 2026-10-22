@@ -15,7 +15,6 @@ Module `orders-fbw` has 14 operations.
 
 - [информации для формирования поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
 - [информации о поставках](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
-  Вы можете создавать карточки товара в песочнице [Контента](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov), а потом использовать баркоды товаров в [песочнице](https://dev.wildberries.ru/sandbox) Поставок
 
 ## Информация для формирования поставок
 
