@@ -99,22 +99,20 @@ client := wbitems.NewAPIClient(cfg)
 
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setBearerToken("<ваш JWT WB>");
 ItemsApi api = new ItemsApi(client);
 ```
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
+    ->setAccessToken('<ваш JWT WB>');
 $api = new ItemsApi(new Client(), $config);
 ```
 
@@ -131,7 +129,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Api;
 using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
-config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+config.SetAccessToken("<ваш JWT WB>");
 var api = new ItemsApi(config);
 ```
 

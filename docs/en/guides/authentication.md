@@ -24,17 +24,17 @@ Every token lives 180 days from creation, after which you need to mint a new one
 
 ## Secret-string wrappers
 
-Once you have the token, don't pass it around as a plain string. Every client wraps the value in a language-native "secret string" type so it redacts under logs, `print`, debuggers, and error dumps — unless you explicitly ask for the raw value.
+Once you have the token, don't pass it around as a plain string. Every client stores the value in a language-native "secret string" type — in Java, PHP and C# you hand the setter a plain string and it wraps the value internally — so the token redacts under logs, `print`, debuggers, and error dumps, unless you explicitly ask for the raw value.
 
-| Language   | Wrapper                                                                                      | Setter                                                  | Redacted under                                            | Explicit expose       |
-| ---------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | --------------------- |
-| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`                         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
-| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`                       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
-| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`                       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
-| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(SecretString)`                | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`     |
-| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessTokenSecret(SecretString)`     | `var_dump($secret)` → `'<REDACTED>'`                      | `->exposeSecret()`    |
-| C#         | per-namespace `SecretString`                                                                 | `Configuration.AccessTokenSecret = new SecretString(…)` | `Console.WriteLine(cfg.AccessTokenSecret)` → `<REDACTED>` | `.ExposeSecret()`     |
-| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`                       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
+| Language   | Wrapper                                                                                      | Setter                                  | Redacted under                                            | Explicit expose       |
+| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
+| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
+| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
+| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setBearerToken(String)`      | `System.out.println(s)` → `<REDACTED>`                    | —                     |
+| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessToken(string)` | `var_dump($config)` → token `'<REDACTED>'`                | `getAccessToken()`    |
+| C#         | per-namespace `SecretString`                                                                 | `Configuration.SetAccessToken(string)`  | `Console.WriteLine(s)` → `<REDACTED>`                     | no getter by design   |
+| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
 
 ### Why bother?
 
@@ -75,17 +75,16 @@ fmt.Println(cfg.AccessToken.ExposeSecret()) // eyJhbGciOi...  (opt-in)
 ```
 
 ```java [Java]
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 SecretString s = new SecretString("eyJhbGciOi...");
 System.out.println(s);            // <REDACTED>
 System.out.println(s.exposeSecret()); // eyJhbGciOi...  (opt-in)
 ```
 
 ```php [PHP]
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
-$s = new SecretString('eyJhbGciOi...');
-var_dump($s);                     // object(...) { ['value']=> '<REDACTED>' }
-echo $s->exposeSecret();          // eyJhbGciOi...  (opt-in)
+use ValeryVerkhoturov\WbApiClient\Items\Configuration;
+$config = (new Configuration())->setAccessToken('eyJhbGciOi...');
+var_dump($config);                // accessToken => '<REDACTED>'
+echo $config->getAccessToken();   // eyJhbGciOi...  (opt-in)
 ```
 
 ```bsl [OneScript]

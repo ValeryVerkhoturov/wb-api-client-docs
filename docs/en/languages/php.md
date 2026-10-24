@@ -29,7 +29,6 @@ Root namespace: `ValeryVerkhoturov\WbApiClient\`. Every WB category is a PascalC
 
 ```php
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 ```
 
@@ -46,24 +45,23 @@ Full per-sub-namespace API listing: [ValeryVerkhoturov/wb-api-client-php README]
 require 'vendor/autoload.php';
 
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+    ->setAccessToken('<your WB JWT>');
 
 $api = new ItemsApi(new Client(), $config);
 
 $result = $api->someEndpoint();
 ```
 
-`setAccessTokenSecret` (note the `Secret` suffix) is the sanctioned path. The plain `setAccessToken` inherited from the openapi-generator template still exists but takes a raw string — prefer the wrapper form unless you have a very specific reason.
+`setAccessToken` takes a plain string and wraps it in a `SecretString` internally — the token redacts under `var_dump($config)` and similar dumps.
 
 To read the raw value back:
 
 ```php
-$config->getAccessTokenSecret()->exposeSecret();
+$config->getAccessToken();   // string|null
 ```
 
 ## User-Agent
@@ -72,7 +70,7 @@ Every request sends `ValeryVerkhoturov/wb-api-client/php` (not the openapi-gener
 
 ```php
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString(TOKEN))
+    ->setAccessToken(TOKEN)
     ->setUserAgent('MyApp/1.2.3 ValeryVerkhoturov/wb-api-client/php');
 ```
 
@@ -102,7 +100,7 @@ Override the host on Configuration:
 ```php
 $config = (new Configuration())
     ->setHost('http://localhost:8080')
-    ->setAccessTokenSecret(new SecretString('test-token'));
+    ->setAccessToken('test-token');
 ```
 
 ## See also

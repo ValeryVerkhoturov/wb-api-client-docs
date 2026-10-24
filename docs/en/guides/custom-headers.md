@@ -61,11 +61,10 @@ client := wbitems.NewAPIClient(cfg)
 
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken("<your WB JWT>");
 client.addDefaultHeader("X-Gateway-Token", "<gateway credentials>");
 client.addDefaultHeader("X-Request-Source", "erp-sync");
 
@@ -74,12 +73,11 @@ ItemsApi api = new ItemsApi(client);
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+    ->setAccessToken('<your WB JWT>');
 
 // PHP's Configuration has no header registry — the Guzzle client holds them.
 $http = new Client([
@@ -108,7 +106,7 @@ using ValeryVerkhoturov.WbApiClient.Items.Api;
 using ValeryVerkhoturov.WbApiClient.Items.Client;
 
 var config = new Configuration();
-config.AccessTokenSecret = new SecretString("<your WB JWT>");
+config.SetAccessToken("<your WB JWT>");
 config.DefaultHeaders["X-Gateway-Token"] = "<gateway credentials>";
 config.DefaultHeaders["X-Request-Source"] = "erp-sync";
 

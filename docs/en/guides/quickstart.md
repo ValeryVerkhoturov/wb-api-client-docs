@@ -113,11 +113,10 @@ func main() {
 
 ```java [Java]
 import io.github.valeryverkhoturov.wbapi.general.ApiClient;
-import io.github.valeryverkhoturov.wbapi.general.SecretString;
 import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken("<your WB JWT>");
 GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV1SellerInfo());
@@ -125,12 +124,11 @@ System.out.println(api.getV1SellerInfo());
 
 ```php [PHP]
 use ValeryVerkhoturov\WbApiClient\General\Configuration;
-use ValeryVerkhoturov\WbApiClient\General\SecretString;
 use ValeryVerkhoturov\WbApiClient\General\Api\GeneralApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
+    ->setAccessToken('<your WB JWT>');
 $api = new GeneralApi(new Client(), $config);
 
 print_r($api->getV1SellerInfo());
@@ -151,7 +149,7 @@ using ValeryVerkhoturov.WbApiClient.General.Api;
 using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
-config.AccessTokenSecret = new SecretString("<your WB JWT>");
+config.SetAccessToken("<your WB JWT>");
 var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetV1SellerInfo());

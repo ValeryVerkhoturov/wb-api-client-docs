@@ -46,7 +46,7 @@ using ValeryVerkhoturov.WbApiClient.General.Api;
 using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
-config.AccessTokenSecret = new SecretString("<your WB JWT>");
+config.SetAccessToken("<your WB JWT>");
 
 var api = new GeneralApi(config);
 var ping = api.GetPing();
@@ -54,13 +54,14 @@ var ping = api.GetPing();
 Console.WriteLine(ping.Status);
 ```
 
-`AccessTokenSecret` is the recommended path. The plain-string `AccessToken` property also works — it is what the generator reads to build the `Authorization` header — but prefer the wrapper.
+`SetAccessToken` stores the string in a `SecretString` internally. `Configuration` deliberately has no getter for the token: the generated Api classes read it through `IReadableConfiguration` when they build the `Authorization` header.
 
 The token does not leak when printed: `SecretString.ToString()` always returns `<REDACTED>`, and string interpolation, `Console.WriteLine` and most logging frameworks all go through it.
 
 ```csharp
-Console.WriteLine($"{config.AccessTokenSecret}");           // <REDACTED>
-Console.WriteLine(config.AccessTokenSecret.ExposeSecret()); // eyJhbGciOi...  (on request)
+var s = new SecretString("eyJhbGciOi...");
+Console.WriteLine($"{s}");            // <REDACTED>
+Console.WriteLine(s.ExposeSecret());  // eyJhbGciOi...  (on request)
 ```
 
 ## Async calls
@@ -76,10 +77,10 @@ var ping = await api.GetPingAsync(cancellationToken: token);
 ```csharp
 var config = new Configuration
 {
-    AccessTokenSecret = new SecretString(token),
     Timeout = TimeSpan.FromSeconds(60),          // 100 seconds by default
     UserAgent = "MyApp/1.2.3 ValeryVerkhoturov/wb-api-client/csharp",
 };
+config.SetAccessToken(token);
 
 config.DefaultHeaders.Add("X-Request-Id", requestId);
 ```
@@ -103,7 +104,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Api;
 using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var fbsConfig = new Configuration();
-fbsConfig.AccessTokenSecret = new SecretString("<your WB JWT>");
+fbsConfig.SetAccessToken("<your WB JWT>");
 
 var fbs = new OrdersFbsApi(fbsConfig);
 
@@ -131,8 +132,7 @@ Api clients are ordinary classes with a `Configuration` constructor, so they reg
 services.AddSingleton(_ =>
 {
     var config = new Configuration();
-    config.AccessTokenSecret = new SecretString(
-        builder.Configuration["Wb:Token"]);
+    config.SetAccessToken(builder.Configuration["Wb:Token"]);
     return config;
 });
 

@@ -49,7 +49,6 @@ libraryDependencies += "io.github.valeryverkhoturov" % "wb-api-client" % "LATEST
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 ```
 
@@ -63,29 +62,21 @@ import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setBearerToken("<ваш JWT WB>");
 
 ItemsApi api = new ItemsApi(client);
 ```
 
-`setBearerToken` принимает именно `SecretString`, а не голую `String` — это сделано специально. Проверка на этапе компиляции заставляет подумать, откуда берётся сырое значение.
-
-Получить сырое значение обратно:
-
-```java
-SecretString token = /* ... */;
-String raw = token.exposeSecret();
-```
+`setBearerToken` принимает обычную `String` и оборачивает её в `SecretString` внутри клиента — конструировать обёртку руками не нужно, а в логах и дампах токен остаётся замаскированным.
 
 ## Один `SecretString` на под-пакет — почему
 
 Обёртка генерируется в каждый под-пакет, а не расшарена на всю библиотеку, потому что openapi-generator создаёт полностью изолированные SDK на каждую спецификацию — общего «core»-модуля нет. Объединение потребовало бы дополнительного прохода генерации с межмодульными зависимостями. Цена — один класс на под-пакет; плюс в том, что клиент остаётся чистым выхлопом openapi-generator с минимальными точечными правками.
 
-На практике: выбирайте `import io.github.valeryverkhoturov.wbapi.items.SecretString` или `.orders_fbs.SecretString` — в зависимости от того, каким под-модулем пользуетесь.
+На практике это незаметно: `setBearerToken` оборачивает строку в `SecretString` своего под-пакета сам, поэтому импортировать и конструировать обёртку не требуется.
 
 ## Свой OkHttp-клиент
 
@@ -101,7 +92,7 @@ OkHttpClient http = new OkHttpClient.Builder()
     .build();
 
 ApiClient client = new ApiClient(http);
-client.setBearerToken(new SecretString(TOKEN));
+client.setBearerToken(TOKEN);
 ```
 
 ## Java 8 vs новее

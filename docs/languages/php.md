@@ -29,7 +29,6 @@ PHP здесь — отдельный случай: Packagist требует, ч
 
 ```php
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 ```
 
@@ -46,24 +45,23 @@ use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 require 'vendor/autoload.php';
 
 use ValeryVerkhoturov\WbApiClient\Items\Configuration;
-use ValeryVerkhoturov\WbApiClient\Items\SecretString;
 use ValeryVerkhoturov\WbApiClient\Items\Api\ItemsApi;
 use GuzzleHttp\Client;
 
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
+    ->setAccessToken('<ваш JWT WB>');
 
 $api = new ItemsApi(new Client(), $config);
 
 $result = $api->someEndpoint();
 ```
 
-`setAccessTokenSecret` (обратите внимание на суффикс `Secret`) — рекомендованный путь. Унаследованный от шаблона openapi-generator метод `setAccessToken` с голой строкой тоже существует, но предпочитайте форму с обёрткой, если только у вас нет очень специфической причины.
+`setAccessToken` принимает обычную строку и хранит её внутри как `SecretString`: `var_dump($config)` покажет токен замаскированным, а не сырым.
 
 Получить сырое значение:
 
 ```php
-$config->getAccessTokenSecret()->exposeSecret();
+$raw = $config->getAccessToken(); // string|null
 ```
 
 ## User-Agent
@@ -72,7 +70,7 @@ $config->getAccessTokenSecret()->exposeSecret();
 
 ```php
 $config = (new Configuration())
-    ->setAccessTokenSecret(new SecretString(TOKEN))
+    ->setAccessToken(TOKEN)
     ->setUserAgent('MyApp/1.2.3 ValeryVerkhoturov/wb-api-client/php');
 ```
 
@@ -102,7 +100,7 @@ $api = new ItemsApi($http, $config);
 ```php
 $config = (new Configuration())
     ->setHost('http://localhost:8080')
-    ->setAccessTokenSecret(new SecretString('test-token'));
+    ->setAccessToken('test-token');
 ```
 
 ## См. также

@@ -49,7 +49,6 @@ Base package: `io.github.valeryverkhoturov.wbapi`. Each WB category lives in a s
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 ```
 
@@ -63,29 +62,21 @@ Full per-module API class listing: [clients/java/README.md](https://github.com/V
 
 ```java
 import io.github.valeryverkhoturov.wbapi.items.ApiClient;
-import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setBearerToken("<your WB JWT>");
 
 ItemsApi api = new ItemsApi(client);
 ```
 
-`setBearerToken` requires a `SecretString`, not a bare `String` — that's deliberate. The compile-time constraint pushes callers to think about where the raw token comes from.
-
-To read the raw value back:
-
-```java
-SecretString token = /* ... */;
-String raw = token.exposeSecret();
-```
+`setBearerToken` takes a plain `String` and wraps it in the sub-module's `SecretString` internally — the token redacts under logging and debug dumps from that point on.
 
 ## One `SecretString` per sub-package — why?
 
 The wrapper is generated into each sub-package rather than shared across the whole library because openapi-generator emits fully isolated SDKs per spec — there is no shared "core" module. Consolidating would require an additional generator pass with cross-module coupling. The cost is a class per sub-package; the benefit is the client remains a pure openapi-generator output with only surgical patches.
 
-Practically: `import io.github.valeryverkhoturov.wbapi.items.SecretString` vs `.orders_fbs.SecretString` — pick the one that matches the sub-module you're using.
+Practically you never touch them: `setBearerToken` wraps your plain string in the sub-module's own `SecretString` — `io.github.valeryverkhoturov.wbapi.items.SecretString` vs `.orders_fbs.SecretString` — automatically.
 
 ## Custom OkHttp client
 
@@ -101,7 +92,7 @@ OkHttpClient http = new OkHttpClient.Builder()
     .build();
 
 ApiClient client = new ApiClient(http);
-client.setBearerToken(new SecretString(TOKEN));
+client.setBearerToken(TOKEN);
 ```
 
 ## Java 8 vs newer

@@ -46,7 +46,7 @@ using ValeryVerkhoturov.WbApiClient.General.Api;
 using ValeryVerkhoturov.WbApiClient.General.Client;
 
 var config = new Configuration();
-config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+config.SetAccessToken("<ваш JWT WB>");
 
 var api = new GeneralApi(config);
 var ping = api.GetPing();
@@ -54,13 +54,14 @@ var ping = api.GetPing();
 Console.WriteLine(ping.Status);
 ```
 
-`AccessTokenSecret` — рекомендованный путь. Свойство `AccessToken` с голой строкой тоже работает (через него генератор собирает заголовок `Authorization`), но предпочитайте обёртку.
+`SetAccessToken` принимает обычную строку и хранит её внутри как `SecretString`. Геттера для токена у `Configuration` нет специально: сырое значение читают только сгенерированные классы Api — через `IReadableConfiguration`.
 
 Токен не раскрывается при выводе: `ToString()` у `SecretString` всегда возвращает `<REDACTED>`, а через него проходят и интерполяция строк, и `Console.WriteLine`, и большинство логгеров.
 
 ```csharp
-Console.WriteLine($"{config.AccessTokenSecret}");        // <REDACTED>
-Console.WriteLine(config.AccessTokenSecret.ExposeSecret()); // eyJhbGciOi...  (по запросу)
+var s = new SecretString("eyJhbGciOi...");
+Console.WriteLine($"{s}");              // <REDACTED>
+Console.WriteLine(s.ExposeSecret());    // eyJhbGciOi...  (по запросу)
 ```
 
 ## Асинхронные вызовы
@@ -76,10 +77,10 @@ var ping = await api.GetPingAsync(cancellationToken: token);
 ```csharp
 var config = new Configuration
 {
-    AccessTokenSecret = new SecretString(token),
     Timeout = TimeSpan.FromSeconds(60),          // по умолчанию 100 секунд
     UserAgent = "MyApp/1.2.3 ValeryVerkhoturov/wb-api-client/csharp",
 };
+config.SetAccessToken(token);
 
 config.DefaultHeaders.Add("X-Request-Id", requestId);
 ```
@@ -103,7 +104,7 @@ using ValeryVerkhoturov.WbApiClient.OrdersFbs.Api;
 using ValeryVerkhoturov.WbApiClient.OrdersFbs.Client;
 
 var fbsConfig = new Configuration();
-fbsConfig.AccessTokenSecret = new SecretString("<ваш JWT WB>");
+fbsConfig.SetAccessToken("<ваш JWT WB>");
 
 var fbs = new OrdersFbsApi(fbsConfig);
 
@@ -135,8 +136,7 @@ catch (ApiException e)
 services.AddSingleton(_ =>
 {
     var config = new Configuration();
-    config.AccessTokenSecret = new SecretString(
-        builder.Configuration["Wb:Token"]);
+    config.SetAccessToken(builder.Configuration["Wb:Token"]);
     return config;
 });
 
