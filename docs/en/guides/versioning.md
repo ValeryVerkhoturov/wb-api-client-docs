@@ -115,7 +115,7 @@ There is no formal deprecation window — the upstream contract is the source of
 
 ## Multi-language version drift — impossible by construction
 
-Because the same `1.YYYYMMDD.N` is stamped into every language's manifest in the same generate.py invocation, and every language is regenerated in every release run, you cannot end up with "Python 1.20260921.0 but Go 1.20260919.0" from a single upstream state — they're always in lockstep.
+Because the same `1.YYYYMMDD.N` is stamped into every language's manifest in the same generate-clients.py invocation, and every language is regenerated in every release run, you cannot end up with "Python 1.20260921.0 but Go 1.20260919.0" from a single upstream state — they're always in lockstep.
 
 The only way to skew: a language's publish step fails (e.g. Maven Central rejects a signature). The tag exists and the source is on GitHub; a manual re-run of the failed publish job for that specific language fixes it.
 

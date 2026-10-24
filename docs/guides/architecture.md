@@ -5,16 +5,16 @@
 ## Пайплайн
 
 ```
-download-swaggers.py   →  swaggers/*.yaml         (сырой апстрим, checksummed)
-post-process.py        →  swaggers/processed/     (13 проходов)
-generate.py <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 языков)
-    ├── inject-secret.py           (SecretString-обёртка на каждый язык)
+download-specs.py          →  swaggers/*.yaml         (сырой апстрим, checksummed)
+process-specs.py           →  swaggers/processed/     (13 проходов)
+generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 7 языков)
+    ├── inject-secrets.py          (SecretString-обёртка на каждый язык)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (канонизация форматирования)
-    └── gen-readmes.py             (README.md на каждый язык)
+    └── generate-readmes.py        (README.md на каждый язык)
      ↓ коммитится тегом v<version>, один тег покрывает все 7 языков
-publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
-gen-api-reference.py   →  wb-api-client-docs      (справка по API: страницы операций,
-                                                   сниппеты и структуры данных на 7 языках, RU/EN)
+publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
+generate-docs.py           →  wb-api-client-docs      (справка по API: страницы операций,
+                                                        сниппеты и структуры данных на 7 языках, RU/EN)
 ```
 
 Каждый шаг — обычный Python-файл, ничего не скрыто за непрозрачным тулингом.
@@ -25,7 +25,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 
 Минус — выхлоп генератора остаётся выхлопом генератора: местами уродливым, местами со следами кривостей спецификации. Именно поэтому есть слой пост-обработки.
 
-## post-process.py — 13 проходов
+## process-specs.py — 13 проходов
 
 1. **`inject_bearer_auth`** — удаляет схему `HeaderApiKey` (дублирует реальный bearer JWT) и ставит одну `BearerAuth`. Каждый сгенерированный клиент получает ровно один путь авторизации.
 2. **`fix_untyped_arrays`** — добавляет `items: {type: string}` массивам без указания внутреннего типа (иначе Go / TS сгенерируют `[]any`).
@@ -39,16 +39,16 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 10. **`drop_date_formats`** — WB возвращает `""` для неустановленных дат (`fixTariffDateFrom`, `utdUcdDate`), что не парсится ни одним строгим date-парсером. Проход снимает `format: date` / `format: date-time` со строковых схем, и клиенты типизируют их как обычные строки.
 11. **`htmlize_descriptions_to_markdown`** — каждое поле `description` прогоняется через `markdownify`, чтобы HTML в докстрингах рендерился как Markdown.
 12. **`absolutize_description_links`** — к относительным ссылкам `[…](/openapi/…)` добавляется `https://dev.wildberries.ru`, чтобы ссылки в сгенерированных докстрингах открывались.
-13. **`add_docs_links`** — добавляет строку `Library doc: <url>` в `description` каждой операции со ссылкой на страницу операции на этом сайте. Генераторы копируют `description` в докстринги/Javadoc, поэтому каждый метод клиента ссылается на свою страницу документации. `gen-api-reference.py` вырезает эту строку обратно, так что сам сайт не затрагивается.
+13. **`add_docs_links`** — добавляет строку `Library doc: <url>` в `description` каждой операции со ссылкой на страницу операции на этом сайте. Генераторы копируют `description` в докстринги/Javadoc, поэтому каждый метод клиента ссылается на свою страницу документации. `generate-docs.py` вырезает эту строку обратно, так что сам сайт не затрагивается.
 
-## generate.py
+## generate-clients.py
 
 - Гоняет `openapi-generator-cli` (закреплённый Docker-образ) для каждой спецификации и каждого языка во временные каталоги.
 - Склеивает пер-спецификационные SDK в единое дерево на язык — Python-пакеты под `wb_api_client.<slug>`, TypeScript subpath-экспорты, Go под-пакеты, Java под-пакеты, PHP под-пространства, OneScript — по префиксу имени класса (пространств имён в языке нет), C# — пространства имён.
-- Запускает `inject-secret.py`, чтобы патчить каждый сгенерированный `Configuration` / `ApiClient` соответствующей языковой обёрткой секрета.
+- Запускает `inject-secrets.py`, чтобы патчить каждый сгенерированный `Configuration` / `ApiClient` соответствующей языковой обёрткой секрета.
 - Запускает закреплённый форматтер: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. Всё внутри Docker — без языковых рантаймов на хосте.
 - Подставляет `__VERSION__` в топ-уровневые манифесты (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`).
-- Запускает `gen-readmes.py`, чтобы выпустить README на каждый язык.
+- Запускает `generate-readmes.py`, чтобы выпустить README на каждый язык.
 
 Итог: `clients/{python,typescript,go,java,php,onescript,csharp}/` — семь пакетов, готовых к публикации.
 
@@ -73,7 +73,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 - OneScript — `opm build` и `opm push` в hub.oscript.io.
 - C# — `dotnet pack` и `dotnet nuget push` в NuGet.
 
-Отдельно daily-check перегенерирует справку по API (`gen-api-reference.py` — страницы операций, сниппеты вызова и структуры входящих/исходящих данных на каждом языке, ссылки на спецификацию WB) и пушит её в `wb-api-client-docs`, откуда сайт деплоится на GitHub Pages.
+Отдельно daily-check перегенерирует справку по API (`generate-docs.py` — страницы операций, сниппеты вызова и структуры входящих/исходящих данных на каждом языке, ссылки на спецификацию WB) и пушит её в `wb-api-client-docs`, откуда сайт деплоится на GitHub Pages.
 
 Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, но PyPI и npm trusted publishing их не поддерживают: и OIDC-claim `job_workflow_ref` (callee), и Sigstore-attestation `workflow_ref` (caller) должны указывать на один и тот же файл, что с `workflow_call` невозможно. Поэтому — `workflow_dispatch`.
 
@@ -87,7 +87,7 @@ Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, н
 
 Ежедневный прогон коммитит и тегает все три соседних репозитория ДО основного — иначе записанные указатели сабмодулей ссылались бы на коммиты, которых на их удалённых ещё нет, и свежий `git clone --recurse-submodules` падал бы.
 
-Четвёртый сосед — [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs), этот сайт. Он не сабмодуль: daily-check клонирует его, запускает `gen-api-reference.py` и пушит результат обратно.
+Четвёртый сосед — [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs), этот сайт. Он не сабмодуль: daily-check клонирует его, запускает `generate-docs.py` и пушит результат обратно.
 
 ## Генератор OneScript
 
@@ -97,7 +97,7 @@ Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, н
 
 Ручные части основного репозитория:
 
-- `scripts/` — сам пайплайн, разложенный по доменным контекстам в `scripts/pipeline/`: `core/` (общее ядро: пути репозитория, именование спецификаций/модулей/языков, YAML IO, запуск внешних инструментов (subprocess, docker, git, python, macOS codesign)), `specs/` (download, post-process), `generation/` (generate, inject-secret), `onescript/` (toolchain, manifests, verify), `docs/` (gen-api-reference, gen-readmes). Плоские `scripts/*.py` — тонкие CLI-обёртки над этими модулями, так что команды выше не меняются. Домашнее правило: ни `#`-комментариев, ни докстрингов под `scripts/` — проверяется в `make scripts-check` и в PR-check.
+- `scripts/` — сам пайплайн, разложенный по доменным контекстам в `scripts/pipeline/`: `core/` (общее ядро: пути репозитория, именование спецификаций/модулей/языков, YAML IO, запуск внешних инструментов (subprocess, docker, git, python, macOS codesign)), `specs/` (download, postprocess), `generation/` (generate, secrets), `onescript/` (toolchain, manifests, verify), `docs/` (reference, readmes). Плоские `scripts/*.py` — тонкие CLI-обёртки над этими модулями, названные по производимому результату: `download-specs`, `process-specs`, `generate-clients`, `generate-readmes`, `generate-docs`, `generate-onescript-manifests`, `inject-secrets`, `verify-onescript`. Домашнее правило: ни `#`-комментариев, ни докстрингов под `scripts/` — проверяется в `make scripts-check` и в PR-check.
 - `generator-configs/*.yaml` — по одному конфигу openapi-generator на язык.
 - `templates/*` — топ-уровневые манифесты с плейсхолдерами `__VERSION__`.
 - `.github/workflows/*` — daily-check, per-language publish, PR drift check.

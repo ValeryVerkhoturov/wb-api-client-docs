@@ -5,17 +5,17 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ## The pipeline
 
 ```
-download-swaggers.py   →  swaggers/*.yaml         (raw upstream, checksummed)
-post-process.py        →  swaggers/processed/     (13 passes)
-generate.py <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
-    ├── inject-secret.py           (SecretString wrapper per lang)
+download-specs.py          →  swaggers/*.yaml         (raw upstream, checksummed)
+process-specs.py           →  swaggers/processed/     (13 passes)
+generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
+    ├── inject-secrets.py          (SecretString wrapper per lang)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (canonicalize formatting)
-    └── gen-readmes.py             (per-language README.md)
+    └── generate-readmes.py        (per-language README.md)
      ↓ committed at v<version>, single tag covers all 7 languages
-publish.yml            →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
-gen-api-reference.py   →  wb-api-client-docs      (API reference: operation pages,
-                                                   call snippets and data structures
-                                                   in 7 languages, RU/EN)
+publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
+generate-docs.py           →  wb-api-client-docs      (API reference: operation pages,
+                                                        call snippets and data structures
+                                                        in 7 languages, RU/EN)
 ```
 
 Every step is a plain Python file, so nothing is hidden behind opaque tooling.
@@ -26,7 +26,7 @@ WB ships OpenAPI specs. Hand-writing 13 clients × 7 languages would drift withi
 
 The downside is that generator output is generator output — sometimes ugly, sometimes carrying artifacts from spec quirks. Which is why there's a post-processing layer.
 
-## post-process.py — 13 passes
+## process-specs.py — 13 passes
 
 1. **`inject_bearer_auth`** — drops WB's `HeaderApiKey` scheme (duplicated with the real bearer JWT semantics) and installs a single `BearerAuth` scheme instead. Every generated client then exposes exactly one auth code path.
 2. **`fix_untyped_arrays`** — adds `items: {type: string}` to arrays missing their inner type (Go / TS would otherwise emit `[]any`).
@@ -40,16 +40,16 @@ The downside is that generator output is generator output — sometimes ugly, so
 10. **`drop_date_formats`** — WB returns `""` for unset date fields (`fixTariffDateFrom`, `utdUcdDate`), which no strict date parser accepts. The pass strips `format: date` / `format: date-time` from string schemas so clients type these as plain strings.
 11. **`htmlize_descriptions_to_markdown`** — every `description` field is passed through `markdownify` so HTML in docstrings renders as Markdown in generated docs.
 12. **`absolutize_description_links`** — relative `[…](/openapi/…)` links get `https://dev.wildberries.ru` prepended so links in generated docstrings still work.
-13. **`add_docs_links`** — appends a `Library doc: <url>` line to every operation's `description`, pointing at the operation's page on this site. Generators copy `description` into docstrings/Javadoc, so every client method links to its rendered docs. `gen-api-reference.py` strips the line back out, so the docs site itself is unaffected.
+13. **`add_docs_links`** — appends a `Library doc: <url>` line to every operation's `description`, pointing at the operation's page on this site. Generators copy `description` into docstrings/Javadoc, so every client method links to its rendered docs. `generate-docs.py` strips the line back out, so the docs site itself is unaffected.
 
-## generate.py
+## generate-clients.py
 
 - Runs `openapi-generator-cli` (pinned Docker image) per spec per language, into scratch directories.
 - Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, for OneScript a class-name prefix (the language has no namespaces), and C# namespaces.
-- Runs `inject-secret.py` to patch every generated `Configuration` / `ApiClient` with the language-native secret-string wrapper.
+- Runs `inject-secrets.py` to patch every generated `Configuration` / `ApiClient` with the language-native secret-string wrapper.
 - Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. All inside Docker — no host runtime needed.
 - Substitutes `__VERSION__` in top-level manifests (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`) with the passed version.
-- Runs `gen-readmes.py` to emit a per-language `README.md`.
+- Runs `generate-readmes.py` to emit a per-language `README.md`.
 
 The result: `clients/{python,typescript,go,java,php,onescript,csharp}/` — seven ready-to-publish packages.
 
@@ -74,7 +74,7 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 - OneScript — `opm build` then `opm push` to hub.oscript.io.
 - C# — `dotnet pack` then `dotnet nuget push` to NuGet.
 
-Separately, daily-check regenerates the API reference (`gen-api-reference.py` — operation pages, call snippets, and request/response data structures per language, with links to the WB specification) and pushes it to `wb-api-client-docs`, which deploys to GitHub Pages.
+Separately, daily-check regenerates the API reference (`generate-docs.py` — operation pages, call snippets, and request/response data structures per language, with links to the WB specification) and pushes it to `wb-api-client-docs`, which deploys to GitHub Pages.
 
 Reusable workflows (`workflow_call`) would be cleaner, but PyPI + npm trusted publishing don't support them — both the OIDC token's `job_workflow_ref` (callee) and the Sigstore attestation cert's `workflow_ref` (caller) have to point at the same file, which is impossible with `workflow_call`. Hence `workflow_dispatch`.
 
@@ -88,7 +88,7 @@ Three languages live in their own repos, mounted here as git submodules:
 
 Every daily run commits and tags all three siblings BEFORE the main repo — otherwise the submodule pointers recorded in the release commit would reference commits their remotes have never seen, and a fresh `git clone --recurse-submodules` would fail.
 
-A fourth sibling is [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs) — this site. Not a submodule: daily-check clones it, runs `gen-api-reference.py`, and pushes the result back.
+A fourth sibling is [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs) — this site. Not a submodule: daily-check clones it, runs `generate-docs.py`, and pushes the result back.
 
 ## The OneScript generator
 
@@ -98,7 +98,7 @@ openapi-generator ships no OneScript target, so it lives in a separate repo — 
 
 The hand-written parts of the main repo:
 
-- `scripts/` — the pipeline itself, organized by bounded context under `scripts/pipeline/`: `core/` (shared kernel: repo paths, spec/module/language naming, YAML IO, external-tool runners (subprocess, docker, git, python, macOS codesign)), `specs/` (download, post-process), `generation/` (generate, inject-secret), `onescript/` (toolchain, manifests, verify), `docs/` (gen-api-reference, gen-readmes). The flat `scripts/*.py` files are thin CLI shims over those modules, so the commands above are unchanged. House rule: no `#` comments and no docstrings under `scripts/` — enforced by `make scripts-check` and the PR check.
+- `scripts/` — the pipeline itself, organized by bounded context under `scripts/pipeline/`: `core/` (shared kernel: repo paths, spec/module/language naming, YAML IO, external-tool runners (subprocess, docker, git, python, macOS codesign)), `specs/` (download, postprocess), `generation/` (generate, secrets), `onescript/` (toolchain, manifests, verify), `docs/` (reference, readmes). The flat `scripts/*.py` files are thin CLI shims over those modules, named verb-object by what they produce: `download-specs`, `process-specs`, `generate-clients`, `generate-readmes`, `generate-docs`, `generate-onescript-manifests`, `inject-secrets`, `verify-onescript`. House rule: no `#` comments and no docstrings under `scripts/` — enforced by `make scripts-check` and the PR check.
 - `generator-configs/*.yaml` — one openapi-generator config per language.
 - `templates/*` — top-level manifests with `__VERSION__` placeholders.
 - `.github/workflows/*` — daily-check, per-language publish, PR drift check.
