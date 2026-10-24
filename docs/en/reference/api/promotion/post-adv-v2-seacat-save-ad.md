@@ -1,29 +1,29 @@
 ---
-title: "Создать кампанию"
-description: "Метод создаёт кампанию: - с ручной ставкой для продвижения товаров в поиске и/или рекомендациях - с единой ставкой для продвижения товаров одновременно в…"
+title: "Create Campaign"
+description: "The method creates campaign: - with custom bid for promo items in search and/or recommendations - with standard bid for promo items both in search and…"
 ---
 
-# Создать кампанию
+# Create Campaign
 
 ```http
 POST /adv/v2/seacat/save-ad
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV2SeacatSaveAd)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Creating Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV2SeacatSaveAd)
 
-Метод создаёт кампанию:
+The method creates campaign:
 
-- с ручной ставкой для продвижения товаров в поиске и/или рекомендациях
-- с единой ставкой для продвижения товаров одновременно в поиске и рекомендациях
+- with custom bid for promo items in search and/or recommendations
+- with standard bid for promo items both in search and recommendations
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Сервисный          | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Базовый с секретом | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 5 requests | 12 s     | 5 requests |
+| Service          | 1 min  | 5 requests | 12 s     | 5 requests |
+| Base with secret | 1 min  | 5 requests | 12 s     | 5 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Request body
 
@@ -31,13 +31,13 @@ POST /adv/v2/seacat/save-ad
 
 ## Responses
 
-| Code  | Description            | Schema    |
-| ----- | ---------------------- | --------- |
-| `200` | Успешно                | `integer` |
-| `400` | Неправильный запрос    | `string`  |
-| `401` | Не авторизован         | `object`  |
-| `403` | Доступ запрещён        | `object`  |
-| `429` | Слишком много запросов | `object`  |
+| Code  | Description       | Schema    |
+| ----- | ----------------- | --------- |
+| `200` | Success           | `integer` |
+| `400` | Bad request       | `string`  |
+| `401` | Unauthorized      | `object`  |
+| `403` | Access denied     | `object`  |
+| `429` | Too many requests | `object`  |
 
 ## Call examples
 

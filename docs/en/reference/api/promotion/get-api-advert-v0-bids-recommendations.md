@@ -1,44 +1,44 @@
 ---
-title: "Рекомендуемые ставки для карточек товаров и поисковых кластеров"
-description: "Метод возвращает рекомендуемые ставки для карточек товаров и поисковых кластеров кампании. Можно использовать для кампаний с типами оплаты cpm — за показы и…"
+title: "Recommended bids for items and search clusters"
+description: "The method returns recommended bids for items and search clusters of the campaign. You can use this method for campaigns with cpm — for impressions, and cpc —…"
 ---
 
-# Рекомендуемые ставки для карточек товаров и поисковых кластеров
+# Recommended bids for items and search clusters
 
 ```http
 GET /api/advert/v0/bids/recommendations
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0BidsRecommendations)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0BidsRecommendations)
 
-Метод возвращает рекомендуемые ставки для карточек товаров и поисковых кластеров кампании.
-Можно использовать для кампаний с типами оплаты `cpm` — за показы и `cpc` — за клики.
+The method returns recommended bids for items and search clusters of the campaign.
+You can use this method for campaigns with `cpm` — for impressions, and `cpc` — for clicks payment models.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 1 мин  | 5 запросов  | 12 сек   | 5 запросов |
-| Сервисный          | 1 мин  | 5 запросов  | 12 сек   | 5 запросов |
-| Базовый с секретом | 1 мин  | 5 запросов  | 12 сек   | 5 запросов |
-| Базовый            | 1 ч    | 20 запросов | 3 мин    | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 5 requests  | 12 s     | 5 requests |
+| Service          | 1 min  | 5 requests  | 12 s     | 5 requests |
+| Base with secret | 1 min  | 5 requests  | 12 s     | 5 requests |
+| Base             | 1 h    | 20 requests | 3 min    | 1 request  |
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description |
-| ---------- | ----- | ---------------- | ---- | ----------- |
-| `nmId`     | query | `integer<int64>` | yes  | Артикул WB  |
-| `advertId` | query | `integer<int64>` | yes  | ID кампании |
+| Name       | In    | Type             | Req. | Description    |
+| ---------- | ----- | ---------------- | ---- | -------------- |
+| `nmId`     | query | `integer<int64>` | yes  | WB item number |
+| `advertId` | query | `integer<int64>` | yes  | Campaign ID    |
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `200` | Успешно                | `object` |
-| `400` | Неправильный запрос    | `string` |
-| `401` | Не авторизован         | `object` |
-| `403` | Доступ запрещён        | `object` |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `200` | Success           | `object` |
+| `400` | Bad request       | `string` |
+| `401` | Unauthorized      | `object` |
+| `403` | Access denied     | `object` |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

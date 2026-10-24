@@ -1,54 +1,54 @@
 ---
-title: "Получить список активных или приглашённых пользователей продавца"
-description: "Метод доступен по Персональному токену"
+title: "Get a List of Seller Active or Invited Users"
+description: "Method is available by Personal token"
 ---
 
-# Получить список активных или приглашённых пользователей продавца
+# Get a List of Seller Active or Invited Users
 
 ```http
 GET /api/v1/users
 ```
 
-**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Управление пользователями продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/getV1Users)
+**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller User Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/getV1Users)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token
 
-Метод возвращает список активных или приглашённых пользователей профиля продавца.
+The method returns a list of seller account active or invited users.
 
-Чтобы выбрать список, укажите значение параметра `isInviteOnly`:
+Specify the value of the `isInviteOnly` parameter to select the list:
 
-- `isInviteOnly=true` — список приглашённых пользователей, которые ещё не активировали доступ
-- `isInviteOnly=false` или не указан — список активных пользователей
-  По каждому пользователю можно получить:
-- роль пользователя
-- разделы, к которым есть доступы
-- статус приглашения
-  Список приглашённых пользователей в ответе всегда отсортирован по дате создания: от новых до старых.
+- `isInviteOnly=true` — invited users list who have not yet activated access
+- `isInviteOnly=false` or is not provided — active users list
+  For each user, you can get:
+- user's role
+- accessible sections
+- invitation status
+  The list of invited users in the response is always sorted by creation date: from newest to oldest.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск    |
-| ------ | -------- | -------- | ---------- |
-| 1 сек  | 1 запрос | 1 сек    | 5 запросов |
+| Period | Limit     | Interval | Burst      |
+| ------ | --------- | -------- | ---------- |
+| 1 s    | 1 request | 1 s      | 5 requests |
 
 ## Parameters
 
-| Name           | In    | Type             | Req. | Description                                                                                                                                               |
-| -------------- | ----- | ---------------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`        | query | `integer<int64>` | no   | Количество активных или приглашённых пользователей в ответе                                                                                               |
-| `offset`       | query | `integer<int64>` | no   | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента                                                                      |
-| `isInviteOnly` | query | `boolean`        | no   | - `true` — список приглашённых пользователей, которые ещё не активировали доступ - `false` или не указан — список активных пользователей профиля продавца |
+| Name           | In    | Type             | Req. | Description                                                                                                                                       |
+| -------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`        | query | `integer<int64>` | no   | The number of active or invited users in the response                                                                                             |
+| `offset`       | query | `integer<int64>` | no   | How many results to skip. For example, for the value 10, the response will start with the 11 element                                              |
+| `isInviteOnly` | query | `boolean`        | no   | - `true` — the list of invited users who have not yet activated access - `false` or not provided — the list of active users of the seller account |
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `getUsersResponse` |
-| `400` | Неправильный запрос    | `errorResponse`    |
-| `401` | Не авторизован         | `object`           |
-| `403` | Доступ запрещён        | `Response4XX`      |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `getUsersResponse` |
+| `400` | Bad request       | `errorResponse`    |
+| `401` | Unauthorized      | `object`           |
+| `403` | Access denied     | `Response4XX`      |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

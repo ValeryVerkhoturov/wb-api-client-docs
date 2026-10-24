@@ -1,28 +1,28 @@
 ---
-title: "Получить остатки товаров"
-description: "Метод возвращает данные об остатках товаров на складах продавца."
+title: "Get Inventory"
+description: "Returns item inventory."
 ---
 
-# Получить остатки товаров
+# Get Inventory
 
 ```http
 POST /api/v3/stocks/{warehouseId}
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Остатки на складах продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses Inventory · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId)
 
-Метод возвращает данные об остатках товаров на [складах продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses).
+Returns item inventory.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **остатков на складах продавца** кроме метода [удаления остатков](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId):
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **inventory** methods except for the [deleting inventory](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId) method:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -30,15 +30,15 @@ POST /api/v3/stocks/{warehouseId}
 
 ## Responses
 
-| Code  | Description            | Schema                               |
-| ----- | ---------------------- | ------------------------------------ |
-| `200` | Успешно                | `PostV3StocksWarehouseIdResponse200` |
-| `400` | Неправильный запрос    | `Error`                              |
-| `401` | Не авторизован         | `object`                             |
-| `402` | Требуется платёж       | `object`                             |
-| `403` | Доступ запрещён        | `Error`                              |
-| `404` | Не найдено             | `Error`                              |
-| `429` | Слишком много запросов | `object`                             |
+| Code  | Description       | Schema                               |
+| ----- | ----------------- | ------------------------------------ |
+| `200` | Success           | `PostV3StocksWarehouseIdResponse200` |
+| `400` | Bad request       | `Error`                              |
+| `401` | Unauthorized      | `object`                             |
+| `402` | Payment required  | `object`                             |
+| `403` | Access denied     | `Error`                              |
+| `404` | Not found         | `Error`                              |
+| `429` | Too many requests | `object`                             |
 
 ## Call examples
 

@@ -1,46 +1,46 @@
 ---
-title: "Список черновиков"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Drafts List"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Список черновиков
+# Drafts List
 
 ```http
 GET /api/supplies/v1/drafts
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Черновики поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/getV1Drafts)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Supply Drafts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/getV1Drafts)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает список черновиков поставок.
+The method returns a list of supply drafts
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит       | Интервал | Всплеск     |
+| Period | Limit       | Interval | Burst       |
 | ------ | ----------- | -------- | ----------- |
-| 1 мин  | 30 запросов | 2 сек    | 10 запросов |
+| 1 min  | 30 requests | 2 s      | 10 requests |
 
 ## Parameters
 
-| Name     | In    | Type             | Req. | Description                                                                                         |
-| -------- | ----- | ---------------- | ---- | --------------------------------------------------------------------------------------------------- |
-| `limit`  | query | `integer<int64>` | no   | Количество черновиков в ответе                                                                      |
-| `offset` | query | `integer<int64>` | no   | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента                |
-| `sort`   | query | `string`         | no   | Сортировка: - `createdDt` — по дате создания черновика - `updatedDt` — по дате обновления черновика |
-| `order`  | query | `string`         | no   | Порядок выдачи: - `desc` — по убыванию - `asc` — по возрастанию                                     |
+| Name     | In    | Type             | Req. | Description                                                                                          |
+| -------- | ----- | ---------------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| `limit`  | query | `integer<int64>` | no   | Number of drafts in the response                                                                     |
+| `offset` | query | `integer<int64>` | no   | How many results to skip. For example, for the value 10, the response will start with the 11 element |
+| `sort`   | query | `string`         | no   | Sorting: - `createdDt` — by the draft creation date - `updatedDt` — by the draft update date         |
+| `order`  | query | `string`         | no   | Data order: - `desc` — descending - `asc` — ascending                                                |
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `models.ListDraftsResponse` |
-| `400` | Неправильный запрос    | `errors.DraftError`         |
-| `401` | Не авторизован         | `object`                    |
-| `403` | Доступ запрещён        | `object`                    |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `models.ListDraftsResponse` |
+| `400` | Bad request       | `errors.DraftError`         |
+| `401` | Unauthorized      | `object`                    |
+| `403` | Access denied     | `object`                    |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

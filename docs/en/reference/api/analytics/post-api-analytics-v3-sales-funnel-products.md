@@ -1,49 +1,49 @@
 ---
-title: "Статистика карточек товаров за период"
-description: "Метод формирует отчёт о товарах, сравнивая ключевые показатели за текущий период с аналогичным прошлым."
+title: "Listings Statistics per Period"
+description: "The method generates a report on items by comparing key metrics for the current period with a similar past one."
 ---
 
-# Статистика карточек товаров за период
+# Listings Statistics per Period
 
 ```http
 POST /api/analytics/v3/sales-funnel/products
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProducts)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Sales Funnel · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProducts)
 
-Метод формирует отчёт о товарах, сравнивая ключевые показатели за текущий период с аналогичным прошлым.
+The method generates a report on items by comparing key metrics for the current period with a similar past one.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-В течение часа после события появляется большая часть данных:
+Most of the data appears within an hour of the event:
 
-- о заказах
-- о переходах в карточку товара
-- о добавлениях товаров в корзину
-  Малая часть этих данных может появляться в течение нескольких дней.
+- orders
+- click-throughs
+- adds-to-Cart
+  A small part of this data may appear within a few days.
 
-Выкупы, отмены и возвраты отображаются в отчёте за тот день, когда товар был заказан. Например, если заказ был сделан 1 января, а покупатель вернул товар 10 января, данные об этом возврате появятся в отчёте за 1 января.
-Окончательные итоги продаж вы можете отслеживать с помощью [детализаций к отчётам реализации](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
+Purchases, cancellations, and returns are displayed in report for the day an item was ordered. For example, if an order was placed on January 1, and the customer returned the item on January 10, data about this return will appear in the report for January 1.
+You can track the final sales results using [details for the realization reports](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
 
-Параметры `brandNames`,`subjectIds`, `tagIds`, `nmIds` могут быть пустыми `[]`, тогда в ответе возвращаются все карточки продавца.
+The `brandNames`, `subjectIds`, `tagIds`, and `nmIds` parameters can be empty `[]`, in which case the response will return all of the seller listings.
 
-Если вы указали несколько параметров, в ответе будут карточки, в которых есть одновременно все эти параметры. Если карточки не подходят по параметрам запроса, вернётся пустой ответ `[]`.
+If you specify multiple parameters, the response will include listings that match all of these parameters simultaneously. If no listings match the request parameters, an empty response `[]` will be returned.
 
-Можно получить отчёт максимум за последние 365 дней.
+You can get a report for a maximum of the last 365 days.
 
-В данных предыдущего периода:
-\* Данные в `pastPeriod` указаны за такой же период, что и в `selectedPeriod`
-\* Если дата начала `pastPeriod` раньше, чем год назад от текущей даты, она будет приведена к виду: `pastPeriod.start = текущая дата — 365 дней`
-Можно использовать пагинацию.
+In the previous period's data:
+\* The data in `pastPeriod` covers the same duration as in `selectedPeriod`
+\* If the `pastPeriod` start date is more than a year before the current date, it will be adjusted to: `pastPeriod.start = current date - 365 days`
+Pagination can be used.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -51,14 +51,14 @@ POST /api/analytics/v3/sales-funnel/products
 
 ## Responses
 
-| Code  | Description            | Schema                                 |
-| ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `PostV3SalesFunnelProductsResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject`                          |
-| `401` | Не авторизован         | `object`                               |
-| `402` | Требуется платёж       | `object`                               |
-| `403` | Доступ запрещён        | `ErrorObject`                          |
-| `429` | Слишком много запросов | `object`                               |
+| Code  | Description       | Schema                                 |
+| ----- | ----------------- | -------------------------------------- |
+| `200` | Success           | `PostV3SalesFunnelProductsResponse200` |
+| `400` | Bad request       | `ErrorObject`                          |
+| `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
+| `403` | Access denied     | `ErrorObject`                          |
+| `429` | Too many requests | `object`                               |
 
 ## Call examples
 

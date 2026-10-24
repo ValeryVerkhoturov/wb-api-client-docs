@@ -1,48 +1,48 @@
 ---
-title: "Подмены и неверные вложения"
-description: "Метод возвращает отчёт об удержаниях за подмены и неверные вложения"
+title: "Substitutions and Incorrect Attachments"
+description: "The method returns a report with substitutions and incorrect attachments retentions"
 ---
 
-# Подмены и неверные вложения
+# Substitutions and Incorrect Attachments
 
 ```http
 GET /api/analytics/v1/deductions
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёты об удержаниях · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1Deductions)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Retention Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1Deductions)
 
-Метод возвращает отчёт об удержаниях за [подмены и неверные вложения](https://seller.wildberries.ru/analytics-reports/dimensions-penalties/retentions)
+The method returns a report with [substitutions and incorrect attachments](https://seller.wildberries.ru/analytics-reports/dimensions-penalties/retentions) retentions
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый            | 1 ч    | 4 запроса | 15 мин   | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 1 request |
+| Service          | 1 min  | 1 request  | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request  | 1 min    | 1 request |
+| Base             | 1 h    | 4 requests | 15 min   | 1 request |
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                                                                                        |
-| ---------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------ |
-| `dateFrom` | query | `string`         | no   | Начало отчётного периода. По умолчанию используются дата и время, когда были впервые получены данные для отчёта    |
-| `dateTo`   | query | `string`         | yes  | Конец отчётного периода                                                                                            |
-| `sort`     | query | `string`         | no   | Сортировка: - `nmId` — по артикулу WB - `dtBonus` — по дате и времени удержания - `bonusSumm` — по сумме удержания |
-| `order`    | query | `string`         | no   | Порядок выдачи: - `desc` — по убыванию - `asc` — по возрастанию                                                    |
-| `limit`    | query | `integer<int64>` | yes  | Количество удержаний в ответе                                                                                      |
-| `offset`   | query | `integer<int64>` | no   | Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента                             |
+| Name       | In    | Type             | Req. | Description                                                                                              |
+| ---------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string`         | no   | Report period start. By default the date and time when data for the report was first received is used    |
+| `dateTo`   | query | `string`         | yes  | Report period end                                                                                        |
+| `sort`     | query | `string`         | no   | Sorting: - `nmId` — by WB item number - `dtBonus` — by fine date and time - `bonusSumm` — by fine amount |
+| `order`    | query | `string`         | no   | Data order: - `desc` — descending - `asc` — ascending                                                    |
+| `limit`    | query | `integer<int64>` | yes  | Number of retentions in the response                                                                     |
+| `offset`   | query | `integer<int64>` | no   | How many results to skip. For example, with value `10`, the response will start with the 11 element      |
 
 ## Responses
 
-| Code  | Description            | Schema                  |
-| ----- | ---------------------- | ----------------------- |
-| `200` | Успешно                | `object`                |
-| `400` | Неправильный запрос    | `Response400Retentions` |
-| `401` | Не авторизован         | `object`                |
-| `402` | Требуется платёж       | `object`                |
-| `403` | Доступ запрещён        | `Response403Retentions` |
-| `429` | Слишком много запросов | `object`                |
+| Code  | Description       | Schema                  |
+| ----- | ----------------- | ----------------------- |
+| `200` | Успешно           | `object`                |
+| `400` | Bad request       | `Response400Retentions` |
+| `401` | Unauthorized      | `object`                |
+| `402` | Payment required  | `object`                |
+| `403` | Access denied     | `Response403Retentions` |
+| `429` | Too many requests | `object`                |
 
 ## Call examples
 

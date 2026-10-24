@@ -1,37 +1,37 @@
 ---
-title: "Ответ на заявку покупателя"
-description: "Метод отправляет ответ на заявку покупателя на возврат товаров."
+title: "Answer Buyers Application"
+description: "Sends an answer to the buyers application for item return."
 ---
 
-# Ответ на заявку покупателя
+# Answer Buyers Application
 
 ```http
 PATCH /api/v1/claim
 ```
 
-**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Возвраты покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersReturns/operation/patchV1Claim)
+**Base URL:** `https://returns-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Buyers Returns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/buyersReturns/operation/patchV1Claim)
 
-Метод отправляет ответ на [заявку](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) покупателя на возврат товаров.
+Sends an answer to the buyers application for item return.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 мин  | 20 запросов | 3 сек    | 10 запросов |
-| Сервисный          | 1 мин  | 20 запросов | 3 сек    | 10 запросов |
-| Базовый с секретом | 1 мин  | 20 запросов | 3 сек    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 min  | 20 requests | 3 s      | 10 requests |
+| Service          | 1 min  | 20 requests | 3 s      | 10 requests |
+| Base with secret | 1 min  | 20 requests | 3 s      | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `200` | Успешно                | —        |
-| `400` | Неправильный запрос    | `object` |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `object` |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `200` | Success           | —        |
+| `400` | Bad request       | `object` |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `object` |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

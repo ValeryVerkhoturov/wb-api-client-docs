@@ -1,36 +1,36 @@
 ---
-title: "Получить идентификаторы маркировки сборочных заданий"
-description: "Метод возвращает идентификаторы маркировки сборочных заданий и статусы их проверки."
+title: "Get Order Label Identifiers"
+description: "Returns assembly orders label identifiers and their validation statuses."
 ---
 
-# Получить идентификаторы маркировки сборочных заданий
+# Get Order Label Identifiers
 
 ```http
 POST /api/marketplace/v3/dbw/orders/meta/details
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Идентификаторы маркировки DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails)
 
-Метод возвращает идентификаторы маркировки [сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrders) и статусы их проверки.
+Returns [assembly orders](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders) label identifiers and their validation statuses.
 
-Перечень идентификаторов маркировки, доступных для сборочного задания, можно получить в [списке новых сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew), поле `requiredMeta`. Если поле `requiredMeta` не содержит какой-либо идентификатор маркировки, значит, у сборочного задания не может быть этого идентификатора — и добавить его нельзя.
-Возможные идентификаторы маркировки:
+The list of label identifiers available for the assembly order can be obtained in the [list of new assembly orders](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew), field `requiredMeta`. If the `requiredMeta` field does not contain the label identifier, it means that this label identifier cannot be added to this assembly order.
+Possible label identifiers:
 
 - `imei` — [IMEI](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaImei)
-- `uin` — [УИН](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaUin)
+- `uin` — [UIN](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaUin)
 - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaGtin)
-- `sgtin` — [код маркировки Честного знака](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaSgtin)
+- `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaSgtin)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -38,14 +38,14 @@ POST /api/marketplace/v3/dbw/orders/meta/details
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `api.OrdersMetaDetailsResponse` |
-| `400` | Неправильный запрос    | `api.BatchError`                |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `api.BatchError`                |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `api.OrdersMetaDetailsResponse` |
+| `400` | Bad request       | `api.BatchError`                |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `api.BatchError`                |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

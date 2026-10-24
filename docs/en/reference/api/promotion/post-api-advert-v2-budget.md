@@ -1,31 +1,31 @@
 ---
-title: "Остатки бюджетов кампаний"
-description: "Метод возвращает информацию об остатках бюджетов кампаний. Для кампаний в статусах: - 4 — готова к запуску - 9 — активна - 11 — на паузе"
+title: "Campaign Budget Balances"
+description: "The method returns information about campaign budget balances. For campaigns in statuses: - 4 — ready to be launched - 9 — active - 11 — paused"
 ---
 
-# Остатки бюджетов кампаний
+# Campaign Budget Balances
 
 ```http
 POST /api/advert/v2/budget
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV2Budget)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV2Budget)
 
-Метод возвращает информацию об остатках бюджетов [кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts).
-Для кампаний в [статусах](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount):
+The method returns information about [campaign](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) budget balances.
+For campaigns in [statuses](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount):
 
-- `4` — готова к запуску
-- `9` — активна
-- `11` — на паузе
+- `4` — ready to be launched
+- `9` — active
+- `11` — paused
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск   |
-| ------------------ | ------ | ----------- | -------- | --------- |
-| Персональный       | 1 мин  | 20 запросов | 3 сек    | 4 запроса |
-| Сервисный          | 1 мин  | 20 запросов | 3 сек    | 4 запроса |
-| Базовый с секретом | 1 мин  | 20 запросов | 3 сек    | 4 запроса |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос  |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 20 requests | 3 s      | 4 requests |
+| Service          | 1 min  | 20 requests | 3 s      | 4 requests |
+| Base with secret | 1 min  | 20 requests | 3 s      | 4 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ## Request body
 
@@ -33,13 +33,13 @@ POST /api/advert/v2/budget
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `V2BudgetResponse` |
-| `400` | Неправильный запрос    | `string`           |
-| `401` | Не авторизован         | `object`           |
-| `403` | Доступ запрещён        | `object`           |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `V2BudgetResponse` |
+| `400` | Bad request       | `string`           |
+| `401` | Unauthorized      | `object`           |
+| `403` | Access denied     | `object`           |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

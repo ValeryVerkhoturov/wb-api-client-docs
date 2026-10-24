@@ -1,41 +1,40 @@
 ---
-title: "Бренды продавца"
-description: "Метод возвращает список брендов продавца для отчёта о доле бренда в продажах."
+title: "Seller Brands"
+description: "Returns the list of the seller brands. You can only get brands that: - were sold in the last 90 days - Have inventory available, regardless of the warehouse"
 ---
 
-# Бренды продавца
+# Seller Brands
 
 ```http
 GET /api/v1/analytics/brand-share/brands
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Доля бренда в продажах · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/shareOfBrandInSales/operation/getV1AnalyticsBrandShareBrands)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Share of Brand in Sales · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/shareOfBrandInSales/operation/getV1AnalyticsBrandShareBrands)
 
-Метод возвращает список брендов продавца для отчёта о [доле бренда в продажах](https://seller.wildberries.ru/analytics-reports/brand-share).
+Returns the list of the seller brands.
+You can only get brands that:
 
-Можно получить только бренды, которые:
+- were sold in the last 90 days
+- Have inventory available, regardless of the warehouse
 
-- Продавались за последние 90 дней
-- Есть в наличии, вне зависимости от склада хранения
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос    |
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `200` | Успешно                | `object` |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `object` |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `200` | Success           | `object` |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `object` |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

@@ -1,47 +1,47 @@
 ---
-title: "Создать отчёт"
-description: "Метод создаёт задание на генерацию отчёта с расширенной аналитикой продавца."
+title: "Create the Report"
+description: "The method creates a task for generating a report with advanced seller analytics."
 ---
 
-# Создать отчёт
+# Create the Report
 
 ```http
 POST /api/v2/nm-report/downloads
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Seller Analytics CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads)
 
-Метод создаёт задание на генерацию отчёта с расширенной аналитикой продавца.
+The method creates a task for generating a report with advanced seller analytics.
 
-Вы можете создать CSV-версии отчётов по [воронке продаж](https://dev.wildberries.ru/openapi/analytics#tag/salesFunnel) или [параметрам поиска](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems) с группировкой по:
-\* артикулам WB
-\* предметам, брендам и ярлыкам
-В отчётах по воронке продаж можно группировать данные по дням, неделям или месяцам.
+You can create a CSV-version of [sales funnel](https://dev.wildberries.ru/openapi/analytics#tag/salesFunnel) or [search parameters](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems) report with grouping:
+\* by WB item numbers
+\* by categories, brands, and labels
+In each of reports on sales funnel, you can group data by days, weeks, or months.
 
-Также можете создать CSV-версии отчётов по [текстам поисковых запросов](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductSearchTexts) и [остаткам](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport).
+Also you can create a CSV-version of [search texts](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductSearchTexts) or [inventory](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport) report.
 
-Каждый новый отчёт должен иметь уникальный ID.
+Each new report must have a unique ID.
 
-Не используйте одинаковые ID для разных отчётов — это может привести к ошибкам при генерации
+Do not use the same ID for different reports — this may cause errors during generation
 
-Набор параметров запроса в объекте `params` зависит от типа отчёта. Чтобы получить описание параметров, выберите тип отчёта в раскрывающемся списке в описании параметра `reportType`.
+The set of parameters in the `params` object depends on the report type. To get a description of the parameters, select the report type from the dropdown list in the description of the `reportType` parameter.
 
-Параметры `includeSubstitutedSKUs` и `includeSearchTexts` не могут одновременно иметь значение `false`.
+The parameters `includeSubstitutedSKUs` and `includeSearchTexts` cannot both be set to `false`
 
-Если не удалось [получить отчёт](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId), можно создать [повторное задание на генерацию](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry). Также можно [получить список и проверить статусы](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads) отчётов.
+If it was not possible to [get report](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId), you can create a [repeat generation task](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry). You can also [get a list and check the statuses](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads) of reports.
 
-Данные отчётов обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-Отчёты по [остаткам](https://seller.wildberries.ru/content-analytics/history-remains) — типы `STOCK_HISTORY_REPORT_CSV` и `STOCK_HISTORY_DAILY_CSV` — можно создать без подписки [Джем](https://seller.wildberries.ru/monetization/jam)
+[Inventory reports](https://seller.wildberries.ru/content-analytics/history-remains) — the `STOCK_HISTORY_REPORT_CSV` and `STOCK_HISTORY_DAILY_CSV` types — can be created without [Jam](https://seller.wildberries.ru/monetization/jam) subscription
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Request body
 
@@ -49,14 +49,14 @@ POST /api/v2/nm-report/downloads
 
 ## Responses
 
-| Code  | Description            | Schema                               |
-| ----- | ---------------------- | ------------------------------------ |
-| `200` | Успешно                | `NmReportCreateReportResponse`       |
-| `400` | Неправильный запрос    | `PostV2NmReportDownloadsResponse400` |
-| `401` | Не авторизован         | `object`                             |
-| `402` | Требуется платёж       | `object`                             |
-| `403` | Доступ запрещён        | `ErrorObject`                        |
-| `429` | Слишком много запросов | `object`                             |
+| Code  | Description       | Schema                               |
+| ----- | ----------------- | ------------------------------------ |
+| `200` | Success           | `NmReportCreateReportResponse`       |
+| `400` | Bad request       | `PostV2NmReportDownloadsResponse400` |
+| `401` | Unauthorized      | `object`                             |
+| `402` | Payment required  | `object`                             |
+| `403` | Access denied     | `ErrorObject`                        |
+| `429` | Too many requests | `object`                             |
 
 ## Call examples
 

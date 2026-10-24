@@ -1,50 +1,50 @@
 ---
-title: "Список документов"
-description: "Метод возвращает список документов продавца. Вы можете получить один или несколько документов из полученного списка."
+title: "Documents List"
+description: "Returns seller documents list"
 ---
 
-# Список документов
+# Documents List
 
 ```http
 GET /api/v1/documents/list
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Documents · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList)
 
-Метод возвращает список документов продавца. Вы можете получить [один](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload) или [несколько](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/postV1DocumentsDownloadAll) документов из полученного списка.
+Returns seller documents list
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Сервисный          | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 10 s   | 1 request | 10 s     | 5 requests |
+| Service          | 10 s   | 1 request | 10 s     | 5 requests |
+| Base with secret | 10 s   | 1 request | 10 s     | 5 requests |
+| Base             | 24 h   | 1 request | 24 h     | 1 request  |
 
 ## Parameters
 
-| Name          | In    | Type             | Req. | Description                                                                                                                                            |
-| ------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `beginTime`   | query | `string`         | no   | Начало периода. Только вместе с `endTime`                                                                                                              |
-| `endTime`     | query | `string`         | no   | Конец периода. Только вместе с `beginTime`                                                                                                             |
-| `sort`        | query | `string`         | no   | Сортировка: - `date` — по дате создания документа - `category` — по категории (только при `locale=ru`) Только вместе с `order`                         |
-| `order`       | query | `string`         | no   | Сортировка: - `desc` — по убыванию - `asc` — по возрастанию Только вместе с `sort`                                                                     |
-| `category`    | query | `string`         | no   | ID [категории документов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name` |
-| `serviceName` | query | `string`         | no   | Уникальный ID документа                                                                                                                                |
-| `limit`       | query | `integer<int64>` | no   | Максимальное количество строк ответа                                                                                                                   |
-| `offset`      | query | `integer<int64>` | no   | После какой строки выдавать данные                                                                                                                     |
+| Name          | In    | Type             | Req. | Description                                                                                                                                                |
+| ------------- | ----- | ---------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `beginTime`   | query | `string`         | no   | Period start. Only with `endTime`                                                                                                                          |
+| `endTime`     | query | `string`         | no   | Period end. Only with `beginTime`                                                                                                                          |
+| `sort`        | query | `string`         | no   | Sorting: - `date` — by the document creation date - `category` — by category (only when `locale=ru`) Only with `order`                                     |
+| `order`       | query | `string`         | no   | Data order: - `desc` — descending - `asc` — ascending Only with `sort`                                                                                     |
+| `category`    | query | `string`         | no   | [Document category](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) ID from the `name` field |
+| `serviceName` | query | `string`         | no   | Unique document ID                                                                                                                                         |
+| `limit`       | query | `integer<int64>` | no   | The maximum number of response rows                                                                                                                        |
+| `offset`      | query | `integer<int64>` | no   | From which row to start outputting data                                                                                                                    |
 
 ## Responses
 
-| Code  | Description            | Schema    |
-| ----- | ---------------------- | --------- |
-| `200` | Успешно                | `GetList` |
-| `400` | Неправильный запрос    | `object`  |
-| `401` | Не авторизован         | `object`  |
-| `402` | Требуется платёж       | `object`  |
-| `403` | Доступ запрещён        | `object`  |
-| `429` | Слишком много запросов | `object`  |
+| Code  | Description       | Schema    |
+| ----- | ----------------- | --------- |
+| `200` | Success           | `GetList` |
+| `400` | Bad request       | `object`  |
+| `401` | Unauthorized      | `object`  |
+| `402` | Payment required  | `object`  |
+| `403` | Access denied     | `object`  |
+| `429` | Too many requests | `object`  |
 
 ## Call examples
 

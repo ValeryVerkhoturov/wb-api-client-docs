@@ -1,26 +1,26 @@
 ---
-title: "Списки активных и неактивных поисковых кластеров"
-description: "Метод возвращает списки активных и неактивных поисковых кластеров, по которым было не меньше 100 показов."
+title: "Active and Inactive Search Cluster Lists"
+description: "Returns lists of active and inactive search clusters with at least 100 views."
 ---
 
-# Списки активных и неактивных поисковых кластеров
+# Active and Inactive Search Cluster Lists
 
 ```http
 POST /adv/v0/normquery/list
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryList)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Search Clusters · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryList)
 
-Метод возвращает списки активных и неактивных поисковых кластеров, по которым было не меньше 100 показов.
+Returns lists of active and inactive search clusters with at least 100 views.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск     |
-| ------------------ | ------ | ---------- | -------- | ----------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос    |
+| Type             | Period | Limit      | Interval | Burst       |
+| ---------------- | ------ | ---------- | -------- | ----------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request   |
 
 ## Request body
 
@@ -28,13 +28,13 @@ POST /adv/v0/normquery/list
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `V0GetNormQueryListResponse` |
-| `400` | Неправильный запрос    | `response400`                |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `object`                     |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `V0GetNormQueryListResponse` |
+| `400` | Bad request       | `response400`                |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `object`                     |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

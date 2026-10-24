@@ -1,28 +1,28 @@
 ---
-title: "Восстановление карточек товаров из корзины"
-description: "Метод восстанавливает карточки товаров из корзины."
+title: "Recover Listing from Trash"
+description: "Returns the listing from trash"
 ---
 
-# Восстановление карточек товаров из корзины
+# Recover Listing from Trash
 
 ```http
 POST /content/v2/cards/recover
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsRecover)
 
-Метод восстанавливает [карточки товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash).
+Returns the listing from trash
 
-Карточка товара сохраняет тот же `imtID` — ID для [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров — что был присвоен ей при [перемещении в корзину](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsDeleteTrash)
+When restoring the listing from the trash, its `imtID` — [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID — doesn't remain the same as it was for the listing in the trash
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск    |
-| ------------------ | ------ | --------- | -------- | ---------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 5 запросов |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 5 запросов |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 5 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 5 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 5 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -30,14 +30,14 @@ POST /content/v2/cards/recover
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `PostV2CardsRecoverResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`   |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `responseBodyContentError403`   |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `PostV2CardsRecoverResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`   |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `responseBodyContentError403`   |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

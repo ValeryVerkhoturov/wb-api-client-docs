@@ -1,40 +1,41 @@
 ---
-title: "Маркировка товара"
-description: "Метод возвращает отчёт о штрафах за отсутствие обязательной маркировки товаров. В отчёте представлены фотографии товаров, на которых маркировка отсутствует…"
+title: "Item Labeling"
+description: "Returns a report on deductions for the absence of mandatory item labeling."
 ---
 
-# Маркировка товара
+# Item Labeling
 
 ```http
 GET /api/v1/analytics/goods-labeling
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёты об удержаниях · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1AnalyticsGoodsLabeling)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Retention Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1AnalyticsGoodsLabeling)
 
-Метод возвращает отчёт о штрафах за отсутствие обязательной маркировки товаров.
-В отчёте представлены фотографии товаров, на которых маркировка отсутствует либо не считывается.
+Returns a report on deductions for the absence of mandatory item labeling.
 
-Можно получить данные максимум за 31 день. Данные доступны с марта 2024.
+The report contains photos of items where the labeling is absent or cannot be read.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+Data can be obtained for up to 31 days, starting from March 2024
 
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос    |
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
+
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema            |
-| ----- | ---------------------- | ----------------- |
-| `200` | Успешно                | `object`          |
-| `400` | Неправильный запрос    | `Http4XXResponse` |
-| `401` | Не авторизован         | `object`          |
-| `402` | Требуется платёж       | `object`          |
-| `403` | Доступ запрещён        | `object`          |
-| `429` | Слишком много запросов | `object`          |
+| Code  | Description       | Schema            |
+| ----- | ----------------- | ----------------- |
+| `200` | Success           | `object`          |
+| `400` | Bad request       | `Http4XXResponse` |
+| `401` | Unauthorized      | `object`          |
+| `402` | Payment required  | `object`          |
+| `403` | Access denied     | `object`          |
+| `429` | Too many requests | `object`          |
 
 ## Call examples
 

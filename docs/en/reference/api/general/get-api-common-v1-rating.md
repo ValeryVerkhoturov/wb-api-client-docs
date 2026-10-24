@@ -1,38 +1,38 @@
 ---
-title: "Получить рейтинг продавца"
-description: "Для доступа к методу используйте токен для категории Вопросы и отзывы"
+title: "Get Seller Rating"
+description: "To access the method, use a token for the Feedbacks and Questions category"
 ---
 
-# Получить рейтинг продавца
+# Get Seller Rating
 
 ```http
 GET /api/common/v1/rating
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1Rating)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1Rating)
 
-Для доступа к методу используйте [токен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-sozdat-personalnyj-bazovyj-ili-testovyj-token) для категории **Вопросы и отзывы**
+To access the method, use a [token](https://dev.wildberries.ru/openapi/api-information#tag/authorization/How-to-create-a-personal-access-base-or-test-token) for the **Feedbacks and Questions** category
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Service** token
 
-Метод возвращает пользовательский рейтинг продавца и количество отзывов.
+The method returns the seller user rating and feedbacks count.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск  |
-| ------ | -------- | -------- | -------- |
-| 1 мин  | 1 запрос | 1 мин    | 1 запрос |
+| Period | Limit     | Interval | Burst     |
+| ------ | --------- | -------- | --------- |
+| 1 min  | 1 request | 1 min    | 1 request |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `SupplierRatingModel` |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `403` | Доступ запрещён        | `Response4XX`         |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `SupplierRatingModel` |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `403` | Access denied     | `Response4XX`         |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

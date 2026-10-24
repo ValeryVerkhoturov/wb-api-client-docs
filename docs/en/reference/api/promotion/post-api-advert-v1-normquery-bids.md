@@ -1,29 +1,29 @@
 ---
-title: "Установить ставки для поисковых кластеров в валюте профиля продавца"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Set Bids for Search Clusters in the Currency of the Seller Account"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Установить ставки для поисковых кластеров в валюте профиля продавца
+# Set Bids for Search Clusters in the Currency of the Seller Account
 
 ```http
 POST /api/advert/v1/normquery/bids
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Search Clusters · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод устанавливает ставки на поисковые кластеры в валюте [профиля продавца](https://cmp.wildberries.ru/campaigns/finances).
-Можно использовать только для кампаний c ручной ставкой и моделью оплаты `cpm` — за показы.
+The method sets bids for search clusters in the currency of the seller account.
+You can use this method only for campaigns with manual bids and `cpm` payment model — per impressions.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип          | Период | Лимит     | Интервал | Всплеск   |
-| ------------ | ------ | --------- | -------- | --------- |
-| Персональный | 1 сек  | 2 запроса | 500 мс   | 4 запроса |
-| Сервисный    | 1 сек  | 2 запроса | 500 мс   | 4 запроса |
+| Type     | Period | Limit      | Interval | Burst      |
+| -------- | ------ | ---------- | -------- | ---------- |
+| Personal | 1 s    | 2 requests | 500 ms   | 4 requests |
+| Service  | 1 s    | 2 requests | 500 ms   | 4 requests |
 
 ## Request body
 
@@ -31,13 +31,13 @@ POST /api/advert/v1/normquery/bids
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `V1SetNormQueryBidsResponse` |
-| `400` | Неправильный запрос    | `response400`                |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `Response4XX`                |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `V1SetNormQueryBidsResponse` |
+| `400` | Bad request       | `response400`                |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `Response4XX`                |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

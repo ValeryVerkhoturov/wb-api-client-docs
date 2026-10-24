@@ -1,36 +1,37 @@
 ---
-title: "Удалить идентификаторы маркировки сборочных заданий"
-description: "Метод удаляет значение указанных идентификаторов маркировки сборочных заданий."
+title: "Delete Assembly Orders Label Identifiers"
+description: "Removes all assembly order label identifiers values."
 ---
 
-# Удалить идентификаторы маркировки сборочных заданий
+# Delete Assembly Orders Label Identifiers
 
 ```http
 POST /api/marketplace/v3/dbs/orders/meta/delete
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDelete)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDelete)
 
-Метод удаляет значение указанных [идентификаторов маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
+Removes all [assembly order label identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) values.
 
-В одном запросе можно удалить идентификаторы маркировки только одного типа. Укажите тип идентификаторов маркировки в запросе:
+You can only delete one type of label identifiers in one request.
+Specify the label identifiers type in the request:
 
 - `imei` — [IMEI](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaImei)
-- `uin` — [УИН](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
+- `uin` — [UIN](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
 - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaGtin)
-- `sgtin` — [код маркировки Честного знака](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
-- `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration). При удалении номера ДТ также удаляется код страны происхождения товара — `originCountryCode`
+- `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
+- `customsDeclaration` — [customs declaration number](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration). Deleting the customs declaration number also deletes the associated country of origin code — `originCountryCode`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **получения и удаления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting DBS label identifiers**:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 150 запросов | 400 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 150 requests | 400 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -38,15 +39,15 @@ POST /api/marketplace/v3/dbs/orders/meta/delete
 
 ## Responses
 
-| Code  | Description                                | Schema                   |
-| ----- | ------------------------------------------ | ------------------------ |
-| `200` | Успешно                                    | `api.StatusSetResponses` |
-| `400` | Неправильный запрос                        | `api.BatchError`         |
-| `401` | Не авторизован                             | `object`                 |
-| `402` | Требуется платёж                           | `object`                 |
-| `403` | Доступ запрещён                            | `api.BatchError`         |
-| `409` | Ошибка удаления идентификаторов маркировки | `api.Error`              |
-| `429` | Слишком много запросов                     | `object`                 |
+| Code  | Description                      | Schema                   |
+| ----- | -------------------------------- | ------------------------ |
+| `200` | Success                          | `api.StatusSetResponses` |
+| `400` | Bad request                      | `api.BatchError`         |
+| `401` | Unauthorized                     | `object`                 |
+| `402` | Payment required                 | `object`                 |
+| `403` | Access denied                    | `api.BatchError`         |
+| `409` | Label identifiers deletion error | `api.Error`              |
+| `429` | Too many requests                | `object`                 |
 
 ## Call examples
 

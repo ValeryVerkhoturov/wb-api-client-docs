@@ -1,29 +1,30 @@
 ---
-title: "Закрепить GTIN за сборочными заданиями"
-description: "Метод обновляет GTIN, уникальный ID товара в Беларуси, в идентификаторах маркировки сборочных заданий. У одного сборочного задания может быть только один GTIN.…"
+title: "Add GTIN to the Assembly Orders"
+description: "The method sets the GTIN, Belarus item unique identifier, for the assembly orders label identifiers. The assembly order can only have one GTIN. You can add the…"
 ---
 
-# Закрепить GTIN за сборочными заданиями
+# Add GTIN to the Assembly Orders
 
 ```http
 POST /api/marketplace/v3/click-collect/orders/meta/gtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Идентификаторы маркировки Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaGtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaGtin)
 
-Метод обновляет GTIN, уникальный ID товара в Беларуси, в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails). У одного сборочного задания может быть только один GTIN.
-Закрепить GTIN можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails) есть поле `gtin`.
+The method sets the GTIN, Belarus item unique identifier, for the [assembly orders label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
+The assembly order can only have one GTIN.
+You can add the GTIN only for assembly orders in the `confirm` [status](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) and if the field `imei` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails) method.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки Самовывоз**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding In-Store Pickup label identifiers**:
 
-| Период                                                          | Лимит       | Интервал | Всплеск      |
-| --------------------------------------------------------------- | ----------- | -------- | ------------ |
-| 1 мин                                                           | 20 запросов | 3 сек    | 500 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit       | Interval | Burst        |
+| ---------------------------------------------------------------- | ----------- | -------- | ------------ |
+| 1 min                                                            | 20 requests | 3 s      | 500 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -31,14 +32,14 @@ POST /api/marketplace/v3/click-collect/orders/meta/gtin
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `api.MetaSetResponses` |
-| `400` | Неправильный запрос    | `api.BatchError`       |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `Error`                |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `api.MetaSetResponses` |
+| `400` | Bad request       | `api.BatchError`       |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `Error`                |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

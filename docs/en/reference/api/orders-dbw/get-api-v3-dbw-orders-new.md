@@ -1,38 +1,38 @@
 ---
-title: "Получить список новых сборочных заданий"
-description: "Метод возвращает список всех новых сборочных заданий, которые есть у продавца на момент запроса."
+title: "Get New Orders"
+description: "Returns a list of all new orders."
 ---
 
-# Получить список новых сборочных заданий
+# Get New Orders
 
 ```http
 GET /api/v3/dbw/orders/new
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew)
 
-Метод возвращает список всех новых [сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders), которые есть у продавца на момент запроса.
+Returns a list of all new [orders](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `GetV3DbwOrdersNewResponse200` |
-| `401` | Не авторизован         | `object`                       |
-| `402` | Требуется платёж       | `object`                       |
-| `403` | Доступ запрещён        | `Error`                        |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `GetV3DbwOrdersNewResponse200` |
+| `401` | Unauthorized      | `object`                       |
+| `402` | Payment required  | `object`                       |
+| `403` | Access denied     | `Error`                        |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

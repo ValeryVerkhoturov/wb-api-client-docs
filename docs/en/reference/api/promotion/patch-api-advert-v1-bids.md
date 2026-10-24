@@ -1,36 +1,36 @@
 ---
-title: "Изменение ставок в кампаниях"
-description: "Метод меняет ставки карточек товаров по артикулам WB в кампаниях: - с единой ставкой - с ручной ставкой - с моделью оплаты cpc — за клики Для кампаний в…"
+title: "Changing Campaigns Bids"
+description: "The method changes the bids of listings by WB item numbers in campaigns: - with standard bid - with custom bid - with a cpc payment model — per click For…"
 ---
 
-# Изменение ставок в кампаниях
+# Changing Campaigns Bids
 
 ```http
 PATCH /api/advert/v1/bids
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/patchV1Bids)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/patchV1Bids)
 
-Метод меняет ставки карточек товаров по артикулам WB в кампаниях:
+The method changes the bids of listings by WB item numbers in campaigns:
 
-- с единой ставкой
-- с ручной ставкой
-- с моделью оплаты `cpc` — за клики
-  Для кампаний в статусах `4`, `9` и `11`.
+- with standard bid
+- with custom bid
+- with a `cpc` payment model — per click
+  For campaigns in statuses `4`, `9` and `11`.
 
-В запросе укажите место размещения в параметре `placement`:
+Specify the placement in the request parameter `placement`:
 
-- `combined` — в поиске и рекомендациях для кампаний с единой ставкой
-- `search `или `recommendations` — в поиске или рекомендациях для кампаний с ручной ставкой
+- `combined` — in search and recommendations for campaigns with standard bid
+- `search `or `recommendations` — in search or recommendations for campaigns with custom bid
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса  | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -38,13 +38,13 @@ PATCH /api/advert/v1/bids
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `PatchV1BidsResponse200` |
-| `400` | Неправильный запрос    | `response400`            |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `object`                 |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `PatchV1BidsResponse200` |
+| `400` | Bad request       | `response400`            |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `object`                 |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

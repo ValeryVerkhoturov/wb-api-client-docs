@@ -1,33 +1,33 @@
 ---
-title: "Пополнение бюджета кампании"
-description: "Метод пополняет бюджет кампании. Чтобы запустить кампанию после пополнения бюджета, используйте метод Запуск кампании."
+title: "Top-up of the Campaign Budget"
+description: "The method tops up the campaign budget. To launch the campaign after topping up the budget, use the Launch campaign method."
 ---
 
-# Пополнение бюджета кампании
+# Top-up of the Campaign Budget
 
 ```http
 POST /adv/v1/budget/deposit
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV1BudgetDeposit)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV1BudgetDeposit)
 
-Метод пополняет [бюджет](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV2Budget) кампании.
-Чтобы запустить кампанию после пополнения бюджета, используйте метод [Запуск кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV0Start).
+The method tops up the campaign [budget](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV2Budget).
+To launch the campaign after topping up the budget, use the [Launch campaign](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV0Start) method.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 1 запрос   | 1 сек    | 5 запросов |
-| Сервисный          | 1 сек  | 1 запрос   | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 сек  | 1 запрос   | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 1 request  | 1 s      | 5 requests |
+| Service          | 1 s    | 1 request  | 1 s      | 5 requests |
+| Base with secret | 1 s    | 1 request  | 1 s      | 5 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
 | Name | In    | Type             | Req. | Description |
 | ---- | ----- | ---------------- | ---- | ----------- |
-| `id` | query | `integer<int64>` | yes  | ID кампании |
+| `id` | query | `integer<int64>` | yes  | Campaign ID |
 
 ## Request body
 
@@ -35,13 +35,13 @@ POST /adv/v1/budget/deposit
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `ResponseWithReturn`             |
-| `400` | Неправильный запрос    | `PostV1BudgetDepositResponse400` |
-| `401` | Не авторизован         | `object`                         |
-| `403` | Доступ запрещён        | `object`                         |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `ResponseWithReturn`             |
+| `400` | Bad request       | `PostV1BudgetDepositResponse400` |
+| `401` | Unauthorized      | `object`                         |
+| `403` | Access denied     | `object`                         |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

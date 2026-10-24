@@ -1,48 +1,45 @@
 ---
-title: "Установить цены для размеров"
-description: "Метод устанавливает цены отдельно для размеров товаров. Работает только для товаров из категорий, где можно устанавливать цены отдельно для разных размеров.…"
+title: "Set Size Prices"
+description: "Sets different prices for different sizes. Only for items from categories where size price setting is available. For these items \"editableSizePrice\":true in…"
 ---
 
-# Установить цены для размеров
+# Set Size Prices
 
 ```http
 POST /api/v2/upload/task/size
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize)
 
-Метод устанавливает цены отдельно для размеров товаров.
-Работает только для товаров из категорий, где можно устанавливать цены отдельно для разных размеров. Для [таких товаров](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm) `"editableSizePrice":true`.
-Чтобы установить цены и скидки для самих товаров, используйте [отдельный метод](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTask).
+Sets different prices for different sizes.
+Only for items from categories where size price setting is available. For these items `"editableSizePrice":true` in [Get item sizes with prices](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm) response.
 
-Получить информацию о процессе установки цен и скидок можно с помощью методов [состояния](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryTasks) и [детализации](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryGoodsTask) обработанной загрузки.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
-
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description                   | Schema                      |
-| ----- | ----------------------------- | --------------------------- |
-| `200` | Успешно                       | `TaskCreated`               |
-| `208` | Такая загрузка уже есть       | `RequestAlreadyExistsError` |
-| `400` | Неправильный запрос           | `ResponseError`             |
-| `401` | Не авторизован                | `object`                    |
-| `402` | Требуется платёж              | `object`                    |
-| `403` | Доступ запрещён               | `ResponseError`             |
-| `409` | Ошибка при конвертации валюты | `ResponseError`             |
-| `422` | Неожидаемый результат         | `ResponseError`             |
-| `429` | Слишком много запросов        | `object`                    |
+| Code  | Description                    | Schema                      |
+| ----- | ------------------------------ | --------------------------- |
+| `200` | Success                        | `TaskCreated`               |
+| `208` | Upload already exists          | `RequestAlreadyExistsError` |
+| `400` | Bad request                    | `ResponseError`             |
+| `401` | Unauthorized                   | `object`                    |
+| `402` | Payment required               | `object`                    |
+| `403` | Access denied                  | `ResponseError`             |
+| `409` | Error while switching currency | `ResponseError`             |
+| `422` | Unexpected result              | `ResponseError`             |
+| `429` | Too many requests              | `object`                    |
 
 ## Call examples
 

@@ -1,28 +1,28 @@
 ---
-title: "Сообщить о получении заказов"
-description: "Метод переводит сборочные задания из статуса deliver в статус receive — получено покупателем."
+title: "Notify that the Orders Are Received"
+description: "The method transfers assembly orders with the deliver status to the receive status — received by the buyer."
 ---
 
-# Сообщить о получении заказов
+# Notify that the Orders Are Received
 
 ```http
 POST /api/marketplace/v3/dbs/orders/status/receive
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusReceive)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusReceive)
 
-Метод переводит [сборочные задания](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) из [статуса](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo) `deliver` в статус `receive` — получено покупателем.
+The method transfers [assembly orders](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) with the `deliver` [status](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo) to the `receive` status — received by the buyer.
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период                                                          | Лимит    | Интервал | Всплеск     |
-| --------------------------------------------------------------- | -------- | -------- | ----------- |
-| 1 сек                                                           | 1 запрос | 1 сек    | 10 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit     | Interval | Burst       |
+| ---------------------------------------------------------------- | --------- | -------- | ----------- |
+| 1 s                                                              | 1 request | 1 s      | 10 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -30,14 +30,14 @@ POST /api/marketplace/v3/dbs/orders/status/receive
 
 ## Responses
 
-| Code  | Description            | Schema                                    |
-| ----- | ---------------------- | ----------------------------------------- |
-| `200` | Успешно                | `PostV3DbsOrdersStatusReceiveResponse200` |
-| `400` | Неправильный запрос    | `api.BatchError`                          |
-| `401` | Не авторизован         | `object`                                  |
-| `402` | Требуется платёж       | `object`                                  |
-| `403` | Доступ запрещён        | `api.BatchError`                          |
-| `429` | Слишком много запросов | `object`                                  |
+| Code  | Description       | Schema                                    |
+| ----- | ----------------- | ----------------------------------------- |
+| `200` | Success           | `PostV3DbsOrdersStatusReceiveResponse200` |
+| `400` | Bad request       | `api.BatchError`                          |
+| `401` | Unauthorized      | `object`                                  |
+| `402` | Payment required  | `object`                                  |
+| `403` | Access denied     | `api.BatchError`                          |
+| `429` | Too many requests | `object`                                  |
 
 ## Call examples
 

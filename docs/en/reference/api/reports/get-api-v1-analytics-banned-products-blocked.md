@@ -1,44 +1,44 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает список заблокированных карточек товаров продавца с причинами блокировки."
+title: "Get Report"
+description: "Returns the list of blocked listings."
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 GET /api/v1/analytics/banned-products/blocked
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Заблокированные карточки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/blockedItems/operation/getV1AnalyticsBannedProducsBlocked)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Blocked Items · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/blockedItems/operation/getV1AnalyticsBannedProducsBlocked)
 
-Метод возвращает список [заблокированных карточек товаров продавца](https://seller.wildberries.ru/analytics-reports/banned-products) с причинами блокировки.
+Returns the list of [blocked listings](https://seller.wildberries.ru/analytics-reports/banned-products).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 10 сек | 1 запрос | 10 сек   | 6 запросов |
-| Сервисный          | 10 сек | 1 запрос | 10 сек   | 6 запросов |
-| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 6 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 10 s   | 1 request | 10 s     | 6 requests |
+| Service          | 10 s   | 1 request | 10 s     | 6 requests |
+| Base with secret | 10 s   | 1 request | 10 s     | 6 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name    | In    | Type     | Req. | Description                                                                                                                                                                                                                     |
-| ------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sort`  | query | `string` | yes  | Сортировка - `brand` — по бренду - `nmId` — по артикулу WB - `title` — по наименованию товара - `vendorCode` — по артикулу продавца - `reason` — по причине блокировки                                                          |
-| `order` | query | `string` | yes  | Порядок выдачи - `desc` — от наибольшего числового значения к наименьшему, от последнего по алфавиту значения к первому - `asc` — от наименьшего числового значения к наибольшему, от первого по алфавиту значения к последнему |
+| Name    | In    | Type     | Req. | Description                                                                                                                                                                                                                 |
+| ------- | ----- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sort`  | query | `string` | yes  | Sorting - `brand` — by brand - `nmId` — by WB item number - `title` — by item title - `vendorCode` — by seller item number - `reason` — by reason for blocking                                                              |
+| `order` | query | `string` | yes  | Data order - `desc` — from the largest numeric value to the smallest, from the last alphabetical value to the first - `asc` — from the smallest numeric value to the largest, from the first alphabetical value to the last |
 
 ## Responses
 
-| Code  | Description            | Schema                                          |
-| ----- | ---------------------- | ----------------------------------------------- |
-| `200` | Успешно                | `GetV1AnalyticsBannedProducsBlockedResponse200` |
-| `400` | Неправильный запрос    | `GetV1AnalyticsBannedProducsBlockedResponse400` |
-| `401` | Не авторизован         | `object`                                        |
-| `402` | Требуется платёж       | `object`                                        |
-| `403` | Доступ запрещён        | `object`                                        |
-| `429` | Слишком много запросов | `object`                                        |
+| Code  | Description       | Schema                                          |
+| ----- | ----------------- | ----------------------------------------------- |
+| `200` | Success           | `GetV1AnalyticsBannedProducsBlockedResponse200` |
+| `400` | Bad request       | `GetV1AnalyticsBannedProducsBlockedResponse400` |
+| `401` | Unauthorized      | `object`                                        |
+| `402` | Payment required  | `object`                                        |
+| `403` | Access denied     | `object`                                        |
+| `429` | Too many requests | `object`                                        |
 
 ## Call examples
 

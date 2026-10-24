@@ -83,6 +83,7 @@ mirrored paths are what make that work, so keep them identical below `en/`.
 - Formatting is Prettier with `proseWrap: "preserve"` and
   `embeddedLanguageFormatting: "off"` (`.prettierrc.json`) — don't reformat prose to a
   fixed line width, and don't manually rewrap code blocks inside Markdown.
-- Comments in config/helper files follow an existing style: short paragraphs explaining
-  _why_, not _what_. Match it.
+- Files under `docs/.vitepress/gen/` carry no comments — the code must speak for itself
+  (same house rule as the main repo's `scripts/`). `config.ts` keeps its existing
+  why-style comments.
 - Never put real WB API tokens in examples; use placeholders like `<ваш JWT WB>` / `<your WB JWT>`.

@@ -1,37 +1,36 @@
 ---
-title: "Список товаров для участия в акции"
-description: "Метод формирует список товаров, подходящих для участия в акции. Эти товары можно добавить в акцию с помощью отдельного метода."
+title: "List of Items for Participating in the Promo"
+description: "Returns a list of items suitable for participation in the promo. Not applicable for auto promos"
 ---
 
-# Список товаров для участия в акции
+# List of Items for Participating in the Promo
 
 ```http
 GET /api/v1/calendar/promotions/nomenclatures
 ```
 
-**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Календарь акций · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsNomenclatures)
+**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Promo Calendar · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsNomenclatures)
 
-Метод формирует список товаров, подходящих для участия в [акции](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails). Эти товары можно добавить в акцию с помощью [отдельного метода](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/postV1CalendarPromotionsUpload).
+Returns a list of items suitable for participation in the promo.
+Not applicable for auto promos
 
-Данный метод неприменим для автоакций.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Promo Calendar** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Календарь акций**:
-
-| Период | Лимит       | Интервал | Всплеск    |
+| Period | Limit       | Interval | Burst      |
 | ------ | ----------- | -------- | ---------- |
-| 6 сек  | 10 запросов | 600 мс   | 5 запросов |
+| 6 s    | 10 requests | 600 ms   | 5 requests |
 
 ## Responses
 
 | Code  | Description                         | Schema   |
 | ----- | ----------------------------------- | -------- |
-| `200` | Успешно                             | `object` |
-| `400` | Неправильный запрос                 | `object` |
-| `401` | Не авторизован                      | `object` |
-| `402` | Требуется платёж                    | `object` |
-| `403` | Доступ запрещён                     | `object` |
-| `422` | Ошибка обработки параметров запроса | `object` |
-| `429` | Слишком много запросов              | `object` |
+| `200` | Success                             | `object` |
+| `400` | Bad request                         | `object` |
+| `401` | Unauthorized                        | `object` |
+| `402` | Payment required                    | `object` |
+| `403` | Access denied                       | `object` |
+| `422` | Error processing request parameters | `object` |
+| `429` | Too many requests                   | `object` |
 
 ## Call examples
 

@@ -1,60 +1,60 @@
 ---
-title: "Продажи"
-description: "Метод возвращает информацию о продажах и возвратах. Данные обновляются раз в 30 минут."
+title: "Sales"
+description: "The method returns purchase and return information. The data updated every 30 minutes."
 ---
 
-# Продажи
+# Sales
 
 ```http
 GET /api/v1/supplier/sales
 ```
 
-**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Основные отчёты · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierSales)
+**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Main Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierSales)
 
-Метод возвращает информацию о продажах и возвратах.
-Данные обновляются раз в 30 минут.
+The method returns purchase and return information.
+The data updated every 30 minutes.
 
-1 строка = 1 заказ = 1 сборочное задание = 1 единица товара.
-Для определения заказа рекомендуем использовать поле `srid`.
+1 line means 1 purchase/return and means 1 item.
+The `srid` field should be used to identify the order.
 
-Информация о заказе хранится 90 дней с момента оформления.
+Data storage is guaranteed for no more than 90 days from the date of sale.
 
-Данные этого отчёта являются предварительными и служат для оперативного мониторинга
+The data in this report is preliminary and is used for operational monitoring
 
-- В ответах могут отсутствовать заказы, по которым не подтверждена оплата, даже если эти заказы есть в детализациях к отчётам реализации. Например, заказы с отложенными платежами или оплатой в рассрочку
-- Значения полей `priceWithDisc` и `forPay` рассчитываются по упрощённой логике и могут отличаться от `retail\_price\_withdisc\_rub` и `ppvz\_for\_pay` соответственно в детализациях к отчётам реализации
-- Поля `finishedPrice`, `priceWithDisc`, `forPay` могут временно иметь значение `0`: данные заполняются асинхронно, актуализируются в течение 24 часов
-- Для заказов, которые оплачены в валюте, отличной от валюты продавца, возможны округления цен из-за конвертации валют
-  Для точных финансовых расчётов, сверки и отчётности используйте [детализации к отчётам реализации](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
+- The responses do not include orders for which payment was not confirmed, even if these orders are in details for the realization reports. For example, it could be orders with delayed payments or installment payments
+- The values of the `priceWithDisc` and `forPay` fields are calculated using a simplified logic and may differ from `retail\_price\_withdisc\_rub` and `ppvz\_for\_pay`, respectively, in details for the realization reports
+- The fields `finishedPrice`, `priceWithDisc`, and `forPay` may temporarily have the value `0`: data is filled in asynchronously and updated within 24 hours
+- For orders that are paid in a currency other than the seller currency, prices may be rounded due to currency conversion
+  Use [details for the realization reports](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports) for accurate financial calculations, reconciliation, and reporting.
 
-Для одного ответа на запрос с `flag=0` или без `flag` в системе установлено условное ограничение 80000 строк. Поэтому, чтобы получить все продажи и возвраты, может потребоваться более, чем один запрос. Во втором и далее запросе в параметре `dateFrom `используйте полное значение поля `lastChangeDate` из последней строки ответа на предыдущий запрос.
-Если в ответе отдаётся пустой массив `[]`, все продажи и возвраты уже выгружены.
+For a single response to a request with `flag=0` or without `flag`, a conditional limit of 80,000 rows is set. Therefore, more than one request may be necessary to retrieve all purchases and returns. In the second and subsequent requests, use the full value of the `lastChangeDate` field of the last row from the response of the previous request in the `dateFrom` parameter.
+If the response returns an empty array `[]`, all sales and returns have already been retrieved.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск  |
-| ------------------ | ------ | -------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый            | 2 ч    | 1 запрос | 2 ч      | 1 запрос |
+| Type             | Period | Limit     | Interval | Burst     |
+| ---------------- | ------ | --------- | -------- | --------- |
+| Personal         | 1 min  | 1 request | 1 min    | 1 request |
+| Service          | 1 min  | 1 request | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request | 1 min    | 1 request |
+| Base             | 2 h    | 1 request | 2 h      | 1 request |
 
 ## Parameters
 
-| Name       | In    | Type     | Req. | Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ---------- | ----- | -------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dateFrom` | query | `string` | yes  | Дата и время последнего изменения по продаже/возврату. Дата в формате RFC3339. Можно передать дату или дату со временем. Время можно указывать с точностью до [секунд](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) или миллисекунд. Время передаётся в часовом поясе Москва (UTC+3). Примеры: - `2019-06-20` - `2019-06-20T23:59:59` - `2019-06-20T00:00:00.12345` - `2017-03-25T00:00:00` |
+| Name       | In    | Type     | Req. | Description                                                                                                                                                                                                                                                                                                             |
+| ---------- | ----- | -------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string` | yes  | Date and time of last change on the purchase/return. Date format: RFC3339. You may send date or date with time. Time could be specified in seconds or milliseconds. The time stands in Moscow time zone (UTC+3). Examples: - `2019-06-20` - `2019-06-20T23:59:59` - `2019-06-20T00:00:00.12345` - `2017-03-25T00:00:00` |
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `GetV1SupplierSalesResponse200` |
-| `400` | Неправильный запрос    | `object`                        |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `object`                        |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `GetV1SupplierSalesResponse200` |
+| `400` | Bad request       | `object`                        |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `object`                        |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

@@ -1,31 +1,31 @@
 ---
-title: "Остатки на складах продавца"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Seller Warehouses Inventory"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Остатки на складах продавца
+# Seller Warehouses Inventory
 
 ```http
 POST /api/analytics/v1/stocks-report/seller-warehouses
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** История остатков · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV1StocksReportSellerWarehouses)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Stocks Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV1StocksReportSellerWarehouses)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает текущие остатки товаров на складах продавца.
+The method returns current seller warehouses inventory.
 
-Данные обновляются 1 раз в 30 минут.
+The data is updated once every 30 minutes.
 
-1 строка ответа — данные об 1 размере товара на 1 складе продавца.
+1 response row means data on 1 item size in 1 seller warehouse.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит     | Интервал | Всплеск  |
-| ------ | --------- | -------- | -------- |
-| 1 мин  | 3 запроса | 20 сек   | 1 запрос |
+| Period | Limit      | Interval | Burst     |
+| ------ | ---------- | -------- | --------- |
+| 1 min  | 3 requests | 20 s     | 1 request |
 
 ## Request body
 
@@ -33,14 +33,14 @@ POST /api/analytics/v1/stocks-report/seller-warehouses
 
 ## Responses
 
-| Code  | Description            | Schema                                          |
-| ----- | ---------------------- | ----------------------------------------------- |
-| `200` | Успешно                | `PostV1StocksReportSellerWarehousesResponse200` |
-| `204` | Нет данных             | —                                               |
-| `400` | Неправильный запрос    | `ErrorObject400`                                |
-| `401` | Не авторизован         | `object`                                        |
-| `403` | Доступ запрещён        | `ErrorObject403`                                |
-| `429` | Слишком много запросов | `object`                                        |
+| Code  | Description       | Schema                                          |
+| ----- | ----------------- | ----------------------------------------------- |
+| `200` | Success           | `PostV1StocksReportSellerWarehousesResponse200` |
+| `204` | No data           | —                                               |
+| `400` | Bad request       | `ErrorObject400`                                |
+| `401` | Unauthorized      | `object`                                        |
+| `403` | Access denied     | `ErrorObject403`                                |
+| `429` | Too many requests | `object`                                        |
 
 ## Call examples
 

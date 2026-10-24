@@ -1,49 +1,45 @@
 ---
-title: "Количество отзывов"
-description: "Метод возвращает количество обработанных или необработанных отзывов за заданный период. Отзыв считается обработанным, если выполняется одно из условий: - на…"
+title: "Number of Feedbacks"
+description: "The method allows to get the number of feedbacks"
 ---
 
-# Количество отзывов
+# Number of Feedbacks
 
 ```http
 GET /api/v1/feedbacks/count
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1FeedbacksCount)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/feedbacks/operation/getV1FeedbacksCount)
 
-Метод возвращает количество обработанных или необработанных [отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks) за заданный период.
-Отзыв считается обработанным, если выполняется одно из условий:
+The method allows to get the number of feedbacks
 
-- на отзыв получен ответ
-- отзыв содержит только оценку (без текста и фото)
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
-
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name         | In    | Type             | Req. | Description                                                       |
-| ------------ | ----- | ---------------- | ---- | ----------------------------------------------------------------- |
-| `dateFrom`   | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp                      |
-| `dateTo`     | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp                       |
-| `isAnswered` | query | `boolean`        | yes  | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
+| Name         | In    | Type             | Req. | Description                                                    |
+| ------------ | ----- | ---------------- | ---- | -------------------------------------------------------------- |
+| `dateFrom`   | query | `integer<int64>` | no   | The start date of the period in Unix timestamp format          |
+| `dateTo`     | query | `integer<int64>` | no   | The end date of the period in Unix timestamp format            |
+| `isAnswered` | query | `boolean`        | yes  | Return only processed feedbacks: - `true` — yes - `false` — no |
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV1FeedbacksCountResponse200` |
-| `400` | Неправильный запрос    | `responseFeedbackQuestionErr`    |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `responseFeedbackQuestionErr`    |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `GetV1FeedbacksCountResponse200` |
+| `400` | Bad request       | `responseFeedbackQuestionErr`    |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `responseFeedbackQuestionErr`    |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

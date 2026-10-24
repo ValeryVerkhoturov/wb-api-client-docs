@@ -1,30 +1,29 @@
 ---
-title: "Закрепить GTIN за сборочным заданием"
-description: "Метод обновляет GTIN, уникальный ID товара в Беларуси, в идентификаторах маркировки сборочного задания. У одного сборочного задания может быть только один…"
+title: "Add GTIN to the Assembly Order"
+description: "Sets the GTIN (Belarus item unique identifier) for the assembly order. The assembly order can only have one GTIN. You can add GTIN to the assembly order only…"
 ---
 
-# Закрепить GTIN за сборочным заданием
+# Add GTIN to the Assembly Order
 
 ```http
 PUT /api/v3/orders/{orderId}/meta/gtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaGtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaGtin)
 
-Метод обновляет GTIN, уникальный ID товара в Беларуси, в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta).
-У одного сборочного задания может быть только один GTIN.
-Закрепить GTIN можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) есть поле `gtin`.
+Sets the GTIN (Belarus item unique identifier) for the assembly order. The assembly order can only have one GTIN.
+You can add GTIN to the assembly order only if the `gtin` field is returned in the response of the [Assembly Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) method, and the assembly order is in the `confirm` status.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding FBS label identifiers**:
 
-| Период                                                          | Лимит         | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------- | -------- | ----------- |
-| 1 мин                                                           | 1000 запросов | 60 мс    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit         | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 min                                                            | 1000 requests | 60 ms    | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -32,15 +31,15 @@ PUT /api/v3/orders/{orderId}/meta/gtin
 
 ## Responses
 
-| Code  | Description                                  | Schema   |
-| ----- | -------------------------------------------- | -------- |
-| `204` | Обновлено                                    | —        |
-| `400` | Неправильный запрос                          | `Error`  |
-| `401` | Не авторизован                               | `object` |
-| `402` | Требуется платёж                             | `object` |
-| `403` | Доступ запрещён                              | `Error`  |
-| `409` | Ошибка обновления идентификаторов маркировки | `Error`  |
-| `429` | Слишком много запросов                       | `object` |
+| Code  | Description                      | Schema   |
+| ----- | -------------------------------- | -------- |
+| `204` | Updated                          | —        |
+| `400` | Bad request                      | `Error`  |
+| `401` | Unauthorized                     | `object` |
+| `402` | Payment required                 | `object` |
+| `403` | Access denied                    | `Error`  |
+| `409` | Error updating label identifiers | `Error`  |
+| `429` | Too many requests                | `object` |
 
 ## Call examples
 

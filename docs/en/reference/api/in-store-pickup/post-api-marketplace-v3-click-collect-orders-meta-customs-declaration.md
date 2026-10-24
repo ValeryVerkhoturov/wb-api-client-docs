@@ -1,33 +1,33 @@
 ---
-title: "Закрепить номера ДТ за сборочными заданиями"
-description: "Метод обновляет номера ДТ — деклараций на товары — и коды стран происхождения товаров в идентификаторах маркировки сборочных заданий. У одного сборочного…"
+title: "Add Customs Declaration Numbers to the Orders"
+description: "Sets the customs declaration numbers and numeric codes of the countries for the assembly orders label identifiers. One assembly order can have only one customs…"
 ---
 
-# Закрепить номера ДТ за сборочными заданиями
+# Add Customs Declaration Numbers to the Orders
 
 ```http
 POST /api/marketplace/v3/click-collect/orders/meta/customs-declaration
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Идентификаторы маркировки Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration)
 
-Метод обновляет номера ДТ — деклараций на товары — и коды стран происхождения товаров в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails). У одного сборочного задания может быть только один номер ДТ.
-Закрепить номер ДТ можно, только если выполняются все условия:
+Sets the customs declaration numbers and numeric codes of the countries for the assembly orders [label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails). One assembly order can have only one customs declaration number.
+Customs declaration number can only be added if all the conditions are met:
 
-- сборочное задание имеет признак B2B-продажи — `"isB2b":true` в ответе метода [получения новых сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrdersNew)
-- сборочное задание находится в [статусах](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) `confirm` или `prepare`
-- поле `customsDeclaration` есть в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails)
+- the assembly order has the B2B sale attribute — `"isB2b": true` in the response of the method [getting new assembly orders](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrdersNew)
+- the assembly order is in `confirm` or `prepare` statuses
+- the `customsDeclaration` field is returned in the response of the [Get order label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails) method
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки Самовывоз**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding In-Store Pickup label identifiers**:
 
-| Период                                                          | Лимит       | Интервал | Всплеск      |
-| --------------------------------------------------------------- | ----------- | -------- | ------------ |
-| 1 мин                                                           | 20 запросов | 3 сек    | 500 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit       | Interval | Burst        |
+| ---------------------------------------------------------------- | ----------- | -------- | ------------ |
+| 1 min                                                            | 20 requests | 3 s      | 500 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -35,13 +35,13 @@ POST /api/marketplace/v3/click-collect/orders/meta/customs-declaration
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `api.CustomsDeclarationSetResponse` |
-| `400` | Неправильный запрос    | `api.BatchError`                    |
-| `401` | Не авторизован         | `object`                            |
-| `403` | Доступ запрещён        | `Error`                             |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Успешно           | `api.CustomsDeclarationSetResponse` |
+| `400` | Bad request       | `api.BatchError`                    |
+| `401` | Unauthorized      | `object`                            |
+| `403` | Access denied     | `Error`                             |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

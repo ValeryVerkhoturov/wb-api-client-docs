@@ -1,41 +1,41 @@
 ---
-title: "Статистика карточек товаров по дням"
-description: "Метод возвращает статистику карточек товаров по дням или неделям. Можно получить данные максимум за последнюю неделю."
+title: "Listings Statistics per Days"
+description: "The method returns statistics for listings by day or by week. You can get data for a maximum of the last week."
 ---
 
-# Статистика карточек товаров по дням
+# Listings Statistics per Days
 
 ```http
 POST /api/analytics/v3/sales-funnel/products/history
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Воронка продаж · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProductsHistory)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Sales Funnel · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/salesFunnel/operation/postV3SalesFunnelProductsHistory)
 
-Метод возвращает статистику карточек товаров по дням или неделям.
-Можно получить данные максимум за последнюю неделю.
+The method returns statistics for listings by day or by week.
+You can get data for a maximum of the last week.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-В течение часа после события появляется большая часть данных:
+Most of the data appears within an hour of the event:
 
-- о заказах
-- о переходах в карточку товара
-- о добавлениях товаров в корзину
-  Малая часть этих данных может появляться в течение нескольких дней.
+- orders
+- click-throughs
+- adds-to-Cart
+  A small part of this data may appear within a few days.
 
-Выкупы, отмены и возвраты отображаются в отчёте за тот день, когда товар был заказан. Например, если заказ был сделан 1 января, а покупатель вернул товар 10 января, данные об этом возврате появятся в отчёте за 1 января.
-Окончательные итоги продаж вы можете отслеживать с помощью [детализаций к отчётам реализации](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
+Purchases, cancellations, and returns are displayed in report for the day an item was ordered. For example, if an order was placed on January 1, and the customer returned the item on January 10, data about this return will appear in the report for January 1.
+You can track the final sales results using [details for the realization reports](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
 
-Чтобы получать отчёты за период до года, используйте методы [Аналитика продавца CSV](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv) — тип `DETAIL_HISTORY_REPORT`. Отчёты этого типа доступны только с подпиской [Джем](https://seller.wildberries.ru/monetization/jam)
+To get reports for a period of up to a year, use the [Seller Analytics CSV](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv) methods — the `DETAIL_HISTORY_REPORT` type. Reports of this type are available only with [Jam](https://seller.wildberries.ru/monetization/jam) subscription
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -43,14 +43,14 @@ POST /api/analytics/v3/sales-funnel/products/history
 
 ## Responses
 
-| Code  | Description            | Schema                                        |
-| ----- | ---------------------- | --------------------------------------------- |
-| `200` | Успешно                | `PostV3SalesFunnelProductsHistoryResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject`                                 |
-| `401` | Не авторизован         | `object`                                      |
-| `402` | Требуется платёж       | `object`                                      |
-| `403` | Доступ запрещён        | `ErrorObject`                                 |
-| `429` | Слишком много запросов | `object`                                      |
+| Code  | Description       | Schema                                        |
+| ----- | ----------------- | --------------------------------------------- |
+| `200` | Success           | `PostV3SalesFunnelProductsHistoryResponse200` |
+| `400` | Bad request       | `ErrorObject`                                 |
+| `401` | Unauthorized      | `object`                                      |
+| `402` | Payment required  | `object`                                      |
+| `403` | Access denied     | `ErrorObject`                                 |
+| `429` | Too many requests | `object`                                      |
 
 ## Call examples
 

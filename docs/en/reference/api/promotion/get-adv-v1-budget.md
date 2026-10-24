@@ -1,42 +1,42 @@
 ---
-title: "Бюджет кампании"
-description: "Метод будет отключен 16 ноября."
+title: "Campaign Budget"
+description: "The deprecated method will be disabled on 16 November."
 ---
 
-# Бюджет кампании
+# Campaign Budget
 
 ```http
 GET /adv/v1/budget
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Budget)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Budget)
 
-Метод будет отключен [16 ноября](https://dev.wildberries.ru/release-notes?id=582).
+The deprecated method will be disabled on [16 November](https://dev.wildberries.ru/en/release-notes?id=582).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 сек  | 4 запроса | 250 мс   | 4 запроса |
-| Сервисный          | 1 сек  | 4 запроса | 250 мс   | 4 запроса |
-| Базовый с секретом | 1 сек  | 4 запроса | 250 мс   | 4 запроса |
-| Базовый            | 1 ч    | 4 запроса | 15 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 4 requests | 250 ms   | 4 requests |
+| Service          | 1 s    | 4 requests | 250 ms   | 4 requests |
+| Base with secret | 1 s    | 4 requests | 250 ms   | 4 requests |
+| Base             | 1 h    | 4 requests | 15 min   | 1 request  |
 
 ## Parameters
 
 | Name | In    | Type             | Req. | Description |
 | ---- | ----- | ---------------- | ---- | ----------- |
-| `id` | query | `integer<int64>` | yes  | ID кампании |
+| `id` | query | `integer<int64>` | yes  | Campaign ID |
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `GetV1BudgetResponse200` |
-| `400` | Неправильный запрос    | `string`                 |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `object`                 |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `GetV1BudgetResponse200` |
+| `400` | Bad request       | `string`                 |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `object`                 |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

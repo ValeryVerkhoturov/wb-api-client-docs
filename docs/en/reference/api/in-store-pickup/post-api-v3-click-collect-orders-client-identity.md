@@ -1,30 +1,30 @@
 ---
-title: "Проверить, что заказ принадлежит покупателю"
-description: "Метод сообщает, принадлежит ли проверяемый заказ покупателю или нет по переданному коду."
+title: "Check If the Order Belongs to the Buyer"
+description: "The method indicates whether the checked order belongs to the buyer based on the provided code."
 ---
 
-# Проверить, что заказ принадлежит покупателю
+# Check If the Order Belongs to the Buyer
 
 ```http
 POST /api/v3/click-collect/orders/client/identity
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClientIdentity)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClientIdentity)
 
-Метод сообщает, принадлежит ли проверяемый заказ покупателю или нет по переданному коду.
+The method indicates whether the checked order belongs to the buyer based on the provided code.
 
-Доступно, если хотя бы одно сборочное задание из заказа находится в статусе prepare - готов к выдаче.
+Available if at least one assembly order from the order is in `prepare` status — ready for pickup.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период                                                          | Лимит       | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ----------- | -------- | ----------- |
-| 1 мин                                                           | 30 запросов | 2 сек    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit       | Interval | Burst       |
+| ---------------------------------------------------------------- | ----------- | -------- | ----------- |
+| 1 min                                                            | 30 requests | 2 s      | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -32,16 +32,16 @@ POST /api/v3/click-collect/orders/client/identity
 
 ## Responses
 
-| Code  | Description                     | Schema                |
-| ----- | ------------------------------- | --------------------- |
-| `200` | Успешно                         | `api.CheckedIdentity` |
-| `400` | Неправильный запрос             | `Error`               |
-| `401` | Не авторизован                  | `object`              |
-| `402` | Требуется платёж                | `object`              |
-| `403` | Доступ запрещён                 | `Error`               |
-| `404` | Не найдено                      | `api.Error`           |
-| `409` | Введён неверный проверочный код | `api.Error`           |
-| `429` | Слишком много запросов          | `object`              |
+| Code  | Description                         | Schema                |
+| ----- | ----------------------------------- | --------------------- |
+| `200` | Success                             | `api.CheckedIdentity` |
+| `400` | Bad request                         | `Error`               |
+| `401` | Unauthorized                        | `object`              |
+| `402` | Payment required                    | `object`              |
+| `403` | Access denied                       | `Error`               |
+| `404` | Not found                           | `api.Error`           |
+| `409` | Incorrect verification code entered | `api.Error`           |
+| `429` | Too many requests                   | `object`              |
 
 ## Call examples
 

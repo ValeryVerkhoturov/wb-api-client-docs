@@ -1,36 +1,36 @@
 ---
-title: "Комиссия по категориям товаров"
-description: "Метод возвращает данные о комиссии WB по родительским категориям товаров согласно модели продаж."
+title: "Item Category Fee"
+description: "WB fee by parent categories of items according to sales model."
 ---
 
-# Комиссия по категориям товаров
+# Item Category Fee
 
 ```http
 GET /api/v1/tariffs/commission
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Комиссии · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/fees/operation/getV1TariffsCommission)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Fees · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/fees/operation/getV1TariffsCommission)
 
-Метод возвращает данные о [комиссии](https://seller.wildberries.ru/dynamic-product-categories/commission) WB по [родительским категориям товаров](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll) согласно модели продаж.
+[WB fee](https://seller.wildberries.ru/dynamic-product-categories/commission) by [parent categories of items](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll) according to sales model.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск   |
-| ------------------ | ------ | ---------- | -------- | --------- |
-| Персональный       | 1 мин  | 1 запрос   | 1 мин    | 2 запроса |
-| Сервисный          | 1 мин  | 1 запрос   | 1 мин    | 2 запроса |
-| Базовый с секретом | 1 мин  | 1 запрос   | 1 мин    | 2 запроса |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 2 requests |
+| Service          | 1 min  | 1 request  | 1 min    | 2 requests |
+| Base with secret | 1 min  | 1 request  | 1 min    | 2 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema       |
-| ----- | ---------------------- | ------------ |
-| `200` | Успешно                | `object`     |
-| `400` | Неправильный запрос    | `BadRequest` |
-| `401` | Не авторизован         | `object`     |
-| `402` | Требуется платёж       | `object`     |
-| `429` | Слишком много запросов | `object`     |
+| Code  | Description       | Schema       |
+| ----- | ----------------- | ------------ |
+| `200` | Success           | `object`     |
+| `400` | Bad request       | `BadRequest` |
+| `401` | Unauthorized      | `object`     |
+| `402` | Payment required  | `object`     |
+| `429` | Too many requests | `object`     |
 
 ## Call examples
 

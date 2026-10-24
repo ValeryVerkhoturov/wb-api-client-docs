@@ -1,41 +1,39 @@
 ---
-title: "Установить оптовые скидки для B2B-продаж"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Set Wholesale Discounts for B2B"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Установить оптовые скидки для B2B-продаж
+# Set Wholesale Discounts for B2B
 
 ```http
 POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV1UploadTaskB2bWholesale)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV1UploadTaskB2bWholesale)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод устанавливает [оптовые скидки для бизнеса](https://seller.wildberries.ru/instructions/ru/ru/material/how-to-enable-wholesale-discounts-for-business)
+The method sets wholesale discounts for B2B.
 
-Получить информацию о процессе установки цен и скидок можно с помощью методов [состояния](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryTasks) и [детализации](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryGoodsTask) обработанной загрузки.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
-
-| Тип          | Период | Лимит       | Интервал | Всплеск    |
-| ------------ | ------ | ----------- | -------- | ---------- |
-| Персональный | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный    | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
+| Type     | Period | Limit       | Interval | Burst      |
+| -------- | ------ | ----------- | -------- | ---------- |
+| Personal | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service  | 6 s    | 10 requests | 600 ms   | 5 requests |
 
 ## Responses
 
-| Code  | Description             | Schema            |
-| ----- | ----------------------- | ----------------- |
-| `200` | Успешно                 | `object`          |
-| `208` | Такая загрузка уже есть | `object`          |
-| `400` | Неправильный запрос     | `ResponseErrorV3` |
-| `401` | Не авторизован          | `object`          |
-| `403` | Доступ запрещён         | `ResponseErrorV3` |
-| `429` | Слишком много запросов  | `object`          |
+| Code  | Description           | Schema            |
+| ----- | --------------------- | ----------------- |
+| `200` | Success               | `object`          |
+| `208` | Upload already exists | `object`          |
+| `400` | Bad request           | `ResponseErrorV3` |
+| `401` | Unauthorized          | `object`          |
+| `403` | Access denied         | `ResponseErrorV3` |
+| `429` | Too many requests     | `object`          |
 
 ## Call examples
 

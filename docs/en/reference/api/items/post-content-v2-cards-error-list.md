@@ -1,26 +1,26 @@
 ---
-title: "Список несозданных карточек товаров с ошибками"
-description: "Метод возвращает список карточек товаров (черновиков), при создании или редактировании которых произошли ошибки, с описанием этих ошибок."
+title: "Failed Listings with Errors"
+description: "Returns the listings (drafts) and the list of errors encountered during listing creation or editing."
 ---
 
-# Список несозданных карточек товаров с ошибками
+# Failed Listings with Errors
 
 ```http
 POST /content/v2/cards/error/list
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
 
-Метод возвращает список карточек товаров ([черновиков](https://seller.wildberries.ru/new-goods/error-cards)), при создании или редактировании которых произошли ошибки, с описанием этих ошибок.
+Returns the listings ([drafts](https://seller.wildberries.ru/new-goods/error-cards)) and the list of errors encountered during listing creation or editing.
 
-Данные в ответе возвращаются пакетами `batch`. Один пакет содержит:
+The data is returned in batches. One batch contains:
 
-- все ошибки по одному массиву `variants` одного запроса при [создании](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload) карточек товаров
-- все ошибки одного запроса при [создании с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd) или [редактировании](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) карточек товаров
+- all errors for one `variants` array in one request during listings [creation](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- all errors in one request during listings [creation with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd) or [editing](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate).
 
-Чтобы получить более 100 пакетов, используйте пагинацию:
+To get more than 100 batches, use pagination:
 
-1. Сделайте первый запрос:
+1. Make first request:
 
 ```
         {
@@ -33,30 +33,30 @@ POST /content/v2/cards/error/list
         }
 ```
 
-2. Скопируйте `"updatedAt":"\*\*\*","batchUUID":"\*\*\*" `из `cursor` ответа и вставьте в `cursor` запроса.
-3. Повторите запрос.
-4. Повторяйте пункты 2 и 3, пока не получите в ответе `"next":false`. Это будет означать, что вы получили все пакеты.
+2. Copy `"updatedAt":"\*\*\*","batchUUID":"\*\*\*"` from the response `cursor` and paste into the request `cursor`.
+3. Repeat the request.
+4. Repeat 2 and 3, until you receive in the response `"next":false`. This will mean that you have received all the batches.
 
-Чтобы удалить карточку товара из списка, сделайте ещё один запрос на создание, создание с присоединением или редактирование карточки товара с исправленными ошибками
+To delete listing from the errors list, repeat the request for creating or creating with merge and updating request with fixed errors
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for the following methods:
 
-- [получения лимитов карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
-- [получения несозданных карточек товаров с ошибками](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
+- [getting limits for the listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
+- [getting failed listings with errors](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
 
-| Период | Лимит       | Интервал | Всплеск    |
+| Period | Limit       | Interval | Burst      |
 | ------ | ----------- | -------- | ---------- |
-| 1 мин  | 10 запросов | 6 сек    | 5 запросов |
+| 1 min  | 10 requests | 6 s      | 5 requests |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name     | In    | Type     | Req. | Description                                                                                                  |
-| -------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------ |
-| `locale` | query | `string` | no   | Язык названий предметов: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице |
+| Name     | In    | Type     | Req. | Description                                                                                                                                             |
+| -------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locale` | query | `string` | no   | Language of subcategory names: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
 
 ## Request body
 
@@ -64,13 +64,13 @@ POST /content/v2/cards/error/list
 
 ## Responses
 
-| Code  | Description            | Schema                                        |
-| ----- | ---------------------- | --------------------------------------------- |
-| `200` | Успешно                | `responsePublicViewerPublicErrorsTableListV2` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`                 |
-| `401` | Не авторизован         | `object`                                      |
-| `403` | Доступ запрещён        | `responseBodyContentError403`                 |
-| `429` | Слишком много запросов | `object`                                      |
+| Code  | Description       | Schema                                        |
+| ----- | ----------------- | --------------------------------------------- |
+| `200` | Success           | `responsePublicViewerPublicErrorsTableListV2` |
+| `400` | Bad request       | `responseBodyContentError400`                 |
+| `401` | Unauthorized      | `object`                                      |
+| `403` | Access denied     | `responseBodyContentError403`                 |
+| `429` | Too many requests | `object`                                      |
 
 ## Call examples
 

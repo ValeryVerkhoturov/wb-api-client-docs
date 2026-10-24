@@ -1,42 +1,42 @@
 ---
-title: "Получить список отчётов"
-description: "Метод возвращает список отчётов с расширенной аналитикой продавца. Ответ содержит ID созданных отчётов и статусы генерации."
+title: "Get the Reports List"
+description: "The method provides a list of reports with advanced seller analytics. The response contains report IDs and generation statuses."
 ---
 
-# Получить список отчётов
+# Get the Reports List
 
 ```http
 GET /api/v2/nm-report/downloads
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Seller Analytics CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads)
 
-Метод возвращает список отчётов с расширенной аналитикой продавца. Ответ содержит ID [созданных отчётов](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) и статусы генерации.
+The method provides a list of reports with advanced seller analytics. The response contains [report IDs](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) and generation statuses.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Parameters
 
 | Name                  | In    | Type             | Req. | Description |
 | --------------------- | ----- | ---------------- | ---- | ----------- |
-| `filter[downloadIds]` | query | `string<uuid>[]` | no   | ID отчёта   |
+| `filter[downloadIds]` | query | `string<uuid>[]` | no   | Report ID   |
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `NmReportGetReportsResponse`        |
-| `400` | Неправильный запрос    | `GetV2NmReportDownloadsResponse400` |
-| `401` | Не авторизован         | `object`                            |
-| `403` | Доступ запрещён        | `ErrorObject`                       |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Success           | `NmReportGetReportsResponse`        |
+| `400` | Bad request       | `GetV2NmReportDownloadsResponse400` |
+| `401` | Unauthorized      | `object`                            |
+| `403` | Access denied     | `ErrorObject`                       |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

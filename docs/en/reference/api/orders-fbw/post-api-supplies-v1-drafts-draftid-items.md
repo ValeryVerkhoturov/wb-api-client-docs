@@ -1,38 +1,38 @@
 ---
-title: "Добавить товары в черновик"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Add Items to Draft"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Добавить товары в черновик
+# Add Items to Draft
 
 ```http
 POST /api/supplies/v1/drafts/{draftId}/items
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Черновики поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/postV1DraftsDraftIdItems)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Supply Drafts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/postV1DraftsDraftIdItems)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод добавляет товары в черновик поставки.
+Adds items to the specified supply draft.
 
-Метод работает по принципу атомарности:
+The method works on the principle of atomicity:
 
-- если все баркоды прошли валидацию успешно, то все товары добавятся в черновик. В ответе вернётся `{"results":[]}`
-- если хотя бы один баркод не прошел валидацию, ни один товар в черновик не добавится. В ответе вернётся список невалидных баркодов
+- if all skus are successfully validated, all items will be added to the draft. The response will return `{"results":[]}`
+- if at least one sku is not validated, no items will be added to the draft. The response will return a list of invalid skus
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит       | Интервал | Всплеск     |
+| Period | Limit       | Interval | Burst       |
 | ------ | ----------- | -------- | ----------- |
-| 1 мин  | 30 запросов | 2 сек    | 10 запросов |
+| 1 min  | 30 requests | 2 s      | 10 requests |
 
 ## Parameters
 
-| Name      | In   | Type     | Req. | Description  |
-| --------- | ---- | -------- | ---- | ------------ |
-| `draftId` | path | `string` | yes  | ID черновика |
+| Name      | In   | Type     | Req. | Description |
+| --------- | ---- | -------- | ---- | ----------- |
+| `draftId` | path | `string` | yes  | Draft ID    |
 
 ## Request body
 
@@ -40,14 +40,14 @@ POST /api/supplies/v1/drafts/{draftId}/items
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `models.DraftAddItemsErrorResponse` |
-| `400` | Неправильный запрос    | `errors.DraftError`                 |
-| `401` | Не авторизован         | `object`                            |
-| `403` | Доступ запрещён        | `object`                            |
-| `404` | Не найдено             | `errors.DraftError`                 |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Success           | `models.DraftAddItemsErrorResponse` |
+| `400` | Bad request       | `errors.DraftError`                 |
+| `401` | Unauthorized      | `object`                            |
+| `403` | Access denied     | `object`                            |
+| `404` | Not found         | `errors.DraftError`                 |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

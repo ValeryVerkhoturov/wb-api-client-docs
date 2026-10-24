@@ -1,46 +1,45 @@
 ---
-title: "Создание карточек товаров"
-description: "Метод создаёт карточки товаров c указанием описаний и характеристик товаров."
+title: "List Items"
+description: "Lists items. You can specify item description and characteristics. How to list an item: 1. Get parent categories list 2. Get the category and get all…"
 ---
 
-# Создание карточек товаров
+# List Items
 
 ```http
 POST /content/v2/cards/upload
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Создание карточек товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listing Items · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
 
-Метод создаёт карточки товаров c указанием описаний и характеристик товаров.
+Lists items. You can specify item description and characteristics.
+How to list an item:
 
-Есть две формы запроса: для создания отдельных и объединённых карточек товаров
+1. Get [parent categories list](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll)
+2. Get [the category and get all subcategories](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll)
+3. Choose [the subcategory and get all available characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId). For `Color`, `Gender`, `Country of origin`, `Season`, `VAT rate`, `HS-code` characteristics use values from [category](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics).
+4. Send the request. If the response is Success (`200`) but the item was not listed, check errors using [failed listing with errors](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList) method.
+   The dimensions of the items can only be specified in `centimeters`, and the weight of packed items must be specified in `kilograms`.
+   With one request you can list maximum 100 individual items or 100 groups of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings, 30 listings (`nmID`) in each. Maximum request size is 10 Mb.
+   Items are listed asynchronously. The process of synchronizing a new listing with services may take up to 30 minutes. During this time, you can't add inventory to warehouses and set prices. In the sandbox, the product card is created immediately, without waiting.
 
-Габариты товаров можно указать только в `сантиметрах`, вес товара с упаковкой — в `килограммах`.
+To add documents to the listing, pass the document data in the `documents` request object.
+To confirm that no documents are required for the item, pass `true` in the `excludeDocuments` parameter.
 
-Создание карточки товара происходит асинхронно. Синхронизация новой карточки с сервисами может занимать до 30 минут. В течение этого времени невозможно добавить остатки на склады и настроить цены.
-В песочнице карточка товара создаётся сразу, без ожидания.
+Document validation is performed asynchronously and can take up to 3 days. When the listing or document is changed, the validation is started again.
+The validation results are displayed in the [listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), the `documents` object:
 
-Одним запросом можно создать максимум 100 отдельных карточек товаров или 100 групп [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров по 30 карточек в каждой. Максимальный размер запроса 10 Мб.
-Если ответ `Успешно` (`200`), но какие-то карточки не создались, проверьте [список несозданных карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList).
+- the result for each document in the `verdict` fields of the `items` object. If `verdict` is not returned in the response, the document validation is not completed yet
+- the final overall result for the listing in the `overallVerdict` field. During the listing validation, not only the results of the document validation are taken into account, but also other data. For example, the data of required labeling codes and information from external registries. If `overallVerdict` is not returned in the response, the listing validation is not completed yet
 
-Чтобы прикрепить документы к карточке товара, передайте данные документов в объекте запроса `documents`.
-Чтобы подтвердить, что для товара не требуются документы, передайте `true` в параметре `excludeDocuments`.
+The types of documents that you can add for the item are specified in [subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId).
 
-Проверка документов выполняется асинхронно и может занимать до 3 дней. При изменении карточки или документа проверка запускается повторно.
-Результаты проверки отображаются в [списке карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), объект `documents`:
+Not all the documents that you can add are required and are being validated. You independently determine which permits are required for the item in accordance with the law.
 
-- результат по каждому документу в полях `verdict` объекта `items`. Если `verdict` не возвращается в ответе — проверка документа ещё не завершена
-- итоговый общий результат по карточке в поле `overallVerdict`. При общей проверке карточки учитываются не только результаты проверки документов, но и другие данные. Например, наличие обязательной маркировки и сведения из внешних реестров. Если `overallVerdict` не возвращается в ответе — проверка карточки ещё не завершена
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-Типы документов, которые вы можете добавить для товара, указаны в [характеристиках предмета](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId).
-
-При этом не все документы, которые вы можете добавить, обязательны и проходят проверку — вы самостоятельно определяете, какие разрешительные документы требуются для товара в соответствии с законодательством.
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Период | Лимит       | Интервал | Всплеск    |
+| Period | Limit       | Interval | Burst      |
 | ------ | ----------- | -------- | ---------- |
-| 1 мин  | 10 запросов | 6 сек    | 5 запросов |
+| 1 min  | 10 requests | 6 s      | 5 requests |
 
 ## Request body
 
@@ -48,15 +47,15 @@ POST /content/v2/cards/upload
 
 ## Responses
 
-| Code  | Description                            | Schema                         |
-| ----- | -------------------------------------- | ------------------------------ |
-| `200` | Успешно                                | `responseItemList`             |
-| `400` | Неправильный запрос                    | `responseBodyContentError400`  |
-| `401` | Не авторизован                         | `object`                       |
-| `402` | Требуется платёж                       | `object`                       |
-| `403` | Доступ запрещён                        | `object`                       |
-| `413` | Превышен лимит объёма данных в запросе | `PostV2CardsUploadResponse413` |
-| `429` | Слишком много запросов                 | `object`                       |
+| Code  | Description                                   | Schema                         |
+| ----- | --------------------------------------------- | ------------------------------ |
+| `200` | Success                                       | `responseItemList`             |
+| `400` | Bad request                                   | `responseBodyContentError400`  |
+| `401` | Unauthorized                                  | `object`                       |
+| `402` | Payment required                              | `object`                       |
+| `403` | Access denied                                 | `object`                       |
+| `413` | The request body size exceeds the given limit | `PostV2CardsUploadResponse413` |
+| `429` | Too many requests                             | `object`                       |
 
 ## Call examples
 

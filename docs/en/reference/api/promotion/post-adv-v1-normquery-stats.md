@@ -1,27 +1,27 @@
 ---
-title: "Статистика по поисковым кластерам с детализацией по дням"
-description: "Метод формирует статистику по поисковым кластерам за указанный период с детализацией по дням. Можно использовать для кампаний с моделями оплаты cpm — за показы…"
+title: "Daily Search Clusters Statistics"
+description: "Returns statistics (views, clicks, add-to-cart, orders, CTR, CPC, CPM, etc.) by search clusters for the specified period detailed by day. You can use this…"
 ---
 
-# Статистика по поисковым кластерам с детализацией по дням
+# Daily Search Clusters Statistics
 
 ```http
 POST /adv/v1/normquery/stats
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Статистика · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV1NormqueryStats)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Statistics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV1NormqueryStats)
 
-Метод формирует статистику по поисковым кластерам за указанный период с детализацией по дням.
-Можно использовать для кампаний с моделями оплаты `cpm` — за показы и `cpc` — за клики.
+Returns statistics (views, clicks, add-to-cart, orders, CTR, CPC, CPM, etc.) by search clusters for the specified period detailed by day.
+You can use this method for campaigns with `cpm` — for impressions, and `cpc` — for clicks payment models.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 мин  | 10 запросов | 6 сек    | 20 запросов |
-| Сервисный          | 1 мин  | 10 запросов | 6 сек    | 20 запросов |
-| Базовый с секретом | 1 мин  | 10 запросов | 6 сек    | 20 запросов |
-| Базовый            | 1 ч    | 2 запроса   | 30 мин   | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 min  | 10 requests | 6 s      | 20 requests |
+| Service          | 1 min  | 10 requests | 6 s      | 20 requests |
+| Base with secret | 1 min  | 10 requests | 6 s      | 20 requests |
+| Base             | 1 h    | 2 requests  | 30 min   | 1 request   |
 
 ## Request body
 
@@ -29,13 +29,13 @@ POST /adv/v1/normquery/stats
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `V1GetNormQueryStatsResponse` |
-| `400` | Неправильный запрос    | `response400`                 |
-| `401` | Не авторизован         | `object`                      |
-| `403` | Доступ запрещён        | `object`                      |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `V1GetNormQueryStatsResponse` |
+| `400` | Bad request       | `response400`                 |
+| `401` | Unauthorized      | `object`                      |
+| `403` | Access denied     | `object`                      |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

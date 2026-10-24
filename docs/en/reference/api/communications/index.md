@@ -1,72 +1,66 @@
 ---
-title: "Общение с покупателями"
+title: "Customer Communication"
 description: "Module `communications` has 25 operations."
 ---
 
-# Общение с покупателями · `communications`
+# Customer Communication · `communications`
 
 Module `communications` has 25 operations.
 
-[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication) · [All modules](/en/reference/api/)
+[Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications) · [All modules](/en/reference/api/)
 
-Узнать больше об общении с покупателями можно в [справочном центре](https://seller.wildberries.ru/instructions/category/f7f6c465-dd12-422d-80a0-a6d9562115d5?goBackOption=prevRoute&categoryId=30817062-14cc-4a82-bc78-3600c2b0685b)
+Management of customer inquiries and feedback, chats, and returns processing
 
-С помощью методов общения с покупателями вы можете работать с:
+You can test the customer communication methods in the [sandbox](https://dev.wildberries.ru/en/sandbox). Also you can use [special methods](https://dev.wildberries.ru/en/docs/openapi-other/sandbox-environment#tag/questionsAndFeedbacks) in the sandbox for managing test feedbacks and questions
 
-1. [Вопросами](https://dev.wildberries.ru/openapi/customer-communication#tag/questions) и [отзывами](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks) покупателей
-2. [Закреплёнными отзывами](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks)
-3. [Чатами с покупателями](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat)
-4. [Заявками покупателей на возврат](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns)
-   Вы можете протестировать методы общения с покупателями в [песочнице](https://dev.wildberries.ru/sandbox). Также в песочнице доступны [специальные методы](https://dev.wildberries.ru/docs/openapi-other/sandbox-environment#tag/questionsAndFeedbacks) для управления тестовыми вопросами и отзывами
+You can learn how to use methods in business cases in the [instructions](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-0b26-7620-8d0b-e3050b7cd01d/communicating-with-customers) on working with **Customer Communication** section
 
-Узнать, как использовать методы в бизнес-кейсах, можно в [инструкции](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-0b26-7620-8d0b-e3050b7cd01d/obshchenie-s-pokupateliami) по работе с разделом **Общение с покупателями**
+## Questions
 
-## Вопросы
+| Method  | Path                                 | Operation                                                                                             |
+| ------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `GET`   | `/api/v1/new-feedbacks-questions`    | [Unseen Feedbacks and Questions](/en/reference/api/communications/get-api-v1-new-feedbacks-questions) |
+| `GET`   | `/api/v1/questions/count-unanswered` | [Unanswered Questions](/en/reference/api/communications/get-api-v1-questions-count-unanswered)        |
+| `GET`   | `/api/v1/questions/count`            | [Number of Questions](/en/reference/api/communications/get-api-v1-questions-count)                    |
+| `GET`   | `/api/v1/questions`                  | [Questions List](/en/reference/api/communications/get-api-v1-questions)                               |
+| `PATCH` | `/api/v1/questions`                  | [Working with Questions](/en/reference/api/communications/patch-api-v1-questions)                     |
+| `GET`   | `/api/v1/question`                   | [Get the Question by ID](/en/reference/api/communications/get-api-v1-question)                        |
 
-| Method  | Path                                 | Operation                                                                                               |
-| ------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `GET`   | `/api/v1/new-feedbacks-questions`    | [Непросмотренные отзывы и вопросы](/en/reference/api/communications/get-api-v1-new-feedbacks-questions) |
-| `GET`   | `/api/v1/questions/count-unanswered` | [Неотвеченные вопросы](/en/reference/api/communications/get-api-v1-questions-count-unanswered)          |
-| `GET`   | `/api/v1/questions/count`            | [Количество вопросов](/en/reference/api/communications/get-api-v1-questions-count)                      |
-| `GET`   | `/api/v1/questions`                  | [Список вопросов](/en/reference/api/communications/get-api-v1-questions)                                |
-| `PATCH` | `/api/v1/questions`                  | [Работа с вопросами](/en/reference/api/communications/patch-api-v1-questions)                           |
-| `GET`   | `/api/v1/question`                   | [Получить вопрос по ID](/en/reference/api/communications/get-api-v1-question)                           |
+## Feedbacks
 
-## Отзывы
+| Method  | Path                                 | Operation                                                                                         |
+| ------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `GET`   | `/api/v1/feedbacks/count-unanswered` | [Unanswered Feedbacks](/en/reference/api/communications/get-api-v1-feedbacks-count-unanswered)    |
+| `GET`   | `/api/v1/feedbacks/count`            | [Number of Feedbacks](/en/reference/api/communications/get-api-v1-feedbacks-count)                |
+| `GET`   | `/api/v1/feedbacks`                  | [Feedbacks List](/en/reference/api/communications/get-api-v1-feedbacks)                           |
+| `POST`  | `/api/v1/feedbacks/answer`           | [Reply to Feedback](/en/reference/api/communications/post-api-v1-feedbacks-answer)                |
+| `PATCH` | `/api/v1/feedbacks/answer`           | [Edit Response to Feedback](/en/reference/api/communications/patch-api-v1-feedbacks-answer)       |
+| `POST`  | `/api/v1/feedbacks/order/return`     | [Return Item by Feedback ID](/en/reference/api/communications/post-api-v1-feedbacks-order-return) |
+| `GET`   | `/api/v1/feedback`                   | [Get the Feedback by ID](/en/reference/api/communications/get-api-v1-feedback)                    |
+| `GET`   | `/api/v1/feedbacks/archive`          | [List of Archived Feedbacks](/en/reference/api/communications/get-api-v1-feedbacks-archive)       |
 
-| Method  | Path                                 | Operation                                                                                          |
-| ------- | ------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| `GET`   | `/api/v1/feedbacks/count-unanswered` | [Необработанные отзывы](/en/reference/api/communications/get-api-v1-feedbacks-count-unanswered)    |
-| `GET`   | `/api/v1/feedbacks/count`            | [Количество отзывов](/en/reference/api/communications/get-api-v1-feedbacks-count)                  |
-| `GET`   | `/api/v1/feedbacks`                  | [Список отзывов](/en/reference/api/communications/get-api-v1-feedbacks)                            |
-| `POST`  | `/api/v1/feedbacks/answer`           | [Ответить на отзыв](/en/reference/api/communications/post-api-v1-feedbacks-answer)                 |
-| `PATCH` | `/api/v1/feedbacks/answer`           | [Отредактировать ответ на отзыв](/en/reference/api/communications/patch-api-v1-feedbacks-answer)   |
-| `POST`  | `/api/v1/feedbacks/order/return`     | [Возврат товара по ID отзыва](/en/reference/api/communications/post-api-v1-feedbacks-order-return) |
-| `GET`   | `/api/v1/feedback`                   | [Получить отзыв по ID](/en/reference/api/communications/get-api-v1-feedback)                       |
-| `GET`   | `/api/v1/feedbacks/archive`          | [Список архивных отзывов](/en/reference/api/communications/get-api-v1-feedbacks-archive)           |
+## Pinned Feedbacks
 
-## Закреплённые отзывы
+| Method   | Path                            | Operation                                                                                               |
+| -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `GET`    | `/api/feedbacks/v1/pins`        | [List of Pinned and Unpinned Feedbacks](/en/reference/api/communications/get-api-feedbacks-v1-pins)     |
+| `POST`   | `/api/feedbacks/v1/pins`        | [Pin Feedbacks](/en/reference/api/communications/post-api-feedbacks-v1-pins)                            |
+| `DELETE` | `/api/feedbacks/v1/pins`        | [Unpin Feedback](/en/reference/api/communications/delete-api-feedbacks-v1-pins)                         |
+| `GET`    | `/api/feedbacks/v1/pins/count`  | [Pinned and Unpinned Feedback Number](/en/reference/api/communications/get-api-feedbacks-v1-pins-count) |
+| `GET`    | `/api/feedbacks/v1/pins/limits` | [Pinned Feedback Limits](/en/reference/api/communications/get-api-feedbacks-v1-pins-limits)             |
 
-| Method   | Path                            | Operation                                                                                                          |
-| -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `GET`    | `/api/feedbacks/v1/pins`        | [Список закреплённых и откреплённых отзывов](/en/reference/api/communications/get-api-feedbacks-v1-pins)           |
-| `POST`   | `/api/feedbacks/v1/pins`        | [Закрепить отзывы](/en/reference/api/communications/post-api-feedbacks-v1-pins)                                    |
-| `DELETE` | `/api/feedbacks/v1/pins`        | [Открепить отзывы](/en/reference/api/communications/delete-api-feedbacks-v1-pins)                                  |
-| `GET`    | `/api/feedbacks/v1/pins/count`  | [Количество закреплённых и откреплённых отзывов](/en/reference/api/communications/get-api-feedbacks-v1-pins-count) |
-| `GET`    | `/api/feedbacks/v1/pins/limits` | [Лимиты закреплённых отзывов](/en/reference/api/communications/get-api-feedbacks-v1-pins-limits)                   |
+## Buyers Chat
 
-## Чат с покупателями
+| Method | Path                           | Operation                                                                                   |
+| ------ | ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `GET`  | `/api/v1/seller/chats`         | [Chats List](/en/reference/api/communications/get-api-v1-seller-chats)                      |
+| `GET`  | `/api/v1/seller/events`        | [Chat Events](/en/reference/api/communications/get-api-v1-seller-events)                    |
+| `POST` | `/api/v1/seller/message`       | [Send Message](/en/reference/api/communications/post-api-v1-seller-message)                 |
+| `GET`  | `/api/v1/seller/download/{id}` | [Get File from the Message](/en/reference/api/communications/get-api-v1-seller-download-id) |
 
-| Method | Path                           | Operation                                                                                    |
-| ------ | ------------------------------ | -------------------------------------------------------------------------------------------- |
-| `GET`  | `/api/v1/seller/chats`         | [Список чатов](/en/reference/api/communications/get-api-v1-seller-chats)                     |
-| `GET`  | `/api/v1/seller/events`        | [События чатов](/en/reference/api/communications/get-api-v1-seller-events)                   |
-| `POST` | `/api/v1/seller/message`       | [Отправить сообщение](/en/reference/api/communications/post-api-v1-seller-message)           |
-| `GET`  | `/api/v1/seller/download/{id}` | [Получить файл из сообщения](/en/reference/api/communications/get-api-v1-seller-download-id) |
+## Buyers Returns
 
-## Возвраты покупателями
-
-| Method  | Path             | Operation                                                                           |
-| ------- | ---------------- | ----------------------------------------------------------------------------------- |
-| `GET`   | `/api/v1/claims` | [Заявки покупателей на возврат](/en/reference/api/communications/get-api-v1-claims) |
-| `PATCH` | `/api/v1/claim`  | [Ответ на заявку покупателя](/en/reference/api/communications/patch-api-v1-claim)   |
+| Method  | Path             | Operation                                                                        |
+| ------- | ---------------- | -------------------------------------------------------------------------------- |
+| `GET`   | `/api/v1/claims` | [Buyers Return Applications](/en/reference/api/communications/get-api-v1-claims) |
+| `PATCH` | `/api/v1/claim`  | [Answer Buyers Application](/en/reference/api/communications/patch-api-v1-claim) |

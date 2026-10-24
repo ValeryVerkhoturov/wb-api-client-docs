@@ -1,36 +1,36 @@
 ---
-title: "Создать черновик"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Create Draft"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Создать черновик
+# Create Draft
 
 ```http
 POST /api/supplies/v1/drafts
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Черновики поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/postV1Drafts)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Supply Drafts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/supplyDrafts/operation/postV1Drafts)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод создаёт пустой черновик поставки.
+The method creates empty supply draft.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит       | Интервал | Всплеск     |
+| Period | Limit       | Interval | Burst       |
 | ------ | ----------- | -------- | ----------- |
-| 1 мин  | 30 запросов | 2 сек    | 10 запросов |
+| 1 min  | 30 requests | 2 s      | 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `models.DraftCreateResponse` |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `object`                     |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `models.DraftCreateResponse` |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `object`                     |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

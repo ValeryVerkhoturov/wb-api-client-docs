@@ -1,35 +1,35 @@
 ---
-title: "Количество медиакампаний"
-description: "Метод возвращает количество медиакампаний продавца с группировкой по статусам."
+title: "Media Campaigns Number"
+description: "Method allows you to get the number of the seller media campaigns."
 ---
 
-# Количество медиакампаний
+# Media Campaigns Number
 
 ```http
 GET /adv/v1/count
 ```
 
-**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Медиа · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Count)
+**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Media · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Count)
 
-Метод возвращает количество [медиакампаний](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Advert) продавца с группировкой по статусам.
+Method allows you to get the number of the seller media campaigns.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Service          | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base with secret | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema                  |
-| ----- | ---------------------- | ----------------------- |
-| `200` | Успешно                | `GetV1CountResponse200` |
-| `401` | Не авторизован         | `object`                |
-| `403` | Доступ запрещён        | `object`                |
-| `429` | Слишком много запросов | `object`                |
+| Code  | Description       | Schema                  |
+| ----- | ----------------- | ----------------------- |
+| `200` | Success           | `GetV1CountResponse200` |
+| `401` | Unauthorized      | `object`                |
+| `403` | Access denied     | `object`                |
+| `429` | Too many requests | `object`                |
 
 ## Call examples
 

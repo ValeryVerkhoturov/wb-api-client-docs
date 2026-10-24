@@ -1,27 +1,27 @@
 ---
-title: "Открепить отзывы"
-description: "Метод позволяет открепить отзывы в карточке товара или в группе объединённых карточек. Чтобы получить pinId — ID операций закрепления, используйте метод Список…"
+title: "Unpin Feedback"
+description: "The method allows to unpin the feedback in a group of merged listings or a listing. To get pinId — feedback pinning operation ID, use the List of pinned and…"
 ---
 
-# Открепить отзывы
+# Unpin Feedback
 
 ```http
 DELETE /api/feedbacks/v1/pins
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Закреплённые отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/pinnedFeedbacks/operation/deleteV1Pins)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Pinned Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/pinnedFeedbacks/operation/deleteV1Pins)
 
-Метод позволяет открепить отзывы в карточке товара или в группе [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек.
-Чтобы получить `pinId` — ID операций закрепления, используйте метод [Список закреплённых и откреплённых отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1Pins).
+The method allows to unpin the feedback in a group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings or a listing.
+To get `pinId` — feedback pinning operation ID, use the [List of pinned and unpinned feedback](https://dev.wildberries.ru/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1Pins) method.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Request body
 
@@ -29,14 +29,14 @@ DELETE /api/feedbacks/v1/pins
 
 ## Responses
 
-| Code  | Description            | Schema                    |
-| ----- | ---------------------- | ------------------------- |
-| `200` | Успешно                | `DeleteV1PinsResponse200` |
-| `400` | Неправильный запрос    | `respond.ResultErr`       |
-| `401` | Не авторизован         | `object`                  |
-| `402` | Требуется платёж       | `object`                  |
-| `403` | Доступ запрещён        | `object`                  |
-| `429` | Слишком много запросов | `object`                  |
+| Code  | Description       | Schema                    |
+| ----- | ----------------- | ------------------------- |
+| `200` | Success           | `DeleteV1PinsResponse200` |
+| `400` | Bad request       | `respond.ResultErr`       |
+| `401` | Unauthorized      | `object`                  |
+| `402` | Payment required  | `object`                  |
+| `403` | Access denied     | `object`                  |
+| `429` | Too many requests | `object`                  |
 
 ## Call examples
 

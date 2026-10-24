@@ -1,46 +1,45 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает отчёт о доле бренда продавца в продажах."
+title: "Get Report"
+description: "Returns a report on the brand share in sales. Data can be obtained starting from 1 November 2022, for up to 365 days."
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 GET /api/v1/analytics/brand-share
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Доля бренда в продажах · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/shareOfBrandInSales/operation/getV1AnalyticsBrandShare)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Share of Brand in Sales · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/shareOfBrandInSales/operation/getV1AnalyticsBrandShare)
 
-Метод возвращает отчёт о [доле бренда продавца в продажах](https://seller.wildberries.ru/analytics-reports/brand-share).
+Returns a report on the brand share in sales.
+Data can be obtained starting from 1 November 2022, for up to 365 days.
 
-Можно получить отчёт максимум за 365 дней. Данные доступны с 1 ноября 2022.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 5 сек  | 1 запрос | 5 сек    | 20 запросов |
-| Сервисный          | 5 сек  | 1 запрос | 5 сек    | 20 запросов |
-| Базовый с секретом | 5 сек  | 1 запрос | 5 сек    | 20 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос    |
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 5 s    | 1 request | 5 s      | 20 requests |
+| Service          | 5 s    | 1 request | 5 s      | 20 requests |
+| Base with secret | 5 s    | 1 request | 5 s      | 20 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request   |
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description               |
-| ---------- | ----- | ---------------- | ---- | ------------------------- |
-| `parentId` | query | `integer<int64>` | yes  | ID родительской категории |
-| `brand`    | query | `string`         | yes  | Бренд                     |
+| Name       | In    | Type             | Req. | Description        |
+| ---------- | ----- | ---------------- | ---- | ------------------ |
+| `parentId` | query | `integer<int64>` | yes  | Parent category ID |
+| `brand`    | query | `string`         | yes  | Brand              |
 
 ## Responses
 
-| Code  | Description            | Schema            |
-| ----- | ---------------------- | ----------------- |
-| `200` | Успешно                | `object`          |
-| `400` | Неправильный запрос    | `Http4XXResponse` |
-| `401` | Не авторизован         | `object`          |
-| `402` | Требуется платёж       | `object`          |
-| `403` | Доступ запрещён        | `object`          |
-| `429` | Слишком много запросов | `object`          |
+| Code  | Description       | Schema            |
+| ----- | ----------------- | ----------------- |
+| `200` | Success           | `object`          |
+| `400` | Bad request       | `Http4XXResponse` |
+| `401` | Unauthorized      | `object`          |
+| `402` | Payment required  | `object`          |
+| `403` | Access denied     | `object`          |
+| `429` | Too many requests | `object`          |
 
 ## Call examples
 

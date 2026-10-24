@@ -1,30 +1,30 @@
 ---
-title: "Детализации к отчётам реализации за период"
-description: "Метод возвращает детализации к отчётам реализации за указанный период."
+title: "Details for the Sales Reports by Period"
+description: "The method returns details for the sales reports by specified period."
 ---
 
-# Детализации к отчётам реализации за период
+# Details for the Sales Reports by Period
 
 ```http
 POST /api/finance/v1/sales-reports/detailed
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Финансовые отчёты · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Financial Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed)
 
-Метод возвращает детализации к [отчётам реализации](https://seller.wildberries.ru/suppliers-mutual-settlements) за указанный период.
+The method returns details for the [sales reports](https://seller.wildberries.ru/suppliers-mutual-settlements) by specified period.
 
-Данные доступны с 29 января 2024 года.
+The data is available since January 29, 2024.
 
-Вы можете выгрузить данные в [Google Таблицы](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-650c-7b04-9596-ba441936f9d3)
+You can save the report in [Google Sheets](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-650c-7b04-9596-ba441936f9d3)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый            | 24 ч   | 2 запроса | 12 ч     | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 1 request |
+| Service          | 1 min  | 1 request  | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request  | 1 min    | 1 request |
+| Base             | 24 h   | 2 requests | 12 h     | 1 request |
 
 ## Request body
 
@@ -32,15 +32,15 @@ POST /api/finance/v1/sales-reports/detailed
 
 ## Responses
 
-| Code  | Description            | Schema                                  |
-| ----- | ---------------------- | --------------------------------------- |
-| `200` | Успешно                | `PostV1SalesReportsDetailedResponse200` |
-| `204` | Нет данных             | —                                       |
-| `400` | Неправильный запрос    | `object`                                |
-| `401` | Не авторизован         | `object`                                |
-| `402` | Требуется платёж       | `object`                                |
-| `403` | Доступ запрещён        | `object`                                |
-| `429` | Слишком много запросов | `object`                                |
+| Code  | Description       | Schema                                  |
+| ----- | ----------------- | --------------------------------------- |
+| `200` | Success           | `PostV1SalesReportsDetailedResponse200` |
+| `204` | No data           | —                                       |
+| `400` | Bad request       | `object`                                |
+| `401` | Unauthorized      | `object`                                |
+| `402` | Payment required  | `object`                                |
+| `403` | Access denied     | `object`                                |
+| `429` | Too many requests | `object`                                |
 
 ## Call examples
 

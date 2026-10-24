@@ -1,42 +1,42 @@
 ---
-title: "Удалить пользователя"
-description: "Метод доступен по Персональному токену"
+title: "Delete User"
+description: "Method is available by Personal token"
 ---
 
-# Удалить пользователя
+# Delete User
 
 ```http
 DELETE /api/v1/user
 ```
 
-**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Управление пользователями продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/deleteV1User)
+**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller User Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/deleteV1User)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token
 
-Метод удаляет пользователя из [списка сотрудников продавца](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement/operation/getV1Users). Этому пользователю будет закрыт доступ в профиль продавца.
+The method removes a user from [the seller users list](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement/operation/getV1Users). This user will no longer have access to the seller account.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск     |
-| ------ | -------- | -------- | ----------- |
-| 1 сек  | 1 запрос | 1 сек    | 10 запросов |
+| Period | Limit     | Interval | Burst       |
+| ------ | --------- | -------- | ----------- |
+| 1 s    | 1 request | 1 s      | 10 requests |
 
 ## Parameters
 
-| Name            | In    | Type             | Req. | Description                                   |
-| --------------- | ----- | ---------------- | ---- | --------------------------------------------- |
-| `deletedUserID` | query | `integer<int64>` | yes  | ID пользователя, которому будет закрыт доступ |
+| Name            | In    | Type             | Req. | Description                                 |
+| --------------- | ----- | ---------------- | ---- | ------------------------------------------- |
+| `deletedUserID` | query | `integer<int64>` | yes  | ID of the user whose access will be revoked |
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | —               |
-| `400` | Неправильный запрос    | `errorResponse` |
-| `401` | Не авторизован         | `object`        |
-| `403` | Доступ запрещён        | `Response4XX`   |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | —               |
+| `400` | Bad request       | `errorResponse` |
+| `401` | Unauthorized      | `object`        |
+| `403` | Access denied     | `Response4XX`   |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

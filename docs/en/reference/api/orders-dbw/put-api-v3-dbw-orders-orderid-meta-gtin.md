@@ -1,25 +1,25 @@
 ---
-title: "Закрепить GTIN за сборочным заданием"
-description: "Метод обновляет GTIN, уникальный ID товара в Беларуси, в идентификаторах маркировки сборочного задания. У одного сборочного задания может быть только один…"
+title: "Add GTIN to the Order"
+description: "Sets the GTIN (Belarus item unique identifier) for the assembly order. The assembly order can only have one GTIN. You can add the GTIN only for assembly orders…"
 ---
 
-# Закрепить GTIN за сборочным заданием
+# Add GTIN to the Order
 
 ```http
 PUT /api/v3/dbw/orders/{orderId}/meta/gtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Идентификаторы маркировки DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaGtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaGtin)
 
-Метод обновляет GTIN, уникальный ID товара в Беларуси, в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails). У одного сборочного задания может быть только один GTIN.
-Закрепить GTIN можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) есть поле `gtin`.
+Sets the GTIN (Belarus item unique identifier) for the assembly order. The assembly order can only have one GTIN.
+You can add the GTIN only for assembly orders in the `confirm` status, and if the field `gtin` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) method.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки DBW**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding DBW label identifiers**:
 
-| Период                                                         | Лимит         | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------- | -------- | ----------- |
-| 1 мин                                                          | 1000 запросов | 60 мс    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit         | Interval | Burst       |
+| --------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 min                                                           | 1000 requests | 60 ms    | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -27,16 +27,16 @@ PUT /api/v3/dbw/orders/{orderId}/meta/gtin
 
 ## Responses
 
-| Code  | Description                                  | Schema   |
-| ----- | -------------------------------------------- | -------- |
-| `204` | Обновлено                                    | —        |
-| `400` | Неправильный запрос                          | `Error`  |
-| `401` | Не авторизован                               | `object` |
-| `402` | Требуется платёж                             | `object` |
-| `403` | Доступ запрещён                              | `Error`  |
-| `404` | Не найдено                                   | `Error`  |
-| `409` | Ошибка добавления идентификаторов маркировки | `Error`  |
-| `429` | Слишком много запросов                       | `object` |
+| Code  | Description                    | Schema   |
+| ----- | ------------------------------ | -------- |
+| `204` | Updated                        | —        |
+| `400` | Bad request                    | `Error`  |
+| `401` | Unauthorized                   | `object` |
+| `402` | Payment required               | `object` |
+| `403` | Access denied                  | `Error`  |
+| `404` | The resource is not found      | `Error`  |
+| `409` | Label identifiers update error | `Error`  |
+| `429` | Too many requests              | `object` |
 
 ## Call examples
 

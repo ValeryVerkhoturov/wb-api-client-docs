@@ -1,44 +1,44 @@
 ---
-title: "Получение истории пополнений счёта"
-description: "Метод возвращает историю пополнений счёта \\\\WB Продвижение\\\\ за заданный период."
+title: "Receiving the History of Account Top-ups"
+description: "The method allows you to get a history of top-ups."
 ---
 
-# Получение истории пополнений счёта
+# Receiving the History of Account Top-ups
 
 ```http
 GET /adv/v1/payments
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Payments)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Payments)
 
-Метод возвращает историю пополнений счёта \*\*WB Продвижение\*\* за заданный период.
+The method allows you to get a history of top-ups.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Сервисный          | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 1 s    | 1 request | 1 s      | 5 requests |
+| Service          | 1 s    | 1 request | 1 s      | 5 requests |
+| Base with secret | 1 s    | 1 request | 1 s      | 5 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name   | In    | Type     | Req. | Description                                                     |
-| ------ | ----- | -------- | ---- | --------------------------------------------------------------- |
-| `from` | query | `string` | no   | Начало интервала                                                |
-| `to`   | query | `string` | no   | Конец интервала. (Минимальный интервал 1 день, максимальный 31) |
+| Name   | In    | Type     | Req. | Description                                                 |
+| ------ | ----- | -------- | ---- | ----------------------------------------------------------- |
+| `from` | query | `string` | no   | Beginning of the interval                                   |
+| `to`   | query | `string` | no   | End of interval. (Minimum interval is 1 day, maximum is 31) |
 
 ## Responses
 
-| Code  | Description                         | Schema                     |
-| ----- | ----------------------------------- | -------------------------- |
-| `200` | Успешно                             | `GetV1PaymentsResponse200` |
-| `204` | История пополнений счета не найдена | —                          |
-| `400` | Неправильный запрос                 | `string`                   |
-| `401` | Не авторизован                      | `object`                   |
-| `403` | Доступ запрещён                     | `object`                   |
-| `429` | Слишком много запросов              | `object`                   |
+| Code  | Description                   | Schema                     |
+| ----- | ----------------------------- | -------------------------- |
+| `200` | Success                       | `GetV1PaymentsResponse200` |
+| `204` | Transaction history not found | —                          |
+| `400` | Bad request                   | `string`                   |
+| `401` | Unauthorized                  | `object`                   |
+| `403` | Access denied                 | `object`                   |
+| `429` | Too many requests             | `object`                   |
 
 ## Call examples
 

@@ -1,50 +1,49 @@
 ---
-title: "Получить информацию о завершённых сборочных заданиях"
-description: "Метод возвращает информацию о завершённых сборочных заданиях после продажи или отмены заказа."
+title: "Get Information on Completed Orders"
+description: "The method provides information on completed assembly orders after the sale or cancellation of an order. You can get data for a specified period, maximum of 30…"
 ---
 
-# Получить информацию о завершённых сборочных заданиях
+# Get Information on Completed Orders
 
 ```http
 GET /api/v3/click-collect/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/getV3ClickCollectOrders)
 
-Метод возвращает информацию о завершённых сборочных заданиях после продажи или отмены заказа.
+The method provides information on completed assembly orders after the sale or cancellation of an order.
+You can get data for a specified period, maximum of 30 calendar days per request.
 
-Можно получить данные за заданный период, максимум 30 календарных дней одним запросом.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **In-Store Pickup assembly orders** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий Самовывоз**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                                                                                                                                         |
-| ---------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`    | query | `integer<int64>` | yes  | Количество элементов в ответе                                                                                                                                       |
-| `next`     | query | `integer<int64>` | yes  | Параметр пагинации. Чтобы получить полный список данных, укажите `0` в первом запросе. Чтобы получить следующий пакет данных, используйте значение `next` из ответа |
-| `dateFrom` | query | `integer<int64>` | yes  | Дата начала периода в формате Unix timestamp                                                                                                                        |
-| `dateTo`   | query | `integer<int64>` | yes  | Дата конца периода в формате Unix timestamp                                                                                                                         |
+| Name       | In    | Type             | Req. | Description                                                                                                                                              |
+| ---------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`    | query | `integer<int64>` | yes  | Number of items in the response                                                                                                                          |
+| `next`     | query | `integer<int64>` | yes  | Pagination parameter. To get the full list of data, specify 0 in the first request. To get the next data package, use the `next` value from the response |
+| `dateFrom` | query | `integer<int64>` | yes  | Period start date in the Unix timestamp format                                                                                                           |
+| `dateTo`   | query | `integer<int64>` | yes  | Period end date in the Unix timestamp format                                                                                                             |
 
 ## Responses
 
-| Code  | Description            | Schema       |
-| ----- | ---------------------- | ------------ |
-| `200` | Успешно                | `api.Orders` |
-| `400` | Неправильный запрос    | `Error`      |
-| `401` | Не авторизован         | `object`     |
-| `402` | Требуется платёж       | `object`     |
-| `403` | Доступ запрещён        | `Error`      |
-| `429` | Слишком много запросов | `object`     |
+| Code  | Description       | Schema       |
+| ----- | ----------------- | ------------ |
+| `200` | Success           | `api.Orders` |
+| `400` | Bad request       | `Error`      |
+| `401` | Unauthorized      | `object`     |
+| `402` | Payment required  | `object`     |
+| `403` | Access denied     | `Error`      |
+| `429` | Too many requests | `object`     |
 
 ## Call examples
 

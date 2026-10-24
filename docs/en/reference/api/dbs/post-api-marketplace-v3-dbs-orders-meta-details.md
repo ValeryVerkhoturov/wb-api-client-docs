@@ -1,34 +1,34 @@
 ---
-title: "Получить идентификаторы маркировки сборочных заданий"
-description: "Метод возвращает идентификаторы маркировки сборочных заданий и статусы их проверки."
+title: "Get Assembly Orders Label Identifiers"
+description: "Returns assembly orders label identifiers and their validation statuses."
 ---
 
-# Получить идентификаторы маркировки сборочных заданий
+# Get Assembly Orders Label Identifiers
 
 ```http
 POST /api/marketplace/v3/dbs/orders/meta/details
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails)
 
-Метод возвращает идентификаторы маркировки [сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) и статусы их проверки.
+Returns [assembly orders](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) label identifiers and their validation statuses.
 
-Перечень идентификаторов маркировки, доступных для сборочного задания, можно получить в [списке новых сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew), поле `requiredMeta`. Если поле `requiredMeta` не содержит какой-либо идентификатор маркировки, значит, у сборочного задания не может быть этого идентификатора — и добавить его нельзя.
-Возможные идентификаторы маркировки:
+You can get the list of label identifiers available for the assembly order via the [list of new assembly orders](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew) method, field `requiredMeta`. If the `requiredMeta` field does not contain the label identifier, it means that this label identifier cannot be added to this assembly order.
+Possible label identifiers:
 
 - `imei` — [IMEI](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaImei)
-- `uin` — [УИН](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
+- `uin` — [UIN](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin)
 - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaGtin)
-- `sgtin` — [код маркировки Честного знака](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
-- `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration)
-- `originCountryCode` — [числовой код страны происхождения товара](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration) из [Общероссийского классификатора стран мира](https://esnsi.gosuslugi.ru/classifiers/16269)
+- `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
+- `customsDeclaration` — [customs declaration number](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration)
+- `originCountryCode` — [numeric code of the country of origin](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration) according to [Russian classification of countries of the world](https://esnsi.gosuslugi.ru/classifiers/16269)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **получения и удаления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting DBS label identifiers**:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -36,14 +36,14 @@ POST /api/marketplace/v3/dbs/orders/meta/details
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `api.OrdersMetaDetailsResponse` |
-| `400` | Неправильный запрос    | `api.BatchError`                |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `api.BatchError`                |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `api.OrdersMetaDetailsResponse` |
+| `400` | Bad request       | `api.BatchError`                |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `api.BatchError`                |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

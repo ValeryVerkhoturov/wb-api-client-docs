@@ -1,29 +1,29 @@
 ---
-title: "Получить отчёт"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Get Report"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 POST /api/analytics/v2/item-rating
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Оценка товара · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/itemRating/operation/postV2ItemRating)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Item Rating · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/itemRating/operation/postV2ItemRating)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод формирует набор данных об оценках товаров.
+The method forms a dataset for item rating.
 
-Данные отчёта обновляются 1 раз в час.
+The report data is updated once an hour.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит     | Интервал | Всплеск   |
-| ------ | --------- | -------- | --------- |
-| 1 мин  | 3 запроса | 20 сек   | 3 запроса |
+| Period | Limit      | Interval | Burst      |
+| ------ | ---------- | -------- | ---------- |
+| 1 min  | 3 requests | 20 s     | 3 requests |
 
 ## Request body
 
@@ -31,13 +31,13 @@ POST /api/analytics/v2/item-rating
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `PostV2ItemRatingResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`              |
-| `401` | Не авторизован         | `object`                      |
-| `403` | Доступ запрещён        | `ErrorObject403`              |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `PostV2ItemRatingResponse200` |
+| `400` | Bad request       | `ErrorObject400`              |
+| `401` | Unauthorized      | `object`                      |
+| `403` | Access denied     | `ErrorObject403`              |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

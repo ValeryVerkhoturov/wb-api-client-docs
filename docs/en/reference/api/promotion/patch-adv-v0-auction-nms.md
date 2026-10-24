@@ -1,30 +1,30 @@
 ---
-title: "Изменение списка карточек товаров в кампаниях"
-description: "Метод добавляет и удаляет карточки товаров в кампаниях."
+title: "Changing the Listings in Campaigns"
+description: "The method allows you to add and remove listings in campaigns."
 ---
 
-# Изменение списка карточек товаров в кампаниях
+# Changing the Listings in Campaigns
 
 ```http
 PATCH /adv/v0/auction/nms
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/patchV0AuctionNms)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/patchV0AuctionNms)
 
-Метод добавляет и удаляет карточки товаров в кампаниях.
+The method allows you to add and remove listings in campaigns.
 
-Для кампаний в статусах `4`, `9` и `11`.
+For campaigns in statuses `4`, `9` and `11`.
 
-Для добавляемых товаров устанавливается текущая минимальная ставка.
+The current minimum bid is set for the added items.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Сервисный          | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Базовый с секретом | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 s    | 1 request  | 1 s      | 1 request |
+| Service          | 1 s    | 1 request  | 1 s      | 1 request |
+| Base with secret | 1 s    | 1 request  | 1 s      | 1 request |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request |
 
 ## Request body
 
@@ -32,13 +32,13 @@ PATCH /adv/v0/auction/nms
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `PatchV0AuctionNmsResponse200` |
-| `400` | Неправильный запрос    | `response400`                  |
-| `401` | Не авторизован         | `object`                       |
-| `403` | Доступ запрещён        | `object`                       |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `PatchV0AuctionNmsResponse200` |
+| `400` | Bad request       | `response400`                  |
+| `401` | Unauthorized      | `object`                       |
+| `403` | Access denied     | `object`                       |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

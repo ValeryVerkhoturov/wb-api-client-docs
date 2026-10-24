@@ -1,36 +1,36 @@
 ---
-title: "Неотвеченные вопросы"
-description: "Метод возвращает общее количество неотвеченных вопросов и количество неотвеченных вопросов за сегодня."
+title: "Unanswered Questions"
+description: "The method allows you to get the number of unanswered questions for today and for all time"
 ---
 
-# Неотвеченные вопросы
+# Unanswered Questions
 
 ```http
 GET /api/v1/questions/count-unanswered
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/getV1QuestionsCountUnanswered)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Questions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/questions/operation/getV1QuestionsCountUnanswered)
 
-Метод возвращает общее количество неотвеченных [вопросов](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Questions) и количество неотвеченных вопросов за сегодня.
+The method allows you to get the number of unanswered questions for today and for all time
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                                     |
-| ----- | ---------------------- | ------------------------------------------ |
-| `200` | Успешно                | `GetV1QuestionsCountUnansweredResponse200` |
-| `401` | Не авторизован         | `object`                                   |
-| `402` | Требуется платёж       | `object`                                   |
-| `403` | Доступ запрещён        | `responseFeedbackQuestionErr`              |
-| `429` | Слишком много запросов | `object`                                   |
+| Code  | Description       | Schema                                     |
+| ----- | ----------------- | ------------------------------------------ |
+| `200` | Success           | `GetV1QuestionsCountUnansweredResponse200` |
+| `401` | Unauthorized      | `object`                                   |
+| `402` | Payment required  | `object`                                   |
+| `403` | Access denied     | `responseFeedbackQuestionErr`              |
+| `429` | Too many requests | `object`                                   |
 
 ## Call examples
 

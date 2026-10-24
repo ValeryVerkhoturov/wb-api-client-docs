@@ -1,49 +1,49 @@
 ---
-title: "Количество закреплённых и откреплённых отзывов"
-description: "Метод возвращает количество закреплённых и откреплённых отзывов за заданный период."
+title: "Pinned and Unpinned Feedback Number"
+description: "The method returns the number of pinned and unpinned feedbacks for the period."
 ---
 
-# Количество закреплённых и откреплённых отзывов
+# Pinned and Unpinned Feedback Number
 
 ```http
 GET /api/feedbacks/v1/pins/count
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Закреплённые отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/pinnedFeedbacks/operation/getV1PinsCount)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Pinned Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/pinnedFeedbacks/operation/getV1PinsCount)
 
-Метод возвращает количество закреплённых и откреплённых отзывов за заданный период.
+The method returns the number of pinned and unpinned feedbacks for the period.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name         | In    | Type             | Req. | Description                                                                                                                                                                                                                                                                                                                                      |
-| ------------ | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `state`      | query | `string`         | no   | Закреплён ли отзыв: - `pinned` — да - `unpinned` — нет                                                                                                                                                                                                                                                                                           |
-| `pinOn`      | query | `string`         | no   | Место закрепления отзыва: - `nm` — карточка товара - `imt` — группа [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров                                                                                      |
-| `imtId`      | query | `integer<int64>` | no   | ID для [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров. Един для всех артикулов WB группы объединённых карточек. У каждой карточки товара есть `imtId`, даже если она не объединена с другими карточками |
-| `nmId`       | query | `integer<int64>` | no   | Артикул WB                                                                                                                                                                                                                                                                                                                                       |
-| `feedbackId` | query | `integer<int64>` | no   | ID отзыва                                                                                                                                                                                                                                                                                                                                        |
-| `dateFrom`   | query | `string`         | no   | Дата закрепления первого отзыва в списке                                                                                                                                                                                                                                                                                                         |
-| `dateTo`     | query | `string`         | no   | Дата закрепления последнего отзыва в списке                                                                                                                                                                                                                                                                                                      |
+| Name         | In    | Type             | Req. | Description                                                                                                                                                                                                                                                                                             |
+| ------------ | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `state`      | query | `string`         | no   | If the feedback is pinned: - `pinned` — yes - `unpinned` — no                                                                                                                                                                                                                                           |
+| `pinOn`      | query | `string`         | no   | Feedback pinning placement: - `nm` — listing - `imt` — group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings                                                                         |
+| `imtId`      | query | `integer<int64>` | no   | [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID. The same for all WB item number of group of merged listings. Every listing has `imtId`, even if is not merged with any other listing |
+| `nmId`       | query | `integer<int64>` | no   | WB item number                                                                                                                                                                                                                                                                                          |
+| `feedbackId` | query | `integer<int64>` | no   | Feedback ID                                                                                                                                                                                                                                                                                             |
+| `dateFrom`   | query | `string`         | no   | The date the first feedback in the list was pinned                                                                                                                                                                                                                                                      |
+| `dateTo`     | query | `string`         | no   | The date the last feedback in the list was pinned                                                                                                                                                                                                                                                       |
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `GetV1PinsCountResponse200` |
-| `400` | Неправильный запрос    | `respond.ResultErr`         |
-| `401` | Не авторизован         | `object`                    |
-| `402` | Требуется платёж       | `object`                    |
-| `403` | Доступ запрещён        | `object`                    |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `GetV1PinsCountResponse200` |
+| `400` | Bad request       | `respond.ResultErr`         |
+| `401` | Unauthorized      | `object`                    |
+| `402` | Payment required  | `object`                    |
+| `403` | Access denied     | `object`                    |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

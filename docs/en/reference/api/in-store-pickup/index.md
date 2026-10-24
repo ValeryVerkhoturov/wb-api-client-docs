@@ -1,42 +1,42 @@
 ---
-title: "Самовывоз"
+title: "In-Store Pickup"
 description: "Module `in-store-pickup` has 18 operations."
 ---
 
-# Самовывоз · `in-store-pickup`
+# In-Store Pickup · `in-store-pickup`
 
 Module `in-store-pickup` has 18 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup) · [All modules](/en/reference/api/)
 
-Управление [сборочными заданиями](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) и [идентификаторами маркировки](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers) Самовывоза.
+Management of [assembly orders](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) and [order label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers) for the In-Store Pickup scheme.
 
-Вы можете протестировать методы Самовывоза в [песочнице](https://dev.wildberries.ru/sandbox). Также в песочнице доступны [специальные методы](https://dev.wildberries.ru/docs/openapi-other/sandbox-environment#tag/marketplaceInStorePickup) для эмуляции действий пользователя
+You can test the In-Store Pickup methods in the [sandbox](https://dev.wildberries.ru/en/sandbox). Also you can use [special methods](https://dev.wildberries.ru/en/docs/openapi-other/sandbox-environment#tag/marketplaceInStorePickup) in the sandbox for emulating user actions
 
-## Сборочные задания Самовывоз
+## In-Store Pickup Assembly Orders
 
-| Method | Path                                                      | Operation                                                                                                                                        |
-| ------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `GET`  | `/api/v3/click-collect/orders/new`                        | [Получить список новых сборочных заданий](/en/reference/api/in-store-pickup/get-api-v3-click-collect-orders-new)                                 |
-| `GET`  | `/api/v3/click-collect/orders`                            | [Получить информацию о завершённых сборочных заданиях](/en/reference/api/in-store-pickup/get-api-v3-click-collect-orders)                        |
-| `POST` | `/api/marketplace/v3/click-collect/orders/final-price`    | [Получить цены продавца и суммы к оплате](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-final-price)            |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/confirm` | [Перевести сборочные задания на сборку](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-confirm)           |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/prepare` | [Сообщить, что сборочные задания готовы к выдаче](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-prepare) |
-| `POST` | `/api/v3/click-collect/orders/client`                     | [Информация о покупателе](/en/reference/api/in-store-pickup/post-api-v3-click-collect-orders-client)                                             |
-| `POST` | `/api/v3/click-collect/orders/client/identity`            | [Проверить, что заказ принадлежит покупателю](/en/reference/api/in-store-pickup/post-api-v3-click-collect-orders-client-identity)                |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/receive` | [Сообщить, что заказы приняты покупателями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-receive)       |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/reject`  | [Сообщить об отказе от заказов](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-reject)                    |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/info`    | [Получить статусы сборочных заданий](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-info)                 |
-| `POST` | `/api/marketplace/v3/click-collect/orders/status/cancel`  | [Отменить сборочные задания](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-cancel)                       |
+| Method | Path                                                      | Operation                                                                                                                                             |
+| ------ | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET`  | `/api/v3/click-collect/orders/new`                        | [Get New Assembly Orders List](/en/reference/api/in-store-pickup/get-api-v3-click-collect-orders-new)                                                 |
+| `GET`  | `/api/v3/click-collect/orders`                            | [Get Information on Completed Orders](/en/reference/api/in-store-pickup/get-api-v3-click-collect-orders)                                              |
+| `POST` | `/api/marketplace/v3/click-collect/orders/final-price`    | [Get seller prices and amounts charged to the buyer](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-final-price)      |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/confirm` | [Transfer to Assembly](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-confirm)                                 |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/prepare` | [Notify That the Assembly Orders Are Ready for Pickup](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-prepare) |
+| `POST` | `/api/v3/click-collect/orders/client`                     | [Buyer Information](/en/reference/api/in-store-pickup/post-api-v3-click-collect-orders-client)                                                        |
+| `POST` | `/api/v3/click-collect/orders/client/identity`            | [Check If the Order Belongs to the Buyer](/en/reference/api/in-store-pickup/post-api-v3-click-collect-orders-client-identity)                         |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/receive` | [Notify That the Orders Were Received by the Buyers](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-receive)   |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/reject`  | [Notify that the Orders Are Declined](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-reject)                   |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/info`    | [Get Assembly Order Statuses](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-info)                             |
+| `POST` | `/api/marketplace/v3/click-collect/orders/status/cancel`  | [Cancel the Assembly Orders](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-status-cancel)                            |
 
-## Идентификаторы маркировки Самовывоз
+## In-Store Pickup Label Identifiers
 
-| Method | Path                                                                | Operation                                                                                                                                                     |
-| ------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/details`             | [Получить идентификаторы маркировки сборочных заданий](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-details)           |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/delete`              | [Удалить идентификаторы маркировки сборочных заданий](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-delete)             |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/sgtin`               | [Закрепить коды маркировки Честного знака за сборочными заданиями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-sgtin) |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/uin`                 | [Закрепить УИН за сборочными заданиями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-uin)                              |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/imei`                | [Закрепить IMEI за сборочными заданиями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-imei)                            |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/gtin`                | [Закрепить GTIN за сборочными заданиями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-gtin)                            |
-| `POST` | `/api/marketplace/v3/click-collect/orders/meta/customs-declaration` | [Закрепить номера ДТ за сборочными заданиями](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-customs-declaration)        |
+| Method | Path                                                                | Operation                                                                                                                                                          |
+| ------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/details`             | [Get Assembly Orders Label Identifiers](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-details)                               |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/delete`              | [Delete Assembly Order Label Identifiers](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-delete)                              |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/sgtin`               | [Add Labeling codes Chestny ZNAK to the Assembly Orders (Chestny ZNAK)](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-sgtin) |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/uin`                 | [Add UIN (Unique Identification Numbers) to the Assembly Orders](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-uin)          |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/imei`                | [Add IMEI to the Assembly Orders](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-imei)                                        |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/gtin`                | [Add GTIN to the Assembly Orders](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-gtin)                                        |
+| `POST` | `/api/marketplace/v3/click-collect/orders/meta/customs-declaration` | [Add Customs Declaration Numbers to the Orders](/en/reference/api/in-store-pickup/post-api-marketplace-v3-click-collect-orders-meta-customs-declaration)           |

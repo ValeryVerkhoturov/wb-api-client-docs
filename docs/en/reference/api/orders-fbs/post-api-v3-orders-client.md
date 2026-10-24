@@ -1,29 +1,29 @@
 ---
-title: "Заказы с информацией по клиенту"
-description: "Метод позволяет получать информацию о покупателе по ID сборочного задания. Только для трансграничных поставок из \\\\Турции\\\\."
+title: "Orders with Client Information"
+description: "The method allows getting information about the client by assembly order ID. Only for Cross-Border orders from \\\\Turkey\\\\"
 ---
 
-# Заказы с информацией по клиенту
+# Orders with Client Information
 
 ```http
 POST /api/v3/orders/client
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersClient)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersClient)
 
-Метод позволяет получать информацию о покупателе по ID сборочного задания.
-Только для трансграничных поставок из \*\*Турции\*\*.
+The method allows getting information about the client by assembly order ID.
+Only for Cross-Border orders from \*\*Turkey\*\*
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -31,15 +31,15 @@ POST /api/v3/orders/client
 
 ## Responses
 
-| Code  | Description            | Schema                            |
-| ----- | ---------------------- | --------------------------------- |
-| `200` | Успешно                | `CrossborderTurkeyClientInfoResp` |
-| `400` | Неправильный запрос    | `Error`                           |
-| `401` | Не авторизован         | `object`                          |
-| `402` | Требуется платёж       | `object`                          |
-| `403` | Доступ запрещён        | `Error`                           |
-| `404` | Не найдено             | `Error`                           |
-| `429` | Слишком много запросов | `object`                          |
+| Code  | Description       | Schema                            |
+| ----- | ----------------- | --------------------------------- |
+| `200` | Success           | `CrossborderTurkeyClientInfoResp` |
+| `400` | Bad request       | `Error`                           |
+| `401` | Unauthorized      | `object`                          |
+| `402` | Payment required  | `object`                          |
+| `403` | Access denied     | `Error`                           |
+| `404` | Not found         | `Error`                           |
+| `429` | Too many requests | `object`                          |
 
 ## Call examples
 

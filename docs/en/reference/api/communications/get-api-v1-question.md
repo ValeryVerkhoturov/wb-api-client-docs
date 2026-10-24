@@ -1,43 +1,43 @@
 ---
-title: "Получить вопрос по ID"
-description: "Метод возвращает данные вопроса по его ID. Далее вы можете работать с этим вопросом."
+title: "Get the Question by ID"
+description: "The method allows you to get a question by its ID"
 ---
 
-# Получить вопрос по ID
+# Get the Question by ID
 
 ```http
 GET /api/v1/question
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/getV1Question)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Questions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/questions/operation/getV1Question)
 
-Метод возвращает данные [вопроса](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Questions) по его ID. Далее вы можете [работать с этим вопросом](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/patchV1Questions).
+The method allows you to get a question by its ID
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
 | Name | In    | Type     | Req. | Description |
 | ---- | ----- | -------- | ---- | ----------- |
-| `id` | query | `string` | yes  | ID вопроса  |
+| `id` | query | `string` | yes  | Question ID |
 
 ## Responses
 
 | Code  | Description                         | Schema                        |
 | ----- | ----------------------------------- | ----------------------------- |
-| `200` | Успешно                             | `GetV1QuestionResponse200`    |
-| `401` | Не авторизован                      | `object`                      |
-| `402` | Требуется платёж                    | `object`                      |
-| `403` | Доступ запрещён                     | `responseFeedbackQuestionErr` |
-| `422` | Ошибка обработки параметров запроса | `responseFeedbackQuestionErr` |
-| `429` | Слишком много запросов              | `object`                      |
+| `200` | Success                             | `GetV1QuestionResponse200`    |
+| `401` | Unauthorized                        | `object`                      |
+| `402` | Payment required                    | `object`                      |
+| `403` | Access denied                       | `responseFeedbackQuestionErr` |
+| `422` | Error processing request parameters | `responseFeedbackQuestionErr` |
+| `429` | Too many requests                   | `object`                      |
 
 ## Call examples
 

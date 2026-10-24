@@ -1,54 +1,54 @@
 ---
-title: "Список предметов"
-description: "Метод возвращает список названий родительских категорий предметов и их предметов с ID. Например, у категории Игрушки будут предметы Калейдоскопы, Куклы, Мячики."
+title: "Subcategories List"
+description: "Returns the list of all available subcategories, parent categories and their IDs"
 ---
 
-# Список предметов
+# Subcategories List
 
 ```http
 GET /content/v2/object/all
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Категории, предметы и характеристики · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Categories, Subcategories, and Characteristics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll)
 
-Метод возвращает список названий [родительских категорий предметов](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectParentAll) и их предметов с ID. Например, у категории `Игрушки` будут предметы `Калейдоскопы`, `Куклы`, `Мячики`.
+Returns the list of all available subcategories, parent categories and their IDs
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-| Период               | Лимит        | Интервал | Всплеск    |
-| -------------------- | ------------ | -------- | ---------- |
-| 1 мин                | 100 запросов | 600 мс   | 5 запросов |
-| Исключение — методы: |
+| Period                      | Limit        | Interval | Burst      |
+| --------------------------- | ------------ | -------- | ---------- |
+| 1 min                       | 100 requests | 600 ms   | 5 requests |
+| Exceptions are the methods: |
 
-- [создания карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
-- [создания карточек товаров с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
-- [редактирования карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
-- [восстановления карточек товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
-- [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
-- [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                                                                                                                                   |
-| ---------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `locale`   | query | `string`         | no   | Язык полей ответа: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
-| `name`     | query | `string`         | no   | Поиск по названию предмета (Носки), поиск работает по подстроке, искать можно на любом из поддерживаемых языков                                               |
-| `limit`    | query | `integer<int64>` | no   | Количество предметов, максимум 1000                                                                                                                           |
-| `offset`   | query | `integer<int64>` | no   | Сколько элементов пропустить. Например, для значения `10` ответ начнется с 11 элемента                                                                        |
-| `parentID` | query | `integer<int64>` | no   | ID родительской категории предмета                                                                                                                            |
+| Name       | In    | Type             | Req. | Description                                                                                                                                                         |
+| ---------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locale`   | query | `string`         | no   | Language for response of the `name` field: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
+| `name`     | query | `string`         | no   | Search by item name (Socks), the search works by substring and can be conducted in any of the supported languages                                                   |
+| `limit`    | query | `integer<int64>` | no   | Number of search results, maximum 1,000                                                                                                                             |
+| `offset`   | query | `integer<int64>` | no   | How many results to skip. For example, with value `10`, the response will start with the 11 element                                                                 |
+| `parentID` | query | `integer<int64>` | no   | Subcategory parent category ID                                                                                                                                      |
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `GetV2ObjectAllResponse200` |
-| `401` | Не авторизован         | `object`                    |
-| `403` | Доступ запрещён        | `object`                    |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `GetV2ObjectAllResponse200` |
+| `401` | Unauthorized      | `object`                    |
+| `403` | Access denied     | `object`                    |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

@@ -1,37 +1,37 @@
 ---
-title: "Детальная информация об акциях"
-description: "Метод возвращает подробную информацию об акции по ID."
+title: "Promos Details"
+description: "Returns detailed information about the selected promos"
 ---
 
-# Детальная информация об акциях
+# Promos Details
 
 ```http
 GET /api/v1/calendar/promotions/details
 ```
 
-**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Календарь акций · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails)
+**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Promo Calendar · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails)
 
-Метод возвращает подробную информацию об [акции](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails) по ID.
+Returns detailed information about the selected promos
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Календарь акций**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Promo Calendar** category:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `200` | Успешно                | `object` |
-| `400` | Неправильный запрос    | `object` |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `object` |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `200` | Success           | `object` |
+| `400` | Bad request       | `object` |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `object` |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

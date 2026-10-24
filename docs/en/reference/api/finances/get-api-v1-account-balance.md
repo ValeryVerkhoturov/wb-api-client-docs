@@ -1,36 +1,36 @@
 ---
-title: "Получить баланс продавца"
-description: "Метод возвращает данные виджета баланса на главной странице портала продавцов."
+title: "Get Seller Balance"
+description: "Balance widget data on the main page of the sellers portal."
 ---
 
-# Получить баланс продавца
+# Get Seller Balance
 
 ```http
 GET /api/v1/account/balance
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Баланс · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/balance/operation/getV1AccountBalance)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Balance · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/balance/operation/getV1AccountBalance)
 
-Метод возвращает данные виджета баланса на [главной странице](https://seller.wildberries.ru) портала продавцов.
+Balance widget data on [the main page](https://seller.wildberries.ru) of the sellers portal.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск  |
-| ------------------ | ------ | -------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос |
+| Type             | Period | Limit     | Interval | Burst     |
+| ---------------- | ------ | --------- | -------- | --------- |
+| Personal         | 1 min  | 1 request | 1 min    | 1 request |
+| Service          | 1 min  | 1 request | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request | 1 min    | 1 request |
+| Base             | 24 h   | 1 request | 24 h     | 1 request |
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV1AccountBalanceResponse200` |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `object`                         |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `GetV1AccountBalanceResponse200` |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `object`                         |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

@@ -1,46 +1,44 @@
 ---
-title: "Создать отчёт"
-description: "Метод создаёт задание на генерацию отчёта о платном хранении."
+title: "Generate the Report"
+description: "Create a task to generate a report. Maximum of report period — 8 days"
 ---
 
-# Создать отчёт
+# Generate the Report
 
 ```http
 GET /api/v1/paid_storage
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Платное хранение · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/paidStorage/operation/getV1PaidStorage)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Paid Storage · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/paidStorage/operation/getV1PaidStorage)
 
-Метод создаёт [задание на генерацию](https://dev.wildberries.ru/openapi/reports#tag/paidStorage/operation/getV1PaidStorageTasksTaskIdStatus) отчёта о [платном хранении](https://dev.wildberries.ru/openapi/reports#tag/paidStorage/operation/getV1PaidStorageTasksTaskIdDownload).
+Create a task to generate a report. Maximum of report period — 8 days
 
-Можно получить отчёт максимум за 8 дней.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 5 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 5 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 1 min  | 1 request | 1 min    | 5 requests |
+| Service          | 1 min  | 1 request | 1 min    | 5 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 5 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name       | In    | Type     | Req. | Description                                                                                                                                                                                 |
-| ---------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dateFrom` | query | `string` | yes  | Начало отчётного периода в формате RFC3339. Можно передать дату или дату со временем. Примеры: * `2019-06-20` * `2019-06-20T23:59:59` * `2019-06-20T00:00:00.12345` * `2017-03-25T00:00:00` |
-| `dateTo`   | query | `string` | yes  | Конец отчётного периода в формате RFC3339. Можно передать дату или дату со временем. Примеры: * `2019-06-20` * `2019-06-20T23:59:59` * `2019-06-20T00:00:00.12345` * `2017-03-25T00:00:00`  |
+| Name       | In    | Type     | Req. | Description                                                                                                                                                                  |
+| ---------- | ----- | -------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string` | yes  | Start of the report period, RFC3339 format. Date or date and time, for example: * `2019-06-20` * `2019-06-20T23:59:59` * `2019-06-20T00:00:00.12345` * `2017-03-25T00:00:00` |
+| `dateTo`   | query | `string` | yes  | End of the report period, RFC3339 format. Date or date and time, for example: * `2019-06-20` * `2019-06-20T23:59:59` * `2019-06-20T00:00:00.12345` * `2017-03-25T00:00:00`   |
 
 ## Responses
 
-| Code  | Description            | Schema               |
-| ----- | ---------------------- | -------------------- |
-| `200` | Успешно                | `CreateTaskResponse` |
-| `400` | Неправильный запрос    | `Http4XXResponse`    |
-| `401` | Не авторизован         | `object`             |
-| `402` | Требуется платёж       | `object`             |
-| `403` | Доступ запрещён        | `object`             |
-| `429` | Слишком много запросов | `object`             |
+| Code  | Description       | Schema               |
+| ----- | ----------------- | -------------------- |
+| `200` | Success           | `CreateTaskResponse` |
+| `400` | Bad request       | `Http4XXResponse`    |
+| `401` | Unauthorized      | `object`             |
+| `402` | Payment required  | `object`             |
+| `403` | Access denied     | `object`             |
+| `429` | Too many requests | `object`             |
 
 ## Call examples
 

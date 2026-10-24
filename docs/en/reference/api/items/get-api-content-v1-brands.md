@@ -1,44 +1,44 @@
 ---
-title: "Бренды"
-description: "Метод возвращает список брендов по ID предмета."
+title: "Brands"
+description: "The method returns list of brands by subcategory ID."
 ---
 
-# Бренды
+# Brands
 
 ```http
 GET /api/content/v1/brands
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Категории, предметы и характеристики · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV1Brands)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Categories, Subcategories, and Characteristics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV1Brands)
 
-Метод возвращает список брендов по ID предмета.
+The method returns list of brands by subcategory ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Сервисный          | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 сек  | 1 запрос | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 1 s    | 1 request | 1 s      | 5 requests |
+| Service          | 1 s    | 1 request | 1 s      | 5 requests |
+| Base with secret | 1 s    | 1 request | 1 s      | 5 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name        | In    | Type             | Req. | Description                                                                                      |
-| ----------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------ |
-| `subjectId` | query | `integer<int64>` | yes  | ID предмета                                                                                      |
-| `next`      | query | `integer<int64>` | no   | Параметр пагинации. Используйте значение `next` из ответа, чтобы получить следующий пакет данных |
+| Name        | In    | Type             | Req. | Description                                                                             |
+| ----------- | ----- | ---------------- | ---- | --------------------------------------------------------------------------------------- |
+| `subjectId` | query | `integer<int64>` | yes  | Subcategory ID                                                                          |
+| `next`      | query | `integer<int64>` | no   | Pagination parameter. Use the `next` value from the response to get the next data batch |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `BrandsResponse`      |
-| `400` | Неправильный запрос    | `BrandsResponseError` |
-| `401` | Не авторизован         | `object`              |
-| `403` | Доступ запрещён        | `object`              |
-| `404` | Не найдено             | `BrandsResponseError` |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `BrandsResponse`      |
+| `400` | Bad request       | `BrandsResponseError` |
+| `401` | Unauthorized      | `object`              |
+| `403` | Access denied     | `object`              |
+| `404` | Not found         | `BrandsResponseError` |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

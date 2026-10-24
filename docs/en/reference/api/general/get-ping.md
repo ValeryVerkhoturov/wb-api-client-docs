@@ -1,42 +1,42 @@
 ---
-title: "Проверка подключения"
-description: "Метод проверяет: 1. Успешно ли запрос доходит до WB API 2. Валидность токена авторизации и URL запроса 3. Совпадают ли категория токена и сервис"
+title: "Connection Check"
+description: "Checks: 1. Whether the request successfully reaches the WB API. 2. The validity of the authorization token and request URL. 3. Whether the token category…"
 ---
 
-# Проверка подключения
+# Connection Check
 
 ```http
 GET /ping
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Проверка подключения к WB API · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/connectionCheck/operation/getPing)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** WB API Connection Check · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/connectionCheck/operation/getPing)
 
-Метод проверяет:
+Checks:
 
-1. Успешно ли запрос доходит до WB API
-2. Валидность токена авторизации и URL запроса
-3. Совпадают ли категория токена и сервис
+1. Whether the request successfully reaches the WB API.
+2. The validity of the authorization token and request URL.
+3. Whether the token category matches the service.
 
-Метод не предназначен для проверки доступности сервисов WB
+This method is not intended to check the availability of WB services
 
-У каждого сервиса есть свой вариант метода в зависимости от домена.
+Each service has its own version of the method depending on the domain.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит     | Интервал | Всплеск     |
-| ------ | --------- | -------- | ----------- |
-| 30 сек | 3 запроса | 10 сек   | 99 запросов |
+| Period | Limit      | Interval | Burst       |
+| ------ | ---------- | -------- | ----------- |
+| 30 s   | 3 requests | 10 s     | 99 requests |
 
-Лимит действует отдельно для каждого варианта метода в зависимости от домена
+The rate limit applies individually to each instance of the method on each host
 
 ## Responses
 
-| Code  | Description            | Schema               |
-| ----- | ---------------------- | -------------------- |
-| `200` | Успешно                | `GetPingResponse200` |
-| `401` | Не авторизован         | `object`             |
-| `403` | Доступ запрещён        | `object`             |
-| `429` | Слишком много запросов | `object`             |
+| Code  | Description       | Schema               |
+| ----- | ----------------- | -------------------- |
+| `200` | Success           | `GetPingResponse200` |
+| `401` | Unauthorized      | `object`             |
+| `403` | Access denied     | `object`             |
+| `429` | Too many requests | `object`             |
 
 ## Call examples
 

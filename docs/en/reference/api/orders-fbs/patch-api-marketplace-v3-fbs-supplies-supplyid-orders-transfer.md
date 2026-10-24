@@ -1,32 +1,32 @@
 ---
-title: "Перевести сборочные задания из доставки на сборку"
-description: "Метод переводит сборочные задания из статуса complete — в доставке в статус confirm — на сборке."
+title: "Transfer Orders From Supply To Assembly"
+description: "The method transfers assembly orders from the complete status — in delivery to the confirm status — in assembly."
 ---
 
-# Перевести сборочные задания из доставки на сборку
+# Transfer Orders From Supply To Assembly
 
 ```http
 PATCH /api/marketplace/v3/fbs/supplies/{supplyId}/orders/transfer
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer)
 
-Метод переводит сборочные задания из статуса `complete` — в доставке в статус `confirm` — на сборке.
+The method transfers assembly orders from the `complete` status — in delivery to the `confirm` status — in assembly.
 
-Используйте метод, чтобы переместить сборочное задание из закрытой поставки в открытую.
+Use the method to moved an assembly order from a closed supply to an open one.
 
-Сборочное задание можно перевести из доставки на сборку, если выполнены все условия:
+An assembly order can be moved from delivery to assembly if all conditions are met:
 
-- сборочное задание находится в статусе `complete` — в доставке
-- поставка, в которую нужно перенести сборочное задание, [не передана в доставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)
-- сборочное задание ранее не переносили из доставки на сборку
-  Чтобы проверить, можно ли перевести сборочное задание из доставки на сборку, используйте [статусы сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus), поле `isTransferable`.
+- the assembly order is in the `complete` status — in delivery
+- the supply to which the assembly order needs to be moved [is not transferred to delivery](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)
+- the assembly order has not previously been moved from delivery to assembly
+  To check whether an assembly order can be transferred from delivery to assembly, use the [assembly order statuses](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus), the isTransferable field.
 
 ## Parameters
 
-| Name       | In   | Type     | Req. | Description                                     |
-| ---------- | ---- | -------- | ---- | ----------------------------------------------- |
-| `supplyId` | path | `string` | yes  | ID поставки, из которой будут перемещены заказы |
+| Name       | In   | Type     | Req. | Description                                      |
+| ---------- | ---- | -------- | ---- | ------------------------------------------------ |
+| `supplyId` | path | `string` | yes  | ID of the supply from which orders will be moved |
 
 ## Request body
 
@@ -34,12 +34,12 @@ PATCH /api/marketplace/v3/fbs/supplies/{supplyId}/orders/transfer
 
 ## Responses
 
-| Code  | Description         | Schema                                |
-| ----- | ------------------- | ------------------------------------- |
-| `200` | Успешно             | `v3.TransferOrdersToAssemblyResponse` |
-| `400` | Неправильный запрос | `Error`                               |
-| `401` | Не авторизован      | `object`                              |
-| `403` | Доступ запрещён     | `Error`                               |
+| Code  | Description   | Schema                                |
+| ----- | ------------- | ------------------------------------- |
+| `200` | Success       | `v3.TransferOrdersToAssemblyResponse` |
+| `400` | Bad request   | `Error`                               |
+| `401` | Unauthorized  | `object`                              |
+| `403` | Access denied | `Error`                               |
 
 ## Call examples
 

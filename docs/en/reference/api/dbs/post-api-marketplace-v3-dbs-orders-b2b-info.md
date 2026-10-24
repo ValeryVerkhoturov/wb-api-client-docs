@@ -1,28 +1,28 @@
 ---
-title: "Информация о покупателе B2B"
-description: "Метод возвращает данные B2B-покупателей по ID сборочных заданий: - ИНН - КПП - Наименование организации"
+title: "B2B Buyer Information"
+description: "The method returns B2B buyers data by assembly orders ID: - Taxpayer Identification Number (TIN or INN in Russian) - Code of Reason for Registration (CRR or…"
 ---
 
-# Информация о покупателе B2B
+# B2B Buyer Information
 
 ```http
 POST /api/marketplace/v3/dbs/orders/b2b/info
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersB2bInfo)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersB2bInfo)
 
-Метод возвращает данные B2B-покупателей по ID сборочных заданий:
+The method returns B2B buyers data by assembly orders ID:
 
-- ИНН
-- КПП
-- Наименование организации
+- Taxpayer Identification Number (TIN or INN in Russian)
+- Code of Reason for Registration (CRR or KPP in Russian)
+- Company name
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
+[Request limit](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **DBS assembly orders** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -30,14 +30,14 @@ POST /api/marketplace/v3/dbs/orders/b2b/info
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `api.B2bClientInfoResponses` |
-| `400` | Неправильный запрос    | `api.BatchError`             |
-| `401` | Не авторизован         | `object`                     |
-| `402` | Требуется платёж       | `object`                     |
-| `403` | Доступ запрещён        | `api.BatchError`             |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `api.B2bClientInfoResponses` |
+| `400` | Bad request       | `api.BatchError`             |
+| `401` | Unauthorized      | `object`                     |
+| `402` | Payment required  | `object`                     |
+| `403` | Access denied     | `api.BatchError`             |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

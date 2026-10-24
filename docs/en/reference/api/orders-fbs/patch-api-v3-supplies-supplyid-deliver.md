@@ -1,51 +1,49 @@
 ---
-title: "Передать поставку в доставку"
-description: "Метод закрывает поставку и переводит все сборочные задания в ней в статус complete — в доставке. После закрытия поставки добавить новые сборочные задания к ней…"
+title: "Move the Supply to the Delivery"
+description: "Closes the supply and moves all assembly orders to complete (In Delivery) status. You cannot add any assembly orders to the supply after it is closed. If the…"
 ---
 
-# Передать поставку в доставку
+# Move the Supply to the Delivery
 
 ```http
 PATCH /api/v3/supplies/{supplyId}/deliver
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)
 
-Метод закрывает [поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId) и переводит все [сборочные задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) в ней в [статус](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `complete` — в доставке. После закрытия поставки добавить новые сборочные задания к ней нельзя.
+Closes the supply and moves all assembly orders to `complete` (`In Delivery`) status. You cannot add any assembly orders to the supply after it is closed.
+If the supply wasn't handed over for delivery, than scanning its QR code or accepting the first item will automatically close the supply.
+You can transfer the supply to delivery only if:
 
-Если поставка не была передана в доставку, то при приёмке первого товара поставка автоматически закроется.
+- there is at least one assembly order
+- required labeling is specified for all assembly orders
+- labeling of all assembly orders passed validation
+  If the supply contains assembly orders with required UIN, make sure that you have created and uploaded the Delivery Contract Specification in advance. The [GIIS DMDK](https://minfin.gov.ru/ru/perfomance/jewels/dmdk) takes about 30 minutes to process changes in UIN statuses.
+  It is required to [specify the shipping parameters](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod) for supplies from Russian sellers to Russia shipping points. If the shipping method, shipping date, or shipping point is not specified, a `409` error is returned.
 
-Передать поставку в доставку можно, только если в ней:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-- есть хотя бы одно сборочное задание
-- для всех сборочных заданий указана обязательная маркировка
-- маркировка всех сборочных заданий прошла проверку
-  Если поставка содержит сборочные задания с обязательным УИН, убедитесь, что вы заранее создали и загрузили спецификацию с договором на доставку. [ГИИС ДМДК](https://minfin.gov.ru/ru/perfomance/jewels/dmdk) требуется около 30 минут для обработки изменений в статусах УИН.
-  Обязательно [указывайте параметры отгрузки](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod) для поставок от продавцов РФ на пункты отгрузки в РФ. Если способ доставки, дата или пункт отгрузки не указаны, возвращается ошибка `409`.
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Responses
 
-| Code  | Description              | Schema                      |
-| ----- | ------------------------ | --------------------------- |
-| `204` | Передано в доставку      | —                           |
-| `400` | Неправильный запрос      | `Error`                     |
-| `401` | Не авторизован           | `object`                    |
-| `402` | Требуется платёж         | `object`                    |
-| `403` | Доступ запрещён          | `Error`                     |
-| `404` | Не найдено               | `Error`                     |
-| `409` | Ошибка закрытия поставки | `Http409SupplyDeliverError` |
-| `429` | Слишком много запросов   | `object`                    |
+| Code  | Description                      | Schema                      |
+| ----- | -------------------------------- | --------------------------- |
+| `204` | The supply moved to the delivery | —                           |
+| `400` | Bad request                      | `Error`                     |
+| `401` | Unauthorized                     | `object`                    |
+| `402` | Payment required                 | `object`                    |
+| `403` | Access denied                    | `Error`                     |
+| `404` | Not found                        | `Error`                     |
+| `409` | Error closing supply             | `Http409SupplyDeliverError` |
+| `429` | Too many requests                | `object`                    |
 
 ## Call examples
 

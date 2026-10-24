@@ -1,44 +1,44 @@
 ---
-title: "Информация о кампаниях"
-description: "Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID."
+title: "Campaigns Information"
+description: "The method returns information about campaigns with standard or custom bid via statuses, payment types and IDs."
 ---
 
-# Информация о кампаниях
+# Campaigns Information
 
 ```http
 GET /api/advert/v2/adverts
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Кампании · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV2Adverts)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV2Adverts)
 
-Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID.
+The method returns information about campaigns with standard or custom bid via statuses, payment types and IDs.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос   | 1 ч      | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name           | In    | Type     | Req. | Description                                                                                                                                                                          |
-| -------------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ids`          | query | `string` | no   | ID кампаний, максимум 50                                                                                                                                                             |
-| `statuses`     | query | `string` | no   | Статусы кампаний: - `-1` — удалена, процесс удаления будет завершён в течение 10 минут - `4` — готова к запуску - `7` — завершена - `8` — отменена - `9` — активна - `11` — на паузе |
-| `payment_type` | query | `string` | no   | Тип оплаты: - `cpm` — за показы - `cpc` — за клик                                                                                                                                    |
+| Name           | In    | Type     | Req. | Description                                                                                                                                                                                  |
+| -------------- | ----- | -------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ids`          | query | `string` | no   | Campaign IDs, maximum 50                                                                                                                                                                     |
+| `statuses`     | query | `string` | no   | Campaign statuses: - `-1` — deleted, the deletion process will be completed within 10 minutes - `4` — ready to be launched - `7` — completed - `8` — declined - `9` — active - `11` — paused |
+| `payment_type` | query | `string` | no   | Payment type: - `cpm` — cost per mille - `cpc` — cost per click                                                                                                                              |
 
 ## Responses
 
-| Code  | Description            | Schema        |
-| ----- | ---------------------- | ------------- |
-| `200` | Успешно                | `GetAdverts`  |
-| `400` | Неправильный запрос    | `response400` |
-| `401` | Не авторизован         | `object`      |
-| `403` | Доступ запрещён        | `object`      |
-| `429` | Слишком много запросов | `object`      |
+| Code  | Description       | Schema        |
+| ----- | ----------------- | ------------- |
+| `200` | Success           | `GetAdverts`  |
+| `400` | Bad request       | `response400` |
+| `401` | Unauthorized      | `object`      |
+| `403` | Access denied     | `object`      |
+| `429` | Too many requests | `object`      |
 
 ## Call examples
 

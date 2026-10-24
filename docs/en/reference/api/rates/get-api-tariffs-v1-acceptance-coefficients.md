@@ -1,44 +1,44 @@
 ---
-title: "Тарифы на поставку"
-description: "Метод временно отключён"
+title: "Supply Rates"
+description: "The method is temporary disabled"
 ---
 
-# Тарифы на поставку
+# Supply Rates
 
 ```http
 GET /api/tariffs/v1/acceptance/coefficients
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на поставку · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Supply Rates · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/supplyRates/operation/getV1AcceptanceCoefficients)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?id=570)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Сервисный          | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый с секретом | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый            | 1 ч    | 1 запрос   | 1 ч      | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 6 requests | 10 s     | 6 requests |
+| Service          | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base with secret | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Parameters
 
-| Name           | In    | Type     | Req. | Description                                                  |
-| -------------- | ----- | -------- | ---- | ------------------------------------------------------------ |
-| `warehouseIDs` | query | `string` | no   | ID складов. По умолчанию возвращаются данные по всем складам |
+| Name           | In    | Type     | Req. | Description                                                    |
+| -------------- | ----- | -------- | ---- | -------------------------------------------------------------- |
+| `warehouseIDs` | query | `string` | no   | Warehouse IDs. By default, data for all warehouses is returned |
 
 ## Responses
 
-| Code  | Description            | Schema                                   |
-| ----- | ---------------------- | ---------------------------------------- |
-| `200` | Успешно                | `GetV1AcceptanceCoefficientsResponse200` |
-| `400` | Неправильный запрос    | `models.ErrorModel`                      |
-| `401` | Не авторизован         | `object`                                 |
-| `402` | Требуется платёж       | `object`                                 |
-| `403` | Доступ запрещён        | —                                        |
-| `404` | Не найдено             | —                                        |
-| `429` | Слишком много запросов | `object`                                 |
+| Code  | Description       | Schema                                   |
+| ----- | ----------------- | ---------------------------------------- |
+| `200` | Success           | `GetV1AcceptanceCoefficientsResponse200` |
+| `400` | Incorrect request | `models.ErrorModel`                      |
+| `401` | Unauthorized      | `object`                                 |
+| `402` | Payment required  | `object`                                 |
+| `403` | Access denied     | —                                        |
+| `404` | Not found         | —                                        |
+| `429` | Too many requests | `object`                                 |
 
 ## Call examples
 

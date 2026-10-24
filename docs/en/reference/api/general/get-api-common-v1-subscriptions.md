@@ -1,49 +1,49 @@
 ---
-title: "Получить информацию о подписке Джем"
-description: "Информацию о подписке Джем можно получить с токеном любой категории"
+title: "Get Jam Subscription Information"
+description: "You can get Jam subscription information with a token of any category."
 ---
 
-# Получить информацию о подписке Джем
+# Get Jam Subscription Information
 
 ```http
 GET /api/common/v1/subscriptions
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1Subscriptions)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1Subscriptions)
 
-Информацию о подписке Джем можно получить с токеном любой [категории](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov)
+You can get Jam subscription information with a token of any [category](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Token-categories).
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Service** token
 
-Метод возвращает информацию о подписке [Джем](https://seller.wildberries.ru/monetization/jam):
+The method returns [Jam](https://seller.wildberries.ru/monetization/jam) subscription information:
 
-- Если продавец никогда не подключал подписку Джем, возвращается пустой ответ `200`.
-- Если продавец активировал и никогда не отменял подписку, возвращается:
-- дата активации подписки `since`
-- дата окончания текущего оплаченного периода `till`
-- Если подписка закончилась или была отменена, но продавец подключил её повторно, возвращается:
-- дата первой активации подписки `since`
-- дата окончания текущего оплаченного периода `till`
-- Если подписка неактивна, возвращается:
-- дата первой активации подписки `since`
-- дата окончания последнего оплаченного периода `till`
+- If seller has never activated the Jam subscription, an empty `200` response is returned.
+- If seller activated the subscription and never canceled it, the following is returned:
+- subscription activation date `since`
+- end date of the current paid period `till`
+- If the subscription expired or was canceled but seller reactivated it, the following is returned:
+- date of the first subscription activation `since`
+- end date of the current paid period `till`
+- If the subscription is inactive, the following is returned:
+- date of the first subscription activation `since`
+- end date of the last paid period `till`
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск     |
-| ------ | -------- | -------- | ----------- |
-| 1 мин  | 1 запрос | 1 мин    | 10 запросов |
+| Period | Limit     | Interval | Burst       |
+| ------ | --------- | -------- | ----------- |
+| 1 min  | 1 request | 1 min    | 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `SubscriptionsJamInfo` |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `Response4XX`          |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Успешно           | `SubscriptionsJamInfo` |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `Response4XX`          |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

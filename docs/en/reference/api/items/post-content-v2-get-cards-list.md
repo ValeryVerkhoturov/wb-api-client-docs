@@ -1,23 +1,23 @@
 ---
-title: "Список карточек товаров"
-description: "Метод возвращает список созданных карточек товаров."
+title: "Listings"
+description: "Returns the listings."
 ---
 
-# Список карточек товаров
+# Listings
 
 ```http
 POST /content/v2/get/cards/list
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2GetCardsList)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2GetCardsList)
 
-Метод возвращает список созданных карточек товаров.
+Returns the listings.
 
-В ответе метода не будет карточек, находящихся в корзине. Получить такие карточки можно через [отдельный метод](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash)
+Listings from the trash are not provided in the method response. You can get these listings via [different method](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash)
 
-Чтобы получить \*\*больше 100\*\* карточек товаров, используйте пагинацию:
+To get \*\*more than 100\*\* listings, use pagination:
 
-1. Сделайте первый запрос:
+1. Make the first request:
 
 ```
         {
@@ -35,33 +35,32 @@ POST /content/v2/get/cards/list
         }
 ```
 
-Чтобы после выгрузки получать только новые или обновлённые карточки товаров, используйте сортировку по возрастанию: `"sort":{"ascending":true}`. 2. Скопируйте `"updatedAt":"\*\*\*","nmID":"\*\*\*"` из `cursor` ответа и вставьте в `cursor` запроса. 3. Повторите запрос. 4. Повторяйте пункты 2 и 3, пока значение `total` в ответе не станет меньше, чем значение `limit` в запросе. Это будет означать, что вы получили все карточки.
-Чтобы получать только карточки товаров, которые были созданы или обновлены после предыдущей выгрузки данных:
+To get only new or updated listings after data export, use ascending sorting: `"sort":{"ascending":true}`. 2. Copy `"updatedAt": "\*\*\*","nmID":"\*\*\*"` from the `cursor` in the response and insert into the `cursor` of your next request. 3. Make the next request. 4. Repeat 2 and 3 until `total` value in the response is less than the `limit` value in the request. This will mean you got all listings.
+To get only items that were listed or updated after the previous data export:
 
-1. Сохраните поля `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}` из последнего ответа предыдущей выгрузки. При выгрузке используйте сортировку по возрастанию: `"sort":{"ascending":true}`.
-2. Укажите в первом запросе сохранённые поля `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}`. Продолжайте использовать сортировку по возрастанию.
-3. Сохраните поля `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}` из последнего ответа текущей выгрузки.
+1. Save the `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}` fields from the last response of the previous data export. When exporting the data, use ascending sorting: `"sort":{"ascending":true}`.
+2. Specify the saved `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}` fields in the first request. Keep using ascending sorting.
+3. Save the `"cursor":{"updatedAt":"\*\*\*","nmID":"\*\*\*"}` fields from the last response of the current data export.
+   In the `documents` object, the method returns:
 
-В объекте `documents` метод возвращает:
+- information about the added documents — the `items` array
+- the validation results for each document — the `verdict` object in `items'. If `verdict` is not returned in the response, the document validation is not completed yet
+- the validation result for the entire listing — the `overallVerdict` object. During the listing validation, not only the results of the document validation are taken into account, but also other data. For example, the data of required labeling codes and information from external registries. If `overallVerdict` is not returned in the response, the listing validation is not completed yet
+  Document and listing validations are performed asynchronously and can take up to 3 days.
+  Each change in the validation result updates the date and time in the `updatedAt` response field.
+  To get new validation results, use pagination uploads sorted in ascending order.
 
-- информацию о переданных документах — массив `items`
-- результаты проверки по каждому документу — объект `verdict` в `items`. Если `verdict` не возвращается в ответе — проверка документа ещё не завершена
-- результат проверки всей карточки — объект `overallVerdict`. Проверка всей карточки включает проверку не только документов, но и других данных. Например, наличия обязательной маркировки и сведений из внешних реестров. Если `overallVerdict` не возвращается в ответе — проверка карточки ещё не завершена
-  Проверки документов и карточки выполняются асинхронно и могут занимать до 3 дней.
-  Каждое изменение результата проверки обновляет дату и время изменения карточки в поле ответа `updatedAt`.
-  Чтобы получить новые результаты проверки, используйте выгрузку с пагинацией с сортировкой по возрастанию.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Период | Лимит        | Интервал | Всплеск    |
+| Period | Limit        | Interval | Burst      |
 | ------ | ------------ | -------- | ---------- |
-| 1 мин  | 100 запросов | 600 мс   | 5 запросов |
+| 1 min  | 100 requests | 600 ms   | 5 requests |
 
 ## Parameters
 
-| Name     | In    | Type     | Req. | Description                                                                                                                                                                              |
-| -------- | ----- | -------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `locale` | query | `string` | no   | Язык полей ответа `name`, `value` и `object`: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
+| Name     | In    | Type     | Req. | Description                                                                                                                                                                                |
+| -------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `locale` | query | `string` | no   | Language for response of the `name`, `value` and `object` fields: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
 
 ## Request body
 
@@ -69,14 +68,14 @@ POST /content/v2/get/cards/list
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `PostV2GetCardsListResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`   |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `responseBodyContentError403`   |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `PostV2GetCardsListResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`   |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `responseBodyContentError403`   |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

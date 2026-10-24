@@ -1,58 +1,57 @@
 ---
-title: "Редактирование карточек товаров"
-description: "Метод обновляет данные карточек товаров. Также используйте его, чтобы добавлять новые размеры и документы."
+title: "Update Listings"
+description: "Edits listings. Also use it to add new sizes."
 ---
 
-# Редактирование карточек товаров
+# Update Listings
 
 ```http
 POST /content/v2/cards/update
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
 
-Метод обновляет данные карточек товаров. Также используйте его, чтобы добавлять новые размеры и документы.
+Edits listings. Also use it to add new sizes.
 
-Карточка товара перезаписывается при обновлении. Поэтому в запросе нужно передать в том числе те параметры карточки, которые вы не собираетесь обновлять. Их значения можно получить в [списке карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) и [списке карточек товаров в корзине](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash).
+The listing is overwritten when updated. So the request must also include those listing parameters that you are not going to update. To get their values, use [Listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) and [Listings in Trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash).
 
-При обновлении карточки объект **documents** также полностью перезаписывается. Передавайте в запросе данные всех документов, которые должны остаться в карточке, включая документы без изменений.
+When the Listing is updated, the **documents** object is also completely overwritten. In the request, send the all documents data that should remain in the listing, including documents without changes.
 
-С помощью этого метода нельзя обновлять или удалять:
+You cannot use this method to update or delete:
 
-- баркоды размеров товара. Можно только добавить дополнительные баркоды
-- параметры `photos`, `video` и `tags`
-- цены товаров. Цену можно задать, только если вы добавляете новые размеры
-  При добавлении нового размера укажите его цену через параметр `price`. Если в запросе не указан `price`, цена размера будет `0` — в этом случае изменить её можно будет с помощью методов:
-- [Установить цены и скидки](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTask), если у [товара](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter) `"editablePriceSize":false`
-- [Установить цены для размеров](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize), если у [товара](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter) `"editablePriceSize":true`
-  Габариты товаров можно указать только в `сантиметрах`, вес товара с упаковкой — в `килограммах`.
+- item size SKUs. You can only add additional SKUs
+- the `photos`, `video` and `tags` parameters
+- prices of items. The price can only be set if you add new sizes
+  When adding a new size, specify its price using the `price` parameter. If no `price` is specified in the request, the size price will be `0`. In this case, you can update it using the methods:
+- [Set Prices and Discounts](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTask), if [item](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter) has `"editablePriceSize":false`
+- [Set Size Prices](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize), if [item](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter) has `"editablePriceSize":true`
+  The dimensions of the items can only be specified in `centimeters`, and the weight of packed items must be specified in `kilograms`.
 
-Одним запросом можно отредактировать максимум 3000 карточек товаров (`nmID`). Максимальный размер запроса 10 Мб.
-Если ответ `Успешно` (`200`), но какие-то карточки не обновились, проверьте [список несозданных карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList).
-Синхронизация данных с сервисами может занимать до 30 минут. В течение этого времени невозможно добавить остатки на склады и настроить цены.
+If this method response is Success (`200`) but listing was not updated, check errors using [failed listings with errors](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList) method.
+With one request you can edit maximum 3000 listings (`nmID`). Maximum request size is 10 Mb.
+The process of synchronizing data with services may take up to 30 minutes. During this time, you can't add inventory to warehouses and set prices.
+To add documents to the listing, pass the document data in the `documents` request object.
+To update the added document, pass document ID `id` and data in the `documents` request object. To get the `id` use [listings](https://dev.wildberries.ru/item-management#tag/listings/operation/postV2GetCardsList) method.
+When the listing or document is changed, the validation is started again.
 
-Чтобы прикрепить документы к карточке товара, передайте данные документов в объекте запроса `documents`.
-Чтобы внести изменения в прикрепленный к карточке документ, передайте `id` документа и его данные в объекте запроса `documents`. Получить `id` документа вы можете в [списке карточек товара](https://dev.wildberries.ru/item-management#tag/listings/operation/postV2GetCardsList).
-После изменения документа или добавления нового документа карточка повторно отправляется на проверку.
+Document validation is performed asynchronously and can take up to 3 days.
+You can update the listing again before completing the current validation. In this case, the validation will be started again, and the listing will retain its current status until the new validation is completed.
+If the listing was available for sale before the document was updated, it will be available until a new validation result is received. If the card has already been blocked, then after updating the data, it will remain blocked until a positive result of repeated validation is received.
 
-Проверка документов выполняется асинхронно и может занимать до 3 дней.
-Вы можете изменить карточку снова до завершения текущей проверки. При этом проверка запустится повторно, а карточка сохранит текущий статус до завершения новой проверки.
-Если карточка была доступна для продажи до обновления документа, она будет доступна и до получения нового результата проверки. Если карточка уже была заблокирована, то после обновления данных она останется заблокированной до получения положительного результата повторной проверки.
+The validation results are displayed in the [listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), the `documents` object:
 
-Результаты проверки отображаются в [списке карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), объект `documents`:
+- the result for each document in the `verdict` fields of the `items` object. If `verdict` is not returned in the response, the document validation is not completed yet.
+- the final overall result for the listing in the `overallVerdict` field. During the listing validation, not only the results of the document validation are taken into account, but also other data. For example, the data of required labeling codes and information from external registries. If `overallVerdict` is not returned in the response, the listing validation is not completed yet.
 
-- результат по каждому документу в полях `verdict` объекта `items`. Если `verdict` не возвращается в ответе — проверка документа ещё не завершена
-- итоговый общий результат по карточке в поле `overallVerdict`. При общей проверке карточки учитываются не только результаты проверки документов, но и другие данные. Например, наличие обязательной маркировки и сведения из внешних реестров. Если `overallVerdict` не возвращается в ответе — проверка карточки ещё не завершена
+The types of documents that you can add for the item are specified in [subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId).
 
-Типы документов, которые вы можете добавить для товара, указаны в [характеристиках предмета](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId).
+Not all the documents that you can add are required and are being validated. You independently determine which permits are required for the item in accordance with the law.
 
-При этом не все документы, которые вы можете добавить, обязательны и проходят проверку — вы самостоятельно определяете, какие разрешительные документы требуются для товара в соответствии с законодательством.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Период | Лимит       | Интервал | Всплеск    |
+| Period | Limit       | Interval | Burst      |
 | ------ | ----------- | -------- | ---------- |
-| 1 мин  | 10 запросов | 6 сек    | 5 запросов |
+| 1 min  | 10 requests | 6 s      | 5 requests |
 
 ## Request body
 
@@ -60,15 +59,15 @@ POST /content/v2/cards/update
 
 ## Responses
 
-| Code  | Description                            | Schema                         |
-| ----- | -------------------------------------- | ------------------------------ |
-| `200` | Успешно                                | `responseItemList`             |
-| `400` | Неправильный запрос                    | `responseBodyContentError400`  |
-| `401` | Не авторизован                         | `object`                       |
-| `402` | Требуется платёж                       | `object`                       |
-| `403` | Доступ запрещён                        | `responseBodyContentError403`  |
-| `413` | Превышен лимит объёма данных в запросе | `PostV2CardsUpdateResponse413` |
-| `429` | Слишком много запросов                 | `object`                       |
+| Code  | Description                                   | Schema                         |
+| ----- | --------------------------------------------- | ------------------------------ |
+| `200` | Success                                       | `responseItemList`             |
+| `400` | Bad request                                   | `responseBodyContentError400`  |
+| `401` | Unauthorized                                  | `object`                       |
+| `402` | Payment required                              | `object`                       |
+| `403` | Access denied                                 | `responseBodyContentError403`  |
+| `413` | The request body size exceeds the given limit | `PostV2CardsUpdateResponse413` |
+| `429` | Too many requests                             | `object`                       |
 
 ## Call examples
 

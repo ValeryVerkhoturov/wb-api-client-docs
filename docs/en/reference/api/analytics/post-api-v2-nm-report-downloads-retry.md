@@ -1,26 +1,26 @@
 ---
-title: "Сгенерировать отчёт повторно"
-description: "Метод создает повторное задание на генерацию отчёта с расширенной аналитикой продавца. Необходимо, если при генерации отчёта вы получили статус FAILED."
+title: "Regenerate the Report"
+description: "The method creates a repeated generation task of report with advanced seller analytics. This is necessary if you received the status FAILED when generating the…"
 ---
 
-# Сгенерировать отчёт повторно
+# Regenerate the Report
 
 ```http
 POST /api/v2/nm-report/downloads/retry
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Seller Analytics CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloadsRetry)
 
-Метод создает повторное [задание на генерацию](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) отчёта с расширенной аналитикой продавца. Необходимо, если при генерации отчёта вы [получили статус](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads) `FAILED`.
+The method creates a [repeated generation task](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) of report with advanced seller analytics. This is necessary if you [received the status](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloads) `FAILED` when generating the report.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Request body
 
@@ -28,13 +28,13 @@ POST /api/v2/nm-report/downloads/retry
 
 ## Responses
 
-| Code  | Description            | Schema                                    |
-| ----- | ---------------------- | ----------------------------------------- |
-| `200` | Успешно                | `NmReportRetryReportResponse`             |
-| `400` | Неправильный запрос    | `PostV2NmReportDownloadsRetryResponse400` |
-| `401` | Не авторизован         | `object`                                  |
-| `403` | Доступ запрещён        | `ErrorObject`                             |
-| `429` | Слишком много запросов | `object`                                  |
+| Code  | Description       | Schema                                    |
+| ----- | ----------------- | ----------------------------------------- |
+| `200` | Success           | `NmReportRetryReportResponse`             |
+| `400` | Bad request       | `PostV2NmReportDownloadsRetryResponse400` |
+| `401` | Unauthorized      | `object`                                  |
+| `403` | Access denied     | `ErrorObject`                             |
+| `429` | Too many requests | `object`                                  |
 
 ## Call examples
 

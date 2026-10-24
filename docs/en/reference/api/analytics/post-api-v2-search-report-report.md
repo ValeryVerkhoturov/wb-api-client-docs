@@ -1,39 +1,39 @@
 ---
-title: "Основная страница"
-description: "Метод формирует набор данных для основной страницы отчёта по поисковым запросам с: - общей информацией - позициями товаров - данными по видимости и переходам в…"
+title: "Main Page"
+description: "Forms a dataset for the main report page with: - General information - Item positions - Data on visibility and transitions to the listing - Data for the table…"
 ---
 
-# Основная страница
+# Main Page
 
 ```http
 POST /api/v2/search-report/report
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Поисковые запросы по вашим товарам · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportReport)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Search Queries for Your Items · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportReport)
 
-Метод формирует набор данных для основной страницы отчёта по поисковым запросам с:
+Forms a dataset for the main report page with:
 
-- общей информацией
-- позициями товаров
-- данными по видимости и переходам в карточку
-- данными для таблицы по группам
-  Для получения дополнительных данных в таблице используйте отдельный запрос для:
-- [пагинации по группам](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportTableGroups)
-- [получения по товарам в группе](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportTableDetails)
-  Дополнительный параметр выбора списка товаров в таблице:
-- `positionCluster` — средняя позиция в поиске
-  Параметры `includeSubstitutedSKUs` и `includeSearchTexts` не могут одновременно иметь значение `false`.
+- General information
+- Item positions
+- Data on visibility and transitions to the listing
+- Data for the table by groups
+  To get additional data in the table, use a separate request for:
+- Pagination by groups
+- Retrieval of items within a group
+  Additional parameters for selecting the list of items in the table:
+- `positionCluster` — average position in search
+  The parameters `includeSubstitutedSKUs` and `includeSearchTexts` cannot both be set to `false`.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Request body
 
@@ -41,14 +41,14 @@ POST /api/v2/search-report/report
 
 ## Responses
 
-| Code  | Description            | Schema                                |
-| ----- | ---------------------- | ------------------------------------- |
-| `200` | Успешно                | `PostV2SearchReportReportResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`                      |
-| `401` | Не авторизован         | `object`                              |
-| `402` | Требуется платёж       | `object`                              |
-| `403` | Доступ запрещён        | `ErrorObject403`                      |
-| `429` | Слишком много запросов | `object`                              |
+| Code  | Description       | Schema                                |
+| ----- | ----------------- | ------------------------------------- |
+| `200` | Success           | `PostV2SearchReportReportResponse200` |
+| `400` | Bad request       | `ErrorObject400`                      |
+| `401` | Unauthorized      | `object`                              |
+| `402` | Payment required  | `object`                              |
+| `403` | Access denied     | `ErrorObject403`                      |
+| `429` | Too many requests | `object`                              |
 
 ## Call examples
 

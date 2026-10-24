@@ -1,44 +1,44 @@
 ---
-title: "Получить настройки дневных лимитов кампаний"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Get Campaign Daily Limits Settings"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Получить настройки дневных лимитов кампаний
+# Get Campaign Daily Limits Settings
 
 ```http
 GET /api/advert/v0/daily-limits
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0DailyLimits)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0DailyLimits)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает текущие настройки [дневных лимитов кампаний CPC](https://cmp.wildberries.ru/campaigns/help/knowledge-base/options#%D0%94%D0%BD%D0%B5%D0%B2%D0%BD%D0%BE%D0%B9%D0%BB%D0%B8%D0%BC%D0%B8%D1%82%D0%B2%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%D1%85%D1%81%D0%BE%D0%BF%D0%BB%D0%B0%D1%82%D0%BE%D0%B9%D0%B7%D0%B0%D0%BA%D0%BB%D0%B8%D0%BA%D0%B8%D0%A1%D0%A0%D0%A1) — максимальных сумм, которые кампании могут потратить на продвижение в течение суток.
+The method returns the current daily limit settings for CPC campaigns — the maximum amounts that campaigns can spend on promotion during a day.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип          | Период | Лимит      | Интервал | Всплеск    |
-| ------------ | ------ | ---------- | -------- | ---------- |
-| Персональный | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Сервисный    | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
+| Type     | Period | Limit      | Interval | Burst      |
+| -------- | ------ | ---------- | -------- | ---------- |
+| Personal | 1 min  | 5 requests | 12 s     | 5 requests |
+| Service  | 1 min  | 5 requests | 12 s     | 5 requests |
 
 ## Parameters
 
-| Name        | In    | Type     | Req. | Description                                               |
-| ----------- | ----- | -------- | ---- | --------------------------------------------------------- |
-| `advertIds` | query | `string` | yes  | ID кампаний, максимум 100. Укажите значения через запятую |
+| Name        | In    | Type     | Req. | Description                                                   |
+| ----------- | ----- | -------- | ---- | ------------------------------------------------------------- |
+| `advertIds` | query | `string` | yes  | Campaign IDs, maximum 100. Specify values separated by commas |
 
 ## Responses
 
-| Code  | Description            | Schema                     |
-| ----- | ---------------------- | -------------------------- |
-| `200` | Успешно                | `V0GetDailyLimitsResponse` |
-| `400` | Неправильный запрос    | `response400`              |
-| `401` | Не авторизован         | `object`                   |
-| `403` | Доступ запрещён        | `object`                   |
-| `429` | Слишком много запросов | `object`                   |
+| Code  | Description       | Schema                     |
+| ----- | ----------------- | -------------------------- |
+| `200` | Success           | `V0GetDailyLimitsResponse` |
+| `400` | Bad request       | `response400`              |
+| `401` | Unauthorized      | `object`                   |
+| `403` | Access denied     | `object`                   |
+| `429` | Too many requests | `object`                   |
 
 ## Call examples
 

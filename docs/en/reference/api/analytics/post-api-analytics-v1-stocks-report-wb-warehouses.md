@@ -1,32 +1,32 @@
 ---
-title: "Остатки на складах WB"
-description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
+title: "WB Warehouses Inventory"
+description: "Method is available by Personal token, Service token, Base token with secret"
 ---
 
-# Остатки на складах WB
+# WB Warehouses Inventory
 
 ```http
 POST /api/analytics/v1/stocks-report/wb-warehouses
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** История остатков · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV1StocksReportWbWarehouses)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Stocks Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV1StocksReportWbWarehouses)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену,
-**Базовому** токену **с секретом**
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token,
+**Base** token **with secret**
 
-Метод возвращает текущие остатки товаров на складах WB.
+The method returns current WB warehouses inventory.
 
-Данные обновляются 1 раз в 30 минут.
+The data is updated once every 30 minutes.
 
-1 строка ответа — данные об 1 размере товара на 1 складе WB.
+1 response row means data on 1 item size in 1 WB warehouse.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит     | Интервал | Всплеск  |
-| ------ | --------- | -------- | -------- |
-| 1 мин  | 3 запроса | 20 сек   | 1 запрос |
+| Period | Limit      | Interval | Burst     |
+| ------ | ---------- | -------- | --------- |
+| 1 min  | 3 requests | 20 s     | 1 request |
 
 ## Request body
 
@@ -34,15 +34,15 @@ POST /api/analytics/v1/stocks-report/wb-warehouses
 
 ## Responses
 
-| Code  | Description            | Schema                                      |
-| ----- | ---------------------- | ------------------------------------------- |
-| `200` | Успешно                | `PostV1StocksReportWbWarehousesResponse200` |
-| `204` | Нет данных             | —                                           |
-| `400` | Неправильный запрос    | `ErrorObject400`                            |
-| `401` | Не авторизован         | `object`                                    |
-| `402` | Требуется платёж       | `object`                                    |
-| `403` | Доступ запрещён        | `ErrorObject403`                            |
-| `429` | Слишком много запросов | `object`                                    |
+| Code  | Description       | Schema                                      |
+| ----- | ----------------- | ------------------------------------------- |
+| `200` | Success           | `PostV1StocksReportWbWarehousesResponse200` |
+| `204` | No data           | —                                           |
+| `400` | Bad request       | `ErrorObject400`                            |
+| `401` | Unauthorized      | `object`                                    |
+| `402` | Payment required  | `object`                                    |
+| `403` | Access denied     | `ErrorObject403`                            |
+| `429` | Too many requests | `object`                                    |
 
 ## Call examples
 

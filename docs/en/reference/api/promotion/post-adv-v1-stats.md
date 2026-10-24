@@ -1,26 +1,26 @@
 ---
-title: "Статистика медиакампаний"
-description: "Метод формирует статистику кампаний сервиса WB Медиа. Статистику можно группировать по датам и/или интервалам."
+title: "Media Campaign Statistics"
+description: "The method allows to get statistics of WB Media campaigns"
 ---
 
-# Статистика медиакампаний
+# Media Campaign Statistics
 
 ```http
 POST /adv/v1/stats
 ```
 
-**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Статистика · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV1Stats)
+**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Statistics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV1Stats)
 
-Метод формирует статистику кампаний сервиса [WB Медиа](https://cmp.wildberries.ru/cmpf/statistics). Статистику можно группировать по датам и/или интервалам.
+The method allows to get statistics of [WB Media](https://cmp.wildberries.ru/cmpf/statistics) campaigns
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Service          | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base with secret | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Request body
 
@@ -28,13 +28,13 @@ POST /adv/v1/stats
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `PostV1StatsResponse200` |
-| `400` | Неправильный запрос    | `ResponseAdvError1`      |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `object`                 |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `PostV1StatsResponse200` |
+| `400` | Bad request       | `ResponseAdvError1`      |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `object`                 |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

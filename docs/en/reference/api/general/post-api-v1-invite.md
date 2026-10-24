@@ -1,35 +1,35 @@
 ---
-title: "Создать приглашение для нового пользователя"
-description: "Метод доступен по Персональному токену"
+title: "Create an Invitation for a New User"
+description: "Method is available by Personal token"
 ---
 
-# Создать приглашение для нового пользователя
+# Create an Invitation for a New User
 
 ```http
 POST /api/v1/invite
 ```
 
-**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Управление пользователями продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/postV1Invite)
+**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller User Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/postV1Invite)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token
 
-Метод создаёт приглашение для нового пользователя с настройкой доступов к разделам профиля продавца.
-Как выдаются права доступа:
+The method creates an invitation for a new user with access settings to the seller account sections.
+How access rights are assigned:
 
-- Если `access` пустой (`[]`) или не указан — по умолчанию выдаются все доступы, кроме доступов к витрине (`showcase`) и \*\*Джем\*\* (`changeJam`)
-- Если в `access` указана часть разделов профиля, то кроме тех доступов, что указаны в запросе, также выдаются все доступы по умолчанию
-- Если в `access` перечислены все возможные разделы, доступы будут выданы согласно запросу, без доступов по умолчанию
-- Если в `access` дважды указан один и тот же раздел (`code`):
-- при разных значениях `disabled` (`true` и `false`) доступ не будет выдан
-- при одинаковых значениях `"disabled": true` доступ не будет выдан
-- при одинаковых значениях `"disabled": false` доступ будет выдан
+- If `access` is empty (`[]`) or not provided — by default, all access is granted, except for access to the showcase (`showcase`) and \*\*Jam\*\* (`changeJam`)
+- If `access` specifies some of the account sections, then in addition to the access rights specified in the request, all default access rights are also granted
+- If `access` lists all possible sections, access rights will be granted according to the request, without the default access rights
+- If the same section (`code`) is specified twice in `access`:
+- with different `disabled` values (`true` and `false`), access will not be granted
+- with identical values of `"disabled": true`, access will not be granted
+- with identical values of `"disabled": false`, access will be granted
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск    |
-| ------ | -------- | -------- | ---------- |
-| 1 сек  | 1 запрос | 1 сек    | 5 запросов |
+| Period | Limit     | Interval | Burst      |
+| ------ | --------- | -------- | ---------- |
+| 1 s    | 1 request | 1 s      | 5 requests |
 
 ## Request body
 
@@ -37,13 +37,13 @@ POST /api/v1/invite
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `createInviteResponse` |
-| `400` | Неправильный запрос    | `errorResponse`        |
-| `401` | Не авторизован         | `object`               |
-| `403` | Доступ запрещён        | `Response4XX`          |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `createInviteResponse` |
+| `400` | Bad request       | `errorResponse`        |
+| `401` | Unauthorized      | `object`               |
+| `403` | Access denied     | `Response4XX`          |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

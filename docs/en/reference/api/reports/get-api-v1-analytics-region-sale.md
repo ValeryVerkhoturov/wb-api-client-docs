@@ -1,37 +1,37 @@
 ---
-title: "Получить отчёт"
-description: "Метод будет отключен 3 ноября."
+title: "Get Report"
+description: "The deprecated method will be disabled on November 3."
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 GET /api/v1/analytics/region-sale
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Продажи по регионам · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/salesByRegions/operation/getV1AnalyticsRegionSale)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Sales by Regions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/salesByRegions/operation/getV1AnalyticsRegionSale)
 
-Метод будет отключен [3 ноября](https://dev.wildberries.ru/release-notes?id=590).
+The deprecated method will be disabled on [November 3](https://dev.wildberries.ru/en/release-notes?id=590).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Сервисный          | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 10 s   | 1 request | 10 s     | 5 requests |
+| Service          | 10 s   | 1 request | 10 s     | 5 requests |
+| Base with secret | 10 s   | 1 request | 10 s     | 5 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema            |
-| ----- | ---------------------- | ----------------- |
-| `200` | Успешно                | `object`          |
-| `400` | Неправильный запрос    | `Http4XXResponse` |
-| `401` | Не авторизован         | `object`          |
-| `402` | Требуется платёж       | `object`          |
-| `403` | Доступ запрещён        | `object`          |
-| `429` | Слишком много запросов | `object`          |
+| Code  | Description       | Schema            |
+| ----- | ----------------- | ----------------- |
+| `200` | Success           | `object`          |
+| `400` | Bad request       | `Http4XXResponse` |
+| `401` | Unauthorized      | `object`          |
+| `402` | Payment required  | `object`          |
+| `403` | Access denied     | `object`          |
+| `429` | Too many requests | `object`          |
 
 ## Call examples
 

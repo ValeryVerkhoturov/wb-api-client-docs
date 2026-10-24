@@ -1,46 +1,46 @@
 ---
-title: "Получить список архивных сборочных заданий"
-description: "Метод возвращает сборочные задания, созданные более 3 месяцев назад. Часть сборочных заданий попадает в архив позже, чем через 3 месяца после создания, так как…"
+title: "Get the List of Archived Assembly Orders"
+description: "The method returns assembly orders created more than 3 months ago. Some assembly orders are archived later than 3 months after creation, as the supply is…"
 ---
 
-# Получить список архивных сборочных заданий
+# Get the List of Archived Assembly Orders
 
 ```http
 GET /api/marketplace/v3/fbs/orders/archive
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive)
 
-Метод возвращает сборочные задания, созданные более 3 месяцев назад.
-Часть сборочных заданий попадает в архив позже, чем через 3 месяца после создания, так как поставка переходит в архив только после того, как все заказы в ней будут завершены.
-Например, так происходит, если продавец не доставил один из заказов в поставке и заказ был отменён автоматически через несколько дней.
+The method returns assembly orders created more than 3 months ago.
+Some assembly orders are archived later than 3 months after creation, as the supply is archived only after all orders in it are completed.
+For example, this happens if the seller did not deliver one of the orders in the supply and the order was canceled automatically after a few days.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
-| Name    | In    | Type             | Req. | Description                                                                                                                                                                                                                                              |
-| ------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `year`  | query | `integer<int64>` | yes  | Год создания заказа                                                                                                                                                                                                                                      |
-| `month` | query | `integer<int64>` | yes  | Месяц создания заказа                                                                                                                                                                                                                                    |
-| `next`  | query | `integer<int64>` | yes  | Параметр пагинации. Устанавливает значение, с которого надо получить следующий пакет данных. Для получения полного списка данных должен быть равен `0` в первом запросе. Для следующих запросов необходимо брать значения из одноимённого поля в ответе. |
-| `limit` | query | `integer<int32>` | yes  | Количество сборочных заданий в ответе                                                                                                                                                                                                                    |
+| Name    | In    | Type             | Req. | Description                                                                                                                                                                                                                |
+| ------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `year`  | query | `integer<int64>` | yes  | Year the order was created                                                                                                                                                                                                 |
+| `month` | query | `integer<int64>` | yes  | Month the order was created                                                                                                                                                                                                |
+| `next`  | query | `integer<int64>` | yes  | Pagination parameter. Sets the value from which to retrieve the next batch. It should start at 0 to get the full list of data. For the subsequent requests, you must take the value from the `next` field in the response. |
+| `limit` | query | `integer<int32>` | yes  | Number of assembly orders in the response                                                                                                                                                                                  |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `v3.ArchiveOrders`    |
-| `400` | Неправильный запрос    | `ArhiveOrderError400` |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `403` | Доступ запрещён        | `object`              |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `v3.ArchiveOrders`    |
+| `400` | Bad request       | `ArhiveOrderError400` |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `403` | Access denied     | `object`              |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

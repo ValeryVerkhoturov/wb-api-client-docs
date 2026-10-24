@@ -1,35 +1,35 @@
 ---
-title: "Получить отчёт"
-description: "Метод будет отключен 26 октября."
+title: "Get Report"
+description: "The method will be disabled on October 26"
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 GET /api/v1/analytics/goods-return
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт о возвратах и перемещении товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1AnalyticsGoodsReturn)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Returns and Item Movement Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1AnalyticsGoodsReturn)
 
-Метод будет отключен [26 октября](https://dev.wildberries.ru/release-notes?id=577).
+The method will be disabled on [October 26](https://dev.wildberries.ru/en/release-notes?id=577)
 
 ## Parameters
 
-| Name       | In    | Type     | Req. | Description                      |
-| ---------- | ----- | -------- | ---- | -------------------------------- |
-| `dateFrom` | query | `string` | yes  | Дата начала отчётного периода    |
-| `dateTo`   | query | `string` | yes  | Дата окончания отчётного периода |
+| Name       | In    | Type     | Req. | Description                            |
+| ---------- | ----- | -------- | ---- | -------------------------------------- |
+| `dateFrom` | query | `string` | yes  | Beginning date of the reporting period |
+| `dateTo`   | query | `string` | yes  | End date of the reporting period       |
 
 ## Responses
 
-| Code  | Description            | Schema                                 |
-| ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `GetV1AnalyticsGoodsReturnResponse200` |
-| `400` | Неправильный запрос    | `Http4XXResponse`                      |
-| `401` | Не авторизован         | `object`                               |
-| `402` | Требуется платёж       | `object`                               |
-| `403` | Доступ запрещён        | `object`                               |
-| `429` | Слишком много запросов | `object`                               |
+| Code  | Description       | Schema                                 |
+| ----- | ----------------- | -------------------------------------- |
+| `200` | Success           | `GetV1AnalyticsGoodsReturnResponse200` |
+| `400` | Bad request       | `Http4XXResponse`                      |
+| `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
+| `403` | Access denied     | `object`                               |
+| `429` | Too many requests | `object`                               |
 
 ## Call examples
 

@@ -1,27 +1,27 @@
 ---
-title: "Получить цены продавца и суммы к оплате"
-description: "Метод возвращает: - цены продавца без учёта скидок - суммы к оплате покупателем с учетом всех скидок и кэшбека"
+title: "Get Seller Prices and Amounts Charged to the Buyer"
+description: "The method returns: - seller prices excluding discounts - sums charged to the buyer including all discounts and cashback"
 ---
 
-# Получить цены продавца и суммы к оплате
+# Get Seller Prices and Amounts Charged to the Buyer
 
 ```http
 POST /api/marketplace/v3/dbs/orders/final-price
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersFinalPrice)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersFinalPrice)
 
-Метод возвращает:
+The method returns:
 
-- цены продавца без учёта скидок
-- суммы к оплате покупателем с учетом всех скидок и кэшбека
+- seller prices excluding discounts
+- sums charged to the buyer including all discounts and cashback
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **получения и удаления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting DBS label identifiers**:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 150 запросов | 400 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 150 requests | 400 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -29,13 +29,13 @@ POST /api/marketplace/v3/dbs/orders/final-price
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `api.OrdersFinalPriceResponse` |
-| `400` | Неправильный запрос    | `api.BatchError`               |
-| `401` | Не авторизован         | `object`                       |
-| `403` | Доступ запрещён        | `api.BatchError`               |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `api.OrdersFinalPriceResponse` |
+| `400` | Bad request       | `api.BatchError`               |
+| `401` | Unauthorized      | `object`                       |
+| `403` | Access denied     | `api.BatchError`               |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

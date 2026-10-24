@@ -1,31 +1,31 @@
 ---
-title: "Закрепить коды маркировки Честного знака за сборочными заданиями"
-description: "Метод обновляет код маркировки Честного знака в идентификаторах маркировки сборочных заданий. Закрепить код маркировки можно только за сборочным заданием в…"
+title: "Add Labeling Codes Chestny ZNAK to Assembly Orders"
+description: "Sets the labeling code Chestny ZNAK for the assembly orders. You can add the labeling code Chestny ZNAK only for orders in the confirm status, and if the field…"
 ---
 
-# Закрепить коды маркировки Честного знака за сборочными заданиями
+# Add Labeling Codes Chestny ZNAK to Assembly Orders
 
 ```http
 POST /api/marketplace/v3/dbw/orders/meta/sgtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Идентификаторы маркировки DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaSgtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaSgtin)
 
-Метод обновляет код маркировки [Честного знака](https://честныйзнак.рф/) в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails).
-Закрепить код маркировки можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) есть поле `sgtin`.
+Sets the labeling code [Chestny ZNAK](https://chestnyznak.ru/en) for the assembly orders.
+You can add the labeling code Chestny ZNAK only for orders in the `confirm` status, and if the field `sgtin` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails) method.
 
-Получить загруженные маркировки можно в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/postV3DbwOrdersMetaDetails).
+For more information about labeling code Chestny ZNAK please check: https://chestnyznak.ru/en/.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -33,14 +33,14 @@ POST /api/marketplace/v3/dbw/orders/meta/sgtin
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `api.StatusSetResponses` |
-| `400` | Неправильный запрос    | `Error`                  |
-| `401` | Не авторизован         | `object`                 |
-| `402` | Требуется платёж       | `object`                 |
-| `403` | Доступ запрещён        | `Error`                  |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `api.StatusSetResponses` |
+| `400` | Bad request       | `Error`                  |
+| `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
+| `403` | Access denied     | `Error`                  |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

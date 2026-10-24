@@ -1,33 +1,33 @@
 ---
-title: "Перенос карточек товаров в корзину"
-description: "Метод переносит карточки товаров в корзину. При этом карточки товаров не удаляются, их можно восстановить."
+title: "Transfer Listing to Trash"
+description: "Transfers the listing to the trash. In doing so, the listing would not be deleted."
 ---
 
-# Перенос карточек товаров в корзину
+# Transfer Listing to Trash
 
 ```http
 POST /content/v2/cards/delete/trash
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsDeleteTrash)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsDeleteTrash)
 
-Метод переносит [карточки товаров в корзину](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash). При этом карточки товаров не удаляются, их можно [восстановить](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover).
+Transfers the listing to the trash. In doing so, the listing would not be deleted.
 
-После переноса в корзину карточке товара присваивается новый `imtID` — ID для [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров
+When transferring listings to the trash, this listing is removed from the listing, meaning it is assigned a new `imtID` — [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID
 
-Карточки товаров удаляются автоматически, если лежат в корзине больше 30 дней, и на них нет остатков. Очистка корзины происходит каждую ночь по московскому времени.
-Карточки товаров можно удалить в любое время в [личном кабинете](https://seller.wildberries.ru/new-goods/basket-cards).
+After 30 days in the trash the listing would be deleted automatically. The trash is cleared every night according to Moscow time.
+The listing can be deleted at any time in [personal account](https://seller.wildberries.ru/new-goods/basket-cards).
 
-Карточка будет продаваться, пока по ней есть остатки на складе, даже если её переместили в корзину. Чтобы полностью снять карточку с продажи, обнулите остатки.
+A listing will remain for sale as long as there is any inventory left, even if moved to the trash. To completely remove the listing from sale, set its inventory to zero.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ## Request body
 
@@ -35,14 +35,14 @@ POST /content/v2/cards/delete/trash
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `PostV2CardsDeleteTrashResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`       |
-| `401` | Не авторизован         | `object`                            |
-| `402` | Требуется платёж       | `object`                            |
-| `403` | Доступ запрещён        | `responseBodyContentError403`       |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Success           | `PostV2CardsDeleteTrashResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`       |
+| `401` | Unauthorized      | `object`                            |
+| `402` | Payment required  | `object`                            |
+| `403` | Access denied     | `responseBodyContentError403`       |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

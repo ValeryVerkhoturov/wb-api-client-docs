@@ -1,44 +1,44 @@
 ---
-title: "Удаление кампании"
-description: "Метод удаляет кампании в статусе 4 — готова к запуску."
+title: "Delete Campaign"
+description: "The method allows to delete campaigns in the status 4 — ready to launch. After deleting, the campaign will be in -1 status for a while. It takes between 3 and…"
 ---
 
-# Удаление кампании
+# Delete Campaign
 
 ```http
 GET /adv/v0/delete
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0Delete)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0Delete)
 
-Метод удаляет [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусе `4` — готова к запуску.
+The method allows to delete campaigns in the status `4` — ready to launch.
+After deleting, the campaign will be in `-1` status for a while.
+It takes between 3 and 10 minutes to completely delete the campaign.
 
-После удаления кампания некоторое время будет находиться в статусе `-1` — кампания в процессе удаления. Полное удаление кампании занимает от 3 до 10 минут.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
 | Name | In    | Type             | Req. | Description |
 | ---- | ----- | ---------------- | ---- | ----------- |
-| `id` | query | `integer<int64>` | yes  | ID кампании |
+| `id` | query | `integer<int64>` | yes  | Campaign ID |
 
 ## Responses
 
-| Code  | Description            | Schema              |
-| ----- | ---------------------- | ------------------- |
-| `200` | Успешно                | —                   |
-| `400` | Неправильный запрос    | `ResponseAdvError1` |
-| `401` | Не авторизован         | `object`            |
-| `403` | Доступ запрещён        | `object`            |
-| `429` | Слишком много запросов | `object`            |
+| Code  | Description       | Schema              |
+| ----- | ----------------- | ------------------- |
+| `200` | Success           | —                   |
+| `400` | Bad request       | `ResponseAdvError1` |
+| `401` | Unauthorized      | `object`            |
+| `403` | Access denied     | `object`            |
+| `429` | Too many requests | `object`            |
 
 ## Call examples
 

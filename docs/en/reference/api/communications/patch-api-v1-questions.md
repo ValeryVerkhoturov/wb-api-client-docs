@@ -1,34 +1,34 @@
 ---
-title: "Работа с вопросами"
-description: "В зависимости от тела запроса, метод позволяет: - отметить вопрос как просмотренный - отклонить вопрос - ответить на вопрос или отредактировать ответ"
+title: "Working with Questions"
+description: "Depending on the request body, you can: - View question. - Reject question. - Answer question or edit the answer"
 ---
 
-# Работа с вопросами
+# Working with Questions
 
 ```http
 PATCH /api/v1/questions
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/patchV1Questions)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Questions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/questions/operation/patchV1Questions)
 
-В зависимости от тела запроса, метод позволяет:
+Depending on the request body, you can:
 
-- отметить [вопрос](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Questions) как просмотренный
-- отклонить вопрос
-- ответить на вопрос или отредактировать ответ
+- View question.
+- Reject question.
+- Answer question or edit the answer
 
-Все ответы продавцов проходят предварительную модерацию перед публикацией
+All seller responses undergo preliminary moderation before publication
 
-Отредактировать ответ на вопрос можно 1 раз в течение 60 дней после отправки ответа
+It is possible to edit a response to a question within 2 months (60 days), after the response has been submitted and only once
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Request body
 
@@ -38,14 +38,14 @@ PATCH /api/v1/questions
 
 | Code  | Description                         | Schema                        |
 | ----- | ----------------------------------- | ----------------------------- |
-| `200` | Успешно                             | `PatchV1QuestionsResponse200` |
-| `400` | Неправильный запрос                 | `responseFeedbackQuestionErr` |
-| `401` | Не авторизован                      | `object`                      |
-| `402` | Требуется платёж                    | `object`                      |
-| `403` | Доступ запрещён                     | `responseFeedbackQuestionErr` |
-| `404` | Не найдено                          | `responseFeedbackQuestionErr` |
-| `422` | Ошибка обработки параметров запроса | `responseFeedbackQuestionErr` |
-| `429` | Слишком много запросов              | `object`                      |
+| `200` | Success                             | `PatchV1QuestionsResponse200` |
+| `400` | Bad request                         | `responseFeedbackQuestionErr` |
+| `401` | Unauthorized                        | `object`                      |
+| `402` | Payment required                    | `object`                      |
+| `403` | Access denied                       | `responseFeedbackQuestionErr` |
+| `404` | Not found                           | `responseFeedbackQuestionErr` |
+| `422` | Error processing request parameters | `responseFeedbackQuestionErr` |
+| `429` | Too many requests                   | `object`                      |
 
 ## Call examples
 

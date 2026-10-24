@@ -1,29 +1,29 @@
 ---
-title: "История статусов для сборочных заданий трансграничных поставок"
-description: "Метод возвращает историю статусов для сборочных заданий трансграничных поставок. В песочнице этот метод всегда возвращает ответ 200."
+title: "Status History for Cross-Border Orders"
+description: "Returns status history for Cross-Border orders. In the sandbox, this method always returns the 200 response."
 ---
 
-# История статусов для сборочных заданий трансграничных поставок
+# Status History for Cross-Border Orders
 
 ```http
 POST /api/v3/orders/status/history
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatusHistory)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatusHistory)
 
-Метод возвращает историю [статусов](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) для [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) трансграничных поставок.
-В песочнице этот метод всегда возвращает ответ `200`.
+Returns status history for Cross-Border orders.
+In the sandbox, this method always returns the `200` response.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -31,15 +31,15 @@ POST /api/v3/orders/status/history
 
 ## Responses
 
-| Code  | Description            | Schema                                 |
-| ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `PostV3OrdersStatusHistoryResponse200` |
-| `400` | Неправильный запрос    | —                                      |
-| `401` | Не авторизован         | `object`                               |
-| `402` | Требуется платёж       | `object`                               |
-| `403` | Доступ запрещён        | `Error`                                |
-| `404` | Не найдено             | `Error`                                |
-| `429` | Слишком много запросов | `object`                               |
+| Code  | Description       | Schema                                 |
+| ----- | ----------------- | -------------------------------------- |
+| `200` | Success           | `PostV3OrdersStatusHistoryResponse200` |
+| `400` | Bad request       | —                                      |
+| `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
+| `403` | Access denied     | `Error`                                |
+| `404` | Not found         | `Error`                                |
+| `429` | Too many requests | `object`                               |
 
 ## Call examples
 

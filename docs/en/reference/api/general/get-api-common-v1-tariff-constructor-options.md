@@ -1,47 +1,47 @@
 ---
-title: "Получить информацию об опциях Конструктора тарифов"
-description: "Информацию об опциях Конструктора тарифов можно получить с токеном любой категории"
+title: "Get Information about Plan Builder Options"
+description: "You can get information about Plan Builder options with a token of any category."
 ---
 
-# Получить информацию об опциях Конструктора тарифов
+# Get Information about Plan Builder Options
 
 ```http
 GET /api/common/v1/tariff-constructor/options
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1TariffConstructorOptions)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1TariffConstructorOptions)
 
-Информацию об опциях Конструктора тарифов можно получить с токеном любой [категории](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov)
+You can get information about Plan Builder options with a token of any [category](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Token-categories).
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Сервисному** токену
+The method returns information about all options and option packages that the seller activated in the [Plan Builder](https://seller.wildberries.ru/tariff-constructor).
 
-Метод возвращает информацию обо всех опциях и пакетах опций, которые продавец подключил в [Конструкторе тарифов](https://seller.wildberries.ru/tariff-constructor).
+Options included in activated packages are returned in the `packages` array. Options activated outside of packages are returned in the `options` array.
 
-Опции, входящие в подключённые пакеты, возвращаются в массиве `packages`. Опции, подключённые вне пакетов, возвращаются в массиве `options`.
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Service** token
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск     |
-| ------ | -------- | -------- | ----------- |
-| 1 мин  | 1 запрос | 1 мин    | 10 запросов |
+| Period | Limit     | Interval | Burst       |
+| ------ | --------- | -------- | ----------- |
+| 1 min  | 1 request | 1 min    | 10 requests |
 
 ## Parameters
 
-| Name     | In    | Type     | Req. | Description                                             |
-| -------- | ----- | -------- | ---- | ------------------------------------------------------- |
-| `locale` | query | `string` | no   | Язык полей ответа: - `ru` — русский - `en` — английский |
+| Name     | In    | Type     | Req. | Description                                                        |
+| -------- | ----- | -------- | ---- | ------------------------------------------------------------------ |
+| `locale` | query | `string` | no   | Language of the response fields: - `ru` — Russian - `en` — English |
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `PlanBuilderOptionsInfo` |
-| `400` | Неправильный запрос    | `PlanBuilderErrors`      |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `Response4XX`            |
-| `404` | Не найдено             | `PlanBuilderErrors`      |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Успешно           | `PlanBuilderOptionsInfo` |
+| `400` | Bad request       | `PlanBuilderErrors`      |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `Response4XX`            |
+| `404` | Not found         | `PlanBuilderErrors`      |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

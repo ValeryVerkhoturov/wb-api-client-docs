@@ -1,32 +1,31 @@
 ---
-title: "Добавить данные СПОТ в поставку"
-description: "Метод добавляет данные СПОТ в поставку."
+title: "Add SPOT Data to Supply"
+description: "The method adds SPOT data to a supply. SPOT can only be added to a supply with the \"spotAvailable\":true flag."
 ---
 
-# Добавить данные СПОТ в поставку
+# Add SPOT Data to Supply
 
 ```http
 PUT /api/marketplace/v3/fbs/supplies/{supplyId}/spot
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/putV3FbsSuppliesSupplyIdSpot)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/putV3FbsSuppliesSupplyIdSpot)
 
-Метод добавляет данные СПОТ в поставку.
+The method adds SPOT data to a supply.
+SPOT can only be added to a [supply](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId) with the `"spotAvailable":true` flag.
 
-СПОТ можно добавить только в [поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId) с признаком `"spotAvailable":true`.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
 | Name       | In   | Type     | Req. | Description |
 | ---------- | ---- | -------- | ---- | ----------- |
-| `supplyId` | path | `string` | yes  | ID поставки |
+| `supplyId` | path | `string` | yes  | Supply ID   |
 
 ## Request body
 
@@ -34,15 +33,15 @@ PUT /api/marketplace/v3/fbs/supplies/{supplyId}/spot
 
 ## Responses
 
-| Code  | Description                   | Schema       |
-| ----- | ----------------------------- | ------------ |
-| `204` | Добавлено                     | —            |
-| `400` | Неправильный запрос           | `ApiErrorV3` |
-| `401` | Не авторизован                | `object`     |
-| `403` | Доступ запрещён               | `object`     |
-| `404` | Не найдено                    | `ApiErrorV3` |
-| `409` | Ошибка добавления данных СПОТ | `ApiErrorV3` |
-| `429` | Слишком много запросов        | `object`     |
+| Code  | Description                  | Schema       |
+| ----- | ---------------------------- | ------------ |
+| `204` | Added                        | —            |
+| `400` | Bad request                  | `ApiErrorV3` |
+| `401` | Unauthorized                 | `object`     |
+| `403` | Access denied                | `object`     |
+| `404` | Not found                    | `ApiErrorV3` |
+| `409` | Error while adding SPOT data | `ApiErrorV3` |
+| `429` | Too many requests            | `object`     |
 
 ## Call examples
 

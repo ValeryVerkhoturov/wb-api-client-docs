@@ -1,28 +1,28 @@
 ---
-title: "Изменение мест размещения в кампаниях с ручной ставкой"
-description: "Метод меняет места размещения в кампаниях с ручной ставкой и моделью оплаты за показы — cpm."
+title: "Changing Placements in Campaigns with Custom Bid"
+description: "The method allows you to change placements in campaigns with custom bid and per mille payment model — cpm."
 ---
 
-# Изменение мест размещения в кампаниях с ручной ставкой
+# Changing Placements in Campaigns with Custom Bid
 
 ```http
 PUT /adv/v0/auction/placements
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/putV0AuctionPlacements)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/putV0AuctionPlacements)
 
-Метод меняет места размещения в кампаниях с ручной ставкой и моделью оплаты за показы — `cpm`.
+The method allows you to change placements in campaigns with custom bid and per mille payment model — `cpm`.
 
-Для кампаний в статусах `4`, `9` и `11`.
+For campaigns in statuses `4`, `9` and `11`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Сервисный          | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Базовый с секретом | 1 сек  | 1 запрос  | 1 сек    | 1 запрос |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 s    | 1 request  | 1 s      | 1 request |
+| Service          | 1 s    | 1 request  | 1 s      | 1 request |
+| Base with secret | 1 s    | 1 request  | 1 s      | 1 request |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request |
 
 ## Request body
 
@@ -30,13 +30,13 @@ PUT /adv/v0/auction/placements
 
 ## Responses
 
-| Code  | Description            | Schema        |
-| ----- | ---------------------- | ------------- |
-| `204` | Успешно                | —             |
-| `400` | Неправильный запрос    | `response400` |
-| `401` | Не авторизован         | `object`      |
-| `403` | Доступ запрещён        | `object`      |
-| `429` | Слишком много запросов | `object`      |
+| Code  | Description       | Schema        |
+| ----- | ----------------- | ------------- |
+| `204` | Success           | —             |
+| `400` | Bad request       | `response400` |
+| `401` | Unauthorized      | `object`      |
+| `403` | Access denied     | `object`      |
+| `429` | Too many requests | `object`      |
 
 ## Call examples
 

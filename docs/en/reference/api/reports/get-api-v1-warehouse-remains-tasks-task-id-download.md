@@ -1,45 +1,45 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает отчёт об остатках на складах WB по ID задания на генерацию."
+title: "Get the Report"
+description: "Returns the report by task ID"
 ---
 
-# Получить отчёт
+# Get the Report
 
 ```http
 GET /api/v1/warehouse_remains/tasks/{task_id}/download
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт об остатках на складах · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Warehouses Inventory Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload)
 
-Метод возвращает отчёт об [остатках на складах WB](https://seller.wildberries.ru/analytics-reports/warehouse-remains) по ID [задания на генерацию](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains).
+Returns the report by task ID
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 1 запрос |
-| Базовый            | 1 ч    | 4 запроса | 15 мин   | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 1 request |
+| Service          | 1 min  | 1 request  | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request  | 1 min    | 1 request |
+| Base             | 1 h    | 4 requests | 15 min   | 1 request |
 
 ## Parameters
 
-| Name      | In   | Type     | Req. | Description             |
-| --------- | ---- | -------- | ---- | ----------------------- |
-| `task_id` | path | `string` | yes  | ID задания на генерацию |
+| Name      | In   | Type     | Req. | Description        |
+| --------- | ---- | -------- | ---- | ------------------ |
+| `task_id` | path | `string` | yes  | Generation task ID |
 
 ## Responses
 
-| Code  | Description            | Schema                                                |
-| ----- | ---------------------- | ----------------------------------------------------- |
-| `200` | Успешно                | `GetV1WarehouseRemainsTasksTaskIdDownloadResponse200` |
-| `204` | Нет данных             | —                                                     |
-| `400` | Неправильный запрос    | `Http4XXResponse`                                     |
-| `401` | Не авторизован         | `object`                                              |
-| `402` | Требуется платёж       | `object`                                              |
-| `403` | Доступ запрещён        | `object`                                              |
-| `404` | Не найдено             | `Http4XXResponse`                                     |
-| `429` | Слишком много запросов | `object`                                              |
+| Code  | Description       | Schema                                                |
+| ----- | ----------------- | ----------------------------------------------------- |
+| `200` | Success           | `GetV1WarehouseRemainsTasksTaskIdDownloadResponse200` |
+| `204` | No data           | —                                                     |
+| `400` | Bad request       | `Http4XXResponse`                                     |
+| `401` | Unauthorized      | `object`                                              |
+| `402` | Payment required  | `object`                                              |
+| `403` | Access denied     | `object`                                              |
+| `404` | Not found         | `Http4XXResponse`                                     |
+| `429` | Too many requests | `object`                                              |
 
 ## Call examples
 

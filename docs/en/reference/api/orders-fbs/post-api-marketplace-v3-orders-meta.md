@@ -1,38 +1,38 @@
 ---
-title: "Получить идентификаторы маркировки сборочных заданий"
-description: "Метод возвращает идентификаторы маркировки сборочных заданий и статусы их проверки."
+title: "Get Assembly Orders Label Identifiers"
+description: "The method returns label identifiers for assembly orders and their validation statuses."
 ---
 
-# Получить идентификаторы маркировки сборочных заданий
+# Get Assembly Orders Label Identifiers
 
 ```http
 POST /api/marketplace/v3/orders/meta
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta)
 
-Метод возвращает идентификаторы маркировки [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) и статусы их проверки.
+The method returns label identifiers for [assembly orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) and their validation statuses.
 
-Перечень идентификаторов маркировки, доступных для сборочного задания, можно получить в [списке новых сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3OrdersNew), поля `requiredMeta` и `optionalMeta`. Если поля `requiredMeta` и `optionalMeta` не содержат какой-либо идентификатор маркировки, значит, у сборочного задания не может быть этого идентификатора — и добавить его нельзя.
-Возможные идентификаторы маркировки:
+You can get the list of label identifiers available for an assembly order in the `requiredMeta` and `optionalMeta` fields in the response of the [Get New Assembly Orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3OrdersNew) method. If the `requiredMeta` and `optionalMeta` fields do not contain the label identifier, it means that this label identifier cannot be added to this assembly order.
+Possible label identifiers:
 
 - `imei` — [IMEI](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaImei)
-- `uin` — [УИН](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin)
+- `uin` — [UIN](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin)
 - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaGtin)
-- `sgtin` — [код маркировки Честного знака](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaSgtin)
-- `expiration` — [срок годности товара](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaExpiration)
-- `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
+- `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaSgtin)
+- `expiration` — [Expiration date](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaExpiration)
+- `customsDeclaration` — [customs declaration number](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **получения и удаления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting FBS label identifiers**:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -40,15 +40,15 @@ POST /api/marketplace/v3/orders/meta
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `v3.OrdersMetaAPI` |
-| `400` | Неправильный запрос    | `v3.APIError`      |
-| `401` | Не авторизован         | `object`           |
-| `402` | Требуется платёж       | `object`           |
-| `403` | Доступ запрещён        | `v3.APIError`      |
-| `404` | Не найдено             | `v3.APIError`      |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `v3.OrdersMetaAPI` |
+| `400` | Bad request       | `v3.APIError`      |
+| `401` | Unauthorized      | `object`           |
+| `402` | Payment required  | `object`           |
+| `403` | Access denied     | `v3.APIError`      |
+| `404` | Not found         | `v3.APIError`      |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

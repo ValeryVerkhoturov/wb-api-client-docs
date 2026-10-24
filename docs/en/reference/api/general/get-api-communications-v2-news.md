@@ -1,45 +1,46 @@
 ---
-title: "Получение новостей портала продавцов"
-description: "Метод позволяет получать новости портала продавцов. Для получения успешного ответа необходимо указать один из параметров from или fromID. За один запрос можно…"
+title: "Getting Seller Portal News"
+description: "The method allows getting news from the seller portal."
 ---
 
-# Получение новостей портала продавцов
+# Getting Seller Portal News
 
 ```http
 GET /api/communications/v2/news
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** API новостей · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** News API · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
 
-Метод позволяет получать новости портала продавцов.
-Для получения успешного ответа необходимо указать
-один из параметров `from` или `fromID`.
-За один запрос можно получить не более 100 новостей.
+The method allows getting news from the seller portal.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+To receive a successful response, one of the parameters `from` or `fromID` must be specified.
 
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос    |
+You can get up to 100 news items per request.
+
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
+
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request   |
 
 ## Parameters
 
-| Name     | In    | Type             | Req. | Description                                                                 |
-| -------- | ----- | ---------------- | ---- | --------------------------------------------------------------------------- |
-| `from`   | query | `string`         | no   | Дата, от которой необходимо выдать новости                                  |
-| `fromID` | query | `integer<int64>` | no   | ID новости, начиная с которой — включая её — нужно получить список новостей |
+| Name     | In    | Type             | Req. | Description                                                                        |
+| -------- | ----- | ---------------- | ---- | ---------------------------------------------------------------------------------- |
+| `from`   | query | `string`         | no   | Date from which to get news                                                        |
+| `fromID` | query | `integer<int64>` | no   | The news ID, starting from which — including it — you need to get the list of news |
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `GetV2NewsResponse200` |
-| `400` | Неправильный запрос    | —                      |
-| `401` | Не авторизован         | `object`               |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `GetV2NewsResponse200` |
+| `400` | Bad request       | —                      |
+| `401` | Unauthorized      | `object`               |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

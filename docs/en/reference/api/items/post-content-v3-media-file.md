@@ -1,47 +1,47 @@
 ---
-title: "Загрузить медиафайл"
-description: "Метод загружает и добавляет один медиафайл к карточке товара. Требования к изображениям: \\ максимум изображений для одной карточки товара — 30 \\ минимальное…"
+title: "Upload Media File"
+description: "Uploads and adds one media file for the listing. Requirements for images: \\ maximum images for each listing — 30, \\ minimal resolution – 700 × 900 pixels, \\…"
 ---
 
-# Загрузить медиафайл
+# Upload Media File
 
 ```http
 POST /content/v3/media/file
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Медиафайлы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/mediaFiles/operation/postV3MediaFile)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Media Files · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/mediaFiles/operation/postV3MediaFile)
 
-Метод загружает и добавляет один медиафайл к карточке товара.
-Требования к изображениям:
-\* максимум изображений для одной карточки товара — 30
-\* минимальное разрешение — 700x900 px
-\* максимальный размер — 32 Мб
-\* минимальное качество — 65%
-\* форматы — JPG, PNG, BMP, GIF (статичные), WebP
-Требования к видео:
-\* максимум одно видео для одной карточки товара
-\* максимальный размер — 50 Мб
-\* форматы — MOV, MP4
+Uploads and adds one media file for the listing.
+Requirements for images:
+\* maximum images for each listing  — 30,
+\* minimal resolution – 700 × 900 pixels,
+\* maximum size — 32 МB,
+\* minimal quality — 65%,
+\* formats — JPG, PNG, BMP, GIF (static), WebP.
+Requirements for video:
+\* maximum one video for each listing
+\* maximum size — 50 MB
+\* formats — MOV, MP4
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Медиафайлов**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **Media Files** methods:
 
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name             | In     | Type             | Req. | Description                                                                                                                                                                                                         |
-| ---------------- | ------ | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `X-Nm-Id`        | header | `string`         | yes  | Артикул WB                                                                                                                                                                                                          |
-| `X-Photo-Number` | header | `integer<int64>` | yes  | Номер медиафайла на загрузку, начинается с `1`. При загрузке видео всегда указывайте `1`. Чтобы добавить изображение к уже загруженным, номер медиафайла должен быть больше количества уже загруженных медиафайлов. |
+| Name             | In     | Type             | Req. | Description                                                                                                                                                       |
+| ---------------- | ------ | ---------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `X-Nm-Id`        | header | `string`         | yes  | WB item number                                                                                                                                                    |
+| `X-Photo-Number` | header | `integer<int64>` | yes  | Number of media file, starting from `1`. To add the video set `1`. To add the image to the uploaded ones, set file the number more then number of uploaded files. |
 
 ## Request body
 
@@ -49,14 +49,14 @@ POST /content/v3/media/file
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `PostV3MediaFileResponse200` |
-| `400` | Неправильный запрос    | `mediaErrors`                |
-| `401` | Не авторизован         | `object`                     |
-| `402` | Требуется платёж       | `object`                     |
-| `403` | Доступ запрещён        | `mediaErrors`                |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `PostV3MediaFileResponse200` |
+| `400` | Bad request       | `mediaErrors`                |
+| `401` | Unauthorized      | `object`                     |
+| `402` | Payment required  | `object`                     |
+| `403` | Access denied     | `mediaErrors`                |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

@@ -1,30 +1,30 @@
 ---
-title: "Данные по складам"
-description: "Метод формирует набор данных об остатках по складам."
+title: "Warehouse Data"
+description: "Forms a dataset for inventory by warehouses."
 ---
 
-# Данные по складам
+# Warehouse Data
 
 ```http
 POST /api/v2/stocks-report/offices
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** История остатков · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportOffices)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Stocks Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportOffices)
 
-Метод формирует набор данных об остатках по складам.
+Forms a dataset for inventory by warehouses.
 
-Данные по складам продавца приходят в агрегированном виде — по всем сразу, без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` и `"offices":[]`.
+The data on the seller warehouses are in an aggregated form — for all of them together without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` and `"offices":[]`.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -32,14 +32,14 @@ POST /api/v2/stocks-report/offices
 
 ## Responses
 
-| Code  | Description            | Schema                                 |
-| ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `PostV2StocksReportOfficesResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`                       |
-| `401` | Не авторизован         | `object`                               |
-| `402` | Требуется платёж       | `object`                               |
-| `403` | Доступ запрещён        | `ErrorObject403`                       |
-| `429` | Слишком много запросов | `object`                               |
+| Code  | Description       | Schema                                 |
+| ----- | ----------------- | -------------------------------------- |
+| `200` | Success           | `PostV2StocksReportOfficesResponse200` |
+| `400` | Bad request       | `ErrorObject400`                       |
+| `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
+| `403` | Access denied     | `ErrorObject403`                       |
+| `429` | Too many requests | `object`                               |
 
 ## Call examples
 

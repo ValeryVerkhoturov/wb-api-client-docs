@@ -1,41 +1,40 @@
 ---
-title: "Добавить товар в акцию"
-description: "Метод создаёт задание на загрузку товара в акцию. Состояние загрузки можно проверить с помощью отдельных методов."
+title: "Add Item to the Promo"
+description: "Creates a item upload for the promo. The upload status can be checked using separate methods. Not applicable for auto promos"
 ---
 
-# Добавить товар в акцию
+# Add Item to the Promo
 
 ```http
 POST /api/v1/calendar/promotions/upload
 ```
 
-**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Календарь акций · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/postV1CalendarPromotionsUpload)
+**Base URL:** `https://dp-calendar-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Promo Calendar · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/promoCalendar/operation/postV1CalendarPromotionsUpload)
 
-Метод создаёт задание на загрузку товара в [акцию](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar/operation/getV1CalendarPromotionsDetails).
-Состояние загрузки можно проверить с помощью [отдельных методов](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryTasks).
+Creates a item upload for the promo.
+The upload status can be checked using [separate methods](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryTasks).
+Not applicable for auto promos
 
-Данный метод неприменим для автоакций.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Promo Calendar** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Календарь акций**:
-
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request  |
 
 ## Responses
 
 | Code  | Description                         | Schema   |
 | ----- | ----------------------------------- | -------- |
-| `200` | Успешно                             | `object` |
-| `400` | Неправильный запрос                 | `object` |
-| `401` | Не авторизован                      | `object` |
-| `402` | Требуется платёж                    | `object` |
-| `403` | Доступ запрещён                     | `object` |
-| `422` | Ошибка обработки параметров запроса | `object` |
-| `429` | Слишком много запросов              | `object` |
+| `200` | Success                             | `object` |
+| `400` | Bad request                         | `object` |
+| `401` | Unauthorized                        | `object` |
+| `402` | Payment required                    | `object` |
+| `403` | Access denied                       | `object` |
+| `422` | Error processing request parameters | `object` |
+| `429` | Too many requests                   | `object` |
 
 ## Call examples
 

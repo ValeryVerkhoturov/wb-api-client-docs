@@ -1,25 +1,25 @@
 ---
-title: "Создать пропуск"
-description: "Метод создаёт пропуск продавца с привязкой к складу WB. Пропуск действует 48 часов со времени создания."
+title: "Create Pass"
+description: "Creates a seller pass. The pass is valid for 48 hours from the time of creation."
 ---
 
-# Создать пропуск
+# Create Pass
 
 ```http
 POST /api/v3/passes
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Пропуска FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsPasses/operation/postV3Passes)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Passes · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsPasses/operation/postV3Passes)
 
-Метод создаёт [пропуск продавца](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsPasses/operation/getV3Passes) с привязкой к складу WB.
-Пропуск действует 48 часов со времени создания.
+Creates a seller pass.
+The pass is valid for 48 hours from the time of creation.
 
-Максимум 1 запрос в 10 [минут](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца.
-Один запрос с кодами ответов `4XX` учитывается как 10 запросов.
+Maximum of 1 request per 10 [minutes](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account
+One request with `4XX` response codes is counted as 10 requests.
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -27,15 +27,15 @@ POST /api/v3/passes
 
 ## Responses
 
-| Code  | Description            | Schema                    |
-| ----- | ---------------------- | ------------------------- |
-| `201` | Создано                | `PostV3PassesResponse201` |
-| `400` | Неправильный запрос    | `Error`                   |
-| `401` | Не авторизован         | `object`                  |
-| `402` | Требуется платёж       | `object`                  |
-| `403` | Доступ запрещён        | `Error`                   |
-| `404` | Не найдено             | `Error`                   |
-| `429` | Слишком много запросов | `object`                  |
+| Code  | Description       | Schema                    |
+| ----- | ----------------- | ------------------------- |
+| `201` | Created           | `PostV3PassesResponse201` |
+| `400` | Bad request       | `Error`                   |
+| `401` | Unauthorized      | `object`                  |
+| `402` | Payment required  | `object`                  |
+| `403` | Access denied     | `Error`                   |
+| `404` | Not found         | `Error`                   |
+| `429` | Too many requests | `object`                  |
 
 ## Call examples
 

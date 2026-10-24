@@ -1,21 +1,20 @@
 ---
-title: "Список карточек товаров в корзине"
-description: "Метод возвращает список карточек товаров в корзине."
+title: "Listings in Trash"
+description: "Returns the listings in trash. To get \\\\more than 100\\\\ listings, use pagination. 1. Make the first request:"
 ---
 
-# Список карточек товаров в корзине
+# Listings in Trash
 
 ```http
 POST /content/v2/get/cards/trash
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2GetCardsTrash)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2GetCardsTrash)
 
-Метод возвращает список карточек товаров в корзине.
+Returns the listings in trash.
+To get \*\*more than 100\*\* listings, use pagination.
 
-Чтобы получить \*\*больше 100\*\* карточек товаров, используйте пагинацию.
-
-1. Сделайте первый запрос:
+1. Make the first request:
 
 ```
         {
@@ -30,36 +29,36 @@ POST /content/v2/get/cards/trash
         }
 ```
 
-Чтобы получать только карточки товаров, которые были перенесены в корзину после выгрузки, используйте сортировку по возрастанию: `"sort":{"ascending":true}`. 2. Скопируйте `"trashedAt":"\*\*\*","nmID":\*\*\*` из `cursor` ответа и вставьте в `cursor` запроса. 3. Повторите запрос. 4. Повторяйте пункты 2 и 3, пока значение `total` в ответе не станет меньше, чем значение `limit` в запросе. Это будет означать, что вы получили все карточки.
-Чтобы получать только карточки товаров, которые были перенесены в корзину после предыдущей выгрузки данных:
+To get only listings that were transferred to the trash after data export, use ascending sorting: `"sort":{"ascending":true}`. 2. Copy `"trashedAt":"\*\*\*","nmID":\*\*\*` from the `cursor` in the response and insert into the `cursor` of your next request. 3. Make the next request. 4. Repeat 2 and 3 until `total` value in the response is less than the `limit` value in the request. This will mean you got all listings.
+To get only listings that were transferred to the trash after the previous data export:
 
-1. Сохраните поля `"cursor":{"trashedAt":"\*\*\*","nmID":\*\*\*}` из последнего ответа предыдущей выгрузки. При выгрузке используйте сортировку по возрастанию: `"sort":{"ascending":true}`.
-2. Укажите в первом запросе сохранённые поля `"cursor":{"trashedAt":"\*\*\*","nmID":"\*\*\*"}`. Продолжайте использовать сортировку по возрастанию.
-3. Сохраните поля `"cursor":{"trashedAt":"\*\*\*","nmID":\*\*\*}` из последнего ответа текущей выгрузки.
+1. Save `"trashedAt":"\*\*\*","nmID":\*\*\*` from the `cursor` of the previous data export. When data export, use ascending sorting: `"sort":{"ascending":true}`.
+2. Specify the `"cursor":{"trashedAt":"\*\*\*","nmID":"\*\*\*"}` saved fields in the first request. Keep using ascending sorting.
+3. Save the `"cursor":{"trashedAt":"\*\*\*","nmID":"\*\*\*"}` fields from the last response of the current data export.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-| Период               | Лимит        | Интервал | Всплеск    |
-| -------------------- | ------------ | -------- | ---------- |
-| 1 мин                | 100 запросов | 600 мс   | 5 запросов |
-| Исключение — методы: |
+| Period                      | Limit        | Interval | Burst      |
+| --------------------------- | ------------ | -------- | ---------- |
+| 1 min                       | 100 requests | 600 ms   | 5 requests |
+| Exceptions are the methods: |
 
-- [создания карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
-- [создания карточек товаров с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
-- [редактирования карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
-- [восстановления карточек товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
-- [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
-- [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name     | In    | Type     | Req. | Description                                                                                                                                                                              |
-| -------- | ----- | -------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `locale` | query | `string` | no   | Язык полей ответа `name`, `value` и `object`: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
+| Name     | In    | Type     | Req. | Description                                                                                                                                                                                |
+| -------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `locale` | query | `string` | no   | Language for response of the `name`, `value` and `object` fields: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
 
 ## Request body
 
@@ -67,14 +66,14 @@ POST /content/v2/get/cards/trash
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `PostV2GetCardsTrashResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`    |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `responseBodyContentError403`    |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `PostV2GetCardsTrashResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`    |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `responseBodyContentError403`    |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

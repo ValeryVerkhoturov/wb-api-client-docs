@@ -1,42 +1,40 @@
 ---
-title: "Детализация необработанной загрузки"
-description: "Метод возвращает информацию о товарах и ошибках в товарах из загрузки в обработке."
+title: "Unprocessed Upload Details"
+description: "Returns items in processing upload including item errors."
 ---
 
-# Детализация необработанной загрузки
+# Unprocessed Upload Details
 
 ```http
 GET /api/v2/buffer/goods/task
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2BufferGoodsTask)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2BufferGoodsTask)
 
-Метод возвращает информацию о товарах и ошибках в товарах из загрузки в обработке.
+Returns items in processing upload including item errors.
 
-Необработанная загрузка — это загрузка скидок в [календаре акций](https://dev.wildberries.ru/openapi/promotion#tag/promoCalendar). Такие скидки применятся к товарам только в момент старта акции.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
-
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `object`        |
-| `400` | Неправильный запрос    | `ResponseError` |
-| `401` | Не авторизован         | `object`        |
-| `403` | Доступ запрещён        | `ResponseError` |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `object`        |
+| `400` | Bad request       | `ResponseError` |
+| `401` | Unauthorized      | `object`        |
+| `403` | Access denied     | `ResponseError` |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

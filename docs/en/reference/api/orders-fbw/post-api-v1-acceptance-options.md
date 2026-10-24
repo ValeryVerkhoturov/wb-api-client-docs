@@ -1,32 +1,32 @@
 ---
-title: "Опции приёмки"
-description: "Метод временно отключён"
+title: "Acceptance Options"
+description: "The method is temporary disabled"
 ---
 
-# Опции приёмки
+# Acceptance Options
 
 ```http
 POST /api/v1/acceptance/options
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация для формирования поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/postV1AcceptanceOptions)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Information for Forming Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/postV1AcceptanceOptions)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?id=570)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Сервисный          | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый с секретом | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый            | 1 ч    | 2 запроса  | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 6 requests | 10 s     | 6 requests |
+| Service          | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base with secret | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Parameters
 
-| Name          | In    | Type             | Req. | Description                                                                                             |
-| ------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------- |
-| `warehouseID` | query | `integer<int64>` | no   | ID склада. Если параметр не указан, возвращаются данные по всем складам. \*\*Максимум одно значение\*\* |
+| Name          | In    | Type             | Req. | Description                                                                                                        |
+| ------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------ |
+| `warehouseID` | query | `integer<int64>` | no   | Warehouse ID. If the parameter is not specified, data for all warehouses is returned. \*\*Maximum is one value\*\* |
 
 ## Request body
 
@@ -34,15 +34,15 @@ POST /api/v1/acceptance/options
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `models.OptionsResultModel` |
-| `400` | Некорректный запрос    | `models.ErrorModel`         |
-| `401` | Не авторизован         | `object`                    |
-| `402` | Требуется платёж       | `object`                    |
-| `403` | Доступ запрещён        | `object`                    |
-| `404` | Не найдено             | —                           |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `models.OptionsResultModel` |
+| `400` | Incorrect request | `models.ErrorModel`         |
+| `401` | Unauthorized      | `object`                    |
+| `402` | Payment required  | `object`                    |
+| `403` | Access denied     | `object`                    |
+| `404` | Not found         | —                           |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

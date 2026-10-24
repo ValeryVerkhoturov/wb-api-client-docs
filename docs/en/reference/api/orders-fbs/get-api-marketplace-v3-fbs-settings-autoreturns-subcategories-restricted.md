@@ -1,46 +1,41 @@
 ---
-title: "Получить предметы, которые не хранятся на складах WB"
-description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
+title: "Get Subcategories That Can't Be Returned to the Warehouse"
+description: "The method returns the list of subcategory IDs those items cannot be stored in the WB warehouses and will be returned to the pickup point automatically."
 ---
 
-# Получить предметы, которые не хранятся на складах WB
+# Get Subcategories That Can't Be Returned to the Warehouse
 
 ```http
 GET /api/marketplace/v3/fbs/settings/autoreturns/subcategories/restricted
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Настройки автовозврата · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Auto-return Settings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену,
-**Базовому** токену **с секретом**
+The method returns the list of subcategory IDs those items cannot be stored in the WB warehouses and will be returned to the pickup point automatically.
 
-Метод возвращает список ID предметов, товары которых не могут храниться на складах WB и будут возвращены в ПВЗ автоматически.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
-| Name    | In    | Type             | Req. | Description                                                                                                                                                                                                                                              |
-| ------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `next`  | query | `integer<int64>` | yes  | Параметр пагинации. Устанавливает значение, с которого надо получить следующий пакет данных. Для получения полного списка данных должен быть равен `0` в первом запросе. Для следующих запросов необходимо брать значения из одноимённого поля в ответе. |
-| `limit` | query | `integer<int32>` | yes  | Количество предметов в ответе                                                                                                                                                                                                                            |
+| Name    | In    | Type             | Req. | Description                                                                                                                                                                                                                |
+| ------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `next`  | query | `integer<int64>` | yes  | Pagination parameter. Sets the value from which to retrieve the next batch. It should start at 0 to get the full list of data. For the subsequent requests, you must take the value from the `next` field in the response. |
+| `limit` | query | `integer<int32>` | yes  | Number of subcategories in the response                                                                                                                                                                                    |
 
 ## Responses
 
-| Code  | Description            | Schema                                                          |
-| ----- | ---------------------- | --------------------------------------------------------------- |
-| `200` | Успешно                | `GetV3FbsSettingsAutoreturnsSubcategoriesRestrictedResponse200` |
-| `400` | Неправильный запрос    | `ApiErrorV3`                                                    |
-| `401` | Не авторизован         | `object`                                                        |
-| `403` | Доступ запрещён        | `Response4XX`                                                   |
-| `429` | Слишком много запросов | `object`                                                        |
+| Code  | Description         | Schema                                                          |
+| ----- | ------------------- | --------------------------------------------------------------- |
+| `200` | Успешно             | `GetV3FbsSettingsAutoreturnsSubcategoriesRestrictedResponse200` |
+| `400` | Неправильный запрос | `ApiErrorV3`                                                    |
+| `401` | Unauthorized        | `object`                                                        |
+| `403` | Access denied       | `Response4XX`                                                   |
+| `429` | Too many requests   | `object`                                                        |
 
 ## Call examples
 

@@ -1,56 +1,49 @@
 ---
-title: "Список отзывов"
-description: "Метод возвращает список отзывов по заданным фильтрам. Вы можете: - получить данные обработанных и необработанных отзывов. Отзыв считается обработанным, если…"
+title: "Feedbacks List"
+description: "The method allows you to get a list of feedbacks by the specified parameters with pagination and sorting"
 ---
 
-# Список отзывов
+# Feedbacks List
 
 ```http
 GET /api/v1/feedbacks
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/feedbacks/operation/getV1Feedbacks)
 
-Метод возвращает список отзывов по заданным фильтрам. Вы можете:
+The method allows you to get a list of feedbacks by the specified parameters with pagination and sorting
 
-- получить данные обработанных и необработанных отзывов.
-  Отзыв считается обработанным, если выполняется одно из условий:
-- на отзыв получен ответ
-- отзыв содержит только оценку (без текста и фото)
-- сортировать отзывы по дате
-- настроить пагинацию и количество отзывов в ответе
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
-
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name         | In    | Type             | Req. | Description                                                       |
-| ------------ | ----- | ---------------- | ---- | ----------------------------------------------------------------- |
-| `isAnswered` | query | `boolean`        | yes  | Вернуть только обработанные отзывы: - `true` — да - `false` — нет |
-| `nmId`       | query | `integer<int64>` | no   | Артикул WB                                                        |
-| `take`       | query | `integer<int64>` | yes  | Количество отзывов (max. 5 000)                                   |
-| `skip`       | query | `integer<int64>` | yes  | Количество отзывов для пропуска (max. 199990)                     |
-| `order`      | query | `string`         | no   | Сортировка отзывов по дате (dateAsc/dateDesc)                     |
-| `dateFrom`   | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp                      |
-| `dateTo`     | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp                       |
+| Name         | In    | Type             | Req. | Description                                                    |
+| ------------ | ----- | ---------------- | ---- | -------------------------------------------------------------- |
+| `isAnswered` | query | `boolean`        | yes  | Return only processed feedbacks: - `true` — yes - `false` — no |
+| `nmId`       | query | `integer<int64>` | no   | WB item number                                                 |
+| `take`       | query | `integer<int64>` | yes  | Number of feedbacks (max. 5 000)                               |
+| `skip`       | query | `integer<int64>` | yes  | Number of feedbacks for skip (max. 199990)                     |
+| `order`      | query | `string`         | no   | Sorting of feedbacks by date (dateAsc/dateDesc)                |
+| `dateFrom`   | query | `integer<int64>` | no   | The start date of the period in Unix timestamp format          |
+| `dateTo`     | query | `integer<int64>` | no   | The end date of the period in Unix timestamp format            |
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `GetV1FeedbacksResponse200`   |
-| `400` | Неправильный запрос    | `responseFeedbackQuestionErr` |
-| `401` | Не авторизован         | `object`                      |
-| `402` | Требуется платёж       | `object`                      |
-| `403` | Доступ запрещён        | `responseFeedbackQuestionErr` |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `GetV1FeedbacksResponse200`   |
+| `400` | Bad request       | `responseFeedbackQuestionErr` |
+| `401` | Unauthorized      | `object`                      |
+| `402` | Payment required  | `object`                      |
+| `403` | Access denied     | `responseFeedbackQuestionErr` |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

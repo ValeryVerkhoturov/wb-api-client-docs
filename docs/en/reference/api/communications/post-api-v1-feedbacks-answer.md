@@ -1,28 +1,28 @@
 ---
-title: "Ответить на отзыв"
-description: "Метод позволяет ответить на отзыв покупателя."
+title: "Reply to Feedback"
+description: "Allows you to respond to the feedback."
 ---
 
-# Ответить на отзыв
+# Reply to Feedback
 
 ```http
 POST /api/v1/feedbacks/answer
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/postV1FeedbacksAnswer)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/feedbacks/operation/postV1FeedbacksAnswer)
 
-Метод позволяет ответить на [отзыв](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks) покупателя.
+Allows you to respond to the feedback.
 
-ID отзыва не валидируется. Если в запросе вы передали некорректный ID, вы не получите ошибку.
+There is no validation by `feedback ID`: if an incorrect value is provided in the request, you will not receive an error.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Request body
 
@@ -30,14 +30,14 @@ ID отзыва не валидируется. Если в запросе вы �
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `204` | Успешно                | —                     |
-| `400` | Неправильный запрос    | `standardizedFQError` |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `403` | Доступ запрещён        | `object`              |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `204` | Success           | —                     |
+| `400` | Bad request       | `standardizedFQError` |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `403` | Access denied     | `object`              |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

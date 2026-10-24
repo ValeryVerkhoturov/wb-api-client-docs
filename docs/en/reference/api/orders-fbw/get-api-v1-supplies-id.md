@@ -1,45 +1,45 @@
 ---
-title: "Детали поставки"
-description: "Метод возвращает детали поставки по ID."
+title: "Supply Details"
+description: "The method returns supply details by ID."
 ---
 
-# Детали поставки
+# Supply Details
 
 ```http
 GET /api/v1/supplies/{ID}
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация о поставках · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesId)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Supplies Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesId)
 
-Метод возвращает детали поставки по ID.
+The method returns supply details by ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 мин  | 30 запросов | 2 сек    | 10 запросов |
-| Сервисный          | 1 мин  | 30 запросов | 2 сек    | 10 запросов |
-| Базовый с секретом | 1 мин  | 30 запросов | 2 сек    | 10 запросов |
-| Базовый            | 1 ч    | 2 запроса   | 30 мин   | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 min  | 30 requests | 2 s      | 10 requests |
+| Service          | 1 min  | 30 requests | 2 s      | 10 requests |
+| Base with secret | 1 min  | 30 requests | 2 s      | 10 requests |
+| Base             | 1 h    | 2 requests  | 30 min   | 1 request   |
 
 ## Parameters
 
-| Name           | In    | Type             | Req. | Description                                                                                                                |
-| -------------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------- |
-| `ID`           | path  | `integer<int64>` | yes  | ID поставки или заказа                                                                                                     |
-| `isPreorderID` | query | `boolean`        | no   | Поиск по: - `true` — ID заказа, если в `ID` передаёте ID заказа - `false` — ID поставки, если в `ID` передаёте ID поставки |
+| Name           | In    | Type             | Req. | Description                                                                                                               |
+| -------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------- |
+| `ID`           | path  | `integer<int64>` | yes  | ID of the supply or the order                                                                                             |
+| `isPreorderID` | query | `boolean`        | no   | Search by: - `true` — order ID, if you pass the order ID in `ID` - `false` — supply ID, if you pass the supply ID in `ID` |
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `models.SupplyDetails` |
-| `400` | Неправильный запрос    | `models.ErrorModel`    |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `object`               |
-| `404` | Не найдено             | `models.ErrorModel`    |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `models.SupplyDetails` |
+| `400` | Bad request       | `models.ErrorModel`    |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `object`               |
+| `404` | Not found         | `models.ErrorModel`    |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

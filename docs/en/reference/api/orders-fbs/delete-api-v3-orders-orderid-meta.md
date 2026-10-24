@@ -1,55 +1,54 @@
 ---
-title: "Удалить идентификаторы маркировки сборочного задания"
-description: "Метод удаляет значение идентификаторов маркировки сборочного задания для переданного ключа."
+title: "Delete Assembly Order Label Identifiers"
+description: "Removes all assembly order label identifiers values for the passed key."
 ---
 
-# Удалить идентификаторы маркировки сборочного задания
+# Delete Assembly Order Label Identifiers
 
 ```http
 DELETE /api/v3/orders/{orderId}/meta
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/deleteV3OrdersOrderIdMeta)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/deleteV3OrdersOrderIdMeta)
 
-Метод удаляет значение [идентификаторов маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) для переданного ключа.
+Removes all assembly order label identifiers values for the passed key.
 
-Возможные идентификаторы маркировки:
+Possible label identifiers are:
 
 - `imei` — [IMEI](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaImei)
-- `uin` — [УИН](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin)
+- `uin` — [UIN](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin)
 - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaGtin)
-- `sgtin` — [код маркировки Честного знака](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaSgtin)
-- `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
-  Можно передать только один ключ.
+- `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaSgtin)
+- `customsDeclaration` — [customs declaration number](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **получения и удаления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting FBS label identifiers**:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
-| Name  | In    | Type     | Req. | Description                                                                        |
-| ----- | ----- | -------- | ---- | ---------------------------------------------------------------------------------- |
-| `key` | query | `string` | yes  | Название идентификаторов маркировки для удаления. Передаётся только одно значение. |
+| Name  | In    | Type     | Req. | Description                            |
+| ----- | ----- | -------- | ---- | -------------------------------------- |
+| `key` | query | `string` | yes  | Name of the label identifier to remove |
 
 ## Responses
 
-| Code  | Description                                | Schema   |
-| ----- | ------------------------------------------ | -------- |
-| `204` | Удалено                                    | —        |
-| `400` | Неправильный запрос                        | `Error`  |
-| `401` | Не авторизован                             | `object` |
-| `402` | Требуется платёж                           | `object` |
-| `403` | Доступ запрещён                            | `Error`  |
-| `409` | Ошибка удаления идентификаторов маркировки | `Error`  |
-| `429` | Слишком много запросов                     | `object` |
+| Code  | Description                      | Schema   |
+| ----- | -------------------------------- | -------- |
+| `204` | Deleted                          | —        |
+| `400` | Bad request                      | `Error`  |
+| `401` | Unauthorized                     | `object` |
+| `402` | Payment required                 | `object` |
+| `403` | Access denied                    | `Error`  |
+| `409` | Error deleting label identifiers | `Error`  |
+| `429` | Too many requests                | `object` |
 
 ## Call examples
 

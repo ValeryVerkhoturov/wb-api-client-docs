@@ -1,46 +1,46 @@
 ---
-title: "Завершение кампании"
-description: "Метод завершает кампании в статусах: - 9 — активна - 11 — пауза"
+title: "Stop Campaign"
+description: "The method allows to end campaigns in statuses: - 9 — active - 11 — paused"
 ---
 
-# Завершение кампании
+# Stop Campaign
 
 ```http
 GET /adv/v0/stop
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0Stop)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0Stop)
 
-Метод завершает [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусах:
+The method allows to end campaigns in statuses:
 
-- `9` — активна
-- `11` — пауза
+- `9` — active
+- `11` — paused
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
 | Name | In    | Type             | Req. | Description |
 | ---- | ----- | ---------------- | ---- | ----------- |
-| `id` | query | `integer<int64>` | yes  | ID кампании |
+| `id` | query | `integer<int64>` | yes  | Campaign ID |
 
 ## Responses
 
-| Code  | Description            | Schema            |
-| ----- | ---------------------- | ----------------- |
-| `200` | Успешно                | —                 |
-| `400` | Неправильный запрос    | `Http400Response` |
-| `401` | Не авторизован         | `object`          |
-| `403` | Доступ запрещён        | `object`          |
-| `422` | Статус не изменен      | `string`          |
-| `429` | Слишком много запросов | `object`          |
+| Code  | Description        | Schema            |
+| ----- | ------------------ | ----------------- |
+| `200` | Success            | —                 |
+| `400` | Bad request        | `Http400Response` |
+| `401` | Unauthorized       | `object`          |
+| `403` | Access denied      | `object`          |
+| `422` | Status not changed | `string`          |
+| `429` | Too many requests  | `object`          |
 
 ## Call examples
 

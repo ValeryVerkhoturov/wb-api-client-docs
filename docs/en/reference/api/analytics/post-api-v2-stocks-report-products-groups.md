@@ -1,30 +1,30 @@
 ---
-title: "Данные по группам"
-description: "Метод формирует набор данных об остатках по группам товаров."
+title: "Group Data"
+description: "Forms a dataset for inventory by item group."
 ---
 
-# Данные по группам
+# Group Data
 
 ```http
 POST /api/v2/stocks-report/products/groups
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** История остатков · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsGroups)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Stocks Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsGroups)
 
-Метод формирует набор данных об остатках по группам товаров.
+Forms a dataset for inventory by item group.
 
-Группа товаров описывается кортежем `subjectID, brandName, tagID`.
+The item group is described by a tuple of `subjectID, brandName, tagID`.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -32,14 +32,14 @@ POST /api/v2/stocks-report/products/groups
 
 ## Responses
 
-| Code  | Description            | Schema                                        |
-| ----- | ---------------------- | --------------------------------------------- |
-| `200` | Успешно                | `PostV2StocksReportProductsGroupsResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`                              |
-| `401` | Не авторизован         | `object`                                      |
-| `402` | Требуется платёж       | `object`                                      |
-| `403` | Доступ запрещён        | `ErrorObject403`                              |
-| `429` | Слишком много запросов | `object`                                      |
+| Code  | Description       | Schema                                        |
+| ----- | ----------------- | --------------------------------------------- |
+| `200` | Success           | `PostV2StocksReportProductsGroupsResponse200` |
+| `400` | Bad request       | `ErrorObject400`                              |
+| `401` | Unauthorized      | `object`                                      |
+| `402` | Payment required  | `object`                                      |
+| `403` | Access denied     | `ErrorObject403`                              |
+| `429` | Too many requests | `object`                                      |
 
 ## Call examples
 

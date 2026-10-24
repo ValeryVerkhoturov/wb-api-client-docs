@@ -1,33 +1,33 @@
 ---
-title: "Получить список стран ОКСМ"
-description: "Метод возвращает список стран ОКСМ — Общероссийского классификатора стран мира — с полными названиями и кодами."
+title: "Get the OKSM Country List"
+description: "The method returns a list of OKSM — All-Russian Classifier of World Countries — countries with their full names and codes."
 ---
 
-# Получить список стран ОКСМ
+# Get the OKSM Country List
 
 ```http
 GET /api/marketplace/v3/fbs/dictionaries/countries/oksm
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm)
 
-Метод возвращает список стран ОКСМ — Общероссийского классификатора стран мира — с полными названиями и кодами.
+The method returns a list of OKSM — All-Russian Classifier of World Countries — countries with their full names and codes.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema              |
-| ----- | ---------------------- | ------------------- |
-| `200` | Успешно                | `CountriesOKSMList` |
-| `401` | Не авторизован         | `object`            |
-| `403` | Доступ запрещён        | `object`            |
-| `429` | Слишком много запросов | `object`            |
+| Code  | Description       | Schema              |
+| ----- | ----------------- | ------------------- |
+| `200` | Success           | `CountriesOKSMList` |
+| `401` | Unauthorized      | `object`            |
+| `403` | Access denied     | `object`            |
+| `429` | Too many requests | `object`            |
 
 ## Call examples
 

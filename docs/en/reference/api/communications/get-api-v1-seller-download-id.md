@@ -1,45 +1,45 @@
 ---
-title: "Получить файл из сообщения"
-description: "Метод возвращает файл или изображение из сообщения по его ID."
+title: "Get File from the Message"
+description: "The method provides a file or image from the message by its ID."
 ---
 
-# Получить файл из сообщения
+# Get File from the Message
 
 ```http
 GET /api/v1/seller/download/{id}
 ```
 
-**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/getV1SellerDownloadId)
+**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Buyers Chat · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/buyersChat/operation/getV1SellerDownloadId)
 
-Метод возвращает файл или изображение из сообщения по его ID.
+The method provides a file or image from the message by its ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Сервисный          | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый с секретом | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый            | 1 ч    | 10 запросов | 6 мин    | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 10 s   | 10 requests | 1 s      | 10 requests |
+| Service          | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base with secret | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base             | 1 h    | 10 requests | 6 min    | 1 request   |
 
 ## Parameters
 
-| Name | In   | Type     | Req. | Description                                                                                                                                                             |
-| ---- | ---- | -------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id` | path | `string` | yes  | ID файла, см. значение поля `downloadID` в методе [События чатов](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents) |
+| Name | In   | Type     | Req. | Description                                                                                                                                                           |
+| ---- | ---- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id` | path | `string` | yes  | File ID from the `downloadID` field in the [chat events](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents) method |
 
 ## Responses
 
-| Code  | Description              | Schema                             |
-| ----- | ------------------------ | ---------------------------------- |
-| `200` | Успешно                  | `string`                           |
-| `202` | Файл на модерации        | `GetV1SellerDownloadIdResponse202` |
-| `400` | Неправильный запрос      | `GetV1SellerDownloadIdResponse400` |
-| `401` | Не авторизован           | `object`                           |
-| `402` | Требуется платёж         | `object`                           |
-| `403` | Доступ запрещён          | `object`                           |
-| `429` | Слишком много запросов   | `object`                           |
-| `451` | Файл не прошёл модерацию | `GetV1SellerDownloadIdResponse451` |
+| Code  | Description                  | Schema                             |
+| ----- | ---------------------------- | ---------------------------------- |
+| `200` | Success                      | `string`                           |
+| `202` | The file is under moderation | `GetV1SellerDownloadIdResponse202` |
+| `400` | Bad request                  | `GetV1SellerDownloadIdResponse400` |
+| `401` | Unauthorized                 | `object`                           |
+| `402` | Payment required             | `object`                           |
+| `403` | Access denied                | `object`                           |
+| `429` | Too many requests            | `object`                           |
+| `451` | Moderation failed            | `GetV1SellerDownloadIdResponse451` |
 
 ## Call examples
 

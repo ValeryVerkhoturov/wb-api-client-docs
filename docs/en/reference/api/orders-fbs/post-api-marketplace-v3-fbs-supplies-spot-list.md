@@ -1,30 +1,29 @@
 ---
-title: "Получить данные СПОТ для списка поставок"
-description: "Метод возвращает данные СПОТ для списка поставок."
+title: "Get SPOT Data for Supply List"
+description: "The method returns SPOT data for a list of supplies. You can get SPOT data only if all of the following conditions are met: - the supply is in the delivery…"
 ---
 
-# Получить данные СПОТ для списка поставок
+# Get SPOT Data for Supply List
 
 ```http
 POST /api/marketplace/v3/fbs/supplies/spot/list
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList)
 
-Метод возвращает данные СПОТ для списка поставок.
+The method returns SPOT data for a list of supplies.
+You can get SPOT data only if all of the following conditions are met:
 
-Вы можете получить данные СПОТ, только если выполняются все условия:
+- the supply is in the delivery stage
+- the seller is registered in any EAEU country other than the Russian Federation
+- the destination warehouse is located in the Russian Federation
 
-- поставка находится на этапе доставки
-- продавец зарегистрирован в любой стране ЕАЭС кроме РФ
-- склад назначения находится в РФ
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -32,13 +31,13 @@ POST /api/marketplace/v3/fbs/supplies/spot/list
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `SupplySpotDataResponse` |
-| `400` | Неправильный запрос    | `ApiErrorV3`             |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `object`                 |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `SupplySpotDataResponse` |
+| `400` | Bad request       | `ApiErrorV3`             |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `object`                 |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

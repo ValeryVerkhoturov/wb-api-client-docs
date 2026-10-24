@@ -1,45 +1,41 @@
 ---
-title: "Получить размеры товара с ценами"
-description: "Метод возвращает информацию обо всех размерах одного товара: цены, валюту, общие скидки и скидки для WB Клуба."
+title: "Get Item Sizes with Prices"
+description: "Returns sizes data for the item. Only for items from categories where size price setting is available. For these items \"editableSizePrice\":true."
 ---
 
-# Получить размеры товара с ценами
+# Get Item Sizes with Prices
 
 ```http
 GET /api/v2/list/goods/size/nm
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm)
 
-Метод возвращает информацию обо всех размерах одного товара: цены, валюту, общие скидки и скидки для [WB Клуба](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskClubDiscount).
+Returns sizes data for the item. Only for items from categories where size price setting is available. For these items `"editableSizePrice":true`.
 
-Работает только для товаров из категорий, где можно устанавливать цены отдельно для разных размеров. Для таких товаров `"editableSizePrice":true`.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-Чтобы получить информацию о самом товаре, используйте [отдельный метод](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter).
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
-
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `object`        |
-| `400` | Неправильный запрос    | `ResponseError` |
-| `401` | Не авторизован         | `object`        |
-| `402` | Требуется платёж       | `object`        |
-| `403` | Доступ запрещён        | `ResponseError` |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `object`        |
+| `400` | Bad request       | `ResponseError` |
+| `401` | Unauthorized      | `object`        |
+| `402` | Payment required  | `object`        |
+| `403` | Access denied     | `ResponseError` |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

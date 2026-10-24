@@ -1,53 +1,47 @@
 ---
-title: "Получить статусы сборочных заданий"
-description: "Метод возвращает статусы сборочных заданий по их ID."
+title: "Get Orders Statuses"
+description: "Returns the statuses of orders based on the provided list of assembly order IDs supplierStatus is a status of an order. The trigger for its change is the…"
 ---
 
-# Получить статусы сборочных заданий
+# Get Orders Statuses
 
 ```http
 POST /api/v3/dbw/orders/status
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus)
 
-Метод возвращает статусы сборочных заданий по их ID.
+Returns the statuses of orders based on the provided list of assembly order IDs
+`supplierStatus` is a status of an order. The trigger for its change is the action of the seller himself.
+Possible values for this field are:
 
-`supplierStatus` — статус сборочного задания.
-Триггер его изменения — действие самого продавца.
-Возможные значения `supplierStatus`:
+| Status                                                      | Description               | How to move an order to this status                                                                                                      |
+| ----------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `new`                                                       | \*\*New order\*\*         |                                                                                                                                          |
+| `confirm`                                                   | \*\*Order on assembly\*\* | [Transfer to assembly](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdConfirm)<br> | `complete` | \*\*Order on delivery\*\*<br> | [Transfer to delivery](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatusDeliver)<br> | `receive` | \*\*Received by the buyer\*\*<br> | Changed by the courier<br> | `reject` | \*\*Declined upon receipt\*\*<br> | Changed by the courier<br> | `cancel` | \*\*Canceled by the seller\*\* | [Cancel the order](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdCancel)<br> | `cancel\_missed\_call` | \*\*Cancellation due to unreachable buyer\*\* | The status changes automatically |
+| `wbStatus` is a status of an order on the Wildberries side. |
+| Possible values for this field are:                         |
 
-| Статус    | Описание                        | Как перевести сборочное задание в данный статус                                                                                                           |
-| --------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `new`     | \*\*Новое сборочное задание\*\* |                                                                                                                                                           |
-| `confirm` | \*\*На сборке\*\*               | [Перевести сборочное задание на сборку](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdConfirm)<br> | `complete` | \*\*В доставке\*\*                     | [Перевести сборочное задание в доставку](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatusDeliver) |
-| `receive` | \*\*Получено покупателем\*\*    | Переводится курьером<br>                                                                                                                                  | `reject`   | \*\*Отказ покупателя при получении\*\* | Переводится курьером<br>                                                                                                                             | `cancel` | \*\*Отменено продавцом\*\* | [Отменить сборочное задание](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdCancel)<br> | `cancel\_missed\_call` | \*\*Отмена по причине недозвона\*\*<br> | Статус меняется автоматически |
+- `waiting` — order in work
+- `sold` — the buyer got the order
+- `canceled` — order canceled
+- `canceled\_by\_client` — the buyer canceled the order
+- `declined\_by\_client` — the buyer canceled the order in the first hour
+  Cancellation is available to the buyer in the first hour from the moment of order, if the order is not transferred to confirm status.
+- `defect` — order canceled due to a defect
+- `canceled\_by\_missed\_call` — cancellation due to unreachable buyer
+- `postponed\_delivery` — courier delivery is postponed
 
-`wbStatus` — статус системы Wildberries.
-Возможные значения `wbStatus`:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- `waiting` — сборочное задание в работе
-- `sold` — заказ получен покупателем
-- `canceled` — отмена сборочного задания
-- `canceled\_by\_client` — покупатель отменил заказ при получении
-- `declined\_by\_client` — покупатель отменил заказ в первый чаc
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-Отмена доступна покупателю в первый час с момента заказа, если заказ не переведен на сборку
-
-- `defect` — отмена заказа по причине брака
-- `canceled\_by\_missed\_call` — отмена заказа по причине недозвона
-- `postponed\_delivery` — курьерская доставка отложена
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
-
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -55,14 +49,14 @@ POST /api/v3/dbw/orders/status
 
 ## Responses
 
-| Code  | Description            | Schema                             |
-| ----- | ---------------------- | ---------------------------------- |
-| `200` | Успешно                | `PostV3DbwOrdersStatusResponse200` |
-| `400` | Неправильный запрос    | `Error`                            |
-| `401` | Не авторизован         | `object`                           |
-| `402` | Требуется платёж       | `object`                           |
-| `403` | Доступ запрещён        | `Error`                            |
-| `429` | Слишком много запросов | `object`                           |
+| Code  | Description       | Schema                             |
+| ----- | ----------------- | ---------------------------------- |
+| `200` | Success           | `PostV3DbwOrdersStatusResponse200` |
+| `400` | Bad request       | `Error`                            |
+| `401` | Unauthorized      | `object`                           |
+| `402` | Payment required  | `object`                           |
+| `403` | Access denied     | `Error`                            |
+| `429` | Too many requests | `object`                           |
 
 ## Call examples
 

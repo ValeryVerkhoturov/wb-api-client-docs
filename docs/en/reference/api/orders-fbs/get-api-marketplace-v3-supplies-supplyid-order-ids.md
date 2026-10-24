@@ -1,46 +1,46 @@
 ---
-title: "Получить ID сборочных заданий поставки"
-description: "Метод возвращает список ID сборочных заданий, закреплённых за поставкой."
+title: "Get Supply Assembly Order IDs"
+description: "The method returns assembly orders IDs assigned to the supply."
 ---
 
-# Получить ID сборочных заданий поставки
+# Get Supply Assembly Order IDs
 
 ```http
 GET /api/marketplace/v3/supplies/{supplyId}/order-ids
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyIdOrderIds)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyIdOrderIds)
 
-Метод возвращает список ID сборочных заданий, закреплённых за поставкой.
+The method returns assembly orders IDs assigned to the supply.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
 | Name       | In   | Type     | Req. | Description |
 | ---------- | ---- | -------- | ---- | ----------- |
-| `supplyId` | path | `string` | yes  | ID поставки |
+| `supplyId` | path | `string` | yes  | Supply ID   |
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `v3.SupplyOrderIDsAPI` |
-| `400` | Неправильный запрос    | `Error`                |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `Error`                |
-| `404` | Не найдено             | `Error`                |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `v3.SupplyOrderIDsAPI` |
+| `400` | Bad request       | `Error`                |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `Error`                |
+| `404` | Not found         | `Error`                |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

@@ -1,32 +1,55 @@
 ---
-title: "Получить статусы сборочных заданий"
-description: "Метод возвращает статусы сборочных заданий по их ID."
+title: "Get Assembly Order Statuses"
+description: "The method provides the statuses of assembly orders by their ID."
 ---
 
-# Получить статусы сборочных заданий
+# Get Assembly Order Statuses
 
 ```http
 POST /api/marketplace/v3/click-collect/orders/status/info
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo)
 
-Метод возвращает статусы [сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) по их ID.
+The method provides the statuses of [assembly orders](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) by their ID.
 
-`supplierStatus` — статус сборочного задания. Триггер его изменения - действие самого продавца.
-Возможные значения `supplierStatus`:
+`supplierStatus` — the status of the assembly order. The trigger for its change is the action of the seller himself.
+Possible values for `supplierStatus`:
 
-| Статус                                                          | Описание                        | Как перевести сборочное задание в данный статус                                                                                                                                 |
-| --------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `new`                                                           | \*\*Новое сборочное задание\*\* |
-| `confirm`                                                       | \*\*На сборке\*\*               | [Перевести сборочное задание на сборку](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusConfirm)<br> | `prepare`   | \*\*Готов к выдаче\*\* | [Сообщить, что сборочное задание готово к выдаче](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusPrepare)<br> | `receive` | \*\*Получено покупателем\*\* | [Сообщить, что заказ принят покупателем](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReceive)<br> | `reject` | \*\*Отказ покупателя при получении\*\* | [Сообщить, что покупатель отказался от заказа](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReject)<br> | `cancel` | \*\*Отменено продавцом\*\* | [Отменить сборочное задание](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusCancel)<br> | `cancel\_shelf\_life` | \*\*Отмена по истечении срока хранения\*\* | Переводится автоматически по возникновению события<br><br>`wbStatus` — статус системы Wildberries.<br>Возможные значения `wbStatus`:<br>- `waiting` - сборочное задание в работе<br>- `sold` - заказ получен покупателем<br>- `canceled` - отмена сборочного задания<br>- `canceled\_by\_client` - покупатель отменил заказ при получении<br>- `declined\_by\_client` - покупатель отменил заказ в первый чаc<br><br>Отмена доступна покупателю в первый час с момента заказа, если заказ не переведён на сборку<br>- `defect` - отмена заказа по причине брака<br>- `ready\_for\_pickup` - заказ готов к выдаче<br><br>[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:<br> | Период | Лимит | Интервал | Всплеск |
-| ---                                                             | ---                             | ---                                                                                                                                                                             | ---         |
-| 1 сек                                                           | 1 запрос                        | 1 сек                                                                                                                                                                           | 10 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Status                                                          | Description                                   | How to set the assembly order to this status                                                                                                                                               |
+| --------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `new`                                                           | \*\*New assembly order\*\*                    |                                                                                                                                                                                            |
+| `confirm`                                                       | \*\*In assembly\*\*                           | [Transfer to assembly](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusConfirm)                                 |
+| `prepare`                                                       | \*\*Ready for pickup\*\*                      | [Notify that the assembly order is ready for delivery](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusPrepare) |
+| `receive`                                                       | \*\*Received by buyer\*\*                     | [Notify that the order has been received by the buyer](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReceive) |
+| `reject`                                                        | \*\*Buyer refusal\*\*                         | [Notify that the buyer has declined the order](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReject)          |
+| `cancel`                                                        | \*\*Canceled by seller\*\*                    | [Cancel the order](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusCancel)                                      |
+| `cancel\_shelf\_life`                                           | \*\*Canceled due to shelf life expiration\*\* | Automatically transitions upon event occurrence                                                                                                                                            |
+| `wbStatus` — the status of the assembly order in the WB system. |
+| Possible values for wbStatus:                                   |
+
+- `waiting` - assembly order is in progress
+- `sorted` - assembly order is sorted
+- `sold` - the buyer got the order
+- `canceled` - assembly order canceled
+- `canceled\_by\_client` - buyer canceled the order upon receipt
+- `declined\_by\_client` - buyer canceled the order within the first hour
+
+Cancellation is available to the buyer within the first hour from the time of order, if the order has not been transitioned to assembly
+
+- `defect` - order canceled due to defect
+- `ready\_for\_pickup` - order is ready for pickup
+
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
+
+| Period                                                           | Limit     | Interval | Burst       |
+| ---------------------------------------------------------------- | --------- | -------- | ----------- |
+| 1 s                                                              | 1 request | 1 s      | 10 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -34,14 +57,14 @@ POST /api/marketplace/v3/click-collect/orders/status/info
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `api.OrderStatusesV2` |
-| `400` | Неправильный запрос    | `api.BatchError`      |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `403` | Доступ запрещён        | `api.BatchError`      |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `api.OrderStatusesV2` |
+| `400` | Bad request       | `api.BatchError`      |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `403` | Access denied     | `api.BatchError`      |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

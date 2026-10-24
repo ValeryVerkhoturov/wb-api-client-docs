@@ -1,34 +1,34 @@
 ---
-title: "Обновить список контактов"
-description: "Метод обновляет список контактов склада продавца."
+title: "Update Contacts List"
+description: "Updates the seller warehouse contacts list."
 ---
 
-# Обновить список контактов
+# Update Contacts List
 
 ```http
 PUT /api/v3/dbw/warehouses/{warehouseId}/contacts
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Склады продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/putV3DbwWarehousesWarehouseIdContacts)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/putV3DbwWarehousesWarehouseIdContacts)
 
-Метод обновляет список контактов [склада продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/getV3Warehouses).
+Updates the seller warehouse contacts list.
 
-Список контактов перезаписывается при обновлении. Поэтому в запросе нужно передать **все** параметры списка контактов, в том числе те, которые вы не собираетесь обновлять
+The contacts list is overwritten upon update. Therefore, you need to include **all** contacts list parameters in the request, including those you do not intend to update
 
-Только для складов с типом доставки `3` — Деливери WB ([DBW](https://dev.wildberries.ru/openapi/orders-dbw)).
+Only for warehouses with delivery type `3` — Delivery WB ([DBW](https://dev.wildberries.ru/openapi/orders-dbw)).
 
-К складу можно добавить максимум 5 контактов. Чтобы удалить контакты, отправьте пустой массив `contacts`.
+A maximum of 5 contacts can be added to the warehouse. To delete contacts, send an empty `contacts` array.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -36,14 +36,14 @@ PUT /api/v3/dbw/warehouses/{warehouseId}/contacts
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `204` | Обновлено              | —        |
-| `400` | Неправильный запрос    | `Error`  |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `Error`  |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `204` | Updated           | —        |
+| `400` | Bad request       | `Error`  |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `Error`  |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

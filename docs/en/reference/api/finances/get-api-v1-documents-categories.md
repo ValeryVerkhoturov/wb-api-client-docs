@@ -1,36 +1,36 @@
 ---
-title: "Категории документов"
-description: "Метод возвращает категории документов для получения списка документов продавца."
+title: "Documents Categories"
+description: "Returns documents categories"
 ---
 
-# Категории документов
+# Documents Categories
 
 ```http
 GET /api/v1/documents/categories
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Documents · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories)
 
-Метод возвращает категории документов для получения [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
+Returns documents categories
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Сервисный          | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 10 s   | 1 request | 10 s     | 5 requests |
+| Service          | 10 s   | 1 request | 10 s     | 5 requests |
+| Base with secret | 10 s   | 1 request | 10 s     | 5 requests |
+| Base             | 24 h   | 1 request | 24 h     | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `GetCategories` |
-| `401` | Не авторизован         | `object`        |
-| `402` | Требуется платёж       | `object`        |
-| `403` | Доступ запрещён        | `object`        |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `GetCategories` |
+| `401` | Unauthorized      | `object`        |
+| `402` | Payment required  | `object`        |
+| `403` | Access denied     | `object`        |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

@@ -1,42 +1,42 @@
 ---
-title: "Получить QR-код СПОТ"
-description: "Метод возвращает сформированный QR-код СПОТ для поставки в формате PNG, кодировка base64. Вы можете получить QR-код, когда в методе получения данных СПОТ будет…"
+title: "Get the Supply SPOT QR Code"
+description: "The method returns the generated SPOT QR code for the supply in PNG format, base64 encoded. You can get the QR code when the flag \"status\":\"completed\" is…"
 ---
 
-# Получить QR-код СПОТ
+# Get the Supply SPOT QR Code
 
 ```http
 GET /api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot)
 
-Метод возвращает сформированный QR-код СПОТ для поставки в формате PNG, кодировка base64.
-Вы можете получить QR-код, когда в методе [получения данных СПОТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) будет признак `"status":"completed"`.
+The method returns the generated SPOT QR code for the supply in PNG format, base64 encoded.
+You can get the QR code when the flag `"status":"completed"` is returned in the method for getting [SPOT data](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
 | Name       | In   | Type     | Req. | Description |
 | ---------- | ---- | -------- | ---- | ----------- |
-| `supplyId` | path | `string` | yes  | ID поставки |
+| `supplyId` | path | `string` | yes  | Supply ID   |
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `SupplySpotQRCode` |
-| `400` | Неправильный запрос    | `ApiErrorV3`       |
-| `401` | Не авторизован         | `object`           |
-| `403` | Доступ запрещён        | `object`           |
-| `404` | Не найдено             | `ApiErrorV3`       |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `SupplySpotQRCode` |
+| `400` | Bad request       | `ApiErrorV3`       |
+| `401` | Unauthorized      | `object`           |
+| `403` | Access denied     | `object`           |
+| `404` | Not found         | `ApiErrorV3`       |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

@@ -1,41 +1,36 @@
 ---
-title: "Получить стикеры грузомест поставки"
-description: "Метод возвращает QR-стикеры в форматах: - SVG - ZPLV (вертикальный) - ZPLH (горизонтальный) - PNG"
+title: "Get the Supply Shipping Unit QR Code Stickers"
+description: "Returns QR-code stickers in svg, zplv (vertical), zplh (horizontal), png. Available only if there are assembly orders in the shipping unit. Stickers…"
 ---
 
-# Получить стикеры грузомест поставки
+# Get the Supply Shipping Unit QR Code Stickers
 
 ```http
 POST /api/v3/supplies/{supplyId}/trbx/stickers
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3SuppliesSupplyIdTrbxStickers)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3SuppliesSupplyIdTrbxStickers)
 
-Метод возвращает QR-стикеры в форматах:
+Returns QR-code stickers in svg, zplv (vertical), zplh (horizontal), png.
+Available only if there are assembly orders in the shipping unit.
+Stickers dimensions: 580x400 px.
 
-- SVG
-- ZPLV (вертикальный)
-- ZPLH (горизонтальный)
-- PNG
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-Размер стикеров — 580x400 px.
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
 | Name   | In    | Type     | Req. | Description    |
 | ------ | ----- | -------- | ---- | -------------- |
-| `type` | query | `string` | yes  | Формат стикера |
+| `type` | query | `string` | yes  | Sticker format |
 
 ## Request body
 
@@ -43,15 +38,15 @@ POST /api/v3/supplies/{supplyId}/trbx/stickers
 
 ## Responses
 
-| Code  | Description            | Schema                                          |
-| ----- | ---------------------- | ----------------------------------------------- |
-| `200` | Успешно                | `PostV3SuppliesSupplyIdTrbxStickersResponse200` |
-| `400` | Неправильный запрос    | `Error`                                         |
-| `401` | Не авторизован         | `object`                                        |
-| `402` | Требуется платёж       | `object`                                        |
-| `403` | Доступ запрещён        | `Error`                                         |
-| `404` | Не найдено             | `Error`                                         |
-| `429` | Слишком много запросов | `object`                                        |
+| Code  | Description       | Schema                                          |
+| ----- | ----------------- | ----------------------------------------------- |
+| `200` | Success           | `PostV3SuppliesSupplyIdTrbxStickersResponse200` |
+| `400` | Bad request       | `Error`                                         |
+| `401` | Unauthorized      | `object`                                        |
+| `402` | Payment required  | `object`                                        |
+| `403` | Access denied     | `Error`                                         |
+| `404` | Not found         | `Error`                                         |
+| `429` | Too many requests | `object`                                        |
 
 ## Call examples
 

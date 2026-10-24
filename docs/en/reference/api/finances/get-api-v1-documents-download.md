@@ -1,44 +1,44 @@
 ---
-title: "Получить документ"
-description: "Метод загружает один документ из списка документов продавца."
+title: "Get Document"
+description: "Returns one document"
 ---
 
-# Получить документ
+# Get Document
 
 ```http
 GET /api/v1/documents/download
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Documents · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsDownload)
 
-Метод загружает один документ из [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
+Returns one document
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Сервисный          | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый с секретом | 10 сек | 1 запрос | 10 сек   | 5 запросов |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 10 s   | 1 request | 10 s     | 5 requests |
+| Service          | 10 s   | 1 request | 10 s     | 5 requests |
+| Base with secret | 10 s   | 1 request | 10 s     | 5 requests |
+| Base             | 24 h   | 1 request | 24 h     | 1 request  |
 
 ## Parameters
 
-| Name          | In    | Type     | Req. | Description             |
-| ------------- | ----- | -------- | ---- | ----------------------- |
-| `serviceName` | query | `string` | yes  | Уникальный ID документа |
-| `extension`   | query | `string` | yes  | Формат документа        |
+| Name          | In    | Type     | Req. | Description        |
+| ------------- | ----- | -------- | ---- | ------------------ |
+| `serviceName` | query | `string` | yes  | Unique document ID |
+| `extension`   | query | `string` | yes  | Document format    |
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `200` | Успешно                | `GetDoc` |
-| `400` | Неправильный запрос    | `object` |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `object` |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `200` | Success           | `GetDoc` |
+| `400` | Bad request       | `object` |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `object` |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

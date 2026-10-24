@@ -1,34 +1,33 @@
 ---
-title: "Создать новую поставку"
-description: "Метод создаёт новую поставку. Ограничения: - Только для сборочных заданий по модели FBS. - При добавлении в поставку все передаваемые сборочные задания в…"
+title: "Create a New Supply"
+description: "\\\\Supplies limitations\\\\: - Supplies applicable only for assembly orders in the FBS (Fulfillment by Seller) delivery. - All assembly orders added to supply…"
 ---
 
-# Создать новую поставку
+# Create a New Supply
 
 ```http
 POST /api/v3/supplies
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3Supplies)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3Supplies)
 
-Метод создаёт новую [поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId).
-Ограничения:
+\*\*Supplies limitations\*\*:
 
-- Только для [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) по модели FBS.
-- При добавлении в поставку все передаваемые сборочные задания в [статусе](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `new` будут автоматически переведены в статус `confirm` — на сборке.
-- Если вы переведёте сборочное задание в статус `cancel` — отмена продавцом, прикрепленное сборочное задание автоматически удалится из поставки.
-- Поставку можно собрать только из сборочных заданий (заказов) одного габаритного типа `cargoType`. Новая поставка не обладает габаритным признаком, она приобретает габаритный признак первого заказа, добавленного в поставку.
+- Supplies applicable only for assembly orders in the FBS (Fulfillment by Seller) delivery.
+- All assembly orders added to supply automatically moved from the `new` status to the `confirm` status.
+- Please note that if you will `cancel` (`Canceled by the seller`) the order, we will automatically remove it from the supply.
+- A supply can only be assembled from assembly jobs (orders) with the same dimensional type (cargoType). A new supply does not have a dimensional attribute. When the first assembly order is added to a supply, the supply acquires the dimensional attribute of that assembly order.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -36,14 +35,14 @@ POST /api/v3/supplies
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `201` | Создано                | `PostV3SuppliesResponse201` |
-| `400` | Неправильный запрос    | `Error`                     |
-| `401` | Не авторизован         | `object`                    |
-| `402` | Требуется платёж       | `object`                    |
-| `403` | Доступ запрещён        | `Error`                     |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `201` | Created           | `PostV3SuppliesResponse201` |
+| `400` | Bad request       | `Error`                     |
+| `401` | Unauthorized      | `object`                    |
+| `402` | Payment required  | `object`                    |
+| `403` | Access denied     | `Error`                     |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

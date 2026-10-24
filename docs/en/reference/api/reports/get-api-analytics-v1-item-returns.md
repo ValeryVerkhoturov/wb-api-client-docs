@@ -1,46 +1,46 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает отчёт о возвратах товаров продавцу."
+title: "Get Report"
+description: "Returns a list of item returns to the seller."
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 GET /api/analytics/v1/item-returns
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт о возвратах и перемещении товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1GoodsReturn)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Returns and Item Movement Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1GoodsReturn)
 
-Метод возвращает отчёт о [возвратах товаров продавцу](https://seller.wildberries.ru/return-transfer-reports).
+Returns a list of [item returns to the seller](https://seller.wildberries.ru/return-transfer-reports).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск     |
-| ------------------ | ------ | --------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 10 запросов |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос    |
+| Type             | Period | Limit      | Interval | Burst       |
+| ---------------- | ------ | ---------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request  | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request  | 1 min    | 10 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request   |
 
 ## Parameters
 
-| Name       | In    | Type            | Req. | Description                                                                          |
-| ---------- | ----- | --------------- | ---- | ------------------------------------------------------------------------------------ |
-| `dateFrom` | query | `string`        | yes  | Дата начала отчётного периода                                                        |
-| `dateTo`   | query | `string`        | yes  | Дата окончания отчётного периода                                                     |
-| `status`   | query | `string`        | no   | Статус возврата: - `archive` — архивный - `active` — активный                        |
-| `limit`    | query | `integer<date>` | no   | Количество возвратов в ответе                                                        |
-| `offset`   | query | `integer<date>` | no   | Сколько элементов пропустить. Например, для значения 10 ответ начнется с 11 элемента |
+| Name       | In    | Type            | Req. | Description                                                                                          |
+| ---------- | ----- | --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string`        | yes  | Beginning date of the reporting period                                                               |
+| `dateTo`   | query | `string`        | yes  | End date of the reporting period                                                                     |
+| `status`   | query | `string`        | no   | Return status: - `archive` — archive - `active` — active                                             |
+| `limit`    | query | `integer<date>` | no   | Number of returns in the response                                                                    |
+| `offset`   | query | `integer<date>` | no   | How many results to skip. For example, for the value 10, the response will start with the 11 element |
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `GoodsReturn200Response` |
-| `204` | Нет данных             | —                        |
-| `400` | Неправильный запрос    | `Http4XXResponse`        |
-| `401` | Не авторизован         | `object`                 |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `GoodsReturn200Response` |
+| `204` | No data           | —                        |
+| `400` | Bad request       | `Http4XXResponse`        |
+| `401` | Unauthorized      | `object`                 |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

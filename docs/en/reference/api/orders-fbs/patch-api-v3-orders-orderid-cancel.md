@@ -1,44 +1,44 @@
 ---
-title: "Отменить сборочное задание"
-description: "Метод отменяет сборочное задание и переводит в статус cancel — отменено продавцом."
+title: "Cancel the Assembly Order"
+description: "Moves the assembly orders to cancel (\"Canceled by the seller\") status."
 ---
 
-# Отменить сборочное задание
+# Cancel the Assembly Order
 
 ```http
 PATCH /api/v3/orders/{orderId}/cancel
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel)
 
-Метод отменяет [сборочное задание](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) и переводит в [статус](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `cancel` — отменено продавцом.
+Moves the assembly orders to `cancel` ("Canceled by the seller") status.
 
-Сборочное задание можно отменить до его передачи Wildberries.
-Чтобы проверить, можно ли отменить сборочное задание, используйте метод [POST /api/v3/orders/status](https://dev.wildberries.ru/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus), поле `isCancellable`.
+You can cancel an assembly order before it is handed over to Wildberries.
+To check whether an assembly order can be canceled, use the [POST /api/v3/orders/status](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) method and the `isCancellable` field.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 100 запросов | 600 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 100 requests | 600 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Responses
 
-| Code  | Description               | Schema   |
-| ----- | ------------------------- | -------- |
-| `204` | Отменено                  | —        |
-| `400` | Неправильный запрос       | `Error`  |
-| `401` | Не авторизован            | `object` |
-| `402` | Требуется платёж          | `object` |
-| `403` | Доступ запрещён           | `Error`  |
-| `404` | Не найдено                | `Error`  |
-| `409` | Ошибка обновления статуса | `Error`  |
-| `429` | Слишком много запросов    | `object` |
+| Code  | Description             | Schema   |
+| ----- | ----------------------- | -------- |
+| `204` | Canceled                | —        |
+| `400` | Bad request             | `Error`  |
+| `401` | Unauthorized            | `object` |
+| `402` | Payment required        | `object` |
+| `403` | Access denied           | `Error`  |
+| `404` | Not found               | `Error`  |
+| `409` | Error updating a status | `Error`  |
+| `429` | Too many requests       | `object` |
 
 ## Call examples
 

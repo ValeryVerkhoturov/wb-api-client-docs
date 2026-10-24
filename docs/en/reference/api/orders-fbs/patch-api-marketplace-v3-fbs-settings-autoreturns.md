@@ -1,29 +1,24 @@
 ---
-title: "Обновить настройки автовозврата продавца"
-description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
+title: "Update Seller Auto-Return Settings"
+description: "The method sets seller auto-return settings for small-sized items — \"cargoType\":1."
 ---
 
-# Обновить настройки автовозврата продавца
+# Update Seller Auto-Return Settings
 
 ```http
 PATCH /api/marketplace/v3/fbs/settings/autoreturns
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Настройки автовозврата · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/patchV3FbsSettingsAutoreturns)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Auto-return Settings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/patchV3FbsSettingsAutoreturns)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену,
-**Базовому** токену **с секретом**
+The method sets seller auto-return settings for small-sized items — `"cargoType":1`.
 
-Метод устанавливает настройки автовозврата продавца для малогабаритных товаров — `"cargoType":1`.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -31,13 +26,13 @@ PATCH /api/marketplace/v3/fbs/settings/autoreturns
 
 ## Responses
 
-| Code  | Description            | Schema        |
-| ----- | ---------------------- | ------------- |
-| `204` | Обновлено              | —             |
-| `400` | Неправильный запрос    | `ApiErrorV3`  |
-| `401` | Не авторизован         | `object`      |
-| `403` | Доступ запрещён        | `Response4XX` |
-| `429` | Слишком много запросов | `object`      |
+| Code  | Description       | Schema        |
+| ----- | ----------------- | ------------- |
+| `204` | Updated           | —             |
+| `400` | Bad request       | `ApiErrorV3`  |
+| `401` | Unauthorized      | `object`      |
+| `403` | Access denied     | `Response4XX` |
+| `429` | Too many requests | `object`      |
 
 ## Call examples
 

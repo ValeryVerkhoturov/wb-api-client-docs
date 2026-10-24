@@ -1,28 +1,28 @@
 ---
-title: "Установка и удаление минус-фраз"
-description: "Метод устанавливает и удаляет минус-фразы в кампаниях c единой и ручной ставкой."
+title: "Setting and Deleting Minus Phrases"
+description: "The method sets and deletes the minus phrases in campaigns with standard and custom bid."
 ---
 
-# Установка и удаление минус-фраз
+# Setting and Deleting Minus Phrases
 
 ```http
 POST /adv/v0/normquery/set-minus
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormquerySetMinus)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Search Clusters · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormquerySetMinus)
 
-Метод устанавливает и удаляет минус-фразы в кампаниях c единой и ручной ставкой.
+The method sets and deletes the minus phrases in campaigns with standard and custom bid.
 
-Отправка пустого массива удаляет все минус-фразы
+Sending an empty array deletes all minus phrases
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск     |
-| ------------------ | ------ | ---------- | -------- | ----------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос    |
+| Type             | Period | Limit      | Interval | Burst       |
+| ---------------- | ------ | ---------- | -------- | ----------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request   |
 
 ## Request body
 
@@ -30,13 +30,13 @@ POST /adv/v0/normquery/set-minus
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | —                        |
-| `400` | Неправильный запрос    | `response400`            |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `StandardizedBatchError` |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | —                        |
+| `400` | Bad request       | `response400`            |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `StandardizedBatchError` |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

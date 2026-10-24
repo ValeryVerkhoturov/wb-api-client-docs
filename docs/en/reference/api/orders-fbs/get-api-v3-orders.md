@@ -1,50 +1,49 @@
 ---
-title: "Получить информацию о сборочных заданиях"
-description: "Метод возвращает информацию о сборочных заданиях, созданных не более 3 месяцев назад, без их актуального статуса. Чтобы получить данные за период, укажите в…"
+title: "Get Assembly Orders"
+description: "The method returns information about assembly orders created no more than 3 months ago, without their current status To get data for a period, specify the…"
 ---
 
-# Получить информацию о сборочных заданиях
+# Get Assembly Orders
 
 ```http
 GET /api/v3/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders)
 
-Метод возвращает информацию о сборочных заданиях, созданных не более 3 месяцев назад, без их актуального [статуса](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus).
-Чтобы получить данные за период, укажите в запросе даты начала и окончания периода. Максимум 30 календарных дней одним запросом.
-В ответе метода будут сборочные задания, созданные в указанный период.
+The method returns information about assembly orders created no more than 3 months ago, without their current status
+To get data for a period, specify the start and end dates of the period in the request. Maximum of 30 calendar days per request. The method's response will contain assembly orders created during the specified period.
 
-Чтобы получить сборочные задания, созданные более 3 месяцев назад, используйте метод получения [списка архивных заказов](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive).
+To get assembly orders created more than 3 months ago, use the method for getting the [list of archived assembly orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                                                                                 |
-| ---------- | ----- | ---------------- | ---- | ----------------------------------------------------------------------------------------------------------- |
-| `dateFrom` | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp. По умолчанию — дата за 30 дней до запроса. Часовой пояс — UTC |
-| `dateTo`   | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp. Часовой пояс — UTC                                             |
+| Name       | In    | Type             | Req. | Description                                                                                                |
+| ---------- | ----- | ---------------- | ---- | ---------------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `integer<int64>` | no   | Period start date in Unix timestamp format. By default date is 30 days before the request. Time zone — UTC |
+| `dateTo`   | query | `integer<int64>` | no   | Period end date in Unix timestamp format. Time zone — UTC                                                  |
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `GetV3OrdersResponse200` |
-| `400` | Неправильный запрос    | `Error`                  |
-| `401` | Не авторизован         | `object`                 |
-| `402` | Требуется платёж       | `object`                 |
-| `403` | Доступ запрещён        | `Error`                  |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `GetV3OrdersResponse200` |
+| `400` | Bad request       | `Error`                  |
+| `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
+| `403` | Access denied     | `Error`                  |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

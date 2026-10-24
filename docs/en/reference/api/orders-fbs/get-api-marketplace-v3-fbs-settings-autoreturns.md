@@ -1,39 +1,34 @@
 ---
-title: "Получить настройки автовозврата продавца"
-description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
+title: "Get Auto-Return Seller Settings"
+description: "The method returns information about auto-return settings set by the seller."
 ---
 
-# Получить настройки автовозврата продавца
+# Get Auto-Return Seller Settings
 
 ```http
 GET /api/marketplace/v3/fbs/settings/autoreturns
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Настройки автовозврата · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturns)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Auto-return Settings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturns)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену,
-**Базовому** токену **с секретом**
+The method returns information about auto-return settings set by the seller.
 
-Метод возвращает информацию о настройках автовозврата, установленных продавцом.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
-| Code  | Description                     | Schema                                   |
-| ----- | ------------------------------- | ---------------------------------------- |
-| `200` | Успешно                         | `GetV3FbsSettingsAutoreturnsResponse200` |
-| `401` | Не авторизован                  | `object`                                 |
-| `403` | Доступ запрещён                 | `Response4XX`                            |
-| `406` | Неприменимо для данного профиля | `ApiErrorV3`                             |
-| `429` | Слишком много запросов          | `object`                                 |
+| Code  | Description                    | Schema                                   |
+| ----- | ------------------------------ | ---------------------------------------- |
+| `200` | Успешно                        | `GetV3FbsSettingsAutoreturnsResponse200` |
+| `401` | Unauthorized                   | `object`                                 |
+| `403` | Access denied                  | `Response4XX`                            |
+| `406` | Not applicable to this account | `ApiErrorV3`                             |
+| `429` | Too many requests              | `object`                                 |
 
 ## Call examples
 

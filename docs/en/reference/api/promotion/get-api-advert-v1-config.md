@@ -1,36 +1,36 @@
 ---
-title: "Конфигурационные значения продвижения"
-description: "Метод возвращает валюту, код валюты профиля продавца и допустимые шаги ставок для метода POST /api/advert/v1/normquery/bids"
+title: "Promotion Configuration Values"
+description: "The method returns the currency, currency codes of the seller account and the allowed bid increments for the method POST /api/advert/v1/normquery/bids."
 ---
 
-# Конфигурационные значения продвижения
+# Promotion Configuration Values
 
 ```http
 GET /api/advert/v1/config
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 
-Метод возвращает валюту, код валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) и допустимые шаги ставок для метода [POST /api/advert/v1/normquery/bids](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
+The method returns the currency, currency codes of the [seller account](https://cmp.wildberries.ru/campaigns/finances) and the allowed bid increments for the method [POST /api/advert/v1/normquery/bids](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids).
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск     |
-| ------ | -------- | -------- | ----------- |
-| 1 мин  | 1 запрос | 1 мин    | 10 запросов |
+| Period | Limit     | Interval | Burst       |
+| ------ | --------- | -------- | ----------- |
+| 1 min  | 1 request | 1 min    | 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `V2GetConfigResponse` |
-| `401` | Не авторизован         | `object`              |
-| `403` | Доступ запрещён        | `Response4XX`         |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `V2GetConfigResponse` |
+| `401` | Unauthorized      | `object`              |
+| `403` | Access denied     | `Response4XX`         |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

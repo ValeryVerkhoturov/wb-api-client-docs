@@ -1,50 +1,50 @@
 ---
-title: "Получить товары в карантине"
-description: "Метод возвращает информацию о товарах в карантине."
+title: "Get Items in Quarantine"
+description: "Returns information about items in quarantine."
 ---
 
-# Получить товары в карантине
+# Get Items in Quarantine
 
 ```http
 GET /api/v2/quarantine/goods
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2QuarantineGoods)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/getV2QuarantineGoods)
 
-Метод возвращает информацию о товарах в карантине.
+Returns information about items in quarantine.
 
-Если новая цена товара со скидкой будет меньше [порогового значения](https://seller.wildberries.ru/instructions/ru/ru/material/price-quarantine#2ef3641a-5165-41db-9ac7-e4374c9fc3f1), товар попадёт в [карантин](https://seller.wildberries.ru/instructions/ru/ru/material/price-quarantine) и будет продаваться по старой цене. Ошибка об этом будет в [детализации загрузки](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryGoodsTask).
+If the new item price with discount is lower than the [threshold value](https://seller.wildberries.ru/instructions/ru/ru/material/price-quarantine#2ef3641a-5165-41db-9ac7-e4374c9fc3f1), the item will go into [price quarantine](https://seller.wildberries.ru/instructions/ru/ru/material/price-quarantine) and the price will not change. You will get the error in the [upload details](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2HistoryGoodsTask).
 
-Вы можете изменить цену или скидку с помощью API либо вывести товар из карантина в [личном кабинете](https://seller.wildberries.ru/discount-and-prices/quarantine).
+You can change price or discount via API or release item from quarantine in [personal account](https://seller.wildberries.ru/discount-and-prices/quarantine).
 
-Для товаров с [поразмерной установкой цен](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize) карантин не применяется.
+For items with [size-based pricing](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskSize), quarantine does not apply.
 
-В [песочнице](https://dev.wildberries.ru/sandbox) товары автоматически удаляются из карантина через 3 дня.
+In the [sandbox](https://dev.wildberries.ru/en/sandbox) items are automatically deleted from quarantine after 3 days.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `object`        |
-| `400` | Неправильный запрос    | `ResponseError` |
-| `401` | Не авторизован         | `object`        |
-| `402` | Требуется платёж       | `object`        |
-| `403` | Доступ запрещён        | `ResponseError` |
-| `422` | Неожидаемый результат  | `ResponseError` |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `object`        |
+| `400` | Bad request       | `ResponseError` |
+| `401` | Unauthorized      | `object`        |
+| `402` | Payment required  | `object`        |
+| `403` | Access denied     | `ResponseError` |
+| `422` | Unexpected result | `ResponseError` |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

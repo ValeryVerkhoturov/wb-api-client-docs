@@ -1,49 +1,50 @@
 ---
-title: "Получить стикеры сборочных заданий"
-description: "Метод возвращает список стикеров для сборочных заданий в статусах confirm — на сборке и complete — в доставке."
+title: "Get Assembly Orders Stickers"
+description: "Returns a list of stickers for assembly orders in the confirm — in assembly and complete — in delivery statuses."
 ---
 
-# Получить стикеры сборочных заданий
+# Get Assembly Orders Stickers
 
 ```http
 POST /api/v3/orders/stickers
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStickers)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStickers)
 
-Метод возвращает список стикеров для [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders) в [статусах](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` — на сборке и `complete` — в доставке.
+Returns a list of stickers for [assembly orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders) in the `confirm` — in assembly and `complete` — in delivery [statuses](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus).
 
-Если за сборочным заданием не закреплён обязательный [номер декларации на товары (ДТ)](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration), получить стикеры для этого сборочного задания невозможно.
+If the required [customs declaration number](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration) is not added to the assembly order, it is not possible to get stickers for this assembly order.
 
-За один запрос можно получить максимум 100 стикеров.
-Можно получить стикер в форматах:
+You can get a maximum of 100 stickers per request.
+
+You can get a sticker in the following formats:
 
 - SVG
-- ZPLV (вертикальный)
-- ZPLH (горизонтальный)
+- ZPLV (vertical)
+- ZPLH (horizontal)
 - PNG
-  Доступны размеры:
-- 580x400 px при `width=58&height=40` в запросе
-- 400x300 px при `width=40&height=30` в запросе
+  Available dimensions:
+- 580x400 px, with parameters `width` = 58, `height` = 40
+- 400x300 px, with parameters `width` = 40, `height` = 30
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
 | Name     | In    | Type             | Req. | Description    |
 | -------- | ----- | ---------------- | ---- | -------------- |
-| `type`   | query | `string`         | yes  | Тип стикера    |
-| `width`  | query | `integer<int64>` | yes  | Ширина стикера |
-| `height` | query | `integer<int64>` | yes  | Высота стикера |
+| `type`   | query | `string`         | yes  | Sticker format |
+| `width`  | query | `integer<int64>` | yes  | Sticker width  |
+| `height` | query | `integer<int64>` | yes  | Sticker height |
 
 ## Request body
 
@@ -51,15 +52,15 @@ POST /api/v3/orders/stickers
 
 ## Responses
 
-| Code  | Description            | Schema                            |
-| ----- | ---------------------- | --------------------------------- |
-| `200` | Успешно                | `PostV3OrdersStickersResponse200` |
-| `400` | Неправильный запрос    | `Error`                           |
-| `401` | Не авторизован         | `object`                          |
-| `402` | Требуется платёж       | `object`                          |
-| `403` | Доступ запрещён        | `Error`                           |
-| `409` | Конфликт               | `Error`                           |
-| `429` | Слишком много запросов | `object`                          |
+| Code  | Description       | Schema                            |
+| ----- | ----------------- | --------------------------------- |
+| `200` | Success           | `PostV3OrdersStickersResponse200` |
+| `400` | Bad request       | `Error`                           |
+| `401` | Unauthorized      | `object`                          |
+| `402` | Payment required  | `object`                          |
+| `403` | Access denied     | `Error`                           |
+| `409` | Conflict          | `Error`                           |
+| `429` | Too many requests | `object`                          |
 
 ## Call examples
 

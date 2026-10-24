@@ -1,48 +1,48 @@
 ---
-title: "Получить товары с ценами по артикулам"
-description: "Метод возвращает информацию о товарах по их артикулам: цены, валюту, общие скидки, скидки WB Клуба и оптовые скидки для B2B-продаж."
+title: "Get Items with Prices by Item Numbers"
+description: "Returns item data by its item number."
 ---
 
-# Получить товары с ценами по артикулам
+# Get Items with Prices by Item Numbers
 
 ```http
 POST /api/v2/list/goods/filter
 ```
 
-**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Цены и скидки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV2ListGoodsFilter)
+**Base URL:** `https://discounts-prices-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Prices and Discounts · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/pricesAndDiscounts/operation/postV2ListGoodsFilter)
 
-Метод возвращает информацию о товарах по их артикулам: цены, валюту, общие скидки, [скидки WB Клуба](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV2UploadTaskClubDiscount) и [оптовые скидки для B2B-продаж](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/postV1UploadTaskB2bWholesale).
+Returns item data by its item number.
 
-В одном запросе можно указать более одного артикула.
+You can specify more than one item number in one request.
 
-Используйте отдельные методы, чтобы получить информацию:
+Use separate methods to get data:
 
-- обо [всех товарах продавца, не указывая артикулы](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter)
-- о [размерах товара](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm)
+- for [all items without specifying item numbers](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsFilter)
+- for [the size of the item](https://dev.wildberries.ru/openapi/item-management#tag/pricesAndDiscounts/operation/getV2ListGoodsSizeNm).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Цены и скидки**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Prices and Discounts** category:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 6 сек  | 10 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса   | 15 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Service          | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base with secret | 6 s    | 10 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 4 requests  | 15 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `object`        |
-| `400` | Неправильный запрос    | `ResponseError` |
-| `401` | Не авторизован         | `object`        |
-| `402` | Требуется платёж       | `object`        |
-| `403` | Доступ запрещён        | `ResponseError` |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `object`        |
+| `400` | Bad request       | `ResponseError` |
+| `401` | Unauthorized      | `object`        |
+| `402` | Payment required  | `object`        |
+| `403` | Access denied     | `ResponseError` |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

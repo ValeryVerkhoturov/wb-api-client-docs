@@ -1,40 +1,40 @@
 ---
-title: "Список ярлыков"
-description: "Метод возвращает список и характеристики всех ярлыков продавца для группировки и фильтрации товаров."
+title: "Labels List"
+description: "Returns seller labels list"
 ---
 
-# Список ярлыков
+# Labels List
 
 ```http
 GET /content/v2/tags
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/getV2Tags)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Labels · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/getV2Tags)
 
-Метод возвращает список и характеристики всех ярлыков продавца для группировки и фильтрации товаров.
+Returns seller labels list
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Ярлыков**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **Labels** methods:
 
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `GetV2TagsResponse200`        |
-| `401` | Не авторизован         | `object`                      |
-| `402` | Требуется платёж       | `object`                      |
-| `403` | Доступ запрещён        | `responseBodyContentError403` |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `GetV2TagsResponse200`        |
+| `401` | Unauthorized      | `object`                      |
+| `402` | Payment required  | `object`                      |
+| `403` | Access denied     | `responseBodyContentError403` |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

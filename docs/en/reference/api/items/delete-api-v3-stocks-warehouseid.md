@@ -1,30 +1,30 @@
 ---
-title: "Удалить остатки товаров"
-description: "Метод удаляет запись об остатках товаров продавца из списка остатков."
+title: "Delete Inventory"
+description: "Deletes item inventory."
 ---
 
-# Удалить остатки товаров
+# Delete Inventory
 
 ```http
 DELETE /api/v3/stocks/{warehouseId}
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Остатки на складах продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses Inventory · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId)
 
-Метод удаляет запись об остатках товаров продавца из [списка остатков](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId).
+Deletes item inventory.
 
-**Действие необратимо**. Удаленный остаток будет необходимо загрузить повторно для возобновления продаж.
+**This action is irreversible**. Deleted stock will require re-uploading to continue sales
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период                                                          | Лимит       | Интервал | Всплеск   |
-| --------------------------------------------------------------- | ----------- | -------- | --------- |
-| 1 мин                                                           | 10 запросов | 6 сек    | 2 запроса |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit       | Interval | Burst      |
+| ---------------------------------------------------------------- | ----------- | -------- | ---------- |
+| 1 min                                                            | 10 requests | 6 s      | 2 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -32,16 +32,16 @@ DELETE /api/v3/stocks/{warehouseId}
 
 ## Responses
 
-| Code  | Description            | Schema   |
-| ----- | ---------------------- | -------- |
-| `204` | Удалено                | —        |
-| `400` | Неправильный запрос    | `Error`  |
-| `401` | Не авторизован         | `object` |
-| `402` | Требуется платёж       | `object` |
-| `403` | Доступ запрещён        | `Error`  |
-| `404` | Не найдено             | `Error`  |
-| `409` | Конфликт               | `Error`  |
-| `429` | Слишком много запросов | `object` |
+| Code  | Description       | Schema   |
+| ----- | ----------------- | -------- |
+| `204` | Deleted           | —        |
+| `400` | Bad request       | `Error`  |
+| `401` | Unauthorized      | `object` |
+| `402` | Payment required  | `object` |
+| `403` | Access denied     | `Error`  |
+| `404` | Not found         | `Error`  |
+| `409` | Conflict          | `Error`  |
+| `429` | Too many requests | `object` |
 
 ## Call examples
 

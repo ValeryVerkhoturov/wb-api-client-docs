@@ -1,45 +1,45 @@
 ---
-title: "Объединение и разъединение карточек товаров"
-description: "Метод объединяет и разъединяет карточки товаров. Карточки товаров являются объединёнными, если у них одинаковый imtID."
+title: "Merging or Separating of Listings"
+description: "The method merges and separates listings. Listings are merged if they have the same imtID."
 ---
 
-# Объединение и разъединение карточек товаров
+# Merging or Separating of Listings
 
 ```http
 POST /content/v2/cards/moveNm
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Карточки товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsMoveNm)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listings · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listings/operation/postV2CardsMoveNm)
 
-Метод [объединяет и разъединяет](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточки товаров. Карточки товаров являются объединёнными, если у них одинаковый `imtID`.
+The method [merges and separates](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings. Listings are merged if they have the same `imtID`.
 
-Для объединения карточек товаров сделайте запрос \*\*с указанием\*\* `imtID`. Можно объединять не более 30 карточек товаров.
-Для разъединения карточек товаров сделайте запрос \*\*без указания\*\* `imtID`. Для разъединенных карточек будут сгенерированы новые `imtID`.
+To merge listings, make a request \*\*specifying\*\* the `imtID`. You can merge up to 30 listings at a time.
+To separate listings, make a request \*\*without specifying\*\* the `imtID`. New `imtID`s will be generated for the separated listings.
 
-Если вы разъедините одновременно несколько карточек товаров, эти карточки объединятся в одну и получат новый `imtID`.
-Чтобы присвоить каждой карточке товара уникальный `imtID`, необходимо передавать по одной карточке товара за запрос.
+If you separate multiple listings simultaneously, these listings will merge into one and receive a new `imtID`.
+To assign a unique `imtID` to each listing, you need to send one listing per request.
 
-Максимальный размер запроса 10 Мб.
+The maximum request size is 10 MB.
 
-Объединить можно карточки товаров только в рамках одного предмета
+It is possible to merge listings containing only the same subcategories
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-| Период               | Лимит        | Интервал | Всплеск    |
-| -------------------- | ------------ | -------- | ---------- |
-| 1 мин                | 100 запросов | 600 мс   | 5 запросов |
-| Исключение — методы: |
+| Period                      | Limit        | Interval | Burst      |
+| --------------------------- | ------------ | -------- | ---------- |
+| 1 min                       | 100 requests | 600 ms   | 5 requests |
+| Exceptions are the methods: |
 
-- [создания карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
-- [создания карточек товаров с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
-- [редактирования карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
-- [восстановления карточек товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
-- [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
-- [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Request body
 
@@ -47,15 +47,15 @@ POST /content/v2/cards/moveNm
 
 ## Responses
 
-| Code  | Description                            | Schema             |
-| ----- | -------------------------------------- | ------------------ |
-| `200` | Успешно                                | `responseItemList` |
-| `400` | Неправильный запрос                    | `object`           |
-| `401` | Не авторизован                         | `object`           |
-| `402` | Требуется платёж                       | `object`           |
-| `403` | Доступ запрещён                        | `responseItemList` |
-| `413` | Превышен лимит объёма данных в запросе | `string`           |
-| `429` | Слишком много запросов                 | `object`           |
+| Code  | Description                                   | Schema             |
+| ----- | --------------------------------------------- | ------------------ |
+| `200` | Success                                       | `responseItemList` |
+| `400` | Bad request                                   | `object`           |
+| `401` | Unauthorized                                  | `object`           |
+| `402` | Payment required                              | `object`           |
+| `403` | Access denied                                 | `responseItemList` |
+| `413` | The request body size exceeds the given limit | `string`           |
+| `429` | Too many requests                             | `object`           |
 
 ## Call examples
 

@@ -1,43 +1,43 @@
 ---
-title: "Информация о медиакампании"
-description: "Метод возвращает информацию о кампании WB Медиа. Вместо карточек товаров в медиакампаниях продвигаются рекламные баннеры продавца на сайте и в приложении WB."
+title: "Information About Media Campaign"
+description: "The method allows to get information about a media campaign"
 ---
 
-# Информация о медиакампании
+# Information About Media Campaign
 
 ```http
 GET /adv/v1/advert
 ```
 
-**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Медиа · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Advert)
+**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Media · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Advert)
 
-Метод возвращает информацию о кампании [WB Медиа](https://cmp.wildberries.ru/cmpf/list). Вместо карточек товаров в медиакампаниях продвигаются рекламные баннеры продавца на сайте и в приложении WB.
+The method allows to get information about a media campaign
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый            | 1 ч    | 5 запросов  | 12 мин   | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Service          | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base with secret | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base             | 1 h    | 5 requests  | 12 min   | 1 request   |
 
 ## Parameters
 
-| Name | In    | Type             | Req. | Description      |
-| ---- | ----- | ---------------- | ---- | ---------------- |
-| `id` | query | `integer<int64>` | yes  | ID медиакампании |
+| Name | In    | Type             | Req. | Description       |
+| ---- | ----- | ---------------- | ---- | ----------------- |
+| `id` | query | `integer<int64>` | yes  | Media campaign ID |
 
 ## Responses
 
 | Code  | Description              | Schema                   |
 | ----- | ------------------------ | ------------------------ |
-| `200` | Успешно                  | `GetV1AdvertResponse200` |
-| `204` | Медиакампания не найдена | —                        |
-| `400` | Неправильный запрос      | `string`                 |
-| `401` | Не авторизован           | `object`                 |
-| `403` | Доступ запрещён          | `object`                 |
-| `429` | Слишком много запросов   | `object`                 |
+| `200` | Success                  | `GetV1AdvertResponse200` |
+| `204` | Media campaign not found | —                        |
+| `400` | Bad request              | `string`                 |
+| `401` | Unauthorized             | `object`                 |
+| `403` | Access denied            | `object`                 |
+| `429` | Too many requests        | `object`                 |
 
 ## Call examples
 

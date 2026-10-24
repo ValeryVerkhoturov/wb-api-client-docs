@@ -1,31 +1,33 @@
 ---
-title: "Закрепить коды маркировки Честного знака за сборочными заданиями"
-description: "Метод обновляет код маркировки Честного знака в идентификаторах маркировки сборочных заданий. Закрепить код маркировки можно только за сборочным заданием в…"
+title: "Add Labeling codes Chestny ZNAK to the Assembly Orders (Chestny ZNAK)"
+description: "The method sets labeling code Chestny ZNAK to the assembly orders label identifiers. You can add the labeling codes Chestny ZNAK only for orders in the confirm…"
 ---
 
-# Закрепить коды маркировки Честного знака за сборочными заданиями
+# Add Labeling codes Chestny ZNAK to the Assembly Orders (Chestny ZNAK)
 
 ```http
 POST /api/marketplace/v3/click-collect/orders/meta/sgtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Идентификаторы маркировки Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaSgtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaSgtin)
 
-Метод обновляет код маркировки [Честного знака](https://честныйзнак.рф/) в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
-Закрепить код маркировки можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails) есть поле `sgtin`.
+The method sets labeling code [Chestny ZNAK](https://chestnyznak.ru/en) to the [assembly orders label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
+You can add the labeling codes Chestny ZNAK only for orders in the `confirm` status and if the field `sgtin` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails) method.
 
-Получить загруженные маркировки можно в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
+You can get the added labeling codes in the [assembly orders label identifiers](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaDetails).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки Самовывоз**:
+For more information about labeling codes Chestny ZNAK please check: https://chestnyznak.ru/en/.
 
-| Период                                                          | Лимит       | Интервал | Всплеск      |
-| --------------------------------------------------------------- | ----------- | -------- | ------------ |
-| 1 мин                                                           | 20 запросов | 3 сек    | 500 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding In-Store Pickup label identifiers**:
+
+| Period                                                           | Limit       | Interval | Burst        |
+| ---------------------------------------------------------------- | ----------- | -------- | ------------ |
+| 1 min                                                            | 20 requests | 3 s      | 500 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -33,14 +35,14 @@ POST /api/marketplace/v3/click-collect/orders/meta/sgtin
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `api.MetaSetResponses` |
-| `400` | Неправильный запрос    | `api.BatchError`       |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `Error`                |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `api.MetaSetResponses` |
+| `400` | Bad request       | `api.BatchError`       |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `Error`                |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

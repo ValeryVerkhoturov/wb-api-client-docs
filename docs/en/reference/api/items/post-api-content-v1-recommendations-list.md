@@ -1,27 +1,27 @@
 ---
-title: "Список рекомендаций в карточках товаров"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Item Recommendations List"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Список рекомендаций в карточках товаров
+# Item Recommendations List
 
 ```http
 POST /api/content/v1/recommendations/list
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Рекомендации · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Recommendations · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает список [рекомендаций](https://seller.wildberries.ru/recommendations-v3) в карточках товаров.
+The method returns item [recommendations](https://seller.wildberries.ru/recommendations-v3) list.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит        | Интервал | Всплеск    |
+| Period | Limit        | Interval | Burst      |
 | ------ | ------------ | -------- | ---------- |
-| 1 мин  | 100 запросов | 600 мс   | 5 запросов |
+| 1 min  | 100 requests | 600 ms   | 5 requests |
 
 ## Request body
 
@@ -29,13 +29,13 @@ POST /api/content/v1/recommendations/list
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `GetRecomRes`         |
-| `400` | Неправильный запрос    | `response400GetRecom` |
-| `401` | Не авторизован         | `object`              |
-| `403` | Доступ запрещён        | `Response4XX`         |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `GetRecomRes`         |
+| `400` | Bad request       | `response400GetRecom` |
+| `401` | Unauthorized      | `object`              |
+| `403` | Access denied     | `Response4XX`         |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

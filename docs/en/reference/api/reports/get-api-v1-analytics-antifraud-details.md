@@ -1,42 +1,39 @@
 ---
-title: "Самовыкупы"
-description: "Метод возвращает отчёт об удержаниях за самовыкупы. Отчёт формируется каждую неделю по средам, до 7:00 по московскому времени, и содержит данные за одну неделю."
+title: "Self-purchases"
+description: "Returns report with self-purchase deductions. The report is generated on Wednesdays at 7:00 UTC+4 and contains weekly data. Also you can get all data starting…"
 ---
 
-# Самовыкупы
+# Self-purchases
 
 ```http
 GET /api/v1/analytics/antifraud-details
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёты об удержаниях · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1AnalyticsAntifraudDetails)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Retention Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1AnalyticsAntifraudDetails)
 
-Метод возвращает отчёт об удержаниях за самовыкупы. Отчёт формируется каждую неделю по средам, до 7:00 по московскому времени, и содержит данные за одну неделю.
+Returns report with self-purchase deductions. The report is generated on Wednesdays at 7:00 UTC+4 and contains weekly data. Also you can get all data starting from August 2023.
 
-Удержание за самовыкуп — 30% от стоимости товаров.
-Минимальная сумма всех удержаний — 100 000 ₽, если за неделю в ПВЗ привезли ваших товаров больше, чем на сумму 100 000 ₽.
+Self-purchase deduction is 30% of item price. Minimum deduction is 100,000 ₽, if the total item cost delivered to the pick-up point is more than 100,000 ₽ per one week.
 
-Данные доступны с августа 2023.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 10 мин | 1 запрос | 10 мин   | 10 запросов |
-| Сервисный          | 10 мин | 1 запрос | 10 мин   | 10 запросов |
-| Базовый с секретом | 10 мин | 1 запрос | 10 мин   | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос | 1 ч      | 1 запрос    |
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 10 min | 1 request | 10 min   | 10 requests |
+| Service          | 10 min | 1 request | 10 min   | 10 requests |
+| Base with secret | 10 min | 1 request | 10 min   | 10 requests |
+| Base             | 1 h    | 1 request | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema            |
-| ----- | ---------------------- | ----------------- |
-| `200` | Успешно                | `object`          |
-| `400` | Неправильный запрос    | `Http4XXResponse` |
-| `401` | Не авторизован         | `object`          |
-| `402` | Требуется платёж       | `object`          |
-| `403` | Доступ запрещён        | `object`          |
-| `429` | Слишком много запросов | `object`          |
+| Code  | Description              | Schema            |
+| ----- | ------------------------ | ----------------- |
+| `200` | Self-purchase deductions | `object`          |
+| `400` | Bad request              | `Http4XXResponse` |
+| `401` | Unauthorized             | `object`          |
+| `402` | Payment required         | `object`          |
+| `403` | Access denied            | `object`          |
+| `429` | Too many requests        | `object`          |
 
 ## Call examples
 

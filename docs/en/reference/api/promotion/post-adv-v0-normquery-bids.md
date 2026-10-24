@@ -1,30 +1,30 @@
 ---
-title: "Установить ставки для поисковых кластеров"
-description: "Метод устанавливает ставки в рублях на поисковые кластеры. Можно использовать только для кампаний с: - ручной ставкой - моделью оплаты cpm — за показы"
+title: "Set Bids for Search Clusters"
+description: "The method sets the bids for search clusters. You can use this method only for campaigns with: - custom bid - a cpm payment model — per impressions"
 ---
 
-# Установить ставки для поисковых кластеров
+# Set Bids for Search Clusters
 
 ```http
 POST /adv/v0/normquery/bids
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryBids)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Search Clusters · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryBids)
 
-Метод устанавливает ставки в рублях на поисковые кластеры.
-Можно использовать только для кампаний с:
+The method sets the bids for search clusters.
+You can use this method only for campaigns with:
 
-- ручной ставкой
-- моделью оплаты `cpm` — за показы
+- custom bid
+- a `cpm` payment model — per impressions
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск   |
-| ------------------ | ------ | ---------- | -------- | --------- |
-| Персональный       | 1 сек  | 2 запроса  | 500 мс   | 4 запроса |
-| Сервисный          | 1 сек  | 2 запроса  | 500 мс   | 4 запроса |
-| Базовый с секретом | 1 сек  | 2 запроса  | 500 мс   | 4 запроса |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 2 requests | 500 ms   | 4 requests |
+| Service          | 1 s    | 2 requests | 500 ms   | 4 requests |
+| Base with secret | 1 s    | 2 requests | 500 ms   | 4 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Request body
 
@@ -32,13 +32,13 @@ POST /adv/v0/normquery/bids
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | —                        |
-| `400` | Неправильный запрос    | `response400`            |
-| `401` | Не авторизован         | `object`                 |
-| `403` | Доступ запрещён        | `StandardizedBatchError` |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | —                        |
+| `400` | Bad request       | `response400`            |
+| `401` | Unauthorized      | `object`                 |
+| `403` | Access denied     | `StandardizedBatchError` |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

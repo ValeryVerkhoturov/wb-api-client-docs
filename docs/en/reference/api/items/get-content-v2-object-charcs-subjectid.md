@@ -1,54 +1,52 @@
 ---
-title: "Характеристики предмета"
-description: "Метод возвращает параметры характеристик предмета: названия, типы данных, единицы измерения и так далее. В запросе необходимо указать ID предмета."
+title: "Subcategory Characteristics"
+description: "Returns list of the subcategory characteristics by its ID"
 ---
 
-# Характеристики предмета
+# Subcategory Characteristics
 
 ```http
 GET /content/v2/object/charcs/{subjectId}
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Категории, предметы и характеристики · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Categories, Subcategories, and Characteristics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId)
 
-Метод возвращает параметры характеристик предмета: названия, типы данных, единицы измерения и так далее. В запросе необходимо указать ID [предмета](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll).
+Returns list of the subcategory characteristics by its ID
 
-Для получения значений характеристик [Цвет](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryColors), [Пол](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryKinds), [Страна производства](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryCountries), [Сезон](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectorySeasons), [Ставка НДС](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryVat) и [ТНВЭД-код](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryTnved) используйте отдельные методы
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
+| Period                      | Limit        | Interval | Burst      |
+| --------------------------- | ------------ | -------- | ---------- |
+| 1 min                       | 100 requests | 600 ms   | 5 requests |
+| Exceptions are the methods: |
 
-| Период               | Лимит        | Интервал | Всплеск    |
-| -------------------- | ------------ | -------- | ---------- |
-| 1 мин                | 100 запросов | 600 мс   | 5 запросов |
-| Исключение — методы: |
-
-- [создания карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
-- [создания карточек товаров с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
-- [редактирования карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
-- [восстановления карточек товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
-- [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
-- [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name        | In    | Type             | Req. | Description                                                                                                                                                                          |
-| ----------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `subjectId` | path  | `integer<int64>` | yes  | ID предмета                                                                                                                                                                          |
-| `locale`    | query | `string`         | no   | Язык полей ответа `subjectName` и `name`: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
+| Name        | In    | Type             | Req. | Description                                                                                                                                                                            |
+| ----------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `subjectId` | path  | `integer<int64>` | yes  | Subcategory ID                                                                                                                                                                         |
+| `locale`    | query | `string`         | no   | Language for response of the `subjectName` and `name` fields: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
 
 ## Responses
 
-| Code  | Description            | Schema                                  |
-| ----- | ---------------------- | --------------------------------------- |
-| `200` | Успешно                | `GetV2ObjectCharcsSubjectIdResponse200` |
-| `400` | Неправильный запрос    | `object`                                |
-| `401` | Не авторизован         | `object`                                |
-| `403` | Доступ запрещён        | `responseBodyContentError403`           |
-| `429` | Слишком много запросов | `object`                                |
+| Code  | Description       | Schema                                  |
+| ----- | ----------------- | --------------------------------------- |
+| `200` | Success           | `GetV2ObjectCharcsSubjectIdResponse200` |
+| `400` | Bad request       | `object`                                |
+| `401` | Unauthorized      | `object`                                |
+| `403` | Access denied     | `responseBodyContentError403`           |
+| `429` | Too many requests | `object`                                |
 
 ## Call examples
 

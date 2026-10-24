@@ -1,53 +1,52 @@
 ---
-title: "Список архивных отзывов"
-description: "Метод возвращает список архивных отзывов."
+title: "List of Archived Feedbacks"
+description: "The method allows you to get a list of archived feedbacks. The feedback becomes archived if: - A response to the feedback is received. - No response to the…"
 ---
 
-# Список архивных отзывов
+# List of Archived Feedbacks
 
 ```http
 GET /api/v1/feedbacks/archive
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Отзывы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/feedbacks/operation/getV1FeedbacksArchive)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Feedbacks · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/feedbacks/operation/getV1FeedbacksArchive)
 
-Метод возвращает список архивных [отзывов](https://dev.wildberries.ru/openapi/customer-communication#tag/feedbacks/operation/getV1Feedbacks).
+The method allows you to get a list of archived feedbacks.
+The feedback becomes archived if:
 
-Отзыв становится архивным, если:
+- A response to the feedback is received.
+- No response to the feedback is received within 30 days.
+- The feedback contains no text or photos.
 
-- на отзыв получен ответ
-- на отзыв не получен ответ в течение 30 дней
-- в отзыве нет текста и фото
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
-
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name    | In    | Type             | Req. | Description                                   |
-| ------- | ----- | ---------------- | ---- | --------------------------------------------- |
-| `nmId`  | query | `integer<int64>` | no   | Артикул WB                                    |
-| `take`  | query | `integer<int64>` | yes  | Количество отзывов (max. 5 000)               |
-| `skip`  | query | `integer<int64>` | yes  | Количество отзывов для пропуска               |
-| `order` | query | `string`         | no   | Сортировка отзывов по дате (dateAsc/dateDesc) |
+| Name    | In    | Type             | Req. | Description                                     |
+| ------- | ----- | ---------------- | ---- | ----------------------------------------------- |
+| `nmId`  | query | `integer<int64>` | no   | WB item number                                  |
+| `take`  | query | `integer<int64>` | yes  | Number of feedbacks (max. 5 000)                |
+| `skip`  | query | `integer<int64>` | yes  | Number of feedbacks for skip                    |
+| `order` | query | `string`         | no   | Sorting of feedbacks by date (dateAsc/dateDesc) |
 
 ## Responses
 
 | Code  | Description                         | Schema                             |
 | ----- | ----------------------------------- | ---------------------------------- |
-| `200` | Успешно                             | `GetV1FeedbacksArchiveResponse200` |
-| `400` | Неправильный запрос                 | `responseFeedbackQuestionErr`      |
-| `401` | Не авторизован                      | `object`                           |
-| `402` | Требуется платёж                    | `object`                           |
-| `403` | Доступ запрещён                     | `responseFeedbackQuestionErr`      |
-| `422` | Ошибка обработки параметров запроса | `responseFeedbackQuestionErr`      |
-| `429` | Слишком много запросов              | `object`                           |
+| `200` | Success                             | `GetV1FeedbacksArchiveResponse200` |
+| `400` | Bad request                         | `responseFeedbackQuestionErr`      |
+| `401` | Unauthorized                        | `object`                           |
+| `402` | Payment required                    | `object`                           |
+| `403` | Access denied                       | `responseFeedbackQuestionErr`      |
+| `422` | Error processing request parameters | `responseFeedbackQuestionErr`      |
+| `429` | Too many requests                   | `object`                           |
 
 ## Call examples
 

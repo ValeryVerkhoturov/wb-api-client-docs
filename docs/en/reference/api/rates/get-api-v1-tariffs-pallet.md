@@ -1,42 +1,42 @@
 ---
-title: "Тарифы для монопаллет"
-description: "Для товаров, которые поставляются на склад WB на монопаллетах, метод возвращает стоимость: - доставки со склада до покупателя - доставки от покупателя до…"
+title: "Pallet Rates"
+description: "For items supplied to the WB warehouse on pallets, the method returns the cost: - of delivery from warehouse to the buyer - of delivery from the buyer to…"
 ---
 
-# Тарифы для монопаллет
+# Pallet Rates
 
 ```http
 GET /api/v1/tariffs/pallet
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на остаток · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/stockRates/operation/getV1TariffsPallet)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Stock Rates · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/stockRates/operation/getV1TariffsPallet)
 
-Для товаров, которые поставляются на склад WB на монопаллетах, метод возвращает [стоимость](https://seller.wildberries.ru/dynamic-product-categories):
+For items supplied to the WB warehouse on pallets, the method returns the [cost](https://seller.wildberries.ru/dynamic-product-categories):
 
-- доставки со склада до покупателя
-- доставки от покупателя до склада
-- хранения на складе WB
+- of delivery from warehouse to the buyer
+- of delivery from the buyer to warehouse
+- of storage on WB warehouse
 
-Тарифы для монопаллет совпадают с тарифами для **Поштучных паллет**
+The rates for pallets match the **Piece pallet** rates
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Сервисный          | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 60 requests | 1 s      | 5 requests |
+| Service          | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base with secret | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `RatesPalletResponse` |
-| `400` | Неправильный запрос    | `BadRequest`          |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `RatesPalletResponse` |
+| `400` | Bad request       | `BadRequest`          |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

@@ -1,37 +1,38 @@
 ---
-title: "Данные по размерам"
-description: "Метод формирует набор данных об остатках по размерам товара."
+title: "Size Data"
+description: "Forms a dataset for inventory by the size of the item."
 ---
 
-# Данные по размерам
+# Size Data
 
 ```http
 POST /api/v2/stocks-report/products/sizes
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** История остатков · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsSizes)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Stocks Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsSizes)
 
-Метод формирует набор данных об остатках по размерам товара.
+Forms a dataset for inventory by the size of the item.
 
-Возможны случаи:
+Possible cases:
 
-1. Товар имеет размеры и `"includeOffice":true`, тогда в ответе будут данные об остатках по каждому из размеров с вложенной детализацией по складам.
-2. Товар имеет размеры и `"includeOffice":false`, тогда в ответе будут данные об остатках по каждому из размеров без вложенной детализации по складам.
-3. Товар не имеет размера и `"includeOffice":true`, тогда в ответе будет детализация по складам. Без данных об остатках по каждому из размеров.
-4. Товар не имеет размера и `"includeOffice":false`, тогда тело ответа будет пустым.
-   Товар не имеет размера, если у него единственный размер с `"techSize":"0"`. В ответах метода получения данных по [товарам](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsProducts) у таких товаров `"hasSizes":false`.
-   Данные по складам продавца приходят в агрегированном виде — по всем сразу, без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` и `"officeName":""`.
+1. The item has dimensions and `"includeOffice":true`, then the response body will contain data on the inventory for each of the sizes with nested details by warehouse.
+2. The item has dimensions and `"includeOffice":false`, then the response body will contain data on the inventory for each of the sizes without nested details by warehouse.
+3. The item has no size and `"include Office":true`, then the response body will contain details by warehouse without data on the inventory for each of the sizes.
+4. The item has no size and `"include Office":false`, then the response body will be empty.
+   `The item has no size` means the size of the item is the same and has `"techSize":"0"`. In responses of the method for getting data on [items](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsProducts), such items have `hasSizes':false`.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The data on the seller warehouses are in an aggregated form — for all of them together without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` and `"officeName":""` in such cases.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+The report data is updated once every 2 hours.
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос  |
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
+
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -39,14 +40,14 @@ POST /api/v2/stocks-report/products/sizes
 
 ## Responses
 
-| Code  | Description            | Schema                                       |
-| ----- | ---------------------- | -------------------------------------------- |
-| `200` | Успешно                | `PostV2StocksReportProductsSizesResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`                             |
-| `401` | Не авторизован         | `object`                                     |
-| `402` | Требуется платёж       | `object`                                     |
-| `403` | Доступ запрещён        | `ErrorObject403`                             |
-| `429` | Слишком много запросов | `object`                                     |
+| Code  | Description       | Schema                                       |
+| ----- | ----------------- | -------------------------------------------- |
+| `200` | Success           | `PostV2StocksReportProductsSizesResponse200` |
+| `400` | Bad request       | `ErrorObject400`                             |
+| `401` | Unauthorized      | `object`                                     |
+| `402` | Payment required  | `object`                                     |
+| `403` | Access denied     | `ErrorObject403`                             |
+| `429` | Too many requests | `object`                                     |
 
 ## Call examples
 

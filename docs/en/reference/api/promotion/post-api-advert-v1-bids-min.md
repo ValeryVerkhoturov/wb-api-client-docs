@@ -1,26 +1,26 @@
 ---
-title: "Минимальные ставки для карточек товаров"
-description: "Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты профиля продавца — по типу оплаты и местам размещения."
+title: "Minimum Bids for Listings"
+description: "Method allows minimum bids for listings in minor currency units — 0.01 of the base unit of the seller account currency — depending on the payment type and…"
 ---
 
-# Минимальные ставки для карточек товаров
+# Minimum Bids for Listings
 
 ```http
 POST /api/advert/v1/bids/min
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV1BidsMin)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Creating Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV1BidsMin)
 
-Метод возвращает минимальные ставки для карточек товаров в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) — по типу оплаты и местам размещения.
+Method allows minimum bids for listings in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency — depending on the payment type and placements.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 1 мин  | 20 запросов | 3 сек    | 5 запросов |
-| Сервисный          | 1 мин  | 20 запросов | 3 сек    | 5 запросов |
-| Базовый с секретом | 1 мин  | 20 запросов | 3 сек    | 5 запросов |
-| Базовый            | 1 ч    | 5 запросов  | 12 мин   | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 20 requests | 3 s      | 5 requests |
+| Service          | 1 min  | 20 requests | 3 s      | 5 requests |
+| Base with secret | 1 min  | 20 requests | 3 s      | 5 requests |
+| Base             | 1 h    | 5 requests  | 12 min   | 1 request  |
 
 ## Request body
 
@@ -28,13 +28,13 @@ POST /api/advert/v1/bids/min
 
 ## Responses
 
-| Code  | Description            | Schema                     |
-| ----- | ---------------------- | -------------------------- |
-| `200` | Успешно                | `PostV1BidsMinResponse200` |
-| `400` | Неправильный запрос    | `StandardizedBatchError`   |
-| `401` | Не авторизован         | `object`                   |
-| `403` | Доступ запрещён        | `object`                   |
-| `429` | Слишком много запросов | `object`                   |
+| Code  | Description       | Schema                     |
+| ----- | ----------------- | -------------------------- |
+| `200` | Success           | `PostV1BidsMinResponse200` |
+| `400` | Bad request       | `StandardizedBatchError`   |
+| `401` | Unauthorized      | `object`                   |
+| `403` | Access denied     | `object`                   |
+| `429` | Too many requests | `object`                   |
 
 ## Call examples
 

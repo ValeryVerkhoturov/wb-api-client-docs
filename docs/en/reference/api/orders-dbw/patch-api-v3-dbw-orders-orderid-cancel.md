@@ -1,44 +1,44 @@
 ---
-title: "Отменить сборочное задание"
-description: "Метод отменяет сборочное задание и переводит в статус cancel — отменено продавцом."
+title: "Cancel the Order"
+description: "Moves the assembly order to cancel status — canceled by the seller."
 ---
 
-# Отменить сборочное задание
+# Cancel the Order
 
 ```http
 PATCH /api/v3/dbw/orders/{orderId}/cancel
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdCancel)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdCancel)
 
-Метод отменяет [сборочное задание](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders) и переводит в [статус](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `cancel` — отменено продавцом.
+Moves the assembly order to `cancel` status — canceled by the seller.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for the DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- управление сборочными заданиями
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- for managing assembly orders
 
-| Тип                                                            | Период | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |
-| Персональный                                                   | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
-| Сервисный                                                      | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
-| Базовый с секретом                                             | 1 мин  | 300 запросов | 200 мс   | 20 запросов |
-| Базовый                                                        | 1 ч    | 10 запросов  | 6 мин    | 1 запрос    |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Type                                                            | Period | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |
+| Personal                                                        | 1 min  | 300 requests | 200 ms   | 20 requests |
+| Service                                                         | 1 min  | 300 requests | 200 ms   | 20 requests |
+| Base with secret                                                | 1 min  | 300 requests | 200 ms   | 20 requests |
+| Base                                                            | 1 h    | 10 requests  | 6 min    | 1 request   |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
 | Code  | Description               | Schema   |
 | ----- | ------------------------- | -------- |
-| `204` | Отменено                  | —        |
-| `400` | Неправильный запрос       | `Error`  |
-| `401` | Не авторизован            | `object` |
-| `402` | Требуется платёж          | `object` |
-| `403` | Доступ запрещён           | `Error`  |
-| `404` | Не найдено                | `Error`  |
-| `409` | Ошибка обновления статуса | `Error`  |
-| `429` | Слишком много запросов    | `object` |
+| `204` | Canceled                  | —        |
+| `400` | Bad request               | `Error`  |
+| `401` | Unauthorized              | `object` |
+| `402` | Payment required          | `object` |
+| `403` | Access denied             | `Error`  |
+| `404` | The resource is not found | `Error`  |
+| `409` | Error updating a status   | `Error`  |
+| `429` | Too many requests         | `object` |
 
 ## Call examples
 

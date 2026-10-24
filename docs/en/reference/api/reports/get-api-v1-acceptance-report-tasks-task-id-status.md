@@ -1,43 +1,43 @@
 ---
-title: "Проверить статус"
-description: "Метод возвращает статус задания на генерацию отчёта об операциях при приёмке."
+title: "Check the Status"
+description: "Returns the status of the generation task"
 ---
 
-# Проверить статус
+# Check the Status
 
 ```http
 GET /api/v1/acceptance_report/tasks/{task_id}/status
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Операции при приёмке · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReportTasksTaskIdStatus)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Acceptance Expenses · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReportTasksTaskIdStatus)
 
-Метод возвращает статус [задания на генерацию](https://dev.wildberries.ru/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReport) отчёта об [операциях при приёмке](https://dev.wildberries.ru/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReportTasksTaskIdDownload).
+Returns the status of the generation task
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 5 сек  | 1 запрос  | 5 сек    | 1 запрос |
-| Сервисный          | 5 сек  | 1 запрос  | 5 сек    | 1 запрос |
-| Базовый с секретом | 5 сек  | 1 запрос  | 5 сек    | 1 запрос |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 5 s    | 1 request  | 5 s      | 1 request |
+| Service          | 5 s    | 1 request  | 5 s      | 1 request |
+| Base with secret | 5 s    | 1 request  | 5 s      | 1 request |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request |
 
 ## Parameters
 
-| Name      | In   | Type     | Req. | Description             |
-| --------- | ---- | -------- | ---- | ----------------------- |
-| `task_id` | path | `string` | yes  | ID задания на генерацию |
+| Name      | In   | Type     | Req. | Description        |
+| --------- | ---- | -------- | ---- | ------------------ |
+| `task_id` | path | `string` | yes  | Generation task ID |
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `GetTasksResponse` |
-| `400` | Неправильный запрос    | `Http4XXResponse`  |
-| `401` | Не авторизован         | `object`           |
-| `403` | Доступ запрещён        | `object`           |
-| `404` | Не найдено             | `Http4XXResponse`  |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `GetTasksResponse` |
+| `400` | Bad request       | `Http4XXResponse`  |
+| `401` | Unauthorized      | `object`           |
+| `403` | Access denied     | `object`           |
+| `404` | Not found         | `Http4XXResponse`  |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

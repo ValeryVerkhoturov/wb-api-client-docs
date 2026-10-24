@@ -1,53 +1,51 @@
 ---
-title: "Создать отчёт"
-description: "Метод создаёт задание на генерацию отчёта об остатках на складах WB."
+title: "Create the Report"
+description: "Creates a task for report generation. The parameters groupBy and filter can be set in any combination — similar to the version in the personal account."
 ---
 
-# Создать отчёт
+# Create the Report
 
 ```http
 GET /api/v1/warehouse_remains
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт об остатках на складах · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Warehouses Inventory Report · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemains)
 
-Метод создаёт [задание на генерацию](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdStatus) отчёта об [остатках на складах WB](https://dev.wildberries.ru/openapi/reports#tag/warehousesInventoryReport/operation/getV1WarehouseRemainsTasksTaskIdDownload).
+Creates a task for report generation. The parameters `groupBy` and `filter` can be set in any combination — similar to the [version](https://seller.wildberries.ru/analytics-reports/warehouse-remains) in the personal account.
 
-Параметры `groupBy` и `filter` (группировки и фильтры) можно задать в любой комбинации — аналогично [версии](https://seller.wildberries.ru/analytics-reports/warehouse-remains) в личном кабинете.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит     | Интервал | Всплеск    |
-| ------------------ | ------ | --------- | -------- | ---------- |
-| Персональный       | 1 мин  | 1 запрос  | 1 мин    | 5 запросов |
-| Сервисный          | 1 мин  | 1 запрос  | 1 мин    | 5 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос  | 1 мин    | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса | 15 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 1 request  | 1 min    | 5 requests |
+| Service          | 1 min  | 1 request  | 1 min    | 5 requests |
+| Base with secret | 1 min  | 1 request  | 1 min    | 5 requests |
+| Base             | 1 h    | 4 requests | 15 min   | 1 request  |
 
 ## Parameters
 
-| Name             | In    | Type             | Req. | Description                                                                                                                                        |
-| ---------------- | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `locale`         | query | `string`         | no   | Язык полей ответа `subjectName` и `warehouseName`: - `ru` — русский - `en` — английский - `zh` — китайский. Значения `warehouseName` на английском |
-| `groupByBrand`   | query | `boolean`        | no   | Разбивка по брендам                                                                                                                                |
-| `groupBySubject` | query | `boolean`        | no   | Разбивка по предметам                                                                                                                              |
-| `groupBySa`      | query | `boolean`        | no   | Разбивка по артикулам продавца                                                                                                                     |
-| `groupByNm`      | query | `boolean`        | no   | Разбивка по артикулам WB. Если `groupByNm=true`, в ответе будет поле `volume`                                                                      |
-| `groupByBarcode` | query | `boolean`        | no   | Разбивка по баркодам                                                                                                                               |
-| `groupBySize`    | query | `boolean`        | no   | Разбивка по размерам                                                                                                                               |
-| `filterPics`     | query | `integer<int64>` | no   | Фильтр по фото: - `-1` — без фото - `0` — не применять фильтр - `1` — с фото                                                                       |
-| `filterVolume`   | query | `integer<int64>` | no   | Фильтр по объёму: - `-1` — без габаритов - `0` — не применять фильтр - `3` — свыше трёх литров                                                     |
+| Name             | In    | Type             | Req. | Description                                                                                                                                                         |
+| ---------------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locale`         | query | `string`         | no   | Language of the `subjectName` and `warehouseName` response fields: - `ru` — Russian - `en` — English - `zh` — Chinese. Values of the `warehouseName` are in English |
+| `groupByBrand`   | query | `boolean`        | no   | Group by brand                                                                                                                                                      |
+| `groupBySubject` | query | `boolean`        | no   | Group by subcategory                                                                                                                                                |
+| `groupBySa`      | query | `boolean`        | no   | Group by seller item number                                                                                                                                         |
+| `groupByNm`      | query | `boolean`        | no   | Group by WB item number. If `groupByNm=true`, there will be `volume` field in the response                                                                          |
+| `groupByBarcode` | query | `boolean`        | no   | Group by SKUs                                                                                                                                                       |
+| `groupBySize`    | query | `boolean`        | no   | Group by size                                                                                                                                                       |
+| `filterPics`     | query | `integer<int64>` | no   | Photo filter: - `-1` — without photo - `0` — do not apply filter - `1` — with photo                                                                                 |
+| `filterVolume`   | query | `integer<int64>` | no   | Volume filter: - `-1` — without dimensions - `0` — do not apply filter - `3` — over three liters                                                                    |
 
 ## Responses
 
-| Code  | Description            | Schema               |
-| ----- | ---------------------- | -------------------- |
-| `200` | Успешно                | `CreateTaskResponse` |
-| `400` | Неправильный запрос    | `Http4XXResponse`    |
-| `401` | Не авторизован         | `object`             |
-| `402` | Требуется платёж       | `object`             |
-| `403` | Доступ запрещён        | `object`             |
-| `429` | Слишком много запросов | `object`             |
+| Code  | Description       | Schema               |
+| ----- | ----------------- | -------------------- |
+| `200` | Success           | `CreateTaskResponse` |
+| `400` | Bad request       | `Http4XXResponse`    |
+| `401` | Unauthorized      | `object`             |
+| `402` | Payment required  | `object`             |
+| `403` | Access denied     | `object`             |
+| `429` | Too many requests | `object`             |
 
 ## Call examples
 

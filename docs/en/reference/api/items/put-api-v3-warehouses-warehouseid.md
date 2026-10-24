@@ -1,28 +1,28 @@
 ---
-title: "Обновить склад продавца"
-description: "Метод обновляет данные склада продавца, кроме складов для сверхгабаритных товаров (СГТ, \"cargoType\":2)."
+title: "Update Warehouse"
+description: "Updates seller warehouse details, except warehouses for over dimensional cargo (ODC, \"cargoType\":2)."
 ---
 
-# Обновить склад продавца
+# Update Warehouse
 
 ```http
 PUT /api/v3/warehouses/{warehouseId}
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Склады продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/putV3WarehousesWarehouseId)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/putV3WarehousesWarehouseId)
 
-Метод обновляет данные [склада продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/getV3Warehouses), кроме складов для сверхгабаритных товаров (СГТ, `"cargoType":2`).
+Updates [seller warehouse](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/getV3Warehouses) details, except warehouses for over dimensional cargo (ODC, `"cargoType":2`).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **складов продавца**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **seller warehouses** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -30,16 +30,16 @@ PUT /api/v3/warehouses/{warehouseId}
 
 ## Responses
 
-| Code  | Description              | Schema   |
-| ----- | ------------------------ | -------- |
-| `204` | Обновлено                | —        |
-| `400` | Неправильный запрос      | `Error`  |
-| `401` | Не авторизован           | `object` |
-| `402` | Требуется платёж         | `object` |
-| `403` | Доступ запрещён          | `Error`  |
-| `404` | Не найдено               | `Error`  |
-| `409` | Ошибка обновления склада | `Error`  |
-| `429` | Слишком много запросов   | `object` |
+| Code  | Description                | Schema   |
+| ----- | -------------------------- | -------- |
+| `204` | Updated                    | —        |
+| `400` | Bad request                | `Error`  |
+| `401` | Unauthorized               | `object` |
+| `402` | Payment required           | `object` |
+| `403` | Access denied              | `Error`  |
+| `404` | Not found                  | `Error`  |
+| `409` | Error updating a warehouse | `Error`  |
+| `429` | Too many requests          | `object` |
 
 ## Call examples
 

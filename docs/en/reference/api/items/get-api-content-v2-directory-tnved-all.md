@@ -1,52 +1,48 @@
 ---
-title: "Список кодов ТН ВЭД"
-description: "Метод возвращает справочный список всех кодов ТН ВЭД. Чтобы найти код по его фрагменту, укажите первые цифры кода в параметре search."
+title: "HS-codes List"
+description: "The method returns a reference list of all HS-codes. To find a code by its fragment, specify the first digits of the code in the search parameter."
 ---
 
-# Список кодов ТН ВЭД
+# HS-codes List
 
 ```http
 GET /api/content/v2/directory/tnved/all
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Категории, предметы и характеристики · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryTnvedAll)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Categories, Subcategories, and Characteristics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryTnvedAll)
 
-Метод возвращает справочный список всех кодов ТН ВЭД. Чтобы найти код по его фрагменту, укажите первые цифры кода в параметре `search`.
+The method returns a reference list of all HS-codes. To find a code by its fragment, specify the first digits of the code in the `search` parameter.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Контент**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-| Период               | Лимит        | Интервал | Всплеск    |
-| -------------------- | ------------ | -------- | ---------- |
-| 1 мин                | 100 запросов | 600 мс   | 5 запросов |
-| Исключение — методы: |
+| Period                      | Limit        | Interval | Burst      |
+| --------------------------- | ------------ | -------- | ---------- |
+| 1 min                       | 100 requests | 600 ms   | 5 requests |
+| Exceptions are the methods: |
 
-- [создания карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
-- [создания карточек товаров с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
-- [редактирования карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
-- [восстановления карточек товаров из корзины](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
-- [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
-- [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
-
----
-
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
 ## Parameters
 
-| Name     | In    | Type             | Req. | Description                                                      |
-| -------- | ----- | ---------------- | ---- | ---------------------------------------------------------------- |
-| `search` | query | `integer<int64>` | no   | Поиск по первым цифрам кода ТН ВЭД. Укажите не более 10 символов |
-| `locale` | query | `string`         | no   | Язык полей ответа: - `ru` — русский - `en` — английский          |
+| Name     | In    | Type             | Req. | Description                                                                   |
+| -------- | ----- | ---------------- | ---- | ----------------------------------------------------------------------------- |
+| `search` | query | `integer<int64>` | no   | Search by the first digits of the HS-code. Specify no more than 10 characters |
+| `locale` | query | `string`         | no   | Response language: - `ru` — Russian - `en` — English                          |
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `GetV2DirectoryTnvedAllResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`       |
-| `401` | Не авторизован         | `object`                            |
-| `403` | Доступ запрещён        | `responseBodyContentError403`       |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Success           | `GetV2DirectoryTnvedAllResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`       |
+| `401` | Unauthorized      | `object`                            |
+| `403` | Access denied     | `responseBodyContentError403`       |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

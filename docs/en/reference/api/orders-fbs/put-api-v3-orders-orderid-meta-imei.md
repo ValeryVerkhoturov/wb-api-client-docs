@@ -1,30 +1,30 @@
 ---
-title: "Закрепить IMEI за сборочным заданием"
-description: "Метод обновляет IMEI в идентификаторах маркировки сборочного задания. У одного сборочного задания может быть только один IMEI. Если у устройства два IMEI —…"
+title: "Add IMEI to the Assembly Order"
+description: "Sets the IMEI for the assembly orders label identifiers. The assembly order can have only one IMEI. If a device has two IMEIs — \\\\IMEI\\\\ and \\\\IMEI2\\\\ or…"
 ---
 
-# Закрепить IMEI за сборочным заданием
+# Add IMEI to the Assembly Order
 
 ```http
 PUT /api/v3/orders/{orderId}/meta/imei
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaImei)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaImei)
 
-Метод обновляет IMEI в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta).
-У одного сборочного задания может быть только один IMEI. Если у устройства два IMEI — \*\*IMEI\*\* и \*\*IMEI2\*\* или \*\*IMEI1\*\* и \*\*IMEI2\*\* — укажите только \*\*IMEI\*\* или \*\*IMEI1\*\*. \*\*IMEI2\*\* указывать не нужно.
-Закрепить IMEI можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) есть поле `imei`.
+Sets the IMEI for the [assembly orders label identifiers](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta).
+The assembly order can have only one IMEI. If a device has two IMEIs — \*\*IMEI\*\* and \*\*IMEI2\*\* or \*\*IMEI1\*\* and \*\*IMEI2\*\* — you should only specify \*\*IMEI\*\* or \*\*IMEI1\*\*. You don't need to specify \*\*IMEI2\*\*.
+You can add IMEI to the assembly order only if the `imei` field is returned in the response of the [Assembly Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) method, and the assembly order is in the `confirm` status.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding FBS label identifiers**:
 
-| Период                                                          | Лимит         | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------- | -------- | ----------- |
-| 1 мин                                                           | 1000 запросов | 60 мс    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit         | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 min                                                            | 1000 requests | 60 ms    | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -32,15 +32,15 @@ PUT /api/v3/orders/{orderId}/meta/imei
 
 ## Responses
 
-| Code  | Description                                  | Schema   |
-| ----- | -------------------------------------------- | -------- |
-| `204` | Обновлено                                    | —        |
-| `400` | Неправильный запрос                          | `Error`  |
-| `401` | Не авторизован                               | `object` |
-| `402` | Требуется платёж                             | `object` |
-| `403` | Доступ запрещён                              | `Error`  |
-| `409` | Ошибка обновления идентификаторов маркировки | `Error`  |
-| `429` | Слишком много запросов                       | `object` |
+| Code  | Description                      | Schema   |
+| ----- | -------------------------------- | -------- |
+| `204` | Updated                          | —        |
+| `400` | Bad request                      | `Error`  |
+| `401` | Unauthorized                     | `object` |
+| `402` | Payment required                 | `object` |
+| `403` | Access denied                    | `Error`  |
+| `409` | Error updating label identifiers | `Error`  |
+| `429` | Too many requests                | `object` |
 
 ## Call examples
 

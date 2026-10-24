@@ -1,37 +1,37 @@
 ---
-title: "Получить информацию о продавце"
-description: "Информацию о продавце можно получить с токеном любой категории"
+title: "Get Seller Information"
+description: "You can get seller information with a token of any category."
 ---
 
-# Получить информацию о продавце
+# Get Seller Information
 
 ```http
 GET /api/v1/seller-info
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Информация о продавце · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1SellerInfo)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerInformation/operation/getV1SellerInfo)
 
-Информацию о продавце можно получить с токеном любой [категории](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kategorii-tokenov)
+You can get seller information with a token of any [category](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Token-categories).
 
-Метод позволяет получать наименование продавца и ID его профиля.
+This method allows you to obtain the seller's name and account ID.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос    |
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
+| Base             | 24 h   | 1 request | 24 h     | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `GetV1SellerInfoResponse200` |
-| `401` | Не авторизован         | `object`                     |
-| `402` | Требуется платёж       | `object`                     |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `GetV1SellerInfoResponse200` |
+| `401` | Unauthorized      | `object`                     |
+| `402` | Payment required  | `object`                     |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

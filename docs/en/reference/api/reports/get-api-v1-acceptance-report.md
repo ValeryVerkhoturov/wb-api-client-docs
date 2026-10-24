@@ -1,39 +1,38 @@
 ---
-title: "Создать отчёт"
-description: "Метод создаёт задание на генерацию отчёта об операциях при приёмке."
+title: "Create the Report"
+description: "Creates a task for report generation. Maximum of report period is 31 days."
 ---
 
-# Создать отчёт
+# Create the Report
 
 ```http
 GET /api/v1/acceptance_report
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Операции при приёмке · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReport)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Acceptance Expenses · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReport)
 
-Метод создаёт [задание на генерацию](https://dev.wildberries.ru/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReportTasksTaskIdStatus) отчёта об [операциях при приёмке](https://dev.wildberries.ru/openapi/reports#tag/acceptanceExpenses/operation/getV1AcceptanceReportTasksTaskIdDownload).
+Creates a task for report generation.
+Maximum of report period is 31 days.
 
-Можно получить отчёт максимум за 31 день.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит    | Интервал | Всплеск  |
-| ------------------ | ------ | -------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый            | 3 ч    | 1 запрос | 3 ч      | 1 запрос |
+| Type             | Period | Limit     | Interval | Burst     |
+| ---------------- | ------ | --------- | -------- | --------- |
+| Personal         | 1 min  | 1 request | 1 min    | 1 request |
+| Service          | 1 min  | 1 request | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request | 1 min    | 1 request |
+| Base             | 3 h    | 1 request | 3 h      | 1 request |
 
 ## Responses
 
-| Code  | Description            | Schema               |
-| ----- | ---------------------- | -------------------- |
-| `200` | Успешно                | `CreateTaskResponse` |
-| `400` | Неправильный запрос    | `Http4XXResponse`    |
-| `401` | Не авторизован         | `object`             |
-| `402` | Требуется платёж       | `object`             |
-| `403` | Доступ запрещён        | `object`             |
-| `429` | Слишком много запросов | `object`             |
+| Code  | Description       | Schema               |
+| ----- | ----------------- | -------------------- |
+| `200` | Success           | `CreateTaskResponse` |
+| `400` | Bad request       | `Http4XXResponse`    |
+| `401` | Unauthorized      | `object`             |
+| `402` | Payment required  | `object`             |
+| `403` | Access denied     | `object`             |
+| `429` | Too many requests | `object`             |
 
 ## Call examples
 

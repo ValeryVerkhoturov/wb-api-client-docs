@@ -1,26 +1,26 @@
 ---
-title: "Карточки товаров для кампаний"
-description: "Метод возвращает список карточек товаров, которые можно добавить в рекламную кампанию. Для получения карточек необходимы ID предметов, также доступных для…"
+title: "Listings for Campaigns"
+description: "Returns listings that are available for all campaigns."
 ---
 
-# Карточки товаров для кампаний
+# Listings for Campaigns
 
 ```http
 POST /adv/v2/supplier/nms
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Создание кампаний · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV2SupplierNms)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Creating Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/creatingCampaigns/operation/postV2SupplierNms)
 
-Метод возвращает список [карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), которые можно добавить в рекламную [кампанию](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts). Для получения карточек необходимы ID [предметов](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/getV1SupplierSubjects), также доступных для добавления в кампанию.
+Returns listings that are available for all campaigns.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Сервисный          | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Базовый с секретом | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса  | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 5 requests | 12 s     | 5 requests |
+| Service          | 1 min  | 5 requests | 12 s     | 5 requests |
+| Base with secret | 1 min  | 5 requests | 12 s     | 5 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -28,13 +28,13 @@ POST /adv/v2/supplier/nms
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `PostV2SupplierNmsResponse200` |
-| `400` | Неправильный запрос    | `string`                       |
-| `401` | Не авторизован         | `object`                       |
-| `403` | Доступ запрещён        | `object`                       |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `PostV2SupplierNmsResponse200` |
+| `400` | Bad request       | `string`                       |
+| `401` | Unauthorized      | `object`                       |
+| `403` | Access denied     | `object`                       |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

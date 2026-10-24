@@ -1,39 +1,41 @@
 ---
-title: "Добавить сборочные задания к поставке"
-description: "Метод добавляет до 100 сборочных заданий к поставке и переводит их в статус confirm — на сборке. Может перемещать сборочные задания: - между активными…"
+title: "Add Assembly Orders to the Supply"
+description: "The method adds up to 100 assembly orders to the supply and moves it to the confirm status. It can also move the assembly orders: - between active supplies -…"
 ---
 
-# Добавить сборочные задания к поставке
+# Add Assembly Orders to the Supply
 
 ```http
 PATCH /api/marketplace/v3/supplies/{supplyId}/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdOrders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdOrders)
 
-Метод добавляет до 100 [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) к поставке и переводит их в [статус](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` — на сборке.
-Может перемещать сборочные задания:
+The method adds up to 100 [assembly orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) to the supply and moves it to the `confirm` [status](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus).
+It can also move the assembly orders:
 
-- между активными поставками
-- из закрытой поставки в активную, если сборочные задания требуют [повторной отгрузки](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3SuppliesOrdersReshipment)
+- between active supplies
+- from a closed to an active supply, if the assembly order requires [reshipment](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3SuppliesOrdersReshipment).
 
-В пустую поставку можно добавить любые сборочные задания, поступившие на один и тот же склад.
-Поставка приобретает признаки первого добавленного в неё сборочного задания из [полей](https://dev.wildberries.ru/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId):- `crossBorderType` — трансграничная или внутренняя поставка
+You can add any assembly orders that arrived at the same warehouse to an empty supply.
+The supply acquires the attributes of the first assembly order added to it from the [fields](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId):
 
-- `cargoType` — габаритный тип
-- `isB2b` — B2B-продажа
-  После этого в поставку можно добавить сборочные задания только с такими же признаками `crossBorderType`, `cargoType`, `isB2b`, как у поставки.
+- `crossBorderType` — crossborder or non-crossborder
+- `cargoType` — dimensional type
+- `isB2b` — B2B-sale or not B2B-sale
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+After that, you can add to the supply only assembly orders with the same `crossBorderType`, `cargoType`, `isB2b` attributes as the supply.
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
+
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -41,16 +43,16 @@ PATCH /api/marketplace/v3/supplies/{supplyId}/orders
 
 ## Responses
 
-| Code  | Description                                     | Schema   |
-| ----- | ----------------------------------------------- | -------- |
-| `204` | Сборочные задания закреплены за поставкой       | —        |
-| `400` | Неправильный запрос                             | `Error`  |
-| `401` | Не авторизован                                  | `object` |
-| `402` | Требуется платёж                                | `object` |
-| `403` | Доступ запрещён                                 | `Error`  |
-| `404` | Не найдено                                      | `Error`  |
-| `409` | Ошибка добавления сборочного задания к поставке | `Error`  |
-| `429` | Слишком много запросов                          | `object` |
+| Code  | Description                                   | Schema   |
+| ----- | --------------------------------------------- | -------- |
+| `204` | The assembly orders assigned to the supply    | —        |
+| `400` | Bad request                                   | `Error`  |
+| `401` | Unauthorized                                  | `object` |
+| `402` | Payment required                              | `object` |
+| `403` | Access denied                                 | `Error`  |
+| `404` | Not found                                     | `Error`  |
+| `409` | Error adding the assembly order to the supply | `Error`  |
+| `429` | Too many requests                             | `object` |
 
 ## Call examples
 

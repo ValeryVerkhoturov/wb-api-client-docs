@@ -1,35 +1,35 @@
 ---
-title: "Списки кампаний"
-description: "Метод возвращает списки всех рекламных кампаний продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения."
+title: "Campaigns Lists"
+description: "Method allows to get campaigns lists grouped by type and status with information about last campaign change date."
 ---
 
-# Списки кампаний
+# Campaigns Lists
 
 ```http
 GET /adv/v1/promotion/count
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Кампании · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV1PromotionCount)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV1PromotionCount)
 
-Метод возвращает списки всех [рекламных кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.
+Method allows to get campaigns lists grouped by type and status with information about last campaign change date.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 4 запроса  | 15 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 4 requests | 15 min   | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV1PromotionCountResponse200` |
-| `401` | Не авторизован         | `object`                         |
-| `403` | Доступ запрещён        | `object`                         |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `GetV1PromotionCountResponse200` |
+| `401` | Unauthorized      | `object`                         |
+| `403` | Access denied     | `object`                         |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

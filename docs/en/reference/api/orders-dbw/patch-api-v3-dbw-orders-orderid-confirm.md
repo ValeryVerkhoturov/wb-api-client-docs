@@ -1,41 +1,41 @@
 ---
-title: "Перевести на сборку"
-description: "Метод переводит сборочное задание в статус confirm — на сборке."
+title: "Transfer to Assembly"
+description: "Transfers the assembly order to the confirm status — on assembly."
 ---
 
-# Перевести на сборку
+# Transfer to Assembly
 
 ```http
 PATCH /api/v3/dbw/orders/{orderId}/confirm
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdConfirm)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/patchV3DbwOrdersOrderIdConfirm)
 
-Метод переводит [сборочное задание](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders) в [статус](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `confirm` — на сборке.
+Transfers the assembly order to the `confirm` status — on assembly.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
 | Code  | Description               | Schema   |
 | ----- | ------------------------- | -------- |
-| `204` | Подтверждено              | —        |
-| `400` | Неправильный запрос       | `Error`  |
-| `401` | Не авторизован            | `object` |
-| `402` | Требуется платёж          | `object` |
-| `403` | Доступ запрещён           | `Error`  |
-| `404` | Не найдено                | `Error`  |
-| `409` | Ошибка обновления статуса | `Error`  |
-| `429` | Слишком много запросов    | `object` |
+| `204` | Confirmed                 | —        |
+| `400` | Bad request               | `Error`  |
+| `401` | Unauthorized              | `object` |
+| `402` | Payment required          | `object` |
+| `403` | Access denied             | `Error`  |
+| `404` | The resource is not found | `Error`  |
+| `409` | Error updating a status   | `Error`  |
+| `429` | Too many requests         | `object` |
 
 ## Call examples
 

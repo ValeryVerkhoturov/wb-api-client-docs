@@ -1,41 +1,41 @@
 ---
-title: "Получить стикеры для сборочных заданий с доставкой в ПВЗ"
-description: "Метод доступен по Персональному токену, Сервисному токену, Базовому токену с секретом"
+title: "Get Stickers for Assembly Orders with Delivery to Pickup Point"
+description: "Method is available by Personal token, Service token, Base token with secret"
 ---
 
-# Получить стикеры для сборочных заданий с доставкой в ПВЗ
+# Get Stickers for Assembly Orders with Delivery to Pickup Point
 
 ```http
 POST /api/marketplace/v3/dbs/orders/stickers
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStickers)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStickers)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену,
-**Базовому** токену **с секретом**
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token,
+**Base** token **with secret**
 
-Метод возвращает стикеры для сборочных заданий с доставкой в ПВЗ в [статусах](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo):
+The method returns stickers for the assembly orders with delivery to pickup points in the [statuses](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo):
 
-- `confirm` — на сборке
-- `deliver` — в доставке
-  Получить стикеры можно только в размере 580x400 px в формате PDF.
+- `confirm` — on assembly
+- `deliver` — in delivery
+  You can get stickers only with 580x400 px size in PDF format.
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
+[Request limit](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **DBS assembly orders** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
 | Name     | In    | Type             | Req. | Description    |
 | -------- | ----- | ---------------- | ---- | -------------- |
-| `type`   | query | `string`         | yes  | Формат стикера |
-| `width`  | query | `integer<int64>` | yes  | Ширина стикера |
-| `height` | query | `integer<int64>` | yes  | Высота стикера |
+| `type`   | query | `string`         | yes  | Sticker format |
+| `width`  | query | `integer<int64>` | yes  | Sticker width  |
+| `height` | query | `integer<int64>` | yes  | Sticker height |
 
 ## Request body
 
@@ -43,14 +43,14 @@ POST /api/marketplace/v3/dbs/orders/stickers
 
 ## Responses
 
-| Code  | Description            | Schema                               |
-| ----- | ---------------------- | ------------------------------------ |
-| `200` | Успешно                | `PostV3DbsOrdersStickersResponse200` |
-| `400` | Неправильный запрос    | `Error`                              |
-| `401` | Не авторизован         | `object`                             |
-| `402` | Требуется платёж       | `object`                             |
-| `403` | Доступ запрещён        | `Error`                              |
-| `429` | Слишком много запросов | `object`                             |
+| Code  | Description       | Schema                               |
+| ----- | ----------------- | ------------------------------------ |
+| `200` | Success           | `PostV3DbsOrdersStickersResponse200` |
+| `400` | Bad request       | `Error`                              |
+| `401` | Unauthorized      | `object`                             |
+| `402` | Payment required  | `object`                             |
+| `403` | Access denied     | `Error`                              |
+| `429` | Too many requests | `object`                             |
 
 ## Call examples
 

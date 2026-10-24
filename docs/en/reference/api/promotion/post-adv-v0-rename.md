@@ -1,26 +1,26 @@
 ---
-title: "Переименование кампании"
-description: "Метод меняет название кампании. Это можно сделать в любой момент существования кампании."
+title: "Rename Campaign"
+description: "The method allows to rename a campaign."
 ---
 
-# Переименование кампании
+# Rename Campaign
 
 ```http
 POST /adv/v0/rename
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/postV0Rename)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/postV0Rename)
 
-Метод меняет название [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts). Это можно сделать в любой момент существования кампании.
+The method allows to rename a campaign.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса  | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Request body
 
@@ -30,12 +30,12 @@ POST /adv/v0/rename
 
 | Code  | Description                         | Schema   |
 | ----- | ----------------------------------- | -------- |
-| `200` | Успешно                             | —        |
-| `400` | Неправильный запрос                 | `string` |
-| `401` | Не авторизован                      | `object` |
-| `403` | Доступ запрещён                     | `object` |
-| `422` | Ошибка обработки параметров запроса | `string` |
-| `429` | Слишком много запросов              | `object` |
+| `200` | Success                             | —        |
+| `400` | Bad request                         | `string` |
+| `401` | Unauthorized                        | `object` |
+| `403` | Access denied                       | `object` |
+| `422` | Error processing request parameters | `string` |
+| `429` | Too many requests                   | `object` |
 
 ## Call examples
 

@@ -1,46 +1,46 @@
 ---
-title: "Удержания за занижение габаритов упаковки"
-description: "Метод возвращает отчёт об удержаниях за занижение габаритов упаковки"
+title: "Logistics and Storage Costs Multiplier"
+description: "The method returns a report with logistics and storage costs multiplier"
 ---
 
-# Удержания за занижение габаритов упаковки
+# Logistics and Storage Costs Multiplier
 
 ```http
 GET /api/analytics/v1/measurement-penalties
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёты об удержаниях · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1MeasurementPenalties)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Retention Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/retentionReports/operation/getV1MeasurementPenalties)
 
-Метод возвращает отчёт об [удержаниях за занижение габаритов упаковки](https://seller.wildberries.ru/analytics-reports/dimensions-penalties)
+The method returns a report with [logistics and storage costs multiplier](https://seller.wildberries.ru/analytics-reports/dimensions-penalties)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск  |
-| ------------------ | ------ | -------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый            | 6 ч    | 1 запрос | 6 ч      | 1 запрос |
+| Type             | Period | Limit     | Interval | Burst     |
+| ---------------- | ------ | --------- | -------- | --------- |
+| Personal         | 1 min  | 1 request | 1 min    | 1 request |
+| Service          | 1 min  | 1 request | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request | 1 min    | 1 request |
+| Base             | 6 h    | 1 request | 6 h      | 1 request |
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                                                                             |
-| ---------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------- |
-| `dateFrom` | query | `string`         | no   | Начало отчётного периода. По умолчанию используется дата, когда были впервые получены данные для отчёта |
-| `dateTo`   | query | `string`         | yes  | Конец отчётного периода                                                                                 |
-| `limit`    | query | `integer<int64>` | yes  | Количество удержаний в ответе                                                                           |
-| `offset`   | query | `integer<int64>` | no   | Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента                  |
+| Name       | In    | Type             | Req. | Description                                                                                         |
+| ---------- | ----- | ---------------- | ---- | --------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string`         | no   | Report period start. By default the date when data for the report was first received is used        |
+| `dateTo`   | query | `string`         | yes  | Report period end                                                                                   |
+| `limit`    | query | `integer<int64>` | yes  | Number of retentions in the response                                                                |
+| `offset`   | query | `integer<int64>` | no   | How many results to skip. For example, with value `10`, the response will start with the 11 element |
 
 ## Responses
 
-| Code  | Description            | Schema                  |
-| ----- | ---------------------- | ----------------------- |
-| `200` | Успешно                | `MeasurementPenalties`  |
-| `400` | Неправильный запрос    | `Response400Retentions` |
-| `401` | Не авторизован         | `object`                |
-| `402` | Требуется платёж       | `object`                |
-| `403` | Доступ запрещён        | `Response403Retentions` |
-| `429` | Слишком много запросов | `object`                |
+| Code  | Description       | Schema                  |
+| ----- | ----------------- | ----------------------- |
+| `200` | Success           | `MeasurementPenalties`  |
+| `400` | Bad request       | `Response400Retentions` |
+| `401` | Unauthorized      | `object`                |
+| `402` | Payment required  | `object`                |
+| `403` | Access denied     | `Response403Retentions` |
+| `429` | Too many requests | `object`                |
 
 ## Call examples
 

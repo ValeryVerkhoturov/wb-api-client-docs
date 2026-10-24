@@ -1,28 +1,28 @@
 ---
-title: "Настройка дневных лимитов кампаний"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Set Campaign Daily Limits"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Настройка дневных лимитов кампаний
+# Set Campaign Daily Limits
 
 ```http
 PUT /api/advert/v0/daily-limits
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Управление кампаниями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/putV0DailyLimits)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/putV0DailyLimits)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод включает, выключает и обновляет дневной лимит кампаний.
+The method allows you to enable, update or disable the daily budget limit.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип          | Период | Лимит      | Интервал | Всплеск    |
-| ------------ | ------ | ---------- | -------- | ---------- |
-| Персональный | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
-| Сервисный    | 1 мин  | 5 запросов | 12 сек   | 5 запросов |
+| Type     | Period | Limit      | Interval | Burst      |
+| -------- | ------ | ---------- | -------- | ---------- |
+| Personal | 1 min  | 5 requests | 12 s     | 5 requests |
+| Service  | 1 min  | 5 requests | 12 s     | 5 requests |
 
 ## Request body
 
@@ -30,13 +30,13 @@ PUT /api/advert/v0/daily-limits
 
 ## Responses
 
-| Code  | Description            | Schema                     |
-| ----- | ---------------------- | -------------------------- |
-| `200` | Успешно                | `V0PutDailyLimitsResponse` |
-| `400` | Неправильный запрос    | `response400`              |
-| `401` | Не авторизован         | `object`                   |
-| `403` | Доступ запрещён        | `object`                   |
-| `429` | Слишком много запросов | `object`                   |
+| Code  | Description       | Schema                     |
+| ----- | ----------------- | -------------------------- |
+| `200` | Success           | `V0PutDailyLimitsResponse` |
+| `400` | Bad request       | `response400`              |
+| `401` | Unauthorized      | `object`                   |
+| `403` | Access denied     | `object`                   |
+| `429` | Too many requests | `object`                   |
 
 ## Call examples
 

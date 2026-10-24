@@ -1,41 +1,41 @@
 ---
-title: "Список контактов"
-description: "Метод возвращает список контактов, привязанных к складу продавца."
+title: "Contacts List"
+description: "Returns a list of contacts linked to the seller warehouse."
 ---
 
-# Список контактов
+# Contacts List
 
 ```http
 GET /api/v3/dbw/warehouses/{warehouseId}/contacts
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Склады продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/getV3DbwWarehousesWarehouseIdContacts)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehouses/operation/getV3DbwWarehousesWarehouseIdContacts)
 
-Метод возвращает список контактов, привязанных к [складу продавца](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehouses/operation/getV3Warehouses).
+Returns a list of contacts linked to the seller warehouse.
 
-Только для складов с типом доставки `3` — Деливери WB ([DBW](https://dev.wildberries.ru/openapi/orders-dbw)).
+Only for warehouses with delivery type `3` — Delivery WB ([DBW](https://dev.wildberries.ru/openapi/orders-dbw)).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Responses
 
-| Code  | Description            | Schema                                             |
-| ----- | ---------------------- | -------------------------------------------------- |
-| `200` | Успешно                | `GetV3DbwWarehousesWarehouseIdContactsResponse200` |
-| `400` | Неправильный запрос    | `Error`                                            |
-| `401` | Не авторизован         | `object`                                           |
-| `402` | Требуется платёж       | `object`                                           |
-| `403` | Доступ запрещён        | `Error`                                            |
-| `429` | Слишком много запросов | `object`                                           |
+| Code  | Description       | Schema                                             |
+| ----- | ----------------- | -------------------------------------------------- |
+| `200` | Success           | `GetV3DbwWarehousesWarehouseIdContactsResponse200` |
+| `400` | Bad request       | `Error`                                            |
+| `401` | Unauthorized      | `object`                                           |
+| `402` | Payment required  | `object`                                           |
+| `403` | Access denied     | `Error`                                            |
+| `429` | Too many requests | `object`                                           |
 
 ## Call examples
 

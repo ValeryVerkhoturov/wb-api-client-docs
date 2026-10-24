@@ -1,30 +1,30 @@
 ---
-title: "Обновить остатки товаров"
-description: "Метод обновляет количество остатков товаров продавца в списке."
+title: "Update Inventory"
+description: "Updates item inventory."
 ---
 
-# Обновить остатки товаров
+# Update Inventory
 
 ```http
 PUT /api/v3/stocks/{warehouseId}
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Остатки на складах продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/putV3StocksWarehouseId)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Seller Warehouses Inventory · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/sellerWarehousesInventory/operation/putV3StocksWarehouseId)
 
-Метод обновляет количество остатков товаров продавца [в списке](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/postV3StocksWarehouseId).
+Updates item inventory.
 
-Названия параметров запроса не валидируются. При отправке некорректных названий вы получите успешный ответ (`204`), но остатки не обновятся.
+The names of the query parameters are not validated. If invalid names are sent, the response will be successful(204), but the remaining amounts will not be updated.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **остатков на складах продавца** кроме метода [удаления остатков](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId):
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **inventory** methods except for the [deleting inventory](https://dev.wildberries.ru/openapi/item-management#tag/sellerWarehousesInventory/operation/deleteV3StocksWarehouseId) method:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -32,17 +32,17 @@ PUT /api/v3/stocks/{warehouseId}
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `204` | Обновлено              | —                                   |
-| `400` | Неправильный запрос    | `Error`                             |
-| `401` | Не авторизован         | `object`                            |
-| `402` | Требуется платёж       | `object`                            |
-| `403` | Доступ запрещён        | `Error`                             |
-| `404` | Не найдено             | `Error`                             |
-| `406` | Не применимо           | `UpdateBlocked`                     |
-| `409` | Конфликт               | `PutV3StocksWarehouseIdResponse409` |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `204` | Updated           | —                                   |
+| `400` | Bad request       | `Error`                             |
+| `401` | Unauthorized      | `object`                            |
+| `402` | Payment required  | `object`                            |
+| `403` | Access denied     | `Error`                             |
+| `404` | Not found         | `Error`                             |
+| `406` | Not Acceptable    | `UpdateBlocked`                     |
+| `409` | Conflict          | `PutV3StocksWarehouseIdResponse409` |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

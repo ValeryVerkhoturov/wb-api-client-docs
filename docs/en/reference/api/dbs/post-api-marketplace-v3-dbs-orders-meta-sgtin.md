@@ -1,34 +1,34 @@
 ---
-title: "Закрепить коды маркировки Честного знака за сборочными заданиями"
-description: "Метод обновляет код маркировки Честного знака в идентификаторах маркировки сборочных заданий. Закрепить код маркировки можно только за сборочным заданием в…"
+title: "Add Labeling Codes Chestny ZNAK to Assembly Orders"
+description: "Sets the labeling code Chestny ZNAK for the assembly orders. You can set the labeling code Chestny ZNAK only for orders in the confirm status and if the field…"
 ---
 
-# Закрепить коды маркировки Честного знака за сборочными заданиями
+# Add Labeling Codes Chestny ZNAK to Assembly Orders
 
 ```http
 POST /api/marketplace/v3/dbs/orders/meta/sgtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin)
 
-Метод обновляет код маркировки [Честного знака](https://честныйзнак.рф/) в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
-Закрепить код маркировки можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) есть поле `sgtin`.
+Sets the labeling code [Chestny ZNAK](https://chestnyznak.ru/en) for the assembly orders.
+You can set the labeling code Chestny ZNAK only for orders in the `confirm` status and if the field `sgtin` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) method.
 
-Получить загруженные маркировки можно в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails).
+For more information about labeling code Chestny ZNAK please check: https://chestnyznak.ru/en/.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding DBS label identifiers**:
 
-| Тип                                                             | Период | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |
-| Персональный                                                    | 1 мин  | 500 запросов | 120 мс   | 20 запросов |
-| Сервисный                                                       | 1 мин  | 500 запросов | 120 мс   | 20 запросов |
-| Базовый с секретом                                              | 1 мин  | 500 запросов | 120 мс   | 20 запросов |
-| Базовый                                                         | 1 ч    | 10 запросов  | 6 мин    | 1 запрос    |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Type                                                             | Period | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------ | ------------ | -------- | ----------- |
+| Personal                                                         | 1 min  | 500 requests | 120 ms   | 20 requests |
+| Service                                                          | 1 min  | 500 requests | 120 ms   | 20 requests |
+| Base with secret                                                 | 1 min  | 500 requests | 120 ms   | 20 requests |
+| Base                                                             | 1 h    | 10 requests  | 6 min    | 1 request   |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In Sandbox — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -36,14 +36,14 @@ POST /api/marketplace/v3/dbs/orders/meta/sgtin
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `api.StatusSetResponses` |
-| `400` | Неправильный запрос    | `api.BatchError`         |
-| `401` | Не авторизован         | `object`                 |
-| `402` | Требуется платёж       | `object`                 |
-| `403` | Доступ запрещён        | `api.BatchError`         |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `api.StatusSetResponses` |
+| `400` | Bad request       | `api.BatchError`         |
+| `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
+| `403` | Access denied     | `api.BatchError`         |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

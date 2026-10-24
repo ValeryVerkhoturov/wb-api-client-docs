@@ -1,32 +1,31 @@
 ---
-title: "Добавить грузоместа к поставке"
-description: "Метод добавляет требуемое количество грузомест в поставку."
+title: "Add Shipping Units to the Supply"
+description: "Adds the required number of shipping units to the supply."
 ---
 
-# Добавить грузоместа к поставке
+# Add Shipping Units to the Supply
 
 ```http
 POST /api/v3/supplies/{supplyId}/trbx
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3SuppliesSupplyIdTrbx)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/postV3SuppliesSupplyIdTrbx)
 
-Метод добавляет требуемое количество [грузомест](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyIdTrbx) в [поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId).
+Adds the required number of shipping units to the supply.
 
-Грузоместа необходимо добавлять только в поставки, отгружаемые на ПВЗ.
+You should add shipping units only to supplies shipped to the pickup points.
+You can add shipping units to an open supply only. One shipping unit can contain several orders. For example, if a supply has 10 orders, distribute them into boxes: the system will allow creating no more than 5 shipping units. For 20 orders — no more than 10 shipping units, for 100 — no more than 50.
 
-Грузоместа можно добавить только в открытую поставку. В одном грузоместе может быть несколько заказов. Например, если в поставке 10 заказов, распределите их по коробам: система позволит создать не больше 5 грузомест. Для 20 заказов — не больше 10 грузомест, для 100 — не больше 50.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -34,15 +33,15 @@ POST /api/v3/supplies/{supplyId}/trbx
 
 ## Responses
 
-| Code  | Description            | Schema                                  |
-| ----- | ---------------------- | --------------------------------------- |
-| `201` | Создано                | `PostV3SuppliesSupplyIdTrbxResponse201` |
-| `400` | Неправильный запрос    | `Error`                                 |
-| `401` | Не авторизован         | `object`                                |
-| `402` | Требуется платёж       | `object`                                |
-| `403` | Доступ запрещён        | `Error`                                 |
-| `404` | Не найдено             | `Error`                                 |
-| `429` | Слишком много запросов | `object`                                |
+| Code  | Description       | Schema                                  |
+| ----- | ----------------- | --------------------------------------- |
+| `201` | Created           | `PostV3SuppliesSupplyIdTrbxResponse201` |
+| `400` | Bad request       | `Error`                                 |
+| `401` | Unauthorized      | `object`                                |
+| `402` | Payment required  | `object`                                |
+| `403` | Access denied     | `Error`                                 |
+| `404` | Not found         | `Error`                                 |
+| `429` | Too many requests | `object`                                |
 
 ## Call examples
 

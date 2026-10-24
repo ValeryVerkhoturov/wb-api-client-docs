@@ -1,47 +1,44 @@
 ---
-title: "Лимиты карточек товаров"
-description: "Возвращает бесплатные и платные лимиты продавца на создание карточек товаров."
+title: "Limits for the Listings"
+description: "The method allows to get separately free and paid vendor limits for creating listings. To calculate the number of items that can be listed, use the formula:…"
 ---
 
-# Лимиты карточек товаров
+# Limits for the Listings
 
 ```http
 GET /content/v2/cards/limits
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Создание карточек товаров · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Listing Items · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
 
-Возвращает бесплатные и платные лимиты продавца на [создание карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload).
+The method allows to get separately free and paid vendor limits for creating listings.
+To calculate the number of items that can be listed, use the formula: (freeLimits + paidLimits) - Number of listed items.
+All items that can be obtained using the [listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) and [listings that are in the trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash) methods are considered listed.
 
-Формула для получения количества карточек, которые можно создать:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for the following methods:
 
-> (`freeLimits` + `paidLimits`) - количество созданных карточек
-> Созданными считаются карточки, которые можно получить через методы [список карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) и [список карточек товаров в корзине](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsTrash).
+- [getting limits for the listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
+- [getting failed listings with errors](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов:
-
-- [получения лимитов карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
-- [получения несозданных карточек товаров с ошибками](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
-
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `GetV2CardsLimitsResponse200` |
-| `401` | Не авторизован         | `object`                      |
-| `403` | Доступ запрещён        | `responseBodyContentError403` |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `GetV2CardsLimitsResponse200` |
+| `401` | Unauthorized      | `object`                      |
+| `403` | Access denied     | `responseBodyContentError403` |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

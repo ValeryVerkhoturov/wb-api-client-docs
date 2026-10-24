@@ -1,45 +1,45 @@
 ---
-title: "Количество вопросов"
-description: "Метод возвращает количество отвеченных или неотвеченных вопросов за заданный период."
+title: "Number of Questions"
+description: "The method allows to get the number of questions for requested period"
 ---
 
-# Количество вопросов
+# Number of Questions
 
 ```http
 GET /api/v1/questions/count
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/getV1QuestionsCount)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Questions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/questions/operation/getV1QuestionsCount)
 
-Метод возвращает количество отвеченных или неотвеченных [вопросов](https://dev.wildberries.ru/openapi/customer-communication#tag/questions/operation/getV1Questions) за заданный период.
+The method allows to get the number of questions for requested period
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name         | In    | Type             | Req. | Description                                            |
-| ------------ | ----- | ---------------- | ---- | ------------------------------------------------------ |
-| `dateFrom`   | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp           |
-| `dateTo`     | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp            |
-| `isAnswered` | query | `boolean`        | no   | Есть ли ответ на вопрос: - `true` — да - `false` — нет |
+| Name         | In    | Type             | Req. | Description                                                 |
+| ------------ | ----- | ---------------- | ---- | ----------------------------------------------------------- |
+| `dateFrom`   | query | `integer<int64>` | no   | The start date of the period in Unix timestamp format       |
+| `dateTo`     | query | `integer<int64>` | no   | The end date of the period in Unix timestamp format         |
+| `isAnswered` | query | `boolean`        | no   | If the question was answered: - `true` — yes - `false` — no |
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV1QuestionsCountResponse200` |
-| `400` | Неправильный запрос    | `responseFeedbackQuestionErr`    |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `responseFeedbackQuestionErr`    |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `GetV1QuestionsCountResponse200` |
+| `400` | Bad request       | `responseFeedbackQuestionErr`    |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `responseFeedbackQuestionErr`    |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

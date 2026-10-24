@@ -1,41 +1,41 @@
 ---
-title: "Удалить поставку"
-description: "Метод удаляет поставку, если она активна и за ней не закреплено ни одно сборочное задание."
+title: "Delete the Supply"
+description: "Deleted the supply if it is active and does not contain any assembly orders."
 ---
 
-# Удалить поставку
+# Delete the Supply
 
 ```http
 DELETE /api/v3/supplies/{supplyId}
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/deleteV3SuppliesSupplyId)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/deleteV3SuppliesSupplyId)
 
-Метод удаляет [поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId), если она активна и за ней не закреплено ни одно [сборочное задание](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders).
+Deleted the supply if it is active and does not contain any assembly orders.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Responses
 
-| Code  | Description                               | Schema   |
-| ----- | ----------------------------------------- | -------- |
-| `204` | Удалено                                   | —        |
-| `400` | Неправильный запрос                       | `Error`  |
-| `401` | Не авторизован                            | `object` |
-| `402` | Требуется платёж                          | `object` |
-| `403` | Доступ запрещён                           | `Error`  |
-| `404` | Не найдено                                | `Error`  |
-| `409` | За поставкой закреплены сборочные задания | `Error`  |
-| `429` | Слишком много запросов                    | `object` |
+| Code  | Description                | Schema   |
+| ----- | -------------------------- | -------- |
+| `204` | Deleted                    | —        |
+| `400` | Bad request                | `Error`  |
+| `401` | Unauthorized               | `object` |
+| `402` | Payment required           | `object` |
+| `403` | Access denied              | `Error`  |
+| `404` | Not found                  | `Error`  |
+| `409` | The supply contains orders | `Error`  |
+| `429` | Too many requests          | `object` |
 
 ## Call examples
 

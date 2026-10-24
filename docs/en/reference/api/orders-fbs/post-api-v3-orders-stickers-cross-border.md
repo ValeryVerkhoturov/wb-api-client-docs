@@ -1,37 +1,37 @@
 ---
-title: "Получить стикеры сборочных заданий трансграничных поставок"
-description: "Метод возвращает список стикеров сборочных заданий трансграничных поставок в формате PDF."
+title: "Get Stickers for Cross-Border Assembly Orders"
+description: "Returns a list of stickers for Cross-Border assembly orders in PDF."
 ---
 
-# Получить стикеры сборочных заданий трансграничных поставок
+# Get Stickers for Cross-Border Assembly Orders
 
 ```http
 POST /api/v3/orders/stickers/cross-border
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStickersCrossBorder)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStickersCrossBorder)
 
-Метод возвращает список стикеров [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) трансграничных поставок в формате PDF.
+Returns a list of stickers for Cross-Border assembly orders in PDF.
 
-Для каждого сборочного задания в ответе указывается статус генерации стикера:
+For each assembly order, the response contains the sticker generation status:
 
-- `awaitingTrackNumber` — стикер не готов. Ожидается трек-номер от перевозчика.
-- `ready` — стикер готов
+- `awaitingTrackNumber` — the sticker is not ready. Waiting for a carrier's track number.
+- `ready` — the sticker is ready
 
-Стикер может генерироваться с задержкой. Повторяйте запрос, пока не получите статус `ready`.
+Stickers may be generated with a delay. Repeat the request until you receive the `ready` status.
 
-Ограничения:
+Method limitations:
 
-- За один запрос можно получить максимум 100 стикеров.
-- Можно получить стикеры только для сборочных заданий, находящихся на сборке или в доставке — [статусы](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm`, `complete`.
-  В песочнице этот метод всегда возвращает ответ `200`.
+- You cannot request more than 100 stickers at a time (no more than 100 assembly order IDs in a request).
+- The method returns stickers only for assembly orders that are on assembly or in delivery [status](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus): `confirm`, `complete`.
+  In the sandbox, this method always returns the `200` response.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -39,14 +39,14 @@ POST /api/v3/orders/stickers/cross-border
 
 ## Responses
 
-| Code  | Description            | Schema                                       |
-| ----- | ---------------------- | -------------------------------------------- |
-| `200` | Успешно                | `PostV3OrdersStickersCrossBorderResponse200` |
-| `400` | Неправильный запрос    | `Error`                                      |
-| `401` | Не авторизован         | `object`                                     |
-| `402` | Требуется платёж       | `object`                                     |
-| `403` | Доступ запрещён        | `Error`                                      |
-| `429` | Слишком много запросов | `object`                                     |
+| Code  | Description       | Schema                                       |
+| ----- | ----------------- | -------------------------------------------- |
+| `200` | Success           | `PostV3OrdersStickersCrossBorderResponse200` |
+| `400` | Bad request       | `Error`                                      |
+| `401` | Unauthorized      | `object`                                     |
+| `402` | Payment required  | `object`                                     |
+| `403` | Access denied     | `Error`                                      |
+| `429` | Too many requests | `object`                                     |
 
 ## Call examples
 

@@ -1,48 +1,47 @@
 ---
-title: "Получить информацию о завершенных сборочных заданиях"
-description: "Метод возвращает информацию о завершенных сборочных заданиях после продажи или отмены заказа."
+title: "Get Information on Completed Orders"
+description: "Returns information on completed orders (either canceled or sold). You can get data for a specified period, maximum of 30 calendar days per request."
 ---
 
-# Получить информацию о завершенных сборочных заданиях
+# Get Information on Completed Orders
 
 ```http
 GET /api/v3/dbs/orders
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
 
-Метод возвращает информацию о завершенных [сборочных заданиях](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) после продажи или отмены заказа.
+Returns information on completed orders (either canceled or sold).
+You can get data for a specified period, maximum of 30 calendar days per request.
 
-Можно получить данные за заданный период, максимум 30 календарных дней одним запросом.
+[Request limit](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **DBS assembly orders** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Parameters
 
-| Name       | In    | Type             | Req. | Description                                  |
-| ---------- | ----- | ---------------- | ---- | -------------------------------------------- |
-| `dateFrom` | query | `integer<int64>` | yes  | Дата начала периода в формате Unix timestamp |
-| `dateTo`   | query | `integer<int64>` | yes  | Дата конца периода в формате Unix timestamp  |
+| Name       | In    | Type             | Req. | Description                                |
+| ---------- | ----- | ---------------- | ---- | ------------------------------------------ |
+| `dateFrom` | query | `integer<int64>` | yes  | Period start date in Unix timestamp format |
+| `dateTo`   | query | `integer<int64>` | yes  | Period end date in Unix timestamp format   |
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `GetV3DbsOrdersResponse200` |
-| `400` | Неправильный запрос    | `Error`                     |
-| `401` | Не авторизован         | `object`                    |
-| `402` | Требуется платёж       | `object`                    |
-| `403` | Доступ запрещён        | `Error`                     |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `GetV3DbsOrdersResponse200` |
+| `400` | Bad request       | `Error`                     |
+| `401` | Unauthorized      | `object`                    |
+| `402` | Payment required  | `object`                    |
+| `403` | Access denied     | `Error`                     |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

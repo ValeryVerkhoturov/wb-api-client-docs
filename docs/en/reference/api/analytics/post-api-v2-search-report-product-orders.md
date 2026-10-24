@@ -1,34 +1,34 @@
 ---
-title: "Заказы и позиции по поисковым запросам товара"
-description: "Метод формирует данные для таблицы: - о заказах по каждому поисковому запросу для конкретного товара - о позициях товара в результатах поиска по каждому…"
+title: "Orders and Positions by Item Search Texts"
+description: "The method forms data for the table: - about orders for each search query for a specific item - about item positions in search results for each query The data…"
 ---
 
-# Заказы и позиции по поисковым запросам товара
+# Orders and Positions by Item Search Texts
 
 ```http
 POST /api/v2/search-report/product/orders
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Поисковые запросы по вашим товарам · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductOrders)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Search Queries for Your Items · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductOrders)
 
-Метод формирует данные для таблицы:
+The method forms data for the table:
 
-- о заказах по каждому поисковому запросу для конкретного товара
-- о позициях товара в результатах поиска по каждому запросу
-  Данные указаны в рамках периода для [запрошенного товара](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductSearchTexts) и сгруппированы по дням. Максимальный период — 7 дней.
+- about orders for each search query for a specific item
+- about item positions in search results for each query
+  The data is provided within the period for the [requested item](https://dev.wildberries.ru/openapi/analytics#tag/searchQueriesForYourItems/operation/postV2SearchReportProductSearchTexts) and grouped by day. The maximum period is 7 days.
 
-Данные отчёта обновляются 1 раз в 2 часа.
+The report data is updated once every 2 hours.
 
-Можно получить отчёт максимум за последние 365 дней с момента выполнения запроса
+You can get a report for a maximum of the last 365 days from the moment of the request
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Request body
 
@@ -36,14 +36,14 @@ POST /api/v2/search-report/product/orders
 
 ## Responses
 
-| Code  | Description            | Schema                                       |
-| ----- | ---------------------- | -------------------------------------------- |
-| `200` | Успешно                | `PostV2SearchReportProductOrdersResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`                             |
-| `401` | Не авторизован         | `object`                                     |
-| `402` | Требуется платёж       | `object`                                     |
-| `403` | Доступ запрещён        | `ErrorObject403`                             |
-| `429` | Слишком много запросов | `object`                                     |
+| Code  | Description       | Schema                                       |
+| ----- | ----------------- | -------------------------------------------- |
+| `200` | Success           | `PostV2SearchReportProductOrdersResponse200` |
+| `400` | Bad request       | `ErrorObject400`                             |
+| `401` | Unauthorized      | `object`                                     |
+| `402` | Payment required  | `object`                                     |
+| `403` | Access denied     | `ErrorObject403`                             |
+| `429` | Too many requests | `object`                                     |
 
 ## Call examples
 

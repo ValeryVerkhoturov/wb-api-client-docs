@@ -1,33 +1,33 @@
 ---
-title: "Закрепить номера ДТ за сборочными заданиями"
-description: "Метод обновляет номера ДТ — деклараций на товары — и коды стран происхождения товаров в идентификаторах маркировки сборочных заданий. У одного сборочного…"
+title: "Add Custom Declaration to the Orders"
+description: "Sets the customs declaration numbers and numeric codes of the countries of origin for assembly order label identifiers. One assembly order can have only one…"
 ---
 
-# Закрепить номера ДТ за сборочными заданиями
+# Add Custom Declaration to the Orders
 
 ```http
 POST /api/marketplace/v3/dbs/orders/meta/customs-declaration
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration)
 
-Метод обновляет номера ДТ — деклараций на товары — и коды стран происхождения товаров в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails). У одного сборочного задания может быть только один номер ДТ.
-Закрепить номер ДТ можно, только если выполняются все условия:
+Sets the customs declaration numbers and numeric codes of the countries of origin for [assembly order label identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails). One assembly order can have only one customs declaration number.
+Customs declaration number can only be added if all the conditions are met:
 
-- сборочное задание имеет признак B2B-продажи — `"isB2b":true` в ответе метода [получения новых сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew)
-- сборочное задание находится в [статусах](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo) `confirm` или `deliver`
-- поле `customsDeclaration` есть в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails)
+- the assembly order has the B2B sale attribute — `"isB2b": true` in the response of the method [getting new assembly orders](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew)
+- the assembly order is in `confirm` or `deliver` [statuses](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo)
+- the `customsDeclaration` field is returned in the response of the [Get order label identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) method
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding DBS label identifiers**:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 500 запросов | 120 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 500 requests | 120 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -35,16 +35,16 @@ POST /api/marketplace/v3/dbs/orders/meta/customs-declaration
 
 ## Responses
 
-| Code  | Description                  | Schema                   |
-| ----- | ---------------------------- | ------------------------ |
-| `200` | Успешно                      | `api.StatusSetResponses` |
-| `400` | Неправильный запрос          | `Error`                  |
-| `401` | Не авторизован               | `object`                 |
-| `402` | Требуется платёж             | `object`                 |
-| `403` | Доступ запрещён              | `Error`                  |
-| `404` | Не найдено                   | `Error`                  |
-| `409` | Ошибка добавления маркировки | `Error`                  |
-| `429` | Слишком много запросов       | `object`                 |
+| Code  | Description                    | Schema                   |
+| ----- | ------------------------------ | ------------------------ |
+| `200` | Success                        | `api.StatusSetResponses` |
+| `400` | Bad request                    | `Error`                  |
+| `401` | Unauthorized                   | `object`                 |
+| `402` | Payment required               | `object`                 |
+| `403` | Access denied                  | `Error`                  |
+| `404` | The resource is not found      | `Error`                  |
+| `409` | Label identifiers update error | `Error`                  |
+| `429` | Too many requests              | `object`                 |
 
 ## Call examples
 

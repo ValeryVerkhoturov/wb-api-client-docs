@@ -1,46 +1,46 @@
 ---
-title: "Получить список пунктов отгрузки поставки"
-description: "Метод возвращает доступные пункты отгрузки для указанной поставки. Используйте данные этого метода, чтобы устанавливать параметры отгрузки поставок."
+title: "Get Supply Shipping Points"
+description: "The method returns shipping points available for the supply. Use this method data to set supply shipping methods."
 ---
 
-# Получить список пунктов отгрузки поставки
+# Get Supply Shipping Points
 
 ```http
 GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdShippingPoints)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdShippingPoints)
 
-Метод возвращает доступные пункты отгрузки для указанной поставки.
-Используйте данные этого метода, чтобы устанавливать [параметры отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
+The method returns shipping points available for the supply.
+Use this method data to set [supply shipping methods](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
-| Name         | In    | Type     | Req. | Description                                                                                                                                                                                                                                                  |
-| ------------ | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `supplyId`   | path  | `string` | yes  | ID поставки                                                                                                                                                                                                                                                  |
-| `city`       | query | `string` | yes  | Населённый пункт отгрузки поставки, кириллица                                                                                                                                                                                                                |
-| `officeType` | query | `string` | yes  | Тип пункта отгрузки. Укажите значения через запятую: - `sc` — сортировочный центр - `sw` — склад - `pp` — пункт выдачи заказов (ПВЗ) - `pfc` — партнёрский фулфилмент-центр (ПФЦ) - `gpp` — пункт приёма товаров (ППТ)                                       |
-| `shippingDt` | query | `string` | no   | Планируемая дата отгрузки поставки в формате `YYYY-MM-DD`. Обязательно для заказов МГТ (`"cargoType":1`) и КГТ+ (`"cargoType":3`). Если значение передано, в ответе возвращаются только пункты отгрузки, в которые можно отгрузить поставку в указанную дату |
+| Name         | In    | Type     | Req. | Description                                                                                                                                                                                                                                                               |
+| ------------ | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `supplyId`   | path  | `string` | yes  | Supply ID                                                                                                                                                                                                                                                                 |
+| `city`       | query | `string` | yes  | Locality for shipping the supply, Cyrillic                                                                                                                                                                                                                                |
+| `officeType` | query | `string` | yes  | Shipping point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point                                                                                                               |
+| `shippingDt` | query | `string` | no   | Planned supply shipping date, format `YYYY-MM-DD`. Required for orders for small-sized items (`"cargoType":1`) and dimensional cargo+ (`"cargoType":3`). If the value passed, you will get only the shipping points where the supply can be shipped on the specified date |
 
 ## Responses
 
 | Code  | Description                      | Schema                         |
 | ----- | -------------------------------- | ------------------------------ |
-| `200` | Успешно                          | `SupplyShippingPointsResponse` |
-| `400` | Неправильный запрос              | `Error`                        |
-| `401` | Не авторизован                   | `object`                       |
-| `403` | Доступ запрещён                  | `object`                       |
-| `404` | Поставка не найдена              | `Error`                        |
-| `409` | В поставке нет сборочных заданий | `Error`                        |
-| `429` | Слишком много запросов           | `object`                       |
+| `200` | Success                          | `SupplyShippingPointsResponse` |
+| `400` | Bad request                      | `Error`                        |
+| `401` | Unauthorized                     | `object`                       |
+| `403` | Access denied                    | `object`                       |
+| `404` | Supply not found                 | `Error`                        |
+| `409` | No assembly orders in the supply | `Error`                        |
+| `429` | Too many requests                | `object`                       |
 
 ## Call examples
 

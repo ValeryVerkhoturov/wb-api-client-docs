@@ -1,28 +1,27 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает отчёт с операциями по товарам с обязательной маркировкой."
+title: "Report on Items with Mandatory Labeling"
+description: "Returns operations with labeled items. You can save the main reports in sheets format."
 ---
 
-# Получить отчёт
+# Report on Items with Mandatory Labeling
 
 ```http
 POST /api/v1/analytics/excise-report
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Отчёт о товарах c обязательной маркировкой · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/reportOnItemsWithMandatoryLabeling/operation/postV1AnalyticsExciseReport)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Report on Items with Mandatory Labeling · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/reportOnItemsWithMandatoryLabeling/operation/postV1AnalyticsExciseReport)
 
-Метод возвращает отчёт с [операциями по товарам с обязательной маркировкой](https://seller.wildberries.ru/analytics-reports/excise-report).
+Returns operations with labeled items.
+You can save the main reports in [sheets format](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-650c-7b04-9596-ba441936f9d3).
 
-Данный отчёт можно сохранить в [формате таблиц](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-650c-7b04-9596-ba441936f9d3).
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 5 ч    | 10 запросов | 30 мин   | 10 запросов |
-| Сервисный          | 5 ч    | 10 запросов | 30 мин   | 10 запросов |
-| Базовый с секретом | 5 ч    | 10 запросов | 30 мин   | 10 запросов |
-| Базовый            | 24 ч   | 2 запроса   | 12 ч     | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 5 h    | 10 requests | 30 min   | 10 requests |
+| Service          | 5 h    | 10 requests | 30 min   | 10 requests |
+| Base with secret | 5 h    | 10 requests | 30 min   | 10 requests |
+| Base             | 24 h   | 2 requests  | 12 h     | 1 request   |
 
 ## Request body
 
@@ -30,14 +29,14 @@ POST /api/v1/analytics/excise-report
 
 ## Responses
 
-| Code  | Description            | Schema                 |
-| ----- | ---------------------- | ---------------------- |
-| `200` | Успешно                | `ExciseReportResponse` |
-| `400` | Неправильный запрос    | `Http4XXResponse`      |
-| `401` | Не авторизован         | `object`               |
-| `402` | Требуется платёж       | `object`               |
-| `403` | Доступ запрещён        | `object`               |
-| `429` | Слишком много запросов | `object`               |
+| Code  | Description       | Schema                 |
+| ----- | ----------------- | ---------------------- |
+| `200` | Success           | `ExciseReportResponse` |
+| `400` | Bad request       | `Http4XXResponse`      |
+| `401` | Unauthorized      | `object`               |
+| `402` | Payment required  | `object`               |
+| `403` | Access denied     | `object`               |
+| `429` | Too many requests | `object`               |
 
 ## Call examples
 

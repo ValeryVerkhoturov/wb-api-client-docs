@@ -1,26 +1,26 @@
 ---
-title: "Получить документы"
-description: "Метод загружает несколько документов из списка документов продавца."
+title: "Get Documents"
+description: "Returns more than one document."
 ---
 
-# Получить документы
+# Get Documents
 
 ```http
 POST /api/v1/documents/download/all
 ```
 
-**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Документы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/postV1DocumentsDownloadAll)
+**Base URL:** `https://documents-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Documents · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/documents/operation/postV1DocumentsDownloadAll)
 
-Метод загружает несколько документов из [списка документов продавца](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsList).
+Returns more than one document.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск    |
-| ------------------ | ------ | -------- | -------- | ---------- |
-| Персональный       | 5 мин  | 1 запрос | 5 мин    | 5 запросов |
-| Сервисный          | 5 мин  | 1 запрос | 5 мин    | 5 запросов |
-| Базовый с секретом | 5 мин  | 1 запрос | 5 мин    | 5 запросов |
-| Базовый            | 24 ч   | 1 запрос | 24 ч     | 1 запрос   |
+| Type             | Period | Limit     | Interval | Burst      |
+| ---------------- | ------ | --------- | -------- | ---------- |
+| Personal         | 5 min  | 1 request | 5 min    | 5 requests |
+| Service          | 5 min  | 1 request | 5 min    | 5 requests |
+| Base with secret | 5 min  | 1 request | 5 min    | 5 requests |
+| Base             | 24 h   | 1 request | 24 h     | 1 request  |
 
 ## Request body
 
@@ -28,14 +28,14 @@ POST /api/v1/documents/download/all
 
 ## Responses
 
-| Code  | Description            | Schema    |
-| ----- | ---------------------- | --------- |
-| `200` | Успешно                | `GetDocs` |
-| `400` | Неправильный запрос    | `object`  |
-| `401` | Не авторизован         | `object`  |
-| `402` | Требуется платёж       | `object`  |
-| `403` | Доступ запрещён        | `object`  |
-| `429` | Слишком много запросов | `object`  |
+| Code  | Description       | Schema    |
+| ----- | ----------------- | --------- |
+| `200` | Success           | `GetDocs` |
+| `400` | Bad request       | `object`  |
+| `401` | Unauthorized      | `object`  |
+| `402` | Payment required  | `object`  |
+| `403` | Access denied     | `object`  |
+| `429` | Too many requests | `object`  |
 
 ## Call examples
 

@@ -1,71 +1,71 @@
 ---
-title: "Расхождения в поставке"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Supply Discrepancies"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Расхождения в поставке
+# Supply Discrepancies
 
 ```http
 GET /api/supplies/v1/discrepancies/{supplyId}
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация о поставках · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesSupplyIdDiscrepanciesQuantity)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Supplies Information · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/suppliesInformation/operation/getV1SuppliesSupplyIdDiscrepanciesQuantity)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает информацию о выявленных расхождениях между заявленным и фактическим количеством товара в поставке.
+The method returns information about discrepancies between the declared and actual item quantity in the supply.
 
-Для поставок принятых не позднее года назад.
+Available for supplies accepted no more than one year ago.
 
-\*\*Типы расхождений:\*\*
+\*\*Discrepancy types:\*\*
 
-Расхождение в большую сторону:
+Discrepancy upwards:
 
-1. Избыток товара с заявленным баркодом:
+1. Excess of items with the declared SKU:
 
 - `"discrepancyType": "surplus"`
 - `"discrepancyLabel": "surplus"`
 
-2. Избыток товара с несоответствующим заявленному баркодом:
+2. Excess of items with a SKU that does not match the declared one:
 
 - `"discrepancyType": "surplus"`
 - `"discrepancyLabel": "re-sorting"`
-  Расхождение в меньшую сторону:
+  Discrepancy downwards:
 
-1. Не хватает товара:
+1. Missing items:
 
 - `"discrepancyType": "shortage"`
 - `"discrepancyLabel": "shortage"`
 
-2. Некоторые баркоды не соответствуют заявленным:
+2. Some SKUs do not match the declared ones:
 
 - `"discrepancyType": "shortage"`
 - `"discrepancyLabel": "re-sorting"`
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск  |
-| ------ | -------- | -------- | -------- |
-| 1 мин  | 1 запрос | 1 мин    | 1 запрос |
+| Period | Limit     | Interval | Burst     |
+| ------ | --------- | -------- | --------- |
+| 1 min  | 1 request | 1 min    | 1 request |
 
 ## Parameters
 
 | Name       | In   | Type              | Req. | Description |
 | ---------- | ---- | ----------------- | ---- | ----------- |
-| `supplyId` | path | `string<integer>` | yes  | ID поставки |
+| `supplyId` | path | `string<integer>` | yes  | Supply ID   |
 
 ## Responses
 
-| Code  | Description            | Schema                                                  |
-| ----- | ---------------------- | ------------------------------------------------------- |
-| `200` | Успешно                | `GetV1SuppliesSupplyIdDiscrepanciesQuantityResponse200` |
-| `400` | Неправильный запрос    | `models.ErrorModel`                                     |
-| `401` | Не авторизован         | `object`                                                |
-| `403` | Доступ запрещён        | `models.SupplyAcceptedMoreThanYearAgo`                  |
-| `404` | Не найдено             | `models.ErrorModel`                                     |
-| `429` | Слишком много запросов | `object`                                                |
+| Code  | Description       | Schema                                                  |
+| ----- | ----------------- | ------------------------------------------------------- |
+| `200` | Success           | `GetV1SuppliesSupplyIdDiscrepanciesQuantityResponse200` |
+| `400` | Bad request       | `models.ErrorModel`                                     |
+| `401` | Unauthorized      | `object`                                                |
+| `403` | Доступ запрещён   | `models.SupplyAcceptedMoreThanYearAgo`                  |
+| `404` | Not found         | `models.ErrorModel`                                     |
+| `429` | Too many requests | `object`                                                |
 
 ## Call examples
 

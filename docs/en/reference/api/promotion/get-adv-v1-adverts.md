@@ -1,47 +1,47 @@
 ---
-title: "Список медиакампаний"
-description: "Метод возвращает список всех медиакампаний продавца по их типам и статусам."
+title: "List of Media Campaigns"
+description: "The method allows to get the list of media campaigns of the seller"
 ---
 
-# Список медиакампаний
+# List of Media Campaigns
 
 ```http
 GET /adv/v1/adverts
 ```
 
-**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Медиа · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Adverts)
+**Base URL:** `https://advert-media-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Media · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/media/operation/getV1Adverts)
 
-Метод возвращает список всех [медиакампаний](https://dev.wildberries.ru/openapi/promotion#tag/media/operation/getV1Advert) продавца по их типам и статусам.
+The method allows to get the list of media campaigns of the seller
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 10 запросов | 100 мс   | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Service          | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base with secret | 1 s    | 10 requests | 100 ms   | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Parameters
 
 | Name        | In    | Type             | Req. | Description                                                                                                                                                                                                                                                                                             |
 | ----------- | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `status`    | query | `string`         | no   | Статус медиакампании: - `1` — черновик - `2` — модерация - `3` — отклонена (с возможностью вернуть на модерацию) - `4` — готова к запуску - `5` — запланирована - `6` — на показах - `7` — завершена - `8` — отменена - `9` — приостановлена продавцом - `10` — пауза по дневному лимиту - `11` — пауза |
-| `type`      | query | `integer<int64>` | no   | Тип медиакампании: - `1` — размещение по дням - `2` — размещение по просмотрам                                                                                                                                                                                                                          |
-| `limit`     | query | `integer<int64>` | no   | Количество кампаний в ответе                                                                                                                                                                                                                                                                            |
-| `offset`    | query | `integer<int64>` | no   | Смещение относительно первой медиакампании                                                                                                                                                                                                                                                              |
-| `order`     | query | `string`         | no   | Порядок вывода ответа: - `create` — по времени создания медиакампании - `id` — по ID медиакампании                                                                                                                                                                                                      |
-| `direction` | query | `string`         | no   | Порядок сортировки: - `desc` — от большего к меньшему - `asc` — от меньшего к большему                                                                                                                                                                                                                  |
+| `status`    | query | `string`         | no   | Media campaign status: - `1` — template - `2` — moderation - `3` — rejected (with the possibility to resubmit for moderation) - `4` — ready for launch - `5` — scheduled - `6` — running - `7` — completed - `8` — declined - `9` — paused by seller - `10` — paused due to daily limit - `11` — paused |
+| `type`      | query | `integer<int64>` | no   | Media campaign type: - `1` — daily basis - `2` — views basis                                                                                                                                                                                                                                            |
+| `limit`     | query | `integer<int64>` | no   | Number of campaigns in the response                                                                                                                                                                                                                                                                     |
+| `offset`    | query | `integer<int64>` | no   | Offset relative to the first media campaign                                                                                                                                                                                                                                                             |
+| `order`     | query | `string`         | no   | The order in which the response is displayed: - `create` — by time of media campaign creation - `id` — by ID of media campaign creation                                                                                                                                                                 |
+| `direction` | query | `string`         | no   | Sorting order: - `desc` — upward - `asc` — smaller to larger                                                                                                                                                                                                                                            |
 
 ## Responses
 
-| Code  | Description              | Schema                    |
-| ----- | ------------------------ | ------------------------- |
-| `200` | Успешно                  | `GetV1AdvertsResponse200` |
-| `204` | Медиакампании не найдены | —                         |
-| `401` | Не авторизован           | `object`                  |
-| `403` | Доступ запрещён          | `object`                  |
-| `429` | Слишком много запросов   | `object`                  |
+| Code  | Description               | Schema                    |
+| ----- | ------------------------- | ------------------------- |
+| `200` | Success                   | `GetV1AdvertsResponse200` |
+| `204` | Media campaigns not found | —                         |
+| `401` | Unauthorized              | `object`                  |
+| `403` | Access denied             | `object`                  |
+| `429` | Too many requests         | `object`                  |
 
 ## Call examples
 

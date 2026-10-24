@@ -1,46 +1,46 @@
 ---
-title: "Получить отчёт"
-description: "Метод возвращает отчёт с расширенной аналитикой продавца по ID задания на генерацию."
+title: "Get the Report"
+description: "The method provides a report with advanced seller analytics by generation task ID."
 ---
 
-# Получить отчёт
+# Get the Report
 
 ```http
 GET /api/v2/nm-report/downloads/file/{downloadId}
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Аналитика продавца CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Seller Analytics CSV · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/sellerAnalyticsCsv/operation/getV2NmReportDownloadsFileDownloadId)
 
-Метод возвращает отчёт с расширенной аналитикой продавца по ID [задания на генерацию](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads).
+The method provides a report with advanced seller analytics by [generation task](https://dev.wildberries.ru/openapi/analytics#tag/sellerAnalyticsCsv/operation/postV2NmReportDownloads) ID.
 
-Можно получить отчёт, который сгенерирован за последние 48 часов.
-Отчёт будет загружен внутри архива ZIP в формате CSV.
+You can get a report that was generated within the last 48 hours.
+The report will be downloaded inside a ZIP archive in CSV format.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск   |
-| ------------------ | ------ | --------- | -------- | --------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 3 запроса |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос  |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 3 requests |
+| Service          | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base with secret | 1 min  | 3 requests | 20 s     | 3 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Parameters
 
 | Name         | In   | Type           | Req. | Description |
 | ------------ | ---- | -------------- | ---- | ----------- |
-| `downloadId` | path | `string<uuid>` | yes  | ID отчёта   |
+| `downloadId` | path | `string<uuid>` | yes  | Report ID   |
 
 ## Responses
 
-| Code  | Description            | Schema                                            |
-| ----- | ---------------------- | ------------------------------------------------- |
-| `200` | Успешно                | `string`                                          |
-| `400` | Неправильный запрос    | `GetV2NmReportDownloadsFileDownloadIdResponse400` |
-| `401` | Не авторизован         | `object`                                          |
-| `402` | Требуется платёж       | `object`                                          |
-| `403` | Доступ запрещён        | `ErrorObject`                                     |
-| `429` | Слишком много запросов | `object`                                          |
+| Code  | Description       | Schema                                            |
+| ----- | ----------------- | ------------------------------------------------- |
+| `200` | Success           | `string`                                          |
+| `400` | Bad request       | `GetV2NmReportDownloadsFileDownloadIdResponse400` |
+| `401` | Unauthorized      | `object`                                          |
+| `402` | Payment required  | `object`                                          |
+| `403` | Access denied     | `ErrorObject`                                     |
+| `429` | Too many requests | `object`                                          |
 
 ## Call examples
 

@@ -1,47 +1,47 @@
 ---
-title: "События чатов"
-description: "Метод возвращает список событий всех чатов с покупателями. Чтобы получить все события: 1. Сделайте первый запрос без параметра next. 2. Повторяйте запрос со…"
+title: "Chat Events"
+description: "Returns an event list for all chats. To retrieve all events: 1. Make the first request without a next parameter. 2. Repeat the request with the next parameter…"
 ---
 
-# События чатов
+# Chat Events
 
 ```http
 GET /api/v1/seller/events
 ```
 
-**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents)
+**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Buyers Chat · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/buyersChat/operation/getV1SellerEvents)
 
-Метод возвращает список событий всех [чатов с покупателями](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats).
-Чтобы получить все события:
+Returns an event list for all chats.
+To retrieve all events:
 
-1. Сделайте первый запрос без параметра `next`.
-2. Повторяйте запрос со значением параметра `next` из ответа на предыдущий запрос, пока `totalEvents` не станет равным `0`. Это будет означать, что вы получили все события.
+1. Make the first request without a `next` parameter.
+2. Repeat the request with the `next` parameter value from the previous response until `totalEvents` becomes `0`. This will indicate that you have received all events.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Сервисный          | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый с секретом | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 10 s   | 10 requests | 1 s      | 10 requests |
+| Service          | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base with secret | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Parameters
 
-| Name   | In    | Type             | Req. | Description                                                                                                 |
-| ------ | ----- | ---------------- | ---- | ----------------------------------------------------------------------------------------------------------- |
-| `next` | query | `integer<int64>` | no   | Пагинатор. С какого момента получить следующий пакет данных. Формат Unix timestamp \*\*с миллисекундами\*\* |
+| Name   | In    | Type             | Req. | Description                                                                                                          |
+| ------ | ----- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------- |
+| `next` | query | `integer<int64>` | no   | Paginator. Retrieve the next data packet starting from this moment. Format: Unix timestamp \*\*with milliseconds\*\* |
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `EventsResponse`               |
-| `400` | Неправильный запрос    | `GetV1SellerEventsResponse400` |
-| `401` | Не авторизован         | `object`                       |
-| `402` | Требуется платёж       | `object`                       |
-| `403` | Доступ запрещён        | `object`                       |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `EventsResponse`               |
+| `400` | Bad request       | `GetV1SellerEventsResponse400` |
+| `401` | Unauthorized      | `object`                       |
+| `402` | Payment required  | `object`                       |
+| `403` | Access denied     | `object`                       |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

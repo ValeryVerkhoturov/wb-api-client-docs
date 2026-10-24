@@ -1,38 +1,38 @@
 ---
-title: "Получить отчёт"
-description: "Метод формирует набор данных о заказах и продажах."
+title: "Get Report"
+description: "The method forms a dataset for orders and sales."
 ---
 
-# Получить отчёт
+# Get Report
 
 ```http
 POST /api/analytics/v1/order-feed
 ```
 
-**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Лента заказов · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed)
+**Base URL:** `https://seller-analytics-api.wildberries.ru` · **Module:** [`analytics`](/en/reference/api/analytics/) · **Section:** Order Feed · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed)
 
-Метод формирует набор данных о заказах и продажах.
+The method forms a dataset for orders and sales.
 
-Данные отчёта обновляются в режиме реального времени.
+The report data is updated in real time.
 
-> 1 заказ = 1 сборочное задание = 1 единица товара
-> Параметры `brandNames`,`subjectIds`, `tagIds`, `nmIds` могут быть пустыми `[]`, тогда в ответе возвращаются все заказы продавца.
-> Если вы указали несколько параметров, в ответе будут заказы, в которых есть одновременно все эти параметры. Если заказы не подходят по параметрам запроса, вернётся пустой массив `[]`.
+> 1 order means 1 assembly order and means 1 item
+> The `brandNames`, `subjectIds`, `tagIds`, and `nmIds` parameters can be empty `[]`, in which case the response will return all of the seller orders.
+> If you specify multiple parameters, the response will include orders that match all of these parameters simultaneously. If no orders match the request parameters, an empty array `[]` will be returned.
 
-Можно получить отчёт максимум за последние 31 день.
+You can get a report for a maximum of the last 31 days.
 
-Заказы отдаются по времени текущего статуса, от самого нового к самому раннему.
+Orders are sorted by current status time, from the newest to the earliest.
 
-Можно использовать пагинацию.
+Pagination can be used.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск  |
-| ------------------ | ------ | -------- | -------- | -------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 1 запрос |
-| Базовый            | 3 ч    | 1 запрос | 3 ч      | 1 запрос |
+| Type             | Period | Limit     | Interval | Burst     |
+| ---------------- | ------ | --------- | -------- | --------- |
+| Personal         | 1 min  | 1 request | 1 min    | 1 request |
+| Service          | 1 min  | 1 request | 1 min    | 1 request |
+| Base with secret | 1 min  | 1 request | 1 min    | 1 request |
+| Base             | 3 h    | 1 request | 3 h      | 1 request |
 
 ## Request body
 
@@ -40,13 +40,13 @@ POST /api/analytics/v1/order-feed
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `PostV1OrderFeedResponse200` |
-| `400` | Неправильный запрос    | `ErrorObject400`             |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `ErrorObject403`             |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `PostV1OrderFeedResponse200` |
+| `400` | Bad request       | `ErrorObject400`             |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `ErrorObject403`             |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

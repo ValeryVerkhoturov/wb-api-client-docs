@@ -1,36 +1,36 @@
 ---
-title: "Список чатов"
-description: "Метод возвращает список всех чатов продавца. По этим данным можно получить события чатов или отправить сообщение покупателю."
+title: "Chats List"
+description: "Returns a list of all seller chats."
 ---
 
-# Список чатов
+# Chats List
 
 ```http
 GET /api/v1/seller/chats
 ```
 
-**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats)
+**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Buyers Chat · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/buyersChat/operation/getV1SellerChats)
 
-Метод возвращает список всех чатов продавца. По этим данным можно получить [события чатов](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents) или [отправить сообщение покупателю](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage).
+Returns a list of all seller chats.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Сервисный          | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый с секретом | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 10 s   | 10 requests | 1 s      | 10 requests |
+| Service          | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base with secret | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | `ChatsResponse` |
-| `401` | Не авторизован         | `object`        |
-| `402` | Требуется платёж       | `object`        |
-| `403` | Доступ запрещён        | `object`        |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | `ChatsResponse` |
+| `401` | Unauthorized      | `object`        |
+| `402` | Payment required  | `object`        |
+| `403` | Access denied     | `object`        |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

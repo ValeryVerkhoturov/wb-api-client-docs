@@ -1,31 +1,31 @@
 ---
-title: "Закрепить номер ДТ за сборочным заданием"
-description: "Метод обновляет номер ДТ — декларации на товары — в идентификаторах маркировки сборочного задания. У одного сборочного задания может быть только один номер ДТ.…"
+title: "Add Custom Declaration number to the Order"
+description: "The method updates the customs declaration number in the label identifiers of the assembly order. An assembly order can have only one customs declaration…"
 ---
 
-# Закрепить номер ДТ за сборочным заданием
+# Add Custom Declaration number to the Order
 
 ```http
 PUT /api/marketplace/v3/orders/{orderId}/meta/customs-declaration
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaCustomsDeclaration)
 
-Метод обновляет номер ДТ — декларации на товары — в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta). У одного сборочного задания может быть только один номер ДТ.
-Закрепить номер ДТ можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) есть поле `customsDeclaration`.
+The method updates the customs declaration number in the [label identifiers of the assembly order](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta). An assembly order can have only one customs declaration number.
+You can add customs declaration number to the assembly order only if the `customsDeclaration` field is returned in the response of the [Assembly Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) method, and the assembly order is in the `confirm` status.
 
-Продавцам из Армении необходимо обязательно указывать номер декларации на товары (ДТ), произведённые вне ЕАЭС, если заказ из Армении доставляется в РФ.
+Sellers from Armenia must specify the customs declaration number for items produced outside the EAEU if an order from Armenia is delivered to the Russian Federation.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding FBS label identifiers**:
 
-| Период                                                          | Лимит         | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------- | -------- | ----------- |
-| 1 мин                                                           | 1000 запросов | 60 мс    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit         | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 min                                                            | 1000 requests | 60 ms    | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -33,16 +33,16 @@ PUT /api/marketplace/v3/orders/{orderId}/meta/customs-declaration
 
 ## Responses
 
-| Code  | Description                 | Schema   |
-| ----- | --------------------------- | -------- |
-| `204` | Обновлено                   | —        |
-| `400` | Неправильный запрос         | `Error`  |
-| `401` | Не авторизован              | `object` |
-| `402` | Требуется платёж            | `object` |
-| `403` | Доступ запрещён             | `Error`  |
-| `404` | Не найдено                  | `Error`  |
-| `409` | Ошибка обновления номера ДТ | `Error`  |
-| `429` | Слишком много запросов      | `object` |
+| Code  | Description                              | Schema   |
+| ----- | ---------------------------------------- | -------- |
+| `204` | Updated                                  | —        |
+| `400` | Bad request                              | `Error`  |
+| `401` | Unauthorized                             | `object` |
+| `402` | Payment required                         | `object` |
+| `403` | Access denied                            | `Error`  |
+| `404` | Not found                                | `Error`  |
+| `409` | Error updating custom declaration number | `Error`  |
+| `429` | Too many requests                        | `object` |
 
 ## Call examples
 

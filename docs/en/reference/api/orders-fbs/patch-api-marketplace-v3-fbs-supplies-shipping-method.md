@@ -1,30 +1,30 @@
 ---
-title: "Установить параметры отгрузки поставок"
-description: "Метод устанавливает способ доставки, дату и пункт отгрузки у поставок."
+title: "Set Supply Shipping Method"
+description: "The method sets shipping method, shipping date, and shipping point for the supplies."
 ---
 
-# Установить параметры отгрузки поставок
+# Set Supply Shipping Method
 
 ```http
 PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Поставки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod)
 
-Метод устанавливает способ доставки, дату и пункт отгрузки у поставок.
+The method sets shipping method, shipping date, and shipping point for the supplies.
 
-Параметры отгрузки нужно указать до передачи поставки в доставку. Вы можете обновлять параметры отгрузки до сканирования поставки и её коробов в пункте отгрузки. Когда поставка будет отсканирована, метод начнёт возвращать ошибку `409`.
+The shipping method must be specified before transferring supply to delivery. You can update the shipping method until the supply and its boxes are scanned at the shipping point. Once the supply has been scanned, this method will start returning a `409` error.
 
-В запросе можно указать максимум 100 поставок. Результат обработки возвращается для каждой поставки отдельно.
+You can specify a maximum of 100 supplies per request. The processing result is returned for each supply separately.
 
-Доступно только для продавцов из РФ.
+Available only for sellers from the Russian Federation.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -32,14 +32,14 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 ## Responses
 
-| Code  | Description            | Schema                                 |
-| ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `UpdateSuppliesShippingMethodResponse` |
-| `400` | Неправильный запрос    | `Error`                                |
-| `401` | Не авторизован         | `object`                               |
-| `403` | Доступ запрещён        | `Error`                                |
-| `409` | Конфликт               | `v3.APIError`                          |
-| `429` | Слишком много запросов | `object`                               |
+| Code  | Description       | Schema                                 |
+| ----- | ----------------- | -------------------------------------- |
+| `200` | Success           | `UpdateSuppliesShippingMethodResponse` |
+| `400` | Bad request       | `Error`                                |
+| `401` | Unauthorized      | `object`                               |
+| `403` | Access denied     | `Error`                                |
+| `409` | Conflict          | `v3.APIError`                          |
+| `429` | Too many requests | `object`                               |
 
 ## Call examples
 

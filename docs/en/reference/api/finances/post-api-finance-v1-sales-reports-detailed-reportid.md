@@ -1,35 +1,35 @@
 ---
-title: "Детализации к отчётам реализации по ID отчётов"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Details for the Sales Reports by Report ID"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Детализации к отчётам реализации по ID отчётов
+# Details for the Sales Reports by Report ID
 
 ```http
 POST /api/finance/v1/sales-reports/detailed/{reportId}
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Финансовые отчёты · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Financial Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает детализации к [отчётам реализации](https://seller.wildberries.ru/suppliers-mutual-settlements) по ID отчётов.
+The method returns details for the [sales reports](https://seller.wildberries.ru/suppliers-mutual-settlements) by report IDs.
 
-Данные доступны с 29 января 2024 года.
+The data is available since January 29, 2024.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск  |
-| ------ | -------- | -------- | -------- |
-| 1 мин  | 1 запрос | 1 мин    | 1 запрос |
+| Period | Limit     | Interval | Burst     |
+| ------ | --------- | -------- | --------- |
+| 1 min  | 1 request | 1 min    | 1 request |
 
 ## Parameters
 
-| Name       | In   | Type             | Req. | Description                                                                                                                                                                            |
-| ---------- | ---- | ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `reportId` | path | `integer<int64>` | yes  | ID отчёта. Для ежедневных отчётов вместо стандартной десериализации рекомендуем использовать нестандартные библиотеки с поддержкой [BigInt](https://www.npmjs.com/package/json-bigint) |
+| Name       | In   | Type             | Req. | Description                                                                                                                                                                   |
+| ---------- | ---- | ---------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `reportId` | path | `integer<int64>` | yes  | Report ID. For daily reports, we recommend using non-standard libraries with [BigInt](https://www.npmjs.com/package/json-bigint) support, instead of standard deserialization |
 
 ## Request body
 
@@ -37,16 +37,16 @@ POST /api/finance/v1/sales-reports/detailed/{reportId}
 
 ## Responses
 
-| Code  | Description            | Schema                                          |
-| ----- | ---------------------- | ----------------------------------------------- |
-| `200` | Успешно                | `PostV1SalesReportsDetailedReportIdResponse200` |
-| `204` | Нет данных             | —                                               |
-| `400` | Неправильный запрос    | `object`                                        |
-| `401` | Не авторизован         | `object`                                        |
-| `402` | Требуется платёж       | `object`                                        |
-| `403` | Доступ запрещён        | `Response4XX`                                   |
-| `404` | Не найдено             | `object`                                        |
-| `429` | Слишком много запросов | `object`                                        |
+| Code  | Description       | Schema                                          |
+| ----- | ----------------- | ----------------------------------------------- |
+| `200` | Success           | `PostV1SalesReportsDetailedReportIdResponse200` |
+| `204` | No data           | —                                               |
+| `400` | Bad request       | `object`                                        |
+| `401` | Unauthorized      | `object`                                        |
+| `402` | Payment required  | `object`                                        |
+| `403` | Access denied     | `Response4XX`                                   |
+| `404` | Not found         | `object`                                        |
+| `429` | Too many requests | `object`                                        |
 
 ## Call examples
 

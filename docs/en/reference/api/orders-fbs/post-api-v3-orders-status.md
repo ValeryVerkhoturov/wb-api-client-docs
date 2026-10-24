@@ -1,54 +1,54 @@
 ---
-title: "Получить статусы сборочных заданий"
-description: "Метод возвращает статусы сборочных заданий по их ID."
+title: "Get Assembly Orders Statuses"
+description: "Returns the statuses of assembly orders from the request. supplierStatus is a status of an assembly order. Its change is always triggered only by the seller.…"
 ---
 
-# Получить статусы сборочных заданий
+# Get Assembly Orders Statuses
 
 ```http
 POST /api/v3/orders/status
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Сборочные задания FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus)
 
-Метод возвращает статусы [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) по их ID.
+Returns the statuses of assembly orders from the request.
+`supplierStatus` is a status of an assembly order. Its change is always triggered only by the seller.
+Possible values of `supplierStatus`:
 
-`supplierStatus` — статус сборочного задания. Триггер его изменения — действие самого продавца.
-Возможные значения `supplierStatus`:
+| Status                                                        | Description                                                                       | How to move the assembly orders to this status                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `new`                                                         | \*\*New order\*\*                                                                 |                                                                                                                                                                                                                                                                                                           |
+| `confirm`                                                     | \*\*In assembly\*\*<br>For delivery by Wildberries `fbs`                          | [Add assembly orders to the supply](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdOrders)<br>[Transfer orders from supply to assembly](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) |
+| `complete`                                                    | \*\*In delivery\*\*<br>For delivery by Wildberries `fbs` and by WB courier `wbgo` | [Transfer the supply to delivery](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)                                                                                                                                                                 |
+| `cancel`                                                      | \*\*Canceled by seller\*\*                                                        | [Cancel the order](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel)                                                                                                                                                                              |
+| `cancel\_carrier`                                             | \*\*Canceled by carrier\*\*<br>For crossborder only                               | Changed by the carrier                                                                                                                                                                                                                                                                                    |
+| `wbStatus` — is a status of an order on the Wildberries side. |
+| Possible values for this field are:                           |
 
-| Статус            | Описание                                                            | Как перевести сборочное задание в данный статус                                                                                                                                                                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `new`             | \*\*Новое сборочное задание\*\*                                     |                                                                                                                                                                                                                                                                                                                         |
-| `confirm`         | \*\*На сборке\*\*                                                   | [Добавить сборочное задание к поставке](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdOrders)<br>[Перевести сборочные задания из доставки на сборку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) |
-| `complete`        | \*\*В доставке\*\*                                                  | [Передать поставку в доставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver)                                                                                                                                                                                  |
-| `cancel`          | \*\*Отменено продавцом\*\*                                          | [Отменить сборочное задание](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel)                                                                                                                                                                                  |
-| `cancel\_carrier` | \*\*Отменено перевозчиком\*\*<br>Только для трансграничных поставок | Переводится перевозчиком                                                                                                                                                                                                                                                                                                |
+- `waiting` — the seller confirmed the order, and the Wildberries has not received it yet
+- `sorted` — the Wildberries warehouse sorted the order
+- `sold` — the order is sold
+- `canceled` — the seller canceled the order
+- `canceled\_by\_client` — the buyer canceled the order upon receipt
+- `declined\_by\_client` — the buyer canceled the order in the first hour
+  Cancellation is available to the buyer in the first hour from the moment of order, if the order is not transferred to confirm status.
+- `defect` — cancellation of the order due to a defect
+- `ready\_for\_pickup` — the order came at pickup point and waiting for the client
+- `postponed\_delivery` — courier delivery is postponed
+- `accepted\_by\_carrier` — accepted by carrier. The order is handed over to delivery service in the seller country
+- `sent\_to\_carrier` — dispatched to carrier. The order is on the way to delivery service's warehouse in the seller
+- `canceled\_by\_carrier` — the order was cancelled by the carrier. For crossborder only
 
-`wbStatus` — статус системы Wildberries.
-Возможные значения `wbStatus`:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
-- `waiting` — сборочное задание в работе
-- `sorted` — сборочное задание отсортировано
-- `sold` — заказ получен покупателем
-- `canceled` — отмена сборочного задания
-- `canceled\_by\_client` — покупатель отменил заказ при получении
-- `declined\_by\_client` — покупатель отменил заказ. Отмена доступна покупателю в первый час с момента заказа, если заказ не переведён на сборку
-- `defect` — отмена заказа по причине брака
-- `ready\_for\_pickup` — заказ прибыл на пункт выдачи заказов (ПВЗ)
-- `accepted\_by\_carrier` — продавец передал заказ в службу доставки в своей стране
-- `sent\_to\_carrier` — заказ отправлен на склад службы доставки в стране продавца
-- `canceled\_by\_carrier` — заказ отменён перевозчиком. Только для трансграничных поставок
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
-
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -56,14 +56,14 @@ POST /api/v3/orders/status
 
 ## Responses
 
-| Code  | Description            | Schema                          |
-| ----- | ---------------------- | ------------------------------- |
-| `200` | Успешно                | `PostV3OrdersStatusResponse200` |
-| `400` | Неправильный запрос    | `Error`                         |
-| `401` | Не авторизован         | `object`                        |
-| `402` | Требуется платёж       | `object`                        |
-| `403` | Доступ запрещён        | `Error`                         |
-| `429` | Слишком много запросов | `object`                        |
+| Code  | Description       | Schema                          |
+| ----- | ----------------- | ------------------------------- |
+| `200` | Success           | `PostV3OrdersStatusResponse200` |
+| `400` | Bad request       | `Error`                         |
+| `401` | Unauthorized      | `object`                        |
+| `402` | Payment required  | `object`                        |
+| `403` | Access denied     | `Error`                         |
+| `429` | Too many requests | `object`                        |
 
 ## Call examples
 

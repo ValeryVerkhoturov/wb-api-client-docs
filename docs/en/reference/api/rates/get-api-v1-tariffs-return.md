@@ -1,39 +1,39 @@
 ---
-title: "Тарифы на возврат"
-description: "Метод возвращает тарифы: - на перевозку товаров со склада WB или из пункта приёма до продавца - на обратную перевозку возвратов, которые не забрал продавец"
+title: "Return Rates"
+description: "Returns rates: - on transfer from Wildberries warehouse or sorting center to the seller - on transfer of returned items that were not picked up by seller"
 ---
 
-# Тарифы на возврат
+# Return Rates
 
 ```http
 GET /api/v1/tariffs/return
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Стоимость возврата продавцу · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Return Cost to Seller · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/returnCostToSeller/operation/getV1TariffsReturn)
 
-Метод возвращает [тарифы](https://seller.wildberries.ru/dynamic-product-categories/return-cost):
+Returns [rates](https://seller.wildberries.ru/dynamic-product-categories/return-cost):
 
-- на перевозку товаров со склада WB или из пункта приёма до продавца
-- на обратную перевозку возвратов, которые не забрал продавец
+- on transfer from Wildberries warehouse or sorting center to the seller
+- on transfer of returned items that were not picked up by seller
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Сервисный          | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 60 requests | 1 s      | 5 requests |
+| Service          | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base with secret | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                |
-| ----- | ---------------------- | --------------------- |
-| `200` | Успешно                | `ReturnRatesResponse` |
-| `400` | Неправильный запрос    | `BadRequest`          |
-| `401` | Не авторизован         | `object`              |
-| `402` | Требуется платёж       | `object`              |
-| `429` | Слишком много запросов | `object`              |
+| Code  | Description       | Schema                |
+| ----- | ----------------- | --------------------- |
+| `200` | Success           | `ReturnRatesResponse` |
+| `400` | Bad request       | `BadRequest`          |
+| `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
+| `429` | Too many requests | `object`              |
 
 ## Call examples
 

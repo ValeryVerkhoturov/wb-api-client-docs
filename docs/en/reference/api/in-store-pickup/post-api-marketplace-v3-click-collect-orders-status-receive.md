@@ -1,28 +1,28 @@
 ---
-title: "Сообщить, что заказы приняты покупателями"
-description: "Метод переводит сборочные задания из статуса prepare — готово к выдаче — в статус receive — получено покупателем."
+title: "Notify That the Orders Were Received by the Buyers"
+description: "The method transfers assembly orders from the prepare — ready for pickup — status to the receive — received by the buyer — status."
 ---
 
-# Сообщить, что заказы приняты покупателями
+# Notify That the Orders Were Received by the Buyers
 
 ```http
 POST /api/marketplace/v3/click-collect/orders/status/receive
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReceive)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusReceive)
 
-Метод переводит [сборочные задания](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) из [статуса](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) `prepare` — готово к выдаче — в статус `receive` — получено покупателем.
+The method transfers [assembly orders](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) from the `prepare` — ready for pickup — [status](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersStatusInfo) to the `receive` — received by the buyer — status.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период                                                          | Лимит    | Интервал | Всплеск     |
-| --------------------------------------------------------------- | -------- | -------- | ----------- |
-| 1 сек                                                           | 1 запрос | 1 сек    | 10 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit     | Interval | Burst       |
+| ---------------------------------------------------------------- | --------- | -------- | ----------- |
+| 1 s                                                              | 1 request | 1 s      | 10 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -30,14 +30,14 @@ POST /api/marketplace/v3/click-collect/orders/status/receive
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `api.StatusSetResponses` |
-| `400` | Неправильный запрос    | `api.BatchError`         |
-| `401` | Не авторизован         | `object`                 |
-| `402` | Требуется платёж       | `object`                 |
-| `403` | Доступ запрещён        | `api.BatchError`         |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `api.StatusSetResponses` |
+| `400` | Bad request       | `api.BatchError`         |
+| `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
+| `403` | Access denied     | `api.BatchError`         |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

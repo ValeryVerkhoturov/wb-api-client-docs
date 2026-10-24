@@ -1,29 +1,29 @@
 ---
-title: "Закрепить GTIN за сборочными заданиями"
-description: "Метод обновляет GTIN, уникальный ID товара в Беларуси, в идентификаторах маркировки сборочных заданий. У одного сборочного задания может быть только один GTIN.…"
+title: "Add GTIN to Assembly Orders"
+description: "Sets the GTIN, Belarus item unique identifier, for the assembly order label identifiers. The assembly order can only have one GTIN. You can set the GTIN only…"
 ---
 
-# Закрепить GTIN за сборочными заданиями
+# Add GTIN to Assembly Orders
 
 ```http
 POST /api/marketplace/v3/dbs/orders/meta/gtin
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Идентификаторы маркировки DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaGtin)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaGtin)
 
-Метод обновляет GTIN, уникальный ID товара в Беларуси, в [идентификаторах маркировки сборочных заданий](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails). У одного сборочного задания может быть только один GTIN.
-Закрепить GTIN можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) есть поле `gtin`.
+Sets the GTIN, Belarus item unique identifier, for the [assembly order label identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails). The assembly order can only have one GTIN.
+You can set the GTIN only for orders in the `confirm` [status](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersStatusInfo), and if the field `gtin` is returned in the response of the [Get Order Label Identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaDetails) method.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки DBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding DBS label identifiers**:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 500 запросов | 120 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 500 requests | 120 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -31,15 +31,15 @@ POST /api/marketplace/v3/dbs/orders/meta/gtin
 
 ## Responses
 
-| Code  | Description                                  | Schema                   |
-| ----- | -------------------------------------------- | ------------------------ |
-| `200` | Успешно                                      | `api.StatusSetResponses` |
-| `400` | Неправильный запрос                          | `api.BatchError`         |
-| `401` | Не авторизован                               | `object`                 |
-| `402` | Требуется платёж                             | `object`                 |
-| `403` | Доступ запрещён                              | `api.BatchError`         |
-| `409` | Ошибка обновления идентификаторов маркировки | `api.Error`              |
-| `429` | Слишком много запросов                       | `object`                 |
+| Code  | Description                    | Schema                   |
+| ----- | ------------------------------ | ------------------------ |
+| `200` | Success                        | `api.StatusSetResponses` |
+| `400` | Bad request                    | `api.BatchError`         |
+| `401` | Unauthorized                   | `object`                 |
+| `402` | Payment required               | `object`                 |
+| `403` | Access denied                  | `api.BatchError`         |
+| `409` | Label identifiers update error | `api.Error`              |
+| `429` | Too many requests              | `object`                 |
 
 ## Call examples
 

@@ -1,38 +1,36 @@
 ---
-title: "Изменение ярлыка"
-description: "Метод заменяет данные ярлыка: имя и цвет."
+title: "Update the Label"
+description: "Changes label data: name and color"
 ---
 
-# Изменение ярлыка
+# Update the Label
 
 ```http
 PATCH /content/v2/tag/{id}
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Ярлыки · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/patchV2TagId)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Labels · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/labels/operation/patchV2TagId)
 
-Метод заменяет данные ярлыка: имя и цвет.
+Changes label data: name and color
 
-Новые данные можно получить в общем [списке](https://dev.wildberries.ru/openapi/item-management#tag/labels/operation/getV2Tags).
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **Labels** methods:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Ярлыков**:
-
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name | In   | Type             | Req. | Description        |
-| ---- | ---- | ---------------- | ---- | ------------------ |
-| `id` | path | `integer<int64>` | yes  | Числовой ID ярлыка |
+| Name | In   | Type             | Req. | Description      |
+| ---- | ---- | ---------------- | ---- | ---------------- |
+| `id` | path | `integer<int64>` | yes  | Numeric label ID |
 
 ## Request body
 
@@ -40,14 +38,14 @@ PATCH /content/v2/tag/{id}
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `responseContentError`        |
-| `400` | Неправильный запрос    | `responseBodyContentError400` |
-| `401` | Не авторизован         | `object`                      |
-| `402` | Требуется платёж       | `object`                      |
-| `403` | Доступ запрещён        | `responseBodyContentError403` |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `responseContentError`        |
+| `400` | Bad request       | `responseBodyContentError400` |
+| `401` | Unauthorized      | `object`                      |
+| `402` | Payment required  | `object`                      |
+| `403` | Access denied     | `responseBodyContentError403` |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

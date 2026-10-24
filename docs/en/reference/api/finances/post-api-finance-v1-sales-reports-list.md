@@ -1,29 +1,29 @@
 ---
-title: "Список отчётов реализации"
-description: "Метод доступен по Персональному токену, Сервисному токену"
+title: "Sales Reports List"
+description: "Method is available by Personal token, Service token"
 ---
 
-# Список отчётов реализации
+# Sales Reports List
 
 ```http
 POST /api/finance/v1/sales-reports/list
 ```
 
-**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Финансовые отчёты · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsList)
+**Base URL:** `https://finance-api.wildberries.ru` · **Module:** [`finances`](/en/reference/api/finances/) · **Section:** Financial Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsList)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену,
-**Сервисному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
 
-Метод возвращает список отчётов релизации по формату [таблицы отчётов](https://seller.wildberries.ru/suppliers-mutual-settlements).
+The method returns sales reports list in the [report table](https://seller.wildberries.ru/suppliers-mutual-settlements) format.
 
-Данные доступны с 29 января 2024 года.
+The list contains data since January 29, 2024.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск  |
-| ------ | -------- | -------- | -------- |
-| 1 мин  | 1 запрос | 1 мин    | 1 запрос |
+| Period | Limit     | Interval | Burst     |
+| ------ | --------- | -------- | --------- |
+| 1 min  | 1 request | 1 min    | 1 request |
 
 ## Request body
 
@@ -31,14 +31,14 @@ POST /api/finance/v1/sales-reports/list
 
 ## Responses
 
-| Code  | Description            | Schema                              |
-| ----- | ---------------------- | ----------------------------------- |
-| `200` | Успешно                | `PostV1SalesReportsListResponse200` |
-| `204` | Нет данных             | —                                   |
-| `400` | Неправильный запрос    | `object`                            |
-| `401` | Не авторизован         | `object`                            |
-| `403` | Доступ запрещён        | `Response4XX`                       |
-| `429` | Слишком много запросов | `object`                            |
+| Code  | Description       | Schema                              |
+| ----- | ----------------- | ----------------------------------- |
+| `200` | Success           | `PostV1SalesReportsListResponse200` |
+| `204` | No data           | —                                   |
+| `400` | Bad request       | `object`                            |
+| `401` | Unauthorized      | `object`                            |
+| `403` | Access denied     | `Response4XX`                       |
+| `429` | Too many requests | `object`                            |
 
 ## Call examples
 

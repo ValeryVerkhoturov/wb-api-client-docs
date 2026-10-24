@@ -1,28 +1,28 @@
 ---
-title: "Получить дату и время доставки"
-description: "Метод возвращает информацию о выбранных покупателем дате и времени доставки заказов."
+title: "Get Delivery Date and Time"
+description: "Method provides information about the orders delivery date and time selected by the buyer."
 ---
 
-# Получить дату и время доставки
+# Get Delivery Date and Time
 
 ```http
 POST /api/v3/dbs/orders/delivery-date
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** Сборочные задания DBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersDeliveryDate)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`dbs`](/en/reference/api/dbs/) · **Section:** DBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/postV3DbsOrdersDeliveryDate)
 
-Метод возвращает информацию о выбранных покупателем дате и времени доставки заказов.
+Method provides information about the orders delivery date and time selected by the buyer.
 
-[Лимит запросов](https://dev.wildberries.ru/docs/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий DBS**:
+[Request limit](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **DBS assembly orders** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -30,14 +30,14 @@ POST /api/v3/dbs/orders/delivery-date
 
 ## Responses
 
-| Code  | Description            | Schema                  |
-| ----- | ---------------------- | ----------------------- |
-| `200` | Успешно                | `DeliveryDatesInfoResp` |
-| `400` | Неправильный запрос    | `Error`                 |
-| `401` | Не авторизован         | `object`                |
-| `402` | Требуется платёж       | `object`                |
-| `403` | Доступ запрещён        | `Error`                 |
-| `429` | Слишком много запросов | `object`                |
+| Code  | Description       | Schema                  |
+| ----- | ----------------- | ----------------------- |
+| `200` | Success           | `DeliveryDatesInfoResp` |
+| `400` | Bad request       | `Error`                 |
+| `401` | Unauthorized      | `object`                |
+| `402` | Payment required  | `object`                |
+| `403` | Access denied     | `Error`                 |
+| `429` | Too many requests | `object`                |
 
 ## Call examples
 

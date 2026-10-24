@@ -1,48 +1,48 @@
 ---
-title: "Статистика кампаний"
-description: "Метод формирует статистику для кампаний независимо от типа."
+title: "Campaigns Statistics"
+description: "The method generates statistics for campaigns, regardless of their type."
 ---
 
-# Статистика кампаний
+# Campaigns Statistics
 
 ```http
 GET /adv/v3/fullstats
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Статистика · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/getV3Fullstats)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Statistics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/getV3Fullstats)
 
-Метод формирует статистику для кампаний независимо от типа.
+The method generates statistics for campaigns, regardless of their type.
 
-Максимальный период в запросе — 31 день.
+The maximum period in a request is 31 days.
 
-Для кампаний в статусах `7`, `9` и `11`.
+For campaigns in statuses `7`, `9` and `11`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит     | Интервал | Всплеск  |
-| ------------------ | ------ | --------- | -------- | -------- |
-| Персональный       | 1 мин  | 3 запроса | 20 сек   | 1 запрос |
-| Сервисный          | 1 мин  | 3 запроса | 20 сек   | 1 запрос |
-| Базовый с секретом | 1 мин  | 3 запроса | 20 сек   | 1 запрос |
-| Базовый            | 1 ч    | 1 запрос  | 1 ч      | 1 запрос |
+| Type             | Period | Limit      | Interval | Burst     |
+| ---------------- | ------ | ---------- | -------- | --------- |
+| Personal         | 1 min  | 3 requests | 20 s     | 1 request |
+| Service          | 1 min  | 3 requests | 20 s     | 1 request |
+| Base with secret | 1 min  | 3 requests | 20 s     | 1 request |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request |
 
 ## Parameters
 
-| Name        | In    | Type     | Req. | Description                       |
-| ----------- | ----- | -------- | ---- | --------------------------------- |
-| `ids`       | query | `string` | yes  | ID кампаний, максимум 50 значений |
-| `beginDate` | query | `string` | yes  | Дата начала интервала             |
-| `endDate`   | query | `string` | yes  | Дата окончания интервала          |
+| Name        | In    | Type     | Req. | Description                     |
+| ----------- | ----- | -------- | ---- | ------------------------------- |
+| `ids`       | query | `string` | yes  | Campaign IDs, maximum 50 values |
+| `beginDate` | query | `string` | yes  | Start date for the interval     |
+| `endDate`   | query | `string` | yes  | End date for the interval       |
 
 ## Responses
 
-| Code  | Description            | Schema                      |
-| ----- | ---------------------- | --------------------------- |
-| `200` | Успешно                | `GetV3FullstatsResponse200` |
-| `400` | Неправильный запрос    | `FullStatsError`            |
-| `401` | Не авторизован         | `object`                    |
-| `403` | Доступ запрещён        | `object`                    |
-| `429` | Слишком много запросов | `object`                    |
+| Code  | Description       | Schema                      |
+| ----- | ----------------- | --------------------------- |
+| `200` | Success           | `GetV3FullstatsResponse200` |
+| `400` | Bad request       | `FullStatsError`            |
+| `401` | Unauthorized      | `object`                    |
+| `403` | Access denied     | `object`                    |
+| `429` | Too many requests | `object`                    |
 
 ## Call examples
 

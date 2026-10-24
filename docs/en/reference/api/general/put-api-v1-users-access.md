@@ -1,28 +1,28 @@
 ---
-title: "Изменить права доступа пользователей"
-description: "Метод доступен по Персональному токену"
+title: "Update User's Access Permissions"
+description: "Method is available by Personal token"
 ---
 
-# Изменить права доступа пользователей
+# Update User's Access Permissions
 
 ```http
 PUT /api/v1/users/access
 ```
 
-**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Управление пользователями продавца · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/putV1UsersAccess)
+**Base URL:** `https://user-management-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Seller User Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/sellerUserManagement/operation/putV1UsersAccess)
 
-Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
-**Персональному** токену
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token
 
-Метод меняет права доступа одному или нескольким пользователям.
+The method changes the access rights for one or more users.
 
-Обновляются только права доступа, переданные в параметрах запроса. Остальные поля остаются без изменений.
+Only the data passed in the request parameters will be updated. The other fields will remain unchanged.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Период | Лимит    | Интервал | Всплеск    |
-| ------ | -------- | -------- | ---------- |
-| 1 сек  | 1 запрос | 1 сек    | 5 запросов |
+| Period | Limit     | Interval | Burst      |
+| ------ | --------- | -------- | ---------- |
+| 1 s    | 1 request | 1 s      | 5 requests |
 
 ## Request body
 
@@ -30,13 +30,13 @@ PUT /api/v1/users/access
 
 ## Responses
 
-| Code  | Description            | Schema          |
-| ----- | ---------------------- | --------------- |
-| `200` | Успешно                | —               |
-| `400` | Неправильный запрос    | `errorResponse` |
-| `401` | Не авторизован         | `object`        |
-| `403` | Доступ запрещён        | `Response4XX`   |
-| `429` | Слишком много запросов | `object`        |
+| Code  | Description       | Schema          |
+| ----- | ----------------- | --------------- |
+| `200` | Success           | —               |
+| `400` | Bad request       | `errorResponse` |
+| `401` | Unauthorized      | `object`        |
+| `403` | Access denied     | `Response4XX`   |
+| `429` | Too many requests | `object`        |
 
 ## Call examples
 

@@ -1,42 +1,42 @@
 ---
-title: "Тарифы для коробов"
-description: "Для остатков товаров, которые поставляются на склад в коробах, метод возвращает тарифы на: - доставку со склада или пункта приёма до покупателя - доставку от…"
+title: "Box Rates"
+description: "For items inventory supplied to the warehouse in boxes, the method returns the rates: - for delivery from warehouse or sorting center to the buyer - for…"
 ---
 
-# Тарифы для коробов
+# Box Rates
 
 ```http
 GET /api/v1/tariffs/box
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Тарифы на остаток · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/stockRates/operation/getV1TariffsBox)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`rates`](/en/reference/api/rates/) · **Section:** Stock Rates · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/rates#tag/stockRates/operation/getV1TariffsBox)
 
-Для остатков товаров, которые поставляются на склад в коробах, метод возвращает [тарифы](https://seller.wildberries.ru/dynamic-product-categories) на:
+For items inventory supplied to the warehouse in boxes, the method returns the [rates](https://seller.wildberries.ru/dynamic-product-categories):
 
-- доставку со склада или пункта приёма до покупателя
-- доставку от покупателя до пункта приёма
-- хранение на складе WB
+- for delivery from warehouse or sorting center to the buyer
+- for delivery from the buyer to the sorting center
+- for storage on WB warehouse
 
-Тарифы для коробов совпадают с тарифами для **Суперсейфа**
+The rates for boxes match the **Supersafe** rates
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск    |
-| ------------------ | ------ | ----------- | -------- | ---------- |
-| Персональный       | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Сервисный          | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 мин  | 60 запросов | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос   |
+| Type             | Period | Limit       | Interval | Burst      |
+| ---------------- | ------ | ----------- | -------- | ---------- |
+| Personal         | 1 min  | 60 requests | 1 s      | 5 requests |
+| Service          | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base with secret | 1 min  | 60 requests | 1 s      | 5 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema             |
-| ----- | ---------------------- | ------------------ |
-| `200` | Успешно                | `RatesBoxResponse` |
-| `400` | Неправильный запрос    | `BadRequest`       |
-| `401` | Не авторизован         | `object`           |
-| `402` | Требуется платёж       | `object`           |
-| `429` | Слишком много запросов | `object`           |
+| Code  | Description       | Schema             |
+| ----- | ----------------- | ------------------ |
+| `200` | Success           | `RatesBoxResponse` |
+| `400` | Bad request       | `BadRequest`       |
+| `401` | Unauthorized      | `object`           |
+| `402` | Payment required  | `object`           |
+| `429` | Too many requests | `object`           |
 
 ## Call examples
 

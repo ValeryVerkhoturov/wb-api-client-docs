@@ -1,32 +1,32 @@
 ---
-title: "Закрепить за сборочным заданием срок годности товара"
-description: "Метод закрепляет за сборочным заданием срок годности товара. Товар годен до указанной даты. Закрепить срок годности можно только за сборочным заданием в…"
+title: "Add Expiration Date to the Assembly Order"
+description: "Sets the expiration date for the assembly order. You can add expiration date to the assembly order only if the expiration field is returned in the response of…"
 ---
 
-# Закрепить за сборочным заданием срок годности товара
+# Add Expiration Date to the Assembly Order
 
 ```http
 PUT /api/v3/orders/{orderId}/meta/expiration
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** Идентификаторы маркировки FBS · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaExpiration)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Label Identifiers · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaExpiration)
 
-Метод закрепляет за [сборочным заданием](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) срок годности товара. Товар годен до указанной даты.
-Закрепить срок годности можно только за сборочным заданием в [статусе](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus) `confirm` и если в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) есть поле `expiration`.
+Sets the expiration date for the assembly order.
+You can add expiration date to the assembly order only if the `expiration` field is returned in the response of the [Assembly Order Label Identifiers](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta) method, and the assembly order is in the `confirm` status.
 
-Получить загруженные данные можно в [идентификаторах маркировки сборочного задания](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta).
-Чтобы изменить срок годности, отправьте запрос с новой датой. Удалить срок годности сборочного задания невозможно.
+You can get the uploaded data in the [label identifiers of the assembly order](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/postV3OrdersMeta).
+To change the expiration date, send a request with the new date. It is impossible to remove the expiration date of the assembly order.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **закрепления идентификаторов маркировки FBS**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **adding FBS label identifiers**:
 
-| Период                                                          | Лимит         | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------- | -------- | ----------- |
-| 1 мин                                                           | 1000 запросов | 60 мс    | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit         | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------- | -------- | ----------- |
+| 1 min                                                            | 1000 requests | 60 ms    | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -36,14 +36,14 @@ PUT /api/v3/orders/{orderId}/meta/expiration
 
 | Code  | Description                      | Schema   |
 | ----- | -------------------------------- | -------- |
-| `204` | Отправлено                       | —        |
-| `400` | Неправильный запрос              | `Error`  |
-| `401` | Не авторизован                   | `object` |
-| `402` | Требуется платёж                 | `object` |
-| `403` | Доступ запрещён                  | `Error`  |
-| `404` | Не найдено                       | `Error`  |
-| `409` | Ошибка добавления срока годности | `Error`  |
-| `429` | Слишком много запросов           | `object` |
+| `204` | Sent                             | —        |
+| `400` | Bad request                      | `Error`  |
+| `401` | Unauthorized                     | `object` |
+| `402` | Payment required                 | `object` |
+| `403` | Access denied                    | `Error`  |
+| `404` | Not found                        | `Error`  |
+| `409` | Error updating label identifiers | `Error`  |
+| `429` | Too many requests                | `object` |
 
 ## Call examples
 

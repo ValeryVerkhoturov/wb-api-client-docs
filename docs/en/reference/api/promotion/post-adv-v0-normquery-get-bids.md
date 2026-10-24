@@ -1,29 +1,29 @@
 ---
-title: "Список ставок поисковых кластеров"
-description: "Метод возвращает список поисковых кластеров со ставками по: - ID кампаний - артикулам WB"
+title: "List of Search Clusters Bids"
+description: "The method returns a list of search clusters with bids by: - campaign IDs - WB item numbers"
 ---
 
-# Список ставок поисковых кластеров
+# List of Search Clusters Bids
 
 ```http
 POST /adv/v0/normquery/get-bids
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Поисковые кластеры · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetBids)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Search Clusters · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/searchClusters/operation/postV0NormqueryGetBids)
 
-Метод возвращает список поисковых кластеров со ставками по:
+The method returns a list of search clusters with bids by:
 
-- ID кампаний
-- артикулам WB
+- campaign IDs
+- WB item numbers
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск     |
-| ------------------ | ------ | ---------- | -------- | ----------- |
-| Персональный       | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Сервисный          | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый с секретом | 1 сек  | 5 запросов | 200 мс   | 10 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос    |
+| Type             | Period | Limit      | Interval | Burst       |
+| ---------------- | ------ | ---------- | -------- | ----------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 10 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request   |
 
 ## Request body
 
@@ -31,13 +31,13 @@ POST /adv/v0/normquery/get-bids
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `V0GetNormQueryBidsResponse` |
-| `400` | Неправильный запрос    | `response400`                |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `StandardizedBatchError`     |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `V0GetNormQueryBidsResponse` |
+| `400` | Bad request       | `response400`                |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `StandardizedBatchError`     |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 

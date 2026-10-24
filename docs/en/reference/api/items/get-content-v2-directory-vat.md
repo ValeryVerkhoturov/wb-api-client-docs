@@ -1,46 +1,46 @@
 ---
-title: "Ставка НДС"
-description: "Метод возвращает возможные значения характеристики предмета Ставка НДС."
+title: "VAT Rate"
+description: "Returns a list of values for the \\\\VAT rate\\\\ characteristic"
 ---
 
-# Ставка НДС
+# VAT Rate
 
 ```http
 GET /content/v2/directory/vat
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Категории, предметы и характеристики · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryVat)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Categories, Subcategories, and Characteristics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2DirectoryVat)
 
-Метод возвращает возможные значения [характеристики](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) предмета `Ставка НДС`.
+Returns a list of values for the \*\*VAT rate\*\* characteristic
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **Характеристик**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **Characteristics** methods:
 
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 
-| Name     | In    | Type     | Req. | Description                                                                                                                                                                          |
-| -------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `locale` | query | `string` | no   | Язык полей ответа `subjectName` и `name`: - `ru` — русский - `en` — английский - `zh` — китайский Не используется в песочнице. Данные песочницы возвращаются только на русском языке |
+| Name     | In    | Type     | Req. | Description                                                                                                                                                                            |
+| -------- | ----- | -------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `locale` | query | `string` | no   | Language for response of the `subjectName` and `name` fields: - `ru` — Russian - `en` — English - `zh` — Chinese Not used in the sandbox. The sandbox data is returned only in Russian |
 
 ## Responses
 
-| Code  | Description            | Schema                         |
-| ----- | ---------------------- | ------------------------------ |
-| `200` | Успешно                | `GetV2DirectoryVatResponse200` |
-| `400` | Неправильный запрос    | `responseBodyContentError400`  |
-| `401` | Не авторизован         | `object`                       |
-| `403` | Доступ запрещён        | `responseBodyContentError403`  |
-| `429` | Слишком много запросов | `object`                       |
+| Code  | Description       | Schema                         |
+| ----- | ----------------- | ------------------------------ |
+| `200` | Success           | `GetV2DirectoryVatResponse200` |
+| `400` | Bad request       | `responseBodyContentError400`  |
+| `401` | Unauthorized      | `object`                       |
+| `403` | Access denied     | `responseBodyContentError403`  |
+| `429` | Too many requests | `object`                       |
 
 ## Call examples
 

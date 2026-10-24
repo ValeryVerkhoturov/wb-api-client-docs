@@ -1,30 +1,31 @@
 ---
-title: "Перевести сборочные задания в доставку"
-description: "Метод переводит сборочные задания из статуса confirm в статус complete — в доставке."
+title: "Transfer Assembly Orders to Delivery"
+description: "The method transfers assembly orders with the confirm status to the complete status — in delivery."
 ---
 
-# Перевести сборочные задания в доставку
+# Transfer Assembly Orders to Delivery
 
 ```http
 POST /api/marketplace/v3/dbw/orders/status/deliver
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatusDeliver)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatusDeliver)
 
-Метод переводит [сборочные задания](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrders) из [статуса](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) `confirm` в статус `complete` — в доставке.
+The method transfers [assembly orders](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrders) with the `confirm` [status](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus) to the `complete` status — in delivery.
 
-Проверяйте ответ метода. Сборочные задания, переведённые в доставку, вернутся с признаком `"isError":false`. Для остальных сборочных заданий смотрите причину ошибки в массиве `errors`
+Check the method response. Assembly orders that have been successfully transferred to delivery will be returned with the flag "isError": false.
+For all other assembly orders, see the error reason in the errors array.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Request body
 
@@ -32,14 +33,14 @@ POST /api/marketplace/v3/dbw/orders/status/deliver
 
 ## Responses
 
-| Code  | Description            | Schema                   |
-| ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `api.StatusSetResponses` |
-| `400` | Неправильный запрос    | `Error`                  |
-| `401` | Не авторизован         | `object`                 |
-| `402` | Требуется платёж       | `object`                 |
-| `403` | Доступ запрещён        | `Error`                  |
-| `429` | Слишком много запросов | `object`                 |
+| Code  | Description       | Schema                   |
+| ----- | ----------------- | ------------------------ |
+| `200` | Success           | `api.StatusSetResponses` |
+| `400` | Bad request       | `Error`                  |
+| `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
+| `403` | Access denied     | `Error`                  |
+| `429` | Too many requests | `object`                 |
 
 ## Call examples
 

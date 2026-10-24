@@ -1,48 +1,48 @@
 ---
-title: "Загрузить медиафайлы по ссылкам"
-description: "Метод загружает набор медиафайлов в карточку товара через указание ссылок в запросе."
+title: "Upload Media Files via Links"
+description: "The method uploads a set of media files to a listing by specifying links in the request."
 ---
 
-# Загрузить медиафайлы по ссылкам
+# Upload Media Files via Links
 
 ```http
 POST /content/v3/media/save
 ```
 
-**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Медиафайлы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/mediaFiles/operation/postV3MediaSave)
+**Base URL:** `https://content-api.wildberries.ru` · **Module:** [`items`](/en/reference/api/items/) · **Section:** Media Files · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/item-management#tag/mediaFiles/operation/postV3MediaSave)
 
-Метод загружает набор медиафайлов в карточку товара через указание ссылок в запросе.
+The method uploads a set of media files to a listing by specifying links in the request.
 
-Новые медиафайлы полностью заменяют старые. Чтобы добавить новые медиафайлы, укажите в запросе ссылки одновременно на новые и старые медиафайлы.
+New media files (`data`) replace old ones (`mediaFiles`). To add new files, set links both to new and old files.
 
-Требования к ссылкам:
-\* для доступа к файлу по ссылке не нужна авторизация
-\* ссылка ведёт прямо на файл. Убедитесь, что ссылка не ведёт на страницу предпросмотра или авторизации. Ссылка должна заканчиваться на имя файла с расширением — например, `/file\_name.jpg`. Если по ссылке открывается текстовая страница TXT или HTML, ссылка считается некорректной.
-Помните, что некоторые хранилища не формируют прямые ссылки и поэтому не подходят для использования. К таким хранилищам относится, например, \*\*Google Drive\*\*, который формирует ссылки только на предпросмотр файла либо на служебные страницы.
-Требования к изображениям:
-\* максимум изображений для одной карточки товара — 30
-\* минимальное разрешение — 700×900 px
-\* максимальный размер — 32 Мб
-\* минимальное качество — 65%
-\* форматы — JPG, PNG, BMP, GIF (статичные), WebP
-Требования к видео:
-\* максимум одно видео для одной карточки товара
-\* максимальный размер — 50 Мб
-\* форматы — MOV, MP4
-Если видео или хотя бы одно изображение в запросе не соответствует требованиям, то даже при успешном ответе (`200`) ни одно изображение/видео не загрузится.
+Requirements for links:
+\* no authorization is required to access the file via the link
+\* the link must point directly to the file. Ensure the link does not lead to a preview or authentication page. The link must end with the file name including its extension — for example, `/file\_name.jpg`. If the link opens a TXT or HTML page, it is considered invalid.
+Note that some storage services do not generate direct links and therefore are not suitable for use. \*\*Google Drive\*\* is an example of such a service, as it only generates links to a file preview or internal service pages.
+Requirements for images:
+\* maximum images for each listing — 30
+\* minimal resolution – 700 × 900 pixels
+\* maximum size — 32 MB
+\* minimal quality — 65%
+\* formats — JPG, PNG, BMP, GIF (static), WebP
+Requirements for video:
+\* maximum one video for each listing
+\* maximum size — 50 MB
+\* formats — MOV, MP4
+If one or several images or a video do not meet the requirements, no images and a video will be uploaded even if you have the success response (`200`)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов **Медиафайлов**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all **Media Files** methods:
 
-| Тип                | Период | Лимит        | Интервал | Всплеск    |
-| ------------------ | ------ | ------------ | -------- | ---------- |
-| Персональный       | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Сервисный          | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый с секретом | 1 мин  | 100 запросов | 600 мс   | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса    | 30 мин   | 1 запрос   |
+| Type             | Period | Limit        | Interval | Burst      |
+| ---------------- | ------ | ------------ | -------- | ---------- |
+| Personal         | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Service          | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
+| Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
 ---
 
-В песочнице — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
+In Sandbox — maximum of 1 request per second for all **Content** methods in total.
 
 ## Request body
 
@@ -52,14 +52,14 @@ POST /content/v3/media/save
 
 | Code  | Description                    | Schema                       |
 | ----- | ------------------------------ | ---------------------------- |
-| `200` | Успешно                        | `PostV3MediaSaveResponse200` |
-| `400` | Неправильный запрос            | `mediaErrors`                |
-| `401` | Не авторизован                 | `object`                     |
-| `402` | Требуется платёж               | `object`                     |
-| `403` | Доступ запрещён                | `mediaErrors`                |
-| `409` | Ошибка сохранения части ссылок | `mediaErrors`                |
-| `422` | Отсутствует параметр nmId      | `mediaErrors`                |
-| `429` | Слишком много запросов         | `object`                     |
+| `200` | Success                        | `PostV3MediaSaveResponse200` |
+| `400` | Bad request                    | `mediaErrors`                |
+| `401` | Unauthorized                   | `object`                     |
+| `402` | Payment required               | `object`                     |
+| `403` | Access denied                  | `mediaErrors`                |
+| `409` | Error saving some of the links | `mediaErrors`                |
+| `422` | The parameter nmId is missing  | `mediaErrors`                |
+| `429` | Too many requests              | `object`                     |
 
 ## Call examples
 

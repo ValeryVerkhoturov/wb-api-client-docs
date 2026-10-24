@@ -1,41 +1,36 @@
 ---
-title: "Баланс"
-description: "Метод возвращает информацию о: - счёте кабинета Продвижения WB. Его пополняет продавец. - балансе — максимальной сумме для оплаты кампании по взаиморасчету:…"
+title: "Balance"
+description: "The method allows to get information about the seller net, balance and bonuses"
 ---
 
-# Баланс
+# Balance
 
 ```http
 GET /adv/v1/balance
 ```
 
-**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Финансы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Balance)
+**Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/getV1Balance)
 
-Метод возвращает информацию о:
+The method allows to get information about the seller net, balance and bonuses
 
-- счёте кабинета Продвижения WB. Его пополняет продавец.
-- балансе — максимальной сумме для оплаты кампании по взаиморасчету: удержании средств из будущих продаж. Баланс пополнить нельзя, он рассчитывается автоматически на основе отчётов по продвижению.
-- бонусных начислениях WB.
-  Чтобы получить информацию о бюджетах кампаний, используйте метод [Бюджеты кампаний](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV2Budget).
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
-
-| Тип                | Период | Лимит     | Интервал | Всплеск    |
-| ------------------ | ------ | --------- | -------- | ---------- |
-| Персональный       | 1 сек  | 1 запрос  | 1 сек    | 5 запросов |
-| Сервисный          | 1 сек  | 1 запрос  | 1 сек    | 5 запросов |
-| Базовый с секретом | 1 сек  | 1 запрос  | 1 сек    | 5 запросов |
-| Базовый            | 1 ч    | 2 запроса | 30 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 1 request  | 1 s      | 5 requests |
+| Service          | 1 s    | 1 request  | 1 s      | 5 requests |
+| Base with secret | 1 s    | 1 request  | 1 s      | 5 requests |
+| Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                    |
-| ----- | ---------------------- | ------------------------- |
-| `200` | Успешно                | `GetV1BalanceResponse200` |
-| `400` | Неправильный запрос    | `string`                  |
-| `401` | Не авторизован         | `object`                  |
-| `403` | Доступ запрещён        | `object`                  |
-| `429` | Слишком много запросов | `object`                  |
+| Code  | Description       | Schema                    |
+| ----- | ----------------- | ------------------------- |
+| `200` | Success           | `GetV1BalanceResponse200` |
+| `400` | Bad request       | `string`                  |
+| `401` | Unauthorized      | `object`                  |
+| `403` | Access denied     | `object`                  |
+| `429` | Too many requests | `object`                  |
 
 ## Call examples
 

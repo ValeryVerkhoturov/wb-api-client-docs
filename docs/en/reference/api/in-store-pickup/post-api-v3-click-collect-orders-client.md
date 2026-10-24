@@ -1,33 +1,35 @@
 ---
-title: "Информация о покупателе"
-description: "Метод возвращает информацию о покупателе по ID сборочного задания."
+title: "Buyer Information"
+description: "The method provides information about the buyer based on the assembly order ID."
 ---
 
-# Информация о покупателе
+# Buyer Information
 
 ```http
 POST /api/v3/click-collect/orders/client
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** Сборочные задания Самовывоз · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClient)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`in-store-pickup`](/en/reference/api/in-store-pickup/) · **Section:** In-Store Pickup Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders/operation/postV3ClickCollectOrdersClient)
 
-Метод возвращает информацию о покупателе по ID сборочного задания.
+The method provides information about the buyer based on the assembly order ID.
 
-Доступно только для сборочных заданий в статусах:
+Available only for assembly orders with the following statuses:
 
-- `confirm` — на сборке
-- `prepare` — готов к выдаче
+- `confirm` — in assembly
+- `prepare` — ready for pickup
+  Restrictions:
+- Information can only be obtained for assembly orders that are in the assembly process — status `confirm` and ready for pickup — status `prepare`.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий Самовывоз**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **In-Store Pickup assembly orders** methods:
 
-| Период                                                          | Лимит        | Интервал | Всплеск     |
-| --------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                           | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов. |
+| Period                                                           | Limit        | Interval | Burst       |
+| ---------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                            | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests. |
 
 ---
 
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Маркетплейса**.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 
@@ -35,14 +37,14 @@ POST /api/v3/click-collect/orders/client
 
 ## Responses
 
-| Code  | Description            | Schema                    |
-| ----- | ---------------------- | ------------------------- |
-| `200` | Успешно                | `api.OrderClientInfoResp` |
-| `400` | Неправильный запрос    | `Error`                   |
-| `401` | Не авторизован         | `object`                  |
-| `402` | Требуется платёж       | `object`                  |
-| `403` | Доступ запрещён        | `Error`                   |
-| `429` | Слишком много запросов | `object`                  |
+| Code  | Description       | Schema                    |
+| ----- | ----------------- | ------------------------- |
+| `200` | Success           | `api.OrderClientInfoResp` |
+| `400` | Bad request       | `Error`                   |
+| `401` | Unauthorized      | `object`                  |
+| `402` | Payment required  | `object`                  |
+| `403` | Access denied     | `Error`                   |
+| `429` | Too many requests | `object`                  |
 
 ## Call examples
 

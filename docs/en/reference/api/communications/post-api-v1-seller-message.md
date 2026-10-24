@@ -1,26 +1,26 @@
 ---
-title: "Отправить сообщение"
-description: "Метод отправляет сообщения в чат с покупателем."
+title: "Send Message"
+description: "Sends message to the buyer."
 ---
 
-# Отправить сообщение
+# Send Message
 
 ```http
 POST /api/v1/seller/message
 ```
 
-**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Чат с покупателями · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage)
+**Base URL:** `https://buyer-chat-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Buyers Chat · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/buyersChat/operation/postV1SellerMessage)
 
-Метод отправляет сообщения в [чат с покупателем](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats).
+Sends message to the buyer.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит       | Интервал | Всплеск     |
-| ------------------ | ------ | ----------- | -------- | ----------- |
-| Персональный       | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Сервисный          | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый с секретом | 10 сек | 10 запросов | 1 сек    | 10 запросов |
-| Базовый            | 1 ч    | 1 запрос    | 1 ч      | 1 запрос    |
+| Type             | Period | Limit       | Interval | Burst       |
+| ---------------- | ------ | ----------- | -------- | ----------- |
+| Personal         | 10 s   | 10 requests | 1 s      | 10 requests |
+| Service          | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base with secret | 10 s   | 10 requests | 1 s      | 10 requests |
+| Base             | 1 h    | 1 request   | 1 h      | 1 request   |
 
 ## Request body
 
@@ -28,14 +28,14 @@ POST /api/v1/seller/message
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `MessageResponse`                |
-| `400` | Неправильный запрос    | `PostV1SellerMessageResponse400` |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `object`                         |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `MessageResponse`                |
+| `400` | Bad request       | `PostV1SellerMessageResponse400` |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `object`                         |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

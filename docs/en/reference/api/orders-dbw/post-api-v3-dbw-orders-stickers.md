@@ -1,48 +1,48 @@
 ---
-title: "Получить стикеры сборочных заданий"
-description: "Метод возвращает список стикеров для сборочных заданий в статусах: - confirm — на сборке - complete — в доставке За один запрос можно получить максимум 100…"
+title: "Get Orders Stickers"
+description: "Returns a list of stickers for the assembly orders in the statuses: - confirm — on assembly - complete — on delivery You can get a maximum of 100 stickers per…"
 ---
 
-# Получить стикеры сборочных заданий
+# Get Orders Stickers
 
 ```http
 POST /api/v3/dbw/orders/stickers
 ```
 
-**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** Сборочные задания DBW · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStickers)
+**Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-dbw`](/en/reference/api/orders-dbw/) · **Section:** DBW Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStickers)
 
-Метод возвращает список стикеров для [сборочных заданий](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew) в [статусах](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus):
+Returns a list of stickers for the [assembly orders](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/getV3DbwOrdersNew) in the [statuses](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders/operation/postV3DbwOrdersStatus):
 
-- `confirm` — на сборке
-- `complete` — в доставке
-  За один запрос можно получить максимум 100 стикеров.
-  Доступные форматы стикеров:
+- `confirm` — on assembly
+- `complete` — on delivery
+  You can get a maximum of 100 stickers per request.
+  Available sticker formats:
 - SVG
-- ZPLV (вертикальный)
-- ZPLH (горизонтальный)
+- ZPLV (vertical)
+- ZPLH (horizontal)
 - PNG
-  Доступны размеры:
-- 580x400 px при `width=58&height=40` в запросе
-- 400x300 px при `width=40&height=30` в запросе
+  Available dimensions:
+- 580x400 px, with `width=58&height=40` in request
+- 400x300 px, with `width=40&height=30` in request
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для следующих методов DBW:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for DBW methods:
 
-- получение и обновление списка контактов
-- получение и удаление идентификаторов маркировки
-- методы сборочных заданий
+- for getting and updating contact lists
+- for getting and deleting label identifiers
+- assembly orders
 
-| Период                                                         | Лимит        | Интервал | Всплеск     |
-| -------------------------------------------------------------- | ------------ | -------- | ----------- |
-| 1 мин                                                          | 300 запросов | 200 мс   | 20 запросов |
-| Один запрос с кодами ответов `4XX` учитывается как 10 запросов |
+| Period                                                          | Limit        | Interval | Burst       |
+| --------------------------------------------------------------- | ------------ | -------- | ----------- |
+| 1 min                                                           | 300 requests | 200 ms   | 20 requests |
+| One request with `4XX` response codes is counted as 10 requests |
 
 ## Parameters
 
 | Name     | In    | Type             | Req. | Description    |
 | -------- | ----- | ---------------- | ---- | -------------- |
-| `type`   | query | `string`         | yes  | Тип стикера    |
-| `width`  | query | `integer<int64>` | yes  | Ширина стикера |
-| `height` | query | `integer<int64>` | yes  | Высота стикера |
+| `type`   | query | `string`         | yes  | Sticker format |
+| `width`  | query | `integer<int64>` | yes  | Sticker width  |
+| `height` | query | `integer<int64>` | yes  | Sticker height |
 
 ## Request body
 
@@ -50,14 +50,14 @@ POST /api/v3/dbw/orders/stickers
 
 ## Responses
 
-| Code  | Description            | Schema                               |
-| ----- | ---------------------- | ------------------------------------ |
-| `200` | Успешно                | `PostV3DbwOrdersStickersResponse200` |
-| `400` | Неправильный запрос    | `Error`                              |
-| `401` | Не авторизован         | `object`                             |
-| `402` | Требуется платёж       | `object`                             |
-| `403` | Доступ запрещён        | `Error`                              |
-| `429` | Слишком много запросов | `object`                             |
+| Code  | Description       | Schema                               |
+| ----- | ----------------- | ------------------------------------ |
+| `200` | Success           | `PostV3DbwOrdersStickersResponse200` |
+| `400` | Bad request       | `Error`                              |
+| `401` | Unauthorized      | `object`                             |
+| `402` | Payment required  | `object`                             |
+| `403` | Access denied     | `Error`                              |
+| `429` | Too many requests | `object`                             |
 
 ## Call examples
 

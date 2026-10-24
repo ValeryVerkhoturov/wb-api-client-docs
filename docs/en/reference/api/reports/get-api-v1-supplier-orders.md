@@ -1,57 +1,57 @@
 ---
-title: "Заказы"
-description: "Метод возвращает информацию о заказах. Данные обновляются раз в 30 минут."
+title: "Orders"
+description: "The method returns order information. The data updated every 30 minutes."
 ---
 
-# Заказы
+# Orders
 
 ```http
 GET /api/v1/supplier/orders
 ```
 
-**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Основные отчёты · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierOrders)
+**Base URL:** `https://statistics-api.wildberries.ru` · **Module:** [`reports`](/en/reference/api/reports/) · **Section:** Main Reports · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/mainReports/operation/getV1SupplierOrders)
 
-Метод возвращает информацию о заказах.
-Данные обновляются раз в 30 минут.
+The method returns order information.
+The data updated every 30 minutes.
 
-1 строка = 1 заказ = 1 сборочное задание = 1 единица товара.
-Для определения заказа рекомендуем использовать поле `srid`.
+1 line means 1 order and means 1 item.
+The `srid` field should be used to identify the order.
 
-Информация о заказе хранится 90 дней с момента оформления.
+Data storage is guaranteed for no more than 90 days from the date of order.
 
-В ответах могут отсутствовать заказы, по которым не подтверждена оплата. Например, заказы с отложенными платежами или оплатой в рассрочку. При этом, если по таким заказам есть продажи, вы можете получить их с помощью [детализаций к отчётам реализации](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
-Чтобы получить все оформленные заказы, используйте [Ленту заказов](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed).
+The responses do not include orders for which payment was not confirmed. For example, it could be orders with delayed payments or installment payments. However, if there are sales for such orders, you can get it using [details for the sales reports](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports).
+To receive all completed orders, use [Order Feed](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed).
 
-Данные этого отчёта являются предварительными и служат для оперативного мониторинга
+The data in this report is preliminary and is used for operational monitoring
 
-Для одного ответа на запрос с `flag=0` или без `flag` в системе установлено условное ограничение 80000 строк. Поэтому, чтобы получить все заказы, может потребоваться более, чем один запрос. Во втором и далее запросе в параметре `dateFrom` используйте полное значение поля `lastChangeDate` из последней строки ответа на предыдущий запрос.
-Если в ответе отдаётся пустой массив `[]`, все заказы уже выгружены.
+For a single response to a request with `flag=0` or without `flag`, a conditional limit of 80,000 rows is set. Therefore, more than one request may be necessary to retrieve all orders. In the second and subsequent requests, use the full value of the `lastChangeDate` field of the last row from the response of the previous request in the `dateFrom` parameter.
+If the response returns an empty array `[]`, all orders have already been retrieved.
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит    | Интервал | Всплеск     |
-| ------------------ | ------ | -------- | -------- | ----------- |
-| Персональный       | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Сервисный          | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый с секретом | 1 мин  | 1 запрос | 1 мин    | 10 запросов |
-| Базовый            | 3 ч    | 1 запрос | 3 ч      | 1 запрос    |
+| Type             | Period | Limit     | Interval | Burst       |
+| ---------------- | ------ | --------- | -------- | ----------- |
+| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
+| Service          | 1 min  | 1 request | 1 min    | 10 requests |
+| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
+| Base             | 3 h    | 1 request | 3 h      | 1 request   |
 
 ## Parameters
 
-| Name       | In    | Type     | Req. | Description                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ---------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dateFrom` | query | `string` | yes  | Дата и время последнего изменения по заказу. Дата в формате RFC3339. Можно передать дату или дату со временем. Время можно указывать с точностью до [секунд](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) или миллисекунд. Время передаётся в часовом поясе Москва (UTC+3). Примеры: - `2019-06-20` - `2019-06-20T23:59:59` - `2019-06-20T00:00:00.12345` - `2017-03-25T00:00:00` |
+| Name       | In    | Type     | Req. | Description                                                                                                                                                                                                                                                                                                   |
+| ---------- | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dateFrom` | query | `string` | yes  | Date and time of last change on the order. Date format: RFC3339. You may send date or date with time. Time could be specified in seconds or milliseconds. The time stands in Moscow time zone (UTC+3). Examples: - `2019-06-20` - `2019-06-20T23:59:59` - `2019-06-20T00:00:00.12345` - `2017-03-25T00:00:00` |
 
 ## Responses
 
-| Code  | Description            | Schema                           |
-| ----- | ---------------------- | -------------------------------- |
-| `200` | Успешно                | `GetV1SupplierOrdersResponse200` |
-| `400` | Неправильный запрос    | `object`                         |
-| `401` | Не авторизован         | `object`                         |
-| `402` | Требуется платёж       | `object`                         |
-| `403` | Доступ запрещён        | `object`                         |
-| `429` | Слишком много запросов | `object`                         |
+| Code  | Description       | Schema                           |
+| ----- | ----------------- | -------------------------------- |
+| `200` | Success           | `GetV1SupplierOrdersResponse200` |
+| `400` | Bad request       | `object`                         |
+| `401` | Unauthorized      | `object`                         |
+| `402` | Payment required  | `object`                         |
+| `403` | Access denied     | `object`                         |
+| `429` | Too many requests | `object`                         |
 
 ## Call examples
 

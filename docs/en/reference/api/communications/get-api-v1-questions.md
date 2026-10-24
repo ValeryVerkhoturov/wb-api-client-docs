@@ -1,55 +1,50 @@
 ---
-title: "Список вопросов"
-description: "Метод возвращает список вопросов по заданным фильтрам. Вы можете: - получить данные отвеченных и неотвеченных вопросов - сортировать вопросы по дате -…"
+title: "Questions List"
+description: "The method allows you to get a list of questions by the specified parameters with pagination and sorting. It is possible to get a maximum of 10,000 questions…"
 ---
 
-# Список вопросов
+# Questions List
 
 ```http
 GET /api/v1/questions
 ```
 
-**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Вопросы · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/customer-communication#tag/questions/operation/getV1Questions)
+**Base URL:** `https://feedbacks-api.wildberries.ru` · **Module:** [`communications`](/en/reference/api/communications/) · **Section:** Questions · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/communications#tag/questions/operation/getV1Questions)
 
-Метод возвращает список вопросов по заданным фильтрам. Вы можете:
+The method allows you to get a list of questions by the specified parameters with pagination and sorting.
+It is possible to get a maximum of 10,000 questions per query
 
-- получить данные отвеченных и неотвеченных вопросов
-- сортировать вопросы по дате
-- настроить пагинацию и количество вопросов в ответе
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Feedbacks and Questions** category:
 
-Можно получить максимум 10 000 вопросов в одном ответе
-
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для всех методов категории **Вопросы и отзывы**:
-
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Сервисный          | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый с секретом | 1 сек  | 3 запроса  | 333 мс   | 6 запросов |
-| Базовый            | 1 ч    | 5 запросов | 12 мин   | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Service          | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
+| Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
 ## Parameters
 
-| Name         | In    | Type             | Req. | Description                                                                                                                                                               |
-| ------------ | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `isAnswered` | query | `boolean`        | yes  | Есть ли ответ на вопрос: - `true` — да - `false` — нет                                                                                                                    |
-| `nmId`       | query | `integer<int64>` | no   | Артикул WB                                                                                                                                                                |
-| `take`       | query | `integer<int64>` | yes  | Количество запрашиваемых вопросов (максимально допустимое значение для параметра - 10 000, при этом сумма значений параметров `take` и `skip` не должна превышать 10 000) |
-| `skip`       | query | `integer<int64>` | yes  | Количество вопросов для пропуска (максимально допустимое значение для параметра - 10 000, при этом сумма значений параметров `take` и `skip` не должна превышать 10 000)  |
-| `order`      | query | `string`         | no   | Сортировка вопросов по дате (`dateAsc`/`dateDesc`)                                                                                                                        |
-| `dateFrom`   | query | `integer<int64>` | no   | Дата начала периода в формате Unix timestamp                                                                                                                              |
-| `dateTo`     | query | `integer<int64>` | no   | Дата конца периода в формате Unix timestamp                                                                                                                               |
+| Name         | In    | Type             | Req. | Description                                                                                                                                                         |
+| ------------ | ----- | ---------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isAnswered` | query | `boolean`        | yes  | The question is answered: - `true` — yes - `false` — no                                                                                                             |
+| `nmId`       | query | `integer<int64>` | no   | WB item number                                                                                                                                                      |
+| `take`       | query | `integer<int64>` | yes  | Number of requested questions (the maximum possible value for the parameter is 10,000, and the total amount of `take` and `skip` parameters must not exceed 10,000) |
+| `skip`       | query | `integer<int64>` | yes  | Number of questions to skip (maximum possible value for the parameter is 10,000, and the total amount of `take` and `skip` parameters must not exceed 10,000)       |
+| `order`      | query | `string`         | no   | Sorting questions by date (`dateAsc`/`dateDesc`)                                                                                                                    |
+| `dateFrom`   | query | `integer<int64>` | no   | The start date of the period in Unix timestamp format                                                                                                               |
+| `dateTo`     | query | `integer<int64>` | no   | The end date of the period in Unix timestamp format                                                                                                                 |
 
 ## Responses
 
-| Code  | Description            | Schema                        |
-| ----- | ---------------------- | ----------------------------- |
-| `200` | Успешно                | `GetV1QuestionsResponse200`   |
-| `400` | Неправильный запрос    | `responseFeedbackQuestionErr` |
-| `401` | Не авторизован         | `object`                      |
-| `402` | Требуется платёж       | `object`                      |
-| `403` | Доступ запрещён        | `responseFeedbackQuestionErr` |
-| `429` | Слишком много запросов | `object`                      |
+| Code  | Description       | Schema                        |
+| ----- | ----------------- | ----------------------------- |
+| `200` | Success           | `GetV1QuestionsResponse200`   |
+| `400` | Bad request       | `responseFeedbackQuestionErr` |
+| `401` | Unauthorized      | `object`                      |
+| `402` | Payment required  | `object`                      |
+| `403` | Access denied     | `responseFeedbackQuestionErr` |
+| `429` | Too many requests | `object`                      |
 
 ## Call examples
 

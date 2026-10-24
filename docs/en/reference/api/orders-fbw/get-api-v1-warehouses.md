@@ -1,36 +1,36 @@
 ---
-title: "Список складов"
-description: "Метод временно отключён"
+title: "Warehouses List"
+description: "The method is temporary disabled"
 ---
 
-# Список складов
+# Warehouses List
 
 ```http
 GET /api/v1/warehouses
 ```
 
-**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Информация для формирования поставок · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
+**Base URL:** `https://supplies-api.wildberries.ru` · **Module:** [`orders-fbw`](/en/reference/api/orders-fbw/) · **Section:** Information for Forming Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
 
-Метод [временно отключён](https://dev.wildberries.ru/release-notes?id=570)
+The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?id=570)
 
-[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Тип                | Период | Лимит      | Интервал | Всплеск    |
-| ------------------ | ------ | ---------- | -------- | ---------- |
-| Персональный       | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Сервисный          | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый с секретом | 1 мин  | 6 запросов | 10 сек   | 6 запросов |
-| Базовый            | 12 ч   | 1 запрос   | 12 ч     | 1 запрос   |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 min  | 6 requests | 10 s     | 6 requests |
+| Service          | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base with secret | 1 min  | 6 requests | 10 s     | 6 requests |
+| Base             | 12 h   | 1 request  | 12 h     | 1 request  |
 
 ## Responses
 
-| Code  | Description            | Schema                       |
-| ----- | ---------------------- | ---------------------------- |
-| `200` | Успешно                | `GetV1WarehousesResponse200` |
-| `401` | Не авторизован         | `object`                     |
-| `403` | Доступ запрещён        | `object`                     |
-| `404` | Не найдено             | —                            |
-| `429` | Слишком много запросов | `object`                     |
+| Code  | Description       | Schema                       |
+| ----- | ----------------- | ---------------------------- |
+| `200` | Success           | `GetV1WarehousesResponse200` |
+| `401` | Unauthorized      | `object`                     |
+| `403` | Access denied     | `object`                     |
+| `404` | Not found         | —                            |
+| `429` | Too many requests | `object`                     |
 
 ## Call examples
 
