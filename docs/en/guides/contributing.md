@@ -19,8 +19,8 @@ Every file under `clients/` in the main repo is generated. Editing there gets ov
 
 If you find something wrong in generated output, the fix goes in one of:
 
-- **`scripts/post-process.py`** — a new pass, if the fix applies to the spec before generation.
-- **`scripts/inject-secret.py`** — if the fix is in the generated `Configuration` / `ApiClient` boilerplate.
+- **`scripts/pipeline/specs/postprocess.py`** — a new pass, if the fix applies to the spec before generation.
+- **`scripts/pipeline/generation/secrets.py`** — if the fix is in the generated `Configuration` / `ApiClient` boilerplate.
 - **`generator-configs/*.yaml`** — if it's an openapi-generator option toggle.
 - **`templates/{lang}/*`** — if it's in the top-level manifest.
 
@@ -42,6 +42,8 @@ make verify                                    # build + format check every lang
 `generate.py` always regenerates all seven languages. For per-language iteration during debugging, comment out the other `queue_generation` calls rather than adding a flag. The `OPENAPI_GENERATOR_THREADS` environment variable controls generation concurrency (default: 2).
 
 Formatting runs inside Docker so contributors don't need language runtimes installed. `make verify-<lang>` and `make {black,prettier,gofmt,spotless,php-cs-fixer,dotnet-format}` are individual targets. OneScript has no formatter, so `make verify-onescript` compiles every module with `oscript -check` and loads the package instead. `make help` lists everything.
+
+The pipeline itself lives in `scripts/pipeline/`, organized by bounded context (see [architecture](/en/guides/architecture)); the flat `scripts/*.py` files are just CLI shims. Changes under `scripts/` are additionally gated by `make scripts-check` (kernel smoke checks, no `#` comments, no docstrings), and black covers `scripts/` too, not just `clients/python`.
 
 ## PR flow
 

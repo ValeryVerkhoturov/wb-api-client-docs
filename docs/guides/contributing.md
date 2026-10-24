@@ -19,8 +19,8 @@
 
 Если нашли ошибку в сгенерированном выходе, чинить нужно в одном из:
 
-- **`scripts/post-process.py`** — новый проход, если правка применяется к спецификации до генерации.
-- **`scripts/inject-secret.py`** — если правка внутри сгенерированного `Configuration` / `ApiClient`.
+- **`scripts/pipeline/specs/postprocess.py`** — новый проход, если правка применяется к спецификации до генерации.
+- **`scripts/pipeline/generation/secrets.py`** — если правка внутри сгенерированного `Configuration` / `ApiClient`.
 - **`generator-configs/*.yaml`** — если это флаг openapi-generator.
 - **`templates/{lang}/*`** — если это топ-уровневый манифест.
 
@@ -42,6 +42,8 @@ make verify                                   # сборка + проверка 
 `generate.py` всегда регенерирует все семь языков. Для одноязычной итерации при отладке комментируйте остальные вызовы `queue_generation`, а не добавляйте флаг. Переменная окружения `OPENAPI_GENERATOR_THREADS` управляет параллелизмом генерации (по умолчанию 2).
 
 Форматирование гоняется в Docker, поэтому языковые рантаймы на хосте не нужны. `make verify-<lang>` и `make {black,prettier,gofmt,spotless,php-cs-fixer,dotnet-format}` — отдельные цели. У OneScript форматтера нет, поэтому `make verify-onescript` вместо него компилирует каждый модуль через `oscript -check` и загружает пакет целиком. `make help` перечисляет всё.
+
+Сам пайплайн лежит в `scripts/pipeline/` по доменным контекстам (см. [архитектуру](/guides/architecture)); плоские `scripts/*.py` — лишь CLI-обёртки. Правки в `scripts/` дополнительно проверяются `make scripts-check` (smoke-проверки общего ядра, запрет `#`-комментариев и докстрингов), а black гоняется и по `scripts/`, не только по `clients/python`.
 
 ## Flow с PR
 

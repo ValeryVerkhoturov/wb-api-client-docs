@@ -98,7 +98,7 @@ openapi-generator ships no OneScript target, so it lives in a separate repo — 
 
 The hand-written parts of the main repo:
 
-- `scripts/*` — the pipeline itself (download, post-process, generate, inject-secret, gen-readmes).
+- `scripts/` — the pipeline itself, organized by bounded context under `scripts/pipeline/`: `core/` (shared kernel: repo paths, spec/module/language naming, YAML IO, subprocess), `specs/` (download, post-process), `generation/` (generate, inject-secret), `onescript/` (toolchain, manifests, verify), `docs/` (gen-api-reference, gen-readmes). The flat `scripts/*.py` files are thin CLI shims over those modules, so the commands above are unchanged. House rule: no `#` comments and no docstrings under `scripts/` — enforced by `make scripts-check` and the PR check.
 - `generator-configs/*.yaml` — one openapi-generator config per language.
 - `templates/*` — top-level manifests with `__VERSION__` placeholders.
 - `.github/workflows/*` — daily-check, per-language publish, PR drift check.
