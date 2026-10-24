@@ -7,8 +7,8 @@ description: "OneScript-клиент (1С) Wildberries Seller API: пакет wb
 Пакет: [`wb-api-client`](https://hub.oscript.io/pools/default/packages/wb-api-client) на hub.oscript.io.
 
 - **OneScript:** 2.0.0+
-- **HTTP:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3
-- **Зависимости:** [1connector](https://github.com/vbondarevsky/1connector) 2.3.3 — транспорт, [jason](https://hub.oscript.io/package/jason) 0.6.0 — сериализация моделей
+- **HTTP:** [1connector](https://hub.oscript.io/pools/default/packages/1connector) 2.3.3
+- **Зависимости:** [1connector](https://hub.oscript.io/pools/default/packages/1connector) 2.3.3 — транспорт, [jason](https://hub.oscript.io/pools/default/packages/jason) 0.6.0 — сериализация моделей
 - **Обёртка секретов:** класс `СекретнаяСтрока`
 
 ## Установка
