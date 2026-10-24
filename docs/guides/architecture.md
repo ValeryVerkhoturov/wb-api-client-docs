@@ -97,7 +97,7 @@ Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, н
 
 Ручные части основного репозитория:
 
-- `scripts/` — сам пайплайн, разложенный по доменным контекстам в `scripts/pipeline/`: `core/` (общее ядро: пути репозитория, именование спецификаций/модулей/языков, YAML IO, subprocess), `specs/` (download, post-process), `generation/` (generate, inject-secret), `onescript/` (toolchain, manifests, verify), `docs/` (gen-api-reference, gen-readmes). Плоские `scripts/*.py` — тонкие CLI-обёртки над этими модулями, так что команды выше не меняются. Домашнее правило: ни `#`-комментариев, ни докстрингов под `scripts/` — проверяется в `make scripts-check` и в PR-check.
+- `scripts/` — сам пайплайн, разложенный по доменным контекстам в `scripts/pipeline/`: `core/` (общее ядро: пути репозитория, именование спецификаций/модулей/языков, YAML IO, запуск внешних инструментов (subprocess, docker, git, python, macOS codesign)), `specs/` (download, post-process), `generation/` (generate, inject-secret), `onescript/` (toolchain, manifests, verify), `docs/` (gen-api-reference, gen-readmes). Плоские `scripts/*.py` — тонкие CLI-обёртки над этими модулями, так что команды выше не меняются. Домашнее правило: ни `#`-комментариев, ни докстрингов под `scripts/` — проверяется в `make scripts-check` и в PR-check.
 - `generator-configs/*.yaml` — по одному конфигу openapi-generator на язык.
 - `templates/*` — топ-уровневые манифесты с плейсхолдерами `__VERSION__`.
 - `.github/workflows/*` — daily-check, per-language publish, PR drift check.
