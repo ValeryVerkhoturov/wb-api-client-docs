@@ -37,7 +37,11 @@ docs/
   .vitepress/
     config.ts             # nav, sidebar, base, SEO, locales (both RU and EN live here)
     api-sidebar.ts        # GENERATED — do not edit
-    llms.ts, page-meta.ts # build-time helpers for Markdown mirrors / SEO
+    gen/                  # build-time generation, organized by bounded context
+      kernel/pages.ts     # facts read from Markdown sources (title, lede, url path, breadcrumbs)
+      kernel/sources.ts   # fs walk of docs/ + writes into dist
+      llms/               # llms.txt / llms-full.txt (index.ts) + per-page Markdown twins (mirror.ts)
+      og/                 # per-page share cards (index.ts), card layout (card.ts), fonts (fonts.ts)
 ```
 
 ## Rules that matter

@@ -3,8 +3,8 @@ import { editorialFonts } from "vitepress-editorial-modernist/config";
 
 // Markdown twin of every page, llms.txt and llms-full.txt, all written
 // into dist once the HTML build is done.
-import { generateLlmsFiles } from "./llms";
-import { generateOgImages } from "./og";
+import { generateLlmsFiles } from "./gen/llms";
+import { generateOgImages } from "./gen/og";
 import {
   breadcrumbTrail,
   counterpart,
@@ -12,7 +12,7 @@ import {
   leadParagraph,
   mdPath,
   urlPath,
-} from "./page-meta";
+} from "./gen/kernel/pages";
 
 // Endpoint reference: one page per API operation, generated into
 // docs/reference/api/ (and /en/) by scripts/gen-api-reference.py in the
