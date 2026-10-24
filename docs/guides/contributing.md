@@ -32,14 +32,14 @@
 git clone --recurse-submodules https://github.com/ValeryVerkhoturov/wb-api-client
 cd wb-api-client
 
-./scripts/download-swaggers.sh                # тянет апстрим (локально может отдать 498)
-pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, black, flask
+pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, requests, black, flask
+./scripts/download-swaggers.py                # тянет апстрим (локально может отдать 498)
 python  scripts/post-process.py               # -> swaggers/processed/
-./scripts/generate.sh 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp}
+./scripts/generate.py 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp}
 make verify                                   # сборка + проверка форматирования на каждом языке
 ```
 
-`generate.sh` всегда регенерирует все семь языков. Для одноязычной итерации при отладке комментируйте оставшиеся шесть циклов, а не добавляйте флаг — скрипт меньше 200 строк и без параметризации.
+`generate.py` всегда регенерирует все семь языков. Для одноязычной итерации при отладке комментируйте остальные вызовы `queue_generation`, а не добавляйте флаг. Переменная окружения `OPENAPI_GENERATOR_THREADS` управляет параллелизмом генерации (по умолчанию 2).
 
 Форматирование гоняется в Docker, поэтому языковые рантаймы на хосте не нужны. `make verify-<lang>` и `make {black,prettier,gofmt,spotless,php-cs-fixer,dotnet-format}` — отдельные цели. У OneScript форматтера нет, поэтому `make verify-onescript` вместо него компилирует каждый модуль через `oscript -check` и загружает пакет целиком. `make help` перечисляет всё.
 

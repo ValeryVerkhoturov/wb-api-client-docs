@@ -5,9 +5,9 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ## The pipeline
 
 ```
-download-swaggers.sh   →  swaggers/*.yaml         (raw upstream, checksummed)
-post-process.py        →  swaggers/processed/     (12 passes)
-generate.sh <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
+download-swaggers.py   →  swaggers/*.yaml         (raw upstream, checksummed)
+post-process.py        →  swaggers/processed/     (13 passes)
+generate.py <ver>      →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
     ├── inject-secret.py           (SecretString wrapper per lang)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (canonicalize formatting)
     └── gen-readmes.py             (per-language README.md)
@@ -18,7 +18,7 @@ gen-api-reference.py   →  wb-api-client-docs      (API reference: operation pa
                                                    in 7 languages, RU/EN)
 ```
 
-Every step is a plain shell script or Python file, so nothing is hidden behind opaque tooling.
+Every step is a plain Python file, so nothing is hidden behind opaque tooling.
 
 ## Why generate?
 
@@ -26,22 +26,23 @@ WB ships OpenAPI specs. Hand-writing 13 clients × 7 languages would drift withi
 
 The downside is that generator output is generator output — sometimes ugly, sometimes carrying artifacts from spec quirks. Which is why there's a post-processing layer.
 
-## post-process.py — 12 passes
+## post-process.py — 13 passes
 
 1. **`inject_bearer_auth`** — drops WB's `HeaderApiKey` scheme (duplicated with the real bearer JWT semantics) and installs a single `BearerAuth` scheme instead. Every generated client then exposes exactly one auth code path.
 2. **`fix_untyped_arrays`** — adds `items: {type: string}` to arrays missing their inner type (Go / TS would otherwise emit `[]any`).
-3. **`inline_top_level_arrays`** — inlines every `$ref` to a `type: array` component and collapses `allOf: [array, description-only]` wrappers (openapi-generator mishandles arrays-at-root). Runs to fixed point because inlined subtrees can contain further refs.
-4. **`rename_digit_prefixed_schemas`** — `409SupplyDeliverError` → `Http409SupplyDeliverError` (invalid Go identifier otherwise).
-5. **`name_inline_response_schemas`** — hoists anonymous inline 4xx/5xx bodies to `<OperationId>Response<code>` (again, valid Go identifiers).
-6. **`drop_response_required`** — WB marks nearly every response field `required`, but the live API omits fields at will, and every generated language then throws on deserialization. The pass deletes `required` from every schema reachable from a response; request bodies keep their `required` lists, so input validation is unaffected.
-7. **`sanitize_non_ascii_enums`** — adds `x-enum-varnames` for Russian enum members like `"Склад WB"` (empty JS/Go/Java identifiers otherwise).
-8. **`rename_tags_to_module`** — WB tags are Russian (`Финансовые отчёты`), which openapi-generator sanitizes to an empty class-name stem, so every language fell back to `Api`/`DefaultApi` classes. The pass rewrites every operation's tags to the module name (`Finances`, `Reports`, …), giving each module a single well-named API class (`FinancesApi`, …), and stashes the original tags in `x-original-tags` for the docs generator.
-9. **`drop_date_formats`** — WB returns `""` for unset date fields (`fixTariffDateFrom`, `utdUcdDate`), which no strict date parser accepts. The pass strips `format: date` / `format: date-time` from string schemas so clients type these as plain strings.
-10. **`htmlize_descriptions_to_markdown`** — every `description` field is passed through `markdownify` so HTML in docstrings renders as Markdown in generated docs.
-11. **`absolutize_description_links`** — relative `[…](/openapi/…)` links get `https://dev.wildberries.ru` prepended so links in generated docstrings still work.
-12. **`add_docs_links`** — appends a `Library doc: <url>` line to every operation's `description`, pointing at the operation's page on this site. Generators copy `description` into docstrings/Javadoc, so every client method links to its rendered docs. `gen-api-reference.py` strips the line back out, so the docs site itself is unaffected.
+3. **`widen_integer_formats`** — sets `format: int64` on integer fields with no format or with `uint32`/`uint64`/Unix-timestamp formats: WB uses those for IDs and millisecond timestamps that overflow a signed 32-bit int. Explicit `int32` and currency-code formats are left alone.
+4. **`inline_top_level_arrays`** — inlines every `$ref` to a `type: array` component and collapses `allOf: [array, description-only]` wrappers (openapi-generator mishandles arrays-at-root). Runs to fixed point because inlined subtrees can contain further refs.
+5. **`rename_digit_prefixed_schemas`** — `409SupplyDeliverError` → `Http409SupplyDeliverError` (invalid Go identifier otherwise).
+6. **`name_inline_response_schemas`** — hoists anonymous inline 4xx/5xx bodies to `<OperationId>Response<code>` (again, valid Go identifiers).
+7. **`drop_response_required`** — WB marks nearly every response field `required`, but the live API omits fields at will, and every generated language then throws on deserialization. The pass deletes `required` from every schema reachable from a response; request bodies keep their `required` lists, so input validation is unaffected.
+8. **`sanitize_non_ascii_enums`** — adds `x-enum-varnames` for Russian enum members like `"Склад WB"` (empty JS/Go/Java identifiers otherwise).
+9. **`rename_tags_to_module`** — WB tags are Russian (`Финансовые отчёты`), which openapi-generator sanitizes to an empty class-name stem, so every language fell back to `Api`/`DefaultApi` classes. The pass rewrites every operation's tags to the module name (`Finances`, `Reports`, …), giving each module a single well-named API class (`FinancesApi`, …), and stashes the original tags in `x-original-tags` for the docs generator.
+10. **`drop_date_formats`** — WB returns `""` for unset date fields (`fixTariffDateFrom`, `utdUcdDate`), which no strict date parser accepts. The pass strips `format: date` / `format: date-time` from string schemas so clients type these as plain strings.
+11. **`htmlize_descriptions_to_markdown`** — every `description` field is passed through `markdownify` so HTML in docstrings renders as Markdown in generated docs.
+12. **`absolutize_description_links`** — relative `[…](/openapi/…)` links get `https://dev.wildberries.ru` prepended so links in generated docstrings still work.
+13. **`add_docs_links`** — appends a `Library doc: <url>` line to every operation's `description`, pointing at the operation's page on this site. Generators copy `description` into docstrings/Javadoc, so every client method links to its rendered docs. `gen-api-reference.py` strips the line back out, so the docs site itself is unaffected.
 
-## generate.sh
+## generate.py
 
 - Runs `openapi-generator-cli` (pinned Docker image) per spec per language, into scratch directories.
 - Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, for OneScript a class-name prefix (the language has no namespaces), and C# namespaces.
