@@ -153,4 +153,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2CardsMoveNm());
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::post_v2_cards_move_nm(&cfg, post_v2_cards_move_nm_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

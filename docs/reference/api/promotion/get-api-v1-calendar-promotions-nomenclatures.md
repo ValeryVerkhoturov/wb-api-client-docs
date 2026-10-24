@@ -129,4 +129,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.GetV1CalendarPromotionsNomenclatures(promotionID, inAction));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = promotion_api::get_v1_calendar_promotions_nomenclatures(&cfg, promotion_id, in_action, limit, offset).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

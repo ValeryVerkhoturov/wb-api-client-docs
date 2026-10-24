@@ -154,4 +154,17 @@ var api = new OrdersDbwApi(config);
 Console.WriteLine(api.PostV3DbwOrdersStatus());
 ```
 
+```rust [Rust]
+use wb_api_client::orders_dbw::apis::{configuration::Configuration, orders_dbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_dbw_api::post_v3_dbw_orders_status(&cfg, post_v3_dbw_orders_status_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

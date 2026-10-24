@@ -153,4 +153,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV3SalesFunnelGroupedHistory(groupedHistoryRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = analytics_api::post_v3_sales_funnel_grouped_history(&cfg, grouped_history_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

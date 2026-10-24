@@ -133,4 +133,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.PostV1SellerMessage(replySign));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = communications_api::post_v1_seller_message(&cfg, reply_sign, message, file).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -132,4 +132,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.PostV0NormqueryList(v0GetNormQueryListRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = promotion_api::post_v0_normquery_list(&cfg, v0_get_norm_query_list_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

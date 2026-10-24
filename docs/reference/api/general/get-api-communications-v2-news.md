@@ -137,4 +137,17 @@ var api = new GeneralApi(config);
 Console.WriteLine(api.GetV2News());
 ```
 
+```rust [Rust]
+use wb_api_client::general::apis::{configuration::Configuration, general_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = general_api::get_v2_news(&cfg, from, from_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

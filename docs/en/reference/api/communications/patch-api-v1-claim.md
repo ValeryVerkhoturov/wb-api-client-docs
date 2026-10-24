@@ -129,4 +129,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.PatchV1Claim(patchV1ClaimRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = communications_api::patch_v1_claim(&cfg, patch_v1_claim_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

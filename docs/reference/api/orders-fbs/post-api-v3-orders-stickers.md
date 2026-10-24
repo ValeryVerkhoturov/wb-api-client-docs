@@ -157,4 +157,17 @@ var api = new OrdersFbsApi(config);
 Console.WriteLine(api.PostV3OrdersStickers(type, width, height));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbs::apis::{configuration::Configuration, orders_fbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = orders_fbs_api::post_v3_orders_stickers(&cfg, r#type, width, height, post_v3_orders_stickers_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

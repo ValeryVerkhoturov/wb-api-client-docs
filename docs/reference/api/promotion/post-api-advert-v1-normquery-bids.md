@@ -135,4 +135,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.PostV1NormqueryBids(v1SetNormQueryBidsRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = promotion_api::post_v1_normquery_bids(&cfg, v1_set_norm_query_bids_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

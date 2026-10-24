@@ -140,4 +140,17 @@ var api = new OrdersDbwApi(config);
 Console.WriteLine(api.GetV3DbwOrders(limit, next, dateFrom, dateTo));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_dbw::apis::{configuration::Configuration, orders_dbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_dbw_api::get_v3_dbw_orders(&cfg, limit, next, date_from, date_to).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -129,4 +129,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.GetV3Warehouses());
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::get_v3_warehouses(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

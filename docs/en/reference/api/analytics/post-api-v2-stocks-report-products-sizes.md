@@ -145,4 +145,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV2StocksReportProductsSizes(tableSizeRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = analytics_api::post_v2_stocks_report_products_sizes(&cfg, table_size_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

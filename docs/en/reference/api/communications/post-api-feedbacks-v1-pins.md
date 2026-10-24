@@ -136,4 +136,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.PostV1Pins(openapiPinReviewItem));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = communications_api::post_v1_pins(&cfg, openapi_period_pin_review_item).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

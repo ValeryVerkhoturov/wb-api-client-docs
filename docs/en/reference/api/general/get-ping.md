@@ -134,4 +134,17 @@ var api = new GeneralApi(config);
 Console.WriteLine(api.GetPing());
 ```
 
+```rust [Rust]
+use wb_api_client::general::apis::{configuration::Configuration, general_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = general_api::get_ping(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

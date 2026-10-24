@@ -146,4 +146,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.GetV2ObjectCharcsSubjectId(subjectId));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::get_v2_object_charcs_subject_id(&cfg, subject_id, locale).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -128,4 +128,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.GetV1FeedbacksCountUnanswered());
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = communications_api::get_v1_feedbacks_count_unanswered(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

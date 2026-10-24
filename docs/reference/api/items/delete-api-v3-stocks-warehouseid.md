@@ -139,4 +139,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.DeleteV3StocksWarehouseId(warehouseId, deleteV3StocksWarehouseIdRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::delete_v3_stocks_warehouse_id(&cfg, warehouse_id, delete_v3_stocks_warehouse_id_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -142,4 +142,17 @@ var api = new FinancesApi(config);
 Console.WriteLine(api.GetV1DocumentsList());
 ```
 
+```rust [Rust]
+use wb_api_client::finances::apis::{configuration::Configuration, finances_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = finances_api::get_v1_documents_list(&cfg, locale, begin_time, end_time, sort, order, category, service_name, limit, offset).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

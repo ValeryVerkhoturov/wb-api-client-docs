@@ -127,4 +127,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.GetV1PromotionCount());
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = promotion_api::get_v1_promotion_count(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

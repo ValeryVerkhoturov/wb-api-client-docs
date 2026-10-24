@@ -136,4 +136,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV3StocksWarehouseId(warehouseId, postV3StocksWarehouseIdRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::post_v3_stocks_warehouse_id(&cfg, warehouse_id, post_v3_stocks_warehouse_id_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

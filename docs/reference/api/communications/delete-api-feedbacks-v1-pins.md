@@ -134,4 +134,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.DeleteV1Pins(requestBody));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = communications_api::delete_v1_pins(&cfg, request_body).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

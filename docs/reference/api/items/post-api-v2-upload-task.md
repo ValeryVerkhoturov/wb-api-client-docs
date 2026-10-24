@@ -140,4 +140,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2UploadTask(postV2UploadTaskRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::post_v2_upload_task(&cfg, post_v2_upload_task_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

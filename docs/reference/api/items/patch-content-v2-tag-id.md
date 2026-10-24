@@ -145,4 +145,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PatchV2TagId(id, patchV2TagIdRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::patch_v2_tag_id(&cfg, id, patch_v2_tag_id_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

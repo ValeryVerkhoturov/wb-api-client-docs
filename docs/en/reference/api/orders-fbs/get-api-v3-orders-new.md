@@ -134,4 +134,17 @@ var api = new OrdersFbsApi(config);
 Console.WriteLine(api.GetV3OrdersNew());
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbs::apis::{configuration::Configuration, orders_fbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_fbs_api::get_v3_orders_new(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

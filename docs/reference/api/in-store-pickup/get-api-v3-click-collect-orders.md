@@ -142,4 +142,17 @@ var api = new InStorePickupApi(config);
 Console.WriteLine(api.GetV3ClickCollectOrders(limit, next, dateFrom, dateTo));
 ```
 
+```rust [Rust]
+use wb_api_client::in_store_pickup::apis::{configuration::Configuration, in_store_pickup_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = in_store_pickup_api::get_v3_click_collect_orders(&cfg, limit, next, date_from, date_to).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

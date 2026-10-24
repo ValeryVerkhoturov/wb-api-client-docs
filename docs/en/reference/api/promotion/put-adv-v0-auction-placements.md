@@ -134,4 +134,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.PutV0AuctionPlacements(putV0AuctionPlacementsRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = promotion_api::put_v0_auction_placements(&cfg, put_v0_auction_placements_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -136,4 +136,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.PostV1FeedbacksOrderReturn(postV1FeedbacksOrderReturnRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = communications_api::post_v1_feedbacks_order_return(&cfg, post_v1_feedbacks_order_return_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -149,4 +149,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.GetV1SupplierOrders(dateFrom));
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = reports_api::get_v1_supplier_orders(&cfg, date_from, flag).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

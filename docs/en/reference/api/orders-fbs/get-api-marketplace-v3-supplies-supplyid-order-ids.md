@@ -138,4 +138,17 @@ var api = new OrdersFbsApi(config);
 Console.WriteLine(api.GetV3SuppliesSupplyIdOrderIds(supplyId));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbs::apis::{configuration::Configuration, orders_fbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_fbs_api::get_v3_supplies_supply_id_order_ids(&cfg, supply_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

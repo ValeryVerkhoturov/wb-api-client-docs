@@ -134,4 +134,17 @@ var api = new RatesApi(config);
 Console.WriteLine(api.GetV1TariffsBox(date));
 ```
 
+```rust [Rust]
+use wb_api_client::rates::apis::{configuration::Configuration, rates_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = rates_api::get_v1_tariffs_box(&cfg, date).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

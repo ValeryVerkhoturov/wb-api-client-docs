@@ -143,4 +143,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV2SearchReportTableDetails(tableDetailsRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = analytics_api::post_v2_search_report_table_details(&cfg, table_details_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

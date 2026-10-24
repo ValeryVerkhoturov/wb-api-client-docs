@@ -144,4 +144,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.GetV1Pins());
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = communications_api::get_v1_pins(&cfg, state, pin_on, imt_id, nm_id, feedback_id, date_from, date_to, next, limit).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

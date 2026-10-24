@@ -135,4 +135,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.GetV0Pause(id));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = promotion_api::get_v0_pause(&cfg, id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

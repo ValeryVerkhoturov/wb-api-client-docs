@@ -138,4 +138,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.GetV1AnalyticsBrandShareParentSubjects(brand, dateFrom, dateTo));
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = reports_api::get_v1_analytics_brand_share_parent_subjects(&cfg, brand, date_from, date_to, locale).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

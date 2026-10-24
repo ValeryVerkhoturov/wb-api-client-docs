@@ -157,4 +157,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV3MediaSave(postV3MediaSaveRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::post_v3_media_save(&cfg, post_v3_media_save_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

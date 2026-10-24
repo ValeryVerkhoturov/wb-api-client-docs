@@ -154,4 +154,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2CardsUpload());
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::post_v2_cards_upload(&cfg, post_v2_cards_upload_request_inner).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

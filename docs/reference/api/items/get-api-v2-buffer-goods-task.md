@@ -134,4 +134,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.GetV2BufferGoodsTask(limit, uploadID));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::get_v2_buffer_goods_task(&cfg, limit, upload_id, offset).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

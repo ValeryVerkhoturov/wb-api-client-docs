@@ -135,4 +135,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV2ItemRating(itemRatingRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = analytics_api::post_v2_item_rating(&cfg, item_rating_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

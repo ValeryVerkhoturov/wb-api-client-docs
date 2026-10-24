@@ -136,4 +136,17 @@ var api = new OrdersFbsApi(config);
 Console.WriteLine(api.PatchV3OrdersOrderIdCancel(orderId));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbs::apis::{configuration::Configuration, orders_fbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_fbs_api::patch_v3_orders_order_id_cancel(&cfg, order_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

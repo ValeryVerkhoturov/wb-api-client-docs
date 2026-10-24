@@ -133,4 +133,17 @@ var api = new OrdersDbwApi(config);
 Console.WriteLine(api.PatchV3DbwOrdersOrderIdConfirm(orderId));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_dbw::apis::{configuration::Configuration, orders_dbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = orders_dbw_api::patch_v3_dbw_orders_order_id_confirm(&cfg, order_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

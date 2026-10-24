@@ -143,4 +143,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.GetV2DirectoryCountries());
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::get_v2_directory_countries(&cfg, locale).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

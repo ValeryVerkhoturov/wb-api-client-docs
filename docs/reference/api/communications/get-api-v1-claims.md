@@ -129,4 +129,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.GetV1Claims(isArchive));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = communications_api::get_v1_claims(&cfg, is_archive, id, limit, offset, nm_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

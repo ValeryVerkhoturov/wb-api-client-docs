@@ -133,4 +133,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.PostV0Rename());
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = promotion_api::post_v0_rename(&cfg, post_v0_rename_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

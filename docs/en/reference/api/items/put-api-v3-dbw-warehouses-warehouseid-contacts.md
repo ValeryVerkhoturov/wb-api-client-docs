@@ -141,4 +141,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PutV3DbwWarehousesWarehouseIdContacts(warehouseId, storeContactRequestBody));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::put_v3_dbw_warehouses_warehouse_id_contacts(&cfg, warehouse_id, store_contact_request_body).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

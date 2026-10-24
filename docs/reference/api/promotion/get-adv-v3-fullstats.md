@@ -140,4 +140,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.GetV3Fullstats(ids, beginDate, endDate));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = promotion_api::get_v3_fullstats(&cfg, ids, begin_date, end_date).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

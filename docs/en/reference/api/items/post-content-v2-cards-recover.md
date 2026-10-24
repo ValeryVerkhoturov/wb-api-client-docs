@@ -135,4 +135,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2CardsRecover(postV2CardsDeleteTrashRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::post_v2_cards_recover(&cfg, post_v2_cards_delete_trash_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

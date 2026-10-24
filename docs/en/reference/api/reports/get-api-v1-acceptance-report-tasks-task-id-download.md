@@ -137,4 +137,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.GetV1AcceptanceReportTasksTaskIdDownload(taskId));
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = reports_api::get_v1_acceptance_report_tasks_task_id_download(&cfg, task_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

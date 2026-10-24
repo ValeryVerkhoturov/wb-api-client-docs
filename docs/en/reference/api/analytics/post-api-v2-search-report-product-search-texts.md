@@ -140,4 +140,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV2SearchReportProductSearchTexts(itemSearchTextsRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = analytics_api::post_v2_search_report_product_search_texts(&cfg, item_search_texts_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

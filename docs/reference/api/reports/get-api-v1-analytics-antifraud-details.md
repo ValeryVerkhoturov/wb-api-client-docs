@@ -134,4 +134,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.GetV1AnalyticsAntifraudDetails());
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = reports_api::get_v1_analytics_antifraud_details(&cfg, date).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -144,4 +144,17 @@ var api = new CommunicationsApi(config);
 Console.WriteLine(api.GetV1FeedbacksArchive(take, skip));
 ```
 
+```rust [Rust]
+use wb_api_client::communications::apis::{configuration::Configuration, communications_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = communications_api::get_v1_feedbacks_archive(&cfg, take, skip, nm_id, order).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

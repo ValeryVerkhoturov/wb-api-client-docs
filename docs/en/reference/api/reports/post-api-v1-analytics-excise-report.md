@@ -134,4 +134,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.PostV1AnalyticsExciseReport(dateFrom, dateTo));
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = reports_api::post_v1_analytics_excise_report(&cfg, date_from, date_to, excise_report_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

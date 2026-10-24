@@ -138,4 +138,17 @@ var api = new OrdersFbsApi(config);
 Console.WriteLine(api.PutV3OrdersOrderIdMetaImei(orderId, putV3OrdersOrderIdMetaImeiRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbs::apis::{configuration::Configuration, orders_fbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_fbs_api::put_v3_orders_order_id_meta_imei(&cfg, order_id, put_v3_orders_order_id_meta_imei_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

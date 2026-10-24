@@ -163,4 +163,17 @@ var api = new OrdersFbwApi(config);
 Console.WriteLine(api.GetV1SuppliesSupplyIdDiscrepanciesQuantity(supplyId));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbw::apis::{configuration::Configuration, orders_fbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = orders_fbw_api::get_v1_supplies_supply_id_discrepancies_quantity(&cfg, supply_id).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

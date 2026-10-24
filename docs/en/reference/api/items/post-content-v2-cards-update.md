@@ -165,4 +165,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2CardsUpdate());
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::post_v2_cards_update(&cfg, post_v2_cards_update_request_inner).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -135,4 +135,17 @@ var api = new OrdersDbwApi(config);
 Console.WriteLine(api.PutV3DbwOrdersOrderIdMetaImei(orderId, putV3DbwOrdersOrderIdMetaImeiRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_dbw::apis::{configuration::Configuration, orders_dbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = orders_dbw_api::put_v3_dbw_orders_order_id_meta_imei(&cfg, order_id, put_v3_dbw_orders_order_id_meta_imei_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

@@ -148,4 +148,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV3SalesFunnelProductsHistory(itemHistoryRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = analytics_api::post_v3_sales_funnel_products_history(&cfg, item_history_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

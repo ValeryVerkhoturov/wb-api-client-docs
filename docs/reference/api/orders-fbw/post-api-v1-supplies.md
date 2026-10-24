@@ -140,4 +140,17 @@ var api = new OrdersFbwApi(config);
 Console.WriteLine(api.PostV1Supplies(modelsSuppliesFiltersRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbw::apis::{configuration::Configuration, orders_fbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = orders_fbw_api::post_v1_supplies(&cfg, models_period_supplies_filters_request, limit, offset).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

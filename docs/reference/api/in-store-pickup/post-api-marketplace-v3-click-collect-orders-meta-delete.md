@@ -143,4 +143,17 @@ var api = new InStorePickupApi(config);
 Console.WriteLine(api.PostV3ClickCollectOrdersMetaDelete(apiOrdersMetaDeleteRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::in_store_pickup::apis::{configuration::Configuration, in_store_pickup_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = in_store_pickup_api::post_v3_click_collect_orders_meta_delete(&cfg, api_period_orders_meta_delete_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

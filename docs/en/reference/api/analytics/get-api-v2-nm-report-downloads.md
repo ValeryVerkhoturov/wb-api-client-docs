@@ -134,4 +134,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.GetV2NmReportDownloads());
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = analytics_api::get_v2_nm_report_downloads(&cfg, filter_left_square_bracket_download_ids_right_square_bracket).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

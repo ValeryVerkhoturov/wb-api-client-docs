@@ -133,4 +133,17 @@ var api = new FinancesApi(config);
 Console.WriteLine(api.PostV1DocumentsDownloadAll());
 ```
 
+```rust [Rust]
+use wb_api_client::finances::apis::{configuration::Configuration, finances_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = finances_api::post_v1_documents_download_all(&cfg, request_download).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

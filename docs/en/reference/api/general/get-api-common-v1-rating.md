@@ -130,4 +130,17 @@ var api = new GeneralApi(config);
 Console.WriteLine(api.GetV1Rating());
 ```
 
+```rust [Rust]
+use wb_api_client::general::apis::{configuration::Configuration, general_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = general_api::get_v1_rating(&cfg).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

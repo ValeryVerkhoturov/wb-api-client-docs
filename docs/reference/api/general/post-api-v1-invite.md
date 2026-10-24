@@ -141,4 +141,17 @@ var api = new GeneralApi(config);
 Console.WriteLine(api.PostV1Invite(createInviteRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::general::apis::{configuration::Configuration, general_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = general_api::post_v1_invite(&cfg, create_invite_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

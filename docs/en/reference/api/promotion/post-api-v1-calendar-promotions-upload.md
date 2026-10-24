@@ -132,4 +132,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.PostV1CalendarPromotionsUpload(postV1CalendarPromotionsUploadRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = promotion_api::post_v1_calendar_promotions_upload(&cfg, post_v1_calendar_promotions_upload_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

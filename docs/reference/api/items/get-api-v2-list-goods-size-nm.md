@@ -137,4 +137,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.GetV2ListGoodsSizeNm(limit, nmID));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = items_api::get_v2_list_goods_size_nm(&cfg, limit, nm_id, offset).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

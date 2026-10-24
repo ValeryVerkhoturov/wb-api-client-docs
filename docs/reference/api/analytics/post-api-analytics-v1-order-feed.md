@@ -144,4 +144,17 @@ var api = new AnalyticsApi(config);
 Console.WriteLine(api.PostV1OrderFeed());
 ```
 
+```rust [Rust]
+use wb_api_client::analytics::apis::{configuration::Configuration, analytics_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = analytics_api::post_v1_order_feed(&cfg, order_feed_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

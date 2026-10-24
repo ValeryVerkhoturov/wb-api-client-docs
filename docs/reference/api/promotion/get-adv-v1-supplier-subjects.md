@@ -134,4 +134,17 @@ var api = new PromotionApi(config);
 Console.WriteLine(api.GetV1SupplierSubjects());
 ```
 
+```rust [Rust]
+use wb_api_client::promotion::apis::{configuration::Configuration, promotion_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = promotion_api::get_v1_supplier_subjects(&cfg, payment_type).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

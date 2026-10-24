@@ -142,4 +142,17 @@ var api = new OrdersFbwApi(config);
 Console.WriteLine(api.DeleteV1DraftsDraftIdItems(draftId, modelsDraftDeleteitemsRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::orders_fbw::apis::{configuration::Configuration, orders_fbw_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = orders_fbw_api::delete_v1_drafts_draft_id_items(&cfg, draft_id, models_period_draft_deleteitems_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

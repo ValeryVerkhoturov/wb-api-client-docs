@@ -141,4 +141,17 @@ var api = new DbsApi(config);
 Console.WriteLine(api.PostV3DbsOrdersMetaDetails(apiOrdersRequestV2));
 ```
 
+```rust [Rust]
+use wb_api_client::dbs::apis::{configuration::Configuration, dbs_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = dbs_api::post_v3_dbs_orders_meta_details(&cfg, api_period_orders_request_v2).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

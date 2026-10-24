@@ -136,4 +136,17 @@ var api = new FinancesApi(config);
 Console.WriteLine(api.PostV1SalesReportsList(salesReportListReq));
 ```
 
+```rust [Rust]
+use wb_api_client::finances::apis::{configuration::Configuration, finances_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = finances_api::post_v1_sales_reports_list(&cfg, sales_report_list_req).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

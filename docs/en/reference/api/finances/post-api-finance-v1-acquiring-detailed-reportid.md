@@ -142,4 +142,17 @@ var api = new FinancesApi(config);
 Console.WriteLine(api.PostV1AcquiringDetailedReportId(reportId, financialReportsDetailedReportIdReq));
 ```
 
+```rust [Rust]
+use wb_api_client::finances::apis::{configuration::Configuration, finances_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = finances_api::post_v1_acquiring_detailed_report_id(&cfg, report_id, financial_reports_detailed_report_id_req).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

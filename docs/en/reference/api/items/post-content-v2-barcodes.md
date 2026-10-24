@@ -141,4 +141,17 @@ var api = new ItemsApi(config);
 Console.WriteLine(api.PostV2Barcodes(postV2BarcodesRequest));
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let result = items_api::post_v2_barcodes(&cfg, post_v2_barcodes_request).await;
+    println!("{:#?}", result);
+}
+```
+
 :::

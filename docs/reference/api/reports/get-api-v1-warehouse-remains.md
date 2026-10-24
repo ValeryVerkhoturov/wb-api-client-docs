@@ -145,4 +145,17 @@ var api = new ReportsApi(config);
 Console.WriteLine(api.GetV1WarehouseRemains());
 ```
 
+```rust [Rust]
+use wb_api_client::reports::apis::{configuration::Configuration, reports_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<ваш JWT WB>");
+
+    let result = reports_api::get_v1_warehouse_remains(&cfg, locale, group_by_brand, group_by_subject, group_by_sa, group_by_nm, group_by_barcode, group_by_size, filter_pics, filter_volume).await;
+    println!("{:#?}", result);
+}
+```
+
 :::
