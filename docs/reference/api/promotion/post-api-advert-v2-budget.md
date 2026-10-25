@@ -97,7 +97,7 @@ import io.github.valeryverkhoturov.wbapi.promotion.SecretString;
 import io.github.valeryverkhoturov.wbapi.promotion.api.PromotionApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 PromotionApi api = new PromotionApi(client);
 
 System.out.println(api.postV2Budget(v2BudgetRequest));

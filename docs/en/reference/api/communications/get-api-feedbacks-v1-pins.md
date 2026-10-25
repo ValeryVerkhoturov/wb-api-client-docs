@@ -104,7 +104,7 @@ import io.github.valeryverkhoturov.wbapi.communications.SecretString;
 import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.getV1Pins(state, pinOn, imtId, nmId, feedbackId, dateFrom, dateTo, next, limit));

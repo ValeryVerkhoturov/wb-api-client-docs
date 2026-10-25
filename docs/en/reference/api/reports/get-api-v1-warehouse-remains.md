@@ -103,7 +103,7 @@ import io.github.valeryverkhoturov.wbapi.reports.SecretString;
 import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.getV1WarehouseRemains(locale, groupByBrand, groupBySubject, groupBySa, groupByNm, groupByBarcode, groupBySize, filterPics, filterVolume));

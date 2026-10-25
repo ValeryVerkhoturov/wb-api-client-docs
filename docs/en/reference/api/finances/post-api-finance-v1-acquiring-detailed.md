@@ -95,7 +95,7 @@ import io.github.valeryverkhoturov.wbapi.finances.SecretString;
 import io.github.valeryverkhoturov.wbapi.finances.api.FinancesApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 FinancesApi api = new FinancesApi(client);
 
 System.out.println(api.postV1AcquiringDetailed(acquiringReportsDetailedReq));

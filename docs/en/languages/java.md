@@ -65,18 +65,18 @@ import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken("<your WB JWT>");
+client.setAccessToken("<your WB JWT>");
 
 ItemsApi api = new ItemsApi(client);
 ```
 
-`setBearerToken` takes a plain `String` and wraps it in the sub-module's `SecretString` internally — the token redacts under logging and debug dumps from that point on.
+`setAccessToken` takes a plain `String` and wraps it in the sub-module's `SecretString` internally — the token redacts under logging and debug dumps from that point on.
 
 ## One `SecretString` per sub-package — why?
 
 The wrapper is generated into each sub-package rather than shared across the whole library because openapi-generator emits fully isolated SDKs per spec — there is no shared "core" module. Consolidating would require an additional generator pass with cross-module coupling. The cost is a class per sub-package; the benefit is the client remains a pure openapi-generator output with only surgical patches.
 
-Practically you never touch them: `setBearerToken` wraps your plain string in the sub-module's own `SecretString` — `io.github.valeryverkhoturov.wbapi.items.SecretString` vs `.orders_fbs.SecretString` — automatically.
+Practically you never touch them: `setAccessToken` wraps your plain string in the sub-module's own `SecretString` — `io.github.valeryverkhoturov.wbapi.items.SecretString` vs `.orders_fbs.SecretString` — automatically.
 
 ## Custom OkHttp client
 
@@ -92,7 +92,7 @@ OkHttpClient http = new OkHttpClient.Builder()
     .build();
 
 ApiClient client = new ApiClient(http);
-client.setBearerToken(TOKEN);
+client.setAccessToken(TOKEN);
 ```
 
 ## Java 8 vs newer

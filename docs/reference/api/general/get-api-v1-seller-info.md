@@ -89,7 +89,7 @@ import io.github.valeryverkhoturov.wbapi.general.SecretString;
 import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV1SellerInfo());

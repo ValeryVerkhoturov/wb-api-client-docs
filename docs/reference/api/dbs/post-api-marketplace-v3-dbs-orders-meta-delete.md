@@ -104,7 +104,7 @@ import io.github.valeryverkhoturov.wbapi.dbs.SecretString;
 import io.github.valeryverkhoturov.wbapi.dbs.api.DbsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 DbsApi api = new DbsApi(client);
 
 System.out.println(api.postV3DbsOrdersMetaDelete(apiOrdersMetaDeleteRequest));

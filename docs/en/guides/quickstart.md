@@ -116,7 +116,7 @@ import io.github.valeryverkhoturov.wbapi.general.ApiClient;
 import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken("<your WB JWT>");
+client.setAccessToken("<your WB JWT>");
 GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.getV1SellerInfo());

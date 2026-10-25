@@ -95,7 +95,7 @@ import io.github.valeryverkhoturov.wbapi.in_store_pickup.SecretString;
 import io.github.valeryverkhoturov.wbapi.in_store_pickup.api.InStorePickupApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 InStorePickupApi api = new InStorePickupApi(client);
 
 System.out.println(api.postV3ClickCollectOrdersStatusReject(apiOrdersRequestV2));

@@ -88,7 +88,7 @@ import io.github.valeryverkhoturov.wbapi.orders_fbw.SecretString;
 import io.github.valeryverkhoturov.wbapi.orders_fbw.api.OrdersFbwApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 OrdersFbwApi api = new OrdersFbwApi(client);
 
 System.out.println(api.getV1Warehouses());

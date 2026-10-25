@@ -94,7 +94,7 @@ import io.github.valeryverkhoturov.wbapi.analytics.SecretString;
 import io.github.valeryverkhoturov.wbapi.analytics.api.AnalyticsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 AnalyticsApi api = new AnalyticsApi(client);
 
 System.out.println(api.getV2NmReportDownloads(filterDownloadIds));

@@ -64,7 +64,7 @@ import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken("<ваш JWT WB>");
+client.setAccessToken("<ваш JWT WB>");
 client.addDefaultHeader("X-Gateway-Token", "<креденшелы шлюза>");
 client.addDefaultHeader("X-Request-Source", "erp-sync");
 

@@ -97,7 +97,7 @@ import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.putV3WarehousesWarehouseId(warehouseId, putV3WarehousesWarehouseIdRequest));

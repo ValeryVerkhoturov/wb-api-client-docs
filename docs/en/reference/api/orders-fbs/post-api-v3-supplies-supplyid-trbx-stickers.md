@@ -104,7 +104,7 @@ import io.github.valeryverkhoturov.wbapi.orders_fbs.SecretString;
 import io.github.valeryverkhoturov.wbapi.orders_fbs.api.OrdersFbsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 OrdersFbsApi api = new OrdersFbsApi(client);
 
 System.out.println(api.postV3SuppliesSupplyIdTrbxStickers(supplyId, type, postV3SuppliesSupplyIdTrbxStickersRequest));

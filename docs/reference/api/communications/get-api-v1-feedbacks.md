@@ -108,7 +108,7 @@ import io.github.valeryverkhoturov.wbapi.communications.SecretString;
 import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.getV1Feedbacks(isAnswered, take, skip, nmId, order, dateFrom, dateTo));

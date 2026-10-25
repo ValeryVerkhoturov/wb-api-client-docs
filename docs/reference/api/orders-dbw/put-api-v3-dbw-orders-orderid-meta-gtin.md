@@ -94,7 +94,7 @@ import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.putV3DbwOrdersOrderIdMetaGtin(orderId, putV3DbwOrdersOrderIdMetaGtinRequest));

@@ -108,7 +108,7 @@ import io.github.valeryverkhoturov.wbapi.dbs.SecretString;
 import io.github.valeryverkhoturov.wbapi.dbs.api.DbsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 DbsApi api = new DbsApi(client);
 
 System.out.println(api.postV3DbsOrdersStickers(type, width, height, postV3DbsOrdersStickersRequest));

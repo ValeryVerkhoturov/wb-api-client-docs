@@ -117,7 +117,7 @@ import io.github.valeryverkhoturov.wbapi.items.SecretString;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 ItemsApi api = new ItemsApi(client);
 
 System.out.println(api.postV3MediaSave(postV3MediaSaveRequest));

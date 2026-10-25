@@ -101,7 +101,7 @@ import io.github.valeryverkhoturov.wbapi.general.SecretString;
 import io.github.valeryverkhoturov.wbapi.general.api.GeneralApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 GeneralApi api = new GeneralApi(client);
 
 System.out.println(api.postV1Invite(createInviteRequest));

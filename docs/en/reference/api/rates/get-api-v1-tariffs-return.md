@@ -91,7 +91,7 @@ import io.github.valeryverkhoturov.wbapi.rates.SecretString;
 import io.github.valeryverkhoturov.wbapi.rates.api.RatesApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 RatesApi api = new RatesApi(client);
 
 System.out.println(api.getV1TariffsReturn(date));

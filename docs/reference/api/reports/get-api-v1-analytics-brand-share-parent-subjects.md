@@ -98,7 +98,7 @@ import io.github.valeryverkhoturov.wbapi.reports.SecretString;
 import io.github.valeryverkhoturov.wbapi.reports.api.ReportsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<ваш JWT WB>"));
+client.setAccessToken(new SecretString("<ваш JWT WB>"));
 ReportsApi api = new ReportsApi(client);
 
 System.out.println(api.getV1AnalyticsBrandShareParentSubjects(brand, dateFrom, dateTo, locale));

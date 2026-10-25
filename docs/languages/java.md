@@ -65,18 +65,18 @@ import io.github.valeryverkhoturov.wbapi.items.ApiClient;
 import io.github.valeryverkhoturov.wbapi.items.api.ItemsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken("<ваш JWT WB>");
+client.setAccessToken("<ваш JWT WB>");
 
 ItemsApi api = new ItemsApi(client);
 ```
 
-`setBearerToken` принимает обычную `String` и оборачивает её в `SecretString` внутри клиента — конструировать обёртку руками не нужно, а в логах и дампах токен остаётся замаскированным.
+`setAccessToken` принимает обычную `String` и оборачивает её в `SecretString` внутри клиента — конструировать обёртку руками не нужно, а в логах и дампах токен остаётся замаскированным.
 
 ## Один `SecretString` на под-пакет — почему
 
 Обёртка генерируется в каждый под-пакет, а не расшарена на всю библиотеку, потому что openapi-generator создаёт полностью изолированные SDK на каждую спецификацию — общего «core»-модуля нет. Объединение потребовало бы дополнительного прохода генерации с межмодульными зависимостями. Цена — один класс на под-пакет; плюс в том, что клиент остаётся чистым выхлопом openapi-generator с минимальными точечными правками.
 
-На практике это незаметно: `setBearerToken` оборачивает строку в `SecretString` своего под-пакета сам, поэтому импортировать и конструировать обёртку не требуется.
+На практике это незаметно: `setAccessToken` оборачивает строку в `SecretString` своего под-пакета сам, поэтому импортировать и конструировать обёртку не требуется.
 
 ## Свой OkHttp-клиент
 
@@ -92,7 +92,7 @@ OkHttpClient http = new OkHttpClient.Builder()
     .build();
 
 ApiClient client = new ApiClient(http);
-client.setBearerToken(TOKEN);
+client.setAccessToken(TOKEN);
 ```
 
 ## Java 8 vs новее

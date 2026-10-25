@@ -93,7 +93,7 @@ import io.github.valeryverkhoturov.wbapi.orders_dbw.SecretString;
 import io.github.valeryverkhoturov.wbapi.orders_dbw.api.OrdersDbwApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 OrdersDbwApi api = new OrdersDbwApi(client);
 
 System.out.println(api.patchV3DbwOrdersOrderIdConfirm(orderId));

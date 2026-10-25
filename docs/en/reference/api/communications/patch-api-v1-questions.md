@@ -103,7 +103,7 @@ import io.github.valeryverkhoturov.wbapi.communications.SecretString;
 import io.github.valeryverkhoturov.wbapi.communications.api.CommunicationsApi;
 
 ApiClient client = new ApiClient();
-client.setBearerToken(new SecretString("<your WB JWT>"));
+client.setAccessToken(new SecretString("<your WB JWT>"));
 CommunicationsApi api = new CommunicationsApi(client);
 
 System.out.println(api.patchV1Questions(patchV1QuestionsRequest));
