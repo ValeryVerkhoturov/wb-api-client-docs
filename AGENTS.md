@@ -6,7 +6,7 @@ Guidance for AI coding agents working in this repository.
 
 A [VitePress](https://vitepress.dev) documentation site for
 [wb-api-client](https://github.com/ValeryVerkhoturov/wb-api-client) — auto-generated
-SDKs for the Wildberries Seller API in Python, TypeScript, Go, Java, PHP, OneScript, and C#.
+SDKs for the Wildberries Seller API in Python, TypeScript, Go, Java, PHP, OneScript, C#, and Rust.
 Deployed to GitHub Pages on every push to `main` (`.github/workflows/deploy.yml`).
 
 ## Commands
@@ -72,7 +72,7 @@ mirrored paths are what make that work, so keep them identical below `en/`.
   extracted (`page-meta.ts`) as the page description/og:description, so it must stand alone.
 - Multi-language code samples use VitePress `::: code-group` blocks with one fenced block
   per language (see `docs/guides/quickstart.md` for the pattern). Language order:
-  Python, TypeScript, Go, Java, PHP, OneScript, C#.
+  Python, TypeScript, Go, Java, PHP, OneScript, C#, Rust.
 - Set frontmatter `title` when the H1 is long; a bare `description` in frontmatter
   overrides the extracted lead.
 - Code repo links point at `https://github.com/ValeryVerkhoturov/wb-api-client`

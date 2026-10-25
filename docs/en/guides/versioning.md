@@ -1,6 +1,6 @@
 # Versioning
 
-All seven language packages share one version string per release: **`1.YYYYMMDD.N`**.
+All eight language packages share one version string per release: **`1.YYYYMMDD.N`**.
 
 ## Format
 
@@ -22,7 +22,7 @@ n="$(git tag --list "v1.${today}.*" | wc -l | tr -d ' ')"
 version="1.${today}.${n}"
 ```
 
-The resulting string goes into every language's manifest — `pyproject.toml`, `package.json`, `go.mod` tag, `pom.xml`, `composer.json` — verbatim. No language sees a translated form.
+The resulting string goes into every language's manifest — `pyproject.toml`, `package.json`, `go.mod` tag, `pom.xml`, `composer.json`, `Cargo.toml` — verbatim. No language sees a translated form.
 
 ## What "latest" resolves to
 
@@ -56,6 +56,10 @@ opm install wb-api-client
 
 ```bash [C#]
 dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
+```bash [Rust]
+cargo add wb-api-client
 ```
 
 :::
@@ -92,6 +96,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 
 ```xml [C#]
 <PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="1.20260926.0" />
+```
+
+```toml [Rust]
+wb-api-client = "=1.20260926.0"
 ```
 
 :::

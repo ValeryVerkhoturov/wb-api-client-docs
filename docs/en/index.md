@@ -5,7 +5,7 @@ title: SDKs for the Wildberries Seller API
 hero:
   name: wb-api-client
   text: Wildberries API, in your language.
-  tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, PHP, OneScript (1С) and C#. One version across every ecosystem. Bearer tokens redacted by default.
+  tagline: Auto-generated SDKs for Python, TypeScript, Go, Java, PHP, OneScript (1С), C# and Rust. One version across every ecosystem. Bearer tokens redacted by default.
   actions:
     - theme: brand
       text: Quickstart
@@ -20,16 +20,16 @@ features:
   - title: Secret redaction, built in
     details: Your bearer JWT is wrapped in a per-language SecretString so it stays out of logs, prints, and debuggers unless you explicitly ask for the raw value.
   - title: Daily upstream sync
-    details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, Packagist, hub.oscript.io and NuGet automatically — with a matching git tag.
-  - title: One version, seven ecosystems
-    details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer / opm / dotnet add all pick the latest without prerelease dance.
+    details: A CI job re-downloads the WB specs every morning. If anything changed, a new release is cut and pushed to PyPI, npm, Go, Maven Central, Packagist, hub.oscript.io, NuGet and crates.io automatically — with a matching git tag.
+  - title: One version, eight ecosystems
+    details: 1.YYYYMMDD.N — a valid stable semver in every language. pip / npm / go get / mvn / composer / opm / dotnet add / cargo add all pick the latest without prerelease dance.
   - title: Bearer auth, everywhere
     details: The upstream YAMLs conflate an API-key scheme with a bearer JWT. A post-processing pass strips that duplication so every generated client exposes exactly one auth path.
   - title: Deterministic regeneration
     details: Pinned openapi-generator + formatter versions + hidden generation timestamps. PRs that break determinism are caught by a per-PR regen check.
 ---
 
-wb-api-client is a set of client libraries for the Wildberries Seller API: 13 categories (items, orders across FBS / DBW / FBW / DBS, promotion, analytics, finances and the rest) in seven languages, sharing one version and rebuilt from the official WB specs every day.
+wb-api-client is a set of client libraries for the Wildberries Seller API: 13 categories (items, orders across FBS / DBW / FBW / DBS, promotion, analytics, finances and the rest) in eight languages, sharing one version and rebuilt from the official WB specs every day.
 
 ## Install
 
@@ -65,6 +65,10 @@ opm install wb-api-client
 
 ```bash [C#]
 dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
+```bash [Rust]
+cargo add wb-api-client
 ```
 
 :::
@@ -133,9 +137,16 @@ config.SetAccessToken("<your WB JWT>");
 var api = new ItemsApi(config);
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+let mut cfg = Configuration::new();
+cfg.set_access_token("<your WB JWT>");
+```
+
 :::
 
-Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php) · [OneScript](/en/languages/onescript) · [C#](/en/languages/csharp).
+Full tour of every sub-module, per-language: [Python](/en/languages/python) · [TypeScript](/en/languages/typescript) · [Go](/en/languages/go) · [Java](/en/languages/java) · [PHP](/en/languages/php) · [OneScript](/en/languages/onescript) · [C#](/en/languages/csharp) · [Rust](/en/languages/rust).
 
 <p align="center">
   <img src="/pics/blueberry-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">

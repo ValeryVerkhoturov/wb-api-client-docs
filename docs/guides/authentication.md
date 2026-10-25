@@ -35,6 +35,7 @@
 | PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessToken(string)` | `var_dump($config)` → `'<REDACTED>'`                      | `$config->getAccessToken()` |
 | C#         | `SecretString` в каждом пространстве имён                                                    | `Configuration.SetAccessToken(…)`       | `Console.WriteLine(new SecretString("…"))` → `<REDACTED>` | `.ExposeSecret()`           |
 | OneScript  | класс `СекретнаяСтрока`                                                                      | `Конфигурация.УстановитьТокен(…)`       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`               |
+| Rust       | `SecretString` в каждом модуле                                                               | `Configuration::set_access_token(…)`    | `println!("{s:?}")` / `{}` → `<REDACTED>`                 | `.expose_secret()`          |
 
 ### Зачем это нужно
 
@@ -98,6 +99,13 @@ echo $s->exposeSecret();                      // eyJhbGciOi...  (по запро
 var s = new SecretString("eyJhbGciOi...");
 Console.WriteLine($"{s}");                    // <REDACTED>
 Console.WriteLine(s.ExposeSecret());          // eyJhbGciOi...  (по запросу)
+```
+
+```rust [Rust]
+use wb_api_client::items::apis::configuration::SecretString;
+let s = SecretString::new("eyJhbGciOi...");
+println!("{s:?}");                            // <REDACTED>
+println!("{}", s.expose_secret());            // eyJhbGciOi...  (по запросу)
 ```
 
 :::

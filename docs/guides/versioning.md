@@ -1,6 +1,6 @@
 # Версионирование
 
-Все семь языковых пакетов делят одну версионную строку на релиз: **`1.YYYYMMDD.N`**.
+Все восемь языковых пакетов делят одну версионную строку на релиз: **`1.YYYYMMDD.N`**.
 
 ## Формат
 
@@ -22,7 +22,7 @@ n="$(git tag --list "v1.${today}.*" | wc -l | tr -d ' ')"
 version="1.${today}.${n}"
 ```
 
-Полученная строка вставляется в каждый языковой манифест — `pyproject.toml`, `package.json`, тег `go.mod`, `pom.xml`, `composer.json` — как есть. Никакой язык не видит переведённой формы.
+Полученная строка вставляется в каждый языковой манифест — `pyproject.toml`, `package.json`, тег `go.mod`, `pom.xml`, `composer.json`, `Cargo.toml` — как есть. Никакой язык не видит переведённой формы.
 
 ## Что резолвится как «последняя»
 
@@ -56,6 +56,10 @@ opm install wb-api-client
 
 ```bash [C#]
 dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
+```bash [Rust]
+cargo add wb-api-client
 ```
 
 :::
@@ -92,6 +96,10 @@ go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 
 ```xml [C#]
 <PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="1.20260926.0" />
+```
+
+```toml [Rust]
+wb-api-client = "=1.20260926.0"
 ```
 
 :::

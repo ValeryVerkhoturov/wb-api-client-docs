@@ -53,6 +53,10 @@ opm install wb-api-client
 dotnet add package ValeryVerkhoturov.WbApiClient
 ```
 
+```bash [Rust]
+cargo add wb-api-client
+```
+
 :::
 
 `LATEST` for Java: check the [releases page](https://github.com/ValeryVerkhoturov/wb-api-client/releases) for the current `1.YYYYMMDD.N` version and paste it in.
@@ -153,6 +157,19 @@ config.SetAccessToken("<your WB JWT>");
 var api = new GeneralApi(config);
 
 Console.WriteLine(api.GetV1SellerInfo());
+```
+
+```rust [Rust]
+use wb_api_client::general::apis::{configuration::Configuration, general_api};
+
+#[tokio::main]
+async fn main() {
+    let mut cfg = Configuration::new();
+    cfg.set_access_token("<your WB JWT>");
+
+    let info = general_api::get_v1_seller_info(&cfg).await;
+    println!("{:#?}", info);
+}
 ```
 
 :::

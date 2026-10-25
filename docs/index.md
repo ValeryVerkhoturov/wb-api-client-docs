@@ -5,7 +5,7 @@ title: SDK для Wildberries Seller API
 hero:
   name: wb-api-client
   text: Wildberries API на вашем языке.
-  tagline: Автоматически сгенерированные SDK для Python, TypeScript, Go, Java, PHP, OneScript (1С) и C#. Одна версия для всех экосистем. Bearer-токен маскируется по умолчанию.
+  tagline: Автоматически сгенерированные SDK для Python, TypeScript, Go, Java, PHP, OneScript (1С), C# и Rust. Одна версия для всех экосистем. Bearer-токен маскируется по умолчанию.
   actions:
     - theme: brand
       text: Быстрый старт
@@ -20,16 +20,16 @@ features:
   - title: Маскирование секретов из коробки
     details: Ваш bearer-токен обёрнут в языко-специфичный SecretString, поэтому он не попадает в логи, print, дампы отладчика и Sentry, пока вы явно не запросите значение.
   - title: Ежедневная синхронизация с апстримом
-    details: CI-задача каждый день скачивает спецификации WB. Если что-то изменилось, автоматически публикуется новый релиз на PyPI, npm, Go, Maven Central, Packagist, hub.oscript.io и NuGet — с соответствующим git-тегом.
-  - title: Одна версия, семь экосистем
-    details: 1.YYYYMMDD.N — валидный стабильный semver в каждом языке. pip / npm / go get / mvn / composer / opm / dotnet add подхватывают последнюю версию без прелиз-плясок.
+    details: CI-задача каждый день скачивает спецификации WB. Если что-то изменилось, автоматически публикуется новый релиз на PyPI, npm, Go, Maven Central, Packagist, hub.oscript.io, NuGet и crates.io — с соответствующим git-тегом.
+  - title: Одна версия, восемь экосистем
+    details: 1.YYYYMMDD.N — валидный стабильный semver в каждом языке. pip / npm / go get / mvn / composer / opm / dotnet add / cargo add подхватывают последнюю версию без прелиз-плясок.
   - title: Bearer-авторизация везде
     details: Апстрим-YAML путает apiKey-схему с bearer JWT. Пост-обработка убирает дублирование, и в каждом сгенерированном клиенте остаётся ровно один способ авторизации.
   - title: Детерминированная генерация
     details: Зафиксированные версии openapi-generator и форматтеров, скрытые метки времени. Проверка на PR перегенерирует всё с нуля и падает, если результат отличается.
 ---
 
-wb-api-client — клиентские библиотеки для Wildberries Seller API: 13 категорий (товары, заказы FBS / DBW / FBW / DBS, продвижение, аналитика, финансы и остальные) на семи языках, с единой версией и ежедневной пересборкой по официальным спецификациям WB.
+wb-api-client — клиентские библиотеки для Wildberries Seller API: 13 категорий (товары, заказы FBS / DBW / FBW / DBS, продвижение, аналитика, финансы и остальные) на восьми языках, с единой версией и ежедневной пересборкой по официальным спецификациям WB.
 
 ## Установка
 
@@ -65,6 +65,10 @@ opm install wb-api-client
 
 ```bash [C#]
 dotnet add package ValeryVerkhoturov.WbApiClient
+```
+
+```bash [Rust]
+cargo add wb-api-client
 ```
 
 :::
@@ -133,9 +137,16 @@ config.SetAccessToken("<ваш JWT WB>");
 var api = new ItemsApi(config);
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::{configuration::Configuration, items_api};
+
+let mut cfg = Configuration::new();
+cfg.set_access_token("<ваш JWT WB>");
+```
+
 :::
 
-Подробно по каждому языку и всем 13 под-модулям: [Python](/languages/python) · [TypeScript](/languages/typescript) · [Go](/languages/go) · [Java](/languages/java) · [PHP](/languages/php) · [OneScript](/languages/onescript) · [C#](/languages/csharp).
+Подробно по каждому языку и всем 13 под-модулям: [Python](/languages/python) · [TypeScript](/languages/typescript) · [Go](/languages/go) · [Java](/languages/java) · [PHP](/languages/php) · [OneScript](/languages/onescript) · [C#](/languages/csharp) · [Rust](/languages/rust).
 
 <p align="center">
   <img src="/pics/blueberry-ascii-animated.webp" style="height: 200px; width: auto; max-width: 100%; object-fit: contain" alt="wb-api-client mascot">

@@ -10,7 +10,7 @@ const RULE = "#d8d3c6";
 const ACCENT = "#c2381c";
 
 const RUNHEAD = "Wildberries Seller API · SDK";
-const LANGS = "Python · TypeScript · Go · Java · PHP · OneScript · C#";
+const LANGS = "Python · TypeScript · Go · Java · PHP · OneScript · C# · Rust";
 
 export const SECTIONS: Record<string, { ru: string; en: string }> = {
   guides: { ru: "Руководства", en: "Guides" },

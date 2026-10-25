@@ -1,6 +1,6 @@
 # Custom headers
 
-Sometimes every request needs a header the WB spec knows nothing about: credentials for a gateway or corporate proxy sitting in front of the API, a trace identifier, an environment tag. Every client can add them — the mechanism differs per language, and all seven are covered below.
+Sometimes every request needs a header the WB spec knows nothing about: credentials for a gateway or corporate proxy sitting in front of the API, a trace identifier, an environment tag. Every client can add them — the mechanism differs per language, and all eight are covered below.
 
 ## What this is not for
 
@@ -113,6 +113,22 @@ config.DefaultHeaders["X-Request-Source"] = "erp-sync";
 var api = new ItemsApi(config);
 ```
 
+```rust [Rust]
+use wb_api_client::items::apis::configuration::Configuration;
+
+// Rust's Configuration has no header registry — the reqwest client holds them.
+let mut headers = reqwest::header::HeaderMap::new();
+headers.insert("X-Gateway-Token", "<gateway credentials>".parse().unwrap());
+headers.insert("X-Request-Source", "erp-sync".parse().unwrap());
+
+let mut cfg = Configuration::new();
+cfg.set_access_token("<your WB JWT>");
+cfg.client = reqwest::Client::builder()
+    .default_headers(headers)
+    .build()
+    .unwrap();
+```
+
 :::
 
 Headers live on a `Configuration` / `ApiClient` instance — and each sub-module has its own. If you use both `items` and `orders_fbs`, set the headers on both; see [Multiple sub-modules, one token](/en/guides/authentication#multiple-sub-modules-one-token).
@@ -130,6 +146,7 @@ Not every client can set a header for one call — it depends on what openapi-ge
 | PHP        | no                                                   |
 | C#         | no                                                   |
 | OneScript  | no — `Заголовки` are assembled inside the method     |
+| Rust       | no — methods take only `&Configuration`              |
 
 ::: code-group
 
@@ -147,7 +164,7 @@ const tags = await api.getV2Tags({
 
 :::
 
-In the other five languages, if a header is only needed on some requests, build a second client instance carrying its own headers and route those calls through it.
+In the other six languages, if a header is only needed on some requests, build a second client instance carrying its own headers and route those calls through it.
 
 ## Precedence
 
@@ -162,6 +179,7 @@ Each generator merges headers in its own order, and it is not always the intuiti
 | PHP        | request headers → Guzzle defaults                                                     | Guzzle client defaults apply only when the header is not already set                          |
 | C#         | `DefaultHeaders` → operation headers                                                  | replaces by name                                                                              |
 | OneScript  | `Accept`/`User-Agent`/`Authorization` → `ДополнительныеЗаголовки` → operation headers | `Соответствие.Вставить` replaces the value                                                    |
+| Rust       | client `default_headers` → operation headers                                          | a header set by the operation overrides the reqwest client default                            |
 
 The practical takeaway is the same everywhere: do not use the mechanisms on this page to override a header the client already sets. `User-Agent` has a dedicated setting in every language, and `Authorization` has the token setter.
 

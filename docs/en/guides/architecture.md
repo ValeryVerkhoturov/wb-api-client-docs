@@ -7,22 +7,22 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ```
 download-specs.py          →  swaggers/*.yaml         (raw upstream, checksummed)
 process-specs.py           →  swaggers/processed/     (13 passes)
-generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 7 langs)
+generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 8 langs)
     ├── inject-secrets.py          (SecretString wrapper per lang)
-    ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (canonicalize formatting)
+    ├── {black|prettier|gofmt|spotless|php-cs-fixer|rustfmt}   (canonicalize formatting)
     └── generate-readmes.py        (per-language README.md)
-     ↓ committed at v<version>, single tag covers all 7 languages
-publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
+     ↓ committed at v<version>, single tag covers all 8 languages
+publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet / crates.io
 generate-docs.py           →  wb-api-client-docs      (API reference: operation pages,
                                                         call snippets and data structures
-                                                        in 7 languages, RU/EN)
+                                                        in 8 languages, RU/EN)
 ```
 
 Every step is a plain Python file, so nothing is hidden behind opaque tooling.
 
 ## Why generate?
 
-WB ships OpenAPI specs. Hand-writing 13 clients × 7 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
+WB ships OpenAPI specs. Hand-writing 13 clients × 8 languages would drift within a week. The upside of generating from the spec is that every field, every enum, every response wrapper is exactly what WB documents — and re-syncing takes exactly zero effort once the pipeline exists.
 
 The downside is that generator output is generator output — sometimes ugly, sometimes carrying artifacts from spec quirks. Which is why there's a post-processing layer.
 
@@ -45,13 +45,13 @@ The downside is that generator output is generator output — sometimes ugly, so
 ## generate-clients.py
 
 - Runs `openapi-generator-cli` (pinned Docker image) per spec per language, into scratch directories.
-- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, for OneScript a class-name prefix (the language has no namespaces), and C# namespaces.
+- Splices each per-spec SDK into a unified per-language tree — Python packages nested under `wb_api_client.<slug>`, TypeScript subpath exports, Go sub-packages, Java sub-packages, PHP sub-namespaces, for OneScript a class-name prefix (the language has no namespaces), C# namespaces, and Rust modules of a single crate (`wb_api_client::<slug>`).
 - Runs `inject-secrets.py` to patch every generated `Configuration` / `ApiClient` with the language-native secret-string wrapper.
-- Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. All inside Docker — no host runtime needed.
-- Substitutes `__VERSION__` in top-level manifests (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`) with the passed version.
+- Runs the pinned formatter per language: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`, `cargo fmt` (rustfmt). All inside Docker — no host runtime needed.
+- Substitutes `__VERSION__` in top-level manifests (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`, `Cargo.toml`) with the passed version.
 - Runs `generate-readmes.py` to emit a per-language `README.md`.
 
-The result: `clients/{python,typescript,go,java,php,onescript,csharp}/` — seven ready-to-publish packages.
+The result: `clients/{python,typescript,go,java,php,onescript,csharp,rust}/` — eight ready-to-publish packages.
 
 ## Determinism
 
@@ -64,7 +64,7 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 
 ## Publishing
 
-`daily-check.yml` computes the version, regenerates, commits, tags. Then it fires 7 `workflow_dispatch` events at `publish.yml` — one per language — with the tag as the `ref` input. Each language branch of `publish.yml`:
+`daily-check.yml` computes the version, regenerates, commits, tags. Then it fires 8 `workflow_dispatch` events at `publish.yml` — one per language — with the tag as the `ref` input. Each language branch of `publish.yml`:
 
 - Python — OIDC → PyPI trusted publishing (`pypa/gh-action-pypi-publish`).
 - TypeScript — OIDC → npm trusted publishing (`npm publish --provenance`).
@@ -73,6 +73,7 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 - PHP — ping the Packagist update-package API.
 - OneScript — `opm build` then `opm push` to hub.oscript.io.
 - C# — `dotnet pack` then `dotnet nuget push` to NuGet.
+- Rust — `cargo publish` to crates.io (GitHub environment `crates-io`, toolchain pinned at 1.98).
 
 Separately, daily-check regenerates the API reference (`generate-docs.py` — operation pages, call snippets, and request/response data structures per language, with links to the WB specification) and pushes it to `wb-api-client-docs`, which deploys to GitHub Pages.
 
@@ -80,15 +81,16 @@ Reusable workflows (`workflow_call`) would be cleaner, but PyPI + npm trusted pu
 
 ## The sibling repositories
 
-Three languages live in their own repos, mounted here as git submodules:
+Four languages live in their own repos, mounted here as git submodules:
 
 - [`ValeryVerkhoturov/wb-api-client-php`](https://github.com/ValeryVerkhoturov/wb-api-client-php) → `clients/php`. Reason: Packagist requires `composer.json` at the ROOT of the crawled repo.
 - [`ValeryVerkhoturov/wb-api-client-1c`](https://github.com/ValeryVerkhoturov/wb-api-client-1c) → `clients/onescript`. So 1C users can clone just the client and install it from a tag.
 - [`ValeryVerkhoturov/wb-api-client-go`](https://github.com/ValeryVerkhoturov/wb-api-client-go) → `clients/go`. Reason: Go versions modules with repository tags, so the module must sit at a repo root (`go get github.com/ValeryVerkhoturov/wb-api-client-go`) — a subdirectory module would need `clients/go/`-prefixed tags and `go get` would fetch the whole monorepo.
+- [`ValeryVerkhoturov/wb-api-client-rust`](https://github.com/ValeryVerkhoturov/wb-api-client-rust) → `clients/rust`. Reason: crates.io links the crate to a dedicated repo, and git dependencies (`wb-api-client = { git = "…", tag = "vX.Y.Z" }`) resolve from the repo root.
 
-Every daily run commits and tags all three siblings BEFORE the main repo — otherwise the submodule pointers recorded in the release commit would reference commits their remotes have never seen, and a fresh `git clone --recurse-submodules` would fail.
+Every daily run commits and tags all four siblings BEFORE the main repo — otherwise the submodule pointers recorded in the release commit would reference commits their remotes have never seen, and a fresh `git clone --recurse-submodules` would fail.
 
-A fourth sibling is [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs) — this site. Not a submodule: daily-check clones it, runs `generate-docs.py`, and pushes the result back.
+A fifth sibling is [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs) — this site. Not a submodule: daily-check clones it, runs `generate-docs.py`, and pushes the result back.
 
 ## The OneScript generator
 

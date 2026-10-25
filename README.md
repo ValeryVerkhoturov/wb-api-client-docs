@@ -1,6 +1,6 @@
 # wb-api-client-docs
 
-Documentation site for [wb-api-client](https://github.com/ValeryVerkhoturov/wb-api-client) — the auto-generated SDKs for the Wildberries Seller API in Python, TypeScript, Go, Java, and PHP.
+Documentation site for [wb-api-client](https://github.com/ValeryVerkhoturov/wb-api-client) — the auto-generated SDKs for the Wildberries Seller API in Python, TypeScript, Go, Java, PHP, OneScript, C#, and Rust.
 
 Live site: **https://valeryverkhoturov.github.io/wb-api-client-docs/**
 
@@ -41,6 +41,9 @@ docs/
     go.md
     java.md
     php.md
+    onescript.md
+    csharp.md
+    rust.md
   reference/
     api/                 # GENERATED — endpoint reference, do not edit
       index.md

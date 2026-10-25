@@ -7,21 +7,21 @@
 ```
 download-specs.py          →  swaggers/*.yaml         (сырой апстрим, checksummed)
 process-specs.py           →  swaggers/processed/     (13 проходов)
-generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 7 языков)
+generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 8 языков)
     ├── inject-secrets.py          (SecretString-обёртка на каждый язык)
-    ├── {black|prettier|gofmt|spotless|php-cs-fixer}   (канонизация форматирования)
+    ├── {black|prettier|gofmt|spotless|php-cs-fixer|rustfmt}   (канонизация форматирования)
     └── generate-readmes.py        (README.md на каждый язык)
-     ↓ коммитится тегом v<version>, один тег покрывает все 7 языков
-publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet
+     ↓ коммитится тегом v<version>, один тег покрывает все 8 языков
+publish.yml                →  PyPI / npm / Go tag / Maven Central / Packagist / hub.oscript.io / NuGet / crates.io
 generate-docs.py           →  wb-api-client-docs      (справка по API: страницы операций,
-                                                        сниппеты и структуры данных на 7 языках, RU/EN)
+                                                        сниппеты и структуры данных на 8 языках, RU/EN)
 ```
 
 Каждый шаг — обычный Python-файл, ничего не скрыто за непрозрачным тулингом.
 
 ## Зачем генерировать
 
-WB выпускает OpenAPI-спецификации. Написать 13 клиентов × 7 языков вручную — уплывут за неделю. Плюс генерации из спецификации: каждое поле, каждый enum, каждая обёртка ответа — ровно то, что задокументировал WB. И повторная синхронизация стоит нуля усилий после сборки пайплайна.
+WB выпускает OpenAPI-спецификации. Написать 13 клиентов × 8 языков вручную — уплывут за неделю. Плюс генерации из спецификации: каждое поле, каждый enum, каждая обёртка ответа — ровно то, что задокументировал WB. И повторная синхронизация стоит нуля усилий после сборки пайплайна.
 
 Минус — выхлоп генератора остаётся выхлопом генератора: местами уродливым, местами со следами кривостей спецификации. Именно поэтому есть слой пост-обработки.
 
@@ -44,13 +44,13 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 ## generate-clients.py
 
 - Гоняет `openapi-generator-cli` (закреплённый Docker-образ) для каждой спецификации и каждого языка во временные каталоги.
-- Склеивает пер-спецификационные SDK в единое дерево на язык — Python-пакеты под `wb_api_client.<slug>`, TypeScript subpath-экспорты, Go под-пакеты, Java под-пакеты, PHP под-пространства, OneScript — по префиксу имени класса (пространств имён в языке нет), C# — пространства имён.
+- Склеивает пер-спецификационные SDK в единое дерево на язык — Python-пакеты под `wb_api_client.<slug>`, TypeScript subpath-экспорты, Go под-пакеты, Java под-пакеты, PHP под-пространства, OneScript — по префиксу имени класса (пространств имён в языке нет), C# — пространства имён, Rust — модули одного крейта (`wb_api_client::<slug>`).
 - Запускает `inject-secrets.py`, чтобы патчить каждый сгенерированный `Configuration` / `ApiClient` соответствующей языковой обёрткой секрета.
-- Запускает закреплённый форматтер: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`. Всё внутри Docker — без языковых рантаймов на хосте.
-- Подставляет `__VERSION__` в топ-уровневые манифесты (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`).
+- Запускает закреплённый форматтер: `black`, `prettier`, `gofmt`, spotless (google-java-format), `php-cs-fixer`, `dotnet format`, `cargo fmt` (rustfmt). Всё внутри Docker — без языковых рантаймов на хосте.
+- Подставляет `__VERSION__` в топ-уровневые манифесты (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `composer.json`, `Cargo.toml`).
 - Запускает `generate-readmes.py`, чтобы выпустить README на каждый язык.
 
-Итог: `clients/{python,typescript,go,java,php,onescript,csharp}/` — семь пакетов, готовых к публикации.
+Итог: `clients/{python,typescript,go,java,php,onescript,csharp,rust}/` — восемь пакетов, готовых к публикации.
 
 ## Детерминизм
 
@@ -63,7 +63,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 
 ## Публикация
 
-`daily-check.yml` считает версию, регенерирует, коммитит, тегает. Затем шлёт 7 событий `workflow_dispatch` в `publish.yml` — по одному на язык — с тегом в качестве входа `ref`. Каждая языковая ветка `publish.yml`:
+`daily-check.yml` считает версию, регенерирует, коммитит, тегает. Затем шлёт 8 событий `workflow_dispatch` в `publish.yml` — по одному на язык — с тегом в качестве входа `ref`. Каждая языковая ветка `publish.yml`:
 
 - Python — OIDC → PyPI trusted publishing (`pypa/gh-action-pypi-publish`).
 - TypeScript — OIDC → npm trusted publishing (`npm publish --provenance`).
@@ -72,6 +72,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 - PHP — пинг API `packagist.org/api/update-package`.
 - OneScript — `opm build` и `opm push` в hub.oscript.io.
 - C# — `dotnet pack` и `dotnet nuget push` в NuGet.
+- Rust — `cargo publish` в crates.io (GitHub-окружение `crates-io`, toolchain закреплён на 1.98).
 
 Отдельно daily-check перегенерирует справку по API (`generate-docs.py` — страницы операций, сниппеты вызова и структуры входящих/исходящих данных на каждом языке, ссылки на спецификацию WB) и пушит её в `wb-api-client-docs`, откуда сайт деплоится на GitHub Pages.
 
@@ -79,15 +80,16 @@ Reusable-воркфлоу (`workflow_call`) был бы аккуратнее, н
 
 ## Соседние репозитории
 
-Три языка живут в своих репозиториях, подключённых сюда как git-submodule:
+Четыре языка живут в своих репозиториях, подключённых сюда как git-submodule:
 
 - [`ValeryVerkhoturov/wb-api-client-php`](https://github.com/ValeryVerkhoturov/wb-api-client-php) → `clients/php`. Причина: Packagist требует `composer.json` в КОРНЕ обходимого репозитория.
 - [`ValeryVerkhoturov/wb-api-client-1c`](https://github.com/ValeryVerkhoturov/wb-api-client-1c) → `clients/onescript`. Так пользователи 1С могут склонировать только клиент и поставить его из тега.
 - [`ValeryVerkhoturov/wb-api-client-go`](https://github.com/ValeryVerkhoturov/wb-api-client-go) → `clients/go`. Причина: Go версионирует модули тегами репозитория, поэтому модуль обязан лежать в корне репо (`go get github.com/ValeryVerkhoturov/wb-api-client-go`) — модуль в подкаталоге потребовал бы тегов вида `clients/go/v…` и тянул бы весь монорепозиторий.
+- [`ValeryVerkhoturov/wb-api-client-rust`](https://github.com/ValeryVerkhoturov/wb-api-client-rust) → `clients/rust`. Причина: crates.io связывает крейт с выделенным репозиторием, а git-зависимости (`wb-api-client = { git = "…", tag = "vX.Y.Z" }`) резолвятся от корня репозитория.
 
-Ежедневный прогон коммитит и тегает все три соседних репозитория ДО основного — иначе записанные указатели сабмодулей ссылались бы на коммиты, которых на их удалённых ещё нет, и свежий `git clone --recurse-submodules` падал бы.
+Ежедневный прогон коммитит и тегает все четыре соседних репозитория ДО основного — иначе записанные указатели сабмодулей ссылались бы на коммиты, которых на их удалённых ещё нет, и свежий `git clone --recurse-submodules` падал бы.
 
-Четвёртый сосед — [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs), этот сайт. Он не сабмодуль: daily-check клонирует его, запускает `generate-docs.py` и пушит результат обратно.
+Пятый сосед — [`ValeryVerkhoturov/wb-api-client-docs`](https://github.com/ValeryVerkhoturov/wb-api-client-docs), этот сайт. Он не сабмодуль: daily-check клонирует его, запускает `generate-docs.py` и пушит результат обратно.
 
 ## Генератор OneScript
 

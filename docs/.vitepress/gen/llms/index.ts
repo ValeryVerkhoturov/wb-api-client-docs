@@ -27,6 +27,7 @@ const SECTIONS = [
       "languages/php",
       "languages/onescript",
       "languages/csharp",
+      "languages/rust",
     ],
   },
   {
@@ -42,7 +43,7 @@ const LOCALES = [
     lang: "ru-RU",
     other: "en/",
     blurb:
-      "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP, OneScript и C#. Одна версия на все семь экосистем, bearer-токен маскируется по умолчанию.",
+      "Автоматически сгенерированные клиенты Wildberries Seller API для Python, TypeScript, Go, Java, PHP, OneScript, C# и Rust. Одна версия на все восемь экосистем, bearer-токен маскируется по умолчанию.",
     mirror:
       "Любая страница сайта доступна в Markdown по её адресу с суффиксом `.md` — например `guides/quickstart.md`. Это относится и к {apiPages} справочника API, которые ниже не перечислены поштучно: страница модуля перечисляет все свои операции.",
     api: "Справочник API",
@@ -55,7 +56,7 @@ const LOCALES = [
     lang: "en-US",
     other: "",
     blurb:
-      "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript and C#. One version across all seven ecosystems, bearer tokens redacted by default.",
+      "Auto-generated client libraries for the Wildberries Seller API — Python, TypeScript, Go, Java, PHP, OneScript, C# and Rust. One version across all eight ecosystems, bearer tokens redacted by default.",
     mirror:
       "Every page on the site is also served as Markdown at its own address plus `.md` — `guides/quickstart.md`, for instance. That includes the {apiPages} endpoint reference pages, which are not listed individually below: each module page lists its own operations.",
     api: "API reference",
@@ -103,6 +104,7 @@ const PACKAGES: [name: string, url: string, install: string][] = [
     "https://www.nuget.org/packages/ValeryVerkhoturov.WbApiClient",
     "dotnet add package ValeryVerkhoturov.WbApiClient",
   ],
+  ["Rust", "https://crates.io/crates/wb-api-client", "cargo add wb-api-client"],
 ];
 
 function countApiPages(prefix: string): number {

@@ -24,7 +24,7 @@ Every token lives 180 days from creation, after which you need to mint a new one
 
 ## Secret-string wrappers
 
-Once you have the token, don't pass it around as a plain string. Every client stores the value in a language-native "secret string" type — in Java, PHP and C# you hand the setter a plain string and it wraps the value internally — so the token redacts under logs, `print`, debuggers, and error dumps, unless you explicitly ask for the raw value.
+Once you have the token, don't pass it around as a plain string. Every client stores the value in a language-native "secret string" type — in Java, PHP, C# and Rust you hand the setter a plain string and it wraps the value internally — so the token redacts under logs, `print`, debuggers, and error dumps, unless you explicitly ask for the raw value.
 
 | Language   | Wrapper                                                                                      | Setter                                  | Redacted under                                            | Explicit expose       |
 | ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- | --------------------- |
@@ -35,6 +35,7 @@ Once you have the token, don't pass it around as a plain string. Every client st
 | PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessToken(string)` | `var_dump($config)` → token `'<REDACTED>'`                | `getAccessToken()`    |
 | C#         | per-namespace `SecretString`                                                                 | `Configuration.SetAccessToken(string)`  | `Console.WriteLine(s)` → `<REDACTED>`                     | no getter by design   |
 | OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
+| Rust       | per-module `SecretString` struct                                                             | `Configuration::set_access_token(&str)` | `println!("{s:?}")` / `{}` → `<REDACTED>`                 | `.expose_secret()`    |
 
 ### Why bother?
 
@@ -97,6 +98,13 @@ echo $config->getAccessToken();   // eyJhbGciOi...  (opt-in)
 var s = new SecretString("eyJhbGciOi...");
 Console.WriteLine($"{s}");        // <REDACTED>
 Console.WriteLine(s.ExposeSecret()); // eyJhbGciOi...  (opt-in)
+```
+
+```rust [Rust]
+use wb_api_client::items::apis::configuration::SecretString;
+let s = SecretString::new("eyJhbGciOi...");
+println!("{s:?}");                // <REDACTED>
+println!("{}", s.expose_secret()); // eyJhbGciOi...  (opt-in)
 ```
 
 :::

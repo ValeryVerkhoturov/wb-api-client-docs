@@ -6,7 +6,7 @@ Bugs, spec-drift oddities, generator quirks: open an issue on the main code repo
 
 Include:
 
-- Which language client (Python / TypeScript / Go / Java / PHP / OneScript / C#)
+- Which language client (Python / TypeScript / Go / Java / PHP / OneScript / C# / Rust)
 - Which sub-module (`items`, `orders_fbs`, `analytics`, …)
 - Version string from the manifest (`1.YYYYMMDD.N`)
 - Minimal reproduction — one API call, one exception, one expected-vs-actual
@@ -35,11 +35,11 @@ cd wb-api-client
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, requests, black, flask
 ./scripts/download-specs.py                # pull upstream (may 498 locally)
 python  scripts/process-specs.py               # -> swaggers/processed/
-./scripts/generate-clients.py 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp}
+./scripts/generate-clients.py 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp,rust}
 make verify                                    # build + format check every language
 ```
 
-`generate-clients.py` always regenerates all seven languages. For per-language iteration during debugging, comment out the other `queue_generation` calls rather than adding a flag. The `OPENAPI_GENERATOR_THREADS` environment variable controls generation concurrency (default: 2).
+`generate-clients.py` always regenerates all eight languages. For per-language iteration during debugging, comment out the other `queue_generation` calls rather than adding a flag. The `OPENAPI_GENERATOR_THREADS` environment variable controls generation concurrency (default: 2).
 
 Formatting runs inside Docker so contributors don't need language runtimes installed. `make verify-<lang>` and `make {black,prettier,gofmt,spotless,php-cs-fixer,dotnet-format}` are individual targets. OneScript has no formatter, so `make verify-onescript` compiles every module with `oscript -check` and loads the package instead. `make help` lists everything.
 
