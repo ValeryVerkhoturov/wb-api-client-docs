@@ -66,6 +66,22 @@ To get only items that were listed or updated after the previous data export:
 
 `application/json` — schema `object`, required
 
+- `settings` `object` — Settings
+  - `sort` `object` — Sorting by `updatedAt` — date and time listings were updated
+    - `ascending` `boolean` — Sorting order: - `false` — descending - `true` — ascending
+  - `filter` `object` — Filters
+    - `withPhoto` `integer<int64>` = `-1` | `0` | `1` | `2` — Photo: * `-1` — any listings * `0` — any listings * `1` — only listings with photos * `2` — only listings without photos
+    - `textSearch` `string` — Seller item number, WB item number or SKU search
+    - `tagIDs` `integer<int64>[]` — Label ID search
+    - `allowedCategoriesOnly` `boolean` — Category: - `true` — permitted - `false` — forbidden Not used in the sandbox
+    - `objectIDs` `integer<int64>[]` — Subcategory ID search
+    - `brands` `string[]` — Brand search
+    - `imtID` `integer<int64>` — [Merged listing ID](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) search
+  - `cursor` `object` — Cursor
+    - `limit` `integer<int64>` — Number of listings in the response
+    - `updatedAt` `string` — Update date and time
+    - `nmID` `integer<int64>` — WB item number for the next listing page
+
 ## Responses
 
 | Code  | Description       | Schema                          |
@@ -76,6 +92,122 @@ To get only items that were listed or updated after the previous data export:
 | `402` | Payment required  | `object`                        |
 | `403` | Access denied     | `responseBodyContentError403`   |
 | `429` | Too many requests | `object`                        |
+
+**Structure `200`:**
+
+- `cards` `object[]` — Listings
+  - `nmID` `integer<int64>` — WB item number
+  - `imtID` `integer<int64>` — [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID. The same for all WB item number of group of merged listings. Every listing has `imtID`, even if is not merged with any other listing
+  - `nmUUID` `string<UUID>` — Internal system ID of the listing
+  - `subjectID` `integer<int64>` — Subcategory ID
+  - `subjectName` `string` — Subcategory name
+  - `vendorCode` `string` — Seller item number
+  - `brand` `string` — Brand
+  - `title` `string` — Item title
+  - `gtin` `string` — Additional GTIN. The field is returned only if an additional GTIN is specified. Only for sellers from the Russian
+  - `description` `string` — Item description
+  - `needKiz` `boolean` — Is labeling code [Chestny ZNAK](https://chestnyznak.ru/en) required for the item: - `false` — labeling code is not required -`true` — labeling code is required
+  - `kizMarked` `boolean` — Is there the confirmation from the seller that required labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is applied to the item: - `true` — yes - `false` — no Whether labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is required is specified in the `needKiz` field
+  - `photos` `object[]` — Photo array
+    - `big` `string` — URL of `900x1200` photo
+    - `c246x328` `string` — URL of `248x328` photo
+    - `c516x688` `string` — URL of `516x688` photo
+    - `square` `string` — URL of `600x600` photo
+    - `tm` `string` — URL of `75x100` photo
+  - `video` `string` — Video URL
+  - `wholesale` `object` — B2B sale
+    - `enabled` `boolean` — Is the item intended for sale only to B2B buyers: - `true` — the item is intended for sale only to B2B buyers - `false` — the item is intended for sale to B2B and B2C buyers
+    - `quantum` `number<uint64>` — Minimum number of items in one cart of B2B buyer. Only when `"enable":true`
+  - `dimensions` `object` — Dimensions and weight of packed item in cm and kg
+    - `length` `integer<int64>` — Length, cm
+    - `width` `integer<int64>` — Width, cm
+    - `height` `integer<int64>` — Height, cm
+    - `weightBrutto` `number` — Weight, kg Number of decimal places <=3
+    - `isValid` `boolean` — Potential inaccuracy of item dimensions: - `true` — not detected. `"isValid": true` does not guarantee that the dimensions are correct. In some cases (for example, when creating a new item category), `"isValid": true` will be returned for any values except zero. - `false` — the specified dimensions significantly differ from the average for the category (subcategory). it is recommended to double-check whether the item dimensions in the packaging are correctly specified in `centimeters`. The functionality of the listing, including the calculation of logistics and storage, will not be limited. Logistics and storage will continue to be calculated based on the current dimensions. Also, `"isValid": false` is returned when there are missing values or any dimension is zero.
+  - `documents` `object` — Documents added to the listing. Validation results for each document specified in `items`. Validation result of the entire listing specified in `overallVerdict`
+    - `items` `object[]` — Document list and validation results for each document
+      - `id` `string` — Document ID
+      - `type` `integer<int64>` — Document type: - `1` — Certificate of Conformity - `2` — The Correspondence Declaration - `3` — Certificate of Registration of SGR - `4` — Registration Certificate - `5` — Certificate of Registration of the Republic of Belarus - `7` — Registration of a Pesticide - `8` — Registration of an Agrochemical - `9` — Medicine Registration Certificate
+      - `number` `string` — Document number
+      - `productNumber` `string` — Additional document number
+      - `tradeName` `string` — Trade name
+      - `applicant` `string` — Representative of the medical device manufacturer
+      - `startDate` `string` — Document start date and time
+      - `endDate` `string` — Document end date and time
+      - `isEndless` `boolean` — Is the document valid indefinitely: - `true` — yes, the document is indefinite - `false` — no, the document has an expiration date
+      - `verdict` `object` — Document validation result. Returns when the document validation is completed
+        - `verified` `boolean` — - `true` — the document is validated - `false` — the document is not validated
+        - `status` `integer<int64>` — Document validation result: - `1` — validation passed - `2` — validation failed
+        - `reason` `reasonDocument`
+        - `additionalData` `object` — Additional data
+        - `createdAt` `string` — Listing validation date
+      - `createdAt` `string` — Date the document was added
+    - `overallVerdict` `object` — The overall result of the entire listing validation. Returns when the validation is completed. The results of current documents validation and the overall result of the listing may vary. For example, a listing can pass validation if the required document passed validation, but the additional document failed
+      - `isFullyChecked` `boolean` — - `true` — the listing is validated - `false` — the listing is not validated
+      - `status` `integer<int64>` — Listing validation result: - `1` — validation passed - `2` — validation failed
+      - `reason` `reasonListing`
+      - `createdAt` `string` — Listing validation date and time
+    - `excludeDocuments` `boolean` — Seller confirmation that no permits are required for the item: - `true` — yes, seller confirms that no permits are required. All values passed to `documents` will be replaced with empty values - `false` — no, seller does not confirm that no permits are required Whether the permits are required is checked when creating and changing the listing. If permits are required for the item and the value `true` is specified, the listing will not pass validation
+  - `characteristics` `object[]` — Characteristics
+    - `id` `integer<int64>` — Characteristic ID
+    - `name` `string` — Characteristic name
+    - `value` `object` — Characteristic value
+  - `sizes` `object[]` — Item sizes
+    - `chrtID` `integer<int64>` — Size ID
+    - `techSize` `string` — Size (for example, S or 42)
+    - `wbSize` `string` — Russian size
+    - `skus` `string[]` — SKU
+  - `tags` `object[]` — Labels
+    - `id` `integer<int64>` — Label ID
+    - `name` `string` — Label name
+    - `color` `string` — Label color: - `D1CFD7` — grey - `FEE0E0` — red - `ECDAFF` — purple - `E4EAFF` — blue - `DEF1DD` — green - `FFECC7` — yellow
+  - `createdAt` `string` — Creation date and time
+  - `updatedAt` `string` — Update date and time
+- `cursor` `object` — Paginator
+  - `updatedAt` `string` — Date and time for the next listing page
+  - `nmID` `integer<int64>` — WB item number for the next listing page
+  - `total` `integer<int64>` — Number of listings
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

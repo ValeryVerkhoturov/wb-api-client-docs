@@ -43,6 +43,90 @@ GET /api/common/v1/tariff-constructor/options
 | `404` | Не найдено             | `PlanBuilderErrors`      |
 | `429` | Слишком много запросов | `object`                 |
 
+**Структура `200`:**
+
+- `activeOptionCount` `number<int>` — Количество активных опций, не включённых в пакеты
+- `activePackageCount` `number<int>` — Количество активных пакетов опций
+- `totalCommissionRate` `number<float>` — Итоговая комиссия за подключённые опции и пакеты, % от оборота
+- `packages` `PlanBuilderPackage[]` — Подключённые пакеты опций
+  - `id` `string<uuid>` — ID пакета
+  - `slug` `string` — Код пакета
+  - `name` `string` — Название пакета на языке из параметра `locale`
+  - `status` `string` = `active` | `pendingActivation` | `pendingDeactivation` — Статус пакета: - `active` — активен - `pendingActivation` — подключён, начнёт работать с 00:00 следующего дня - `pendingDeactivation` — отключён, перестанет работать с 00:00 следующего дня
+  - `activatedAt` `string` — Дата активации пакета
+  - `expiresAt` `string` — Дата окончания минимального срока действия пакета. До этого дня пакет опций нельзя отключить
+  - `commissionRate` `number<float>` — Комиссия за пакет, % от оборота
+  - `periodDuration` `number<int>` — Минимальный срок действия пакета в днях
+  - `options` `PlanBuilderOptionShort[]` — Опции, которые входят в пакет
+    - `id` `string` — ID опции
+    - `slug` `string` — Код опции
+    - `name` `string` — Название опции на языке из параметра `locale`
+- `options` `PlanBuilderOption[]` — Подключённые опции
+  - `id` `string` — ID опции
+  - `slug` `string` — Код опции
+  - `name` `string` — Название опции на языке из параметра `locale`
+  - `status` `string` = `active` | `pendingActivation` | `pendingDeactivation` — Статус опции: - `active` — активна - `pendingActivation` — подключена, начнёт работать с 00:00 следующего дня - `pendingDeactivation` — отключена, перестанет работать с 00:00 следующего дня
+  - `activatedAt` `string` — Дата активации опции
+  - `expiresAt` `string` — Дата окончания минимального срока действия опции. До этого дня опцию нельзя отключить
+  - `commissionRate` `number<float>` — Стоимость подключения опции, % от оборота. Возвращается, если в ответе нет объекта `promotion`
+  - `periodDuration` `number<int>` — Минимальный срок действия опции в днях
+  - `promotion` `object`
+    - `commissionRate` `number<float>` — Стоимость подключения опции по акции, % от оборота
+    - `expiresAt` `string` — Дата окончания действия цены по акции
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `errors` `string[]` — Ошибки запроса с указанием параметров и деталей ошибок
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `errors` `string[]` — Ошибки запроса с указанием параметров и деталей ошибок
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

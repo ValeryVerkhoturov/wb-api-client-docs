@@ -29,6 +29,8 @@ POST /api/marketplace/v3/fbs/settings/autoreturns/items
 
 `application/json` — схема `object`, необязательно
 
+- `chrtIds` `integer<int64>[]` (обязательно) — Список ID размеров товаров в системе WB
+
 ## Ответы
 
 | Код   | Описание               | Схема                                          |
@@ -38,6 +40,55 @@ POST /api/marketplace/v3/fbs/settings/autoreturns/items
 | `401` | Не авторизован         | `object`                                       |
 | `403` | Доступ запрещён        | `Response4XX`                                  |
 | `429` | Слишком много запросов | `object`                                       |
+
+**Структура `200`:**
+
+- `results` `object[]`
+  - `success` `boolean` — - `true` — настройки автовозврата товара успешно получены
+  - `chrtId` `integer<int64>` — ID размера товара в системе WB
+  - `type` `string` = `auto` | `byWarehouse` | `byPickupPoint` | `byCourier` — Куда будет возвращён товар: - `auto` — место возврата определяется автоматически - `byWarehouse` — на склад WB - `byPickupPoint` — на пункт выдачи заказов - `byCourier` — продавцу курьером. Всегда для товаров тех [предметов](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted), которые автоматически возвращаются в ПВЗ
+  - `changeable` `boolean` — - `true` — настройки автовозврата товара можно изменить
+  - `error` `object[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — Дополнительная информация об ошибке
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

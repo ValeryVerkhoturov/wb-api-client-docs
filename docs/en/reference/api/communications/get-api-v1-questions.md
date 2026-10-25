@@ -46,6 +46,76 @@ It is possible to get a maximum of 10,000 questions per query
 | `403` | Access denied     | `responseFeedbackQuestionErr` |
 | `429` | Too many requests | `object`                      |
 
+**Structure `200`:**
+
+- `data` `object`
+  - `countUnanswered` `integer<int64>` — Number of unanswered questions
+  - `countArchive` `integer<int64>` — Number of questions answered
+  - `questions` `object[]` — Questions
+    - `id` `string` — question id
+    - `text` `string` — question text
+    - `createdDate` `string` — Date and time the question was created
+    - `state` `string` — Question status: - `none` — question rejected by seller (this question doesn't appear on the buyer portal) - `wbRu` — answer provided, the question is displayed on the buyers site - `suppliersPortalSynch` - new question
+    - `answer` `object` — Answer structure
+      - `text` `string` — Answer text
+      - `editable` `boolean` — Ability to edit answer (`false` - unable, `true` - able to)
+      - `createDate` `string` — Date and time the answer was created
+    - `productDetails` `object` — Item information
+      - `nmId` `integer<int64>` — WB item number
+      - `imtId` `integer<int64>` — [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID
+      - `productName` `string` — Item name
+      - `supplierArticle` `string` — Seller item number
+      - `supplierName` `string` — Seller's name
+      - `brandName` `string` — Brand name
+    - `wasViewed` `boolean` — If the question was viewed
+    - `isWarned` `boolean` — Suspicious question indicator. If `true`, the question is published, but on the seller portal, you will see a banner saying \*\*Suspicious message\*\*
+- `error` `boolean` — Error presence
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+
+**Structure `400`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

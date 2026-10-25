@@ -34,6 +34,12 @@ POST /api/v2/search-report/product/orders
 
 `application/json` — схема `ItemOrdersRequest`, обязательно
 
+- `period` `PeriodOrdersRequest` (обязательно)
+  - `start` `string` (обязательно) — Дата начала периода. Не позднее `end`. Не ранее 365 суток от сегодня
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 365 суток от сегодня
+- `nmId` `integer<int64>` (обязательно) — Артикул WB
+- `searchTexts` `string[]` (обязательно) — Поисковые запросы. Для тарифов [Джема](https://seller.wildberries.ru/monetization/tariffs) **Продвинутый** и **Премиальный** максимум — 100
+
 ## Ответы
 
 | Код   | Описание               | Схема                                        |
@@ -44,6 +50,62 @@ POST /api/v2/search-report/product/orders
 | `402` | Требуется платёж       | `object`                                     |
 | `403` | Доступ запрещён        | `ErrorObject403`                             |
 | `429` | Слишком много запросов | `object`                                     |
+
+**Структура `200`:**
+
+- `data` `ItemOrdersResponse`
+  - `total` `ItemOrdersMetrics[]` — Итог по товарам
+    - `dt` `string` — Дата сбора статистики
+    - `avgPosition` `integer<int64>` — Средняя позиция товара в результатах поиска
+    - `orders` `integer<int64>` — Сколько раз товары из поиска заказали
+  - `items` `ItemOrdersTextItem[]` — Элементы таблицы
+    - `text` `string` — Текст поискового запроса
+    - `frequency` `integer<int64>` — Количество обращений с поисковым запросом
+    - `dateItems` `ItemOrdersMetrics[]` — Статистика по датам
+      - `dt` `string` — Дата сбора статистики
+      - `avgPosition` `integer<int64>` — Средняя позиция товара в результатах поиска
+      - `orders` `integer<int64>` — Сколько раз товары из поиска заказали
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

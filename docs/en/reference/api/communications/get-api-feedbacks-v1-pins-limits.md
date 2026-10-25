@@ -32,6 +32,60 @@ The method returns the pinned feedback limits for a rate and subscription.
 | `403` | Access denied     | `object`                     |
 | `429` | Too many requests | `object`                     |
 
+**Structure `200`:**
+
+- `data` `object`
+  - `subscription` `object`
+    - `perUnitLimit` `integer<int64>` — Maximum number of pinned feedback per listing or group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings
+    - `remaining` `integer<int64>` — How many more feedback can be pinned
+    - `totalLimit` `integer<int64>` — Total pinning limit
+    - `unlimited` `boolean` — The number of pinned feedback is unlimited: - `true` — yes - `false` — no
+    - `used` `integer<int64>` — Current number of pinned feedback
+  - `tariff` `object`
+    - `perUnitLimit` `integer<int64>` — Maximum number of pinned feedback per listing or group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings
+    - `remaining` `integer<int64>` — How many more feedback can be pinned
+    - `totalLimit` `integer<int64>` — Total pinning limit
+    - `unlimited` `boolean` — The number of pinned feedback is unlimited: - `true` — yes - `false` — no
+    - `used` `integer<int64>` — Current number of pinned feedback
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

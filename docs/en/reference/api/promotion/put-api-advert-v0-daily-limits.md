@@ -28,6 +28,11 @@ The method allows you to enable, update or disable the daily budget limit.
 
 `application/json` — schema `V0PutDailyLimitsRequest`, required
 
+- `advertIds` `integer<int64>[]` (required) — Campaign IDs
+- `enabled` `boolean` (required) — Enable the limit: - `true` — yes - `false` — no
+- `dailyLimit` `integer<int64>` — Daily limit amount. Required when `"enabled": true`. The minimum allowed amount is specified in the `minDailyLimit` field of the [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config) method
+- `carryOverEnabled` `boolean` — Carry over the unused remaining limit to the next day: - `true` — yes - `false` — no Required when `"enabled": true`
+
 ## Responses
 
 | Code  | Description       | Schema                     |
@@ -37,6 +42,54 @@ The method allows you to enable, update or disable the daily budget limit.
 | `401` | Unauthorized      | `object`                   |
 | `403` | Access denied     | `object`                   |
 | `429` | Too many requests | `object`                   |
+
+**Structure `200`:**
+
+- `adverts` `V0PutDailyLimitsAdvertResult[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `belowMinLimit` `boolean` — Whether the set daily limit is lower than the recommended minimum relative to the current bids (`requiredLimit`): - `true` — yes - `false` — no
+  - `requiredLimit` `integer<int64>` — Recommended minimum daily limit based on the campaign’s current bids. Specified in minor currency units — 0.01 of the base currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances). With a lower limit, the budget may be spent unevenly and errors may occur in the campaign
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

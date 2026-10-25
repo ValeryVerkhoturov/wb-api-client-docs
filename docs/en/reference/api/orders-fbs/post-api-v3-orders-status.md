@@ -54,6 +54,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `object`, optional
 
+- `orders` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                          |
@@ -64,6 +66,54 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                        |
 | `403` | Access denied     | `Error`                         |
 | `429` | Too many requests | `object`                        |
+
+**Structure `200`:**
+
+- `orders` `object[]`
+  - `id` `integer<int64>` — Assembly order ID
+  - `isCancellable` `boolean` — Whether assembly order [cancellation](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel) is available: - `false` — not available - `true` — available
+  - `isTransferable` `boolean` — Can be [moved](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) from delivery to assembly: - `false` — not available - `true` — available An assembly order can be moved from delivery to assembly if all the following conditions are met: - the assembly order is in the `complete` status — in delivery - the supply to which the assembly order needs to be moved [is not transferred to delivery](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver) - the assembly order has not been moved before
+  - `supplierStatus` `string` = `new` | `confirm` | `complete` | `cancel` — Assembly order status set by the seller
+  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` — Assembly order status set by WB system
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

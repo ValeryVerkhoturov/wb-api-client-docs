@@ -41,6 +41,66 @@ The method provides a file or image from the message by its ID.
 | `429` | Too many requests            | `object`                           |
 | `451` | Moderation failed            | `GetV1SellerDownloadIdResponse451` |
 
+**Structure `202`:**
+
+- `moderationState` `string` — Moderation status
+- `retrySeconds` `integer<int64>` — Seconds until retry to request a file
+
+**Structure `400`:**
+
+- `status` `number` — HTTP status code
+- `title` `string` — Error title
+- `origin` `string` — WB internal service ID
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `error` `string` — Error text
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `451`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `origin` `string` — WB internal service ID
+- `detail` `string` — Error detail
+- `requestId` `string` — Request ID
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

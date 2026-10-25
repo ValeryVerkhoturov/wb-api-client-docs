@@ -42,6 +42,59 @@ GET /api/analytics/v1/item-returns
 | `401` | Не авторизован         | `object`                 |
 | `429` | Слишком много запросов | `object`                 |
 
+**Структура `200`:**
+
+- `count` `integer<int64>` — Общее количество возвратов за запрашиваемый период
+- `report` `object[]` — Отчёт
+  - `sku` `string` — Баркод
+  - `brand` `string` — Бренд
+  - `completedDt` `string` — Дата и время выдачи возврата продавцу
+  - `dstOfficeAddress` `string` — Адрес ПВЗ для выдачи возврата продавцу
+  - `kiz` `string` — Код маркировки [Честного знака](https://честныйзнак.рф/)
+  - `dstOfficeId` `integer<int64>` — ID ПВЗ для выдачи возврата продавцу
+  - `expiredDt` `string` — Дата и время истечения срока хранения возврата
+  - `nmId` `integer<int64>` — Артикул WB
+  - `orderDt` `string` — Дата заказа на возврат
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `readyToReturnDt` `string` — Дата и время готовности возврата к выдаче
+  - `returnReason` `string` — Причина возврата. Поле возвращается только при `"returnType":"Возврат неопознанного товара"`
+  - `returnType` `string` — Тип возврата
+  - `shkId` `integer<int64>` — Штрихкод
+  - `srid` `string` — ID заказа на возврат
+  - `returnStatus` `string` — Статус возврата
+  - `stickerId` `string` — Стикер заказа на возврат
+  - `subjectName` `string` — Предмет
+  - `techSize` `string` — Размер
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

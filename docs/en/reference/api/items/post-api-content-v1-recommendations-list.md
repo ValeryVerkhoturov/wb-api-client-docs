@@ -27,6 +27,12 @@ The method returns item [recommendations](https://seller.wildberries.ru/recommen
 
 `application/json` — schema `GetRecomReq`, optional
 
+- `brandNames` `string[]` — Brands
+- `limit` `integer<int64>` — Number of items in the response
+- `next` `integer<int64>` — Cursor. The last `nmId` in the response
+- `search` `string` — Search: - by WB item number `nmId` — full match - by seller item number `vendorCode` — partial match
+- `subjectIds` `integer<int64>[]` — Subject IDs
+
 ## Responses
 
 | Code  | Description       | Schema                |
@@ -36,6 +42,63 @@ The method returns item [recommendations](https://seller.wildberries.ru/recommen
 | `401` | Unauthorized      | `object`              |
 | `403` | Access denied     | `Response4XX`         |
 | `429` | Too many requests | `object`              |
+
+**Structure `200`:**
+
+- `data` `object[]` — Data about items and their recommendations
+  - `nmId` `integer<int64>` — WB item number
+  - `imtId` `integer<int64>` — [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID
+  - `vendorCode` `string` — Seller item number
+  - `brandName` `string` — Brand
+  - `updatedAt` `string` — Date and time of the last recommendations update
+  - `picsCount` `integer<int64>` — Number of listing pics
+  - `title` `string` — Item name
+  - `subjectName` `string` — Subject
+  - `pic` `string` — URL of the main listing pic
+  - `recomCount` `integer<int64>` — Number of recommended items
+  - `recomPics` `string[]` — List of URLs of the recommended items' main pics
+  - `recomNms` `integer<int64>[]` — List of recommended items' `nmId`
+- `next` `integer<int64>` — Cursor. The last `nmId` in the response
+
+**Structure `400`:**
+
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

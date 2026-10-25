@@ -39,6 +39,103 @@ The method allows you to get a feedback by its ID
 | `422` | Error processing request parameters | `responseFeedbackQuestionErr` |
 | `429` | Too many requests                   | `object`                      |
 
+**Structure `200`:**
+
+- `data` `object`
+  - `id` `string` — Feedback ID
+  - `text` `string` — Feedback text
+  - `pros` `string` — Item pros
+  - `cons` `string` — Item cons
+  - `matchingSize` `string` — Compliance of the declared size with the real one. Possible values: - ` ` - for dimensionless items - `ок` - matches to the size - `smaller` - runs small - `bigger` - runs large
+  - `productValuation` `integer<int64>` — Item rate
+  - `createdDate` `string` — Date and time the feedback was created
+  - `answer` `object` — Reply structure
+    - `text` `string` — Reply text
+    - `state` `string` — Status: - `none` — new - `wbRu` — displayed on the site - `reviewRequired` — response being reviewed - `rejected` — response rejected
+    - `editable` `boolean` — Whether the answer can be edited: - `false` — no - `true` - yes
+  - `state` `string` — Feedback state: - `none` - not processed (new) - `wbRu` - processed
+  - `productDetails` `object` — Item information
+    - `nmId` `integer<int64>` — WB item number
+    - `imtId` `integer<int64>` — [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listing ID
+    - `productName` `string` — Item name
+    - `supplierArticle` `string` — Seller item number
+    - `supplierName` `string` — Seller's name
+    - `brandName` `string` — Brand name
+    - `size` `string` — Item size (`techSize' in the listing)
+  - `photoLinks` `object[]` — Array of structure of images
+    - `fullSize` `string` — Link of full-size images
+    - `miniSize` `string` — Link of small-size images
+  - `userName` `string` — Name of the feedback author
+  - `orderStatus` `string` — Order status. Possible values: - `buyout` — bought out - `rejected` — rejected - `returned` — returned - `notSpecified` — status not assigned
+  - `video` `object` — Video structure
+    - `previewImage` `string` — Video preview image link
+    - `link` `string` — Link to the playlist video file (available through hls protocol)
+    - `durationSec` `integer<int64>` — Video duration
+  - `wasViewed` `boolean` — If the feedback was viewed
+  - `isAbleSupplierFeedbackValuation` `boolean` — Is the feedback rating available to the seller - `true`— yes - `false` — no
+  - `supplierFeedbackValuation` `integer<int64>` — Feedback rating left by the seller
+  - `isAbleSupplierProductValuation` `boolean` — Is the item rating available to the seller (`true` - available, `false` - not available)
+  - `supplierProductValuation` `integer<int64>` — Item rating left by the seller
+  - `isAbleReturnProductOrders` `boolean` — Item return option: - `true` — available - `false` — unavailable
+  - `returnProductOrdersDate` `string` — Date and time when a response with status code 200 was received for the return request.
+  - `bables` `string[]` — List of customer tags
+  - `lastOrderShkId` `integer<int64>` — SKU of the item
+  - `lastOrderCreatedAt` `string` — Date of purchase
+  - `color` `string` — Item color
+  - `subjectId` `integer<int64>` — Subcategory ID
+  - `subjectName` `string` — Subcategory name
+  - `parentFeedbackId` `string` — ID of the original feedback (`null` if this feedback is original)
+  - `childFeedbackId` `string` — ID of the updated feedback (`null` if this feedback is updated)
+- `error` `boolean` — Error presence
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `422`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

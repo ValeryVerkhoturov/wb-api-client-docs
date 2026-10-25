@@ -41,6 +41,66 @@ GET /api/v1/seller/download/{id}
 | `429` | Слишком много запросов   | `object`                           |
 | `451` | Файл не прошёл модерацию | `GetV1SellerDownloadIdResponse451` |
 
+**Структура `202`:**
+
+- `moderationState` `string` — Статус модерации
+- `retrySeconds` `integer<int64>` — Секунд до следующей попытки запроса файла
+
+**Структура `400`:**
+
+- `status` `number` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `error` `string` — Текст ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `451`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — ID запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

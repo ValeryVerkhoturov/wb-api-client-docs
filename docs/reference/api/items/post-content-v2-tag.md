@@ -32,6 +32,9 @@ POST /content/v2/tag
 
 `application/json` — схема `object`, обязательно
 
+- `color` `string` — Цвет ярлыка. Доступные цвета: - `D1CFD7` — серый - `FEE0E0` — красный - `ECDAFF` — фиолетовый - `E4EAFF` — синий - `DEF1DD` — зеленый - `FFECC7` — желтый
+- `name` `string` — Имя ярлыка
+
 ## Ответы
 
 | Код   | Описание               | Схема                         |
@@ -42,6 +45,54 @@ POST /content/v2/tag
 | `402` | Требуется платёж       | `object`                      |
 | `403` | Доступ запрещён        | `responseBodyContentError403` |
 | `429` | Слишком много запросов | `object`                      |
+
+**Структура `200`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `object` — Дополнительные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

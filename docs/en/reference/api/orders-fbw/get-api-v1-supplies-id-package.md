@@ -39,6 +39,60 @@ The method returns information about the package of the supply.
 | `403` | Access denied     | `object`                            |
 | `429` | Too many requests | `object`                            |
 
+**Structure `200` — `models.Box[]`:**
+
+- `packageCode` `string` — Package SKU
+- `quantity` `integer<int64>` — Total quantity of items in the package, pieces
+- `barcodes` `models.GoodInBox[]` — List of packed items
+  - `barcode` `string` — Barcode
+  - `quantity` `integer<int64>` — Quantity, pieces
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

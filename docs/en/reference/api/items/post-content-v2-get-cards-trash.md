@@ -64,6 +64,16 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `object`, required
 
+- `settings` `object` — Settings
+  - `sort` `object` — Sorting by `trashedAt` — date and time listings were transferred to the trash
+    - `ascending` `boolean` — Sorting order: - `true` — ascending - `false` — descending
+  - `cursor` `object` — Paginator
+    - `limit` `integer<int64>` — Number of listings in the response
+    - `trashedAt` `string` — Date and time the listing was transferred to the trash
+    - `nmID` `integer<int64>` — WB item number for the next listing page
+  - `filter` `object` — Filters
+    - `textSearch` `string` — Seller item number, WB item number or SKU to search
+
 ## Responses
 
 | Code  | Description       | Schema                           |
@@ -74,6 +84,87 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                         |
 | `403` | Access denied     | `responseBodyContentError403`    |
 | `429` | Too many requests | `object`                         |
+
+**Structure `200`:**
+
+- `cards` `object[]` — Requested listings
+  - `nmID` `integer<int64>` — WB item number
+  - `vendorCode` `string` — Seller item number
+  - `kizMarked` `boolean` — Confirmation that required labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is specified: - `true` — the seller confirms that required labeling code is applied to the item. - `false` — the seller does not confirm that required labeling code is applied to the item. Pass `true` in the request to confirm that the item has required labeling code. The item will not pass validation if there is no confirmation from the seller that required labeling code is applied to the item. To check if labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is required, use the [Listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) method, the response field `needKiz`
+  - `subjectID` `integer<int64>` — Subcategory ID
+  - `subjectName` `string` — Subcategory name
+  - `photos` `object[]` — Photo array
+    - `big` `string` — URL of `900x1200` photo
+    - `c246x328` `string` — URL of `248x328` photo
+    - `c516x688` `string` — URL of `516x688` photo
+    - `square` `string` — URL of `600x600` photo
+    - `tm` `string` — URL of `75x100` photo
+  - `video` `string` — Video URL
+  - `wholesale` `object` — B2B sale
+    - `enabled` `boolean` — Is the item intended for sale only to B2B buyers: - `true` — the item is intended for sale only to B2B buyers - `false` — the item is intended for sale to B2B and B2C buyers
+    - `quantum` `number<uint64>` — Minimum number of items in one cart of B2B buyer. Only when `"enable":true`
+  - `sizes` `object[]` — Item sizes
+    - `chrtID` `integer<int64>` — Size ID
+    - `techSize` `string` — Item size (eg S, M, L, XL, 42, 42-43)
+    - `wbSize` `string` — Russian item size
+    - `skus` `string[]` — Array of SKUs
+  - `dimensions` `object` — Dimensions and weight of packed item in cm and kg
+    - `length` `integer<int64>` — Length, cm
+    - `width` `integer<int64>` — Width, cm
+    - `height` `integer<int64>` — Height, cm
+    - `weightBrutto` `number` — Weight, kg Number of decimal places <=3
+    - `isValid` `boolean` — Potential inaccuracy of item dimensions: - `true` — not detected. `"isValid": true` does not guarantee that the dimensions are correct. In some cases (for example, when creating a new item category), `"isValid": true` will be returned for any values except zero. - `false` — the specified dimensions significantly differ from the average for the category (subcategory). it is recommended to double-check whether the item dimensions in the packaging are correctly specified in `centimeters`. The functionality of the listing, including the calculation of logistics and storage, will not be limited. Logistics and storage will continue to be calculated based on the current dimensions. Also, `"isValid": false` is returned when there are missing values or any dimension is zero.
+  - `characteristics` `object[]` — Characteristics
+    - `id` `integer<int64>` — Characteristic ID
+    - `name` `string` — Characteristic name
+    - `value` `object` — Characteristic value
+  - `createdAt` `string` — Characteristics
+  - `trashedAt` `string` — Date and time the listing was transferred to the trash
+- `cursor` `object` — Paginator
+  - `trashedAt` `string` — Date and time for the next listing page
+  - `nmID` `integer<int64>` — WB item number for the next listing page
+  - `total` `integer<int64>` — Number of listings
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

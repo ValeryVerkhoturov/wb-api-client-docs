@@ -35,6 +35,64 @@ The method sets wholesale discounts for B2B.
 | `403` | Access denied         | `ResponseErrorV3` |
 | `429` | Too many requests     | `object`          |
 
+**Structure `200`:**
+
+- `id` `integer<int64>` (required) — Upload ID
+- `alreadyExists` `boolean` (required) — Upload duplication: `true` — upload already exists
+- `results` `object[]` (required) — Request results
+  - `nmId` `integer<int64>` (required) — WB item number
+  - `success` `boolean` (required) — Is the discount on the item successful: - `false` — failed - `true` — success
+  - `error` `object` — Error. If `"success":false`
+    - `status` `integer<int64>` (required) — HTTP status code
+    - `title` `string` (required) — Error title
+    - `detail` `string` (required) — Error details
+
+**Structure `208`:**
+
+- `status` `integer<int64>` (required) — HTTP status code
+- `title` `string` (required) — Response title
+- `detail` `string` (required) — Response details
+- `requestId` `string` (required) — Request ID
+- `origin` `string` (required) — WB internal service ID
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

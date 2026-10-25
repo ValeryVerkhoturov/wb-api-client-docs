@@ -27,6 +27,12 @@ You can use this method only for campaigns with a `cpm` payment model — for im
 
 `application/json` — schema `V0GetNormQueryStatsRequest`, required
 
+- `from` `string` (required) — Period start date
+- `to` `string` (required) — Period end date
+- `items` `object[]` (required)
+  - `advert_id` `integer<int64>` (required) — Campaign ID
+  - `nm_id` `integer<int64>` (required) — WB item number
+
 ## Responses
 
 | Code  | Description       | Schema                        |
@@ -36,6 +42,63 @@ You can use this method only for campaigns with a `cpm` payment model — for im
 | `401` | Unauthorized      | `object`                      |
 | `403` | Access denied     | `StandardizedBatchError`      |
 | `429` | Too many requests | `object`                      |
+
+**Structure `200`:**
+
+- `stats` `V0GetNormQueryStatsItem[]`
+  - `advert_id` `integer<int64>` — Campaign ID
+  - `nm_id` `integer<int64>` — WB item number
+  - `stats` `V0GetNormQueryStatsItemStat[]`
+    - `norm_query` `string` — Search cluster
+    - `views` `integer<int64>` — Number of views. For `cpc` campaigns (pay-per-click), the value will be `null`
+    - `clicks` `integer<int64>` — Number of clicks
+    - `atbs` `integer<int64>` — Number of items added to the basket
+    - `orders` `integer<int64>` — Orders number
+    - `ctr` `number<double>` — Click-through rate — the ratio of clicks to impressions, %. For `cpc` campaigns (pay-per-click), the value will be `null`
+    - `cpc` `number<double>` — Cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `cpm` `number<double>` — Average cost per mille in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. For `cpc` campaigns — pay-per-click, the value will be `null`
+    - `avg_pos` `number<double>` — Average item position on search results pages
+    - `shks` `integer<int64>` — Number of ordered items, pcs
+    - `spend` `number<double>` — Item promotion costs in a specific search cluster of the campaign
+    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP Status Code
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

@@ -32,6 +32,9 @@ PATCH /api/marketplace/v3/fbs/supplies/{supplyId}/orders/transfer
 
 `application/json` — схема `object`, обязательно
 
+- `orderIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий, которые нужно перевести на сборку
+- `newSupplyId` `string` (обязательно) — ID поставки, в которую будут перемещены сборочные задания. Поставка не должна быть в доставке
+
 ## Ответы
 
 | Код   | Описание            | Схема                                 |
@@ -40,6 +43,40 @@ PATCH /api/marketplace/v3/fbs/supplies/{supplyId}/orders/transfer
 | `400` | Неправильный запрос | `Error`                               |
 | `401` | Не авторизован      | `object`                              |
 | `403` | Доступ запрещён     | `Error`                               |
+
+**Структура `200`:**
+
+- `transferredOrders` `v3.TransferOrderToAssembly[]`
+  - `error` `object` — Детали ошибки
+    - `detail` `string` — Детали ошибки
+    - `code` `integer<int64>` — Внутренний код ошибки
+  - `success` `boolean` — Успешна ли обработка запроса. Может быть только `true`
+  - `newStickerId` `integer<int64>` — Новый ID стикера
+  - `oldStickerId` `integer<int64>` — Старый ID стикера
+  - `orderId` `integer<int64>` — ID сборочного задания
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
 
 ## Примеры вызова
 

@@ -26,6 +26,11 @@ POST /api/advert/v1/bids/min
 
 `application/json` — схема `object`, обязательно
 
+- `advert_id` `integer<int64>` (обязательно) — ID кампании
+- `nm_ids` `integer<int64>[]` (обязательно) — Список артикулов WB
+- `payment_type` `string` = `cpm` | `cpc` (обязательно) — Тип оплаты: - `cpm` — за показы - `cpc` — за клик
+- `placement_types` `string[]` (обязательно) — Места размещения: - `search` — поиск - `recommendation` — рекомендации - `combined` — поиск и рекомендации
+
 ## Ответы
 
 | Код   | Описание               | Схема                      |
@@ -35,6 +40,56 @@ POST /api/advert/v1/bids/min
 | `401` | Не авторизован         | `object`                   |
 | `403` | Доступ запрещён        | `object`                   |
 | `429` | Слишком много запросов | `object`                   |
+
+**Структура `200`:**
+
+- `bids` `object[]` — Список карточек товаров со ставками
+  - `bids` `object[]` — Список ставок по местам размещения
+    - `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `type` `PlacementType`
+    - `value` `integer<int64>` — Минимальная ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `nm_id` `integer<int64>` — Артикул WB
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

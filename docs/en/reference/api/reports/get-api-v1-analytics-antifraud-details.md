@@ -35,6 +35,60 @@ Self-purchase deduction is 30% of item price. Minimum deduction is 100,000 �
 | `403` | Access denied            | `object`          |
 | `429` | Too many requests        | `object`          |
 
+**Structure `200`:**
+
+- `details` `object[]`
+  - `nmID` `integer<int64>` — WB item number
+  - `sum` `integer<int64>` — Order sum
+  - `currency` `string` — Currency
+  - `dateFrom` `string` — Report start date
+  - `dateTo` `string` — Report end date
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

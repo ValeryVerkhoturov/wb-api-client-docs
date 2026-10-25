@@ -29,6 +29,8 @@ POST /api/v3/dbw/orders/courier
 
 `application/json` — схема `OrdersRequestAPI`, обязательно
 
+- `orders` `integer<int64>[]` — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                  |
@@ -39,6 +41,59 @@ POST /api/v3/dbw/orders/courier
 | `402` | Требуется платёж       | `object`               |
 | `403` | Доступ запрещён        | `Error`                |
 | `429` | Слишком много запросов | `object`               |
+
+**Структура `200`:**
+
+- `orders` `OrderCourierInfo[]`
+  - `courierInfo` `object` — Информация о курьере
+    - `contacts` `object` — Контактные данные курьера
+      - `carNumber` `string` — Номер автомобиля
+      - `fullName` `string` — ФИО курьера
+      - `phone` `string` — Номер телефона
+      - `pTimeFrom` `string` — Дата и время, с которого прибудет курьер
+      - `pTimeTo` `string` — Дата и время, до которого прибудет курьер
+    - `mustBeAssigned` `boolean` — Должен ли быть назначен курьер к текущему моменту: - `false` — нет - `true` — да Если `"mustBeAssigned":true`, а `"contacts":null`, необходимо запросить контакты в [поддержке](https://seller.wildberries.ru/service-desk-v2)
+    - `updatedAt` `string` — Дата и время обновления информации о курьере. Если `null`, информация не обновлялась
+  - `orderID` `integer<int64>` — ID сборочного задания
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

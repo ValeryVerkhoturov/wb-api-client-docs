@@ -39,6 +39,73 @@ GET /api/v1/question
 | `422` | Ошибка обработки параметров запроса | `responseFeedbackQuestionErr` |
 | `429` | Слишком много запросов              | `object`                      |
 
+**Структура `200`:**
+
+- `data` `object`
+  - `id` `string` — ID вопроса
+  - `text` `string` — Текст вопроса
+  - `createdDate` `string` — Дата и время создания вопроса
+  - `state` `string` — Статус вопроса: - `none` - вопрос отклонён продавцом (такой вопрос не отображается на портале покупателей) - `wbRu` - ответ предоставлен, вопрос отображается на сайте покупателей - `suppliersPortalSynch` - новый вопрос
+  - `answer` `object` — Ответ
+    - `text` `string` — Текст ответа
+    - `editable` `boolean` — Можно ли отредактировать ответ (`false` - нельзя, `true` - можно)
+    - `createDate` `string` — Дата и время создания ответа
+  - `productDetails` `object` — Item information
+    - `nmId` `integer<int64>` — Артикул WB
+    - `imtId` `integer<int64>` — ID для [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров
+    - `productName` `string` — Название товара
+    - `supplierArticle` `string` — Артикул продавца
+    - `supplierName` `string` — Имя продавца
+    - `brandName` `string` — Название бренда
+  - `wasViewed` `boolean` — Просмотрен ли вопрос
+  - `isWarned` `boolean` — Признак подозрительного вопроса. Если `true`, то вопрос опубликован, но на портале продавцов вы увидите баннер \*\*Сообщение подозрительное\*\*
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `422`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

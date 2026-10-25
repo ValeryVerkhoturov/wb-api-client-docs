@@ -49,6 +49,51 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `responseBodyContentError403`   |
 | `429` | Too many requests | `object`                        |
 
+**Structure `200`:**
+
+- `data` `object[]` — Data
+  - `okpd2` `string` — OKPD2 code
+  - `description` `string` — Description of the items included in the group
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -30,6 +30,16 @@ The report data is updated once every 2 hours.
 
 `application/json` — schema `TableShippingOfficeRequest`, required
 
+- `nmIDs` `integer<int64>[]` — List of WB item numbers for filtering
+- `subjectIDs` `integer<int32>[]` — List of subcategory IDs for filtering
+- `brandNames` `string[]` — List of brands for filtering
+- `tagIDs` `integer<int64>[]` — List of label IDs for filtering
+- `currentPeriod` `PeriodInv` (required)
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 3 months from today
+  - `end` `string` (required) — End date of the period. No earlier than 3 months from today
+- `stockType` `StockType` (required)
+- `skipDeletedNm` `boolean` (required) — Skip deleted items
+
 ## Responses
 
 | Code  | Description       | Schema                                 |
@@ -40,6 +50,75 @@ The report data is updated once every 2 hours.
 | `402` | Payment required  | `object`                               |
 | `403` | Access denied     | `ErrorObject403`                       |
 | `429` | Too many requests | `object`                               |
+
+**Structure `200`:**
+
+- `data` `TableShippingOfficeResponse`
+  - `regions` `TableShippingOfficeItem[]` — Set of data on shipping regions
+    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
+    - `metrics` `object` — Metrics by region
+      - `stockCount` `integer<int64>` — Current inventory
+      - `stockSum` `integer<int64>` — Current inventory value
+      - `saleRate` `object` — Current DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `toClientCount` `integer<int64>` — On the way to user
+      - `fromClientCount` `integer<int64>` — On the way from user
+    - `offices` `object[]` — Warehouse data. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `[]`
+      - `officeID` `integer<int64>` — Warehouse ID
+      - `officeName` `string` — Warehouse name
+      - `metrics` `object` — Warehouse metrics
+        - `stockCount` `integer<int64>` — Current inventory
+        - `stockSum` `integer<int64>` — Current inventory value
+        - `saleRate` `object` — Current DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+          - `days` `integer<int32>` — Number of days
+            - …
+          - `hours` `integer<int32>` — Number of hours
+            - …
+        - `toClientCount` `integer<int64>` — On the way to user
+        - `fromClientCount` `integer<int64>` — On the way from user
+  - `currency` `Currency`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

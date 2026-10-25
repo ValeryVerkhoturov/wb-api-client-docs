@@ -26,6 +26,10 @@ POST /api/v1/documents/download/all
 
 `application/json` — схема `requestDownload`, необязательно
 
+- `params` `object[]`
+  - `extension` `string` — Формат документа
+  - `serviceName` `string` — Уникальный ID документа
+
 ## Ответы
 
 | Код   | Описание               | Схема     |
@@ -36,6 +40,59 @@ POST /api/v1/documents/download/all
 | `402` | Требуется платёж       | `object`  |
 | `403` | Доступ запрещён        | `object`  |
 | `429` | Слишком много запросов | `object`  |
+
+**Структура `200`:**
+
+- `data` `object`
+  - `fileName` `string` — Название документа
+  - `extension` `string` — Формат документа
+  - `document` `string` — Документ в кодировке base64
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `number` — HTTP статус-код
+- `detail` `string` — Детализация ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

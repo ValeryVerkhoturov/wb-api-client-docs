@@ -42,6 +42,67 @@ The method returns information about the items in the supply.
 | `403` | Access denied     | `object`                          |
 | `429` | Too many requests | `object`                          |
 
+**Structure `200` — `models.GoodInSupply[]`:**
+
+- `barcode` `string` — Item barcode
+- `vendorCode` `string` — Seller item number
+- `nmID` `integer<int64>` — WB item number
+- `needKiz` `boolean` — Is a labeling code [Chestny ZNAK](https://chestnyznak.ru/en) required for this item: - `false` — not required - `true` — required
+- `tnved` `string` — HS-code. If `"needKiz":true` and `"tnved":null`, it is required to specify the \*\*HS-codes\*\* in the [personal account](https://seller.wildberries.ru/new-goods) or through [API](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- `techSize` `string` — Item size specified by the seller
+- `color` `string` — Item color
+- `supplierBoxAmount` `integer<int64>` — Specified in the package, pieces
+- `quantity` `integer<int64>` — Specified in the supply/order, pieces
+- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pieces
+- `acceptedQuantity` `integer<int64>` — Accepted, pieces
+- `unloadingQuantity` `integer<int64>` — Total items at putaway, pieces
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

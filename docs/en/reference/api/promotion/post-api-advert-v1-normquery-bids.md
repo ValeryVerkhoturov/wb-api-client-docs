@@ -29,6 +29,12 @@ You can use this method only for campaigns with manual bids and `cpm` payment mo
 
 `application/json` — schema `V1SetNormQueryBidsRequest`, required
 
+- `bids` `V1SetNormQueryBidsRequestItem[]` (required)
+  - `advertId` `integer<int64>` (required) — Campaign ID
+  - `nmId` `integer<int64>` (required) — WB item number
+  - `normQuery` `string` (required) — Search cluster
+  - `bidMinorUnits` `integer<int64>` (required) — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. The allowed bid increment is specified in the response of the method [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+
 ## Responses
 
 | Code  | Description       | Schema                       |
@@ -38,6 +44,60 @@ You can use this method only for campaigns with manual bids and `cpm` payment mo
 | `401` | Unauthorized      | `object`                     |
 | `403` | Access denied     | `Response4XX`                |
 | `429` | Too many requests | `object`                     |
+
+**Structure `200`:**
+
+- `success` `V1SetNormQueryBidsSuccessResponseItem[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `nmId` `integer<int64>` — WB item number
+  - `normQuery` `string` — Search cluster - a group of similar search queries by which buyers find items
+  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `failed` `NormQueryBidFailResponseItem[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `nmId` `integer<int64>` — WB item number
+  - `normQuery` `string` — Search cluster - a group of similar search queries by which buyers find items
+  - `reason` `string` — Error reason description
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

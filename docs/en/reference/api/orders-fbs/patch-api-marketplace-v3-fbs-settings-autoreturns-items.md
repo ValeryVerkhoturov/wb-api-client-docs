@@ -24,6 +24,9 @@ The method sets item auto-return settings for small-sized items — `"cargoType"
 
 `application/json` — schema `object`, optional
 
+- `chrtIds` `integer<int64>[]` (required) — List of item size IDs in WB systems
+- `type` `string` = `byWarehouse` | `byPickupPoint` (required) — Item auto-return type for small-sized items: - `byWarehouse` — all items sent to the WB warehouse - `byPickupPoint` — all items sent to the pickup point
+
 ## Responses
 
 | Code  | Description       | Schema                                          |
@@ -33,6 +36,51 @@ The method sets item auto-return settings for small-sized items — `"cargoType"
 | `401` | Unauthorized      | `object`                                        |
 | `403` | Access denied     | `Response4XX`                                   |
 | `429` | Too many requests | `object`                                        |
+
+**Structure `200`:**
+
+- `results` `object[]`
+  - `chrtId` `integer<int64>` — Item size ID in WB systems
+  - `error` `object` — Error details
+  - `success` `boolean` — - `true` — item auto-return settings updated
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

@@ -29,6 +29,12 @@ POST /adv/v2/seacat/save-ad
 
 `application/json` — схема `object`, необязательно
 
+- `name` `string` (обязательно) — Название кампании
+- `nms` `integer<int64>[]` — Карточки товаров для кампании. Доступные карточки товаров можно получить с помощью метода [Карточки товаров для кампаний](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/postV2SupplierNms). Максимум 50 товаров (`nm`)
+- `bid_type` `string` = `manual` | `unified` — Тип ставки: - `manual` — ручная - `unified` — единая
+- `payment_type` `string` = `cpm` | `cpc` — Тип оплаты: - `cpm` — за показы - `cpc` — за клик. При создании с этим типом оплаты в кампании автоматически устанавливается минимальная ставка
+- `placement_types` `string[]` — Места размещения: - `search` — в поиске - `recommendations` — в рекомендациях Укажите только для кампании с ручной ставкой
+
 ## Ответы
 
 | Код   | Описание               | Схема     |
@@ -38,6 +44,39 @@ POST /adv/v2/seacat/save-ad
 | `401` | Не авторизован         | `object`  |
 | `403` | Доступ запрещён        | `object`  |
 | `429` | Слишком много запросов | `object`  |
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

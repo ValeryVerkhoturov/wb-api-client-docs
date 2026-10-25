@@ -34,6 +34,8 @@ POST /api/marketplace/v3/click-collect/orders/meta/details
 
 `application/json` — схема `api.OrdersRequestV2`, обязательно
 
+- `ordersIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                           |
@@ -43,6 +45,56 @@ POST /api/marketplace/v3/click-collect/orders/meta/details
 | `401` | Не авторизован         | `object`                        |
 | `403` | Доступ запрещён        | `api.BatchError`                |
 | `429` | Слишком много запросов | `object`                        |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `orders` `object[]` — Идентификаторы маркировки сборочных заданий и статусы их валидации
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `isError` `boolean` — Есть ли ошибки
+  - `errors` `object[]` — Информация об ошибке
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — Дополнительная информация об ошибке
+  - `metaDetails` `object[]` — Идентификаторы маркировки и статусы их валидации
+    - `key` `string` — Идентификатор маркировки: - `imei` — [IMEI](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaImei) - `uin` — [УИН](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaUin) - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaGtin) - `sgtin` — [код маркировки](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaSgtin) - `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration) - `originCountryCode` — [числовой код страны происхождения товара](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration) из [Общероссийского классификатора стран мира](https://esnsi.gosuslugi.ru/classifiers/16269)
+    - `value` `string` — Значение идентификатора маркировки
+    - `decision` `string` — Статусы проверки идентификатора маркировки. - `imei` - `filled` — Маркировка закреплена за сборочным заданием, проверка не требуется - `optional` — Маркировка не закреплена за сборочным заданием и не обязательна. Проверка пройдена - `deadlineExceeded` — Проверка маркировки не завершена и будет продолжена. Проверка может завершиться и успешно, и неуспешно - `imeiMaySell` — Товар допущен к продаже. Проверка пройдена - `imeiSoldB2B` — Товар продан покупателю B2B, допущен к продаже повторно. Проверка пройдена - `pending` — Проверка маркировки продолжается. Дождитесь изменения статуса проверки - `required` — Маркировка обязательна и не закреплена за сборочным заданием. Проверка не пройдена - `imeiInvalidFormat` — Указан неверный формат маркировки. Проверка не пройдена - `imeiAlreadySold` — Товар с этим IMEI уже продан. Проверка не пройдена - `uin` - `filled` — Маркировка закреплена за сборочным заданием, проверка не требуется - `optional` — Маркировка не закреплена за сборочным заданием и не обязательна. Проверка пройдена - `required` — Маркировка обязательна и не закреплена за сборочным заданием. Проверка не пройдена - `sgtin` - `filled` — Маркировка закреплена за сборочным заданием, проверка не требуется - `optional` — Маркировка не закреплена за сборочным заданием и не обязательна. Проверка пройдена - `deadlineExceeded` — Проверка маркировки не завершена и будет продолжена. Проверка может завершиться и успешно, и неуспешно - `sgtinIntroduced` — Товар допущен к продаже. Проверка пройдена - `sgtinSoldB2B` — Товар продан покупателю B2B, допущен к продаже повторно. Проверка пройдена - `pending` — Проверка маркировки продолжается. Дождитесь изменения статуса проверки - `required` — Маркировка обязательна и не закреплена за сборочным заданием. Проверка не пройдена - `sgtinInvalidFormat` — Указан неверный формат маркировки. Проверка не пройдена - `sgtinNotFound` — Маркировка не найдена в [Честном знаке](https://chestnyznak.ru). Проверка не пройдена - `sgtinEmitted` — Маркировка эмитирована. Проверка не пройдена - `sgtinApplied` — Не пройдена процедура Ввод в оборот. Проверка не пройдена - `sgtinWrittenOff` — Списан. Проверка не пройдена - `sgtinRetired` — Выбыл. Проверка не пройдена - `sgtinWithdrawn` — Выбыл. Проверка не пройдена - `sgtinDisaggregated` — Расформирован. Проверка не пройдена - `sgtinDisaggregation` — Расформирован. Проверка не пройдена - `sgtinAppliedNotPaid` — Не оплачен. Проверка не пройдена - `gtin` - `filled` — Маркировка закреплена за сборочным заданием, проверка не требуется - `optional` — Маркировка не закреплена за сборочным заданием и не обязательна. Проверка пройдена - `required` — Маркировка обязательна и не закреплена за сборочным заданием. Проверка не пройдена - `customsDeclaration` - `filled` — Маркировка закреплена за сборочным заданием, проверка не требуется - `optional` — Маркировка не закреплена за сборочным заданием и не обязательна. Проверка пройдена - `required` — Маркировка обязательна и не закреплена за сборочным заданием. Проверка не пройдена
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

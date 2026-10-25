@@ -41,6 +41,90 @@ GET /api/v1/supplies/{ID}
 | `404` | Не найдено             | `models.ErrorModel`    |
 | `429` | Слишком много запросов | `object`               |
 
+**Структура `200`:**
+
+- `phone` `string` — Телефон пользователя, создавшего поставку
+- `statusID` `integer<int64>` = `1` | `2` | `3` | `4` | `5` | `6` — ID статуса поставки: - `1` — Не запланировано - `2` — Запланировано - `3` — Отгрузка разрешена - `4` — Идёт приёмка - `5` — Принято - `6` — Отгружено на воротах
+- `virtualTypeID` `integer<int64>` — ID типа виртуальной поставки. Отображается только для поставок с `"boxTypeID":0`. - `0` — Перенос остатков - `1` — Обезличка - `4` — QR-поставка - `5` — Допринято - `6` — Скан-приёмка
+- `boxTypeID` `integer<int64>` — ID типа поставки: - `0` — Без коробов (виртуальная поставка) - `1` и `2` — Короба - `5` — Монопаллеты - `6` — Суперсейф
+- `createDate` `string` — Дата и время создания поставки
+- `supplyDate` `string` — Плановая дата отгрузки поставки
+- `factDate` `string` — Дата фактической отгрузки поставки
+- `updatedDate` `string` — Дата изменения поставки
+- `warehouseID` `integer<int64>` — ID склада, на который планируется поставка
+- `warehouseName` `string` — Название склада, на который планируется поставка
+- `actualWarehouseID` `integer<int64>` — ID склада, на который поставка была привезена
+- `actualWarehouseName` `string` — Название склада, на который поставка привезена
+- `transitWarehouseID` `integer<int64>` — ID транзитного склада
+- `transitWarehouseName` `string` — Название транзитного склада
+- `acceptanceCost` `number` — Предварительная стоимость приёмки, ₽
+- `paidAcceptanceCoefficient` `number` — Коэффициент приёмки
+- `rejectReason` `string` — Причина, по которой поставка не может быть принята
+- `supplierAssignName` `string` — Краткое название продавца
+- `storageCoef` `string` — Коэффициент хранения
+- `deliveryCoef` `string` — Коэффициент логистики
+- `quantity` `integer<int64>` — Добавлено в поставку/заказ, шт
+- `readyForSaleQuantity` `integer<int64>` — Поступило в продажу, шт
+- `acceptedQuantity` `integer<int64>` — Принято, шт
+- `unloadingQuantity` `integer<int64>` — Количество товара, находящегося на раскладке, шт
+- `depersonalizedQuantity` `integer<int64>` — Количество обезличенного товара, шт
+- `discrepancies` `integer<int64>` — Расхождения между заявленным и фактическим количеством товара в поставке. Только при `"statusID":5`
+- `isBoxOnPallet` `boolean` — Тип поставки — **Поштучная палета**: - `true` — да - `false` — нет Поле возвращается только при `"boxTypeID": 2`
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -36,6 +36,9 @@ POST /api/marketplace/v3/dbw/orders/meta/delete
 
 `application/json` — схема `api.OrdersMetaDleteRequestV2`, обязательно
 
+- `key` `string` = `imei` | `uin` | `gtin` | `sgtin` (обязательно) — Название идентификатора маркировки для удаления. Передаётся только одно значение
+- `ordersIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                                  |
@@ -46,6 +49,55 @@ POST /api/marketplace/v3/dbw/orders/meta/delete
 | `402` | Требуется платёж       | `object`                               |
 | `403` | Доступ запрещён        | `Error`                                |
 | `429` | Слишком много запросов | `object`                               |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса. Отображается для ответов с ошибками
+- `results` `object[]`
+  - `errors` `object[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` - `409`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `ImeiIsNotFilled` — не заполнен IMEI
+  - `isError` `boolean` — Есть ли ошибки
+  - `orderId` `integer<int64>` — ID сборочного задания с успешно обновлёнными данными
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

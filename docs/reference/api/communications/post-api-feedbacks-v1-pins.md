@@ -29,6 +29,10 @@ POST /api/feedbacks/v1/pins
 
 `application/json` — схема `openapi.PinReviewItem[]`, обязательно
 
+- `pinMethod` `string` = `tariff` | `subscription` (обязательно) — Метод закрепления: - `subscription` — подписка Джем - `tariff` — тарифная опция
+- `pinOn` `string` = `nm` | `imt` (обязательно) — Место закрепления отзыва: - `nm` — карточка товара - `imt` — группа [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров
+- `feedbackId` `string` (обязательно) — ID отзыва
+
 ## Ответы
 
 | Код   | Описание               | Схема                   |
@@ -39,6 +43,64 @@ POST /api/feedbacks/v1/pins
 | `402` | Требуется платёж       | `object`                |
 | `403` | Доступ запрещён        | `respond.ResultErr`     |
 | `429` | Слишком много запросов | `object`                |
+
+**Структура `200`:**
+
+- `data` `object[]`
+  - `feedbackId` `string` — ID отзыва
+  - `pinId` `integer<int64>` — ID операции закрепления. Если поле отсутствует — закрепить отзыв не удалось
+  - `pinMethod` `string` = `tariff` | `subscription` — Метод закрепления: - `subscription` — подписка Джем - `tariff` — тарифная опция
+  - `pinOn` `string` = `nm` | `imt` — Место закрепления отзыва: - `nm` — карточка товара - `imt` — группа [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров
+  - `isErrors` `boolean` — Есть ли ошибки
+  - `errors` `openapi.ResultErr[]` — Детали ошибок
+    - `origin` `string` — ID внутреннего сервиса WB
+    - `detail` `string` — Детали ошибки
+    - `requestId` `string` — ID запроса
+    - `status` `string` = `feedbackNotFound` | `itemNotFound` | `feedbackMismatch` | `itemNoImages` | `feedbackExcluded` | `imtNotDisplayed` | `globalLimitReached` | `unitLimitReached` | `tariffRestriction` | `subscriptionRestriction` | `alreadyPinned` | `bodyNotValid` — Статус
+    - `title` `string` — Заголовок ошибки
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

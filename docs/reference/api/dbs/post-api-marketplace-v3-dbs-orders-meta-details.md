@@ -34,6 +34,8 @@ POST /api/marketplace/v3/dbs/orders/meta/details
 
 `application/json` — схема `api.OrdersRequestV2`, обязательно
 
+- `ordersIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                           |
@@ -44,6 +46,61 @@ POST /api/marketplace/v3/dbs/orders/meta/details
 | `402` | Требуется платёж       | `object`                        |
 | `403` | Доступ запрещён        | `api.BatchError`                |
 | `429` | Слишком много запросов | `object`                        |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `orders` `object[]` — Идентификаторы маркировки сборочных заданий и статусы их валидации
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `isError` `boolean` — Есть ли ошибки
+  - `errors` `object[]` — Информация об ошибке
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — Дополнительная информация об ошибке
+  - `metaDetails` `object[]` — Идентификаторы маркировки и статусы их валидации
+    - `key` `string` — Идентификатор маркировки: - `imei` — [IMEI](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaImei) - `uin` — [УИН](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaUin) - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaGtin) - `sgtin` — [код маркировки](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin) - `customsDeclaration` — [номер ДТ](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration) - `originCountryCode` — [числовой код страны происхождения](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaCustomsDeclaration) из [Общероссийского классификатора стран мира](https://esnsi.gosuslugi.ru/classifiers/16269) post)
+    - `value` `string` — Значение идентификатора маркировки
+    - `decision` `string` — Статус проверки: - `imei` - `pending` — Маркировка на проверке - `optional` — Маркировка не обязательна - `filled` — Валидация пройдена - `deadlineExceeded` — Валидация пройдена - `imeiMaySell` — Товар допущен к продаже. Валидация пройдена - `imeiSoldB2B` — Товар продан покупателю B2B, допущен к продаже повторно. Валидация пройдена - `required` — Обязательная маркировка не заполнена. Валидация не пройдена - `imeiInvalidFormat` — Неверный формат маркировки. Валидация не пройдена - `imeiAlreadySold` — Товар с этим IMEI уже продан. Валидация не пройдена - `uin` - `optional` — Маркировка не обязательна - `filled` — Валидация пройдена - `sgtin` - `pending` — Маркировка на проверке - `optional` — Маркировка не обязательна - `filled` — Валидация пройдена - `deadlineExceeded` — Валидация пройдена - `sgtinIntroduced` — Товар допущен к продаже. Валидация пройдена - `sgtinSoldB2B` — Товар продан покупателю B2B, допущен к продаже повторно. Валидация пройдена - `required` — Обязательная маркировка не заполнена. Валидация не пройдена - `sgtinInvalidFormat` — Неверный формат маркировки. Валидация не пройдена - `sgtinNotFound` — Маркировка не найдена в [Честном Знаке](https://chestnyznak.ru). Валидация не пройдена - `sgtinEmitted` — Маркировка эмитирована. Валидация не пройдена - `sgtinApplied` — Не пройдена процедура Ввод в оборот. Валидация не пройдена - `sgtinWrittenOff` — Списан. Валидация не пройдена - `sgtinRetired` — Выбыл. Валидация не пройдена - `sgtinWithdrawn` — Выбыл. Валидация не пройдена - `sgtinDisaggregation` — Расформирован. Валидация не пройдена - `sgtinDisaggregated` — Расформирован. Валидация не пройдена - `sgtinAppliedNotPaid` — Не оплачен. Валидация не пройдена - `gtin` - `optional` — Маркировка не обязательна - `filled` — Валидация пройдена - `customsDeclaration` - `optional` — Маркировка не обязательна - `filled` — Валидация пройдена
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

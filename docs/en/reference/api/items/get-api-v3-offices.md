@@ -33,6 +33,46 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `Error`                   |
 | `429` | Too many requests | `object`                  |
 
+**Structure `200` — `Office[]`:**
+
+- `federalDistrict` `string` — Federal district of the WB office. If `null`, the office is located outside the Russian Federation or the federal district is not specified
+- `address` `string` — Address
+- `name` `string` — Name
+- `city` `string` — City
+- `id` `integer<int64>` — ID
+- `longitude` `number<float64>` — Longitude
+- `latitude` `number<float64>` — Latitude
+- `cargoType` `integer<int64>` = `1` | `3` — The type of items a warehouse can accept: - `1` — small-sized items - `3` — dimensional cargo+ (CD+)
+- `deliveryType` `integer<int64>` = `1` | `2` | `3` | `5` | `6` — The type of deliveries: - `1` — Fulfillment By WB (FBS) - `2` — Delivery By Seller (DBS) - `3` — Delivery WB (DBW) - `5` — In-Store Pickup (C&C) - `6` — Express Delivery By Seller (EDBS)
+- `selected` `boolean` — The flag indicating that the office has already been selected by the seller
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error details
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

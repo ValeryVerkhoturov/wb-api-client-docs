@@ -35,6 +35,13 @@ POST /api/v1/invite
 
 `application/json` — схема `createInviteRequest`, обязательно
 
+- `access` `object[]` — Настройки доступа к разделам профиля продавца
+  - `code` `string` = `balance` | `brands` | `changeJam` | `discountPrice` | `finance` | `showcase` | `suppliersDocuments` | `supply` | `questions` | `pinFeedbacks` | `pointsForReviews` | `feedbacks` | `oldAnalyticsReports` | `marketplace` | `brandsFlow` | `copyrightComplaints` | `pretrialClaims` | `sellersChat` | `brandzone` | `brandzoneSubscribe` (обязательно) — Код раздела профиля продавца, к которому пользователь получит доступ: * `balance` — Просмотр баланса и вывод средств * `brands` — Управление брендами * `changeJam` — Доступ к подключению подписки **Джем**: **А/Б тесты**, отметки на фото, автозапуски видео, сравнение карточек * `discountPrice` — Изменение цен на товары, управление скидками и акциями * `finance` — Финансовая аналитика. Статистика по балансу, финансовые отчёты, история платежей * `showcase` — Управление витриной магазина * `suppliersDocuments` — Просмотр и скачивание документов по работе с площадкой * `supply` — Создание и управление поставками FBW * `questions` — Просмотр и ответы на вопросы покупателей * `pinFeedbacks` — Возможность закреплять и откреплять отзывы * `pointsForReviews` — Баллы за отзывы * `feedbacks` — Просмотр и ответы на отзывы покупателей * `oldAnalyticsReports` — Отчёты * `marketplace` — Свой склад * `brandsFlow` — Мои бренды * `copyrightComplaints` — Обращения правообладателей * `pretrialClaims` — Досудебные претензии * `sellersChat` — Чат с покупателями * `brandzone` — Бренд-зона. Публикация изменений * `brandzoneSubscribe` — Управление подпиской бренд-зоны
+  - `disabled` `boolean` (обязательно) — * `true` — доступ к разделу запрещён * `false` — доступ к разделу разрешён
+- `invite` `object` (обязательно)
+  - `phoneNumber` `string` (обязательно) — Номер телефона пользователя для приглашения. **Поддерживаются номера телефонов из стран:**• Азербайджан • Армения • Барбадос • Беларусь • Бразилия • Гонконг • Грузия • Италия • Казахстан • Китай • Кыргызстан • Макао • ОАЭ • Россия • Сербия • Таджикистан • Турция • Узбекистан • Чехия • Швеция
+  - `position` `string` — Должность пользователя
+
 ## Ответы
 
 | Код   | Описание               | Схема                  |
@@ -44,6 +51,54 @@ POST /api/v1/invite
 | `401` | Не авторизован         | `object`               |
 | `403` | Доступ запрещён        | `Response4XX`          |
 | `429` | Слишком много запросов | `object`               |
+
+**Структура `200`:**
+
+- `inviteID` `string<uuid>` — ID приглашения
+- `expiredAt` `string` — Дата и время окончания срока действия приглашения
+- `isSuccess` `boolean` — - `true` — приглашение создано успешно - `false` — повторите запрос
+- `inviteUrl` `string` — URL приглашения, по которому должен перейти пользователь
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Название внутреннего сервиса
+- `status` `number` — HTTP статус-код
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

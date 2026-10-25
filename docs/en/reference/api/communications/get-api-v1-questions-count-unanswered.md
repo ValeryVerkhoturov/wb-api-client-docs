@@ -32,6 +32,50 @@ The method allows you to get the number of unanswered questions for today and fo
 | `403` | Access denied     | `responseFeedbackQuestionErr`              |
 | `429` | Too many requests | `object`                                   |
 
+**Structure `200`:**
+
+- `data` `object`
+  - `countUnanswered` `integer<int64>` — Number of unanswered questions
+  - `countUnansweredToday` `integer<int64>` — Number of unanswered questions for today
+- `error` `boolean` — Error presence
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

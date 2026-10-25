@@ -34,6 +34,8 @@ Possible label identifiers:
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                          |
@@ -43,6 +45,56 @@ Possible label identifiers:
 | `401` | Unauthorized      | `object`                        |
 | `403` | Access denied     | `api.BatchError`                |
 | `429` | Too many requests | `object`                        |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID
+- `orders` `object[]` — Assembly orders label identifiers and validation statuses
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `isError` `boolean` — Are there any errors
+  - `errors` `object[]` — Error data
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — Additional error data
+  - `metaDetails` `object[]` — Label identifiers and their validation statuses
+    - `key` `string` — Label identifier: - `imei` — [IMEI](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaImei) - `uin` — [UIN](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaUin) - `gtin` — [GTIN](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaGtin) - `sgtin` — [labeling code Chestny ZNAK](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaSgtin) - `customsDeclaration` — [customs declaration number](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration) - `originCountryCode` — [numeric code of the country of origin](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupLabelIdentifiers/operation/postV3ClickCollectOrdersMetaCustomsDeclaration) according to [Russian classification of countries of the world](https://esnsi.gosuslugi.ru/classifiers/16269)
+    - `value` `string` — Label identifier value
+    - `decision` `string` — Label identifiers validation statuses. - `imei` - `filled` — Label identifier is added to the assembly order, validation is not required - `deadlineExceeded` — Label identifier validation is not completed and will continue. The validation can pass or fail - `optional` — Label identifier is not required. Validation passed - `imeiMaySell` — The item is approved for sale. Validation passed - `imeiSoldB2B` — The item was sold to a B2B buyer and approved for sale again. Validation passed - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order. Validation failed - `imeiInvalidFormat` — Invalid format. Validation failed - `imeiAlreadySold` — The item with this IMEI has already been sold. Validation failed - `uin` - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed - `required` — Required label identifier is not added to the assembly order. Validation failed - `sgtin` - `filled` — Label identifier is added to the assembly order, validation is not required - `deadlineExceeded` — Label identifier validation is not completed and will continue. The validation can pass or fail - `optional` — Label identifier is not required. Validation passed - `sgtinIntroduced` — The item is approved for sale. Validation passed - `sgtinSoldB2B` — The item was sold to a B2B buyer and approved for sale again. Validation passed - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order. Validation failed - `sgtinInvalidFormat` — Invalid format. Validation failed - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/). Validation failed - `sgtinEmitted` — Label identifier has been issued. Validation failed - `sgtinApplied` — Putting into circulation not completed. Validation failed - `sgtinWrittenOff` — Written off. Validation failed - `sgtinRetired` — Retired. Validation failed - `sgtinWithdrawn` — Withdrawn. Validation failed - `sgtinDisaggregated` — Disaggregated. Validation failed - `sgtinDisaggregation` — Disaggregation. Validation failed - `sgtinAppliedNotPaid` — Not paid. Validation failed - `gtin` - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed - `required` — Required label identifier is not added to the assembly order. Validation failed - `customsDeclaration` - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed - `required` — Required label identifier is not added to the assembly order. Validation failed
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

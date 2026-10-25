@@ -28,6 +28,9 @@ There is no validation by `feedback ID`: if an incorrect value is provided in th
 
 `application/json` — schema `object`, optional
 
+- `id` `string` (required) — Feedback ID
+- `text` `string` (required) — Reply text
+
 ## Responses
 
 | Code  | Description       | Schema                |
@@ -38,6 +41,51 @@ There is no validation by `feedback ID`: if an incorrect value is provided in th
 | `402` | Payment required  | `object`              |
 | `403` | Access denied     | `object`              |
 | `429` | Too many requests | `object`              |
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

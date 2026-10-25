@@ -67,6 +67,72 @@ Discrepancy upwards:
 | `404` | Not found         | `models.ErrorModel`                                     |
 | `429` | Too many requests | `object`                                                |
 
+**Structure `200` — `models.ItemDiscrepancyResponse[]`:**
+
+- `packageCode` `string` — Package ID
+- `videoUrl` `string` — Video of discrepancies during acceptance
+- `videoStartsAt` `string` — Date and time of video recording of discrepancies during acceptance
+- `videoUnavailable` `boolean` — Is the video available: - `false` — yes - `true` — no
+- `items` `models.DiscrepancyResponseItem[]` — Supply items
+  - `declaredSku` `string` — SKU declared when creating the supply
+  - `discrepancyType` `string` = `surplus` | `shortage` | `re-sorting` — Overall discrepancy type for the box: - `surplus` — more items delivered than declared - `shortage` — fewer items delivered than declared - `re-sorting` — the SKU of the accepted item does not match the one declared when creating the supply
+  - `declaredAmount` `integer<int64>` — Item quantity declared when creating the supply
+  - `actualAmount` `integer<int64>` — Actual item quantity
+  - `discrepancyQuantity` `integer<int64>` — Difference between declared and actual item quantity
+  - `actualSku` `string` — Actual SKU
+  - `skuScans` `models.ItemScans[]` — Item scan results
+    - `scanId` `integer<int64>` — Scan ID
+    - `declaredSku` `string` — SKU declared when creating the supply
+    - `scanTime` `string` — Scan date and time
+    - `discrepancyLabel` `string` = `surplus` | `shortage` | `re-sorting` — Discrepancy type: - `surplus` — more items delivered than declared - `shortage` — fewer items delivered than declared - `re-sorting` — the SKU of the accepted item does not match the one declared when creating the supply
+    - `actualSku` `string` — Actual SKU
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Short error description
+- `detail` `string` — Detailed error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service where the error occurred
+
+**Structure `404`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

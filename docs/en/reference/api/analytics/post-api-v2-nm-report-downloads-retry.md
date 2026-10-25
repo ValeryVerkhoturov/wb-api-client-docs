@@ -26,6 +26,8 @@ The method creates a [repeated generation task](https://dev.wildberries.ru/opena
 
 `application/json` — schema `NmReportRetryReportRequest`, required
 
+- `downloadId` `string<uuid>` — Report ID
+
 ## Responses
 
 | Code  | Description       | Schema                                    |
@@ -35,6 +37,46 @@ The method creates a [repeated generation task](https://dev.wildberries.ru/opena
 | `401` | Unauthorized      | `object`                                  |
 | `403` | Access denied     | `ErrorObject`                             |
 | `429` | Too many requests | `object`                                  |
+
+**Structure `200`:**
+
+- `data` `string` — Notification that report re-generation has started
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

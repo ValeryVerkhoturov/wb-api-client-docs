@@ -30,6 +30,12 @@ The current minimum bid is set for the added items.
 
 `application/json` — schema `object`, required
 
+- `nms` `object[]` (required) — Listings in campaigns
+  - `advert_id` `integer<int64>` (required) — Campaign ID
+  - `nms` `object` (required) — Listings. Maximum of 50 items per campaign
+    - `add` `object` — The listings that need to be added
+    - `delete` `integer<int64>[]` — The listings that need to be deleted
+
 ## Responses
 
 | Code  | Description       | Schema                         |
@@ -39,6 +45,55 @@ The current minimum bid is set for the added items.
 | `401` | Unauthorized      | `object`                       |
 | `403` | Access denied     | `object`                       |
 | `429` | Too many requests | `object`                       |
+
+**Structure `200`:**
+
+- `nms` `object[]` — The result of processing the request
+  - `advert_id` `integer<int64>` — Campaign ID
+  - `nms` `object` — Listings
+    - `added` `integer<int64>[]` — Added listings
+    - `deleted` `integer<int64>[]` — Deleted listings
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

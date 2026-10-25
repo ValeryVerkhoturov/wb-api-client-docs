@@ -27,6 +27,13 @@ POST /api/content/v1/recommendations/set
 
 `application/json` — схема `SetRecomReq`, обязательно
 
+- `recList` `object[]` (обязательно) — Список рекомендаций для товаров
+  - `nmId` `integer<int64>` — Артикул WB
+  - `recommendations` `object[]` — Рекомендуемые товары. Укажите `recomNm` товаров, чтобы добавить их в рекомендации к указанному `nmId`. При отправке пустого массива `[]` все текущие рекомендации для указанного `nmId` будут удалены.
+    - `recomNm` `integer<int64>` — Артикул WB рекомендуемого товара
+    - `sort` `integer<int64>` — Позиция товара в списке рекомендаций. Допустимые значения: - `1`–`20` — фиксированная позиция: - при создании или замене (`replace: true`) задаёт порядок отображения - при добавлении (`replace: false`) вставляет товар на указанную позицию, существующие сдвигаются - `0` — автоматическая сортировка товаров: - при создании или замене (`replace: true`) — в порядке расположения товаров в массиве `recommendations` - при добавлении (`replace: false`) — в конец списка существующих рекомендаций, сохраняя порядок из массива `recommendations`
+- `replace` `boolean` — Действие в запросе: - `false` — добавить новые рекомендации к существующим - `true` — заменить существующие рекомендации новыми
+
 ## Ответы
 
 | Код   | Описание               | Схема                 |
@@ -37,6 +44,61 @@ POST /api/content/v1/recommendations/set
 | `401` | Не авторизован         | `object`              |
 | `403` | Доступ запрещён        | `Response4XX`         |
 | `429` | Слишком много запросов | `object`              |
+
+**Структура `200`:**
+
+- `isError` `boolean` — Есть ли ошибки: - `false` — ошибок нет. Запрос полностью успешен - `true` — ошибки есть
+- `errors` `object[]` — Ошибки. При `"isError":true`
+  - `mainNm` `string` — Значение параметра `nmId`
+  - `recomNm` `string` — Значение параметра `recomNm`
+  - `message` `string` — Сообщение об ошибке
+
+**Структура `208`:**
+
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `title` `string` — Заголовок ответа
+- `detail` `string` — Детали ответа
+
+**Структура `400`:**
+
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

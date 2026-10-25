@@ -39,6 +39,50 @@ GET /adv/v1/upd
 | `403` | Доступ запрещён        | `object`              |
 | `429` | Слишком много запросов | `object`              |
 
+**Структура `200` — `object[]`:**
+
+- `updNum` `integer<int64>` — Номер выставленного документа
+- `updTime` `string<time-date>` — Время списания
+- `updSum` `integer<int64>` — Выставленная сумма в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `advertId` `integer<int64>` — ID кампании
+- `campName` `string` — Название кампании
+- `advertType` `integer<int64>` — Тип кампании
+- `paymentType` `string` — Источник списания: - `Баланс` - `Бонусы` - `Счёт` - `Кэшбэк`
+- `advertStatus` `integer<int64>` — Статус кампании: - `-1` — удалена, процесс удаления будет завершён в течение 10 минут - `4` — готова к запуску - `7` — завершена - `8` — отменена - `9` — активна - `11` — на паузе
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

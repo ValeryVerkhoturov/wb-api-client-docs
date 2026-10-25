@@ -28,6 +28,8 @@ POST /api/v3/stocks/{warehouseId}
 
 `application/json` — схема `object`, обязательно
 
+- `chrtIds` `integer<int64>[]` (обязательно) — Массив ID размеров товаров
+
 ## Ответы
 
 | Код   | Описание               | Схема                                |
@@ -39,6 +41,54 @@ POST /api/v3/stocks/{warehouseId}
 | `403` | Доступ запрещён        | `Error`                              |
 | `404` | Не найдено             | `Error`                              |
 | `429` | Слишком много запросов | `object`                             |
+
+**Структура `200`:**
+
+- `stocks` `object[]`
+  - `chrtId` `integer<int64>` — ID размера товара
+  - `amount` `integer<int64>` — Остаток
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

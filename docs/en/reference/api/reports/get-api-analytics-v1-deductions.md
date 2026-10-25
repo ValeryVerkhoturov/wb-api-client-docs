@@ -44,6 +44,70 @@ The method returns a report with [substitutions and incorrect attachments](https
 | `403` | Access denied     | `Response403Retentions` |
 | `429` | Too many requests | `object`                |
 
+**Structure `200`:**
+
+- `data` `object` (required) — Response data
+  - `reports` `object[]` (required) — Retentions
+    - `dtBonus` `string` — Fine date and time
+    - `nmId` `integer<int64>` — WB item number
+    - `oldShkId` `integer<int64>` — Old item No.
+    - `oldColor` `string` — Old color
+    - `oldSize` `string` — Old Size
+    - `oldSku` `string` — Old SKU
+    - `oldVendorCode` `string` — Old seller `supplierArticle`
+    - `newShkId` `integer<int64>` — New item No.
+    - `newColor` `string` — New color
+    - `newSize` `string` — New size
+    - `newSku` `string` — New SKU
+    - `newVendorCode` `string` — New seller item number
+    - `bonusSumm` `number` — Fine amount
+    - `bonusType` `string` — Fine reason
+    - `photoUrls` `string[]` — Photos of the measurements
+  - `total` `integer<int64>` (required) — Number of retentions in the report. Except `limit` and `offset`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -30,6 +30,10 @@ PUT /api/v3/stocks/{warehouseId}
 
 `application/json` — схема `object`, необязательно
 
+- `stocks` `object[]` (обязательно) — Массив ID размеров товаров и их остатков
+  - `chrtId` `integer<int64>` (обязательно) — ID размера товара
+  - `amount` `integer<int64>` (обязательно) — Остаток
+
 ## Ответы
 
 | Код   | Описание               | Схема                               |
@@ -43,6 +47,62 @@ PUT /api/v3/stocks/{warehouseId}
 | `406` | Не применимо           | `UpdateBlocked`                     |
 | `409` | Конфликт               | `PutV3StocksWarehouseIdResponse409` |
 | `429` | Слишком много запросов | `object`                            |
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `406`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `409` — `object[]`:**
+
+- `data` `object[]` — Дополнительная информация об ошибке
+  - `sku` `string` — Не используется
+  - `chrtId` `integer<int64>` — ID размера
+  - `amount` `integer<int64>` — Остаток
+- `code` `string` — Код ошибки
+- `message` `string` — Детали ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

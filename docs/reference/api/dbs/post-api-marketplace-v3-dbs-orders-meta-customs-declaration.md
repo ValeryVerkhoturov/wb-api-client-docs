@@ -33,6 +33,11 @@ POST /api/marketplace/v3/dbs/orders/meta/customs-declaration
 
 `application/json` — схема `object`, обязательно
 
+- `orders` `object[]` (обязательно)
+  - `customsDeclaration` `string` (обязательно) — Номер ДТ
+  - `orderId` `integer<int64>` (обязательно) — ID сборочного задания
+  - `originCountryCode` `string` (обязательно) — Числовой код страны происхождения товара из [Общероссийского классификатора стран мира](https://esnsi.gosuslugi.ru/classifiers/16269). Необходимо указывать только для сборочных заданий с признаком B2B-продажи `"isB2b":true`
+
 ## Ответы
 
 | Код   | Описание                     | Схема                    |
@@ -45,6 +50,67 @@ POST /api/marketplace/v3/dbs/orders/meta/customs-declaration
 | `404` | Не найдено                   | `Error`                  |
 | `409` | Ошибка добавления маркировки | `Error`                  |
 | `429` | Слишком много запросов       | `object`                 |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `results` `api.StatusSetResponse[]`
+  - `errors` `api.BatchErrorResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` - `409` - `400`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `ImeiIsNotFilled` — не заполнен IMEI - `OrderNotB2B` — операция доступна только для сборочных заданий с признаком B2B-продажи `"isB2b":true` - `InvalidOriginCountryCode` — некорректный код страны происхождения товара
+  - `isError` `boolean` — Есть ли ошибки
+  - `orderId` `integer<int64>` — ID сборочного задания с успешно обновлёнными данными
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `409`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

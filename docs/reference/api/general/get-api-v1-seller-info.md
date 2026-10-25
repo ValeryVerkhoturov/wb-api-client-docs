@@ -33,6 +33,41 @@ GET /api/v1/seller-info
 | `402` | Требуется платёж       | `object`                     |
 | `429` | Слишком много запросов | `object`                     |
 
+**Структура `200`:**
+
+- `name` `string` — Наименование продавца
+- `sid` `string<UUID>` — Уникальный ID продавца на Wildberries, [находящийся в публичном поле токена](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-ustroen-token)
+- `tin` `string` — ИНН
+- `tradeMark` `string` — Торговое наименование продавца
+- `country` `string` — Страна регистрации профиля продавца
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -46,6 +46,67 @@ GET /api/v2/quarantine/goods
 | `422` | Неожидаемый результат  | `ResponseError` |
 | `429` | Слишком много запросов | `object`        |
 
+**Структура `200`:**
+
+- `data` `object` — Данные ответа
+  - `quarantineGoods` `QuarantineItems[]` — Информация о товарах в карантине
+    - `nmID` `integer<int64>` — Артикул WB
+    - `sizeID` `integer<int64>` — Не используется
+    - `techSizeName` `string` — Не используется
+    - `currencyIsoCode4217` `string` — Валюта по стандарту ISO 4217
+    - `newPrice` `number<float>` — Новая цена продавца до скидки
+    - `oldPrice` `number<float>` — Текущая цена продавца до скидки
+    - `newDiscount` `integer<int64>` — Новая скидка продавца, %
+    - `oldDiscount` `integer<int64>` — Текущая скидка продавца, %
+    - `priceDiff` `number<float>` — Разница: `newPrice` * (1 - `newDiscount` / 100) - `oldPrice` * (1 - `oldDiscount` / 100)
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `422`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

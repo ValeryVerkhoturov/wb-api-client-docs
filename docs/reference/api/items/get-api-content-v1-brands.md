@@ -40,6 +40,70 @@ GET /api/content/v1/brands
 | `404` | Не найдено             | `BrandsResponseError` |
 | `429` | Слишком много запросов | `object`              |
 
+**Структура `200`:**
+
+- `brands` `object[]`
+  - `id` `integer<int64>` — ID бренда
+  - `logoUrl` `string` — URL логотипа бренда
+  - `name` `string` — Название бренда
+- `next` `integer<int64>` — Параметр пагинации. Укажите это значение в запросе, чтобы получить следующий пакет данных. Если поле отсутствует, вы получили все данные
+- `total` `integer<int64>` — Общее количество брендов предмета
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `errors` `object[]`
+  - `message` `string` — Текст ошибки
+  - `location` `string` — Параметр, где произошла ошибка
+  - `value` `object` — Значение параметра, где произошла ошибка
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `errors` `object[]`
+  - `message` `string` — Текст ошибки
+  - `location` `string` — Параметр, где произошла ошибка
+  - `value` `object` — Значение параметра, где произошла ошибка
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

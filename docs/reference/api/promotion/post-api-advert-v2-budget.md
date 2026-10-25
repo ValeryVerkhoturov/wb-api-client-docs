@@ -31,6 +31,8 @@ POST /api/advert/v2/budget
 
 `application/json` — схема `V2BudgetRequest`, обязательно
 
+- `advertIds` `integer<int64>[]` (обязательно) — Список ID кампаний
+
 ## Ответы
 
 | Код   | Описание               | Схема              |
@@ -40,6 +42,46 @@ POST /api/advert/v2/budget
 | `401` | Не авторизован         | `object`           |
 | `403` | Доступ запрещён        | `object`           |
 | `429` | Слишком много запросов | `object`           |
+
+**Структура `200`:**
+
+- `adverts` `V1BudgetAdvert[]` — Данные по кампаниям
+  - `advertId` `integer<int64>` — ID кампании
+  - `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `total` `integer<int64>` — Бюджет кампании в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

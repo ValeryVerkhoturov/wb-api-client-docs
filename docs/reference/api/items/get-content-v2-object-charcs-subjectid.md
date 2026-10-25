@@ -50,6 +50,58 @@ GET /content/v2/object/charcs/{subjectId}
 | `403` | Доступ запрещён        | `responseBodyContentError403`           |
 | `429` | Слишком много запросов | `object`                                |
 
+**Структура `200`:**
+
+- `data` `object[]` — Данные
+  - `charcID` `integer<int64>` — ID характеристики
+  - `subjectName` `string` — Название предмета
+  - `subjectID` `integer<int64>` — ID предмета
+  - `name` `string` — Название характеристики
+  - `required` `boolean` — - `true` — характеристику необходимо обязательно указать в карточке товара - `false` — характеристику необязательно указывать
+  - `unitName` `string` — Единица измерения
+  - `maxCount` `integer<int64>` — Максимальное количество значений, которое можно присвоить характеристике при [создании](https://dev.wildberries.ru/openapi/item-management#tag/listingItems) или [редактировании](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) карточек товаров. Используется только для характеристик с `"charcType":1` — массив строк. Характеристикам с `"charcType":4` — число, можно присвоить только одно значение. Если `"maxCount":0`, количество значений не ограничено
+  - `popular` `boolean` — Характеристика популярна у пользователей (true - да, false - нет)
+  - `charcType` `integer<int64>` — Тип данных характеристики, который необходимо использовать при [создании](https://dev.wildberries.ru/openapi/item-management#tag/listingItems) или [редактировании](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) карточек товаров: - `1` — массив строк - `4` — число (целое либо с десятичной дробью) - `0` — характеристика не используется
+  - `hasFilter` `boolean` — Ключевая характеристика. Является ли характеристика значимой для покупателей: - `true` — да - `false` — нет
+  - `isVariable` `boolean` — Признак [меняющейся характеристики](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov). Значение размечает характеристики, по которым варианты отличаются друг от друга: - `true` — варианты товара отличаются по этой характеристике - `false` — варианты товара не отличаются по этой характеристике
+  - `existNamedField` `boolean` — Как передать характеристику в запросах на [cоздание](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload), [создание с присоединением](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd) и [редактирование](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) карточек товара: - `true` — в соответствующем параметре запроса - `false` — внутри массива `characteristics`
+- `error` `boolean` — Флаг наличия ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `400`:**
+
+- один из вариантов: `responseBodyContentError400`, `responseBodyContentError400InvalidSyntax`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

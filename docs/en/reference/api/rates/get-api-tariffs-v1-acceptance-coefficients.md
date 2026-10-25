@@ -40,6 +40,57 @@ The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?i
 | `404` | Not found         | —                                        |
 | `429` | Too many requests | `object`                                 |
 
+**Structure `200` — `models.AcceptanceCoefficient[]`:**
+
+- `date` `string` — Start date of the coefficient
+- `coefficient` `number` — Acceptance coefficient: - `-1` — acceptance is not available, regardless of the value of the field `allowUnload` - `0` — free acceptance - from `1` — acceptance cost multiplier
+- `warehouseID` `integer<int64>` — Warehouse ID. Use it to get [information about the warehouse](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
+- `warehouseName` `string` — Warehouse name
+- `allowUnload` `boolean` — Availability of acceptance for deliveries of this type, see the value of the field `boxTypeID`: - `true` — available - `false` — not available
+- `boxTypeID` `integer<int64>` — Supply type ID: - `2` — Box - `5` — Monopallets - `6` — Super safe For the \*\*QR-delivery with boxes\*\* supply type the field is not returned
+- `storageCoef` `string` — Storage coefficient
+- `deliveryCoef` `string` — Logistic coefficient
+- `deliveryBaseLiter` `string` — Cost of logistic for the first liter
+- `deliveryAdditionalLiter` `string` — Cost of logistic for each additional liter
+- `storageBaseLiter` `string` — Storage cost: - for pallets — cost per pallet - for boxes — storage cost for the first liter
+- `storageAdditionalLiter` `string` — Storage cost for each additional liter: - for pallets — will always be `null` since the storage cost per pallet is defined in `StorageBaseLiter` - for boxes — storage cost for each additional liter
+- `isSortingCenter` `boolean` — Warehouse type: - `true` — a sorting center (SC) - `false` — regular
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

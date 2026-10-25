@@ -45,6 +45,52 @@ The method returns [Jam](https://seller.wildberries.ru/monetization/jam) subscri
 | `403` | Access denied     | `Response4XX`          |
 | `429` | Too many requests | `object`               |
 
+**Structure `200`:**
+
+- `state` `string` = `active` | `inactive` — Subscription state: - `active` — active - `inactive` — expired or canceled
+- `activationSource` `string` = `constructor` | `jam` — Subscription activation source: - `constructor` — purchased via the **Plan Builder** section - `jam` — purchased via the **Jam Subscription** section
+- `level` `string` = `standard` | `advanced` | `premium` — Subscription level: - `standard` - `advanced` - `premium`
+- `since` `string` — The date and time when the subscription was first activated. Does not change upon renewal or reactivation
+- `till` `string` — Subscription end date and time
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

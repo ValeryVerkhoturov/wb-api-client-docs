@@ -26,6 +26,10 @@ POST /api/v1/seller/message
 
 `multipart/form-data` — схема `object`, обязательно
 
+- `replySign` `string` (обязательно) — Подпись чата. Можно получить из [информации по чату](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats) или [данных события](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents), если в событии есть поле `"isNewChat": true`.
+- `message` `string` — Текст сообщения. Максимум 1000 символов.
+- `file` `string<binary>[]` — Файлы, формат JPEG, PDF или PNG, максимальный размер — 5 Мб каждый. Максимальный суммарный размер файлов — 30 Мб.
+
 ## Ответы
 
 | Код   | Описание               | Схема                            |
@@ -36,6 +40,61 @@ POST /api/v1/seller/message
 | `402` | Требуется платёж       | `object`                         |
 | `403` | Доступ запрещён        | `object`                         |
 | `429` | Слишком много запросов | `object`                         |
+
+**Структура `200`:**
+
+- `errors` `string[]` — Ошибки загрузки файлов, если есть
+- `result` `object`
+  - `addTime` `integer<int64>` — Дата и время создания чата
+  - `chatID` `string` — ID чата
+  - `sign` `string` — Подпись чата
+
+**Структура `400`:**
+
+- `status` `number` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `error` `string` — Текст ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

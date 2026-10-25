@@ -32,6 +32,25 @@ The report data is updated once every 2 hours.
 
 `application/json` — schema `TableGroupRequest`, required
 
+- `currentPeriod` `Period` (required)
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 365 days from today
+  - `end` `string` (required) — End date of the period. No earlier than 365 days from today
+- `pastPeriod` `pastPeriod`
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 365 days from today
+  - `end` `string` (required) — End date of the period. No later than the day before the start date `currentPeriod`. No earlier than 365 days from today
+- `nmIds` `integer<int32>[]` — List of WB item numbers for filtering
+- `subjectIds` `integer<int32>[]` — List of subcategory IDs for filtering
+- `brandNames` `string[]` — List of brands for filtering
+- `tagIds` `integer<int64>[]` — List of label IDs for filtering
+- `orderBy` `OrderByGrTe` (required)
+  - `field` `string` = `avgPosition` | `openCard` | `addToCart` | `openToCart` | `orders` | `cartToOrder` | `visibility` (required) — Field for sorting: - `avgPosition` — by average position - `addToCart` — by adds-to-Cart - `openCard` — by click-throughs - `orders` — by number of items ordered - `cartToOrder` — by conversion to order from search - `openToCart` — by conversion to cart from search - `visibility` — by item visibility
+  - `mode` `string` = `asc` | `desc` (required) — Order of sorting: - `asc` — ascending - `desc` — descending
+- `positionCluster` `PositionCluster` (required)
+- `includeSubstitutedSKUs` `boolean` — Show data for direct queries with [promo items](https://seller.wildberries.ru/help-center/article/A-524)
+- `includeSearchTexts` `boolean` — Show data for search queries without promo items
+- `limit` `integer<int64>` (required) — Number of item groups in the response
+- `offset` `integer<int64>` (required) — From which element to start outputting data
+
 ## Responses
 
 | Code  | Description       | Schema                                     |
@@ -42,6 +61,116 @@ The report data is updated once every 2 hours.
 | `402` | Payment required  | `object`                                   |
 | `403` | Access denied     | `ErrorObject403`                           |
 | `429` | Too many requests | `object`                                   |
+
+**Structure `200`:**
+
+- `data` `TableGroupResponse`
+  - `groups` `TableGroupItem[]` — List of item groups for the table
+    - `subjectName` `string` — Subcategory name
+    - `subjectId` `integer<int64>` — Subcategory ID
+    - `brandName` `string` — Brand
+    - `tagName` `string` — Label name
+    - `tagId` `integer<int64>` — Label ID
+    - `metrics` `object` — Item metrics in the table
+      - `avgPosition` `object` — Average item position in search results
+        - `current` `integer<int64>` — Current average position
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `openCard` `object` — Click-throughs from search
+        - `current` `integer<int64>` — Current click-throughs
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `addToCart` `object` — Adds-to-Cart from search
+        - `current` `integer<int64>` — Current number
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `openToCart` `object` — Conversion to cart from search — the ratio of item additions to the cart compared to all transitions to the listing from the search
+        - `current` `integer<int64>` — Current conversion
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `orders` `object` — Items ordered from search
+        - `current` `integer<int64>` — Current number
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `cartToOrder` `object` — Conversion to order from search — the ratio of items ordered to all additions of the item from search to the cart
+        - `current` `integer<int64>` — Current conversion
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `visibility` `object` — Item visibility percent in search results
+        - `current` `integer<int64>` — Current visibility percent
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+    - `items` `TableItem[]` — List of the group items
+      - `nmId` `integer<int64>` — WB item number
+      - `name` `string` — Item name
+      - `vendorCode` `string` — Seller item number
+      - `subjectName` `string` — Subcategory name
+      - `brandName` `string` — Brand
+      - `mainPhoto` `string` — URL of the main photo of the listing
+      - `isAdvertised` `boolean` — Is the item being promoted in search results
+      - `isSubstitutedSKU` `boolean` — If the item was searched by the promo item. The field will be in the response if the request contains `includeSubstitutedSKUs` and/or `includeSearchTexts`
+      - `isCardRated` `boolean` — If the listing has a rating
+      - `rating` `number<float64>` — Listing rating
+      - `feedbackRating` `number<float64>` — Feedbacks rating
+      - `price` `object` — Price
+        - `minPrice` `integer<int64>` — Minimal price
+        - `maxPrice` `integer<int64>` — Maximal price
+      - `avgPosition` `object` — Average item position in search results
+        - `current` `integer<int64>` — Current average position
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `openCard` `object` — Click-throughs from search
+        - `current` `integer<int64>` — Current click-throughs
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `addToCart` `object` — Adds-to-Cart from search
+        - `current` `integer<int64>` — Current number
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `openToCart` `object` — Conversion to cart from search — the ratio of item additions to the cart compared to all transitions to the listing from the search
+        - `current` `integer<int64>` — Current conversion
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `orders` `object` — Items ordered from search
+        - `current` `integer<int64>` — Current number
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `cartToOrder` `object` — Conversion to order from search — the ratio of items ordered to all additions of the item from search to the cart
+        - `current` `integer<int64>` — Current conversion
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `visibility` `object` — Item visibility percent in search results
+        - `current` `integer<int64>` — Current visibility percent
+        - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+  - `currency` `Currency`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

@@ -28,6 +28,8 @@ POST /api/marketplace/v3/click-collect/orders/status/receive
 
 `application/json` — схема `api.OrdersRequestV2`, необязательно
 
+- `ordersIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -38,6 +40,57 @@ POST /api/marketplace/v3/click-collect/orders/status/receive
 | `402` | Требуется платёж       | `object`                 |
 | `403` | Доступ запрещён        | `api.BatchError`         |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `200`:**
+
+- `requestId` `object` — Уникальный ID запроса
+- `results` `api.StatusSetResponse[]`
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `isError` `boolean` — Есть ли ошибки
+  - `errors` `api.BatchErrorResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` - `409` - `400`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `ImeiIsNotFilled` — не заполнен IMEI - `OrderNotB2B` — операция доступна только для сборочных заданий с признаком B2B-продажи `"isB2b":true` - `InvalidOriginCountryCode` — некорректный код страны происхождения товара
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

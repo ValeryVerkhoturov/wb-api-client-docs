@@ -28,6 +28,8 @@ POST /api/v1/analytics/excise-report
 
 `application/json` — схема `ExciseReportRequest`, необязательно
 
+- `countries` `string[]` — Код стран по стандарту ISO 3166-2. Чтобы получить данные по всем странам, оставьте параметр пустым
+
 ## Ответы
 
 | Код   | Описание               | Схема                  |
@@ -38,6 +40,68 @@ POST /api/v1/analytics/excise-report
 | `402` | Требуется платёж       | `object`               |
 | `403` | Доступ запрещён        | `object`               |
 | `429` | Слишком много запросов | `object`               |
+
+**Структура `200`:**
+
+- `response` `models.ExciseReportResponse`
+  - `data` `object[]`
+    - `name` `string` — Страна покупателя
+    - `price` `number` — Цена товара, с НДС
+    - `currency_name_short` `string` — Валюта
+    - `excise_short` `string` — Код маркировки
+    - `barcode` `string` — Баркод
+    - `nm_id` `integer<int64>` — Артикул WB
+    - `operation_type_id` `integer<int64>` — Тип операции, если есть: * `1` — вывод из оборота * `2` — возврат в оборот
+    - `fiscal_doc_number` `integer<int64>` — Номер фискального документа (чека полного расчёта), если есть
+    - `fiscal_dt` `string` — Дата фискализации (дата в чеке), если есть, `ГГГГ-ММ-ДД`
+    - `fiscal_drive_number` `string` — Номер фискального накопителя, если есть
+    - `rid` `integer<int64>` — `Rid`
+    - `srid` `string` — `Srid`
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

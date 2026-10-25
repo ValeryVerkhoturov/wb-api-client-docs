@@ -26,6 +26,8 @@ You can add the IMEI only for assembly orders in the `confirm` status, and if th
 
 `application/json` — schema `object`, required
 
+- `imei` `string` (required) — IMEI
+
 ## Responses
 
 | Code  | Description                    | Schema   |
@@ -38,6 +40,57 @@ You can add the IMEI only for assembly orders in the `confirm` status, and if th
 | `404` | The resource is not found      | `Error`  |
 | `409` | Label identifiers update error | `Error`  |
 | `429` | Too many requests              | `object` |
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `404`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `409`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

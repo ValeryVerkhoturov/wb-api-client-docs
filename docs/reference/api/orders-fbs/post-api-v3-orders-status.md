@@ -54,6 +54,8 @@ POST /api/v3/orders/status
 
 `application/json` — схема `object`, необязательно
 
+- `orders` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                           |
@@ -64,6 +66,54 @@ POST /api/v3/orders/status
 | `402` | Требуется платёж       | `object`                        |
 | `403` | Доступ запрещён        | `Error`                         |
 | `429` | Слишком много запросов | `object`                        |
+
+**Структура `200`:**
+
+- `orders` `object[]`
+  - `id` `integer<int64>` — ID сборочного задания
+  - `isCancellable` `boolean` — Доступна ли [отмена](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel) сборочного задания: - `false` — недоступна - `true` — доступна
+  - `isTransferable` `boolean` — Можно ли [перевести сборочное задание](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) из доставки на сборку: - `false` — нет - `true` — да Сборочное задание можно перенести из доставки на сборку, если выполняются все условия: - сборочное задание находится в статусе `complete` — в доставке - поставка, в которую нужно перенести сборочное задание, не [передана в доставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver) - сборочное задание ранее не переносили
+  - `supplierStatus` `string` = `new` | `confirm` | `complete` | `cancel` — Статус сборочного задания, установленный продавцом
+  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` — Статус сборочного задания в системе Wildberries
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -35,6 +35,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `object`, required
 
+- `count` `integer<int64>` — Number of SKUs to be generated, maximum 5,000
+
 ## Responses
 
 | Code  | Description       | Schema                        |
@@ -44,6 +46,47 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                      |
 | `403` | Access denied     | `responseBodyContentError403` |
 | `429` | Too many requests | `object`                      |
+
+**Structure `200`:**
+
+- `data` `string[]` — An array of generated SKUs
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Any additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

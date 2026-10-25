@@ -29,6 +29,8 @@ POST /api/v3/orders/client
 
 `application/json` — схема `OrdersRequestAPI`, обязательно
 
+- `orders` `integer<int64>[]` — Список заказов
+
 ## Ответы
 
 | Код   | Описание               | Схема                             |
@@ -40,6 +42,62 @@ POST /api/v3/orders/client
 | `403` | Доступ запрещён        | `Error`                           |
 | `404` | Не найдено             | `Error`                           |
 | `429` | Слишком много запросов | `object`                          |
+
+**Структура `200`:**
+
+- `orders` `CrossborderTurkeyClientInfo[]` — Информация по клиенту для трансграничных поставок из Турции
+  - `firstName` `string` — Имя клиента
+  - `fullName` `string` — Фамилия, Имя, Отчество
+  - `lastName` `string` — Фамилия клиента
+  - `middleName` `string` — Отчество клиента
+  - `orderID` `integer<int64>` — Номер заказа
+  - `phone` `string` — Телефон для связи с клиентом
+  - `phoneCode` `string` — Не используется
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

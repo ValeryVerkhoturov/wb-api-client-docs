@@ -43,6 +43,107 @@ GET /api/v1/seller/events
 | `403` | Доступ запрещён        | `object`                       |
 | `429` | Слишком много запросов | `object`                       |
 
+**Структура `200`:**
+
+- `result` `EventsResult`
+  - `next` `integer<int64>` — Пагинатор. Значение поля необходимо указать в запросе для получения следующего пакета данных
+  - `newestEventTime` `string` — Время новейшего события в ответе
+  - `oldestEventTime` `string` — Время старейшего события в ответе
+  - `totalEvents` `integer<int64>` — Количество событий
+  - `events` `Event[]`
+    - `chatID` `string` — ID чата
+    - `eventID` `string` — ID события
+    - `eventType` `EventType`
+    - `isNewChat` `boolean` — Признак нового чата: - `false` — чат не новый - `true` — чат новый
+    - `message` `object` — Данные сообщения
+      - `attachments` `EventAttachments`
+        - `goodCard` `Listing`
+          - `nmID` `integer<int64>` — Артикул WB
+            - …
+          - `price` `integer<int64>` — Фактическая цена с учетом всех скидок. Взимается с покупателя
+            - …
+          - `priceCurrency` `string` — Валюта
+            - …
+          - `rid` `string` — Уникальный ID заказа. Примечание: `rid` — это `srid` в ответах методов: - [Заявки покупателей на возврат](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) - [Лента заказов](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed) - [Заказы](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierOrders) - [Продажи](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierSales) - [Отчёт о возвратах и перемещении товаров](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport) - [Детализации к отчётам реализации по ID отчётов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId) - [Детализации к отчётам реализации за период](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed) - [Детализации к отчётам об издержках на приём платежей по ID отчётов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId) - [Детализации к отчётам об издержках на приём платежей за период](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailed)
+            - …
+          - `size` `string` — Размер товара, соответствует `wbSize` в [карточке товара](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList)
+            - …
+        - `files` `File[]` — Файлы
+          - `contentType` `string` — Тип файла
+            - …
+          - `date` `string` — Дата загрузки файла
+            - …
+          - `downloadID` `string` — ID файла. [Получить файл](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerDownloadId)
+            - …
+          - `name` `string` — Название файла
+            - …
+          - `url` `string` — URL для получения файла
+            - …
+          - `size` `integer<int64>` — Размер файла в байтах
+            - …
+        - `images` `Image[]` — Изображения
+          - `date` `string` — Дата загрузки изображения
+            - …
+          - `downloadID` `string` — ID файла. [Получить файл](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerDownloadId)
+            - …
+          - `url` `string` — URL для получения изображения
+            - …
+      - `text` `string` — Текст сообщения
+    - `source` `string` — Источник отправки сообщения: - `seller-portal` — портал продавцов - `seller-public-api` — API Чата с покупателями - `rusite` — портал покупателей - `global` — портал `global.wildberries.ru` - `ios` — мобильная операционная система от **Apple** - `android` — операционная система **Android** от **Google**
+    - `addTimestamp` `integer<int64>` — Время появления события на сервере. Формат Unix timestamp
+    - `addTime` `string` — Время появления события на сервере в UTC
+    - `replySign` `string` — Подпись чата. Доступна только при `"isNewChat": true`. Требуется при [отправке сообщения](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage)
+    - `sender` `Sender`
+    - `clientName` `string` — Имя покупателя
+- `errors` `string[]` — Ошибки, если есть
+
+**Структура `400`:**
+
+- `status` `number` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `error` `string` — Текст ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

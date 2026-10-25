@@ -29,6 +29,24 @@ POST /api/analytics/v2/item-rating
 
 `application/json` — схема `ItemRatingRequest`, обязательно
 
+- `currentPeriod` `PeriodItemRating` (обязательно)
+  - `start` `string` (обязательно) — Дата начала периода. Не ранее 364 суток от вчерашнего дня и не позднее `end`
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 364 суток от вчерашнего дня
+- `pastPeriod` `PastPeriodItemRating`
+  - `start` `string` (обязательно) — Дата начала периода. Не ранее 364 суток от вчерашнего дня и не позднее `end`
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 364 суток от вчерашнего дня и не позднее даты перед началом `currentPeriod`.
+- `nmIds` `integer<int32>[]` — Список артикулов WB для фильтрации
+- `subjectIds` `integer<int32>[]` — Список ID предметов для фильтрации
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `tagIds` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `isNotIncludeNmsWithoutSales` `boolean` — Не возвращать товары без продаж: - `true` — да, возвращаются только товары с продажами за период, указанный в объекте `currentPeriod` - `false` — нет, возвращаются все товары, если не указаны другие параметры
+- `onlyShadowedNms` `boolean` — Возвращаются ли в ответе только скрытые товары: - `true` — да, возвращаются только скрытые из каталога товары - `false` — нет, возвращаются все товары, если не указаны другие параметры
+- `orderBy` `OrderByItemRating` (обязательно)
+  - `field` `string` = `feedbackRating` | `feedbackCount` | `fiveStar` | `fourStar` | `threeStar` | `twoStar` | `oneStar` | `disqualified` (обязательно) — Поле для сортировки: - `feedbackRating` — Рейтинг товара по отзывам - `feedbackCount` — Все отзывы за период - `fiveStar` — Отзывы 5 звёзд - `fourStar` — Отзывы 4 звезды - `threeStar` — Отзывы 3 звезды - `twoStar` — Отзывы 2 звезды - `oneStar` — Отзывы 1 звезда - `disqualified` — Отзывы, исключённые из рейтинга
+  - `mode` `string` = `asc` | `desc` (обязательно) — Порядок сортировки: - `asc` — по возрастанию - `desc` — по убыванию
+- `limit` `integer<int64>` — Количество товаров в ответе
+- `offset` `integer<int64>` (обязательно) — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+
 ## Ответы
 
 | Код   | Описание               | Схема                         |
@@ -38,6 +56,108 @@ POST /api/analytics/v2/item-rating
 | `401` | Не авторизован         | `object`                      |
 | `403` | Доступ запрещён        | `ErrorObject403`              |
 | `429` | Слишком много запросов | `object`                      |
+
+**Структура `200`:**
+
+- `data` `ItemRatingResponse`
+  - `sellerRating` `TableItemFloat`
+    - `current` `number<float64>` — Текущий рейтинг
+    - `dynamics` `number<float64>` — Динамика по сравнению с предыдущим периодом, %
+  - `feedbackIncrease` `FeedbacksIncreaseItem`
+    - `current` `integer<int64>` — Прирост оценок за период
+    - `total` `integer<int64>` — Всего оценок
+    - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `fiveStar` `object` — Отзывы 5 звёзд
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+      - `total` `integer<int64>` — Всего оценок
+    - `fourStar` `object` — Отзывы 4 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+      - `total` `integer<int64>` — Всего оценок
+    - `threeStar` `object` — Отзывы 3 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+      - `total` `integer<int64>` — Всего оценок
+    - `twoStar` `object` — Отзывы 2 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+      - `total` `integer<int64>` — Всего оценок
+    - `oneStar` `object` — Отзывы 1 звезда
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+      - `total` `integer<int64>` — Всего оценок
+  - `items` `DistributionTableItem[]` — Данные по товарам
+    - `nmId` `integer<int64>` — Артикул WB
+    - `title` `string` — Название товара
+    - `vendorCode` `string` — Артикул продавца
+    - `subjectId` `integer<int64>` — ID предмета
+    - `subjectName` `string` — Название предмета
+    - `brandName` `string` — Бренд
+    - `tagName` `string` — Название ярлыка
+    - `tagId` `integer<int64>` — ID ярлыка
+    - `pinnedFeedback` `boolean` — Отзыв закреплён
+    - `rating` `number<float64>` — Рейтинг карточки товара
+    - `feedbackRating` `object` — Рейтинг товара по отзывам
+      - `current` `number<float64>` — Текущий рейтинг
+      - `dynamics` `number<float64>` — Динамика по сравнению с предыдущим периодом, %
+      - `percentile` `number<float64>` — Сколько процентов товаров этого предмета у других продавцов имеют рейтинг ниже, чем у этого товара
+    - `feedbackCount` `object` — Все отзывы за период
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `fiveStar` `object` — Отзывы 5 звёзд
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `fourStar` `object` — Отзывы 4 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `threeStar` `object` — Отзывы 3 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `twoStar` `object` — Отзывы 2 звезды
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `oneStar` `object` — Отзывы 1 звезда
+      - `current` `integer<int64>` — Прирост оценок за период
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `disqualified` `integer<int64>` — Отзывы, исключённые из рейтинга
+    - `isShadowed` `boolean` — Является ли товар скрытым из каталога: - `true` — товар скрыт из каталога - `false` — товар не скрыт из каталога
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

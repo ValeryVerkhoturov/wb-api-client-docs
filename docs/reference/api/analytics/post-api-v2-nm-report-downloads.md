@@ -47,6 +47,8 @@ POST /api/v2/nm-report/downloads
 
 `application/json` — схема `object`, необязательно
 
+- один из вариантов: `SalesFunnelItemReq`, `SalesFunnelGroupReq`, `SearchReportGroupReq`, `SearchReportItemReq`, `SearchReportTextReq`, `InventoryMetricsReportReq`, `InventoryHistoryReportReq`
+
 ## Ответы
 
 | Код   | Описание               | Схема                                |
@@ -57,6 +59,44 @@ POST /api/v2/nm-report/downloads
 | `402` | Требуется платёж       | `object`                             |
 | `403` | Доступ запрещён        | `ErrorObject`                        |
 | `429` | Слишком много запросов | `object`                             |
+
+**Структура `200`:**
+
+- `data` `string` — Уведомление, что началась генерация отчёта
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- один из вариантов: `response429Download`, `response429DownloadDaily`
 
 ## Примеры вызова
 

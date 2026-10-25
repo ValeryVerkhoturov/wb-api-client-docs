@@ -33,6 +33,12 @@ The method returns a list of supplies, the last 1000 supplies by default.
 
 `application/json` — schema `models.SuppliesFiltersRequest`, required
 
+- `dates` `models.DateFilterRequest[]` — Filter by dates
+  - `from` `string<ISO 8601>` — Period start date
+  - `till` `string<ISO 8601>` — Period end date
+  - `type` `string` = `factDate` | `createDate` | `supplyDate` | `updatedDate` (required) — Dates type: - `factDate` — actual dispatch date - `createDate` — supply creation date - `supplyDate` — planned dispatch date - `updatedDate` — supply update date
+- `statusIDs` `models.HandySupplyStatus[]` — Filter the supply by statuses. Possible values: - `1` — Not planned - `2` — Planned - `3` — Dispatch allowed - `4` — Accepting - `5` — Accepted - `6` — Unloaded at the gate
+
 ## Responses
 
 | Code  | Description       | Schema                      |
@@ -43,6 +49,65 @@ The method returns a list of supplies, the last 1000 supplies by default.
 | `402` | Payment required  | `object`                    |
 | `403` | Access denied     | `object`                    |
 | `429` | Too many requests | `object`                    |
+
+**Structure `200` — `models.Supply[]`:**
+
+- `phone` `string` — Phone number of the user that created the supply
+- `supplyID` `integer<int64>` — Supply ID. If `null`, it's an order, so use the value of the `preorderID` field
+- `preorderID` `integer<int64>` — Order ID (unplanned supply). Will be `0` for all virtual supplies
+- `createDate` `string` — Date and time the supply was created
+- `supplyDate` `string` — Planned dispatch date
+- `factDate` `string` — Actual dispatch date
+- `updatedDate` `string` — Date of the supply update
+- `statusID` `integer<int64>` = `1` | `2` | `3` | `4` | `5` | `6` — Supply status ID: - `1` — Not planned - `2` — Planned - `3` — Dispatch allowed - `4` — Accepting - `5` — Accepted - `6` — Unloaded at the gate
+- `boxTypeID` `object` — Supply type ID: - `0` — Without boxes (virtual supply) - `1` and `2` — Boxes - `5` — Monopallets - `6` — Supersafe
+- `isBoxOnPallet` `boolean` — **Pallet with Single Items** — supply type: - `true` — yes - `false` — no The field is returned only when `"boxTypeID": 2`
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

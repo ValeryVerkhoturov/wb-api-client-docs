@@ -40,6 +40,57 @@ GET /api/tariffs/v1/acceptance/coefficients
 | `404` | Не найдено             | —                                        |
 | `429` | Слишком много запросов | `object`                                 |
 
+**Структура `200` — `models.AcceptanceCoefficient[]`:**
+
+- `date` `string` — Дата начала действия коэффициента
+- `coefficient` `number` — Коэффициент приёмки: - `-1` — приёмка недоступна, вне зависимости от значения поля `allowUnload` - `0` — бесплатная приёмка - от `1` — множитель стоимости приёмки
+- `warehouseID` `integer<int64>` — ID склада. По нему можно получить [информацию о складе](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
+- `warehouseName` `string` — Название склада
+- `allowUnload` `boolean` — Доступность приёмки для поставок данного типа, смотри значение поля `boxTypeID`: - `true` — приёмка доступна - `false` — приёмка не доступна
+- `boxTypeID` `integer<int64>` — ID типа поставки: - `2` — Короба - `5` — Монопаллеты - `6` — Суперсейф Для типа поставки \*\*QR-поставка с коробами\*\* поле не возвращается
+- `storageCoef` `string` — Коэффициент хранения
+- `deliveryCoef` `string` — Коэффициент логистики
+- `deliveryBaseLiter` `string` — Стоимость логистики первого литра
+- `deliveryAdditionalLiter` `string` — Стоимость логистики каждого следующего литра
+- `storageBaseLiter` `string` — Стоимость хранения: - для паллет — стоимость за одну паллету - для коробов — стоимость хранения за первый литр
+- `storageAdditionalLiter` `string` — Стоимость хранения каждого последующего литра: - для паллет — всегда будет `null`, т.к. стоимость хранения за единицу паллеты определяется в `StorageBaseLiter` - для коробов — стоимость хранения за каждый последующий литр
+- `isSortingCenter` `boolean` — Тип склада: - `true` — сортировочный центр (СЦ) - `false` — обычный
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

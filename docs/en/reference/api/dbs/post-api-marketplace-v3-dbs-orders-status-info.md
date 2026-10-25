@@ -47,6 +47,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                |
@@ -58,6 +60,64 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `api.BatchError`      |
 | `404` | Not found         | `api.BatchError`      |
 | `429` | Too many requests | `object`              |
+
+**Structure `200`:**
+
+- `orders` `api.OrderStatusV2[]` — Status data
+  - `errors` `api.BatchErrorResponse[]` — Error detail
+    - `code` `integer<int64>` — Error code: - `404` - `409` - `400`
+    - `detail` `string` — - `NotFound` — assembly order is not found - `StatusMismatch` — operation is not possible for this assembly order status - `ImeiIsNotFilled` — IMEI is not filled - `OrderNotB2B` — operation is available only for assembly orders with the B2B sale indicator `"isB2b": true` - `InvalidOriginCountryCode` — invalid country of origin code
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `supplierStatus` `string` — Assembly order status set by the seller
+  - `wbStatus` `string` — Assembly order status set by WB system
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `404`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

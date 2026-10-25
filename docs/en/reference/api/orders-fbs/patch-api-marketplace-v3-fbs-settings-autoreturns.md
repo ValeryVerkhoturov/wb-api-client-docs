@@ -24,6 +24,8 @@ The method sets seller auto-return settings for small-sized items — `"cargoTyp
 
 `application/json` — schema `object`, optional
 
+- `type` `string` = `allToWarehouse` | `allToPickupPoint` | `manual` (required) — Auto-return type for small-sized items: - `allToWarehouse` — send all items to WB warehouse, except for items of [subcategories](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted) that are automatically returned to the pickup point - `allToPickupPoint` — send all items to the pickup point - `manual` — use manual settings
+
 ## Responses
 
 | Code  | Description       | Schema        |
@@ -33,6 +35,44 @@ The method sets seller auto-return settings for small-sized items — `"cargoTyp
 | `401` | Unauthorized      | `object`      |
 | `403` | Access denied     | `Response4XX` |
 | `429` | Too many requests | `object`      |
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

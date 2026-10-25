@@ -32,6 +32,9 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 
 `application/json` — schema `object`, required
 
+- `nmID` `integer<int64>` — WB item number
+- `tagsIDs` `integer<int64>[]` — An array of numeric label IDs. When removing a label from a listing, the label itself is not removed. To add labels to existing ones in the listing, you need to specify in the request the new labels and the labels that are already exist in the listing.
+
 ## Responses
 
 | Code  | Description       | Schema                        |
@@ -42,6 +45,54 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `402` | Payment required  | `object`                      |
 | `403` | Access denied     | `responseBodyContentError403` |
 | `429` | Too many requests | `object`                      |
+
+**Structure `200`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

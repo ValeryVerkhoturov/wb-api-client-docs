@@ -36,6 +36,9 @@ Specify the label identifiers type in the request:
 
 `application/json` — schema `api.OrdersMetaDleteRequestV2`, required
 
+- `key` `string` = `imei` | `uin` | `gtin` | `sgtin` (required) — Name of label identifier to delete. Only one value is passed
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                                 |
@@ -46,6 +49,55 @@ Specify the label identifiers type in the request:
 | `402` | Payment required  | `object`                               |
 | `403` | Access denied     | `Error`                                |
 | `429` | Too many requests | `object`                               |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID. Displayed for responses with errors
+- `results` `object[]`
+  - `errors` `object[]` — Error details
+    - `code` `integer<int64>` — Error code: - `404` - `409`
+    - `detail` `string` — - `NotFound` — assembly order is not found - `StatusMismatch` — operation is not possible for this assembly order status - `ImeiIsNotFilled` — IMEI is not filled
+  - `isError` `boolean` — Are there any errors
+  - `orderId` `integer<int64>` — Assembly order ID with successfully set data
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

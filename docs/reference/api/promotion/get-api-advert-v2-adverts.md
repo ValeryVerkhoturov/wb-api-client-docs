@@ -40,6 +40,76 @@ GET /api/advert/v2/adverts
 | `403` | Доступ запрещён        | `object`      |
 | `429` | Слишком много запросов | `object`      |
 
+**Структура `200`:**
+
+- `adverts` `object[]` — Кампании
+  - `bid_type` `string` — Тип ставки: - `unified` — единая ставка - `manual` — ручная ставка
+  - `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `id` `integer<int64>` — ID кампании
+  - `nm_settings` `AdvertNMsSettings[]` — Настройки товаров
+    - `bids_kopecks` `AdvertBidsKopecks`
+      - `search` `integer<int64>` — Ставка в поиске
+      - `recommendations` `integer<int64>` — Ставка в рекомендациях
+    - `subject` `AdvertSubcategory`
+      - `id` `integer<int64>` — ID предмета
+      - `name` `string` — Название предмета
+    - `nm_id` `integer<int64>` — Артикул WB
+  - `settings` `AdvertSettings`
+    - `payment_type` `string` — Тип оплаты: - `cpm` — за показы - `cpc` — за клик
+    - `name` `string` — Название кампании
+    - `placements` `object` — Места размещения
+      - `search` `boolean` — Размещение в поиске: - `false` — отключено - `true` — включено
+      - `recommendations` `boolean` — Размещение в рекомендациях: - `false` — отключено - `true` — включено
+  - `restrictions` `object` — Ограничения кампании
+    - `can_change_nms` `boolean` — Можно ли изменять список товаров кампании: - `true` — да - `false` — нет
+  - `status` `integer<int64>` = `-1` | `4` | `7` | `8` | `9` | `11` — Статус кампании: - `-1` — удалена, процесс удаления будет завершён в течение 10 минут - `4` — готова к запуску - `7` — завершена - `8` — отменена - `9` — активна - `11` — на паузе
+  - `timestamps` `Timestamps`
+    - `created` `string` — Время создания кампании
+    - `updated` `string` — Время последнего изменения кампании
+    - `started` `string` — Время последнего запуска кампании
+    - `deleted` `string` — Время удаления кампании. Если кампания не удалена, время указывается в будущем
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

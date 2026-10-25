@@ -27,6 +27,13 @@ The method updates, adds or delete item [recommendations](https://seller.wildber
 
 `application/json` — schema `SetRecomReq`, required
 
+- `recList` `object[]` (required) — Item recommendations list
+  - `nmId` `integer<int64>` — WB item number
+  - `recommendations` `object[]` — Recommended items. Specify the `recomNm` of the items to add them to the recommendations for the specified `nmId`. Sending an empty array `[]` will delete all current recommendations for the specified `nmId`.
+    - `recomNm` `integer<int64>` — Recommended item WB number
+    - `sort` `integer<int64>` — Position of the item in the recommendations list. Allowed values: - `1`–`20` — fixed position: - when creating or replacing (`replace: true`) sets the display order - when adding (`replace: false`) inserts the item at the specified position, existing ones are shifted - `0` — automatic sorting: - when creating or replacing (`replace: true`) — according to the order of items in the `recommendations` array - when adding (`replace: false`) — at the end of the existing recommendations list, preserving the order from the `recommendations` array
+- `replace` `boolean` — Requested action: - `false` — add new recommendations to the current ones - `true` — replace current recommendations with the new ones
+
 ## Responses
 
 | Code  | Description       | Schema                |
@@ -37,6 +44,61 @@ The method updates, adds or delete item [recommendations](https://seller.wildber
 | `401` | Unauthorized      | `object`              |
 | `403` | Access denied     | `Response4XX`         |
 | `429` | Too many requests | `object`              |
+
+**Structure `200`:**
+
+- `isError` `boolean` — Are there any errors: - `false` — No errors, completely successful - `true` — There are errors
+- `errors` `object[]` — Errors. If `"isError":true`
+  - `mainNm` `string` — The `nmId` parameter value
+  - `recomNm` `string` — The `recomNm` parameter value
+  - `message` `string` — Error message
+
+**Structure `208`:**
+
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `title` `string` — Response title
+- `detail` `string` — Response details
+
+**Structure `400`:**
+
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

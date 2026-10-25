@@ -29,6 +29,10 @@ The method is available for [Jam subscription](https://seller.wildberries.ru/mon
 
 `application/json` — schema `openapi.PinReviewItem[]`, required
 
+- `pinMethod` `string` = `tariff` | `subscription` (required) — Pinning methods: - `subscription` — Jam subscription - `tariff` — rate option
+- `pinOn` `string` = `nm` | `imt` (required) — Feedback pinning placement: - `nm` — listing - `imt` — group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings
+- `feedbackId` `string` (required) — Feedback ID
+
 ## Responses
 
 | Code  | Description       | Schema                  |
@@ -39,6 +43,64 @@ The method is available for [Jam subscription](https://seller.wildberries.ru/mon
 | `402` | Payment required  | `object`                |
 | `403` | Access denied     | `respond.ResultErr`     |
 | `429` | Too many requests | `object`                |
+
+**Structure `200`:**
+
+- `data` `object[]`
+  - `feedbackId` `string` — Feedback ID
+  - `pinId` `integer<int64>` — Pinning operation ID. If the field is missing, the feedback is not pinned
+  - `pinMethod` `string` = `tariff` | `subscription` — Pinning methods: - `subscription` — Jam subscription - `tariff` — rate option
+  - `pinOn` `string` = `nm` | `imt` — Feedback pinning placement: - `nm` — listing - `imt` — group of [merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings
+  - `isErrors` `boolean` — Are there any errors
+  - `errors` `openapi.ResultErr[]` — Error detail
+    - `origin` `string` — WB internal service ID
+    - `detail` `string` — Error detail
+    - `requestId` `string` — Request ID
+    - `status` `string` = `feedbackNotFound` | `itemNotFound` | `feedbackMismatch` | `itemNoImages` | `feedbackExcluded` | `imtNotDisplayed` | `globalLimitReached` | `unitLimitReached` | `tariffRestriction` | `subscriptionRestriction` | `alreadyPinned` | `bodyNotValid` — Status
+    - `title` `string` — Error title
+
+**Structure `400`:**
+
+- `detail` `string` — Error detail
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `detail` `string` — Error detail
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

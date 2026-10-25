@@ -42,6 +42,70 @@ Use this method data to set [supply shipping methods](https://dev.wildberries.ru
 | `409` | No assembly orders in the supply | `Error`                        |
 | `429` | Too many requests                | `object`                       |
 
+**Structure `200`:**
+
+- `shippingPoints` `SupplyShippingPoint[]` — Shipping points list for the supply
+  - `id` `integer<int64>` — Shipping point ID
+  - `name` `string` — Name
+  - `address` `string` — Address
+  - `city` `string` — Locality
+  - `officeType` `string` — Shipping point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point
+  - `latitude` `number` — Latitude
+  - `longitude` `number` — Longitude
+  - `fulfillment` `boolean` — Whether tne **Fulfillment in SC** service is available for FBS supplies: - `true` — available - `false` — unavailable
+  - `available` `boolean` — Whether the shipping point is available for the supply: - `true` — available - `false` — unavailable. Returns for the pickup point if it is overloaded on the planned supply shipping date
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `409`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

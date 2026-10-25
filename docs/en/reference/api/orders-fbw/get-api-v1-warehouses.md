@@ -32,6 +32,48 @@ The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?i
 | `404` | Not found         | —                            |
 | `429` | Too many requests | `object`                     |
 
+**Structure `200` — `models.WarehousesResultItems[]`:**
+
+- `ID` `integer<int64>` — Warehouse ID
+- `name` `string` — Warehouse name
+- `address` `string` — Warehouse address
+- `workTime` `string` — Warehouse operating hours
+- `isActive` `boolean` — Is it available as a destination warehouse: - `true` — yes - `false` — no
+- `isTransitActive` `boolean` — Is it available as a transit warehouse: - `true` — yes - `false` — no
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

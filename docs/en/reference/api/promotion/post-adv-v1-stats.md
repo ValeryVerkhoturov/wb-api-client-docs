@@ -26,6 +26,8 @@ The method allows to get statistics of [WB Media](https://cmp.wildberries.ru/cmp
 
 `application/json` — schema `object[]`, required
 
+- one of: `RequestWithDate`, `RequestWithInterval`, `RequestWithCampaignID`
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -35,6 +37,47 @@ The method allows to get statistics of [WB Media](https://cmp.wildberries.ru/cmp
 | `401` | Unauthorized      | `object`                 |
 | `403` | Access denied     | `object`                 |
 | `429` | Too many requests | `object`                 |
+
+**Structure `200` — `object[]`:**
+
+- one of: `StatInterval`, `StatDate`, `Stat`, `StatCampaignNotFound`
+
+**Structure `400`:**
+
+- `error` `string`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

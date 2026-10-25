@@ -45,6 +45,42 @@ Not all the documents that you can add are required and are being validated. You
 
 `application/json` — schema `object[]`, optional
 
+- `subjectID` `integer<int64>` (required) — Subcategory ID
+- `variants` `object[]` (required) — [Merged](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings) listings. To list individual item, pass only one object.
+  - `brand` `string` — Brand
+  - `title` `string` — Item title
+  - `gtin` `string` — Additional GTIN. Specify this parameter if you have previously indicated the same GTIN in the `skus` parameter of one of the listings. It is not possible to specify the same GTIN in `skus` for different listings or item sizes. Only for sellers from the Russian
+  - `description` `string` — Item description. The maximum number of characters depends on the item category Standard — 2000, minimum — 1000, maximum — 5000 More details about \*\*rules for filling out the listing\*\* in [Instructions](https://seller.wildberries.ru/instructions/ru/ru/material/how-to-create-card) category of sellers portal
+  - `vendorCode` `string` (required) — Seller item number
+  - `kizMarked` `boolean` — Confirmation that required labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is specified: - `true` — the seller confirms that required labeling code is applied to the item - `false` — the seller does not confirm that required labeling code is applied to the item. Pass `true` in the request to confirm that the item has required labeling code. The item will not pass validation if there is no confirmation from the seller that required labeling code is applied to the item To check if labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is required, use the [Listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) method, the response field `needKiz`
+  - `wholesale` `object` — B2B sale
+    - `enabled` `boolean` — Is the item intended for sale only to B2B buyers: - `true` — the item is intended for sale only to B2B buyers - `false` — the item is intended for sale to B2B and B2C buyers
+    - `quantum` `number<uint64>` — Minimum number of items in one cart of B2B buyer. Only when `"enable":true`
+  - `dimensions` `object` — Dimensions and weight of the item \*\*with packaging\*\*. Specify in `centimeters` and `kilograms` for any item. If the data is not specified, zero values ​​for length, width, height and weight will be automatically generated. The process of synchronizing new data with service may take up to 30 minutes
+    - `length` `integer<int64>` — Length, cm
+    - `width` `integer<int64>` — Width, cm
+    - `height` `integer<int64>` — Height, cm
+    - `weightBrutto` `number` — Weight, kg Number of decimal places <=3
+  - `sizes` `object[]` — Item sizes. If the item has sizes but you send empty parameter, it is generated automatically with values: `techSize` = "A", `wbSize` = "1" and some random SKU
+    - `techSize` `string` — Item size (for example, L or 45)
+    - `wbSize` `string` — Russian size
+    - `price` `integer<int64>` — Price, ₽
+    - `skus` `string[]` — Array of SKUs for the size. If not specified, SKU is generated automatically. Allows linking multiple SKUs to one size, for example, for different batches of the item
+  - `characteristics` `object[]` — Item characteristics. Use the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) method to get characteristics of the item
+    - `id` `integer<int64>` (required) — Characteristic ID
+    - `value` `object` (required) — Characteristic values. Data type — array of strings or number — depends on the characteristic data type. For more details see the description of the `charcType` field in the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/operation/getV2ObjectCharcsSubjectId) method. The allowed number of values is specified in the `maxCount` field of the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/operation/getV2ObjectCharcsSubjectId) method
+  - `documents` `object` — Listing permits
+    - `items` `documentsRequest[]` — Permits list and data. The document type `type` is required for each document
+      - `type` `integer<int64>` — Document type. The types of documents that you can add for the item are listed in [subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) in the `charcID` field. Possible document types:: - `1` — Certificate of Conformity. You can specify for `charcID`: 15001136, 15001137, 15001138 - `2` — The Correspondence Declaration. You can specify for `charcID`: 15001135, 15001137, 15001138 - `3` — Certificate of Registration of SGR. You can specify for `charcID`: 62945173, 15000785, 15004302 - `4` — Registration Certificate. You can specify for `charcID`: 15001574, 15002355, 15002356, 15002357 - `5` — Certificate of Registration of the Republic of Belarus. You can specify for `charcID`: 15003071, 15003939 - `7` — Registration of a Pesticide. You can specify for `charcID`: 15003924, 15003925 - `8` — Registration of an Agrochemical. You can specify for `charcID`: 15003920, 15003921 - `9` — Medicine Registration Certificate. You can specify for `charcID`: 1897013, 15004284
+      - `number` `string` — Document number
+      - `productNumber` `string` — Additional document number
+      - `tradeName` `string` — Trade name
+      - `applicant` `string` — Representative of the medical device manufacturer
+      - `startDate` `string` — Document start date and time
+      - `endDate` `string` — Document end date and time
+      - `isEndless` `boolean` — Is the document valid indefinitely: - `true` — yes, the document is indefinite - `false` — no, the document has an expiration date
+    - `excludeDocuments` `boolean` — Seller confirmation that no permits are required for the item: - `true` — yes, seller confirms that no permits are required. All values passed to `documents` will be replaced with empty values - `false` — no, seller does not confirm that no permits are required Whether the permits are required is checked when creating and changing the listing. If permits are required for the item and the value `true` is specified, the listing will not pass validation
+
 ## Responses
 
 | Code  | Description                                   | Schema                         |
@@ -56,6 +92,69 @@ Not all the documents that you can add are required and are being validated. You
 | `403` | Access denied                                 | `object`                       |
 | `413` | The request body size exceeds the given limit | `PostV2CardsUploadResponse413` |
 | `429` | Too many requests                             | `object`                       |
+
+**Structure `200`:**
+
+- `data` `object` — Response data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Any additional errors
+  - one of: `object`, `string`, `object`
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `413`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

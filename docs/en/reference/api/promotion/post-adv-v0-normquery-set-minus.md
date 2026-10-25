@@ -28,6 +28,10 @@ Sending an empty array deletes all minus phrases
 
 `application/json` — schema `V0SetMinusNormQueryRequest`, required
 
+- `advert_id` `integer<int64>` (required) — Campaign ID
+- `nm_id` `integer<int64>` (required) — WB item number
+- `norm_queries` `string[]` (required)
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -37,6 +41,44 @@ Sending an empty array deletes all minus phrases
 | `401` | Unauthorized      | `object`                 |
 | `403` | Access denied     | `StandardizedBatchError` |
 | `429` | Too many requests | `object`                 |
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP Status Code
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

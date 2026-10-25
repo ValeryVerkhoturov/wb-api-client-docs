@@ -40,6 +40,70 @@ The method returns list of brands by subcategory ID.
 | `404` | Not found         | `BrandsResponseError` |
 | `429` | Too many requests | `object`              |
 
+**Structure `200`:**
+
+- `brands` `object[]`
+  - `id` `integer<int64>` — Brand ID
+  - `logoUrl` `string` — Brand logo URL
+  - `name` `string` — Brand name
+- `next` `integer<int64>` — Pagination parameter. Specify this value in the request to get the next batch. If the field is missing, you received all the data
+- `total` `integer<int64>` — Total number of brands of the subcategory
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `errors` `object[]`
+  - `message` `string` — Error text
+  - `location` `string` — Parameter where the error occurred
+  - `value` `object` — Value of the parameter where the error occurred
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `errors` `object[]`
+  - `message` `string` — Error text
+  - `location` `string` — Parameter where the error occurred
+  - `value` `object` — Value of the parameter where the error occurred
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

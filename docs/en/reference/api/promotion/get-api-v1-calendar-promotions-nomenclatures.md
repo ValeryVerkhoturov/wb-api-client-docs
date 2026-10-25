@@ -32,6 +32,64 @@ Not applicable for auto promos
 | `422` | Error processing request parameters | `object` |
 | `429` | Too many requests                   | `object` |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `nomenclatures` `PromoItemsList[]` — Items list
+    - `id` `integer<int64>` — WB item number
+    - `inAction` `boolean` — Participates in the promo: - `true` — yes - `false` — no
+    - `price` `number<float>` — Current retail price
+    - `currencyCode` `string` — Currency in ISO 4217 format
+    - `planPrice` `number<float>` — Planned price (price during the promo)
+    - `discount` `integer<int64>` — Current discount
+    - `planDiscount` `integer<int64>` — Recommended discount for participating in the promo
+
+**Structure `400`:**
+
+- `errorText` `string` — Error text
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `422`:**
+
+- `errorText` `string` — Error text
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -53,6 +53,78 @@ If the response returns an empty array `[]`, all orders have already been retrie
 | `403` | Access denied     | `object`                         |
 | `429` | Too many requests | `object`                         |
 
+**Structure `200` — `OrdersItem[]`:**
+
+- `date` `string` — Date and time of order. This field equals to `dateFrom` in request if `flag=1`. If the time zone is not specified, then Moscow time UTC+3 is taken.
+- `lastChangeDate` `string` — Date and time of refreshing info of service. This field corresponds to the `dateFrom` parameter in the request if the `flag=0` parameter exist or not specified. If the time zone is not specified, then Moscow time UTC+3 is taken.
+- `warehouseName` `string` — Shipping warehouse name
+- `warehouseType` `string` = `Склад WB` | `Склад продавца` — Type of items storage warehouse: - `Склад WB` — WB warehouse - `Склад продавца` — seller warehouse
+- `countryName` `string` — Country
+- `oblastOkrugName` `string` — Area
+- `regionName` `string` — Region
+- `supplierArticle` `string` — Seller item number
+- `nmId` `integer<int64>` — WB item number
+- `barcode` `string` — SKU
+- `category` `string` — Category
+- `subject` `string` — Subcategory
+- `brand` `string` — Brand
+- `techSize` `string` — Item size
+- `incomeID` `integer<int64>` — Supply number
+- `isSupply` `boolean` — Supply contract
+- `isRealization` `boolean` — Implementation contract
+- `totalPrice` `number` — Price without discounts
+- `discountPercent` `integer<int64>` — Seller discount, %
+- `spp` `number` — WB discount, %
+- `finishedPrice` `number` — Price with all discounts, except WB Wallet sum
+- `priceWithDisc` `number` — Price with seller discount, including WB Club discount
+- `isCancel` `boolean` — Order cancel: - `true` — the order is cancelled
+- `cancelDate` `string` — Date and time for order canceling. If order wasn't canceled, then `"0001-01-01T00:00:00"`. If the time zone is not specified, then Moscow time UTC+3 is taken.
+- `sticker` `string` — sticker ID
+- `gNumber` `string` — Buyer cart ID. Orders within a single transaction will have the same `gNumber`
+- `srid` `string` — Unique order ID. Note for those working with Marketplace API: `srid` equals `rid` in response of orders methods
+
+**Structure `400`:**
+
+- one of: `responseErrorStatistics`, `responseErrorStatistics2`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

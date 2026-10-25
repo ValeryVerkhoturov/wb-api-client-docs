@@ -57,6 +57,40 @@ Not all the documents that you can add are required and are being validated. You
 
 `application/json` — schema `object[]`, optional
 
+- `nmID` `integer<int64>` (required) — WB item number
+- `vendorCode` `string` (required) — Seller item number
+- `kizMarked` `boolean` — Confirmation that required labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is specified: - `true` — the seller confirms that required labeling code is applied to the item. - `false` — the seller does not confirm that required labeling code is applied to the item. Pass `true` in the request to confirm that the item has required labeling code. The item will not pass validation if there is no confirmation from the seller that required labeling code is applied to the item. To check if labeling code [Chestny ZNAK](https://chestnyznak.ru/en) is required, use the [Listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList) method, the response field `needKiz`
+- `brand` `string` — Brand
+- `title` `string` — Item title
+- `gtin` `string` — Additional GTIN. Specify this parameter if you have previously indicated the same GTIN in the `skus` parameter of one of the listings. It is not possible to specify the same GTIN in `skus` for different listings or item sizes. Only for sellers from the Russian
+- `description` `string` — Item description. The maximum number of characters depends on the item category Standard — 2000, minimum — 1000, maximum — 5000 More details about \*\*rules for filling out the listing\*\* in [Instructions](https://seller.wildberries.ru/instructions/ru/ru/material/how-to-create-card) category of sellers portal
+- `dimensions` `object` — Dimensions and weight of the item \*\*with packaging\*\*. Specify in `centimeters` and `kilograms` for any item. The process of synchronizing new data with service may take up to 30 minutes
+  - `length` `integer<int64>` — Length, cm
+  - `width` `integer<int64>` — Width, cm
+  - `height` `integer<int64>` — Height, cm
+  - `weightBrutto` `number` — Weight, kg Number of decimal places <=3
+- `documents` `object` — Listing permits
+  - `items` `object[]` — Permits list and their data
+    - `id` `string` — Document ID attached to the listing. Specify the `id` to rewrite previously attached document. The document ID is specified in the [listings](https://dev.wildberries.ru/item-management#tag/listings/operation/postV2GetCardsList). To add a new document, you do not need to specify the `id`.
+    - `type` `integer<int64>` — Document type. The types of documents that you can add for the item are listed in [subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) in the `charcID` field. Possible document types:: - `1` — Certificate of Conformity. You can specify for `charcID`: 15001136, 15001137, 15001138 - `2` — The Correspondence Declaration. You can specify for `charcID`: 15001135, 15001137, 15001138 - `3` — Certificate of Registration of SGR. You can specify for `charcID`: 62945173, 15000785, 15004302 - `4` — Registration Certificate. You can specify for `charcID`: 15001574, 15002355, 15002356, 15002357 - `5` — Certificate of Registration of the Republic of Belarus. You can specify for `charcID`: 15003071, 15003939 - `7` — Registration of a Pesticide. You can specify for `charcID`: 15003924, 15003925 - `8` — Registration of an Agrochemical. You can specify for `charcID`: 15003920, 15003921 - `9` — Medicine Registration Certificate. You can specify for `charcID`: 1897013, 15004284
+    - `number` `string` — Document number
+    - `productNumber` `string` — Additional document number
+    - `tradeName` `string` — Trade name
+    - `applicant` `string` — Representative of the medical device manufacturer
+    - `startDate` `string` — Document start date and time
+    - `endDate` `string` — Document end date and time
+    - `isEndless` `boolean` — Is the document valid indefinitely: - `true` — yes, the document is indefinite - `false` — no, the document has an expiration date
+  - `excludeDocuments` `boolean` — Seller confirmation that no documents are required for the item: - `true` — yes, seller confirms that no documents are required. All values passed to `documents` will be replaced with empty values - `false` — no, seller does not confirm that no documents are required Whether the documents are required is checked when creating and changing the listing. If documents are required for the item and the value `true` is specified, the listing will not pass validation
+- `characteristics` `object[]` — Item characteristics Use the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectCharcsSubjectId) method to get characteristics of the item
+  - `id` `integer<int64>` (required) — Characteristic ID
+  - `value` `object` (required) — Characteristic values. Data type — array of strings or number — depends on the characteristic data type. For more details see the description of the `charcType` field in the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/operation/getV2ObjectCharcsSubjectId) method. The allowed number of values is specified in the `maxCount` field of the [Subcategory characteristics](https://dev.wildberries.ru/openapi/item-management#tag/operation/getV2ObjectCharcsSubjectId) method
+- `sizes` `object[]` (required) — Item sizes If item has no sizes, send only SKUs
+  - `chrtID` `integer<int64>` — WB item number of this size Required for existing sizes If you add new size, do not send this ID
+  - `techSize` `string` — Size (for example, XL, S, 45)
+  - `wbSize` `string` — Russian size
+  - `price` `integer<int64>` — Price, ₽ Specified when adding the size
+  - `skus` `string[]` — SKUs
+
 ## Responses
 
 | Code  | Description                                   | Schema                         |
@@ -68,6 +102,65 @@ Not all the documents that you can add are required and are being validated. You
 | `403` | Access denied                                 | `responseBodyContentError403`  |
 | `413` | The request body size exceeds the given limit | `PostV2CardsUpdateResponse413` |
 | `429` | Too many requests                             | `object`                       |
+
+**Structure `200`:**
+
+- `data` `object` — Response data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Any additional errors
+  - one of: `object`, `string`, `object`
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `413`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

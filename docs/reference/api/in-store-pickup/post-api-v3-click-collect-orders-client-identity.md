@@ -30,6 +30,9 @@ POST /api/v3/click-collect/orders/client/identity
 
 `application/json` — схема `api.CheckIdentityRequest`, обязательно
 
+- `orderCode` `string` — Уникальный ID заказа покупателя
+- `passcode` `string` — Код подтверждения
+
 ## Ответы
 
 | Код   | Описание                        | Схема                 |
@@ -42,6 +45,61 @@ POST /api/v3/click-collect/orders/client/identity
 | `404` | Не найдено                      | `api.Error`           |
 | `409` | Введён неверный проверочный код | `api.Error`           |
 | `429` | Слишком много запросов          | `object`              |
+
+**Структура `200`:**
+
+- `ok` `boolean` — Принадлежит ли заказ покупателю: - `true` — принадлежит - `false` — значение не применяется. Если заказ не принадлежит покупателю, вы получите ответ со статус-кодом `409`
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `404`:**
+
+- `code` `string`
+- `data` `object`
+- `message` `string`
+
+**Структура `409`:**
+
+- `code` `string`
+- `data` `object`
+- `message` `string`
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

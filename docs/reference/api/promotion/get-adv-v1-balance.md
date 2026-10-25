@@ -37,6 +37,50 @@ GET /adv/v1/balance
 | `403` | Доступ запрещён        | `object`                  |
 | `429` | Слишком много запросов | `object`                  |
 
+**Структура `200`:**
+
+- `balance` `integer<int64>` — Счёт в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `net` `integer<int64>` — Баланс в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `bonus` `integer<int64>` — Бонусы в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `cashbacks` `object[]` — Промо-бонусы
+  - `sum` `integer<int64>` — Промо-бонусы в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `percent` `integer<int64>` — Процент от суммы пополнения бюджета кампании, который можно оплатить промо-бонусами за один раз
+  - `expiration_date` `string<ISO 8601>` — Дата окончания действия промо-бонусов
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

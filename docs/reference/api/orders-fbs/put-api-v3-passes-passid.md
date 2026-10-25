@@ -28,6 +28,12 @@ PUT /api/v3/passes/{passId}
 
 `application/json` — схема `object`, обязательно
 
+- `firstName` `string` (обязательно) — Имя водителя
+- `lastName` `string` (обязательно) — Фамилия водителя
+- `carModel` `string` (обязательно) — Марка машины
+- `carNumber` `string` (обязательно) — Номер машины
+- `officeId` `integer<int64>` (обязательно) — ID склада
+
 ## Ответы
 
 | Код   | Описание               | Схема    |
@@ -39,6 +45,51 @@ PUT /api/v3/passes/{passId}
 | `403` | Доступ запрещён        | `Error`  |
 | `404` | Не найдено             | `Error`  |
 | `429` | Слишком много запросов | `object` |
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

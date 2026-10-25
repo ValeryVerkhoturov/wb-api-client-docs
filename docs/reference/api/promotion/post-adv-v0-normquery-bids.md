@@ -30,6 +30,12 @@ POST /adv/v0/normquery/bids
 
 `application/json` — схема `V0SetNormQueryBidsRequest`, обязательно
 
+- `bids` `V0SetNormQueryBidsRequestItem[]` (обязательно)
+  - `advert_id` `integer<int64>` (обязательно) — ID кампании
+  - `nm_id` `integer<int64>` (обязательно) — Артикул WB
+  - `norm_query` `string` (обязательно) — Поисковый кластер
+  - `bid` `integer<int64>` (обязательно) — Ставка за тысячу показов в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -39,6 +45,44 @@ POST /adv/v0/normquery/bids
 | `401` | Не авторизован         | `object`                 |
 | `403` | Доступ запрещён        | `StandardizedBatchError` |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

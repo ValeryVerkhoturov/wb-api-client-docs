@@ -28,6 +28,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `DeliveryDatesRequest`, required
 
+- `orders` `integer<int64>[]` — List of orders IDs
+
 ## Responses
 
 | Code  | Description       | Schema                  |
@@ -38,6 +40,58 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                |
 | `403` | Access denied     | `Error`                 |
 | `429` | Too many requests | `object`                |
+
+**Structure `200`:**
+
+- `orders` `object[]`
+  - `dTimeFrom` `string` — Current delivery time "from"
+  - `dTimeTo` `string` — Current delivery time "to"
+  - `dTimeFromOld` `string` — Previous delivery time "from". Available only during the first day after the change
+  - `dTimeToOld` `string` — Previous delivery time "to". Available only during the first day after the change
+  - `dDateOld` `string` — Previous delivery date. Available only one day after the change
+  - `dDate` `string` — Current delivery date specified by the buyer
+  - `dDateFrom` `string` — Not used
+  - `dDateTo` `string` — Not used
+  - `id` `integer<int64>` — Assembly order ID
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

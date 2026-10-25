@@ -32,6 +32,9 @@ POST /api/v1/acceptance/options
 
 `application/json` — схема `models.Good[]`, обязательно
 
+- `quantity` `integer<int64>` — Суммарное количество товаров, планируемых для поставки. \*\*Максимум 999999\*\*
+- `barcode` `string` — Баркод из карточки товара
+
 ## Ответы
 
 | Код   | Описание               | Схема                       |
@@ -43,6 +46,68 @@ POST /api/v1/acceptance/options
 | `403` | Доступ запрещён        | `object`                    |
 | `404` | Не найдено             | —                           |
 | `429` | Слишком много запросов | `object`                    |
+
+**Структура `200`:**
+
+- `result` `object[]`
+  - `barcode` `string` — Баркод из карточки товара
+  - `error` `object` — Данные ошибки. При наличии
+    - `title` `string` — ID ошибки
+    - `detail` `string` — Описание ошибки
+  - `isError` `boolean` — Наличие ошибки: - `true` — ошибка есть - Поля нет — ошибка отсутствует
+  - `warehouses` `object[]` — Список складов. При наличии ошибки будет `null`
+    - `warehouseID` `integer<int64>` — ID склада. По нему можно получить [информацию о складе](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies/operation/getV1Warehouses)
+    - `canBox` `boolean` — Тип упаковки **Короб**: - `true` — доступен - `false` — недоступен
+    - `canMonopallet` `boolean` — Тип упаковки **Монопаллета**: - `true` — доступен - `false` — недоступен
+    - `canSupersafe` `boolean` — Тип упаковки **Суперсейф**: - `true` — доступен - `false` — недоступен
+    - `isBoxOnPallet` `boolean` — Тип поставки **Поштучная палета**: - `true` — доступен - `false` — недоступен
+- `requestId` `string` — ID запроса при наличии ошибок
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

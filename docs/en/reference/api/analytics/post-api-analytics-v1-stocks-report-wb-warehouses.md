@@ -32,6 +32,11 @@ The data is updated once every 30 minutes.
 
 `application/json` — schema `InventoryRequest`, required
 
+- `nmIds` `integer<int64>[]` — WB item numbers
+- `chrtIds` `integer<int64>[]` — Size IDs. It is used only for the item numbers specified in the `nmIds` array
+- `limit` `integer<int64>` — Number of rows in the response
+- `offset` `integer<int64>` — How many results to skip. For example, with value `10`, the response will start with the 11 element
+
 ## Responses
 
 | Code  | Description       | Schema                                      |
@@ -43,6 +48,60 @@ The data is updated once every 30 minutes.
 | `402` | Payment required  | `object`                                    |
 | `403` | Access denied     | `ErrorObject403`                            |
 | `429` | Too many requests | `object`                                    |
+
+**Structure `200`:**
+
+- `data` `InventoryWbResponse`
+  - `items` `object[]` — WB warehouses inventory by size
+    - `nmId` `integer<int64>` — WB item number
+    - `chrtId` `integer<int64>` — Size ID
+    - `warehouseId` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`
+    - `warehouseName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`
+    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`
+    - `quantity` `integer<int64>` — Warehouse inventory available to clients to add to cart
+    - `inWayToClient` `integer<int64>` — On way to client
+    - `inWayFromClient` `integer<int64>` — On way from client
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

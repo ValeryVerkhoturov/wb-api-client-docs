@@ -53,6 +53,78 @@ GET /api/v1/supplier/orders
 | `403` | Доступ запрещён        | `object`                         |
 | `429` | Слишком много запросов | `object`                         |
 
+**Структура `200` — `OrdersItem[]`:**
+
+- `date` `string` — Дата и время заказа. Это поле соответствует параметру `dateFrom` в запросе, если параметр `flag`=1. Если часовой пояс не указан, то берётся Московское время (UTC+3).
+- `lastChangeDate` `string` — Дата и время обновления информации в сервисе. Это поле соответствует параметру `dateFrom` в запросе, если параметр `flag`=0 или не указан. Если часовой пояс не указан, то берётся Московское время (UTC+3).
+- `warehouseName` `string` — Склад отгрузки
+- `warehouseType` `string` = `Склад WB` | `Склад продавца` — Тип склада хранения товаров
+- `countryName` `string` — Страна
+- `oblastOkrugName` `string` — Округ
+- `regionName` `string` — Регион
+- `supplierArticle` `string` — Артикул продавца
+- `nmId` `integer<int64>` — Артикул WB
+- `barcode` `string` — Баркод
+- `category` `string` — Категория
+- `subject` `string` — Предмет
+- `brand` `string` — Бренд
+- `techSize` `string` — Размер товара
+- `incomeID` `integer<int64>` — Номер поставки
+- `isSupply` `boolean` — Договор поставки
+- `isRealization` `boolean` — Договор реализации
+- `totalPrice` `number` — Цена без скидок
+- `discountPercent` `integer<int64>` — Скидка продавца, %
+- `spp` `number` — Скидка WB, %
+- `finishedPrice` `number` — Цена с учетом всех скидок, кроме суммы по WB Кошельку
+- `priceWithDisc` `number` — Цена со скидкой продавца, в том числе со скидкой WB Клуба
+- `isCancel` `boolean` — Отмена заказа: - `true` — заказ отменен
+- `cancelDate` `string` — Дата и время отмены заказа. Если заказ не был отменен, то "0001-01-01T00:00:00".Если часовой пояс не указан, то берётся Московское время UTC+3.
+- `sticker` `string` — ID стикера
+- `gNumber` `string` — ID корзины покупателя. Заказы одной транзакции будут иметь одинаковый `gNumber`
+- `srid` `string` — Уникальный ID заказа. Примечание для использующих API Маркетплейс: `srid` равен `rid` в ответах методов сборочных заданий.
+
+**Структура `400`:**
+
+- один из вариантов: `responseErrorStatistics`, `responseErrorStatistics2`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

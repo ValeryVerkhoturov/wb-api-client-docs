@@ -31,6 +31,50 @@ GET /api/v1/transit-tariffs
 | `403` | Доступ запрещён        | `object`                         |
 | `429` | Слишком много запросов | `object`                         |
 
+**Структура `200` — `models.TransitTariff[]`:**
+
+- `transitWarehouseName` `string` — Транзитный склад
+- `destinationWarehouseName` `string` — Склад назначения
+- `activeFrom` `string` — С какого числа доступно транзитное направление
+- `boxTariff` `models.VolumeTariff[]` — Тариф за транзит коробов. Если `null`, транзит для коробов недоступен
+  - `from` `integer<int64>` — Объём поставки от, литры
+  - `to` `integer<int64>` — Объём поставки до, литры
+  - `value` `number` — Тариф, ₽ за литр
+- `palletTariff` `integer<int64>` — Тариф за паллету, ₽
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -33,6 +33,8 @@ POST /api/v3/click-collect/orders/client
 
 `application/json` — схема `api.OrdersRequest`, обязательно
 
+- `orders` `integer<int64>[]` — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                     |
@@ -43,6 +45,53 @@ POST /api/v3/click-collect/orders/client
 | `402` | Требуется платёж       | `object`                  |
 | `403` | Доступ запрещён        | `Error`                   |
 | `429` | Слишком много запросов | `object`                  |
+
+**Структура `200`:**
+
+- `orders` `api.OrderClientInfo[]`
+  - `phone` `string` — Телефон для связи с покупателем. Чтобы связаться с покупателем наберите этот номер и введите добавочный код. Данный номер не является прямым номером покупателя
+  - `firstName` `string` — Имя покупателя
+  - `orderID` `integer<int64>` — ID сборочного задания
+  - `phoneCode` `integer<int64>` — Добавочный код
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

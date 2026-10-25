@@ -31,6 +31,8 @@ For all other assembly orders, see the error reason in the errors array.
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -41,6 +43,59 @@ For all other assembly orders, see the error reason in the errors array.
 | `402` | Payment required  | `object`                 |
 | `403` | Access denied     | `Error`                  |
 | `429` | Too many requests | `object`                 |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique ID of the request with errors.
+- `results` `api.StatusSetResponse[]`
+  - `errors` `api.BatchErrorResponse[]` — Error details
+    - `code` `integer<int64>` — Error code: - `404` - `409`
+    - `detail` `string` — - `NotFound` — assembly order is not found - `StatusMismatch` — operation is not possible for this assembly order status - `ImeiIsNotFilled` — IMEI is not filled - `MetaValidationFail` — errors label identifier validation
+    - `metaDetails` `object[]` — Label identifiers validation error details
+      - `key` `string` — Label identifier
+      - `value` `string` — Label identifier value
+      - `decision` `string` — Статус проверки: - `sgtin` - `sgtinInvalidFormat` — Invalid format - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/) - `sgtinEmitted` — Label identifier has been issued - `sgtinApplied` — Putting into circulation not completed - `sgtinWrittenOff` — Written off - `sgtinRetired` — Retired - `sgtinWithdrawn` — Withdrawn - `sgtinDisaggregation` — Disaggregation - `sgtinDisaggregated` — Disaggregated - `sgtinAppliedNotPaid` — Not paid - `pending` — Label identifier for inspection
+  - `isError` `boolean` — Are there any errors
+  - `orderId` `integer<int64>` — Assembly order ID with successfully set data
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

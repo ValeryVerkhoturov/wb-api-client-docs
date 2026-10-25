@@ -44,6 +44,111 @@ GET /adv/v3/fullstats
 | `403` | Доступ запрещён        | `object`                    |
 | `429` | Слишком много запросов | `object`                    |
 
+**Структура `200` — `FullStatsItem[]`:**
+
+- `advertId` `integer<int64>` — ID кампании
+- `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+- `boosterStats` `object[]` — Статистика по средней позиции товара (для кампаний с единой ставкой)
+  - `avg_position` `integer<int64>` — Средняя позиция товара
+  - `date` `string` — Дата, за которую предоставлены данные
+  - `nm` `integer<int64>` — Артикул WB
+- `canceled` `integer<int64>` — Отмены, шт.
+- `clicks` `integer<int64>` — Количество кликов
+- `cpc` `number<double>` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `cr` `number<double>` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
+- `ctr` `number<double>` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+- `days` `object[]` — Статистка по дням
+  - `apps` `object[]` — Блок информации о платформе
+    - `appType` `integer<int64>` = `1` | `32` | `64` — Тип платформы: - `1` — сайт - `32` — Android - `64` — IOS
+    - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+    - `canceled` `integer<int64>` — Отмены, шт.
+    - `clicks` `integer<int64>` — Количество кликов
+    - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
+    - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+    - `nms` `object[]` — Блок статистики по артикулам WB
+      - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+      - `canceled` `integer<int64>` — Отмены, шт.
+      - `clicks` `integer<int64>` — Количество кликов
+      - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+      - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
+      - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+      - `name` `string` — Название товара
+      - `nmId` `integer<int64>` — Артикул WB
+      - `orders` `integer<int64>` — Количество заказов
+      - `shks` `integer<int64>` — Количество заказанных товаров, шт.
+      - `sum` `number` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+      - `sum_price` `number` — Заказов на сумму в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+      - `views` `integer<int64>` — Количество просмотров
+    - `orders` `integer<int64>` — Количество заказов
+    - `shks` `integer<int64>` — Количество заказанных товаров, шт.
+    - `sum` `number` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `sum_price` `number` — Заказов на сумму в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `views` `integer<int64>` — Количество просмотров
+  - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+  - `canceled` `integer<int64>` — Отмены, шт.
+  - `date` `string` — Дата, за которую представлены данные
+  - `clicks` `integer<int64>` — Количество кликов
+  - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству посещений кампании
+  - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+  - `orders` `integer<int64>` — Количество заказов
+  - `shks` `integer<int64>` — Количество заказанных товаров, шт.
+  - `sum` `number` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `sum_price` `number` — Заказов на сумму в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `views` `integer<int64>` — Количество просмотров
+- `orders` `integer<int64>` — Количество заказов
+- `shks` `integer<int64>` — Количество заказанных товаров, шт.
+- `sum` `number<double>` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `sum_price` `number<double>` — Сумма заказов в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `views` `integer<int64>` — Количество просмотров
+- `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `400`:**
+
+- `errors` `object[]`
+  - `detail` `string` — Детали ошибки
+  - `field` `string` — Параметр с ошибкой
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `type` `string` — Тип ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

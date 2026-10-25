@@ -44,6 +44,111 @@ For campaigns in statuses `7`, `9` and `11`.
 | `403` | Access denied     | `object`                    |
 | `429` | Too many requests | `object`                    |
 
+**Structure `200` — `FullStatsItem[]`:**
+
+- `advertId` `integer<int64>` — Campaign ID
+- `atbs` `integer<int64>` — Number of items added to the cart
+- `boosterStats` `object[]` — Statistics on the average position (for campaigns with standard bid)
+  - `avg_position` `integer<int64>` — Average position of the item
+  - `date` `string` — Date for which information is to be provided
+  - `nm` `integer<int64>` — WB item number
+- `canceled` `integer<int64>` — Cancellations, pcs
+- `clicks` `integer<int64>` — Number of clicks
+- `cpc` `number<double>` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `cr` `number<double>` — CR (conversion rate) — the ratio of the number of orders to the total number of clicks
+- `ctr` `number<double>` — CTR (click-through rate) — the ratio of clicks to impressions, expressed as a percentage
+- `days` `object[]` — Statistics by days
+  - `apps` `object[]` — Information block about the platform
+    - `appType` `integer<int64>` = `1` | `32` | `64` — Platform type - `1` — website - `32` — Android - `64` — IOS
+    - `atbs` `integer<int64>` — Number of items added to the cart
+    - `canceled` `integer<int64>` — Cancellations, pcs
+    - `clicks` `integer<int64>` — Number of clicks
+    - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of clicks
+    - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+    - `nms` `object[]` — Statistics block for WB item numbers
+      - `atbs` `integer<int64>` — Number of items added to the cart
+      - `canceled` `integer<int64>` — Cancellations, pcs
+      - `clicks` `integer<int64>` — Number of clicks
+      - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+      - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of clicks
+      - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+      - `name` `string` — Item name
+      - `nmId` `integer<int64>` — WB item number
+      - `orders` `integer<int64>` — Number of orders
+      - `shks` `integer<int64>` — Number of ordered items, pcs
+      - `sum` `number` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+      - `sum_price` `number` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+      - `views` `integer<int64>` — Number of views
+    - `orders` `integer<int64>` — Number of orders
+    - `shks` `integer<int64>` — Number of ordered items, pcs
+    - `sum` `number` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `sum_price` `number` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `views` `integer<int64>` — Number of views
+  - `atbs` `integer<int64>` — Number of items added to the cart
+  - `canceled` `integer<int64>` — Cancellations, pcs
+  - `date` `string` — Date for which the data is presented
+  - `clicks` `integer<int64>` — Number of clicks
+  - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency.
+  - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of visits to the campaign
+  - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+  - `orders` `integer<int64>` — Number of orders
+  - `shks` `integer<int64>` — Number of ordered items, pcs
+  - `sum` `number` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `sum_price` `number` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `views` `integer<int64>` — Number of views
+- `orders` `integer<int64>` — Number of orders
+- `shks` `integer<int64>` — Number of ordered items, pcs
+- `sum` `number<double>` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `sum_price` `number<double>` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `views` `integer<int64>` — Number of views
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `400`:**
+
+- `errors` `object[]`
+  - `detail` `string` — Error details
+  - `field` `string` — Parameter with error
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `type` `string` — Error type
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

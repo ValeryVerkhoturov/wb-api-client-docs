@@ -42,6 +42,67 @@ GET /api/v1/supplies/{ID}/goods
 | `403` | Доступ запрещён        | `object`                          |
 | `429` | Слишком много запросов | `object`                          |
 
+**Структура `200` — `models.GoodInSupply[]`:**
+
+- `barcode` `string` — Баркод товара
+- `vendorCode` `string` — Артикул продавца
+- `nmID` `integer<int64>` — Артикул WB
+- `needKiz` `boolean` — Нужен ли [код маркировки Честного знака](https://честныйзнак.рф/) для этого товара: - `false` — не нужен - `true` — нужен
+- `tnved` `string` — Код ТНВЭД. Если `"needKiz":true`, а `"tnved":null`, нужно заполнить характеристику товара \*\*ТН ВЭД\*\* в [личном кабинете](https://seller.wildberries.ru/new-goods) или по [API](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- `techSize` `string` — Размер товара, указанный продавцом
+- `color` `string` — Цвет товара
+- `supplierBoxAmount` `integer<int64>` — Указано в упаковке, шт
+- `quantity` `integer<int64>` — Указано в поставке/заказе, шт
+- `readyForSaleQuantity` `integer<int64>` — Поступило в продажу, шт
+- `acceptedQuantity` `integer<int64>` — Принято, шт
+- `unloadingQuantity` `integer<int64>` — Количество товара на раскладке, шт
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

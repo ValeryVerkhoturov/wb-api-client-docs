@@ -40,6 +40,59 @@ GET /api/advert/v0/daily-limits
 | `403` | Доступ запрещён        | `object`                   |
 | `429` | Слишком много запросов | `object`                   |
 
+**Структура `200`:**
+
+- `adverts` `V0DailyLimitAdvert[]`
+  - `advertId` `integer<int64>` — ID кампании
+  - `enabled` `boolean` — - `true` — дневной лимит включен - `false` — дневной лимит отключен
+  - `dailyLimit` `integer<int64>` — Размер дневного лимита в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `spentToday` `integer<int64>` — Потрачено сегодня в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+  - `currency` `string<ISO 4217>` — Код валюты
+  - `carryOverEnabled` `boolean` — Перенос остатка дневного лимита на следующий день. Если за 24 часа лимит потратится не полностью, добавим остаток суммы к лимиту следующего дня. Расходы на продвижение не увеличатся. - `true` — перенос остатка включен - `false` — перенос остатка отключен
+  - `valid` `boolean` — Хватает ли текущего размера лимита на установку ставок кампании: - `true` — да - `false` — нет, рекомендуем повысить лимит, иначе бюджет кампании может расходоваться неравномерно
+  - `requiredLimit` `integer<int64>` — Рекомендуемый минимальный размер дневного лимита при текущих ставках кампании. Указывается в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

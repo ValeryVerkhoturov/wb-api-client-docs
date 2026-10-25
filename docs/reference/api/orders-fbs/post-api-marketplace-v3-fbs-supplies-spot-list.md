@@ -30,6 +30,8 @@ POST /api/marketplace/v3/fbs/supplies/spot/list
 
 `application/json` — схема `object`, обязательно
 
+- `supplyIds` `string[]` (обязательно) — Список ID поставок
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -39,6 +41,60 @@ POST /api/marketplace/v3/fbs/supplies/spot/list
 | `401` | Не авторизован         | `object`                 |
 | `403` | Доступ запрещён        | `object`                 |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `200`:**
+
+- `supplies` `object[]`
+  - `id` `string` — ID поставки
+  - `spot` `object`
+    - `status` `string` = `pending` | `completed` | `failed` — Статус СПОТ: - `pending` — ожидается результат формирования ДОПП — документа о предстоящей поставке - `completed` — ДОПП успешно сформирован. Можно [получить QR-код](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot) - `failed` — ошибка формирования ДОПП. Подробнее в поле `errorCode`
+    - `carrierName` `string` — Наименование перевозчика
+    - `carrierTaxNumber` `string` — ИНН перевозчика
+    - `carrierCountryCode` `string` — Код страны перевозчика по [ОКСМ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm)
+    - `vehicleRegistrationNumber` `string` — Регистрационный номер транспортного средства
+    - `trailerRegistrationNumber` `string` — Регистрационный номер прицепа
+    - `errorCode` `string` = `doppFailed` — Код ошибки от сервиса формирования ДОПП — документа о предстоящей поставке. Возвращается при `"status": "failed"`. Чтобы исправить ошибку, проверьте данные СПОТ и [добавьте их в поставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdSpot) ещё раз
+  - `error` `object`
+    - `title` `string` — Заголовок ошибки
+    - `detail` `string` — Детали ошибки
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -36,6 +36,25 @@ POST /api/v2/search-report/table/details
 
 `application/json` — схема `TableDetailsRequest`, обязательно
 
+- `currentPeriod` `Period` (обязательно)
+  - `start` `string` (обязательно) — Дата начала периода. Не позднее `end`. Не ранее 365 суток от сегодня
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 365 суток от сегодня
+- `pastPeriod` `pastPeriod`
+  - `start` `string` (обязательно) — Дата начала периода. Не позднее `end`. Не ранее 365 суток от сегодня
+  - `end` `string` (обязательно) — Дата окончания периода. Не позднее даты перед датой начала `currentPeriod`. Не ранее 365 суток от сегодня
+- `subjectId` `integer<int32>` — ID предмета
+- `brandName` `string` — Название товара
+- `tagId` `integer<int64>` — ID ярлыка
+- `nmIds` `integer<int64>[]` — Список артикулов WB
+- `orderBy` `OrderByMainAndDetails` (обязательно)
+  - `field` `string` = `avgPosition` | `openCard` | `addToCart` | `openToCart` | `orders` | `cartToOrder` | `visibility` | `minPrice` | `maxPrice` (обязательно) — Поле для сортировки: - `avgPosition` — по средней позиции - `addToCart` — по добавлениям в корзину - `openCard` — по открытию карточки (переход на страницу товара) - `orders` — по количеству заказов - `cartToOrder` — по конверсии в заказ из поиска - `openToCart` — по конверсии в корзину из поиска - `visibility` — по видимости товара - `minPrice` — по минимальной цене - `maxPrice` — по максимальной цене
+  - `mode` `string` = `asc` | `desc` (обязательно) — Порядок сортировки: - `asc` — по возрастанию - `desc` — по убыванию
+- `positionCluster` `string` = `all` | `firstHundred` | `secondHundred` | `below` (обязательно) — Товары с какой средней позицией в поиске показывать в отчёте: - `all` — все - `firstHundred` — от 1 до 100 - `secondHundred` — от 101 до 200 - `below` — от 201 и ниже
+- `includeSubstitutedSKUs` `boolean` — Показать данные по прямым запросам с [подменным артикулом](https://seller.wildberries.ru/help-center/article/A-524)
+- `includeSearchTexts` `boolean` — Показать данные по поисковым запросам без учёта подменного артикула
+- `limit` `integer<int64>` (обязательно) — Количество товаров в ответе
+- `offset` `integer<int64>` (обязательно) — После какого элемента выдавать данные
+
 ## Ответы
 
 | Код   | Описание               | Схема                                       |
@@ -46,6 +65,88 @@ POST /api/v2/search-report/table/details
 | `402` | Требуется платёж       | `object`                                    |
 | `403` | Доступ запрещён        | `ErrorObject403`                            |
 | `429` | Слишком много запросов | `object`                                    |
+
+**Структура `200`:**
+
+- `data` `TableDetailsResponse`
+  - `products` `TableItem[]` — Список товаров в группе по фильтру
+    - `nmId` `integer<int64>` — Артикул WB
+    - `name` `string` — Название товара
+    - `vendorCode` `string` — Артикул продавца
+    - `subjectName` `string` — Название предмета
+    - `brandName` `string` — Бренд
+    - `mainPhoto` `string` — URL главного фото карточки товара
+    - `isAdvertised` `boolean` — Находится ли товар в продвижении в Поисковой выдаче
+    - `isSubstitutedSKU` `boolean` — Искали ли товар по подменному артикулу. Поле будет в ответе при наличии в запросе `includeSubstitutedSKUs` и/или `includeSearchTexts`
+    - `isCardRated` `boolean` — Есть ли рейтинг у карточки товара
+    - `rating` `number<float64>` — Рейтинг карточки товара
+    - `feedbackRating` `number<float64>` — Рейтинг по отзывам
+    - `price` `object` — Цена
+      - `minPrice` `integer<int64>` — Минимальная цена продавца со скидкой продавца (без учёта скидки WB Клуба)
+      - `maxPrice` `integer<int64>` — Максимальная цена продавца со скидкой продавца (без учёта скидки WB Клуба)
+    - `avgPosition` `object` — Средняя позиция товара в результатах поиска
+      - `current` `integer<int64>` — Текущая средняя позиция
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `openCard` `object` — Количество переходов в карточку товара из поиска
+      - `current` `integer<int64>` — Текущее количество переходов
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `addToCart` `object` — Сколько раз товар из поиска добавили в корзину
+      - `current` `integer<int64>` — Текущее количество
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `openToCart` `object` — Конверсия в корзину из поиска — доля добавлений товара в корзину по отношению ко всем переходам в карточку товара из поиска
+      - `current` `integer<int64>` — Текущая конверсия
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `orders` `object` — Сколько раз товары из поиска заказали
+      - `current` `integer<int64>` — Текущее количество
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `cartToOrder` `object` — Конверсия в заказ из поиска — доля заказов товара по отношению ко всем добавлениям товара из поиска в корзину
+      - `current` `integer<int64>` — Текущая конверсия
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+    - `visibility` `object` — Процент видимости товара в результатах поиска
+      - `current` `integer<int64>` — Текущий процент видимости
+      - `dynamics` `integer<int64>` — Динамика по сравнению с предыдущим периодом, %
+  - `currency` `Currency`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

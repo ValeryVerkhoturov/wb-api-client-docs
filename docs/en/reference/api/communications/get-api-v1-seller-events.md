@@ -43,6 +43,107 @@ To retrieve all events:
 | `403` | Access denied     | `object`                       |
 | `429` | Too many requests | `object`                       |
 
+**Structure `200`:**
+
+- `result` `EventsResult`
+  - `next` `integer<int64>` — Paginator. Retrieve the next data set starting from this moment
+  - `newestEventTime` `string` — Newest response event time
+  - `oldestEventTime` `string` — Oldest response event time
+  - `totalEvents` `integer<int64>` — Number of events
+  - `events` `Event[]`
+    - `chatID` `string` — Chat ID
+    - `eventID` `string` — Event ID
+    - `eventType` `EventType`
+    - `isNewChat` `boolean` — New chat indicator: - `false` — chat is not new - `true` — chat is new
+    - `message` `object` — Message data
+      - `attachments` `EventAttachments`
+        - `goodCard` `Listing`
+          - `nmID` `integer<int64>` — WB item number
+            - …
+          - `price` `integer<int64>` — Actual price with all discounts applied. Charged to the buyer
+            - …
+          - `priceCurrency` `string` — Currency
+            - …
+          - `rid` `string` — Unique order ID. Note: `rid` corresponds to `srid` in the responses of the methods: - [Buyers Return Applications](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) - [Order Feed](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed) - [Orders](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierOrders) - [Sales](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierSales) - [Returns and Item Movement Report](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport) - [Details for the Sales Reports by Report ID](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId) - [Details for the Sales Reports by Period](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed) - [Details for the Acquiring Expenses Reports by Report ID](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId) - [Details for the Acquiring Expenses Reports by Period](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailed)
+            - …
+          - `size` `string` — The item size, corresponds to `wbSize` in the [listing](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList)
+            - …
+        - `files` `File[]` — Files
+          - `contentType` `string` — File type
+            - …
+          - `date` `string` — Date of the file upload
+            - …
+          - `downloadID` `string` — File ID. [Download the file](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerDownloadId)
+            - …
+          - `name` `string` — File name
+            - …
+          - `url` `string` — URL for accessing the file
+            - …
+          - `size` `integer<int64>` — File size in bytes
+            - …
+        - `images` `Image[]` — Images
+          - `date` `string` — Date of the image upload
+            - …
+          - `downloadID` `string` — File ID. [Download the file](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerDownloadId)
+            - …
+          - `url` `string` — URL for accessing the image
+            - …
+      - `text` `string` — Message text
+    - `source` `string` — Message sending source: - `seller-portal` — sellers portal - `seller-public-api` — Buyers chat API - `rusite` — buyers portal - `global` — `global.wildberries.ru` portal - `ios` — mobile operating system by **Apple** - `android` — **Android** mobile operating system by **Google**
+    - `addTimestamp` `integer<int64>` — Time of event occurrence on the server. Unix timestamp format
+    - `addTime` `string` — Time of event occurrence on the server in UTC
+    - `replySign` `string` — Chat signature. Available only if `"isNewChat": true`. Required when [sending a message](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/postV1SellerMessage)
+    - `sender` `Sender`
+    - `clientName` `string` — Buyer's name
+- `errors` `string[]` — Errors, if any
+
+**Structure `400`:**
+
+- `status` `number` — HTTP status code
+- `title` `string` — Error title
+- `origin` `string` — WB internal service ID
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `error` `string` — Error text
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -36,6 +36,56 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `403` | Access denied     | `ResponseError` |
 | `429` | Too many requests | `object`        |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `uploadID` `integer<int64>` — Upload ID
+  - `historyGoods` `GoodHistory[]` — Data of items in the upload
+    - `nmID` `integer<int64>` — WB item number
+    - `vendorCode` `string` — Seller item number
+    - `sizeID` `integer<int64>` — Size ID. In the Content methods this is the `chrtID` field
+    - `techSizeName` `string` — Size
+    - `price` `integer<int64>` — Price
+    - `currencyIsoCode4217` `string` — Currency, according to ISO 4217
+    - `discount` `integer<int64>` — Discount, %
+    - `clubDiscount` `integer<int64>` — WB Club discount, %
+    - `status` `ItemStatus`
+    - `errorText` `string` — Error description. For example: - `New price is several times lower than the current price. Item has been moved to Price Quarantine` — the error means that the new price with discount is lower than the [threshold value](https://seller.wildberries.ru/instructions/ru/ru/material/price-quarantine#2ef3641a-5165-41db-9ac7-e4374c9fc3f1). You can edit the price or discount using API or remove the item out of quarantine in the [personal account](https://seller.wildberries.ru/discount-and-prices/quarantine).
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

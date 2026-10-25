@@ -30,6 +30,22 @@ POST /api/v2/stocks-report/products/groups
 
 `application/json` — схема `TableGroupRequestSt`, обязательно
 
+- `nmIDs` `integer<int64>[]` — Список артикулов WB для фильтрации
+- `subjectIDs` `integer<int32>[]` — Список ID предметов для фильтрации
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `tagIDs` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `currentPeriod` `PeriodInv` (обязательно)
+  - `start` `string` (обязательно) — Дата начала периода. Не позднее `end`. Не ранее 3 месяцев от текущей даты
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 3 месяцев от текущей даты
+- `stockType` `StockType` (обязательно)
+- `skipDeletedNm` `boolean` (обязательно) — Скрыть удалённые товары
+- `availabilityFilters` `string[]` (обязательно) — Доступность товара: - `deficient` — Дефицит - `actual` — Актуальный - `balanced` — Баланс - `nonActual` — Неактуальный - `nonLiquid` — Неликвид - `invalidData` — Не рассчитано
+- `orderBy` `TableOrderBy` (обязательно)
+  - `field` `TableGroupField` (обязательно)
+  - `mode` `OrderByMode` (обязательно)
+- `limit` `integer<int64>` — Количество групп в ответе
+- `offset` `integer<int64>` (обязательно) — После какого элемента выдавать данные
+
 ## Ответы
 
 | Код   | Описание               | Схема                                         |
@@ -40,6 +56,138 @@ POST /api/v2/stocks-report/products/groups
 | `402` | Требуется платёж       | `object`                                      |
 | `403` | Доступ запрещён        | `ErrorObject403`                              |
 | `429` | Слишком много запросов | `object`                                      |
+
+**Структура `200`:**
+
+- `data` `TableGroupResponseSt`
+  - `groups` `TableGroupItemSt[]` — Множество данных по группам
+    - `subjectID` `integer<int32>` — ID предмета
+    - `subjectName` `string` — Название предмета
+    - `brandName` `string` — Бренд
+    - `tagID` `integer<int64>` — ID ярлыка
+    - `tagName` `string` — Название ярлыка
+    - `metrics` `object` — Метрики группы
+      - `ordersCount` `integer<int64>` — Заказы, шт.
+      - `ordersSum` `integer<int64>` — Заказы, сумма
+      - `avgOrders` `number<float64>` — Среднее количество заказов в день
+      - `avgOrdersByMonth` `FloatGraphByPeriodItem[]` — Среднее количество заказов по месяцам
+        - `start` `string` — Начало месяца
+        - `end` `string` — Конец месяца
+        - `value` `number<float64>` — Среднее количество заказов
+      - `buyoutCount` `integer<int64>` — Выкупы, шт.
+      - `buyoutSum` `integer<int64>` — Выкупы, сумма
+      - `buyoutPercent` `integer<int64>` — Процент выкупа
+      - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
+      - `stockSum` `integer<int64>` — Стоимость остатков на текущий день
+      - `saleRate` `object` — Оборачиваемость текущих остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+        - `days` `integer<int32>` — Количество дней
+        - `hours` `integer<int32>` — Количество часов
+      - `avgStockTurnover` `object` — Оборачиваемость средних остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+        - `days` `integer<int32>` — Количество дней
+        - `hours` `integer<int32>` — Количество часов
+      - `toClientCount` `integer<int64>` — В пути к клиенту, шт.
+      - `fromClientCount` `integer<int64>` — В пути от клиента, шт.
+      - `officeMissingTime` `object` — Время отсутствия товара на складе. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность 4. `"hours":-4` — отсутствие в течение всего периода
+        - `days` `integer<int32>` — Количество дней
+        - `hours` `integer<int32>` — Количество часов
+      - `lostOrdersCount` `number<float64>` — Упущенные заказы, шт. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+      - `lostOrdersSum` `number<float64>` — Упущенные заказы, сумма. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+      - `lostBuyoutsCount` `number<float64>` — Упущенные выкупы, шт. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+      - `lostBuyoutsSum` `number<float64>` — Упущенные выкупы, сумма. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+    - `items` `TableItemSt[]` — Товары группы
+      - `nmID` `integer<int64>` — Артикул WB
+      - `isDeleted` `boolean` — Является ли товар удалённым
+      - `subjectName` `string` — Название предмета
+      - `name` `string` — Название товара
+      - `vendorCode` `string` — Артикул продавца
+      - `brandName` `string` — Бренд
+      - `mainPhoto` `string` — Ссылка на главное фото
+      - `hasSizes` `boolean` — Является ли товар размерным. Неразмерный товар имеет единственный размер, с `"techSize":"0"`
+      - `metrics` `object` — Метрики товара
+        - `ordersCount` `integer<int64>` — Заказы, шт.
+        - `ordersSum` `integer<int64>` — Заказы, сумма
+        - `avgOrders` `number<float64>` — Среднее количество заказов в день
+        - `avgOrdersByMonth` `FloatGraphByPeriodItem[]` — Среднее количество заказов по месяцам
+          - `start` `string` — Начало месяца
+            - …
+          - `end` `string` — Конец месяца
+            - …
+          - `value` `number<float64>` — Среднее количество заказов
+            - …
+        - `buyoutCount` `integer<int64>` — Выкупы, шт.
+        - `buyoutSum` `integer<int64>` — Выкупы, сумма
+        - `buyoutPercent` `integer<int64>` — Процент выкупа
+        - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
+        - `stockSum` `integer<int64>` — Стоимость остатков на текущий день
+        - `saleRate` `object` — Оборачиваемость текущих остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+          - `days` `integer<int32>` — Количество дней
+            - …
+          - `hours` `integer<int32>` — Количество часов
+            - …
+        - `avgStockTurnover` `object` — Оборачиваемость средних остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+          - `days` `integer<int32>` — Количество дней
+            - …
+          - `hours` `integer<int32>` — Количество часов
+            - …
+        - `toClientCount` `integer<int64>` — В пути к клиенту, шт.
+        - `fromClientCount` `integer<int64>` — В пути от клиента, шт.
+        - `officeMissingTime` `object` — Время отсутствия товара на складе. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность 4. `"hours":-4` — отсутствие в течение всего периода
+          - `days` `integer<int32>` — Количество дней
+            - …
+          - `hours` `integer<int32>` — Количество часов
+            - …
+        - `lostOrdersCount` `number<float64>` — Упущенные заказы, шт. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+        - `lostOrdersSum` `number<float64>` — Упущенные заказы, сумма. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+        - `lostBuyoutsCount` `number<float64>` — Упущенные выкупы, шт. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+        - `lostBuyoutsSum` `number<float64>` — Упущенные выкупы, сумма. Особые случаи: 1. Значение меньше `0` и не равно `-2` — значение не рассчитано 2. Значение `-2` — нулевое значение
+        - `currentPrice` `object` — Текущая цена
+          - `minPrice` `integer<int64>` — Минимальная цена продавца со скидкой продавца (без учёта скидки WB Клуба)
+            - …
+          - `maxPrice` `integer<int64>` — Максимальная цена продавца со скидкой продавца (без учёта скидки WB Клуба)
+            - …
+        - `availability` `string` = `deficient` | `actual` | `balanced` | `nonActual` | `nonLiquid` | `invalidData` — Доступность товара: - `deficient` — Дефицит - `actual` — Актуальный - `balanced` — Баланс - `nonActual` — Неактуальный - `nonLiquid` — Неликвид - `invalidData` — Не рассчитано
+  - `currency` `Currency`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

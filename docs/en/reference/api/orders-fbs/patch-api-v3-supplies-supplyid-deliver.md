@@ -45,6 +45,63 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `409` | Error closing supply             | `Http409SupplyDeliverError` |
 | `429` | Too many requests                | `object`                    |
 
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `404`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `409`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+  - `orders` `object[]` — Assembly orders those label identifiers has not passed or has not yet completed validation
+    - `id` `integer<int64>` — Assembly order ID
+    - `metaDetails` `object[]` — Errors info
+      - `key` `string` — Label identifier
+      - `value` `string` — Label identifier value
+      - `decision` `string` — State: - `imei` - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order - `imeiInvalidFormat` — Invalid format - `imeiAlreadySold` — The item with this IMEI has already been sold - `uin` - `required` — Required label identifier is not added to the assembly order - `pending` — Label identifier validation continues. Wait for the validation status to change - `uinInvalidFormat` — Invalid format - `uinBadStatus` — Invalid batch status - `uinBadProcess` — Invalid processing stage - `uinBadStatusAndBadProcess` — Invalid batch status. Invalid processing stage - `uinNotFound` — Not found in GIIS DMDK [https://minfin.gov.ru/ru/perfomance/jewels/dmdk]. When you receive this error, make sure that the UIN: - is specified in the uploaded Delivery Contract Specification. If the specification was uploaded more than 30 minutes ago, [delete UIN](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/deleteV3OrdersOrderIdMeta) from the assembly order and [add it](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin) again - is registered in GIIS DMDK - is specified correctly and is read from the tag without errors - is in circulation - `sgtin` - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order - `sgtinInvalidFormat` — Invalid format - `sgtinNoGS` — Label identifier does not contain the GS separator `\u001d` - `sgtinHasInvalidSymbols` — Label identifier contains incorrect characters or spaces - `sgtinHasNonLatinSymbols` — Label identifier contains non-special or Latin characters - `sgtinInvalidPattern` — Label identifier structure is incorrect - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/) - `sgtinEmitted` — Label identifier has been issued - `sgtinApplied` — Putting into circulation not completed - `sgtinWrittenOff` — Written off - `sgtinRetired` — Retired - `sgtinWithdrawn` — Withdrawn - `sgtinDisaggregation` — Disaggregation - `sgtinDisaggregated` — Disaggregated - `sgtinAppliedNotPaid` — Not paid - `gtin` - `required` — Required label identifier is not added to the assembly order - `expiration` - `required` — Required label identifier is not added to the assembly order - `customsDeclaration` - `required` — Required label identifier is not added to the assembly order
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

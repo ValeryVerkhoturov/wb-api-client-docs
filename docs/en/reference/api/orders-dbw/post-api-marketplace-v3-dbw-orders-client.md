@@ -28,6 +28,8 @@ The method returns buyers information by order IDs.
 
 `application/json` — schema `OrdersRequestAPI`, required
 
+- `orders` `integer<int64>[]` — Assembly order IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                             |
@@ -38,6 +40,61 @@ The method returns buyers information by order IDs.
 | `402` | Payment required  | `object`                           |
 | `403` | Access denied     | `Error`                            |
 | `429` | Too many requests | `object`                           |
+
+**Structure `200`:**
+
+- `orders` `ClientInfo[]` — Buyers information
+  - `replacementPhone` `string` — Replacement phone number to contact the buyer. An empty value `""` means that the number is not assigned yet
+  - `phone` `string` — Buyer contact phone number: - if the extension code is not specified in the `phoneCode` field, you can call the buyer using the specified number. Additional phone numbers that do not need extension codes are specified in the `additionalPhones` field - if the extension code is specified in the `phoneCode` field, use it to reach the buyer via the specified number and extension code
+  - `firstName` `string` — Buyer first name
+  - `fullName` `string` — Buyer full name, used for documents
+  - `additionalPhones` `string[]` — Additional phone numbers to contact the buyer. Use it to call the buyer, if the main number from `phone` is unavailable. An empty value means that the number is not specified
+  - `additionalPhoneCodes` `integer<int64>[]` — Additional extension codes. Use it if you could not reach the buyer using the extension code from `phoneCode`. An empty value means that the codes are not assigned yet
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `phoneCode` `integer<int64>` — Extension phone code. Use it to reach the buyer via the number from `phone`. If the code is not specified, you can call the buyer without codes
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

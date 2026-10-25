@@ -26,6 +26,10 @@ Sends message to the buyer.
 
 `multipart/form-data` — schema `object`, required
 
+- `replySign` `string` (required) — Chat signature. Can be obtained from [chat information](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerChats) or [event data](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersChat/operation/getV1SellerEvents) if the event contains the `"isNewChat": true` field.
+- `message` `string` — Message text. Maximum of 1000 symbols.
+- `file` `string<binary>[]` — Files, in JPEG, PDF, or PNG format, maximum size — 5 MB each. Maximum of total file size — 30 MB.
+
 ## Responses
 
 | Code  | Description       | Schema                           |
@@ -36,6 +40,61 @@ Sends message to the buyer.
 | `402` | Payment required  | `object`                         |
 | `403` | Access denied     | `object`                         |
 | `429` | Too many requests | `object`                         |
+
+**Structure `200`:**
+
+- `errors` `string[]` — File upload errors, if any
+- `result` `object`
+  - `addTime` `integer<int64>` — Date and time the chat was created
+  - `chatID` `string` — Chat ID
+  - `sign` `string` — Chat signature
+
+**Structure `400`:**
+
+- `status` `number` — HTTP status code
+- `title` `string` — Error title
+- `origin` `string` — WB internal service ID
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `error` `string` — Error text
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

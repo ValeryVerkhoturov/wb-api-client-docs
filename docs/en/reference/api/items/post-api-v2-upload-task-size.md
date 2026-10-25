@@ -41,6 +41,73 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `422` | Unexpected result              | `ResponseError`             |
 | `429` | Too many requests              | `object`                    |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `id` `integer<int64>` — Upload ID
+  - `alreadyExists` `boolean` — Upload duplication: `true` — upload already exists
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `208`:**
+
+- `data` `object` — Response data
+  - `id` `integer<int64>` — Upload ID
+  - `alreadyExists` `boolean` — Upload duplication: `true` — upload already exists
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `409`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `422`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

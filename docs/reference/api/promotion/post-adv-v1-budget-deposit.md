@@ -33,6 +33,12 @@ POST /adv/v1/budget/deposit
 
 `application/json` — схема `object`, обязательно
 
+- `sum` `integer<int64>` — Общая сумма пополнения бюджета в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `cashback_sum` `integer<int64>` — Сумма пополнения бюджета промо-бонусами. Пополнить можно только определённый процент от общей суммы, указанный в поле `percent` ответа метода получения [баланса](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/getV1Balance). Оставшаяся часть общей суммы спишется с указанного источника пополнения. Пополнить можно только определённый процент от общей суммы, указанный в поле `percent` ответа метода получения [баланса](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/getV1Balance). Оставшаяся часть общей суммы спишется с указанного источника пополнения. Списать промо-бонусы можно только для источников пополнения: - `0` — счёт - `1` — баланс
+- `cashback_percent` `integer<int64>` — Процент от суммы пополнения, который можно пополнить промо-бонусами. Нужно указать значение поля percent из ответа метода получения [баланса](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/getV1Balance) Если вы указали `cashback\_sum`, параметр `cashback\_percent` становится обязательным
+- `type` `integer<int64>` — Тип источника пополнения: - `0` — Счёт - `1` — Баланс - `3` — Бонусы
+- `return` `boolean` — Флаг возврата ответа (`true` — в ответе вернется обновлённый размер бюджета кампании, `false` или не указать параметр вообще — не вернётся.)
+
 ## Ответы
 
 | Код   | Описание               | Схема                            |
@@ -42,6 +48,48 @@ POST /adv/v1/budget/deposit
 | `401` | Не авторизован         | `object`                         |
 | `403` | Доступ запрещён        | `object`                         |
 | `429` | Слишком много запросов | `object`                         |
+
+**Структура `200`:**
+
+- `total` `integer<int64>` — Размер обновлённого бюджета
+- `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `400`:**
+
+- `error` `string`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

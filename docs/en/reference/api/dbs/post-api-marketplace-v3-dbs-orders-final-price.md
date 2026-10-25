@@ -27,6 +27,8 @@ The method returns:
 
 `application/json` — schema `OrdersRequestAPI`, optional
 
+- `orders` `integer<int64>[]` — Assembly order IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                         |
@@ -36,6 +38,59 @@ The method returns:
 | `401` | Unauthorized      | `object`                       |
 | `403` | Access denied     | `api.BatchError`               |
 | `429` | Too many requests | `object`                       |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID
+- `results` `api.OrderFinalPriceResult[]`
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `data` `object` — Assembly order data. If `"data":{}`, the data is being generated. Please try again later. Maximum data generation time is approximately 1 minute. If `data` is absent, the assembly order data is not provided. Use the data from the responses of the methods: - [Get New Assembly Orders List](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew) - [Get Information on Completed Orders](https://dev.wildberries.ru/en/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
+    - `originalPrice` `integer<int64>` — Seller price in the currency of sale, excluding discounts, multiplied by 100
+    - `convertedOriginalPrice` `integer<int64>` — Seller price in the currency of the seller country, excluding discounts, multiplied by 100
+    - `originalFinalPrice` `integer<int64>` — The sum charged to the buyer in the currency of sale including all discounts and cashback, multiplied by 100. You can find a currency code in the `currencyCode` field. Provided for informational purposes only
+    - `convertedOriginalFinalPrice` `integer<int64>` — The sum charged to the buyer in the currency of the seller country including all discounts and cashback, multiplied by 100. Provided for informational purposes only
+    - `currencyCode` `integer<ISO 4217>` — Sale currency code
+    - `convertedCurrencyCode` `integer<ISO 4217>` — Currency code of the seller country
+  - `errors` `api.BatchErrorFinalPriceResponse[]` — Error detail
+    - `code` `integer<int64>` — Error code: - `404` — `NotFound` - `400` — `StatusMismatch` - `422` — `PriceNotCalculated`
+    - `detail` `string` — - `NotFound` — the assembly order is not found (`404`) - `StatusMismatch` — operation is not possible for this assembly order status (`400`) - `PriceNotCalculated` — operation is not available for assembly orders created before 23.07.2026 (`422`)
+  - `isError` `boolean` — Are there any errors
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

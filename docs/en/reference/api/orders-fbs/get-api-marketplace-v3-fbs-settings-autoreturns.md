@@ -30,6 +30,48 @@ The method returns information about auto-return settings set by the seller.
 | `406` | Not applicable to this account | `ApiErrorV3`                             |
 | `429` | Too many requests              | `object`                                 |
 
+**Structure `200`:**
+
+- `type` `string` = `allToWarehouse` | `allToPickupPoint` | `manual` — Auto-return type: - `allToWarehouse` — all items are sent to the WB warehouse, except for items of [subcategories](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted) that are automatically returned to the pickup point - `allToPickupPoint` — all items are sent to the pickup point - `manual` — manual settings are used
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `406`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

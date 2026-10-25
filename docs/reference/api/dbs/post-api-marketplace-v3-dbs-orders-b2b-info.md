@@ -28,6 +28,8 @@ POST /api/marketplace/v3/dbs/orders/b2b/info
 
 `application/json` — схема `api.OrdersRequestV2`, обязательно
 
+- `ordersIds` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                        |
@@ -38,6 +40,61 @@ POST /api/marketplace/v3/dbs/orders/b2b/info
 | `402` | Требуется платёж       | `object`                     |
 | `403` | Доступ запрещён        | `api.BatchError`             |
 | `429` | Слишком много запросов | `object`                     |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `results` `api.B2bClientInfoResponse[]`
+  - `data` `api.B2bClientInfo`
+    - `inn` `string` — Индивидуальный номер налогоплательщика (ИНН)
+    - `kpp` `string` — Код причины постановки на учёт (КПП)
+    - `orgName` `string` — Наименование организации
+  - `errors` `object[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — Описание ошибки
+  - `isError` `boolean` — Есть ли ошибки
+  - `orderId` `integer<int64>` — ID сборочного задания
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

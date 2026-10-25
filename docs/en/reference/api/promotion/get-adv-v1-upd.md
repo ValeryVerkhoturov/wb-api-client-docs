@@ -39,6 +39,50 @@ The method allows to get a costs history
 | `403` | Access denied     | `object`              |
 | `429` | Too many requests | `object`              |
 
+**Structure `200` — `object[]`:**
+
+- `updNum` `integer<int64>` — Billing document number (if any)
+- `updTime` `string<time-date>` — Time of charge-off
+- `updSum` `integer<int64>` — Amount invoiced in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `advertId` `integer<int64>` — Campaign ID
+- `campName` `string` — Campaign name
+- `advertType` `integer<int64>` — Campaign type
+- `paymentType` `string` — Source of charge-off: - `Баланс` — Balance - `Бонусы` — Bonuses - `Счёт` — Money account - `Кэшбэк` — Debit card cashback
+- `advertStatus` `integer<int64>` — Campaign status: - `-1` — deleted, the deletion process will be completed within 10 minutes - `4` — ready to be launched - `7` — completed - `8` — declined - `9` — active - `11` — paused
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

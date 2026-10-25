@@ -37,6 +37,64 @@ POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 | `403` | Доступ запрещён         | `ResponseErrorV3` |
 | `429` | Слишком много запросов  | `object`          |
 
+**Структура `200`:**
+
+- `id` `integer<int64>` (обязательно) — ID загрузки
+- `alreadyExists` `boolean` (обязательно) — Дублирование загрузки: `true` — такая загрузка уже есть
+- `results` `object[]` (обязательно) — Результаты обработки запроса
+  - `nmId` `integer<int64>` (обязательно) — Артикул WB
+  - `success` `boolean` (обязательно) — Успешна ли установка скидки на товар: - `false` — неуспешна - `true` — успешна
+  - `error` `object` — Ошибка. При `"success":false`
+    - `status` `integer<int64>` (обязательно) — HTTP статус-код
+    - `title` `string` (обязательно) — Заголовок ошибки
+    - `detail` `string` (обязательно) — Детали ошибки
+
+**Структура `208`:**
+
+- `status` `integer<int64>` (обязательно) — HTTP статус-код
+- `title` `string` (обязательно) — Заголовок ответа
+- `detail` `string` (обязательно) — Детали ответа
+- `requestId` `string` (обязательно) — ID запроса
+- `origin` `string` (обязательно) — ID внутреннего сервиса WB
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -32,6 +32,50 @@ The method allows to get information about the seller net, balance and bonuses
 | `403` | Access denied     | `object`                  |
 | `429` | Too many requests | `object`                  |
 
+**Structure `200`:**
+
+- `balance` `integer<int64>` — Account in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `net` `integer<int64>` — Balance in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `bonus` `integer<int64>` — Bonuses in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `cashbacks` `object[]` — Promo bonuses
+  - `sum` `integer<int64>` — Promo bonuses in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `percent` `integer<int64>` — The percentage of the campaign budget top-up amount that can be paid with promo bonuses at one time
+  - `expiration_date` `string<ISO 8601>` — Promo bonuses expiration date
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -30,6 +30,12 @@ You can use this method only for campaigns with:
 
 `application/json` — schema `V0SetNormQueryBidsRequest`, required
 
+- `bids` `V0SetNormQueryBidsRequestItem[]` (required)
+  - `advert_id` `integer<int64>` (required) — Campaign ID
+  - `nm_id` `integer<int64>` (required) — WB item number
+  - `norm_query` `string` (required) — Search cluster
+  - `bid` `integer<int64>` (required) — Bid per mille in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -39,6 +45,44 @@ You can use this method only for campaigns with:
 | `401` | Unauthorized      | `object`                 |
 | `403` | Access denied     | `StandardizedBatchError` |
 | `429` | Too many requests | `object`                 |
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP Status Code
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

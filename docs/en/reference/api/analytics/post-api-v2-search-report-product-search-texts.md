@@ -33,6 +33,22 @@ The report data is updated once every 2 hours.
 
 `application/json` — schema `ItemSearchTextsRequest`, required
 
+- `currentPeriod` `Period` (required)
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 365 days from today
+  - `end` `string` (required) — End date of the period. No earlier than 365 days from today
+- `pastPeriod` `pastPeriod`
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 365 days from today
+  - `end` `string` (required) — End date of the period. No later than the day before the start date `currentPeriod`. No earlier than 365 days from today
+- `nmIds` `integer<int64>[]` (required) — WB item numbers list
+- `topOrderBy` `string` = `openCard` | `addToCart` | `openToCart` | `orders` | `cartToOrder` (required) — Filtering by the search queries that brought the most: - `openCard` — click-throughs - `addToCart` — adds-to-Cart - `openToCart` — conversion to cart - `orders` — items ordered - `cartToOrder` — conversion to order
+- `includeSubstitutedSKUs` `boolean` — Show data for direct queries with [promo items](https://seller.wildberries.ru/help-center/article/A-524)
+- `includeSearchTexts` `boolean` — Show data for search queries without promo items
+- `orderBy` `OrderByGrTe` (required)
+  - `field` `string` = `avgPosition` | `openCard` | `addToCart` | `openToCart` | `orders` | `cartToOrder` | `visibility` (required) — Field for sorting: - `avgPosition` — by average position - `addToCart` — by adds-to-Cart - `openCard` — by click-throughs - `orders` — by number of items ordered - `cartToOrder` — by conversion to order from search - `openToCart` — by conversion to cart from search - `visibility` — by item visibility
+  - `mode` `string` = `asc` | `desc` (required) — Order of sorting: - `asc` — ascending - `desc` — descending
+- `limit` `TextLimit` (required)
+  - one of: `StandardTariff`, `AdvancedTariff`
+
 ## Responses
 
 | Code  | Description       | Schema                                            |
@@ -43,6 +59,98 @@ The report data is updated once every 2 hours.
 | `402` | Payment required  | `object`                                          |
 | `403` | Access denied     | `ErrorObject403`                                  |
 | `429` | Too many requests | `object`                                          |
+
+**Structure `200`:**
+
+- `data` `ItemSearchTextsResponse`
+  - `items` `TableSearchTextItem[]` — Table elements
+    - `text` `string` — Search text
+    - `nmId` `integer<int64>` — WB item number
+    - `subjectName` `string` — Subcategory name
+    - `brandName` `string` — Brand
+    - `vendorCode` `string` — Seller item number
+    - `name` `string` — Item name
+    - `isCardRated` `boolean` — If the listing has a rating
+    - `rating` `number<float64>` — Listing rating
+    - `feedbackRating` `number<float64>` — Feedbacks rating
+    - `price` `object` — Price
+      - `minPrice` `integer<int64>` — Minimal seller price with seller discount (excluding WB Club discount)
+      - `maxPrice` `integer<int64>` — Maximal seller price with seller discount (excluding WB Club discount)
+    - `frequency` `object` — Number of the search text requests
+      - `current` `integer<int64>` — Current number
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+    - `weekFrequency` `integer<int64>` — Number of the search text requests per week
+    - `medianPosition` `object` — Median position. Only positions from which users added the item to the cart or visited its page are considered. It is the middle value of the position in search results, which excludes significant deviations from the average
+      - `current` `integer<int64>` — Current number
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+    - `avgPosition` `object` — Average item position in search results
+      - `current` `integer<int64>` — Current average position
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+    - `openCard` `object` — Number of transitions to the listing from search
+      - `current` `integer<int64>` — Current click-throughs
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `percentile` `integer<int64>` — The percentage by which click-throughs is higher than that of other sellers' pages for the search text
+    - `addToCart` `object` — How many times the item from search was added to the cart
+      - `current` `integer<int64>` — Current number
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `percentile` `integer<int64>` — The percentage by which adds-to-Cart is higher than that of other sellers' listings for the search text
+    - `openToCart` `object` — Conversion to cart from search — the ratio of item additions to the cart compared to all transitions to the listing from the search
+      - `current` `integer<int64>` — Current conversion
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `percentile` `integer<int64>` — The percentage by which conversion to cart is higher than that of other sellers' pages for the search text
+    - `orders` `object` — Items ordered from search
+      - `current` `integer<int64>` — Current number
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `percentile` `integer<int64>` — The percentage by which the number of orders is higher than that of other sellers' pages for the search text
+    - `cartToOrder` `object` — Conversion to order from search — the ratio of items ordered to all additions of the item from search to the cart
+      - `current` `integer<int64>` — Current conversion
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+      - `percentile` `integer<int64>` — The percentage by which conversion to order is higher than that of other sellers' pages for the search text
+    - `visibility` `object` — Item visibility percent in search results
+      - `current` `integer<int64>` — Current percent
+      - `dynamics` `integer<int64>` — Dynamics compared to the previous period (%)
+  - `currency` `Currency`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

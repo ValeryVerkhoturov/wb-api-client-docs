@@ -42,6 +42,59 @@ Returns a list of [item returns to the seller](https://seller.wildberries.ru/ret
 | `401` | Unauthorized      | `object`                 |
 | `429` | Too many requests | `object`                 |
 
+**Structure `200`:**
+
+- `count` `integer<int64>` — Total number of returns for the requested period
+- `report` `object[]` — Report
+  - `sku` `string` — SKU
+  - `brand` `string` — Brand
+  - `completedDt` `string` — Date and time the seller received the return
+  - `dstOfficeAddress` `string` — Address of pick-up point where the seller receives returns
+  - `kiz` `string` — Labeling code [Chestny ZNAK](https://chestnyznak.ru/en)
+  - `dstOfficeId` `integer<int64>` — ID of pick-up point where the seller receives returns
+  - `expiredDt` `string` — Expiration date and time of the storage period
+  - `nmId` `integer<int64>` — WB item number
+  - `orderDt` `string` — Date of the return order
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `readyToReturnDt` `string` — Date and time when the return is ready for pickup
+  - `returnReason` `string` — The reason for the return. The field is returned only when `"returnType":"Возврат неопознанного товара"`
+  - `returnType` `string` — Return type
+  - `shkId` `integer<int64>` — Item No.
+  - `srid` `string` — Return order ID
+  - `returnStatus` `string` — Return status
+  - `stickerId` `string` — Sticker of the return order
+  - `subjectName` `string` — Subcategory
+  - `techSize` `string` — Size
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

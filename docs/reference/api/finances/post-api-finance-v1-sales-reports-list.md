@@ -29,6 +29,12 @@ POST /api/finance/v1/sales-reports/list
 
 `application/json` — схема `SalesReportListReq`, обязательно
 
+- `dateFrom` `string` (обязательно) — Начальная дата отчёта. Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `dateTo` `string` (обязательно) — Конечная дата отчёта. Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Время передаётся в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `limit` `integer<int64>` — Количество отчётов в ответе
+- `offset` `integer<int64>` — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+- `period` `string` = `daily` | `weekly` — Периодичность отчётов: - `weekly` — еженедельные - `daily` — ежедневные
+
 ## Ответы
 
 | Код   | Описание               | Схема                               |
@@ -39,6 +45,71 @@ POST /api/finance/v1/sales-reports/list
 | `401` | Не авторизован         | `object`                            |
 | `403` | Доступ запрещён        | `Response4XX`                       |
 | `429` | Слишком много запросов | `object`                            |
+
+**Структура `200` — `SalesReportListRes[]`:**
+
+- `reportId` `integer<int64>` — ID отчёта
+- `sellerFinanceName` `string` — Наименование продавца
+- `dateFrom` `string` — Дата начала отчётного периода
+- `dateTo` `string` — Дата конца отчётного периода
+- `createDate` `string` — Дата формирования отчёта
+- `currency` `string` — Валюта отчёта
+- `reportType` `integer<int64>` = `1` | `2` — Тип отчёта: - `1` — основной - `2` — по выкупам
+- `retailAmountSum` `string` — Продажа
+- `forPaySum` `string` — К перечислению за товар
+- `avgSalePercent` `number` — Согласованная скидка, %
+- `deliveryServiceSum` `string` — Стоимость доставки
+- `paidStorageSum` `string` — Стоимость хранения
+- `paidAcceptanceSum` `string` — Стоимость операций при приёмке
+- `deductionSum` `string` — Прочие удержания/выплаты
+- `penaltySum` `string` — Общая сумма штрафов
+- `additionalPaymentSum` `string` — Корректировка Вознаграждения Wildberries (ВВ)
+- `cashbackAmountSum` `string` — Сумма баллов, удержанных по программе лояльности
+- `cashbackDiscountSum` `string` — Компенсация скидки по программе лояльности
+- `cashbackCommissionChangeSum` `string` — Стоимость участия в программе лояльности
+- `paymentSchedule` `string` — Разовое изменение срока перечисления денежных средств
+- `bankPaymentSum` `string` — Итого к оплате
+
+**Структура `400`:**
+
+- `status` `integer<int64>` (обязательно) — HTTP статус-код
+- `title` `string` (обязательно) — Заголовок ошибки
+- `detail` `string` (обязательно) — Детали ошибки
+- `requestId` `string` (обязательно) — ID запроса
+- `origin` `string` (обязательно) — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

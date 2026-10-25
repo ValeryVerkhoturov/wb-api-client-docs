@@ -32,6 +32,60 @@ GET /api/feedbacks/v1/pins/limits
 | `403` | Доступ запрещён        | `object`                     |
 | `429` | Слишком много запросов | `object`                     |
 
+**Структура `200`:**
+
+- `data` `object`
+  - `subscription` `object`
+    - `perUnitLimit` `integer<int64>` — Максимальное количество закреплённых отзывов в одной карточке товара или в группе [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек
+    - `remaining` `integer<int64>` — Сколько ещё отзывов можно закрепить
+    - `totalLimit` `integer<int64>` — Общий лимит закреплений
+    - `unlimited` `boolean` — Количество закреплённых отзывов не ограничено: - `true` — да - `false` — нет
+    - `used` `integer<int64>` — Текущее количество закреплённых отзывов
+  - `tariff` `object`
+    - `perUnitLimit` `integer<int64>` — Максимальное количество закреплённых отзывов в одной карточке товара или в группе [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек
+    - `remaining` `integer<int64>` — Сколько ещё отзывов можно закрепить
+    - `totalLimit` `integer<int64>` — Общий лимит закреплений
+    - `unlimited` `boolean` — Количество закреплённых отзывов не ограничено: - `true` — да - `false` — нет
+    - `used` `integer<int64>` — Текущее количество закреплённых отзывов
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

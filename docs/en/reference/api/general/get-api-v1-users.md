@@ -50,6 +50,73 @@ Specify the value of the `isInviteOnly` parameter to select the list:
 | `403` | Access denied     | `Response4XX`      |
 | `429` | Too many requests | `object`           |
 
+**Structure `200`:**
+
+- `total` `integer<int64>` — The total number of active or invited users in the list
+- `countInResponse` `integer<int64>` — The number of active or invited users on the current page
+- `users` `object[]` — User information
+  - `id` `integer<int64>` — User ID
+  - `role` `string` = `user` | `` — User role: * `user` — user who have activated access * ` ` (empty string) — user who have not yet activated access
+  - `position` `string` — User's position
+  - `phone` `string` — User's phone number
+  - `email` `string` — User's email
+  - `isOwner` `boolean` — Is the user the seller account's owner
+  - `firstName` `string` — User's first name
+  - `secondName` `string` — User's last name
+  - `patronymic` `string` — User's patronymic
+  - `goodsReturn` `boolean` — Can user approve item returns
+  - `isInvitee` `boolean` — Is the user invited
+  - `inviteeInfo` `object` — Invitation information, if the user is invited
+    - `phoneNumber` `string` — Invited user's phone number
+    - `position` `string` — Invited user's position
+    - `inviteUuid` `string<UUID>` — Invitation ID
+    - `expiredAt` `string` — Invitation expiration date and time
+    - `isActive` `boolean` — - `true` — the invitation is active - `false` — the invitation is inactive
+  - `access` `object[]` — Access settings for seller account sections
+    - `code` `string` = `balance` | `brands` | `changeJam` | `discountPrice` | `finance` | `showcase` | `suppliersDocuments` | `supply` | `questions` | `pinFeedbacks` | `pointsForReviews` | `feedbacks` | `oldAnalyticsReports` | `marketplace` | `brandsFlow` | `copyrightComplaints` | `pretrialClaims` | `sellersChat` | `brandzone` | `brandzoneSubscribe` — The code for the seller account section the user will get access to: * `balance` — View balance and withdraw funds * `brands` — Brands management * `changeJam` — Access to **Jam** subscription: **A/B tests**, photo tags, video autostarts, listing comparisons * `discountPrice` — Change item prices, manage discounts and promos * `finance` — Financial analytics. Balance statistics, financial reports, payment history * `showcase` — Showcase management * `suppliersDocuments` — View and download documents related to platform operations * `supply` — Create and manage FBW supplies * `questions` — View and respond to customer questions * `pinFeedbacks` — Ability to pin and unpin reviews * `pointsForReviews` — Points for reviews * `feedbacks` — View and respond to customer reviews * `oldAnalyticsReports` — Reports * `marketplace` — Seller Warehouse * `brandsFlow` — My brands * `copyrightComplaints` — Copyright Claims * `pretrialClaims` — Out-of-Court Claims * `sellersChat` — Chat with Users * `brandzone` — Edit Brand Zone * `brandzoneSubscribe` — Manage Brand Zone Subscription
+    - `disabled` `boolean` — * `true` — access to the section is disabled * `false` — access to the section is enabled
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Request ID
+- `origin` `string` — Internal service name
+- `status` `number` — HTTP status code
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

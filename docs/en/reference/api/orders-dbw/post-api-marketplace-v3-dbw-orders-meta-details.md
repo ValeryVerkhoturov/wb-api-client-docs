@@ -36,6 +36,8 @@ Possible label identifiers:
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                          |
@@ -46,6 +48,61 @@ Possible label identifiers:
 | `402` | Payment required  | `object`                        |
 | `403` | Access denied     | `api.BatchError`                |
 | `429` | Too many requests | `object`                        |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID
+- `orders` `object[]` — Assembly orders label identifiers and validation statuses
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `isError` `boolean` — Are there any errors
+  - `errors` `object[]` — Error data
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — Additional error data
+  - `metaDetails` `object[]` — Label identifiers and their validation statuses
+    - `key` `string` — Label identifier
+    - `value` `string` — Label identifier value
+    - `decision` `string` — State: - `imei` - `pending` — Label identifier for inspection - `optional` — Label identifier is not required - `filled` — Validation passed - `deadlineExceeded` — Validation passed - `imeiMaySell` — The item is approved for sale. Validation passed - `imeiSoldB2B` — The item was sold to a B2B buyer and allowed to be sold again. Validation passed - `required` — Required label identifier is not filled. Validation failed - `imeiInvalidFormat` — Invalid format. Validation failed - `imeiAlreadySold` — The item with this IMEI has already been sold. Validation failed - `uin` - `filled` — Validation passed - `optional` — Label identifier is not required - `sgtin` - `pending` — Label identifier for inspection - `optional` — Label identifier is not required - `filled` — Validation passed - `deadlineExceeded` — Validation passed - `sgtinIntroduced` — The item is approved for sale. Validation passed - `sgtinSoldB2B` — The item was sold to a B2B buyer and allowed to be sold again. Validation passed - `required` — Required label identifier is not filled. Validation failed - `sgtinInvalidFormat` — Invalid format. Validation failed - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/). Validation failed - `sgtinEmitted` — Label identifier has been issued. Validation failed - `sgtinApplied` — Putting into circulation not completed. Validation failed - `sgtinWrittenOff` — Written off. Validation failed - `sgtinRetired` — Retired. Validation failed - `sgtinWithdrawn` — Withdrawn. Validation failed - `sgtinDisaggregation` — Disaggregation. Validation failed - `sgtinDisaggregated` — Disaggregated. Validation failed - `sgtinAppliedNotPaid` — Not paid. Validation failed - `gtin` - `optional` — Label identifier is not required - `filled` — Validation passed - `customsDeclaration` - `optional` — Label identifier is not required - `filled` — Validation passed
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

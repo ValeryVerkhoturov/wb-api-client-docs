@@ -45,6 +45,8 @@ POST /content/v2/cards/moveNm
 
 `application/json` — схема `object`, необязательно
 
+- один из вариантов: `requestMoveNmsImtConn`, `requestMoveNmsImtDisconn`
+
 ## Ответы
 
 | Код   | Описание                               | Схема              |
@@ -56,6 +58,53 @@ POST /content/v2/cards/moveNm
 | `403` | Доступ запрещён                        | `responseItemList` |
 | `413` | Превышен лимит объёма данных в запросе | `string`           |
 | `429` | Слишком много запросов                 | `object`           |
+
+**Структура `200`:**
+
+- `data` `object` — Данные ответа
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `object` — Дополнительные ошибки
+  - один из вариантов: `object`, `string`, `object`
+
+**Структура `400`:**
+
+- один из вариантов: `responseItemList`, `responseIncorrectDate`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object` — Данные ответа
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `object` — Дополнительные ошибки
+  - один из вариантов: `object`, `string`, `object`
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

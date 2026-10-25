@@ -35,6 +35,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `api.OrdersRequest`, required
 
+- `orders` `integer<int64>[]` — Assembly orders IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                    |
@@ -45,6 +47,53 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                  |
 | `403` | Access denied     | `Error`                   |
 | `429` | Too many requests | `object`                  |
+
+**Structure `200`:**
+
+- `orders` `api.OrderClientInfo[]`
+  - `phone` `string` — Contact phone number for the buyer. To reach the buyer, dial this number and enter the extension code. This number is not the buyer's direct phone number
+  - `firstName` `string` — Buyer's name
+  - `orderID` `integer<int64>` — Assembly order ID
+  - `phoneCode` `integer<int64>` — Phone extension code
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data enriching the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data enriching the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

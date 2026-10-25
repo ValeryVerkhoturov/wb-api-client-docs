@@ -28,6 +28,8 @@ Method provides the courier's contact information and vehicle number based on th
 
 `application/json` — schema `OrdersRequestAPI`, required
 
+- `orders` `integer<int64>[]` — Assembly order IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                 |
@@ -38,6 +40,59 @@ Method provides the courier's contact information and vehicle number based on th
 | `402` | Payment required  | `object`               |
 | `403` | Access denied     | `Error`                |
 | `429` | Too many requests | `object`               |
+
+**Structure `200`:**
+
+- `orders` `OrderCourierInfo[]`
+  - `courierInfo` `object` — Courier info
+    - `contacts` `object` — Courier contact information
+      - `carNumber` `string` — Vehicle number
+      - `fullName` `string` — Courier's full name
+      - `phone` `string` — Phone number
+      - `pTimeFrom` `string` — Date and time from which the courier will arrive
+      - `pTimeTo` `string` — Date and time by which the courier will arrive
+    - `mustBeAssigned` `boolean` — If the the courier should be assigned by the current moment: - `false` — no - `true` — yes If `"mustBeAssigned": true` and `"contacts": null`, then you need to request the contacts from [support](https://seller.wildberries.ru/service-desk-v2)
+    - `updatedAt` `string` — Date and time of the courier information update. If `null`, the information has not been updated
+  - `orderID` `integer<int64>` — Assembly order ID
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

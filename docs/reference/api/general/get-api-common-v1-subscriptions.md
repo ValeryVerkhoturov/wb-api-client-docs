@@ -45,6 +45,52 @@ GET /api/common/v1/subscriptions
 | `403` | Доступ запрещён        | `Response4XX`          |
 | `429` | Слишком много запросов | `object`               |
 
+**Структура `200`:**
+
+- `state` `string` = `active` | `inactive` — Статус подписки: - `active` — активна - `inactive` — истекла или отменена
+- `activationSource` `string` = `constructor` | `jam` — Источник подключения подписки: - `constructor` — покупка через раздел **Конструктор тарифов** - `jam` — покупка через раздел **Подписка «Джем»**
+- `level` `string` = `standard` | `advanced` | `premium` — Уровень подписки: - `standard` - `advanced` - `premium`
+- `since` `string` — Дата и время первой активации подписки. Не меняется при продлении или повторной активации
+- `till` `string` — Дата и время окончания подписки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

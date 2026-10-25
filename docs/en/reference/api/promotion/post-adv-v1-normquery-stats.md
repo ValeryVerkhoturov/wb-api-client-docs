@@ -27,6 +27,12 @@ You can use this method for campaigns with `cpm` — for impressions, and `cpc` 
 
 `application/json` — schema `V1GetNormQueryStatsRequest`, required
 
+- `from` `string` (required) — Period start date
+- `to` `string` (required) — Period end date
+- `items` `object[]` (required)
+  - `advertId` `integer<int64>` (required) — Campaign ID
+  - `nmId` `integer<int64>` (required) — WB item number
+
 ## Responses
 
 | Code  | Description       | Schema                        |
@@ -36,6 +42,67 @@ You can use this method for campaigns with `cpm` — for impressions, and `cpc` 
 | `401` | Unauthorized      | `object`                      |
 | `403` | Access denied     | `object`                      |
 | `429` | Too many requests | `object`                      |
+
+**Structure `200`:**
+
+- `items` `V1GetNormQueryStatsResponseItem[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `nmId` `integer<int64>` — WB item number
+  - `dailyStats` `V1GetNormQueryStatsResponseItemDailyStat[]` — Daily detailed statistics
+    - `date` `string` — Date
+    - `stat` `V1GetNormQueryStatsResponseItemStat`
+      - `normQuery` `string` — Search cluster
+      - `views` `integer<int64>` — Number of views. For `cpc` campaigns (pay-per-click), the value will be `null`
+      - `clicks` `integer<int64>` — Number of clicks
+      - `atbs` `integer<int64>` — Number of items added to the cart
+      - `orders` `integer<int64>` — Number of orders
+      - `ctr` `number<float>` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage. For `cpc` campaigns (pay-per-click), the value will be `null`
+      - `cpc` `number<float>` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+      - `cpm` `number<float>` — Average cost per mille in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. For `cpc` campaigns (pay-per-click), the value will be `null`
+      - `avgPos` `number<float>` — Average item position on search results pages
+      - `shks` `integer<int64>` — Number of ordered items, pcs
+      - `spend` `number<double>` — Item promo costs in a specific search cluster of the campaign
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

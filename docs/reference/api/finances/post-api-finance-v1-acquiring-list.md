@@ -27,6 +27,11 @@ POST /api/finance/v1/acquiring/list
 
 `application/json` — схема `AcquiringReportListReq`, обязательно
 
+- `dateFrom` `string` (обязательно) — Начальная дата отчёта. Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `dateTo` `string` (обязательно) — Конечная дата отчёта. Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Время передаётся в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `limit` `integer<int64>` — Количество отчётов в ответе
+- `offset` `integer<int64>` — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+
 ## Ответы
 
 | Код   | Описание               | Схема                            |
@@ -37,6 +42,58 @@ POST /api/finance/v1/acquiring/list
 | `401` | Не авторизован         | `object`                         |
 | `403` | Доступ запрещён        | `Response4XX`                    |
 | `429` | Слишком много запросов | `object`                         |
+
+**Структура `200` — `AcquiringReportListRes[]`:**
+
+- `reportId` `integer<int64>` — ID отчёта
+- `sellerFinanceName` `string` — Наименование продавца
+- `dateFrom` `string` — Дата начала отчётного периода
+- `dateTo` `string` — Дата конца отчётного периода
+- `createDate` `string` — Дата формирования отчёта
+- `currency` `string` — Валюта отчёта
+- `acquiringFeeSum` `string` — Сумма издержек по эквайрингу
+- `acquiringFeeVatSum` `string` — В том числе НДС
+
+**Структура `400`:**
+
+- `status` `integer<int64>` (обязательно) — HTTP статус-код
+- `title` `string` (обязательно) — Заголовок ошибки
+- `detail` `string` (обязательно) — Детали ошибки
+- `requestId` `string` (обязательно) — ID запроса
+- `origin` `string` (обязательно) — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

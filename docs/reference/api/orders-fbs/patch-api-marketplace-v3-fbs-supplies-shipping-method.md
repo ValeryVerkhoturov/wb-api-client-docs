@@ -30,6 +30,12 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 `application/json` — схема `object`, обязательно
 
+- `data` `UpdateSupplyShippingMethod[]` (обязательно)
+  - `shippingDt` `string` (обязательно) — Планируемая дата отгрузки поставки, формат `YYYY-MM-DD`
+  - `shippingPointId` `integer<int64>` (обязательно) — ID пункта отгрузки. Можно получить с помощью [отдельного метода](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+  - `shippingType` `string` = `selfShipping` | `transportCompany` (обязательно) — Способ доставки до пункта отгрузки: - `selfShipping` — доставка силами продавца - `transportCompany` — доставка через транспортную компанию
+  - `supplyId` `string` (обязательно) — ID поставки
+
 ## Ответы
 
 | Код   | Описание               | Схема                                  |
@@ -40,6 +46,55 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 | `403` | Доступ запрещён        | `Error`                                |
 | `409` | Конфликт               | `v3.APIError`                          |
 | `429` | Слишком много запросов | `object`                               |
+
+**Структура `200`:**
+
+- `results` `UpdatedSuppliesShippingMethod[]`
+  - `error` `object` — Ошибка обработки запроса для поставки. Возможные варианты ошибок: - `400 IncorrectRequestBody`: - некорректный ID поставки - место отгрузки не найдено - склад назначения находится не в РФ - неизвестный `shippingType` - дата не соответствует формату `YYYY-MM-DD` - `400 FulfillmentRequired` — в месте отгрузки недоступна услуга **Фулфилмент в СЦ** - `404 NotFound` — поставка не найдена - `409 SupplyAlreadyScanned` — поставка или её короба уже отсканированы в пункте отгрузки - `409 InvalidShippingDt` — некорректная дата отгрузки поставки
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — Дополнительная информация об ошибке
+  - `success` `boolean` — Успешна ли обработка запроса для данной поставки. Может быть только `true`
+  - `supplyId` `string` — ID поставки
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `409`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

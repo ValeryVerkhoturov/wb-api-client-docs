@@ -38,6 +38,55 @@ GET /api/v1/tariffs/pallet
 | `402` | Требуется платёж       | `object`              |
 | `429` | Слишком много запросов | `object`              |
 
+**Структура `200`:**
+
+- `response` `models.RatesPalletResponse`
+  - `data` `models.WarehousesPalletRates`
+    - `currency` `string` — Валюта тарифов
+    - `dtNextPallet` `string` — Дата начала следующего тарифа
+    - `dtTillMax` `string` — Дата окончания последнего установленного тарифа
+    - `warehouseList` `models.WarehousePalletRates[]` — Тарифы для монопаллет, сгруппированные по складам
+      - `palletDeliveryExpr` `string` — Коэффициент доставки, %. На него умножается стоимость доставки. Во всех тарифах этот коэффициент уже учтён
+      - `palletDeliveryValueBase` `string` — Доставка 1 литра, ₽
+      - `palletDeliveryValueLiter` `string` — Доставка каждого дополнительного литра, ₽
+      - `palletStorageExpr` `string` — Коэффициент хранения, %. На него умножается стоимость хранения. Во всех тарифах этот коэффициент уже учтён
+      - `palletStorageValueExpr` `string` — Хранение 1 монопаллеты, ₽
+      - `warehouseName` `string` — Название склада
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

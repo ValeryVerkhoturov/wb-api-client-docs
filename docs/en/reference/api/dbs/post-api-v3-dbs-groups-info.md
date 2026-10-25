@@ -28,6 +28,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `api.OrderGroupsRequest`, required
 
+- `groups` `string[]` — List of `groupId` values. Can be obtained from [new](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew) and [completed](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders) assembly orders.
+
 ## Responses
 
 | Code  | Description       | Schema                           |
@@ -38,6 +40,53 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                         |
 | `403` | Access denied     | `Error`                          |
 | `429` | Too many requests | `object`                         |
+
+**Structure `200` — `object[]`:**
+
+- `groupID` `string<UUID>` — Assembly order group ID
+- `deliveryCost` `integer<int64>` — The cost of paid delivery in the sale currency, multiplied by 100
+- `convertedDeliveryCost` `integer<int64>` — The cost of paid delivery in the seller country currency, multiplied by 100. Provided for informational purposes
+- `currencyCode` `integer<ISO 4217>` — Sale currency code
+- `convertedCurrencyCode` `integer<int64>` — Seller country currency code
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

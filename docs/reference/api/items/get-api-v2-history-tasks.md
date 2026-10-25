@@ -38,6 +38,52 @@ GET /api/v2/history/tasks
 | `403` | Доступ запрещён        | `ResponseError` |
 | `429` | Слишком много запросов | `object`        |
 
+**Структура `200`:**
+
+- `data` `SellerTaskMetadata`
+  - `uploadID` `integer<int64>` — ID загрузки
+  - `status` `TaskStatus`
+  - `uploadDate` `Date`
+  - `activationDate` `Date1`
+  - `overAllGoodsNumber` `integer<int64>` — Всего товаров
+  - `successGoodsNumber` `integer<int64>` — Товаров без ошибок
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

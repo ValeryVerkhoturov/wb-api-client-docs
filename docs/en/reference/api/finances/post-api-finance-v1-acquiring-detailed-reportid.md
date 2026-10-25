@@ -33,6 +33,10 @@ The method returns details for the [acquiring expenses reports](https://seller.w
 
 `application/json` — schema `FinancialReportsDetailedReportIdReq`, required
 
+- `limit` `integer<int64>` — Number of rows in the response
+- `rrdId` `integer<int64>` — Response row ID. Required to get the report in parts. Start report uploading with `"rrdid":0`. In subsequent requests, specify the `rrdId` value from the last row of the previous response. Repeat the request until you get `204` response
+- `fields` `string[]` — List of fields that will be returned in response. If the parameter is not specified, all fields are returned
+
 ## Responses
 
 | Code  | Description       | Schema                                       |
@@ -45,6 +49,80 @@ The method returns details for the [acquiring expenses reports](https://seller.w
 | `403` | Access denied     | `Response4XX`                                |
 | `404` | Not found         | `object`                                     |
 | `429` | Too many requests | `object`                                     |
+
+**Structure `200` — `AcquiringReportsDetailedRes[]`:**
+
+- `rrdId` `integer<int64>` — Row ID
+- `reportId` `integer<int64>` — Report ID
+- `acqDate` `string` — Operation date
+- `acquiringBank` `string` — Acquiring bank
+- `tin` `string` — Taxpayer identification number
+- `taxRegistrationReasonCode` `string` — Tax registration reason code
+- `saleDate` `string` — Purchased on
+- `srid` `string` — Order ID. In the responses of the [FBS](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders), [DBW](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders), [DBS](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders), and [In-Store Pickup](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) assembly order methods, `srid` is `rid`
+- `documentType` `string` — Purchased or returned
+- `nmId` `integer<int64>` — WB item number
+- `retailAmount` `string` — Sales on WB
+- `acquiringFee` `string` — Acquiring fee including VAT
+- `acquiringFeeVat` `string` — VAT amount
+- `invoiceNumber` `string` — Invoice No.
+- `invoiceDate` `string` — Invoice date
+- `shkId` `integer<int64>` — Item No.
+- `currency` `string` — Report currency
+
+**Structure `400`:**
+
+- `status` `integer<int64>` (required) — HTTP status code
+- `title` `string` (required) — Error title
+- `detail` `string` (required) — Error details
+- `requestId` `string` (required) — Request ID
+- `origin` `string` (required) — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `status` `integer<int64>` (required) — HTTP status code
+- `title` `string` (required) — Error title
+- `detail` `string` (required) — Error details
+- `requestId` `string` (required) — Request ID
+- `origin` `string` (required) — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

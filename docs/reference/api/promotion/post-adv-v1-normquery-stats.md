@@ -27,6 +27,12 @@ POST /adv/v1/normquery/stats
 
 `application/json` — схема `V1GetNormQueryStatsRequest`, обязательно
 
+- `from` `string` (обязательно) — Дата начала периода
+- `to` `string` (обязательно) — Дата окончания периода периода
+- `items` `object[]` (обязательно)
+  - `advertId` `integer<int64>` (обязательно) — ID кампании
+  - `nmId` `integer<int64>` (обязательно) — Артикул WB
+
 ## Ответы
 
 | Код   | Описание               | Схема                         |
@@ -36,6 +42,67 @@ POST /adv/v1/normquery/stats
 | `401` | Не авторизован         | `object`                      |
 | `403` | Доступ запрещён        | `object`                      |
 | `429` | Слишком много запросов | `object`                      |
+
+**Структура `200`:**
+
+- `items` `V1GetNormQueryStatsResponseItem[]`
+  - `advertId` `integer<int64>` — ID кампании
+  - `nmId` `integer<int64>` — Артикул WB
+  - `dailyStats` `V1GetNormQueryStatsResponseItemDailyStat[]` — Статистика с детализацией по дням
+    - `date` `string` — Дата
+    - `stat` `V1GetNormQueryStatsResponseItemStat`
+      - `normQuery` `string` — Поисковый кластер
+      - `views` `integer<int64>` — Количество просмотров. Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+      - `clicks` `integer<int64>` — Количество кликов
+      - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+      - `orders` `integer<int64>` — Количество заказов
+      - `ctr` `number<float>` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах. Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+      - `cpc` `number<float>` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+      - `cpm` `number<float>` — Средняя стоимость за тысячу показов в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+      - `avgPos` `number<float>` — Средняя позиция товара на страницах поисковой выдачи
+      - `shks` `integer<int64>` — Количество заказанных товаров, шт.
+      - `spend` `number<double>` — Затраты на продвижение товаров в конкретном поисковом кластере кампании
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

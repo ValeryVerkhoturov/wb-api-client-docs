@@ -34,6 +34,8 @@ PATCH /api/v1/questions
 
 `application/json` — схема `object`, необязательно
 
+- один из вариантов: `object`, `object`
+
 ## Ответы
 
 | Код   | Описание                            | Схема                         |
@@ -46,6 +48,72 @@ PATCH /api/v1/questions
 | `404` | Не найдено                          | `responseFeedbackQuestionErr` |
 | `422` | Ошибка обработки параметров запроса | `responseFeedbackQuestionErr` |
 | `429` | Слишком много запросов              | `object`                      |
+
+**Структура `200`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+
+**Структура `400`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `404`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `422`:**
+
+- `data` `object`
+- `error` `boolean` — Есть ли ошибка
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string[]` — Дополнительные ошибки
+- `requestId` `string`
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

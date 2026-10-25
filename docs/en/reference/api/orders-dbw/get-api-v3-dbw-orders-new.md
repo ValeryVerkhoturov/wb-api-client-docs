@@ -34,6 +34,69 @@ Returns a list of all new [orders](https://dev.wildberries.ru/openapi/orders-dbw
 | `403` | Access denied     | `Error`                        |
 | `429` | Too many requests | `object`                       |
 
+**Structure `200`:**
+
+- `orders` `OrderNewDBW[]` — New assembly orders list
+  - `address` `object` — Address of the buyer for delivery
+    - `fullAddress` `string` — Delivery address
+    - `longitude` `number<float64>` — Longitude
+    - `latitude` `number<float64>` — Latitude
+  - `salePrice` `integer<int64>` — Seller price in the currency of sale, including seller discount, except the WB Club discount, multiplied by 100
+  - `requiredMeta` `string[]` — List of label identifiers available for the assembly order. [Specifying the IMEI](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwLabelIdentifiers/operation/putV3DbwOrdersOrderIdMetaImei) is required for `Smartphones` [subcategory](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll), `"subjectId":515`
+  - `comment` `string` — Buyer comment
+  - `options` `object` — Order options
+    - `isB2b` `boolean` — Indicator of a B2B sale: - `false` — not B2B sale - `true` — B2B sale
+  - `orderUid` `string` — Transaction ID for order grouping. Orders in the same buyer's cart will have the same `orderUid`
+  - `groupId` `string<UUID>` — Assembly order group ID. It unites assembly orders received at a single warehouse (`warehouseId`) as part of a single buyer transaction (`orderUid`)
+  - `article` `string` — Seller item number
+  - `colorCode` `string` — Color code (for tinted items only)
+  - `rid` `string` — Unique order ID. Note: `rid` corresponds to `srid` in the responses of the methods: - [Buyers Return Applications](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) - [Order Feed](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed) - [Orders](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierOrders) - [Sales](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierSales) - [Returns and Item Movement Report](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport) - [Details for the Sales Reports by Report ID](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId) - [Details for the Sales Reports by Period](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed) - [Details for the Acquiring Expenses Reports by Report ID](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId) - [Details for the Acquiring Expenses Reports by Period](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailed)
+  - `createdAt` `string` — Order creation date
+  - `skus` `string[]` — Item SKU array
+  - `id` `integer<int64>` — Assembly order ID
+  - `warehouseId` `integer<int64>` — Seller warehouse ID where the order was received
+  - `nmId` `integer<int64>` — WB item number
+  - `chrtId` `integer<int64>` — Item size ID in WB systems
+  - `price` `integer<int64>` — The price in the currency of sale including all discounts, except WB Wallet discount, multiplied by 100. You can find a currency code in the `currencyCode`. Provided for informational purposes only
+  - `convertedPrice` `integer<int64>` — The price in the currency of the seller country including all discounts, except WB Wallet discount, multiplied by 100. Provided for informational purposes only
+  - `currencyCode` `integer<ISO 4217>` — Sale currency code
+  - `convertedCurrencyCode` `integer<ISO 4217>` — Currency code of the seller country
+  - `cargoType` `integer<int64>` = `1` | `2` | `3` — Type of cargo: - `1` — small-sized items - `2` — over dimensional cargo (ODC) - `3` — dimensional cargo+ (CD+)
+  - `isZeroOrder` `boolean` — Indicator of an order for a item with zero inventory: - `false` — the order is made for a item with a non-zero inventory - `true` — the order is made for a item with zero inventory. Such an order can be canceled without a cancellation fee
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

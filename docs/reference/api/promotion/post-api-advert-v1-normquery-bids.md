@@ -29,6 +29,12 @@ POST /api/advert/v1/normquery/bids
 
 `application/json` — схема `V1SetNormQueryBidsRequest`, обязательно
 
+- `bids` `V1SetNormQueryBidsRequestItem[]` (обязательно)
+  - `advertId` `integer<int64>` (обязательно) — ID кампании
+  - `nmId` `integer<int64>` (обязательно) — Артикул WB
+  - `normQuery` `string` (обязательно) — Поисковый кластер
+  - `bidMinorUnits` `integer<int64>` (обязательно) — Ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). Допустимый шаг ставки указан в ответе метода [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+
 ## Ответы
 
 | Код   | Описание               | Схема                        |
@@ -38,6 +44,60 @@ POST /api/advert/v1/normquery/bids
 | `401` | Не авторизован         | `object`                     |
 | `403` | Доступ запрещён        | `Response4XX`                |
 | `429` | Слишком много запросов | `object`                     |
+
+**Структура `200`:**
+
+- `success` `V1SetNormQueryBidsSuccessResponseItem[]`
+  - `advertId` `integer<int64>` — ID кампании
+  - `nmId` `integer<int64>` — Артикул WB
+  - `normQuery` `string` — Поисковый кластер — это группа похожих поисковых запросов, по которым покупатели находят товары
+  - `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+- `failed` `NormQueryBidFailResponseItem[]`
+  - `advertId` `integer<int64>` — ID кампании
+  - `nmId` `integer<int64>` — Артикул WB
+  - `normQuery` `string` — Поисковый кластер — это группа похожих поисковых запросов, по которым покупатели находят товары
+  - `reason` `string` — Описание причины ошибки
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

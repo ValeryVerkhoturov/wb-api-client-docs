@@ -29,6 +29,12 @@ The list contains data since January 29, 2024.
 
 `application/json` — schema `SalesReportListReq`, required
 
+- `dateFrom` `string` (required) — Report start date. Date in the [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) format. You may send date or date with time. Time could be specified in seconds or milliseconds. The time stands in Moscow time zone `UTC+3`. Examples: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-25T00:00:00`
+- `dateTo` `string` (required) — Report end date. Date in the [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) format. You may send date or date with time. Time could be specified in seconds or milliseconds. The time stands in Moscow time zone `UTC+3`. Examples: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `limit` `integer<int64>` — Number of reports in the response
+- `offset` `integer<int64>` — How many results to skip. For example, with value `10`, the response will start with the 11 element
+- `period` `string` = `daily` | `weekly` — Report periodicity: - `weekly` - `daily`
+
 ## Responses
 
 | Code  | Description       | Schema                              |
@@ -39,6 +45,71 @@ The list contains data since January 29, 2024.
 | `401` | Unauthorized      | `object`                            |
 | `403` | Access denied     | `Response4XX`                       |
 | `429` | Too many requests | `object`                            |
+
+**Structure `200` — `SalesReportListRes[]`:**
+
+- `reportId` `integer<int64>` — Report ID
+- `sellerFinanceName` `string` — Seller name
+- `dateFrom` `string` — Reporting period start date
+- `dateTo` `string` — Reporting period end date
+- `createDate` `string` — Report date
+- `currency` `string` — Report currency
+- `reportType` `integer<int64>` = `1` | `2` — Report type: - `1` — general - `2` — by purchase
+- `retailAmountSum` `string` — Sales
+- `forPaySum` `string` — Net revenue
+- `avgSalePercent` `number` — Agreed discount (%)
+- `deliveryServiceSum` `string` — Logistics cost
+- `paidStorageSum` `string` — Storage cost
+- `paidAcceptanceSum` `string` — Acceptance cost
+- `deductionSum` `string` — Other deductions and payments
+- `penaltySum` `string` — Total penalties
+- `additionalPaymentSum` `string` — WB fee adjustment
+- `cashbackAmountSum` `string` — Amount of rewards deducted for Loyalty Program
+- `cashbackDiscountSum` `string` — Loyalty Program discount compensation
+- `cashbackCommissionChangeSum` `string` — Loyalty Program participation cost
+- `paymentSchedule` `string` — One-time payment period change
+- `bankPaymentSum` `string` — Total
+
+**Structure `400`:**
+
+- `status` `integer<int64>` (required) — HTTP status code
+- `title` `string` (required) — Error title
+- `detail` `string` (required) — Error details
+- `requestId` `string` (required) — Request ID
+- `origin` `string` (required) — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

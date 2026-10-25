@@ -35,6 +35,67 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `Error`                    |
 | `429` | Too many requests | `object`                   |
 
+**Structure `200`:**
+
+- `next` `Next`
+- `supplies` `Supply[]` — Supplies list
+  - `id` `string` — Supply ID
+  - `isB2b` `boolean` — Indicator of a B2B sale: - `true` — B2B sale - `false` — not B2B sale - `null` — no value, no assembly orders added to the supply
+  - `isPickupPointShipmentAllowed` `boolean` — Whether you can dispatch the order to a pickup point: - `false` — no - `true` — yes
+  - `done` `boolean` — An indication that the supply is closed - `true` — closed - `false` — open
+  - `createdAt` `string` — Supply creation date (RFC3339)
+  - `closedAt` `string` — Supply close date (RFC3339)
+  - `scanDt` `string` — Supply scan date (RFC3339). If `"scanDt":null`, the supply was not scanned
+  - `name` `string` — Supply name
+  - `cargoType` `integer<int64>` = `1` | `2` | `3` — Type of cargo: - `1` — small-sized items - `2` — over dimensional cargo (ODC) - `3` — dimensional cargo+ (CD+)
+  - `crossBorderType` `integer<int32>` = `0` | `1` — Supply type: - `0` — Non-Cross-Border - `1` — Cross-Border - `null` — no value
+  - `destinationOfficeId` `integer<int64>` — ID of the office where assembly tasks for the supply are stored. If `null`, office ID is not specified
+  - `recommendedWhId` `integer<int64>` — ID of the recommended warehouse for acceptance of the supply for Moscow and Moscow region. The warehouse closest to the customers chain is defined automatically when the supply is transferred to delivery, taking into account the parameters of all assembly orders in the supply. If `0`, the recommended warehouse is not determined
+  - `shippingDt` `string` — Planned supply shipping date, format `YYYY-MM-DD`
+  - `shippingPointId` `integer<int64>` — Shipping point ID. You can get it using a method for getting [supply shipping points](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+  - `shippingType` `string` = `selfShipping` | `transportCompany` — Type of shipping to the shipping point: - `selfShipping` — shipping at the seller's expense - `transportCompany` — delivery via a transport company
+  - `waybillUuid` `string` — Electronic waybill ID
+  - `spotAvailable` `boolean` — Whether SPOT is available for this supply: - `true` — yes. Use the method for [getting SPOT data](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) - `false` — no
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

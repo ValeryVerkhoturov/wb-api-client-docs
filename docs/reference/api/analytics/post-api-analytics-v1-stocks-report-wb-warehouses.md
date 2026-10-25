@@ -32,6 +32,11 @@ POST /api/analytics/v1/stocks-report/wb-warehouses
 
 `application/json` — схема `InventoryRequest`, обязательно
 
+- `nmIds` `integer<int64>[]` — Артикулы WB
+- `chrtIds` `integer<int64>[]` — ID размеров. Используется только для указанных в массиве `nmIds` артикулов
+- `limit` `integer<int64>` — Количество строк в ответе
+- `offset` `integer<int64>` — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+
 ## Ответы
 
 | Код   | Описание               | Схема                                       |
@@ -43,6 +48,60 @@ POST /api/analytics/v1/stocks-report/wb-warehouses
 | `402` | Требуется платёж       | `object`                                    |
 | `403` | Доступ запрещён        | `ErrorObject403`                            |
 | `429` | Слишком много запросов | `object`                                    |
+
+**Структура `200`:**
+
+- `data` `InventoryWbResponse`
+  - `items` `object[]` — Остатки товаров на складах WB по размерам
+    - `nmId` `integer<int64>` — Артикул WB
+    - `chrtId` `integer<int64>` — ID размера
+    - `warehouseId` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `-999999`
+    - `warehouseName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB`
+    - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB`
+    - `quantity` `integer<int64>` — Количество товара на складе, доступное клиентам для добавления в корзину
+    - `inWayToClient` `integer<int64>` — В пути к клиенту
+    - `inWayFromClient` `integer<int64>` — В пути от клиента
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

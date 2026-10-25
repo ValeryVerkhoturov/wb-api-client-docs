@@ -27,6 +27,8 @@ POST /api/marketplace/v3/dbs/orders/final-price
 
 `application/json` — схема `OrdersRequestAPI`, необязательно
 
+- `orders` `integer<int64>[]` — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                          |
@@ -36,6 +38,59 @@ POST /api/marketplace/v3/dbs/orders/final-price
 | `401` | Не авторизован         | `object`                       |
 | `403` | Доступ запрещён        | `api.BatchError`               |
 | `429` | Слишком много запросов | `object`                       |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `results` `api.OrderFinalPriceResult[]`
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `data` `object` — Данные сборочного задания. Если `"data":{}`, данные формируются. Повторите запрос позднее. Максимальное время формирования данных около 1 минуты. Если `data` отсутствует, данных по сборочному заданию не предусмотрено. Используйте данные из ответов методов: - [Получить список новых сборочных заданий](https://dev.wildberries.ru/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew) - [Получить информацию о завершенных сборочных заданиях](https://dev.wildberries.ru/docs/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders)
+    - `originalPrice` `integer<int64>` — Цена продавца в валюте продажи без учёта скидок, умноженная на 100. Предоставляется в информационных целях
+    - `convertedOriginalPrice` `integer<int64>` — Цена продавца в валюте страны продавца без учёта скидок, умноженная на 100. Предоставляется в информационных целях
+    - `originalFinalPrice` `integer<int64>` — Сумма к оплате покупателем в валюте продажи с учетом всех скидок и кэшбека, умноженная на 100. Код валюты продажи указан в поле `currencyCode`. Предоставляется в информационных целях
+    - `convertedOriginalFinalPrice` `integer<int64>` — Сумма к оплате покупателем в валюте страны продавца с учетом всех скидок и кэшбека, умноженная на 100. Предоставляется в информационных целях
+    - `currencyCode` `integer<ISO 4217>` — Код валюты продажи
+    - `convertedCurrencyCode` `integer<ISO 4217>` — Код валюты страны продавца
+  - `errors` `api.BatchErrorFinalPriceResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` — `NotFound` - `400` — `StatusMismatch` - `422` — `PriceNotCalculated`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено (`404`) - `StatusMismatch` — операция невозможна для этого статуса сборочного задания (`400`) - `PriceNotCalculated` — операция невозможна для сборочных заданий, созданных ранее 23.07.2026 (`422`)
+  - `isError` `boolean` — Есть ли ошибки
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

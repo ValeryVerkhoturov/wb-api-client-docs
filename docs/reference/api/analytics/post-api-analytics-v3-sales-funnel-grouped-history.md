@@ -46,6 +46,15 @@ POST /api/analytics/v3/sales-funnel/grouped/history
 
 `application/json` — схема `GroupedHistoryRequest`, обязательно
 
+- `selectedPeriod` `object` (обязательно)
+  - `start` `string` — Начало периода
+  - `end` `string` — Конец периода
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `subjectIds` `integer<int64>[]` — Список ID предметов для фильтрации
+- `tagIds` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `skipDeletedNm` `boolean` — Скрыть удалённые товары
+- `aggregationLevel` `Level`
+
 ## Ответы
 
 | Код   | Описание               | Схема                                        |
@@ -56,6 +65,71 @@ POST /api/analytics/v3/sales-funnel/grouped/history
 | `402` | Требуется платёж       | `object`                                     |
 | `403` | Доступ запрещён        | `ErrorObject`                                |
 | `429` | Слишком много запросов | `object`                                     |
+
+**Структура `200`:**
+
+- `data` `object[]` — Статистика
+  - `product` `object`
+    - `nmId` `integer<int64>` — Артикул WB
+    - `title` `string<int64>` — Название карточки товара
+    - `vendorCode` `string` — Артикул продавца
+    - `brandName` `string` — Бренд
+    - `subjectId` `integer<int64>` — ID предмета
+    - `subjectName` `string` — Название предмета
+  - `history` `History[]` — Статистика за период
+    - `date` `string` — Дата сбора статистики
+    - `openCount` `integer<int64>` — Количество переходов в карточку товара
+    - `cartCount` `integer<int64>` — Положили в корзину, шт.
+    - `orderCount` `integer<int64>` — Заказали товаров, шт.
+    - `orderSum` `integer<int64>` — Заказали на сумму
+    - `buyoutCount` `integer<int64>` — Выкупили товаров, шт.
+    - `buyoutSum` `integer<int64>` — Выкупили на сумму
+    - `buyoutPercent` `integer<int64>` — Процент выкупа
+    - `addToCartConversion` `integer<int64>` — Конверсия в корзину. Какой процент посетителей, открывших карточку товара, добавили товар в корзину, %
+    - `cartToOrderConversion` `integer<int64>` — Конверсия в заказ. Какой процент посетителей, добавивших товар в корзину, сделали заказ
+    - `addToWishlistCount` `integer<int64>` — Количество добавлений товара в **Отложенные**
+  - `currency` `Currency`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

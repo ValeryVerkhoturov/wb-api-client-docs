@@ -33,6 +33,11 @@ POST /api/marketplace/v3/click-collect/orders/meta/customs-declaration
 
 `application/json` — схема `object`, обязательно
 
+- `orders` `object[]` (обязательно)
+  - `customsDeclaration` `string` (обязательно) — Номер ДТ
+  - `orderId` `integer<int64>` (обязательно) — ID сборочного задания
+  - `originCountryCode` `string` (обязательно) — Числовой код страны происхождения товара из [Общероссийского классификатора стран мира](https://esnsi.gosuslugi.ru/classifiers/16269). Необходимо указывать только для сборочных заданий с признаком B2B-продажи "isB2b":true
+
 ## Ответы
 
 | Код   | Описание               | Схема                               |
@@ -42,6 +47,51 @@ POST /api/marketplace/v3/click-collect/orders/meta/customs-declaration
 | `401` | Не авторизован         | `object`                            |
 | `403` | Доступ запрещён        | `Error`                             |
 | `429` | Слишком много запросов | `object`                            |
+
+**Структура `200`:**
+
+- `requestId` `object` — Уникальный ID запроса
+- `results` `api.StatusSetCustomsDeclarationResponse[]`
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `isError` `boolean` — Есть ли ошибки
+  - `errors` `api.BatchCustomsDeclarationErrorResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` - `409` - `400`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `OrderNotB2B` — операция доступна только для сборочных заданий с признаком B2B-продажи `"isB2b":true` - `InvalidOriginCountryCode` — некорректный код страны происхождения товара
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

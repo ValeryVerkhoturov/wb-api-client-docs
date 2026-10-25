@@ -41,6 +41,84 @@ Returns the report by task ID
 | `404` | Not found         | `Http4XXResponse`                                |
 | `429` | Too many requests | `object`                                         |
 
+**Structure `200` — `object[]`:**
+
+- `date` `string` — Calculation or recalculation date
+- `logWarehouseCoef` `number` — Logistics and storage coefficient. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `0`
+- `officeId` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `0`
+- `warehouse` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB РФ`
+- `warehouseCoef` `number` — Storage coefficient
+- `giId` `integer<int64>` — Shipment ID
+- `chrtId` `integer<int64>` — Size ID
+- `size` `string` — Size (`techSize` in listing)
+- `barcode` `string` — SKU
+- `subject` `string` — Subcategory
+- `brand` `string` — Brand
+- `vendorCode` `string` — Seller item number
+- `nmId` `integer<int64>` — WB item number
+- `volume` `number` — Item volume
+- `calcType` `string` — Calculation type
+- `warehousePrice` `number` — Storage price
+- `barcodesCount` `integer<int64>` — Chargeable item units in the warehouse, in the last 24 hours
+- `palletPlaceCode` `integer<int64>` — Pallet place code. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `0`
+- `palletCount` `number` — Number of pallets
+- `originalDate` `string` — Calculation date, in case of recalculation. If there was not a recalculation, the same as `date`
+- `loyaltyDiscount` `number` — Loyalty program discount, ₽
+- `tariffFixDate` `string` — Tariff fixing date
+- `tariffLowerDate` `string` — Tariff reduction date
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

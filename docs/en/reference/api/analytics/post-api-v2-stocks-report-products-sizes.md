@@ -38,6 +38,16 @@ The report data is updated once every 2 hours.
 
 `application/json` — schema `TableSizeRequest`, required
 
+- `nmID` `integer<int64>` (required) — WB item number
+- `currentPeriod` `PeriodInv` (required)
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 3 months from today
+  - `end` `string` (required) — End date of the period. No earlier than 3 months from today
+- `stockType` `StockType` (required)
+- `orderBy` `TableOrderBy` (required)
+  - `field` `TableGroupField` (required)
+  - `mode` `OrderByMode` (required)
+- `includeOffice` `boolean` (required) — Include warehouse details
+
 ## Responses
 
 | Code  | Description       | Schema                                       |
@@ -48,6 +58,159 @@ The report data is updated once every 2 hours.
 | `402` | Payment required  | `object`                                     |
 | `403` | Access denied     | `ErrorObject403`                             |
 | `429` | Too many requests | `object`                                     |
+
+**Structure `200`:**
+
+- `data` `TableSizeResponse`
+  - `offices` `TableOfficeItem[]` — Set of warehouse data
+    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
+    - `officeID` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`, for WB warehouses
+    - `officeName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `""`, for WB warehouses
+    - `metrics` `object` — Warehouse metrics
+      - `ordersCount` `integer<int64>` — Items ordered
+      - `ordersSum` `integer<int64>` — Total order value
+      - `avgOrders` `number<float64>` — Average daily orders
+      - `avgOrdersByMonth` `FloatGraphByPeriodItem[]` — Average monthly orders
+        - `start` `string` — Beginning of the month
+        - `end` `string` — End of the month
+        - `value` `number<float64>` — Average items ordered
+      - `buyoutCount` `integer<int64>` — Items purchased
+      - `buyoutSum` `integer<int64>` — Total purchase value
+      - `buyoutPercent` `integer<int64>` — Purchase rate
+      - `stockCount` `integer<int64>` — Current inventory
+      - `stockSum` `integer<int64>` — Current inventory value
+      - `saleRate` `object` — Current DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `avgStockTurnover` `object` — Average DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `toClientCount` `integer<int64>` — On the way to user
+      - `fromClientCount` `integer<int64>` — On the way from user
+      - `officeMissingTime` `object` — Out-of-stock time. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration 4) `"hours":-4` — absence during the entire period
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `lostOrdersCount` `number<float64>` — Lost orders. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostOrdersSum` `number<float64>` — Lost order value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostBuyoutsCount` `number<float64>` — Lost sales. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostBuyoutsSum` `number<float64>` — Lost sales value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+  - `sizes` `object[]` — Set of data on the size of item
+    - `name` `string` — Size name
+    - `chrtID` `integer<int64>` — Size ID
+    - `offices` `TableOfficeItem[]` — Warehouses
+      - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
+      - `officeID` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`, for WB warehouses
+      - `officeName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `""`, for WB warehouses
+      - `metrics` `object` — Warehouse metrics
+        - `ordersCount` `integer<int64>` — Items ordered
+        - `ordersSum` `integer<int64>` — Total order value
+        - `avgOrders` `number<float64>` — Average daily orders
+        - `avgOrdersByMonth` `FloatGraphByPeriodItem[]` — Average monthly orders
+          - `start` `string` — Beginning of the month
+            - …
+          - `end` `string` — End of the month
+            - …
+          - `value` `number<float64>` — Average items ordered
+            - …
+        - `buyoutCount` `integer<int64>` — Items purchased
+        - `buyoutSum` `integer<int64>` — Total purchase value
+        - `buyoutPercent` `integer<int64>` — Purchase rate
+        - `stockCount` `integer<int64>` — Current inventory
+        - `stockSum` `integer<int64>` — Current inventory value
+        - `saleRate` `object` — Current DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+          - `days` `integer<int32>` — Number of days
+            - …
+          - `hours` `integer<int32>` — Number of hours
+            - …
+        - `avgStockTurnover` `object` — Average DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+          - `days` `integer<int32>` — Number of days
+            - …
+          - `hours` `integer<int32>` — Number of hours
+            - …
+        - `toClientCount` `integer<int64>` — On the way to user
+        - `fromClientCount` `integer<int64>` — On the way from user
+        - `officeMissingTime` `object` — Out-of-stock time. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration 4) `"hours":-4` — absence during the entire period
+          - `days` `integer<int32>` — Number of days
+            - …
+          - `hours` `integer<int32>` — Number of hours
+            - …
+        - `lostOrdersCount` `number<float64>` — Lost orders. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+        - `lostOrdersSum` `number<float64>` — Lost order value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+        - `lostBuyoutsCount` `number<float64>` — Lost sales. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+        - `lostBuyoutsSum` `number<float64>` — Lost sales value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+    - `metrics` `object` — Size metrics
+      - `ordersCount` `integer<int64>` — Items ordered
+      - `ordersSum` `integer<int64>` — Total order value
+      - `avgOrders` `number<float64>` — Average daily orders
+      - `avgOrdersByMonth` `FloatGraphByPeriodItem[]` — Average monthly orders
+        - `start` `string` — Beginning of the month
+        - `end` `string` — End of the month
+        - `value` `number<float64>` — Average items ordered
+      - `buyoutCount` `integer<int64>` — Items purchased
+      - `buyoutSum` `integer<int64>` — Total purchase value
+      - `buyoutPercent` `integer<int64>` — Purchase rate
+      - `stockCount` `integer<int64>` — Current inventory
+      - `stockSum` `integer<int64>` — Current inventory value
+      - `saleRate` `object` — Current DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `avgStockTurnover` `object` — Average DSI. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `toClientCount` `integer<int64>` — On the way to user
+      - `fromClientCount` `integer<int64>` — On the way from user
+      - `officeMissingTime` `object` — Out-of-stock time. Special cases: 1) `"hours":-1` — infinite duration 2) `"hours":-2` — zero duration 3) `"hours":-3` — uncalculated duration 4) `"hours":-4` — absence during the entire period
+        - `days` `integer<int32>` — Number of days
+        - `hours` `integer<int32>` — Number of hours
+      - `lostOrdersCount` `number<float64>` — Lost orders. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostOrdersSum` `number<float64>` — Lost order value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostBuyoutsCount` `number<float64>` — Lost sales. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `lostBuyoutsSum` `number<float64>` — Lost sales value. Special cases: 1. Value less than `0` and is not `-2` — the value is not calculated 2. Value is `-2` — zero value
+      - `currentPrice` `object` — Current price
+        - `minPrice` `integer<int64>` — Minimal seller price with seller discount (excluding WB Club discount)
+        - `maxPrice` `integer<int64>` — Maximal seller price with seller discount (excluding WB Club discount)
+  - `currency` `Currency`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

@@ -30,6 +30,16 @@ POST /api/v2/stocks-report/offices
 
 `application/json` — схема `TableShippingOfficeRequest`, обязательно
 
+- `nmIDs` `integer<int64>[]` — Список артикулов WB для фильтрации
+- `subjectIDs` `integer<int32>[]` — Список ID предметов для фильтрации
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `tagIDs` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `currentPeriod` `PeriodInv` (обязательно)
+  - `start` `string` (обязательно) — Дата начала периода. Не позднее `end`. Не ранее 3 месяцев от текущей даты
+  - `end` `string` (обязательно) — Дата окончания периода. Не ранее 3 месяцев от текущей даты
+- `stockType` `StockType` (обязательно)
+- `skipDeletedNm` `boolean` (обязательно) — Скрыть удалённые товары
+
 ## Ответы
 
 | Код   | Описание               | Схема                                  |
@@ -40,6 +50,75 @@ POST /api/v2/stocks-report/offices
 | `402` | Требуется платёж       | `object`                               |
 | `403` | Доступ запрещён        | `ErrorObject403`                       |
 | `429` | Слишком много запросов | `object`                               |
+
+**Структура `200`:**
+
+- `data` `TableShippingOfficeResponse`
+  - `regions` `TableShippingOfficeItem[]` — Множество данных по регионам отгрузки
+    - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
+    - `metrics` `object` — Метрики по региону
+      - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
+      - `stockSum` `integer<int64>` — Остатки на текущий день, сумма
+      - `saleRate` `object` — Оборачиваемость текущих остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+        - `days` `integer<int32>` — Количество дней
+        - `hours` `integer<int32>` — Количество часов
+      - `toClientCount` `integer<int64>` — В пути к клиенту, шт.
+      - `fromClientCount` `integer<int64>` — В пути от клиента, шт.
+    - `offices` `object[]` — Данные по складам. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `[]`
+      - `officeID` `integer<int64>` — ID склада
+      - `officeName` `string` — Название склада
+      - `metrics` `object` — Метрики по складу
+        - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
+        - `stockSum` `integer<int64>` — Остатки на текущий день, сумма
+        - `saleRate` `object` — Оборачиваемость текущих остатков. Особые случаи: 1. `"hours":-1` — бесконечная длительность 2. `"hours":-2` — нулевая длительность 3. `"hours":-3` — нерассчитанная длительность
+          - `days` `integer<int32>` — Количество дней
+            - …
+          - `hours` `integer<int32>` — Количество часов
+            - …
+        - `toClientCount` `integer<int64>` — В пути к клиенту, шт.
+        - `fromClientCount` `integer<int64>` — В пути от клиента, шт.
+  - `currency` `Currency`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

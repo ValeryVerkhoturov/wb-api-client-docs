@@ -62,6 +62,13 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 
 `application/json` — schema `requestPublicViewerPublicErrorsTableListV2`, required
 
+- `cursor` `swagger.PublicErrorsCursorInput`
+  - `limit` `number<int>` — Number of batches in the response
+  - `updatedAt` `string` — Date and time of generation of the last batch in the response to the previous request
+  - `batchUUID` `string<UUID>` — The ID of the last batch in the response to the previous request
+- `order` `swagger.PublicErrorsOrderV2`
+  - `ascending` `boolean` — - `false` — sort in descending - `true` — sort in ascending
+
 ## Responses
 
 | Code  | Description       | Schema                                        |
@@ -71,6 +78,60 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `401` | Unauthorized      | `object`                                      |
 | `403` | Access denied     | `responseBodyContentError403`                 |
 | `429` | Too many requests | `object`                                      |
+
+**Structure `200`:**
+
+- `data` `models.ErrorTableListPublicRespV2`
+  - `items` `models.ErrorTableListPublicRespV2Item[]` — Batches
+    - `batchUUID` `string<UUID>` — Batch ID
+    - `subjects` `object` — Subcategories. Layout by `vendorCodes`
+    - `brands` `object` — Brands. Layout by `vendorCodes`
+    - `vendorCodes` `string[]` — Seller item numbers
+    - `errors` `object` — Errors. Layout by `vendorCodes`
+    - `updatedAt` `string` — Date and time when the batch was created or edited
+  - `cursor` `viewer_contract.PublicErrorsCursorOutput`
+    - `next` `boolean` — Are there any more drafts: - `false` — no - `true` — yes
+    - `updatedAt` `string` — Date and time of generation of the last batch in the response
+    - `batchUUID` `string<UUID>` — The ID of the last batch in the response
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

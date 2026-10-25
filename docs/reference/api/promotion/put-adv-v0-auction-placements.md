@@ -28,6 +28,12 @@ PUT /adv/v0/auction/placements
 
 `application/json` — схема `object`, обязательно
 
+- `placements` `object[]` (обязательно) — Места размещения в кампаниях
+  - `advert_id` `integer<int64>` (обязательно) — ID кампании
+  - `placements` `object` (обязательно) — Места размещения
+    - `search` `boolean` (обязательно) — Размещение в поиске: - `false` — отключено - `true` — включено
+    - `recommendations` `boolean` (обязательно) — Размещение в рекомендациях: - `false` — отключено - `true` — включено
+
 ## Ответы
 
 | Код   | Описание               | Схема         |
@@ -37,6 +43,47 @@ PUT /adv/v0/auction/placements
 | `401` | Не авторизован         | `object`      |
 | `403` | Доступ запрещён        | `object`      |
 | `429` | Слишком много запросов | `object`      |
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

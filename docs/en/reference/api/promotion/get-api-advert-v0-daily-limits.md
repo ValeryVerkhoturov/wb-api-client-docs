@@ -40,6 +40,59 @@ The method returns the current daily limit settings for CPC campaigns — the ma
 | `403` | Access denied     | `object`                   |
 | `429` | Too many requests | `object`                   |
 
+**Structure `200`:**
+
+- `adverts` `V0DailyLimitAdvert[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `enabled` `boolean` — - `true` — daily limit is enabled - `false` — daily limit is disabled
+  - `dailyLimit` `integer<int64>` — Daily limit amount in minor currency units — 0.01 of the base currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+  - `spentToday` `integer<int64>` — Amount spent today in minor currency units — 0.01 of the base currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+  - `currency` `string<ISO 4217>` — Currency code
+  - `carryOverEnabled` `boolean` — Carry-over of the remaining daily limit to the next day. If the limit is not fully spent within 24 hours, the remaining amount will be added to the next day's limit. Promotion spend will not increase. - `true` — carry-over is enabled - `false` — carry-over is disabled
+  - `valid` `boolean` — Whether the current daily limit is sufficient for the campaign bids: - `true` — yes - `false` — no, we recommend to increase the limit, otherwise the campaign budget may be spent unevenly
+  - `requiredLimit` `integer<int64>` — Recommended minimum daily limit based on the campaign’s current bids. Specified in minor currency units — 0.01 of the base currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -46,6 +46,80 @@ GET /api/v3/orders
 | `403` | Доступ запрещён        | `Error`                  |
 | `429` | Слишком много запросов | `object`                 |
 
+**Структура `200`:**
+
+- `next` `Next`
+- `orders` `Order[]`
+  - `address` `object` — Точный адрес покупателя для доставки, если применимо. Из-за особенностей адреса некоторые поля могут быть пустыми
+    - `fullAddress` `string` — Адрес доставки
+    - `longitude` `number<float64>` — Долгота
+    - `latitude` `number<float64>` — Широта
+  - `scanPrice` `number<uint32>` — Цена приёмки в копейках. Отображается после фактической приёмки заказа
+  - `deliveryType` `string` = `fbs` — Тип доставки: - `fbs` — доставка на склад Wildberries (FBS)
+  - `supplyId` `string` — ID поставки. Возвращается, если заказ закреплён за поставкой
+  - `orderUid` `string` — ID транзакции для группировки сборочных заданий. Сборочные задания в одной корзине покупателя будут иметь одинаковый `orderUid`
+  - `article` `string` — Артикул продавца
+  - `colorCode` `string` — Код цвета (только для колеруемых товаров)
+  - `rid` `string` — Уникальный ID заказа. Примечание: `rid` — это `srid` в ответах методов: - [Заявки покупателей на возврат](https://dev.wildberries.ru/openapi/customer-communication#tag/buyersReturns/operation/getV1Claims) - [Лента заказов](https://dev.wildberries.ru/openapi/analytics#tag/orderFeed/operation/postV1OrderFeed) - [Заказы](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierOrders) - [Продажи](https://dev.wildberries.ru/openapi/reports#tag/mainReports/operation/getV1SupplierSales) - [Отчет о возвратах и перемещении товаров](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport) - [Детализации к отчётам реализации по ID отчётов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailedReportId) - [Детализации к отчётам реализации за период](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1SalesReportsDetailed) - [Детализации к отчётам об издержках на приём платежей по ID отчётов](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailedReportId) - [Детализации к отчётам об издержках на приём платежей за период](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/financialReports/operation/postV1AcquiringDetailed)
+  - `createdAt` `string` — Дата создания сборочного задания (RFC3339). Часовой пояс — UTC
+  - `offices` `string[]` — Список офисов, куда следует привезти товар
+  - `skus` `string[]` — Список баркодов
+  - `id` `integer<int64>` — ID сборочного задания
+  - `warehouseId` `integer<int64>` — ID склада продавца, на который поступило сборочное задание
+  - `officeId` `integer<int64>` — ID склада WB, к которому привязан склад продавца
+  - `nmId` `integer<int64>` — Артикул WB
+  - `chrtId` `integer<int64>` — ID размера товара в системе WB
+  - `price` `integer<int64>` — Цена в валюте продажи с учётом всех скидок, кроме скидки по WB Кошельку, умноженная на 100. Код валюты продажи — в поле `currencyCode`. Предоставляется в информационных целях
+  - `convertedPrice` `integer<int64>` — Цена в валюте страны продавца с учетом всех скидок, кроме скидки по WB Кошельку, умноженная на 100. Предоставляется в информационных целях
+  - `currencyCode` `integer<ISO 4217>` — Код валюты продажи
+  - `convertedCurrencyCode` `integer<ISO 4217>` — Код валюты страны продавца
+  - `cargoType` `integer<int64>` = `1` | `2` | `3` — Тип товара: - `1` — малогабаритный товар (МГТ) - `2` — сверхгабаритный товар (СГТ) - `3` — крупногабаритный товар (КГТ+)
+  - `crossBorderType` `integer<int32>` = `0` | `1` — Тип сборочного задания: - `0` — внутренняя поставка - `1` — трансграничная поставка
+  - `comment` `string` — Комментарий покупателя
+  - `isZeroOrder` `boolean` — Признак заказа товара с нулевым остатком: - `false` — заказ сделан на товар с ненулевым остатком - `true` — заказ сделан на товар с нулевым остатком. Такой заказ можно отменить без штрафа за отмену
+  - `trackNumber` `string` — Трек-номер для трансграничной поставки
+  - `options` `object` — Опции заказа
+    - `isB2B` `boolean` — Признак B2B-продажи: - `false` — не B2B-продажа - `true` — B2B-продажа
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -31,6 +31,74 @@ The method will be disabled on [October 26](https://dev.wildberries.ru/en/releas
 | `403` | Access denied     | `object`                               |
 | `429` | Too many requests | `object`                               |
 
+**Structure `200`:**
+
+- `report` `object[]` — Report
+  - `barcode` `string` — SKU
+  - `brand` `string` — Brand
+  - `completedDt` `string` — Date and time the seller received return
+  - `dstOfficeAddress` `string` — Address of pick-up point where the seller receives returns
+  - `dstOfficeId` `integer<int64>` — ID of pick-up point where the seller receives returns
+  - `expiredDt` `string` — Expiration date and time of the storage period
+  - `isStatusActive` `integer<int64>` = `0` | `1` — Type of return status: * `0` — archive * `1` — active
+  - `nmId` `integer<int64>` — WB item number
+  - `orderDt` `string` — Date of the return order
+  - `orderId` `integer<int64>` — Assembly order number
+  - `readyToReturnDt` `string` — Date and time when the return is ready for delivery
+  - `reason` `string` — The reason for the return
+  - `returnType` `string` — Return type
+  - `shkId` `integer<int64>` — Item No.
+  - `srid` `string` — The unique ID of the return order
+  - `status` `string` — Return status
+  - `stickerId` `string` — Sticker of the return order
+  - `subjectName` `string` — Subcategory name
+  - `techSize` `string` — Size
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

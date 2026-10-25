@@ -30,6 +30,12 @@ Available only for sellers from the Russian Federation.
 
 `application/json` — schema `object`, required
 
+- `data` `UpdateSupplyShippingMethod[]` (required)
+  - `shippingDt` `string` (required) — Planned supply shipping date, format `YYYY-MM-DD`
+  - `shippingPointId` `integer<int64>` (required) — Shipping point ID. You can get it using a [separate method](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+  - `shippingType` `string` = `selfShipping` | `transportCompany` (required) — Type of shipping to the shipping point: - `selfShipping` — shipping at the seller's expense - `transportCompany` — delivery via a transport company
+  - `supplyId` `string` (required) — Supply ID
+
 ## Responses
 
 | Code  | Description       | Schema                                 |
@@ -40,6 +46,55 @@ Available only for sellers from the Russian Federation.
 | `403` | Access denied     | `Error`                                |
 | `409` | Conflict          | `v3.APIError`                          |
 | `429` | Too many requests | `object`                               |
+
+**Structure `200`:**
+
+- `results` `UpdatedSuppliesShippingMethod[]`
+  - `error` `object` — Error processing the request for the supply. Possible errors: - `400 IncorrectRequestBody`: - incorrect supply ID - shipping point not found - destination warehouse is not located in the Russian Federation - unknown `shippingType` - date does not match the `YYYY-MM-DD` format - `400 FulfillmentRequired` — the **Fulfillment at SC** service is not available at the shipping point - `404 NotFound` — supply not found - `409 SupplyAlreadyScanned` — the supply or its boxes have already been scanned at the shipping point - `409 InvalidShippingDt` — invalid supply shipping date
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — Additional error data
+  - `success` `boolean` — Whether the request was processed successfully for this supply. Can only be `true`
+  - `supplyId` `string` — Supply ID
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `409`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

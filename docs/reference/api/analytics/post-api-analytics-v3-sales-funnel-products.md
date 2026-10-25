@@ -49,6 +49,23 @@ POST /api/analytics/v3/sales-funnel/products
 
 `application/json` — схема `ItemsRequest`, обязательно
 
+- `selectedPeriod` `object` (обязательно)
+  - `start` `string` — Начало периода
+  - `end` `string` — Конец периода
+- `pastPeriod` `object`
+  - `start` `string` — Начало периода
+  - `end` `string` — Конец периода
+- `nmIds` `integer<int64>[]` — Артикулы WB, по которым нужно составить отчёт. Оставьте пустым, чтобы получить отчёт обо всех товарах
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `subjectIds` `integer<int64>[]` — Список ID предметов для фильтрации
+- `tagIds` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `skipDeletedNm` `boolean` — Скрыть удалённые товары
+- `orderBy` `OrderBy`
+  - `field` `string` = `openCard` | `addToCart` | `orderCount` | `orderSum` | `buyoutCount` | `buyoutSum` | `cancelCount` | `cancelSum` | `avgPrice` | `stockMpQty` | `stockWbQty` | `shareOrderPercent` | `addToWishlist` | `timeToReady` | `localizationPercent` | `wbClub.orderCount` | `wbClub.orderSum` | `wbClub.buyoutSum` | `wbClub.cancelSum` | `wbClub.buyoutCount` | `wbClub.avgPrice` | `wbClub.buyoutPercent` | `wbClub.avgOrderCountPerDay` | `wbClub.cancelCount` (обязательно) — Поле для сортировки: - `openCard` — Перешли в карточку - `addToCart` — Положили в корзину - `orderCount` — Заказали товаров, шт - `orderSum` — Заказали на сумму - `buyoutCount` — Выкупили товаров, шт - `buyoutSum` — Выкупили на сумму - `cancelCount` — Отменили и вернули товаров, шт - `cancelSum` — Отменили и вернули на сумму - `avgPrice` — Средняя цена - `stockMpQty` — Остатки на складах продавца, шт - `stockWbQty` — Остатки на складах WB, шт - `shareOrderPercent` — Доля в выручке - `addToWishlist` — Добавили в **Отложенные** - `timeToReady` — Среднее время доставки - `localizationPercent` — Локальные заказы в рамках одного региона - `wbClub.orderCount` — Заказали товаров с WB Клубом, шт - `wbClub.orderSum` — Заказали с WB Клубом на сумму - `wbClub.buyoutSum` — Выкупили товаров с WB Клубом, шт - `wbClub.buyoutCount` — Процент выкупа с WB Клубом - `wbClub.cancelSum` — Отменили и вернули товаров с WB Клубом на сумму - `wbClub.avgPrice` — Средняя цена с WB Клубом - `wbClub.buyoutPercent` — Процент выкупа с WB Клубом - `wbClub.avgOrderCountPerDay` — Среднее количество заказов в день с WB Клубом, шт - `wbClub.cancelCount` — Отменили и вернули товаров с WB Клубом, шт
+  - `mode` `string` = `asc` | `desc` (обязательно) — Порядок сортировки: - `asc` — по возрастанию - `desc` — по убыванию
+- `limit` `integer<int64>` — Количество карточек товара в ответе
+- `offset` `integer<int64>` — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+
 ## Ответы
 
 | Код   | Описание               | Схема                                  |
@@ -59,6 +76,221 @@ POST /api/analytics/v3/sales-funnel/products
 | `402` | Требуется платёж       | `object`                               |
 | `403` | Доступ запрещён        | `ErrorObject`                          |
 | `429` | Слишком много запросов | `object`                               |
+
+**Структура `200`:**
+
+- `data` `object`
+  - `products` `object[]` — Список карточек товаров
+    - `product` `object`
+      - `nmId` `integer<int64>` — Артикул WB
+      - `title` `string<int64>` — Название карточки товара
+      - `vendorCode` `string` — Артикул продавца
+      - `brandName` `string` — Бренд
+      - `subjectId` `integer<int64>` — ID предмета
+      - `subjectName` `string` — Название предмета
+      - `tags` `Tag[]` — Ярлыки
+        - `id` `integer<int64>` — ID ярлыка
+        - `name` `string` — Название ярлыка
+      - `productRating` `number<float32>` — Оценка карточки
+      - `feedbackRating` `number<float32>` — Оценка пользователей
+      - `stocks` `object` — Остатки
+        - `wb` `integer<int64>` — Общее количество остатков на складах WB на текущий день, шт.
+        - `mp` `integer<int64>` — Общее количество остатков на складах продавца на текущий день, шт.
+        - `balanceSum` `integer<int64>` — Сумма остатков на складах на текущий день, шт.
+    - `statistic` `object`
+      - `selected` `object`
+        - `period` `object`
+          - `start` `string` — Начало периода
+            - …
+          - `end` `string` — Конец периода
+            - …
+        - `openCount` `integer<int64>` — Количество переходов в карточку товара
+        - `cartCount` `integer<int32>` — Положили в корзину, шт.
+        - `orderCount` `integer<int64>` — Заказали товаров, шт.
+        - `orderSum` `integer<int64>` — Заказали на сумму
+        - `buyoutCount` `integer<int64>` — Выкупили товаров, шт.
+        - `buyoutSum` `integer<int64>` — Выкупили на сумму
+        - `cancelCount` `integer<int64>` — Отменили и вернули товаров, шт.
+        - `cancelSum` `integer<int64>` — Отменили и вернули на сумму
+        - `avgPrice` `integer<int64>` — Средняя цена
+        - `avgOrdersCountPerDay` `number<float64>` — Среднее количество заказов в день, шт.
+        - `shareOrderPercent` `number<float64>` — Доля в выручке
+        - `addToWishlist` `integer<int64>` — Добавили в **Отложенные**
+        - `timeToReady` `object`
+          - `days` `integer<int64>` — Дни
+            - …
+          - `hours` `integer<int64>` — Часы
+            - …
+          - `mins` `integer<int64>` — Минуты
+            - …
+        - `localizationPercent` `integer<int64>` — Локальные заказы в рамках одного региона. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `100`
+        - `wbClub` `object`
+          - `orderCount` `integer<int64>` — Заказали товаров с WB Клубом, шт.
+            - …
+          - `orderSum` `integer<int64>` — Заказали с WB Клубом на сумму
+            - …
+          - `buyoutSum` `integer<int64>` — Выкупили с WB Клубом на сумму
+            - …
+          - `buyoutCount` `integer<int64>` — Выкупили товаров с WB Клубом, шт.
+            - …
+          - `cancelSum` `integer<int64>` — Отменили и вернули с WB Клубом на сумму
+            - …
+          - `cancelCount` `integer<int64>` — Отменили и вернули товаров с WB Клубом, шт.
+            - …
+          - `avgPrice` `integer<int64>` — Средняя цена с WB Клубом
+            - …
+          - `buyoutPercent` `integer<int64>` — Процент выкупа с WB Клубом
+            - …
+          - `avgOrderCountPerDay` `number<float64>` — Среднее количество заказов с WB Клубом в день, шт.
+            - …
+        - `conversions` `object`
+          - `addToCartPercent` `integer<int>` — Конверсия в корзину. Какой процент посетителей, открывших карточку товара, добавили товар в корзину, %
+            - …
+          - `cartToOrderPercent` `integer<int>` — Конверсия в заказ. Какой процент посетителей, добавивших товар в корзину, сделали заказ, %
+            - …
+          - `buyoutPercent` `integer<int>` — Процент выкупа. Какой процент посетителей, заказавших товар, его выкупили. Без учёта товаров, которые еще доставляются покупателю, %
+            - …
+      - `past` `object`
+        - `period` `object`
+          - `start` `string` — Начало периода
+            - …
+          - `end` `string` — Конец периода
+            - …
+        - `openCount` `integer<int64>` — Количество переходов в карточку товара
+        - `cartCount` `integer<int32>` — Положили в корзину, шт.
+        - `orderCount` `integer<int64>` — Заказали товаров, шт.
+        - `orderSum` `integer<int64>` — Заказали на сумму
+        - `buyoutCount` `integer<int64>` — Выкупили товаров, шт.
+        - `buyoutSum` `integer<int64>` — Выкупили на сумму
+        - `cancelCount` `integer<int64>` — Отменили и вернули товаров, шт.
+        - `cancelSum` `integer<int64>` — Отменили и вернули на сумму
+        - `avgPrice` `integer<int64>` — Средняя цена
+        - `avgOrdersCountPerDay` `number<float64>` — Среднее количество заказов в день, шт.
+        - `shareOrderPercent` `number<float64>` — Доля в выручке
+        - `addToWishlist` `integer<int64>` — Добавили в **Отложенные**
+        - `timeToReady` `object`
+          - `days` `integer<int64>` — Дни
+            - …
+          - `hours` `integer<int64>` — Часы
+            - …
+          - `mins` `integer<int64>` — Минуты
+            - …
+        - `localizationPercent` `integer<int64>` — Локальные заказы в рамках одного региона. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `100`
+        - `wbClub` `object`
+          - `orderCount` `integer<int64>` — Заказали товаров с WB Клубом, шт.
+            - …
+          - `orderSum` `integer<int64>` — Заказали с WB Клубом на сумму
+            - …
+          - `buyoutSum` `integer<int64>` — Выкупили с WB Клубом на сумму
+            - …
+          - `buyoutCount` `integer<int64>` — Выкупили товаров с WB Клубом, шт.
+            - …
+          - `cancelSum` `integer<int64>` — Отменили и вернули с WB Клубом на сумму
+            - …
+          - `cancelCount` `integer<int64>` — Отменили и вернули товаров с WB Клубом, шт.
+            - …
+          - `avgPrice` `integer<int64>` — Средняя цена с WB Клубом
+            - …
+          - `buyoutPercent` `integer<int64>` — Процент выкупа с WB Клубом
+            - …
+          - `avgOrderCountPerDay` `number<float64>` — Среднее количество заказов с WB Клубом в день, шт.
+            - …
+        - `conversions` `object`
+          - `addToCartPercent` `integer<int>` — Конверсия в корзину. Какой процент посетителей, открывших карточку товара, добавили товар в корзину, %
+            - …
+          - `cartToOrderPercent` `integer<int>` — Конверсия в заказ. Какой процент посетителей, добавивших товар в корзину, сделали заказ, %
+            - …
+          - `buyoutPercent` `integer<int>` — Процент выкупа. Какой процент посетителей, заказавших товар, его выкупили. Без учёта товаров, которые еще доставляются покупателю, %
+            - …
+      - `comparison` `object`
+        - `openCountDynamic` `integer<int>` — Динамика переходов в карточку товара
+        - `cartCountDynamic` `integer<int>` — Динамика добавлений в корзину
+        - `orderCountDynamic` `integer<int>` — Динамика количества заказов
+        - `orderSumDynamic` `integer<int>` — Динамика суммы заказов
+        - `buyoutCountDynamic` `integer<int>` — Динамика выкупов
+        - `buyoutSumDynamic` `integer<int>` — Динамика суммы выкупов
+        - `cancelCountDynamic` `integer<int>` — Динамика отмен и возвратов товаров
+        - `cancelSumDynamic` `integer<int>` — Динамика сумм отмен и возвратов товаров
+        - `avgOrdersCountPerDayDynamic` `integer<int>` — Динамика среднего количества заказов в день
+        - `avgPriceDynamic` `integer<int>` — Динамика средней цены на товары. Учитываются скидки для акций
+        - `shareOrderPercentDynamic` `integer<int>` — Динамика доли в выручке
+        - `addToWishlistDynamic` `integer<int>` — Динамика добавлений товара в избранное
+        - `timeToReadyDynamic` `object`
+          - `days` `integer<int64>` — Дни
+            - …
+          - `hours` `integer<int64>` — Часы
+            - …
+          - `mins` `integer<int64>` — Минуты
+            - …
+        - `localizationPercentDynamic` `integer<int>` — Динамика локальных заказов в рамках одного региона. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
+        - `wbClubDynamic` `object`
+          - `orderCount` `integer<int>` — Динамика количества заказов с WB Клубом
+            - …
+          - `orderSum` `integer<int>` — Динамика суммы заказов с WB Клубом
+            - …
+          - `buyoutSum` `integer<int>` — Динамика суммы выкупов с WB Клубом
+            - …
+          - `buyoutCount` `integer<int>` — Динамика выкупов с WB Клубом
+            - …
+          - `cancelSum` `integer<int>` — Динамика сумм отмен и возвратов товаров с WB Клубом
+            - …
+          - `cancelCount` `integer<int>` — Динамика отмен и возвратов товаров с WB Клубом
+            - …
+          - `avgPrice` `integer<int>` — Динамика средней цены на товары с WB Клубом
+            - …
+          - `buyoutPercent` `integer<int>` — Динамика процента выкупа с WB Клубом
+            - …
+          - `avgOrderCountPerDay` `number<int>` — Динамика среднего количества заказов с WB Клубом в день
+            - …
+        - `conversions` `object`
+          - `addToCartPercent` `integer<int>` — Конверсия в корзину. Какой процент посетителей, открывших карточку товара, добавили товар в корзину, %
+            - …
+          - `cartToOrderPercent` `integer<int>` — Конверсия в заказ. Какой процент посетителей, добавивших товар в корзину, сделали заказ, %
+            - …
+          - `buyoutPercent` `integer<int>` — Процент выкупа. Какой процент посетителей, заказавших товар, его выкупили. Без учёта товаров, которые еще доставляются покупателю, %
+            - …
+  - `currency` `Currency`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

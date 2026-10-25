@@ -47,6 +47,63 @@ PATCH /api/v3/supplies/{supplyId}/deliver
 | `409` | Ошибка закрытия поставки | `Http409SupplyDeliverError` |
 | `429` | Слишком много запросов   | `object`                    |
 
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `409`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+  - `orders` `object[]` — Сборочные задания, идентификаторы маркировки которых не прошли или ещё не завершили проверку
+    - `id` `integer<int64>` — ID сборочного задания
+    - `metaDetails` `object[]` — Информация об ошибках
+      - `key` `string` — Идентификатор маркировки
+      - `value` `string` — Значение идентификатора маркировки
+      - `decision` `string` — [Статус проверки](https://dev.wildberries.ru/knowledge-base/articles/019e9273-118b-7b69-a25a-ea1d756f05d9/rabota-s-markirovkoi-po-modeli-fbs): - `imei` - `pending` — Проверка маркировки продолжается. Дождитесь изменения статуса проверки - `required` — Маркировка обязательна и не закреплена за сборочным заданием - `imeiInvalidFormat` — Неверный формат маркировки - `imeiAlreadySold` — Товар с этим IMEI уже продан - `uin` - `required` — Маркировка обязательна и не закреплена за сборочным заданием - `pending` — Проверка маркировки продолжается. Дождитесь изменения статуса проверки - `uinInvalidFormat` — Неверный формат маркировки - `uinBadStatus` — Некорректный статус партии - `uinBadProcess` — Некорректная стадия обработки - `uinBadStatusAndBadProcess` — Некорректный статус партии. Некорректная стадия обработки - `uinNotFound` — Не найден в [ГИИС](https://minfin.gov.ru/ru/perfomance/jewels/dmdk). При получении этой ошибки убедитесь, что УИН: - указан в загруженной спецификации с договором на доставку. Если спецификация загружена более 30 минут назад, [удалите УИН](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/deleteV3OrdersOrderIdMeta) из сборочного задания и [добавьте его](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsLabelIdentifiers/operation/putV3OrdersOrderIdMetaUin) заново - зарегистрирован в ГИИС ДМДК - указан корректно и считывается с бирки без ошибок - находится в обороте - `sgtin` - `required` — Маркировка обязательна и не закреплена за сборочным заданием - `pending` — Проверка маркировки продолжается. Дождитесь изменения статуса проверки - `sgtinInvalidFormat` — Неверный формат маркировки - `sgtinNoGS` — Маркировка не содержит GS-разделитель `\u001d` - `sgtinHasInvalidSymbols` — Маркировка содержит некорректные символы или пробелы - `sgtinHasNonLatinSymbols` — Маркировка содержит символы, не относящиеся к специальным или латинице - `sgtinInvalidPattern` — Структура маркировки некорректна - `sgtinNotFound` — Маркировка не найдена в [Честном знаке](https://chestnyznak.ru) - `sgtinEmitted` — Маркировка эмитирована - `sgtinApplied` — Не пройдена процедура Ввод в оборот - `sgtinWrittenOff` — Списан - `sgtinRetired` — Выбыл - `sgtinWithdrawn` — Выбыл - `sgtinDisaggregation` — Расформирован - `sgtinDisaggregated` — Расформирован - `sgtinAppliedNotPaid` — Не оплачен - `gtin` - `required` — Маркировка обязательна и не закреплена за сборочным заданием - `expiration` - `required` — Маркировка обязательна и не закреплена за сборочным заданием - `customsDeclaration` - `required` — Маркировка обязательна и не закреплена за сборочным заданием
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

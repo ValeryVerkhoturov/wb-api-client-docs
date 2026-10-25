@@ -33,6 +33,12 @@ POST /api/v1/supplies
 
 `application/json` — схема `models.SuppliesFiltersRequest`, обязательно
 
+- `dates` `models.DateFilterRequest[]` — Фильтр по датам
+  - `from` `string<ISO 8601>` — Дата начала периода
+  - `till` `string<ISO 8601>` — Дата окончания периода
+  - `type` `string` = `factDate` | `createDate` | `supplyDate` | `updatedDate` (обязательно) — Тип дат: - `factDate` — дата фактической отгрузки поставки - `createDate` — дата создания поставки - `supplyDate` — плановая дата отгрузки поставки - `updatedDate` — дата изменения поставки
+- `statusIDs` `models.HandySupplyStatus[]` — Фильтр поставок по статусам. Возможные значения: - `1` — Не запланировано - `2` — Запланировано - `3` — Отгрузка разрешена - `4` — Идёт приёмка - `5` — Принято - `6` — Отгружено на воротах
+
 ## Ответы
 
 | Код   | Описание               | Схема                       |
@@ -43,6 +49,65 @@ POST /api/v1/supplies
 | `402` | Требуется платёж       | `object`                    |
 | `403` | Доступ запрещён        | `object`                    |
 | `429` | Слишком много запросов | `object`                    |
+
+**Структура `200` — `models.Supply[]`:**
+
+- `phone` `string` — Телефон пользователя, создавшего поставку
+- `supplyID` `integer<int64>` — ID поставки. Если `null`, это заказ, тогда используйте значение поля `preorderID`
+- `preorderID` `integer<int64>` — ID заказа (незапланированная поставка). Для всех виртуальных поставок будет `0`
+- `createDate` `string` — Дата и время создания поставки
+- `supplyDate` `string` — Плановая дата отгрузки поставки
+- `factDate` `string` — Дата фактической отгрузки поставки
+- `updatedDate` `string` — Дата изменения поставки
+- `statusID` `integer<int64>` = `1` | `2` | `3` | `4` | `5` | `6` — ID статуса поставки: - `1` — Не запланировано - `2` — Запланировано - `3` — Отгрузка разрешена - `4` — Идёт приёмка - `5` — Принято - `6` — Отгружено на воротах
+- `boxTypeID` `object` — ID типа поставки: - `0` — Без коробов (виртуальная поставка) - `1` и `2` — Короба - `5` — Монопаллеты - `6` — Суперсейф
+- `isBoxOnPallet` `boolean` — Тип поставки — **Поштучная палета**: - `true` — да - `false` — нет Поле возвращается только при `"boxTypeID": 2`
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

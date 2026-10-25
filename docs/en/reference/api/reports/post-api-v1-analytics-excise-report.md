@@ -27,6 +27,8 @@ You can save the main reports in [sheets format](https://dev.wildberries.ru/en/k
 
 `application/json` — schema `ExciseReportRequest`, optional
 
+- `countries` `string[]` — Country code in according with ISO 3166-2. Set the empty parameter to get data without filters by country
+
 ## Responses
 
 | Code  | Description       | Schema                 |
@@ -37,6 +39,68 @@ You can save the main reports in [sheets format](https://dev.wildberries.ru/en/k
 | `402` | Payment required  | `object`               |
 | `403` | Access denied     | `object`               |
 | `429` | Too many requests | `object`               |
+
+**Structure `200`:**
+
+- `response` `models.ExciseReportResponse`
+  - `data` `object[]`
+    - `name` `string` — Buyer country
+    - `price` `number` — Price including VAT
+    - `currency_name_short` `string` — Currency
+    - `excise_short` `string` — Labeling code
+    - `barcode` `string` — SKU
+    - `nm_id` `integer<int64>` — WB item number
+    - `operation_type_id` `integer<int64>` — Operation type, if exists: * `1` — withdraw from circulation * `2` — return to sale
+    - `fiscal_doc_number` `integer<int64>` — Receipt number, if exists
+    - `fiscal_dt` `string` — Date in the receipt, if exists, YYYY-MM-DD
+    - `fiscal_drive_number` `string` — Fiscal storage number, if exists
+    - `rid` `integer<int64>` — `Rid`
+    - `srid` `string` — `Srid`
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

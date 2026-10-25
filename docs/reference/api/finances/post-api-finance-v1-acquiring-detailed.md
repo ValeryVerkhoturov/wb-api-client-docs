@@ -27,6 +27,12 @@ POST /api/finance/v1/acquiring/detailed
 
 `application/json` — схема `AcquiringReportsDetailedReq`, обязательно
 
+- `dateFrom` `string` (обязательно) — Начальная дата отчёта. Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `dateTo` `string` (обязательно) — Конечная дата отчёта. Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Время передаётся в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `limit` `integer<int64>` — Количество строк в ответе
+- `rrdId` `integer<int64>` — ID строки ответа. Необходим для получения отчёта частями. Начинайте загрузку отчёта с `"rrdid":0`. В последующих запросах передавайте значение `rrdId` из последней строки предыдущего ответа. Повторяйте запрос, пока не получите ответ `204`
+- `fields` `string[]` — Список полей, которые вернутся в ответе. Если параметр не указан, возвращаются все поля
+
 ## Ответы
 
 | Код   | Описание               | Схема                                |
@@ -38,6 +44,72 @@ POST /api/finance/v1/acquiring/detailed
 | `402` | Требуется платёж       | `object`                             |
 | `403` | Доступ запрещён        | `Response4XX`                        |
 | `429` | Слишком много запросов | `object`                             |
+
+**Структура `200` — `AcquiringReportsDetailedRes[]`:**
+
+- `rrdId` `integer<int64>` — ID строки
+- `reportId` `integer<int64>` — ID отчёта
+- `acqDate` `string` — Дата операции
+- `acquiringBank` `string` — Наименование банка-эквайера
+- `tin` `string` — ИНН
+- `taxRegistrationReasonCode` `string` — КПП
+- `saleDate` `string` — Дата продажи
+- `srid` `string` — ID заказа. В ответах методов сборочных заданий [FBS](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders), [DBW](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders), [DBS](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) и [Самовывоз](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) `srid` равен `rid`
+- `documentType` `string` — Тип документа
+- `nmId` `integer<int64>` — Артикул WB
+- `retailAmount` `string` — Wildberries реализовал Товар (Пр)
+- `acquiringFee` `string` — Размер комиссии за эквайринг, в том числе НДС
+- `acquiringFeeVat` `string` — Сумма НДС
+- `invoiceNumber` `string` — Номер счёта-фактуры
+- `invoiceDate` `string` — Дата счёта-фактуры
+- `shkId` `integer<int64>` — Штрихкод
+- `currency` `string` — Валюта отчёта
+
+**Структура `400`:**
+
+- `status` `integer<int64>` (обязательно) — HTTP статус-код
+- `title` `string` (обязательно) — Заголовок ошибки
+- `detail` `string` (обязательно) — Детали ошибки
+- `requestId` `string` (обязательно) — ID запроса
+- `origin` `string` (обязательно) — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

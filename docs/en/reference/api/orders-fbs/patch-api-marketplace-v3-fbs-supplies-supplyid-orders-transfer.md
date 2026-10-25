@@ -32,6 +32,9 @@ An assembly order can be moved from delivery to assembly if all conditions are m
 
 `application/json` — schema `object`, required
 
+- `orderIds` `integer<int64>[]` (required) — List of assembly order IDs that need to be moved to assembly
+- `newSupplyId` `string` (required) — ID of the supply to which orders will be moved. The supply must not be in a delivery status
+
 ## Responses
 
 | Code  | Description   | Schema                                |
@@ -40,6 +43,40 @@ An assembly order can be moved from delivery to assembly if all conditions are m
 | `400` | Bad request   | `Error`                               |
 | `401` | Unauthorized  | `object`                              |
 | `403` | Access denied | `Error`                               |
+
+**Structure `200`:**
+
+- `transferredOrders` `v3.TransferOrderToAssembly[]`
+  - `error` `object` — Error detail
+    - `detail` `string` — Error details
+    - `code` `integer<int64>` — Internal error code
+  - `success` `boolean` — Whether the request was processed successfully. Can only be `true`
+  - `newStickerId` `integer<int64>` — New sticker ID
+  - `oldStickerId` `integer<int64>` — Old sticker ID
+  - `orderId` `integer<int64>` — Assembly order ID
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
 
 ## Call examples
 

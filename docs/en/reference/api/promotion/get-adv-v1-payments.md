@@ -40,6 +40,49 @@ The method allows you to get a history of top-ups.
 | `403` | Access denied                 | `object`                   |
 | `429` | Too many requests             | `object`                   |
 
+**Structure `200` — `object[]`:**
+
+- `id` `integer<int64>` — Payment ID
+- `date` `string<time-date>` — Payment date
+- `sum` `integer<int64>` — Payment amount
+- `type` `integer<int64>` — Type of charge-off source: - `0` — Account - `1` — Balance - `3` — Card
+- `statusId` `integer<int64>` — Status: - `0` — error - `1` — processed
+- `cardStatus` `string` — Transaction status (when paying by card): - `success` — success - `fail` — not success - `pending` — waiting for response - `unknown` — unknown
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

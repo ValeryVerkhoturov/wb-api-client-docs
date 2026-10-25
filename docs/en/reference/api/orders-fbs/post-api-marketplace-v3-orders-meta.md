@@ -38,6 +38,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `v3.GetMetaMultiRequest`, required
 
+- `orders` `integer<int64>[]` (required)
+
 ## Responses
 
 | Code  | Description       | Schema             |
@@ -49,6 +51,60 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `v3.APIError`      |
 | `404` | Not found         | `v3.APIError`      |
 | `429` | Too many requests | `object`           |
+
+**Structure `200`:**
+
+- `orders` `v3.OrderMetaAPI[]`
+  - `id` `integer<int64>` — Assembly order ID
+  - `metaDetails` `object[]` — Assembly order label identifiers
+    - `key` `string` — Label identifier
+    - `value` `string` — Label identifier value
+    - `decision` `string` — Validation statuses. `imei` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `deadlineExceeded` — Label identifier validation is not completed and will continue. The validation can pass or fail - `optional` — Label identifier is not required. Validation passed - `imeiMaySell` — The item is approved for sale. Validation passed - `imeiSoldB2B` — The item was sold to a B2B buyer and approved for sale again. Validation passed `imei` validation statuses with which the supply can not be transferred to delivery: - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order. Validation failed - `imeiInvalidFormat` — Invalid format. Validation failed - `imeiAlreadySold` — The item with this IMEI has already been sold. Validation failed `uin` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `deadlineExceeded` — Label identifier validation is not completed and will continue. The validation can pass or fail - `optional` — Label identifier is not required. Validation passed - `uinMaySell` — The item is approved for sale. Validation passed `uin` validation statuses with which the supply can not be transferred to delivery: - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order. Validation failed - `uinInvalidFormat` — Invalid format. Validation failed - `uinBadStatus` — Invalid batch status. Validation failed - `uinBadProcess` — Invalid processing stage. Validation failed - `uinBadStatusAndBadProcess` — Invalid batch status. Invalid processing stage. Validation failed - `uinNotFound` — Not found in GIIS DMDK. Validation failed. The status may mean that the UIN: - is not specified in the uploaded Delivery Contract Specification - is not registered in GIIS DMDK - is specified incorrectly and is read from the tag with errors - is not in circulation `sgtin` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `deadlineExceeded` — Label identifier validation is not completed and will continue. The validation can pass or fail - `optional` — Label identifier is not required. Validation passed - `sgtinIntroduced` — The item is approved for sale. Validation passed - `sgtinSoldB2B` — The item was sold to a B2B buyer and approved for sale again. Validation passed `sgtin` validation statuses with which the supply can not be transferred to delivery: - `pending` — Label identifier validation continues. Wait for the validation status to change - `required` — Required label identifier is not added to the assembly order. Validation failed - `sgtinInvalidFormat` — Invalid format. Validation failed - `sgtinNoGS` — Label identifier does not contain the GS separator `\u001d`. Validation failed - `sgtinHasInvalidSymbols` — Label identifier contains incorrect characters or spaces. Validation failed - `sgtinHasNonLatinSymbols` — Label identifier contains non-special or Latin characters. Validation failed - `sgtinInvalidPattern` — Label identifier structure is incorrect. Validation failed - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/). Validation failed - `sgtinEmitted` — Label identifier has been issued. Validation failed - `sgtinApplied` — Putting into circulation not completed. Validation failed - `sgtinWrittenOff` — Written off. Validation failed - `sgtinRetired` — Retired. Validation failed - `sgtinWithdrawn` — Withdrawn. Validation failed - `sgtinDisaggregation` — Disaggregation. Validation failed - `sgtinDisaggregated` — Disaggregated. Validation failed - `sgtinAppliedNotPaid` — Not paid. Validation failed `gtin` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed - `required` — Required label identifier is not added to the assembly order. Validation failed `expiration` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed - `required` — Required label identifier is not added to the assembly order. Validation failed `customsDeclaration` validation statuses with which the supply can not be transferred to delivery: - `required` — Required label identifier is not added to the assembly order. Validation failed `customsDeclaration` validation statuses with which the supply can be transferred to delivery: - `filled` — Label identifier is added to the assembly order, validation is not required - `optional` — Label identifier is not required. Validation passed
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `404`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

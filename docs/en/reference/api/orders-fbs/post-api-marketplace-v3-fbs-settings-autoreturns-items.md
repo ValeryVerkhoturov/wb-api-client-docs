@@ -24,6 +24,8 @@ The method returns item auto-return settings.
 
 `application/json` — schema `object`, optional
 
+- `chrtIds` `integer<int64>[]` (required) — List of item size IDs in WB systems
+
 ## Responses
 
 | Code  | Description       | Schema                                         |
@@ -33,6 +35,55 @@ The method returns item auto-return settings.
 | `401` | Unauthorized      | `object`                                       |
 | `403` | Access denied     | `Response4XX`                                  |
 | `429` | Too many requests | `object`                                       |
+
+**Structure `200`:**
+
+- `results` `object[]`
+  - `success` `boolean` — - `true` — item auto-return settings successfully received
+  - `chrtId` `integer<int64>` — Item size ID in WB systems
+  - `type` `string` = `auto` | `byWarehouse` | `byPickupPoint` | `byCourier` — Where the item will be returned: - `auto` — return location is determined automatically - `byWarehouse` — to WB warehouse - `byPickupPoint` — to pickup point - `byCourier` — by courier to the seller. Always for items of [subcategories](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted) that are automatically returned to the pickup point
+  - `changeable` `boolean` — - `true` — you can change the item auto-return settings
+  - `error` `object[]` — Error details
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — Additional error data
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

@@ -38,6 +38,60 @@ GET /api/v1/tariffs/box
 | `402` | Требуется платёж       | `object`           |
 | `429` | Слишком много запросов | `object`           |
 
+**Структура `200`:**
+
+- `response` `models.RatesBoxResponse`
+  - `data` `models.WarehousesBoxRates`
+    - `currency` `string` — Валюта тарифов
+    - `dtNextBox` `string` — Дата начала следующего тарифа
+    - `dtTillMax` `string` — Дата окончания последнего установленного тарифа
+    - `warehouseList` `models.WarehouseBoxRates[]` — Тарифы для коробов, сгруппированные по складам
+      - `boxDeliveryBase` `string` — Логистика, первый литр, ₽
+      - `boxDeliveryCoefExpr` `string` — Коэффициент **Логистика**, %. На него умножается стоимость логистики. Уже учтён в тарифах
+      - `boxDeliveryLiter` `string` — Логистика, дополнительный литр, ₽
+      - `boxDeliveryMarketplaceBase` `string` — Логистика FBS, первый литр, ₽
+      - `boxDeliveryMarketplaceCoefExpr` `string` — Коэффициент **FBS**, %. На него умножается стоимость логистики FBS. Уже учтён в тарифах
+      - `boxDeliveryMarketplaceLiter` `string` — Логистика FBS, дополнительный литр, ₽
+      - `boxStorageBase` `string` — Хранение в день, первый литр, ₽
+      - `boxStorageCoefExpr` `string` — Коэффициент **Хранение**, %. На него умножается стоимость хранения в день. Уже учтён в тарифах
+      - `boxStorageLiter` `string` — Хранение в день, дополнительный литр, ₽
+      - `geoName` `string` — Местонахождение склада
+      - `warehouseName` `string` — Название склада
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

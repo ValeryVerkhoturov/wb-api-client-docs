@@ -48,6 +48,58 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `responseBodyContentError403`           |
 | `429` | Too many requests | `object`                                |
 
+**Structure `200`:**
+
+- `data` `object[]` — Data
+  - `charcID` `integer<int64>` — Characteristics ID
+  - `subjectName` `string` — Subcategory name
+  - `subjectID` `integer<int64>` — Subcategory ID
+  - `name` `string` — Characteristic name
+  - `required` `boolean` — Characteristic required
+  - `unitName` `string` — Unit (sm, gr and others)
+  - `maxCount` `integer<int64>` — The maximum number of values that can be assigned to a characteristic when [creating](https://dev.wildberries.ru/openapi/item-management#tag/listingItems) or [editing](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) listings. Used only for characteristics with `"charcType":1` — array of strings. For characteristics with `"charcType":4` — number, you can assign only one value. For characteristics with `"maxCount":0`, the number of values is unlimited.
+  - `popular` `boolean` — The characteristic is popular with users
+  - `charcType` `integer<int64>` — Characteristic data type that should be used when [creating](https://dev.wildberries.ru/openapi/item-management#tag/listingItems) or [editing](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) listings: - `1` — array of strings - `4` — number - `0` — characteristic is not used
+  - `hasFilter` `boolean` — Key characteristic. Is it an important characteristic for buyers: - `true` — yes - `false` — no
+  - `isVariable` `boolean` — A sign of [variable characteristic](https://dev.wildberries.ru/en/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/working-with-items#merging-and-unmerging-listings). The value marks out the characteristics by which the variations differ from each other: - `true` — item variations differ by this characteristic - `false` — item variations do not differ by this characteristic
+  - `existNamedField` `boolean` — How to transfer a characteristic in requests for [creating](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload), [creating with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd), and [editing](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate) listings: - `true` — as a separate parameter in the request - `false` — in the `characteristics` array
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `400`:**
+
+- one of: `responseBodyContentError400`, `responseBodyContentError400InvalidSyntax`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string` — Additional errors
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

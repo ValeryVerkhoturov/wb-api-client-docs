@@ -38,6 +38,53 @@ The method provides a list of reports with advanced seller analytics. The respon
 | `403` | Access denied     | `ErrorObject`                       |
 | `429` | Too many requests | `object`                            |
 
+**Structure `200`:**
+
+- `data` `object[]`
+  - `id` `string<uuid>` — Report ID
+  - `createdAt` `string` — Date and time of generation completion
+  - `status` `string` — Report status: * `WAITING` — in the queue for processing * `PROCESSING` — generating * `SUCCESS —` ready * `RETRY` — awaiting reprocessing * `FAILED` — failed to generate, please regenerate
+  - `name` `string` — Report name
+  - `size` `integer<int64>` — Report size, B
+  - `startDate` `string` — Period start
+  - `endDate` `string` — Period end
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -42,6 +42,39 @@ You can get up to 100 news items per request.
 | `401` | Unauthorized      | `object`               |
 | `429` | Too many requests | `object`               |
 
+**Structure `200`:**
+
+- `data` `object[]` — News data
+  - `content` `string<plaintext>` — News text
+  - `date` `string` — News publication date and time
+  - `header` `string` — News header
+  - `id` `integer<int64>` — News ID
+  - `types` `object[]` — News tags
+    - `id` `integer<int64>` — Tag ID
+    - `name` `string` — Tag name
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

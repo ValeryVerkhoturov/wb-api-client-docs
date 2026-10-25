@@ -30,6 +30,13 @@ POST /api/finance/v1/sales-reports/detailed
 
 `application/json` — схема `SalesReportsDetailedReq`, обязательно
 
+- `dateFrom` `string` (обязательно) — Начальная дата отчёта. Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `dateTo` `string` (обязательно) — Конечная дата отчёта. Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд. Время передаётся в часовом поясе Москва `UTC+3`. Примеры: - `2025-06-20` - `2025-06-20T23:59:59` - `2025-06-20T00:00:00.12345` - `2025-06-20T00:00:00`
+- `limit` `integer<int64>` — Количество строк в ответе
+- `rrdId` `integer<int64>` — ID строки ответа. Необходим для получения отчёта частями. Начинайте загрузку отчёта с `"rrdid":0`. В последующих запросах передавайте значение `rrdId` из последней строки предыдущего ответа. Повторяйте запрос, пока не получите ответ `204`
+- `period` `string` = `daily` | `weekly` — Периодичность отчётов: - `weekly` — еженедельные - `daily` — ежедневные
+- `fields` `string[]` — Список полей, которые вернутся в ответе. Если параметр не указан, возвращаются все поля
+
 ## Ответы
 
 | Код   | Описание               | Схема                                   |
@@ -41,6 +48,151 @@ POST /api/finance/v1/sales-reports/detailed
 | `402` | Требуется платёж       | `object`                                |
 | `403` | Доступ запрещён        | `object`                                |
 | `429` | Слишком много запросов | `object`                                |
+
+**Структура `200` — `SalesReportsDetailedRes[]`:**
+
+- `reportId` `integer<int64>` — ID отчёта
+- `dateFrom` `string` — Дата начала отчётного периода
+- `dateTo` `string` — Дата конца отчётного периода
+- `createDate` `string` — Дата формирования отчёта
+- `currency` `string` — Валюта отчёта
+- `reportType` `integer<int64>` = `1` | `2` — Тип отчёта: - `1` — основной - `2` — по выкупам
+- `rrdId` `integer<int64>` — ID строки
+- `giId` `integer<int64>` — ID поставки
+- `dlvPrc` `number` — Фиксированный коэффициент склада по поставке
+- `fixTariffDateFrom` `string` — Дата начала действия фиксации
+- `fixTariffDateTo` `string` — Дата конца действия фиксации
+- `subjectName` `string` — Предмет
+- `nmId` `integer<int64>` — Артикул WB
+- `brandName` `string` — Бренд
+- `vendorCode` `string` — Артикул продавца
+- `title` `string` — Название товара
+- `techSize` `string` — Размер
+- `sku` `string` — Баркод
+- `docTypeName` `string` — Тип документа
+- `quantity` `integer<int64>` — Количество
+- `retailPrice` `string` — Цена розничная
+- `retailAmount` `string` — Wildberries реализовал Товар (Пр)
+- `salePercent` `integer<int64>` — Согласованный продуктовый дисконт, %
+- `commissionPercent` `number` — Размер кВВ, %
+- `officeName` `string` — Склад
+- `sellerOperName` `string` — Обоснование для оплаты
+- `orderDt` `string` — Дата и время заказа
+- `saleDt` `string` — Дата и время продажи
+- `rrDate` `string` — Дата операции
+- `shkId` `integer<int64>` — Штрихкод
+- `retailPriceWithDisc` `string` — Цена розничная с учётом согласованной скидки
+- `deliveryAmount` `integer<int64>` — Количество доставок
+- `returnAmount` `integer<int64>` — Количество возврата
+- `deliveryService` `string` — Услуги по доставке товара покупателю
+- `giBoxTypeName` `string` — Тип коробов
+- `productDiscountForReport` `number` — Итоговая согласованная скидка, %
+- `sellerPromo` `number` — Промокод, %
+- `spp` `number` — Платформенные скидки, %
+- `kvwBase` `number` — Размер кВВ без НДС, % базовый
+- `kvw` `number` — Итоговый кВВ без НДС, %
+- `supRatingUp` `number` — Размер снижения кВВ из-за рейтинга, %
+- `isKgvpV2` `number` — Размер снижения кВВ из-за акции, %
+- `ppvzSalesCommission` `string` — Вознаграждение с продаж до вычета услуг поверенного, без НДС
+- `forPay` `string` — К перечислению продавцу за реализованный товар
+- `ppvzReward` `string` — Возмещение за выдачу и возврат товаров на ПВЗ
+- `acquiringFee` `string` — Компенсация платёжных услуг/комиссия за интеграцию платёжных сервисов
+- `acquiringPercent` `number` — Размер компенсации платёжных услуг/комиссии за интеграцию платёжных сервисов
+- `paymentProcessing` `string` — Тип платежа: компенсация платёжных услуг/комиссия за интеграцию платёжных сервисов
+- `acquiringBank` `string` — Наименование банка-эквайера
+- `vw` `string` — Вознаграждение Wildberries (ВВ), без НДС
+- `vwNds` `string` — НДС с вознаграждения Wildberries
+- `ppvzOfficeName` `string` — Наименование офиса доставки
+- `ppvzOfficeId` `integer<int64>` — ID офиса доставки
+- `ppvzSupplierName` `string` — Партнёр
+- `ppvzSupplierInn` `string` — ИНН партнёра
+- `declarationNumber` `string` — Номер таможенной декларации
+- `bonusTypeName` `string` — Виды доставок, штрафов и корректировок ВВ
+- `stickerId` `string` — Стикер МП
+- `country` `string` — Страна продажи
+- `srvDbs` `boolean` — Признак услуги платной доставки
+- `penalty` `string` — Общая сумма штрафов
+- `additionalPayment` `string` — Корректировка Вознаграждения Wildberries (ВВ)
+- `rebillLogisticCost` `string` — Возмещение издержек по перемещению и операционной обработке товара
+- `rebillLogisticOrg` `string` — Организатор перевозки
+- `paidStorage` `string` — Хранение
+- `deduction` `string` — Удержания
+- `paidAcceptance` `string` — Операции на приёмке
+- `orderId` `integer<int64>` — ID сборочного задания
+- `kiz` `string` — Код маркировки [Честного знака](https://честныйзнак.рф)
+- `isB2b` `boolean` — Признак B2B-продажи
+- `trbxId` `string` — ID короба для обработки товара
+- `installmentCofinancingAmount` `string` — Скидка по программе софинансирования
+- `wibesDiscountPercent` `number` — Скидка Wibes, %
+- `cashbackAmount` `string` — Сумма баллов, удержанных по программе лояльности
+- `cashbackDiscount` `string` — Компенсация скидки по программе лояльности
+- `cashbackCommissionChange` `string` — Стоимость участия в программе лояльности
+- `paymentSchedule` `string` — Разовое изменение срока перечисления денежных средств
+- `deliveryMethod` `string` — Способ продажи и тип товара
+- `sellerPromoId` `integer<int64>` — ID собственной акции продавца с дополнительной скидкой
+- `sellerPromoDiscount` `number` — Размер дополнительной скидки по собственной акции продавца, %
+- `loyaltyId` `integer<int64>` — ID скидки лояльности от продавца
+- `loyaltyDiscount` `number` — Размер скидки лояльности от продавца, %
+- `uuidPromocode` `string` — ID промокода
+- `salePricePromocodeDiscountPrc` `number` — Скидка за промокод, %
+- `articleSubstitution` `string` — ID подменного артикула
+- `salePriceAffiliatedDiscountPrc` `number` — Скидка по подменному артикулу, %
+- `agencyVat` `number` — Удержание Агентского НДС, %. Только для продавцов из Кыргызстана
+- `salePriceWholesaleDiscountPrc` `number` — Оптовая скидка для бизнеса, %
+- `b2bCustomerTin` `string` — ИНН B2B-покупателя
+- `paidWithSocialCertificate` `boolean` — Оплата социальным сертификатом
+- `warehouseLogisticsCoeff` `number` — Коэффициент доставки
+- `buyerTaxRegistrationReasonCode` `string` — КПП B2B-покупателя
+- `utdUcdNumber` `string` — Номер УПД или УКД
+- `utdUcdDate` `string` — Дата УПД или УКД
+- `orderUid` `string` — ID корзины заказа — транзакции. Заказы в одной корзине покупателя будут иметь одинаковый `orderUid`
+- `srid` `string` — ID заказа. В ответах методов сборочных заданий [FBS](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders), [DBW](https://dev.wildberries.ru/openapi/orders-dbw#tag/dbwAssemblyOrders), [DBS](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders) и [Самовывоз](https://dev.wildberries.ru/openapi/in-store-pickup#tag/inStorePickupAssemblyOrders) `srid` равен `rid`
+
+**Структура `400`:**
+
+- `status` `integer<int64>` (обязательно) — HTTP статус-код
+- `title` `string` (обязательно) — Заголовок ошибки
+- `detail` `string` (обязательно) — Детали ошибки
+- `requestId` `string` (обязательно) — ID запроса
+- `origin` `string` (обязательно) — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

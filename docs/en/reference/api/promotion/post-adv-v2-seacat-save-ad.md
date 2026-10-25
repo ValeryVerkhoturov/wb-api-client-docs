@@ -29,6 +29,12 @@ The method creates campaign:
 
 `application/json` — schema `object`, optional
 
+- `name` `string` (required) — Campaign name
+- `nms` `integer<int64>[]` — Listing for this campaign. You can available listings with [listings for campaigns](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/postV2SupplierNms) method. Maximum of 50 items (`nm`)
+- `bid_type` `string` = `manual` | `unified` — Bid type: - `unified` — standard bid - `manual` — custom bid
+- `payment_type` `string` = `cpm` | `cpc` — Payment type: - `cpm` — cost per mille - `cpc` — cost per click. When creating a campaign with this payment type, a minimum bid is automatically set
+- `placement_types` `string[]` — Placements: - `search` — search - `recommendations` — recommendations Specify for campaign with custom bid only
+
 ## Responses
 
 | Code  | Description       | Schema    |
@@ -38,6 +44,39 @@ The method creates campaign:
 | `401` | Unauthorized      | `object`  |
 | `403` | Access denied     | `object`  |
 | `429` | Too many requests | `object`  |
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

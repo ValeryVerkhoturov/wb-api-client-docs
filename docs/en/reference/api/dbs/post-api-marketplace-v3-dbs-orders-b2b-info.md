@@ -28,6 +28,8 @@ The method returns B2B buyers data by assembly orders ID:
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                       |
@@ -38,6 +40,61 @@ The method returns B2B buyers data by assembly orders ID:
 | `402` | Payment required  | `object`                     |
 | `403` | Access denied     | `api.BatchError`             |
 | `429` | Too many requests | `object`                     |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID
+- `results` `api.B2bClientInfoResponse[]`
+  - `data` `api.B2bClientInfo`
+    - `inn` `string` — Taxpayer Identification Number (TIN or INN in Russian)
+    - `kpp` `string` — Code of Reason for Registration (CRR or KPP in Russian)
+    - `orgName` `string` — Company name
+  - `errors` `object[]` — Error details
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — Error description
+  - `isError` `boolean` — Are there any errors
+  - `orderId` `integer<int64>` — Assembly order ID
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

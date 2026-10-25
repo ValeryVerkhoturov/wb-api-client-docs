@@ -41,6 +41,90 @@ The method returns supply details by ID.
 | `404` | Not found         | `models.ErrorModel`    |
 | `429` | Too many requests | `object`               |
 
+**Structure `200`:**
+
+- `phone` `string` — Phone number of the user that created the supply
+- `statusID` `integer<int64>` = `1` | `2` | `3` | `4` | `5` | `6` — Supply status ID: - `1` — Not planned - `2` — Planned - `3` — Dispatch allowed - `4` — Accepting - `5` — Accepted - `6` — Unloaded at the gate
+- `virtualTypeID` `integer<int64>` — ID of virtual supply type. Displayed only for supplies with `"boxTypeID":0`. - `0` — Carryover of stock - `1` — Depersonalization - `4` — QR supply - `5` — Additional acceptance - `6` — Scan acceptance
+- `boxTypeID` `integer<int64>` — Supply type ID: - `0` — Without boxes (virtual supply) - `1` and `2` — Boxes - `5` — Monopallets - `6` — Supersafe
+- `createDate` `string` — Date and time the supply was created
+- `supplyDate` `string` — Planned dispatch date
+- `factDate` `string` — Actual dispatch date
+- `updatedDate` `string` — Date of the supply update
+- `warehouseID` `integer<int64>` — Warehouse ID for planned supply
+- `warehouseName` `string` — Warehouse name for planned supply
+- `actualWarehouseID` `integer<int64>` — Warehouse ID where the supply was delivered
+- `actualWarehouseName` `string` — Warehouse name where the supply was delivered
+- `transitWarehouseID` `integer<int64>` — Transit warehouse ID
+- `transitWarehouseName` `string` — Transit warehouse name
+- `acceptanceCost` `number` — Preliminary acceptance cost, ₽
+- `paidAcceptanceCoefficient` `number` — Acceptance coefficient
+- `rejectReason` `string` — Reason why the supply cannot be accepted
+- `supplierAssignName` `string` — Short seller's name
+- `storageCoef` `string` — Storage coefficient
+- `deliveryCoef` `string` — Logistics coefficient
+- `quantity` `integer<int64>` — Added to the supply/order, pieces
+- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pieces
+- `acceptedQuantity` `integer<int64>` — Accepted, pieces
+- `unloadingQuantity` `integer<int64>` — Total items at putaway, pieces
+- `depersonalizedQuantity` `integer<int64>` — Quantity of depersonalized items, pieces
+- `discrepancies` `integer<int64>` — Discrepancies between the declared and actual quantity of the item in the supply. Only when `"statusID":5`
+- `isBoxOnPallet` `boolean` — **Pallet with Single Items** — supply type: - `true` — yes - `false` — no The field is returned only when `"boxTypeID": 2`
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error ID
+- `detail` `string` — Error description
+- `requestId` `string` — Request ID
+- `origin` `string` — Service that returned the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

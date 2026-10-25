@@ -38,6 +38,18 @@ Pagination can be used.
 
 `application/json` — schema `OrderFeedRequest`, optional
 
+- `selectedPeriod` `object` (required) — Requested period. By date of the current order status
+  - `start` `string` (required) — Start date and time of the period. No later than `end`. No earlier than 31 days from today
+  - `end` `string` — End date and time of the period. No earlier than 31 days from today
+- `nmIds` `integer<int64>[]` — List of WB item numbers for filtering
+- `subjectIds` `integer<int64>[]` — List of subcategory IDs for filtering
+- `brandNames` `string[]` — List of brands for filtering
+- `tagIds` `integer<int64>[]` — List of label IDs for filtering
+- `pagination` `object` — Pagination
+  - `snapshotTime` `string` — Data snapshot timestamp within which pagination is performed. The report data is updated asynchronously. In order not to skip or duplicate orders, requests for the same data selection must have the same `snapshotTime`. In the first data selection request (`"offset":0`) the parameter is not specified. In every subsequent request (`offset`>`0`), specify the value of the `snapshotTime` field from the response to the first request. When changing the values of the period and filters, start selecting again with `"offset":0` and without `snapshotTime`
+  - `offset` `integer<int32>` — How many results to skip. For example, with value `10`, the response will start with the 11 element
+  - `limit` `integer<int32>` — Number of orders in the response
+
 ## Responses
 
 | Code  | Description       | Schema                       |
@@ -47,6 +59,63 @@ Pagination can be used.
 | `401` | Unauthorized      | `object`                     |
 | `403` | Access denied     | `ErrorObject403`             |
 | `429` | Too many requests | `object`                     |
+
+**Structure `200`:**
+
+- `data` `OrderFeedResponse`
+  - `snapshotTime` `string` — Cursor. Date and time of the last update of the data
+  - `currency` `Currency`
+  - `orders` `Order[]` — Orders
+    - `nmId` `integer<int64>` — WB item number
+    - `chrtId` `integer<int64>` — Size ID
+    - `srid` `string` — Order ID
+    - `createdAt` `string` — Order date and time
+    - `updatedAt` `string` — Current status date and time. When `"status":"created"`, the value of the `createdAt` field is returned
+    - `status` `string` = `created` | `buyout` | `cancel` | `return` | `returnDefective` — [Order status](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c): - `created` — placed - `buyout` — purchased - `cancel` — canceled - `return` — returned - `returnDefective` — returned due to defect
+    - `cancelType` `string` = `app` | `receipt` | `expire` | `other` — [Cancellation type](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c) (when `"status":"cancel"`): - `app` — refuse prior to receipt - `receipt` — refuse at pickup - `expire` — pickup period ended - `other` — other
+    - `warehouseName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
+    - `warehouseRegion` `string` — The federal district where the warehouse is located. If the warehouse is not in Russia, the country is returned. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `""`, for WB warehouses
+    - `isMp` `boolean` — Warehouse type: - `true` — seller warehouse - `false` — WB warehouse
+    - `destinationCity` `string` — Delivery location
+    - `destinationDistrict` `string` — The federal district to which the order is delivered. If the delivery is not in Russia, the country is returned
+    - `sellerPrice` `number<float64>` — Seller price with seller discount (excluding WB Club discount and wholesale discount for B2B)
+    - `isB2b` `boolean` — Sale type - `true` — B2B - `false` — B2C
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

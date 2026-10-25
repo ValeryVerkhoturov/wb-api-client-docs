@@ -29,6 +29,8 @@ You can get SPOT data only if all of the following conditions are met:
 
 `application/json` — schema `object`, required
 
+- `supplyIds` `string[]` (required) — Supply IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -38,6 +40,60 @@ You can get SPOT data only if all of the following conditions are met:
 | `401` | Unauthorized      | `object`                 |
 | `403` | Access denied     | `object`                 |
 | `429` | Too many requests | `object`                 |
+
+**Structure `200`:**
+
+- `supplies` `object[]`
+  - `id` `string` — Supply ID
+  - `spot` `object`
+    - `status` `string` = `pending` | `completed` | `failed` — SPOT status: - `pending` — waiting for the result of DOPP — Declaration of Upcoming Supply — formation - `completed` — DOPP successfully formed. You can [get the QR code](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdStickersSpot) - `failed` — DOPP formation error. See the `errorCode` field for details
+    - `carrierName` `string` — Carrier name
+    - `carrierTaxNumber` `string` — Carrier tax number
+    - `carrierCountryCode` `string` — Carrier [OKSM](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm) country code
+    - `vehicleRegistrationNumber` `string` — Vehicle registration number
+    - `trailerRegistrationNumber` `string` — Trailer registration number
+    - `errorCode` `string` = `doppFailed` — Error code from the DOPP — Declaration of Upcoming Supply — formation service. Returned when `"status": "failed"`. To fix the error, check the SPOT data and [add it to the supply](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdSpot) again.
+  - `error` `object`
+    - `title` `string` — Error title
+    - `detail` `string` — Error details
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

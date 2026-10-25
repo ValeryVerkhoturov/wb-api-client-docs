@@ -27,6 +27,12 @@ POST /api/content/v1/recommendations/list
 
 `application/json` — схема `GetRecomReq`, необязательно
 
+- `brandNames` `string[]` — Бренды
+- `limit` `integer<int64>` — Количество товаров в ответе
+- `next` `integer<int64>` — Курсор. Последний `nmId` в ответе
+- `search` `string` — Поиск: - по артикулу WB `nmId` — полное совпадение - по артикулу продавца `vendorCode` — частичное совпадение
+- `subjectIds` `integer<int64>[]` — ID предметов
+
 ## Ответы
 
 | Код   | Описание               | Схема                 |
@@ -36,6 +42,63 @@ POST /api/content/v1/recommendations/list
 | `401` | Не авторизован         | `object`              |
 | `403` | Доступ запрещён        | `Response4XX`         |
 | `429` | Слишком много запросов | `object`              |
+
+**Структура `200`:**
+
+- `data` `object[]` — Данные о товарах и их рекомендациях
+  - `nmId` `integer<int64>` — Артикул WB
+  - `imtId` `integer<int64>` — ID для [объединённых](https://dev.wildberries.ru/knowledge-base/articles/019d49a4-1320-71bb-9dac-8ba07e7177ce/rabota-s-tovarami#obuedinenie-i-razuedinenie-kartochek-tovarov) карточек товаров
+  - `vendorCode` `string` — Артикул продавца
+  - `brandName` `string` — Бренд
+  - `updatedAt` `string` — Дата и время последнего обновления рекомендаций
+  - `picsCount` `integer<int64>` — Количество изображений в карточке товара
+  - `title` `string` — Название товара
+  - `subjectName` `string` — Предмет
+  - `pic` `string` — URL основного изображения в карточке товара
+  - `recomCount` `integer<int64>` — Количество рекомендуемых товаров
+  - `recomPics` `string[]` — Список URL основных изображений рекомендуемых товаров
+  - `recomNms` `integer<int64>[]` — Список `nmId` рекомендуемых товаров
+- `next` `integer<int64>` — Курсор. Последний `nmId` в ответе
+
+**Структура `400`:**
+
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

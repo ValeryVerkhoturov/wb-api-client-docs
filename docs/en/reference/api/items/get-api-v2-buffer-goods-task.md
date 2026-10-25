@@ -36,6 +36,58 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `403` | Access denied     | `ResponseError` |
 | `429` | Too many requests | `object`        |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `uploadID` `integer<int64>` — Upload ID
+  - `bufferGoods` `GoodBufferHistory[]` — Data of items in the upload
+    - `nmID` `integer<int64>` — WB item number
+    - `vendorCode` `string` — Seller item number
+    - `sizeID` `integer<int64>` — Size ID. In the Content methods this is the `chrtID` field
+    - `techSizeName` `string` — Size
+    - `price` `integer<int64>` — Price
+    - `currencyIsoCode4217` `string` — Currency, according to ISO 4217
+    - `discount` `integer<int64>` — Discount, %
+    - `clubDiscount` `integer<int64>` — WB Club discount, %
+    - `status` `ItemStatusBuffer`
+    - `errorText` `string` — Error description
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

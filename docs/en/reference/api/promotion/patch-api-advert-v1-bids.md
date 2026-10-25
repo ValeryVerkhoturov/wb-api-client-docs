@@ -36,6 +36,13 @@ Specify the placement in the request parameter `placement`:
 
 `application/json` — schema `object`, required
 
+- `bids` `object[]` (required) — Bids in campaigns
+  - `advert_id` `integer<int64>` (required) — Campaign ID
+  - `nm_bids` `object[]` (required) — Bids
+    - `nm_id` `integer<int64>` (required) — WB item number
+    - `bid_kopecks` `integer<int64>` (required) — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `placement` `string` = `search` | `recommendations` | `combined` (required) — Placement: - `search` — in search (for campaigns with custom bid) - `recommendations`— in recommendations (for campaigns with custom bid) - `combined` — in search and recommendations (for campaigns with standard bid)
+
 ## Responses
 
 | Code  | Description       | Schema                   |
@@ -45,6 +52,57 @@ Specify the placement in the request parameter `placement`:
 | `401` | Unauthorized      | `object`                 |
 | `403` | Access denied     | `object`                 |
 | `429` | Too many requests | `object`                 |
+
+**Structure `200`:**
+
+- `bids` `object[]` — The result of processing the request
+  - `advert_id` `integer<int64>` — Campaign ID
+  - `nm_bids` `object[]` — Bids
+    - `nm_id` `integer<int64>` — WB item number
+    - `bid_kopecks` `integer<int64>` — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `placement` `string` — Placement: - `search` — in search - `recommendations`— in recommendations
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

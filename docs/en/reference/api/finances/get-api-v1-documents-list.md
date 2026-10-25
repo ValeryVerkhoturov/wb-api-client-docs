@@ -46,6 +46,63 @@ Returns seller documents list
 | `403` | Access denied     | `object`  |
 | `429` | Too many requests | `object`  |
 
+**Structure `200`:**
+
+- `data` `object`
+  - `documents` `object[]` — Documents categories
+    - `serviceName` `string` — Unique document ID
+    - `name` `string` — Document name
+    - `category` `string` — [Document category](https://dev.wildberries.ru/openapi/documents-and-accounting#tag/documents/operation/getV1DocumentsCategories) name from the response field `title`
+    - `extensions` `string[]` — Document formats
+    - `creationTime` `string` — Date and time of document creation
+    - `viewed` `boolean` — Whether the document has been downloaded from the personal account
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `status` `number` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

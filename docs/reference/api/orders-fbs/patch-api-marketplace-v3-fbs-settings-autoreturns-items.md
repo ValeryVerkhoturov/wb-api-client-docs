@@ -29,6 +29,9 @@ PATCH /api/marketplace/v3/fbs/settings/autoreturns/items
 
 `application/json` — схема `object`, необязательно
 
+- `chrtIds` `integer<int64>[]` (обязательно) — Список ID размеров товаров в системе WB
+- `type` `string` = `byWarehouse` | `byPickupPoint` (обязательно) — Тип автовозврата малогабаритных товаров: - `byWarehouse` — все товары отправляются на склад WB - `byPickupPoint` — все товары отправляются на пункт выдачи заказов
+
 ## Ответы
 
 | Код   | Описание               | Схема                                           |
@@ -38,6 +41,51 @@ PATCH /api/marketplace/v3/fbs/settings/autoreturns/items
 | `401` | Не авторизован         | `object`                                        |
 | `403` | Доступ запрещён        | `Response4XX`                                   |
 | `429` | Слишком много запросов | `object`                                        |
+
+**Структура `200`:**
+
+- `results` `object[]`
+  - `chrtId` `integer<int64>` — ID размера товара в системе WB
+  - `error` `object` — Детали ошибки
+  - `success` `boolean` — - `true` — настройки автовозврата товара обновлены
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

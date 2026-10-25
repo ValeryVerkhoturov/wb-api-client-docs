@@ -31,6 +31,74 @@ GET /api/v1/analytics/goods-return
 | `403` | Доступ запрещён        | `object`                               |
 | `429` | Слишком много запросов | `object`                               |
 
+**Структура `200`:**
+
+- `report` `object[]` — Отчёт
+  - `barcode` `string` — Баркод
+  - `brand` `string` — Бренд
+  - `completedDt` `string` — Дата и время выдачи возврата продавцу
+  - `dstOfficeAddress` `string` — Адрес ПВЗ выдачи возврата
+  - `dstOfficeId` `integer<int64>` — ID ПВЗ выдачи возврата
+  - `expiredDt` `string` — Дата и время истечения срока хранения возврата
+  - `isStatusActive` `integer<int64>` = `0` | `1` — Тип статуса возврата: * `0` — архивный * `1` — активный
+  - `nmId` `integer<int64>` — Артикул WB
+  - `orderDt` `string` — Дата заказа на возврат
+  - `orderId` `integer<int64>` — Номер сборочного задания
+  - `readyToReturnDt` `string` — Дата и время готовности возврата к выдаче
+  - `reason` `string` — Причина возврата
+  - `returnType` `string` — Тип возврата
+  - `shkId` `integer<int64>` — Штрихкод
+  - `srid` `string` — Уникальный ID заказа на возврат
+  - `status` `string` — Статус возврата
+  - `stickerId` `string` — Стикер заказа на возврат
+  - `subjectName` `string` — Предмет
+  - `techSize` `string` — Размер
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

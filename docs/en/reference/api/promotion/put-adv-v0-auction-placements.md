@@ -28,6 +28,12 @@ For campaigns in statuses `4`, `9` and `11`.
 
 `application/json` — schema `object`, required
 
+- `placements` `object[]` (required) — Placements in campaigns
+  - `advert_id` `integer<int64>` (required) — Campaign ID
+  - `placements` `object` (required) — Placements
+    - `search` `boolean` (required) — Placement in search: - `false` — disabled - `true` — enabled
+    - `recommendations` `boolean` (required) — Placement in recommendations - `false` — disabled - `true` — enabled
+
 ## Responses
 
 | Code  | Description       | Schema        |
@@ -37,6 +43,47 @@ For campaigns in statuses `4`, `9` and `11`.
 | `401` | Unauthorized      | `object`      |
 | `403` | Access denied     | `object`      |
 | `429` | Too many requests | `object`      |
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

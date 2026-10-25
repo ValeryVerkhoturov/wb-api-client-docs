@@ -28,6 +28,12 @@ Only the data passed in the request parameters will be updated. The other fields
 
 `application/json` — schema `updateUserAccessRequest`, required
 
+- `usersAccesses` `UserAccess[]` (required) — Access settings for user
+  - `userId` `integer<int64>` — User ID
+  - `access` `object[]` — Access settings for seller account sections
+    - `code` `string` = `balance` | `brands` | `changeJam` | `discountPrice` | `finance` | `showcase` | `suppliersDocuments` | `supply` | `questions` | `pinFeedbacks` | `pointsForReviews` | `feedbacks` | `oldAnalyticsReports` | `marketplace` | `brandsFlow` | `copyrightComplaints` | `pretrialClaims` | `sellersChat` | `brandzone` | `brandzoneSubscribe` (required) — The code for the seller account section the user will get access to: * `balance` — View balance and withdraw funds * `brands` — Brands management * `changeJam` — Access to **Jam** subscription: **A/B tests**, photo tags, video autostarts, listing comparisons * `discountPrice` — Change item prices, manage discounts and promos * `finance` — Financial analytics. Balance statistics, financial reports, payment history * `showcase` — Showcase management * `suppliersDocuments` — View and download documents related to platform operations * `supply` — Create and manage FBW supplies * `questions` — View and respond to customer questions * `pinFeedbacks` — Ability to pin and unpin reviews * `pointsForReviews` — Points for reviews * `feedbacks` — View and respond to customer reviews * `oldAnalyticsReports` — Reports * `marketplace` — Seller Warehouse * `brandsFlow` — My brands * `copyrightComplaints` — Copyright Claims * `pretrialClaims` — Out-of-Court Claims * `sellersChat` — Chat with Users * `brandzone` — Edit Brand Zone * `brandzoneSubscribe` — Manage Brand Zone Subscription
+    - `disabled` `boolean` (required) — * `true` — access to the section is disabled * `false` — access to the section is enabled
+
 ## Responses
 
 | Code  | Description       | Schema          |
@@ -37,6 +43,47 @@ Only the data passed in the request parameters will be updated. The other fields
 | `401` | Unauthorized      | `object`        |
 | `403` | Access denied     | `Response4XX`   |
 | `429` | Too many requests | `object`        |
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Request ID
+- `origin` `string` — Internal service name
+- `status` `number` — HTTP status code
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

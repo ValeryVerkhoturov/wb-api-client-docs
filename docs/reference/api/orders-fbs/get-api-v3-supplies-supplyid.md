@@ -36,6 +36,71 @@ GET /api/v3/supplies/{supplyId}
 | `404` | Не найдено             | `Error`  |
 | `429` | Слишком много запросов | `object` |
 
+**Структура `200`:**
+
+- `id` `string` — ID поставки
+- `isB2b` `boolean` — Признак B2B-продажи: - `true` — B2B-продажа - `false` — не B2B-продажа - `null` — признак отсутствует, сборочные задания не добавлены к поставке
+- `isPickupPointShipmentAllowed` `boolean` — Можно ли отгрузить заказ на ПВЗ: - `false` — нет - `true` — да
+- `done` `boolean` — Флаг закрытия поставки: - `true` — закрыта - `false` — открыта
+- `createdAt` `string` — Дата создания поставки (RFC3339)
+- `closedAt` `string` — Дата закрытия поставки (RFC3339)
+- `scanDt` `string` — Дата сканирования поставки (RFC3339). Если `"scanDt":null`, поставка не сканировалась
+- `name` `string` — Наименование поставки
+- `cargoType` `integer<int64>` = `1` | `2` | `3` — Тип товара: - `1` — малогабаритный товар (МГТ) - `2` — сверхгабаритный товар (СГТ) - `3` — крупногабаритный товар (КГТ+)
+- `crossBorderType` `integer<int32>` = `0` | `1` — Тип поставки: - `0` — внутренняя поставка - `1` — трансграничная поставка - `null` — значение отсутствует
+- `destinationOfficeId` `integer<int64>` — ID склада хранения сборочных заданий в поставке. Если `null`, склад не указан
+- `recommendedWhId` `integer<int64>` — ID рекомендуемого склада для приёмки поставки для Москвы и МО. Рекомендуется ближайший к покупателям склад, который определяется автоматически при передаче поставки в доставку с учётом параметров всех сборочных заданий в поставке. Если `0`, рекомендуемый склад не определён
+- `shippingDt` `string` — Планируемая дата отгрузки поставки, формат `YYYY-MM-DD`
+- `shippingPointId` `integer<int64>` — ID пункта отгрузки. Можно получить в методе получения [пунктов отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+- `shippingType` `string` = `selfShipping` | `transportCompany` — Способ доставки до пункта отгрузки: - `selfShipping` — доставка силами продавца - `transportCompany` — доставка через транспортную компанию
+- `waybillUuid` `string` — ID ЭТрН — электронной транспортной накладной
+- `spotAvailable` `boolean` — Доступен ли СПОТ для этой поставки: - `true` — да. Используйте метод [получения данных СПОТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) - `false` — нет
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `404`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -42,6 +42,75 @@ GET /api/analytics/v1/measurement-penalties
 | `403` | Доступ запрещён        | `Response403Retentions` |
 | `429` | Слишком много запросов | `object`                |
 
+**Структура `200`:**
+
+- `data` `object` — Данные ответа
+  - `reports` `object[]` — Удержания
+    - `nmId` `integer<int64>` — Артикул WB
+    - `subjectName` `string` — Предмет
+    - `dimId` `integer<int64>` — ID замера
+    - `prcOver` `number` — Разница в габаритах, %
+    - `volume` `number` — Объём, л (фактические габариты по замеру на складе)
+    - `width` `integer<int64>` — Ширина, см (фактические габариты по замеру на складе)
+    - `length` `integer<int64>` — Длина, см (фактические габариты по замеру на складе)
+    - `height` `integer<int64>` — Высота, см (фактические габариты по замеру на складе)
+    - `volumeSup` `number` — Объём, л (габариты карточки товара)
+    - `widthSup` `integer<int64>` — Ширина, см (габариты карточки товара)
+    - `lengthSup` `integer<int64>` — Длина, см (габариты карточки товара)
+    - `heightSup` `integer<int64>` — Высота, см (габариты карточки товара)
+    - `photoUrls` `string[]` — Фото замеров
+    - `dtBonus` `string` — Дата штрафа
+    - `isValid` `boolean` — Статус обмера: - `false` — отменён - `true` — подтверждён
+    - `isValidDt` `string` — Дата и время подтверждения или отмены обмера
+    - `reversalAmount` `number` — Сумма сторно
+    - `penaltyAmount` `number` — Сумма штрафа
+    - `dateStart` `string` — Дата и время начала действия коэффициента
+    - `dateEnd` `string` — Дата и время окончания действия коэффициента
+  - `total` `integer<int64>` — Количество удержаний в отчёте. Без учёта `limit` и `offset`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

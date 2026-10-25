@@ -29,6 +29,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `object`, optional
 
+- `orders` `integer<int64>[]` — Assembly orders IDs
+
 ## Responses
 
 | Code  | Description       | Schema                                 |
@@ -40,6 +42,54 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `403` | Access denied     | `Error`                                |
 | `404` | Not found         | `Error`                                |
 | `429` | Too many requests | `object`                               |
+
+**Structure `200`:**
+
+- `orders` `object[]` — Assembly orders list
+  - `deliveryDate` `string` — Planned delivery date, [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339)
+  - `statuses` `object[]` — Statuses
+    - `date` `string` — Date of the status assignment
+    - `code` `string` — Assembly order status code: - `dispatched_to_delivery_service` — The order is handed over to delivery service in the seller country - `on_way_to_delivery_service` — The order is on the way to delivery service's warehouse in the seller country - `accepted_by_carrier` — Item accepted by the carrier - `assembling` — Sent for assembly - `assembled` — Assembled at the warehouse - `sorted` — Sorted - `replaced_at_warehouse` — Replaced at the warehouse - `prepared_for_shipment` — Prepared for shipment - `in_search` — In search - `arrived_at_dct` — Arrived at the distribution center-transit - `arrived_at_sct` — Arrived at the sorting center-transit - `arrived_at_dc` — Arrived at the distribution center - `arrived_at_sc` — Arrived at the sorting center - `prepared_for_shipment_at_sc` — Prepared for shipment at the sorting center - `shipped_at_sc` — Shipped by the sorting center - `shipped_at_dct` — Shipped by the distribution center — transit - `shipped_at_dc` — Shipped by the distribution center - `delivered_at_sc` — Delivered to the SC/DC - `on_way_to_sc` — En route to the sorting center - `on_way_to_dc` — En route to the distribution center - `on_way_to_pp` — En route to the pickup point - `arrived_at_pp` — Arrived at the pickup point - `accepted_at_pp` — Received at the pickup point - `ready_for_pick_up` — Ready for pickup - `arrived_at_pp` — Arrived at the pickup point - `received_by_client` — Received by the client - `delivered_at_parcel_locker` — Delivered to the parcel locker - `canceled_by_client` — Buyer canceled the order upon receipt - `cancel_after_expiration` — Canceled due to storage time limit - `at_courier` — Transferred to the courier - `moved_to_return_box` — Moved to the return box - `accepted_for_return` — Accepted for return at the pickup point - `created` — Created - `canceled_by_seller` — Canceled by the seller - `dispatched_by_seller` — Shipped according to seller data - `delivered` — Order issued - `on_way` — En route - `arrived_at_wb_wh` — Arrived at the WB warehouse - `dispatched_from_wh` — Sent from the warehouse - `customs_clearance` — Customs clearance - `customs_clearance_completed` — Released by customs - `departed_from_origin_country` — Sent from the seller country - `arrived_in_destination_country` — Arrival in the destination country - `on_way_to_wb_sc` — Sent to the WB SC - `accepted_at_wb_sc` — Accepted by the WB SC - `canceled` — Canceled - `failed_to_reach_client` — Could not reach the client
+  - `orderID` `integer<int64>` — Assembly order ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `404`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

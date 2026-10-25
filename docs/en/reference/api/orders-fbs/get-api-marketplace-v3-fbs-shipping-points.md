@@ -37,6 +37,59 @@ The deprecated method will be disabled on [November 20](https://dev.wildberries.
 | `403` | Access denied     | `object`                 |
 | `429` | Too many requests | `object`                 |
 
+**Structure `200`:**
+
+- `shippingPoints` `ShippingPoint[]` — Shipping points list
+  - `id` `integer<int64>` — Shipping point ID
+  - `name` `string` — Name
+  - `address` `string` — Address
+  - `city` `string` — Locality
+  - `officeType` `string` = `sc` | `sw` | `pp` — Shipping point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point
+  - `cargoTypes` `integer<int64>[]` — Types of items a shipping point can accept: - `1` — small-sized items - `2` — over dimensional cargo (ODC) - `3` — dimensional cargo+ (CD+)
+  - `latitude` `number` — Latitude
+  - `longitude` `number` — Longitude
+  - `fulfillment` `boolean` — Service **Fulfillment in SC** for FBS supplies: - `true` — available - `false` — unavailable
+  - `available` `boolean` — Whether the shipping point is available for the supply: - `true` — available - `false` — unavailable. Returns for the pickup point if it is overloaded on the planned supply shipping date
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

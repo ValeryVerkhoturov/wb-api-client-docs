@@ -28,6 +28,8 @@ POST /api/v3/dbs/groups/info
 
 `application/json` — схема `api.OrderGroupsRequest`, обязательно
 
+- `groups` `string[]` — Список значений `groupId`. Можно получить из [новых](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrdersNew) и [завершенных](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders/operation/getV3DbsOrders) сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                            |
@@ -38,6 +40,53 @@ POST /api/v3/dbs/groups/info
 | `402` | Требуется платёж       | `object`                         |
 | `403` | Доступ запрещён        | `Error`                          |
 | `429` | Слишком много запросов | `object`                         |
+
+**Структура `200` — `object[]`:**
+
+- `groupID` `string<UUID>` — ID группы сборочных заданий
+- `deliveryCost` `integer<int64>` — Стоимость платной доставки в валюте продажи, умноженная на 100
+- `convertedDeliveryCost` `integer<int64>` — Стоимость платной доставки в валюте страны продавца, умноженная на 100. Предоставляется в информационных целях.
+- `currencyCode` `integer<ISO 4217>` — Код валюты продажи
+- `convertedCurrencyCode` `integer<int64>` — Код валюты страны продавца
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

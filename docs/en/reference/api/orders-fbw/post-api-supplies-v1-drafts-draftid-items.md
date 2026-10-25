@@ -38,6 +38,10 @@ The method works on the principle of atomicity:
 
 `application/json` — schema `models.DraftAdditemsRequest`, required
 
+- `items` `models.Item[]` (required) — Items list
+  - `quantity` `integer<int64>` (required) — Item quantity
+  - `sku` `string` (required) — SKU specified in the listing
+
 ## Responses
 
 | Code  | Description       | Schema                              |
@@ -48,6 +52,63 @@ The method works on the principle of atomicity:
 | `403` | Access denied     | `object`                            |
 | `404` | Not found         | `errors.DraftError`                 |
 | `429` | Too many requests | `object`                            |
+
+**Structure `200`:**
+
+- `results` `models.DraftAddItemsResultItem[]` — List of invalid SKUs with errors
+  - `error` `object` — Error detail
+    - `detail` `string` — Error details
+    - `title` `string` — Error title
+  - `sku` `string` — SKU
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

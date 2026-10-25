@@ -44,6 +44,70 @@ GET /api/analytics/v1/deductions
 | `403` | Доступ запрещён        | `Response403Retentions` |
 | `429` | Слишком много запросов | `object`                |
 
+**Структура `200`:**
+
+- `data` `object` (обязательно) — Данные ответа
+  - `reports` `object[]` (обязательно) — Удержания
+    - `dtBonus` `string` — Дата и время удержания
+    - `nmId` `integer<int64>` — Артикул WB
+    - `oldShkId` `integer<int64>` — Старый штрихкод
+    - `oldColor` `string` — Старый цвет
+    - `oldSize` `string` — Старый размер
+    - `oldSku` `string` — Старый баркод
+    - `oldVendorCode` `string` — Старый артикул продавца
+    - `newShkId` `integer<int64>` — Новый штрихкод
+    - `newColor` `string` — Новый цвет
+    - `newSize` `string` — Новый размер
+    - `newSku` `string` — Новый баркод
+    - `newVendorCode` `string` — Новый артикул продавца
+    - `bonusSumm` `number` — Сумма удержания
+    - `bonusType` `string` — Причина удержания
+    - `photoUrls` `string[]` — Фото замеров
+  - `total` `integer<int64>` (обязательно) — Количество удержаний в отчёте. Без учёта `limit` и `offset`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

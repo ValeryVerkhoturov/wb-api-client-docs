@@ -28,6 +28,8 @@ Return is available for feedbacks with `"isAbleReturnProductOrders": true`
 
 `application/json` — schema `object`, required
 
+- `feedbackId` `string` — Feedback ID
+
 ## Responses
 
 | Code  | Description                         | Schema                                  |
@@ -39,6 +41,67 @@ Return is available for feedbacks with `"isAbleReturnProductOrders": true`
 | `403` | Access denied                       | `object`                                |
 | `422` | Error processing request parameters | `responseFeedbackQuestionErr`           |
 | `429` | Too many requests                   | `object`                                |
+
+**Structure `200`:**
+
+- `data` `object`
+- `error` `boolean` — Error presence
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+
+**Structure `400`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `422`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `string[]` — Additional errors
+- `requestId` `string`
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

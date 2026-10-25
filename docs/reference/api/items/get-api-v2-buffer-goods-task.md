@@ -38,6 +38,58 @@ GET /api/v2/buffer/goods/task
 | `403` | Доступ запрещён        | `ResponseError` |
 | `429` | Слишком много запросов | `object`        |
 
+**Структура `200`:**
+
+- `data` `object` — Данные ответа
+  - `uploadID` `integer<int64>` — ID загрузки
+  - `bufferGoods` `GoodBufferHistory[]` — Информация о товарах в загрузке
+    - `nmID` `integer<int64>` — Артикул WB
+    - `vendorCode` `string` — Артикул продавца
+    - `sizeID` `integer<int64>` — ID размера. В методах Контента это поле `chrtID`
+    - `techSizeName` `string` — Размер
+    - `price` `integer<int64>` — Цена
+    - `currencyIsoCode4217` `string` — Валюта, по стандарту ISO 4217
+    - `discount` `integer<int64>` — Скидка, %
+    - `clubDiscount` `integer<int64>` — Скидка WB Клуба, %
+    - `status` `ItemStatusBuffer`
+    - `errorText` `string` — Описание ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

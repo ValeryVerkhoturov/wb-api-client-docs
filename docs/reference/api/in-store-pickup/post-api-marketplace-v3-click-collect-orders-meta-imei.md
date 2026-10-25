@@ -30,6 +30,10 @@ POST /api/marketplace/v3/click-collect/orders/meta/imei
 
 `application/json` — схема `api.OrdersIMEISetRequest`, обязательно
 
+- `orders` `api.IMEI[]` (обязательно)
+  - `orderId` `integer<int64>` (обязательно) — ID сборочного задания
+  - `imei` `string` (обязательно) — IMEI
+
 ## Ответы
 
 | Код   | Описание               | Схема                  |
@@ -40,6 +44,56 @@ POST /api/marketplace/v3/click-collect/orders/meta/imei
 | `402` | Требуется платёж       | `object`               |
 | `403` | Доступ запрещён        | `Error`                |
 | `429` | Слишком много запросов | `object`               |
+
+**Структура `200`:**
+
+- `requestId` `object` — Уникальный ID запроса
+- `results` `api.MetaSetResponse[]`
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `isError` `boolean` — Есть ли ошибки
+  - `errors` `api.MetaErrorResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `IncorrectRequestBody` — неправильный запрос - `IncorrectRequest` — передан некорректный параметр
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные, обогащающие ошибку
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

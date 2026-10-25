@@ -26,6 +26,11 @@ Method allows minimum bids for listings in minor currency units — 0.01 of the 
 
 `application/json` — schema `object`, required
 
+- `advert_id` `integer<int64>` (required) — Campaign ID
+- `nm_ids` `integer<int64>[]` (required) — WB item numbers list
+- `payment_type` `string` = `cpm` | `cpc` (required) — Payment type: - `cpm` — per mille - `cpc` — per click
+- `placement_types` `string[]` (required) — Placements: - `search` — search - `recommendation` — recommendation - `combined` — search and recommendation
+
 ## Responses
 
 | Code  | Description       | Schema                     |
@@ -35,6 +40,56 @@ Method allows minimum bids for listings in minor currency units — 0.01 of the 
 | `401` | Unauthorized      | `object`                   |
 | `403` | Access denied     | `object`                   |
 | `429` | Too many requests | `object`                   |
+
+**Structure `200`:**
+
+- `bids` `object[]` — List of listings with bids
+  - `bids` `object[]` — List of bids by placements
+    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `type` `PlacementType`
+    - `value` `integer<int64>` — Minimum bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `nm_id` `integer<int64>` — WB item number
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP Status Code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

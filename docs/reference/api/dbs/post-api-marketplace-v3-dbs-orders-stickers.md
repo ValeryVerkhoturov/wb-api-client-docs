@@ -41,6 +41,8 @@ POST /api/marketplace/v3/dbs/orders/stickers
 
 `application/json` — схема `object`, необязательно
 
+- `orders` `integer<int64>[]` (обязательно) — Список ID сборочных заданий
+
 ## Ответы
 
 | Код   | Описание               | Схема                                |
@@ -51,6 +53,54 @@ POST /api/marketplace/v3/dbs/orders/stickers
 | `402` | Требуется платёж       | `object`                             |
 | `403` | Доступ запрещён        | `Error`                              |
 | `429` | Слишком много запросов | `object`                             |
+
+**Структура `200`:**
+
+- `stickers` `object[]` — Стикеры
+  - `orderId` `integer<int64>` — ID сборочного задания
+  - `partA` `string` — Первая часть ID стикера
+  - `partB` `string` — Вторая часть ID стикера
+  - `barcode` `string` — Закодированное значение стикера
+  - `file` `string` — Полное представление стикера, кодировка base64
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

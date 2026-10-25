@@ -43,6 +43,49 @@ The method allows to get the list of media campaigns of the seller
 | `403` | Access denied             | `object`                  |
 | `429` | Too many requests         | `object`                  |
 
+**Structure `200` — `object[]`:**
+
+- `advertId` `integer<int64>` — Media campaign ID
+- `name` `string` — Media campaign name
+- `brand` `string` — Brand name
+- `type` `integer<int64>` — Media campaign type: - `1` — daily basis - `2` — views basis
+- `status` `integer<int64>` — Media campaign status: - `1` — template - `2` — moderation - `3` — rejected (with the possibility to resubmit for moderation) - `4` — ready for launch - `5` — scheduled - `6` — running - `7` — completed - `8` — declined - `9` — paused by seller - `10` — paused due to daily limit - `11` — paused
+- `createTime` `string` — Time of media campaign creation
+- `endTime` `string` — Time of completion of the media campaign
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

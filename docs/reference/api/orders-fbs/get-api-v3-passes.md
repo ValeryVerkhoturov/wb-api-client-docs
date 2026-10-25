@@ -34,6 +34,51 @@ GET /api/v3/passes
 | `403` | Доступ запрещён        | `Error`                  |
 | `429` | Слишком много запросов | `object`                 |
 
+**Структура `200` — `Pass[]`:**
+
+- `firstName` `string` — Имя водителя
+- `dateEnd` `string` — Дата окончания действия пропуска
+- `lastName` `string` — Фамилия водителя
+- `carModel` `string` — Марка машины
+- `carNumber` `string` — Номер машины
+- `officeName` `string` — Название склада
+- `officeAddress` `string` — Адрес склада
+- `officeId` `integer<int64>` — ID склада
+- `id` `integer<int64>` — ID пропуска
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

@@ -28,6 +28,11 @@ PUT /api/advert/v0/daily-limits
 
 `application/json` — схема `V0PutDailyLimitsRequest`, обязательно
 
+- `advertIds` `integer<int64>[]` (обязательно) — ID кампаний
+- `enabled` `boolean` (обязательно) — Включить лимит: - `true` — да - `false` — нет
+- `dailyLimit` `integer<int64>` — Сумма дневного лимита. Параметр обязателен при `"enabled": true`. Минимально допустимая сумма указана в поле `minDailyLimit` метода [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+- `carryOverEnabled` `boolean` — Переносить неиспользованный остаток лимита на следующий день: - `true` — да - `false` — нет Параметр обязателен при `"enabled": true`
+
 ## Ответы
 
 | Код   | Описание               | Схема                      |
@@ -37,6 +42,54 @@ PUT /api/advert/v0/daily-limits
 | `401` | Не авторизован         | `object`                   |
 | `403` | Доступ запрещён        | `object`                   |
 | `429` | Слишком много запросов | `object`                   |
+
+**Структура `200`:**
+
+- `adverts` `V0PutDailyLimitsAdvertResult[]`
+  - `advertId` `integer<int64>` — ID кампании
+  - `belowMinLimit` `boolean` — Установленный размер дневного лимита ниже рекомендуемого минимума относительно текущих ставок `requiredLimit`: - `true` — да - `false` — нет
+  - `requiredLimit` `integer<int64>` — Рекомендуемый минимальный размер дневного лимита при текущих ставках кампании. Указывается в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). С меньшим лимитом бюджет может расходоваться неравномерно и в кампании возникнут ошибки
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -44,6 +44,68 @@ POST /api/v2/list/goods/filter
 | `403` | Доступ запрещён        | `ResponseError` |
 | `429` | Слишком много запросов | `object`        |
 
+**Структура `200`:**
+
+- `data` `object` (обязательно) — Данные ответа
+  - `listGoods` `ItemsList[]` (обязательно) — Информация о товарах
+    - `nmID` `integer<int64>` — Артикул WB
+    - `vendorCode` `string` — Артикул продавца
+    - `sizes` `object[]` — Размер
+      - `sizeID` `integer<int64>` (обязательно) — ID размера. В методах Контента это поле `chrtID`
+      - `price` `integer<int64>` (обязательно) — Цена
+      - `discountedPrice` `number` (обязательно) — Цена со скидкой
+      - `clubDiscountedPrice` `number` (обязательно) — Цена со скидкой, включая скидку WB Клуба
+      - `techSizeName` `string` (обязательно) — Размер товара
+    - `currencyIsoCode4217` `string` — Валюта, по стандарту ISO 4217
+    - `discount` `integer<int64>` — Скидка, %
+    - `clubDiscount` `integer<int64>` — Скидка WB Клуба, %
+    - `editableSizePrice` `boolean` — Можно ли устанавливать цены отдельно для разных размеров (зависит от категории товара): - `true` — можно - `false` — нельзя
+    - `wholesaleDiscountThreshold` `WholesaleDiscountThresholdRes[]` — Оптовые скидки разных уровней для B2B
+      - `minQuantity` `integer<int64>` (обязательно) — Минимальное количество единиц товара для скидки
+      - `wholesaleDiscount` `integer<int64>` (обязательно) — Скидка, %
+      - `level` `integer<int64>` (обязательно) — Уровень скидки
+- `error` `boolean` (обязательно) — Флаг ошибки
+- `errorText` `string` (обязательно) — Описание ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

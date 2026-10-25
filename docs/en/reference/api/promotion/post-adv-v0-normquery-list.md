@@ -26,6 +26,10 @@ Returns lists of active and inactive search clusters with at least 100 views.
 
 `application/json` — schema `V0GetNormQueryListRequest`, required
 
+- `items` `V0GetNormQueryListRequestItem[]` (required)
+  - `advertId` `integer<int64>` (required) — Campaign ID
+  - `nmId` `integer<int64>` (required) — WB item number
+
 ## Responses
 
 | Code  | Description       | Schema                       |
@@ -35,6 +39,57 @@ Returns lists of active and inactive search clusters with at least 100 views.
 | `401` | Unauthorized      | `object`                     |
 | `403` | Access denied     | `object`                     |
 | `429` | Too many requests | `object`                     |
+
+**Structure `200`:**
+
+- `items` `V0GetNormQueryListResponseItem[]`
+  - `advertId` `integer<int64>` — Campaign ID
+  - `nmId` `integer<int64>` — WB item number
+  - `normQueries` `V0GetNormQueryListResponseItemNormQueries`
+    - `active` `string[]` — Active search clusters
+    - `excluded` `string[]` — Inactive search clusters
+    - `archived` `string[]` — Archived search clusters
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

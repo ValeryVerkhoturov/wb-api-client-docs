@@ -30,6 +30,10 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `api.OrdersUINSetRequest`, required
 
+- `orders` `api.UIN[]` (required)
+  - `orderId` `integer<int64>` (required) — Assembly order ID
+  - `uin` `string` (required) — UIN
+
 ## Responses
 
 | Code  | Description       | Schema                 |
@@ -40,6 +44,56 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`               |
 | `403` | Access denied     | `Error`                |
 | `429` | Too many requests | `object`               |
+
+**Structure `200`:**
+
+- `requestId` `object` — Unique request ID
+- `results` `api.MetaSetResponse[]`
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `isError` `boolean` — Are there any errors
+  - `errors` `api.MetaErrorResponse[]` — Error details
+    - `code` `integer<int64>` — Error code
+    - `detail` `string` — - `NotFound` — the assembly order is not found - `IncorrectRequestBody` — incorrect request - `IncorrectRequest` — incorrect parameter
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data enriching the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

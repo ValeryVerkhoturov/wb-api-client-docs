@@ -62,6 +62,13 @@ POST /content/v2/cards/error/list
 
 `application/json` — схема `requestPublicViewerPublicErrorsTableListV2`, обязательно
 
+- `cursor` `swagger.PublicErrorsCursorInput`
+  - `limit` `number<int>` — Количество пакетов в ответе
+  - `updatedAt` `string` — Дата и время формирования последнего пакета в ответе на предыдущий запрос
+  - `batchUUID` `string<UUID>` — ID последнего пакета в ответе на предыдущий запрос
+- `order` `swagger.PublicErrorsOrderV2`
+  - `ascending` `boolean` — - `false` — сортировка по убыванию - `true` — сортировка по возрастанию
+
 ## Ответы
 
 | Код   | Описание               | Схема                                         |
@@ -71,6 +78,60 @@ POST /content/v2/cards/error/list
 | `401` | Не авторизован         | `object`                                      |
 | `403` | Доступ запрещён        | `responseBodyContentError403`                 |
 | `429` | Слишком много запросов | `object`                                      |
+
+**Структура `200`:**
+
+- `data` `models.ErrorTableListPublicRespV2`
+  - `items` `models.ErrorTableListPublicRespV2Item[]` — Пакеты данных
+    - `batchUUID` `string<UUID>` — ID пакета
+    - `subjects` `object` — Предметы. Разбивка по `vendorCodes`
+    - `brands` `object` — Бренды. Разбивка по `vendorCodes`
+    - `vendorCodes` `string[]` — Артикулы продавца
+    - `errors` `object` — Ошибки. Разбивка по `vendorCodes`
+    - `updatedAt` `string` — Дата и время создания или редактирования пакета
+  - `cursor` `viewer_contract.PublicErrorsCursorOutput`
+    - `next` `boolean` — Есть ли ещё черновики: - `false` — нет - `true` — да
+    - `updatedAt` `string` — Дата и время формирования последнего пакета в ответе
+    - `batchUUID` `string<UUID>` — ID последнего пакета в ответе
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `object` — Дополнительные ошибки
+
+**Структура `400`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `object` — Дополнительные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -35,6 +35,13 @@ How access rights are assigned:
 
 `application/json` — schema `createInviteRequest`, required
 
+- `access` `object[]` — Access settings for seller account sections
+  - `code` `string` = `balance` | `brands` | `changeJam` | `discountPrice` | `finance` | `showcase` | `suppliersDocuments` | `supply` | `questions` | `pinFeedbacks` | `pointsForReviews` | `feedbacks` | `oldAnalyticsReports` | `marketplace` | `brandsFlow` | `copyrightComplaints` | `pretrialClaims` | `sellersChat` | `brandzone` | `brandzoneSubscribe` (required) — The code for the seller account section the user will get access to: * `balance` — View balance and withdraw funds * `brands` — Brands management * `changeJam` — Access to **Jam** subscription: **A/B tests**, photo tags, video autostarts, listing comparisons * `discountPrice` — Change item prices, manage discounts and promos * `finance` — Financial analytics. Balance statistics, financial reports, payment history * `showcase` — Showcase management * `suppliersDocuments` — View and download documents related to platform operations * `supply` — Create and manage FBW supplies * `questions` — View and respond to customer questions * `pinFeedbacks` — Ability to pin and unpin reviews * `pointsForReviews` — Points for reviews * `feedbacks` — View and respond to customer reviews * `oldAnalyticsReports` — Reports * `marketplace` — Seller Warehouse * `brandsFlow` — My brands * `copyrightComplaints` — Copyright Claims * `pretrialClaims` — Out-of-Court Claims * `sellersChat` — Chat with Users * `brandzone` — Edit Brand Zone * `brandzoneSubscribe` — Manage Brand Zone Subscription
+  - `disabled` `boolean` (required) — * `true` — access to the section is disabled * `false` — access to the section is enabled
+- `invite` `object` (required)
+  - `phoneNumber` `string` (required) — User's phone number for the invitation. **Phone numbers from the following countries are supported:**• Armenia • Azerbaijan • Barbados • Belarus • Brazil • China • Czech Republic • Georgia • Hong Kong • Italy • Kazakhstan • Kyrgyzstan • Macau • Russia • Serbia • Sweden • Tajikistan • Turkey • UAE • Uzbekistan
+  - `position` `string` — User's position
+
 ## Responses
 
 | Code  | Description       | Schema                 |
@@ -44,6 +51,54 @@ How access rights are assigned:
 | `401` | Unauthorized      | `object`               |
 | `403` | Access denied     | `Response4XX`          |
 | `429` | Too many requests | `object`               |
+
+**Structure `200`:**
+
+- `inviteID` `string<uuid>` — Invitation ID
+- `expiredAt` `string` — Date and time of expiration of the invitation
+- `isSuccess` `boolean` — - `true` — the invitation was created successfully - `false` — retry the request
+- `inviteUrl` `string` — The invitation URL that the user should follow
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Request ID
+- `origin` `string` — Internal service name
+- `status` `number` — HTTP status code
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

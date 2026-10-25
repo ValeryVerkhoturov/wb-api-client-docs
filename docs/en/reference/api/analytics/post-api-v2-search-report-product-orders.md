@@ -34,6 +34,12 @@ You can get a report for a maximum of the last 365 days from the moment of the r
 
 `application/json` — schema `ItemOrdersRequest`, required
 
+- `period` `PeriodOrdersRequest` (required)
+  - `start` `string` (required) — Start date of the period. No later than `end`. No earlier than 365 days from today
+  - `end` `string` (required) — End date of the period. No earlier than 365 days from today
+- `nmId` `integer<int64>` (required) — WB item number
+- `searchTexts` `string[]` (required) — Search texts. For the **Advanced** and **Premium** [Jam](https://seller.wildberries.ru/monetization/tariffs) rates, the maximum is 100
+
 ## Responses
 
 | Code  | Description       | Schema                                       |
@@ -44,6 +50,62 @@ You can get a report for a maximum of the last 365 days from the moment of the r
 | `402` | Payment required  | `object`                                     |
 | `403` | Access denied     | `ErrorObject403`                             |
 | `429` | Too many requests | `object`                                     |
+
+**Structure `200`:**
+
+- `data` `ItemOrdersResponse`
+  - `total` `ItemOrdersMetrics[]` — Total for items
+    - `dt` `string` — Date of statistics collection
+    - `avgPosition` `integer<int64>` — Average item position in search results
+    - `orders` `integer<int64>` — Items ordered from search
+  - `items` `ItemOrdersTextItem[]` — Table elements
+    - `text` `string` — Search text
+    - `frequency` `integer<int64>` — Number of the search text requests
+    - `dateItems` `ItemOrdersMetrics[]` — Statistics by dates
+      - `dt` `string` — Date of statistics collection
+      - `avgPosition` `integer<int64>` — Average item position in search results
+      - `orders` `integer<int64>` — Items ordered from search
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Internal WB service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

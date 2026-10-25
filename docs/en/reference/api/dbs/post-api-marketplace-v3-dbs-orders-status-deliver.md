@@ -28,6 +28,8 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 `application/json` — schema `api.OrdersRequestV2`, required
 
+- `ordersIds` `integer<int64>[]` (required) — List of assembly order IDs
+
 ## Responses
 
 | Code  | Description       | Schema                          |
@@ -38,6 +40,61 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `402` | Payment required  | `object`                        |
 | `403` | Access denied     | `api.BatchError`                |
 | `429` | Too many requests | `object`                        |
+
+**Structure `200`:**
+
+- `requestId` `string` — Unique request ID
+- `results` `api.StatusSetDeliverResponse[]`
+  - `errors` `api.BatchErrorDeliverResponse[]` — Error details
+    - `code` `integer<int64>` — Error code: - `404` - `409`
+    - `detail` `string` — - `NotFound` — assembly order is not found - `StatusMismatch` — operation is not possible for this assembly order status - `ImeiIsNotFilled` — IMEI is not filled - `MetaValidationFail` — label identifiers validation errors
+    - `metaDetails` `object[]` — Label identifiers validation error details
+      - `key` `string` — Label identifier
+      - `value` `string` — Label identifier value
+      - `decision` `string` — Статус проверки: - `sgtin` - `sgtinInvalidFormat` — Invalid format - `sgtinNotFound` — Label identifier not found in [Chestny ZNAK](https://chestnyznak.ru/en/) - `sgtinEmitted` — Label identifier has been issued - `sgtinApplied` — Putting into circulation not completed - `sgtinWrittenOff` — Written off - `sgtinRetired` — Retired - `sgtinWithdrawn` — Withdrawn - `sgtinDisaggregation` — Disaggregation - `sgtinDisaggregated` — Disaggregated - `sgtinAppliedNotPaid` — Not paid - `pending` — Label identifier for inspection
+  - `isError` `boolean` — Are there any errors
+  - `orderId` `integer<int64>` — Assembly order ID with successfully set data
+
+**Structure `400`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `detail` `object` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

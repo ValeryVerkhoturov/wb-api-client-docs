@@ -29,6 +29,8 @@ PATCH /api/marketplace/v3/fbs/settings/autoreturns
 
 `application/json` — схема `object`, необязательно
 
+- `type` `string` = `allToWarehouse` | `allToPickupPoint` | `manual` (обязательно) — Тип автовозврата малогабаритных товаров: - `allToWarehouse` — отправлять все товары на склад WB, кроме товаров тех [предметов](https://dev.wildberries.ru/openapi/orders-fbs#tag/autoreturnSettings/operation/getV3FbsSettingsAutoreturnsSubcategoriesRestricted), которые автоматически возвращаются в ПВЗ - `allToPickupPoint` — отправлять все товары на пункт выдачи заказов - `manual` — использовать ручные настройки
+
 ## Ответы
 
 | Код   | Описание               | Схема         |
@@ -38,6 +40,44 @@ PATCH /api/marketplace/v3/fbs/settings/autoreturns
 | `401` | Не авторизован         | `object`      |
 | `403` | Доступ запрещён        | `Response4XX` |
 | `429` | Слишком много запросов | `object`      |
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -31,6 +31,8 @@ For campaigns in [statuses](https://dev.wildberries.ru/openapi/promotion#tag/cam
 
 `application/json` — schema `V2BudgetRequest`, required
 
+- `advertIds` `integer<int64>[]` (required) — Campaign IDs
+
 ## Responses
 
 | Code  | Description       | Schema             |
@@ -40,6 +42,46 @@ For campaigns in [statuses](https://dev.wildberries.ru/openapi/promotion#tag/cam
 | `401` | Unauthorized      | `object`           |
 | `403` | Access denied     | `object`           |
 | `429` | Too many requests | `object`           |
+
+**Structure `200`:**
+
+- `adverts` `V1BudgetAdvert[]` — Campaigns data
+  - `advertId` `integer<int64>` — Campaign ID
+  - `currency` `string<ISO 4217>` — [Seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `total` `integer<int64>` — Campaign budget in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

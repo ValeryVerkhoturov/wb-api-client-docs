@@ -31,6 +31,50 @@ Method allows to get campaigns lists grouped by type and status with information
 | `403` | Access denied     | `object`                         |
 | `429` | Too many requests | `object`                         |
 
+**Structure `200`:**
+
+- `adverts` `object[]` — Campaign data
+  - `type` `integer<int64>` — Campaign type: - `8` — campaign with standard bid (**deprecated type**) - `9` — campaign with standard or custom bid. You can get the bid type with the [Campaigns Information](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) method, `bid_type` field
+  - `status` `integer<int64>` — Campaign status
+  - `count` `integer<int64>` — Campaigns number
+  - `advert_list` `object[]` — Campaigns list
+    - `advertId` `integer<int64>` — Campaign ID
+    - `changeTime` `string` — Date and time of the last campaign change
+- `all` `integer<int64>` — Total number of campaigns with all statuses and types
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

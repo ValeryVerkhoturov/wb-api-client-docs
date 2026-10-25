@@ -41,6 +41,84 @@ GET /api/v1/paid_storage/tasks/{task_id}/download
 | `404` | Не найдено             | `Http4XXResponse`                                |
 | `429` | Слишком много запросов | `object`                                         |
 
+**Структура `200` — `object[]`:**
+
+- `date` `string` — Дата, за которую был расчёт или перерасчёт
+- `logWarehouseCoef` `number` — Коэффициент логистики и хранения. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
+- `officeId` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
+- `warehouse` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB РФ`
+- `warehouseCoef` `number` — Коэффициент хранения
+- `giId` `integer<int64>` — ID поставки
+- `chrtId` `integer<int64>` — ID размера для этого артикула WB
+- `size` `string` — Размер (`techSize` в карточке товара)
+- `barcode` `string` — Баркод
+- `subject` `string` — Предмет
+- `brand` `string` — Бренд
+- `vendorCode` `string` — Артикул продавца
+- `nmId` `integer<int64>` — Артикул WB
+- `volume` `number` — Объём товара
+- `calcType` `string` — Способ расчёта
+- `warehousePrice` `number` — Сумма хранения
+- `barcodesCount` `integer<int64>` — Количество единиц товара (штук), подлежащих тарифицированию за расчётные сутки
+- `palletPlaceCode` `integer<int64>` — Код паллетоместа. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
+- `palletCount` `number` — Количество паллет
+- `originalDate` `string` — Если был перерасчёт, это дата первоначального расчёта. Если перерасчёта не было, совпадает с `date`
+- `loyaltyDiscount` `number` — Скидка программы лояльности, ₽
+- `tariffFixDate` `string` — Дата фиксации тарифа
+- `tariffLowerDate` `string` — Дата понижения тарифа
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

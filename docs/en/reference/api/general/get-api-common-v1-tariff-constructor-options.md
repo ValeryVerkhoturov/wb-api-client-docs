@@ -43,6 +43,90 @@ Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/aut
 | `404` | Not found         | `PlanBuilderErrors`      |
 | `429` | Too many requests | `object`                 |
 
+**Structure `200`:**
+
+- `activeOptionCount` `number<int>` — Number of active options not included in packages
+- `activePackageCount` `number<int>` — Number of active option packages
+- `totalCommissionRate` `number<float>` — Final fee for activated options and packages, % of turnover
+- `packages` `PlanBuilderPackage[]` — Activated option packages
+  - `id` `string<uuid>` — Package ID
+  - `slug` `string` — Package code
+  - `name` `string` — Package name in the language specified in the `locale` parameter
+  - `status` `string` = `active` | `pendingActivation` | `pendingDeactivation` — Package status: - `active` — active - `pendingActivation` — activated, will start working at 00:00 the next day - `pendingDeactivation` — deactivated, will stop working at 00:00 the next day
+  - `activatedAt` `string` — Package activation date
+  - `expiresAt` `string` — End date of the minimum duration period for the package. The option package cannot be deactivated before this date
+  - `commissionRate` `number<float>` — Fee for the package, % of turnover
+  - `periodDuration` `number<int>` — Minimum duration of the package
+  - `options` `PlanBuilderOptionShort[]` — Options included in the package
+    - `id` `string` — Option ID
+    - `slug` `string` — Option code
+    - `name` `string` — Option name in the language specified in the `locale` parameter
+- `options` `PlanBuilderOption[]` — Activated options
+  - `id` `string` — Option ID
+  - `slug` `string` — Option code
+  - `name` `string` — Option name in the language specified in the `locale` parameter
+  - `status` `string` = `active` | `pendingActivation` | `pendingDeactivation` — Option status: - `active` — active - `pendingActivation` — activated, will start working at 00:00 the next day - `pendingDeactivation` — deactivated, will stop working at 00:00 the next day
+  - `activatedAt` `string` — Option activation date
+  - `expiresAt` `string` — End date of the minimum duration period for the option. The option cannot be deactivated before this date
+  - `commissionRate` `number<float>` — Cost of activating the option, % of turnover. Returned if the response does not contain the `promotion` object
+  - `periodDuration` `number<int>` — Minimum duration of the option
+  - `promotion` `object`
+    - `commissionRate` `number<float>` — Cost of activating the option through a promo, % of turnover
+    - `expiresAt` `string` — End date of the promo price
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `errors` `string[]` — Request errors with specified parameters and error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `errors` `string[]` — Request errors with specified parameters and error details
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -38,6 +38,60 @@ The rates for boxes match the **Supersafe** rates
 | `402` | Payment required  | `object`           |
 | `429` | Too many requests | `object`           |
 
+**Structure `200`:**
+
+- `response` `models.RatesBoxResponse`
+  - `data` `models.WarehousesBoxRates`
+    - `currency` `string` — Rate currency
+    - `dtNextBox` `string` — Start date of next rate
+    - `dtTillMax` `string` — End date of the last set rate
+    - `warehouseList` `models.WarehouseBoxRates[]` — Box rates grouped by Wildberries warehouses
+      - `boxDeliveryBase` `string` — Logistics of the first liter, ₽
+      - `boxDeliveryCoefExpr` `string` — Coefficient **Logistics**, %. The logistics cost is multiplied by it. Already included in the rates
+      - `boxDeliveryLiter` `string` — Logistics of every next liter, ₽
+      - `boxDeliveryMarketplaceBase` `string` — FBS logistics of the first liter, ₽
+      - `boxDeliveryMarketplaceCoefExpr` `string` — Coefficient **FBS**, %. The FBS logistics cost is multiplied by it. Already included in the rates
+      - `boxDeliveryMarketplaceLiter` `string` — FBS logistics of every next liter, ₽
+      - `boxStorageBase` `string` — Storage of the first liter per day, ₽
+      - `boxStorageCoefExpr` `string` — Coefficient **Storage**, %. The storage cost is multiplied by it. Already included in the rates
+      - `boxStorageLiter` `string` — Storage of every next liter per day, ₽
+      - `geoName` `string` — Warehouse location
+      - `warehouseName` `string` — Warehouse name
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `requestId` `string` — Unique request ID
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

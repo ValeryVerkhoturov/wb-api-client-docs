@@ -31,6 +31,50 @@ The method is [temporary disabled](https://dev.wildberries.ru/en/release-notes?i
 | `403` | Access denied     | `object`                         |
 | `429` | Too many requests | `object`                         |
 
+**Structure `200` — `models.TransitTariff[]`:**
+
+- `transitWarehouseName` `string` — Transit warehouse
+- `destinationWarehouseName` `string` — Destination warehouse
+- `activeFrom` `string` — From what date the transit direction is available
+- `boxTariff` `models.VolumeTariff[]` — Tariff for box transit. If `null`, transit for boxes is not available
+  - `from` `integer<int64>` — Supply volume from, liters
+  - `to` `integer<int64>` — Supply volume up to, liters
+  - `value` `number` — Rate, ₽ per liter
+- `palletTariff` `integer<int64>` — Tariff per pallet, ₽
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

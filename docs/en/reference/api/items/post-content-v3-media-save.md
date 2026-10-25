@@ -48,6 +48,9 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 
 `application/json` — schema `object`, required
 
+- `nmId` `integer<int64>` — WB item number
+- `data` `string[]` — Links to images in the order that they are on the listing, and a video at any position of the array
+
 ## Responses
 
 | Code  | Description                    | Schema                       |
@@ -60,6 +63,68 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `409` | Error saving some of the links | `mediaErrors`                |
 | `422` | The parameter nmId is missing  | `mediaErrors`                |
 | `429` | Too many requests              | `object`                     |
+
+**Structure `200`:**
+
+- `data` `object`
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+- `additionalErrors` `object` — Additional errors
+
+**Structure `400`:**
+
+- `additionalErrors` `object` — Additional errors
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `additionalErrors` `object` — Additional errors
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `409`:**
+
+- `additionalErrors` `object` — Additional errors
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `422`:**
+
+- `additionalErrors` `object` — Additional errors
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

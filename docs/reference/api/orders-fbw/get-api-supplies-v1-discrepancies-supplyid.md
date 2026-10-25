@@ -67,6 +67,72 @@ GET /api/supplies/v1/discrepancies/{supplyId}
 | `404` | Не найдено             | `models.ErrorModel`                                     |
 | `429` | Слишком много запросов | `object`                                                |
 
+**Структура `200` — `models.ItemDiscrepancyResponse[]`:**
+
+- `packageCode` `string` — ID упаковки
+- `videoUrl` `string` — Видео фиксации расхождений в процессе приёмки
+- `videoStartsAt` `string` — Дата и время видеофиксации расхождений в процессе приемки
+- `videoUnavailable` `boolean` — Доступность видео: - `false` — видео доступно - `true` — видео недоступно
+- `items` `models.DiscrepancyResponseItem[]` — Товары поставки
+  - `declaredSku` `string` — Баркод, заявленный при формировании поставки
+  - `discrepancyType` `string` = `surplus` | `shortage` | `re-sorting` — Тип расхождения в целом по коробу: - `surplus` — товара в коробе больше заявленного - `shortage` — товара в коробе меньше заявленного - `re-sorting` — баркод принятого товара не соответствует заявленному при формировании поставки
+  - `declaredAmount` `integer<int64>` — Количество товара, заявленное при формировании поставки
+  - `actualAmount` `integer<int64>` — Фактическое количество товара
+  - `discrepancyQuantity` `integer<int64>` — Разница между заявленным и фактическим количеством товара
+  - `actualSku` `string` — Фактический баркод
+  - `skuScans` `models.ItemScans[]` — Результаты сканирования товаров
+    - `scanId` `integer<int64>` — ID сканирования
+    - `declaredSku` `string` — Баркод, заявленный при формировании поставки
+    - `scanTime` `string` — Дата и время сканирования
+    - `discrepancyLabel` `string` = `surplus` | `shortage` | `re-sorting` — Тип расхождения товара: - `surplus` — товара больше, чем заявлено - `shortage` — товара меньше, чем заявлено - `re-sorting` — баркод принятого товара не соответствует заявленному при формировании поставки
+    - `actualSku` `string` — Фактический баркод
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `status` `integer<int64>` — HTTP-статус код
+- `title` `string` — Краткое описание ошибки
+- `detail` `string` — Подробное описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, в котором произошла ошибка
+
+**Структура `404`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — ID ошибки
+- `detail` `string` — Описание ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — Сервис, вернувший ошибку
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

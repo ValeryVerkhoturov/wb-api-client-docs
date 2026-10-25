@@ -41,6 +41,39 @@ GET /api/communications/v2/news
 | `401` | Не авторизован         | `object`               |
 | `429` | Слишком много запросов | `object`               |
 
+**Структура `200`:**
+
+- `data` `object[]` — Новости
+  - `content` `string<plaintext>` — Текст новости
+  - `date` `string` — Дата и время публикации новости
+  - `header` `string` — Заголовок новости
+  - `id` `integer<int64>` — ID новости
+  - `types` `object[]` — Теги новости
+    - `id` `integer<int64>` — ID тега
+    - `name` `string` — Название тега
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

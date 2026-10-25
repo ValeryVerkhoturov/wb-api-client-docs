@@ -26,6 +26,8 @@ POST /adv/v1/stats
 
 `application/json` — схема `object[]`, обязательно
 
+- один из вариантов: `RequestWithDate`, `RequestWithInterval`, `RequestWithCampaignID`
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -35,6 +37,47 @@ POST /adv/v1/stats
 | `401` | Не авторизован         | `object`                 |
 | `403` | Доступ запрещён        | `object`                 |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `200` — `object[]`:**
+
+- один из вариантов: `StatInterval`, `StatDate`, `Stat`, `StatCampaignNotFound`
+
+**Структура `400`:**
+
+- `error` `string`
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

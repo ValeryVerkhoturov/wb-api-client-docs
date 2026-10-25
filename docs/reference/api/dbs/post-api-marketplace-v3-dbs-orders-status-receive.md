@@ -28,6 +28,10 @@ POST /api/marketplace/v3/dbs/orders/status/receive
 
 `application/json` — схема `api.OrdersCodeRequest`, необязательно
 
+- `orders` `api.OrderCodeRequest[]` (обязательно)
+  - `code` `string` — Код подтверждения. Отображается у покупателя на сайте и в приложении Wildberries
+  - `orderId` `integer<int64>` — ID сборочного задания
+
 ## Ответы
 
 | Код   | Описание               | Схема                                     |
@@ -38,6 +42,57 @@ POST /api/marketplace/v3/dbs/orders/status/receive
 | `402` | Требуется платёж       | `object`                                  |
 | `403` | Доступ запрещён        | `api.BatchError`                          |
 | `429` | Слишком много запросов | `object`                                  |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса
+- `results` `object[]`
+  - `errors` `object[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `SGTINIsNotFilled` — обязательный [код маркировки](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers/operation/postV3DbsOrdersMetaSgtin) не указан
+  - `isError` `boolean` — Есть ли ошибки
+  - `orderId` `integer<int64>` — ID сборочного задания с успешно обновлёнными данными
+
+**Структура `400`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `detail` `object` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `requestId` `string` — Уникальный ID запроса
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

@@ -26,6 +26,8 @@ POST /api/v2/nm-report/downloads/retry
 
 `application/json` — схема `NmReportRetryReportRequest`, обязательно
 
+- `downloadId` `string<uuid>` — ID отчёта
+
 ## Ответы
 
 | Код   | Описание               | Схема                                     |
@@ -35,6 +37,46 @@ POST /api/v2/nm-report/downloads/retry
 | `401` | Не авторизован         | `object`                                  |
 | `403` | Доступ запрещён        | `ErrorObject`                             |
 | `429` | Слишком много запросов | `object`                                  |
+
+**Структура `200`:**
+
+- `data` `string` — Уведомление, что началась повторная генерация отчёта
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

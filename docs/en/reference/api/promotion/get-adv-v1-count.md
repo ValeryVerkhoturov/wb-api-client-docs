@@ -31,6 +31,47 @@ Method allows you to get the number of the seller media campaigns.
 | `403` | Access denied     | `object`                |
 | `429` | Too many requests | `object`                |
 
+**Structure `200`:**
+
+- `all` `integer<int64>` — Total number of media campaigns with all statuses and types
+- `adverts` `object`
+  - `type` `integer<int64>` — Media campaign type: - `1` — daily basis - `2` — views basis
+  - `status` `integer<int64>` — Media campaign status: - `1` — template - `2` — moderation - `3` — rejected (with the possibility to resubmit for moderation) - `4` — ready for launch - `5` — scheduled - `6` — running - `7` — completed - `8` — declined - `9` — paused by seller - `10` — paused due to daily limit - `11` — paused
+  - `count` `integer<int64>` — Number of media campaigns
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

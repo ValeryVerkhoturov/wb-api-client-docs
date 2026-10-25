@@ -38,6 +38,18 @@ POST /api/analytics/v1/order-feed
 
 `application/json` — схема `OrderFeedRequest`, необязательно
 
+- `selectedPeriod` `object` (обязательно) — Запрашиваемый период. По дате текущего статуса заказа
+  - `start` `string` (обязательно) — Дата и время начала периода. Не ранее 31 суток от текущей даты и не позднее `end`
+  - `end` `string` — Дата и время конца периода. Не ранее 31 суток от текущей даты
+- `nmIds` `integer<int64>[]` — Список артикулов WB для фильтрации
+- `subjectIds` `integer<int64>[]` — Список ID предметов для фильтрации
+- `brandNames` `string[]` — Список брендов для фильтрации
+- `tagIds` `integer<int64>[]` — Список ID ярлыков для фильтрации
+- `pagination` `object` — Пагинация
+  - `snapshotTime` `string` — Метка снимка данных, в рамках которого выполняется пагинация. Данные отчёта обновляются асинхронно. Чтобы не пропускать и не дублировать заказы, запросы одной выборки должны быть с одним и тем же `snapshotTime`. В первом запросе выборки (`"offset":0`) параметр не указывается, в каждом последующем запросе (`offset`>`0`) указывайте значение поля `snapshotTime` из ответа на **первый** запрос. При изменении значений периода и фильтров начинайте выборку заново с `"offset":0` и без `snapshotTime`
+  - `offset` `integer<int32>` — Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+  - `limit` `integer<int32>` — Количество заказов в ответе
+
 ## Ответы
 
 | Код   | Описание               | Схема                        |
@@ -47,6 +59,63 @@ POST /api/analytics/v1/order-feed
 | `401` | Не авторизован         | `object`                     |
 | `403` | Доступ запрещён        | `ErrorObject403`             |
 | `429` | Слишком много запросов | `object`                     |
+
+**Структура `200`:**
+
+- `data` `OrderFeedResponse`
+  - `snapshotTime` `string` — Метка снимка данных, в рамках которого выполняется пагинация
+  - `currency` `Currency`
+  - `orders` `Order[]` — Заказы
+    - `nmId` `integer<int64>` — Артикул WB
+    - `chrtId` `integer<int64>` — ID размера
+    - `srid` `string` — ID заказа
+    - `createdAt` `string` — Дата и время оформления заказа
+    - `updatedAt` `string` — Дата и время текущего статуса. При `"status":"created"` возвращается значение поля `createdAt`
+    - `status` `string` = `created` | `buyout` | `cancel` | `return` | `returnDefective` — [Статус заказа](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c): - `created` — оформлен - `buyout` — продан - `cancel` — отменён - `return` — возвращён - `returnDefective` — возвращён по причине брака
+    - `cancelType` `string` = `app` | `receipt` | `expire` | `other` — [Тип отмены](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c) (при `"status":"cancel"`): - `app` — отказ до получения - `receipt` — отказ при получении - `expire` — истёк срок получения - `other` — иное
+    - `warehouseName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
+    - `warehouseRegion` `string` — Федеральный округ склада. Если склад не в России, возвращается страна. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `""`
+    - `isMp` `boolean` — Тип склада: - `true` — склад продавца - `false` — склад WB
+    - `destinationCity` `string` — Населённый пункт доставки
+    - `destinationDistrict` `string` — Федеральный округ доставки. Если доставка не по России, возвращается страна
+    - `sellerPrice` `number<float64>` — Цена продавца со скидкой продавца (без учёта скидки WB Клуба и оптовой скидки для B2B-продаж)
+    - `isB2b` `boolean` — Тип продажи: - `true` — B2B - `false` — B2C
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

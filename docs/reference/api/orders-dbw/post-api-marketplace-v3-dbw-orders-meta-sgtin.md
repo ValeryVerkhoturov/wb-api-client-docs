@@ -31,6 +31,10 @@ POST /api/marketplace/v3/dbw/orders/meta/sgtin
 
 `application/json` — схема `api.OrdersSGTINsSetRequest`, обязательно
 
+- `orders` `api.SGTINs[]` (обязательно)
+  - `orderId` `integer<int64>` (обязательно) — ID сборочного задания
+  - `sgtins` `string[]` (обязательно) — Массив кодов маркировки. Допускается от 16 до 135 символов для кода одной маркировки
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -41,6 +45,59 @@ POST /api/marketplace/v3/dbw/orders/meta/sgtin
 | `402` | Требуется платёж       | `object`                 |
 | `403` | Доступ запрещён        | `Error`                  |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `200`:**
+
+- `requestId` `string` — Уникальный ID запроса, содержащего ошибки.
+- `results` `api.StatusSetResponse[]`
+  - `errors` `api.BatchErrorResponse[]` — Детали ошибки
+    - `code` `integer<int64>` — Код ошибки: - `404` - `409`
+    - `detail` `string` — - `NotFound` — сборочное задание не найдено - `StatusMismatch` — операция невозможна для этого статуса сборочного задания - `ImeiIsNotFilled` — не заполнен IMEI - `MetaValidationFail` — ошибки валидации идентификаторов маркировки
+    - `metaDetails` `object[]` — Детали ошибки валидации идентификаторов маркировки
+      - `key` `string` — Идентификатор маркировки
+      - `value` `string` — Значение идентификатора маркировки
+      - `decision` `string` — Статус проверки: - `sgtin` - `sgtinInvalidFormat` — Неверный формат маркировки - `sgtinNotFound` — Маркировка не найдена в [Честном знаке](https://chestnyznak.ru) - `sgtinEmitted` — Маркировка эмитирована - `sgtinApplied` — Не пройдена процедура Ввод в оборот - `sgtinWrittenOff` — Списан - `sgtinRetired` — Выбыл - `sgtinWithdrawn` — Выбыл - `sgtinDisaggregation` — Расформирован - `sgtinDisaggregated` — Расформирован - `sgtinAppliedNotPaid` — Не оплачен - `pending` — Маркировка на проверке
+  - `isError` `boolean` — Есть ли ошибки
+  - `orderId` `integer<int64>` — ID сборочного задания с успешно обновлёнными данными
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

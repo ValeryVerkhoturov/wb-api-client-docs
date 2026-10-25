@@ -43,6 +43,44 @@ GET /content/v2/cards/limits
 | `403` | Доступ запрещён        | `responseBodyContentError403` |
 | `429` | Слишком много запросов | `object`                      |
 
+**Структура `200`:**
+
+- `data` `object`
+  - `freeLimits` `integer<int64>` — Количество бесплатных лимитов
+  - `paidLimits` `integer<int64>` — Количество оплаченных лимитов
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `data` `object` — Данные ошибки
+- `error` `boolean` — Флаг ошибки
+- `errorText` `string` — Описание ошибки
+- `additionalErrors` `string` — Дополнительные ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

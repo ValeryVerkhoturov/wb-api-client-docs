@@ -40,6 +40,76 @@ The method returns information about campaigns with standard or custom bid via s
 | `403` | Access denied     | `object`      |
 | `429` | Too many requests | `object`      |
 
+**Structure `200`:**
+
+- `adverts` `object[]` — Campaigns
+  - `bid_type` `string` — Bid type: - `unified` — standard bid - `manual` — custom bid
+  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `id` `integer<int64>` — Campaign ID
+  - `nm_settings` `AdvertNMsSettings[]` — Item settings
+    - `bids_kopecks` `AdvertBidsKopecks`
+      - `search` `integer<int64>` — Bid in search
+      - `recommendations` `integer<int64>` — Bid in recommendations
+    - `subject` `AdvertSubcategory`
+      - `id` `integer<int64>` — Subcategory ID
+      - `name` `string` — Subcategory name
+    - `nm_id` `integer<int64>` — WB item number
+  - `settings` `AdvertSettings`
+    - `payment_type` `string` — Payment type: - `cpm` — cost per mille - `cpc` — cost per click
+    - `name` `string` — Campaign name
+    - `placements` `object` — Placements
+      - `search` `boolean` — Placement in search: - `false` — disabled - `true` — enabled
+      - `recommendations` `boolean` — Placement in recommendations: - `false` — disabled - `true` — enabled
+  - `restrictions` `object` — Campaign restrictions
+    - `can_change_nms` `boolean` — Can the list of campaign items be changed: - `true` — yes - `false` — no
+  - `status` `integer<int64>` = `-1` | `4` | `7` | `8` | `9` | `11` — Campaign status: - `-1` — deleted, the deletion process will be completed within 10 minutes - `4` — ready to be launched - `7` — completed - `8` — declined - `9` — active - `11` — campaign is paused
+  - `timestamps` `Timestamps`
+    - `created` `string` — Campaign create time
+    - `updated` `string` — Campaign last update time
+    - `started` `string` — Campaign launch time
+    - `deleted` `string` — Campaign delete date. If the campaign has not been deleted, the time will be indicated in the future
+
+**Structure `400`:**
+
+- `detail` `string` — Error details
+- `origin` `string` — WB internal service ID
+- `request_id` `string` — Unique request ID
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

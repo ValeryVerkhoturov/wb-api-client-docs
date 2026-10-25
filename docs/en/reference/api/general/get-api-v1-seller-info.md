@@ -33,6 +33,41 @@ This method allows you to obtain the seller's name and account ID.
 | `402` | Payment required  | `object`                     |
 | `429` | Too many requests | `object`                     |
 
+**Structure `200`:**
+
+- `name` `string` — Seller's name
+- `sid` `string<UUID>` — Wildberries Seller [ID](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-ustroen-token)
+- `tin` `string` — Taxpayer identification number of the partner (INN in Russian)
+- `tradeMark` `string` — Seller's trade name
+- `country` `string` — Seller account registration country
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

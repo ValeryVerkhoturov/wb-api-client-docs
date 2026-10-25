@@ -33,6 +33,12 @@ To launch the campaign after topping up the budget, use the [Launch campaign](ht
 
 `application/json` — schema `object`, required
 
+- `sum` `integer<int64>` — Budget top-up amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `cashback_sum` `integer<int64>` — Top-up budget sum paid with promo bonuses. You can top up only a certain percentage of the amount, indicated in the `percent` field of the response from the method for getting [balance](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/getV1Balance). Promo bonuses are only applicable to these top-up sources: - `0` — account - `1` — balance sheet
+- `cashback_percent` `integer<int64>` — The percentage of the top-up amount that can be paid with promo bonuses. You need to specify the value of the `percent` field from the response for the method for getting [balance] If you specified `cashback\_sum`, the `cashback\_percent` parameter becomes required
+- `type` `integer<int64>` — Type of top-up source: - `0` — Account - `1` — Balance - `3` — Bonuses
+- `return` `boolean` — Response return flag (`true` means updated campaign budget size will be returned in the response, `false` or empty means nothing will be returned).
+
 ## Responses
 
 | Code  | Description       | Schema                           |
@@ -42,6 +48,48 @@ To launch the campaign after topping up the budget, use the [Launch campaign](ht
 | `401` | Unauthorized      | `object`                         |
 | `403` | Access denied     | `object`                         |
 | `429` | Too many requests | `object`                         |
+
+**Structure `200`:**
+
+- `total` `integer<int64>` — Amount of the updated budget
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+
+**Structure `400`:**
+
+- `error` `string`
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

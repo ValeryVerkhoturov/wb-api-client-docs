@@ -35,6 +35,8 @@ Skus are not validated. If you submit an incorrect sku in the request, you will 
 
 `application/json` — schema `models.DraftDeleteitemsRequest`, required
 
+- `skus` `string[]` (required) — SKUs list
+
 ## Responses
 
 | Code  | Description       | Schema                                 |
@@ -45,6 +47,59 @@ Skus are not validated. If you submit an incorrect sku in the request, you will 
 | `403` | Access denied     | `object`                               |
 | `404` | Not found         | `errors.DraftError`                    |
 | `429` | Too many requests | `object`                               |
+
+**Structure `200`:**
+
+- `results` `string[]`
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

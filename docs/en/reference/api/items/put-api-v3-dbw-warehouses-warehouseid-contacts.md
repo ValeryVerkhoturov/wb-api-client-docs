@@ -34,6 +34,10 @@ A maximum of 5 contacts can be added to the warehouse. To delete contacts, send 
 
 `application/json` — schema `StoreContactRequestBody`, required
 
+- `contacts` `object[]`
+  - `comment` `string` — Comment
+  - `phone` `string` — Phone number. Supported country codes: - `+7` — Russia, Kazakhstan - `+374` — Armenia - `+375` — Belarus - `+996` — Kyrgyzstan
+
 ## Responses
 
 | Code  | Description       | Schema   |
@@ -44,6 +48,43 @@ A maximum of 5 contacts can be added to the warehouse. To delete contacts, send 
 | `402` | Payment required  | `object` |
 | `403` | Access denied     | `Error`  |
 | `429` | Too many requests | `object` |
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error details
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

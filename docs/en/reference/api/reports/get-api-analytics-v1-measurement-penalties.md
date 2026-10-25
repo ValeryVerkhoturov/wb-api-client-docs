@@ -42,6 +42,75 @@ The method returns a report with [logistics and storage costs multiplier](https:
 | `403` | Access denied     | `Response403Retentions` |
 | `429` | Too many requests | `object`                |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `reports` `object[]` — Retentions
+    - `nmId` `integer<int64>` — WB item number
+    - `subjectName` `string` — Subcategory
+    - `dimId` `integer<int64>` — Measurement ID
+    - `prcOver` `number` — Difference in dimensions, %
+    - `volume` `number` — Volume, l (as measured at warehouse)
+    - `width` `integer<int64>` — Width, cm (as measured at warehouse)
+    - `length` `integer<int64>` — Length, cm (as measured at warehouse)
+    - `height` `integer<int64>` — Height, cm (as measured at warehouse)
+    - `volumeSup` `number` — Volume, L (as specified in listing)
+    - `widthSup` `integer<int64>` — Width, cm (as specified in listing)
+    - `lengthSup` `integer<int64>` — Length, cm (as specified in listing)
+    - `heightSup` `integer<int64>` — Height, cm (as specified in listing)
+    - `photoUrls` `string[]` — Photos of the measurements
+    - `dtBonus` `string` — Fine date
+    - `isValid` `boolean` — Status of measurement - `false` — canceled - `true` — valid
+    - `isValidDt` `string` — Date and time of validation or cancellation of the measurement
+    - `reversalAmount` `number` — Reversal amount
+    - `penaltyAmount` `number` — Fine amount
+    - `dateStart` `string` — Warehouse multipier start date and time
+    - `dateEnd` `string` — Warehouse multipier end date and time
+  - `total` `integer<int64>` — Number of retentions in the report. Except `limit` and `offset`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -42,6 +42,64 @@ The method returns a report with [warehouse measurements](https://seller.wildber
 | `403` | Access denied     | `Response403Retentions` |
 | `429` | Too many requests | `object`                |
 
+**Structure `200`:**
+
+- `data` `object` — Response data
+  - `reports` `object[]` — Measurements
+    - `nmId` `integer<int64>` — WB item number
+    - `subjectName` `string` — Subcategory
+    - `dimId` `integer<int64>` — Measurement ID
+    - `volume` `number` — Volume, l
+    - `width` `integer<int64>` — Width, cm
+    - `length` `integer<int64>` — Length, cm
+    - `height` `integer<int64>` — Height, cm
+    - `photoUrls` `string[]` — Photos of measurements
+    - `dt` `string` — Date and time
+  - `total` `integer<int64>` — Number of measurements in the report. Except `limit` and `offset`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `status` `integer<int64>` — HTTP status code
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

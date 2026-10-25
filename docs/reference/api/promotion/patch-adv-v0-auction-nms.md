@@ -30,6 +30,12 @@ PATCH /adv/v0/auction/nms
 
 `application/json` — схема `object`, обязательно
 
+- `nms` `object[]` (обязательно) — Карточки товаров в кампаниях
+  - `advert_id` `integer<int64>` (обязательно) — ID кампании
+  - `nms` `object` (обязательно) — Карточки товаров. Максимум 50 товаров для одной кампании
+    - `add` `object` — Карточки товаров, которые необходимо добавить
+    - `delete` `integer<int64>[]` — Карточки товаров, которые необходимо удалить
+
 ## Ответы
 
 | Код   | Описание               | Схема                          |
@@ -39,6 +45,55 @@ PATCH /adv/v0/auction/nms
 | `401` | Не авторизован         | `object`                       |
 | `403` | Доступ запрещён        | `object`                       |
 | `429` | Слишком много запросов | `object`                       |
+
+**Структура `200`:**
+
+- `nms` `object[]` — Результат отработки запроса
+  - `advert_id` `integer<int64>` — ID кампании
+  - `nms` `object` — Карточки товаров
+    - `added` `integer<int64>[]` — Добавленные карточки товаров
+    - `deleted` `integer<int64>[]` — Удалённые карточки товаров
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

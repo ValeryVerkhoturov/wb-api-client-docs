@@ -32,6 +32,48 @@ Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/aut
 | `403` | Access denied     | `Response4XX`         |
 | `429` | Too many requests | `object`              |
 
+**Structure `200`:**
+
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+- `currencyCode` `integer<int64>` — Currency code of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+- `cpmStep` `integer<int64>` — Bid step in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency for CPM campaigns
+- `cpcStep` `integer<int64>` — Bid step in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency for CPC campaigns
+- `minTopUp` `integer<int64>` — Minimum amount of replenishment of the campaign budget in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. For example, the minimum budget top-up amount with `"minTopUp": 10000` and `"currency": "UZS"` — 100 Uzbek sums
+- `minDailyLimit` `integer<int64>` — Minimum allowed daily limit amount, regardless of the campaign bids. Specified in minor currency units — 0.01 of the base currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

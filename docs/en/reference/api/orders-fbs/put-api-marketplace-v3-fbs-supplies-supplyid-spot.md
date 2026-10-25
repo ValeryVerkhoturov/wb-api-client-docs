@@ -31,6 +31,12 @@ SPOT can only be added to a [supply](https://dev.wildberries.ru/openapi/orders-f
 
 `application/json` — schema `object`, required
 
+- `carrierName` `string` (required) — Carrier name
+- `carrierTaxNumber` `string` (required) — Carrier tax number
+- `carrierCountryCode` `string` (required) — Carrier [OKSM](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm) country code
+- `vehicleRegistrationNumber` `string` (required) — Vehicle registration number
+- `trailerRegistrationNumber` `string` — Trailer registration number
+
 ## Responses
 
 | Code  | Description                  | Schema       |
@@ -42,6 +48,54 @@ SPOT can only be added to a [supply](https://dev.wildberries.ru/openapi/orders-f
 | `404` | Not found                    | `ApiErrorV3` |
 | `409` | Error while adding SPOT data | `ApiErrorV3` |
 | `429` | Too many requests            | `object`     |
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `409`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

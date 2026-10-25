@@ -46,6 +46,15 @@ To get reports for a period of up to a year, use the [Seller Analytics CSV](http
 
 `application/json` — schema `GroupedHistoryRequest`, required
 
+- `selectedPeriod` `object` (required)
+  - `start` `string` — Period start
+  - `end` `string` — Period end
+- `brandNames` `string[]` — List of brands for filtering
+- `subjectIds` `integer<int64>[]` — List of subcategory IDs for filtering
+- `tagIds` `integer<int64>[]` — List of label IDs for filtering
+- `skipDeletedNm` `boolean` — Skip deleted items
+- `aggregationLevel` `Level`
+
 ## Responses
 
 | Code  | Description       | Schema                                       |
@@ -56,6 +65,71 @@ To get reports for a period of up to a year, use the [Seller Analytics CSV](http
 | `402` | Payment required  | `object`                                     |
 | `403` | Access denied     | `ErrorObject`                                |
 | `429` | Too many requests | `object`                                     |
+
+**Structure `200`:**
+
+- `data` `object[]` — Statistics
+  - `product` `object`
+    - `nmId` `integer<int64>` — WB item number
+    - `title` `string<int64>` — Listing name
+    - `vendorCode` `string` — Seller item number
+    - `brandName` `string` — Brand
+    - `subjectId` `integer<int64>` — Subcategory ID
+    - `subjectName` `string` — Subcategory name
+  - `history` `History[]` — Statistics per period
+    - `date` `string` — Statistics collection date
+    - `openCount` `integer<int64>` — Click-throughs
+    - `cartCount` `integer<int64>` — Adds-to-Cart
+    - `orderCount` `integer<int64>` — Items ordered
+    - `orderSum` `integer<int64>` — Total order value
+    - `buyoutCount` `integer<int64>` — Items purchased
+    - `buyoutSum` `integer<int64>` — Total purchase value
+    - `buyoutPercent` `integer<int64>` — Purchase rate
+    - `addToCartConversion` `integer<int64>` — Conversion to Cart. What percentage of visitors who opened the listing, added the item to the cart, %
+    - `cartToOrderConversion` `integer<int64>` — Conversion to order. Percentage of visitors who made an order after adding the item to the cart
+    - `addToWishlistCount` `integer<int64>` — Adds-to-Favorites
+  - `currency` `Currency`
+
+**Structure `400`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

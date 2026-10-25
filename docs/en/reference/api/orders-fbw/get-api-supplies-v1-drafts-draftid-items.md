@@ -40,6 +40,71 @@ The method returns the list of items added to the supply draft.
 | `404` | Not found         | `errors.DraftError`             |
 | `429` | Too many requests | `object`                        |
 
+**Structure `200`:**
+
+- `skuQuantity` `integer<int64>` — SKU quantity
+- `itemQuantity` `integer<int64>` — Item quantity
+- `items` `models.DraftItemItem[]` — Items list
+  - `sku` `string` — SKU
+  - `color` `string` — Item color
+  - `quantity` `integer<int64>` — Item quantity
+  - `brandName` `string` — Brand
+  - `imgSrc` `string` — Link to item image
+  - `nmId` `integer<int64>` — WB item number
+  - `subjectName` `string` — Subcategory
+  - `techSize` `string` — Item size
+  - `title` `string` — Item title
+  - `vendorCode` `string` — Seller item number
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `404`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

@@ -37,6 +37,59 @@ GET /api/marketplace/v3/fbs/shipping-points
 | `403` | Доступ запрещён        | `object`                 |
 | `429` | Слишком много запросов | `object`                 |
 
+**Структура `200`:**
+
+- `shippingPoints` `ShippingPoint[]` — Список пунктов отгрузки
+  - `id` `integer<int64>` — ID пункта отгрузки
+  - `name` `string` — Название
+  - `address` `string` — Адрес
+  - `city` `string` — Населённый пункт
+  - `officeType` `string` = `sc` | `sw` | `pp` — Тип пункта отгрузки: - `sc` — сортировочный центр - `sw` — склад - `pp` — ПВЗ
+  - `cargoTypes` `integer<int64>[]` — Типы товаров, которые принимает пункт отгрузки: - `1` — малогабаритный товар (МГТ) - `2` — сверхгабаритный товар (СГТ) - `3` — крупногабаритный товар (КГТ+)
+  - `latitude` `number` — Широта
+  - `longitude` `number` — Долгота
+  - `fulfillment` `boolean` — Услуга **Фулфилмент в СЦ** для поставки по модели FBS: - `true` — доступна - `false` — недоступна
+  - `available` `boolean` — Доступен ли пункт для отгрузки поставки: - `true` — доступен - `false` — недоступен. Возвращается для ПВЗ, если ПВЗ перегружен в планируемую дату отгрузки
+
+**Структура `400`:**
+
+- `code` `string` — Код ошибки
+- `message` `string` — Описание ошибки
+- `data` `object` — Дополнительные данные ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

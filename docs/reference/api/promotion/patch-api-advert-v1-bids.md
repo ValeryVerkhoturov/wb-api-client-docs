@@ -36,6 +36,13 @@ PATCH /api/advert/v1/bids
 
 `application/json` — схема `object`, обязательно
 
+- `bids` `object[]` (обязательно) — Ставки в кампаниях
+  - `advert_id` `integer<int64>` (обязательно) — ID кампании
+  - `nm_bids` `object[]` (обязательно) — Ставки
+    - `nm_id` `integer<int64>` (обязательно) — Артикул WB
+    - `bid_kopecks` `integer<int64>` (обязательно) — Ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `placement` `string` = `search` | `recommendations` | `combined` (обязательно) — Место размещения: - `search` — в поиске (для кампаний с ручной ставкой) - `recommendations`— в рекомендациях (для кампаний с ручной ставкой) - `combined` — в поиске и рекомендациях (для кампаний с единой ставкой)
+
 ## Ответы
 
 | Код   | Описание               | Схема                    |
@@ -45,6 +52,57 @@ PATCH /api/advert/v1/bids
 | `401` | Не авторизован         | `object`                 |
 | `403` | Доступ запрещён        | `object`                 |
 | `429` | Слишком много запросов | `object`                 |
+
+**Структура `200`:**
+
+- `bids` `object[]` — Результат отработки запроса
+  - `advert_id` `integer<int64>` — ID кампании
+  - `nm_bids` `object[]` — Ставки
+    - `nm_id` `integer<int64>` — Артикул WB
+    - `bid_kopecks` `integer<int64>` — Ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `placement` `string` — Место размещения: - `search` — в поиске - `recommendations`— в рекомендациях
+- `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

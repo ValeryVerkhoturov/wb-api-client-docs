@@ -40,6 +40,49 @@ GET /adv/v1/payments
 | `403` | Доступ запрещён                     | `object`                   |
 | `429` | Слишком много запросов              | `object`                   |
 
+**Структура `200` — `object[]`:**
+
+- `id` `integer<int64>` — ID платежа
+- `date` `string<time-date>` — Дата платежа
+- `sum` `integer<int64>` — Сумма платежа
+- `type` `integer<int64>` — Тип источника списания: - `0` — Счёт - `1` — Баланс - `3` — Картой
+- `statusId` `integer<int64>` — Статус: - `0` — ошибка - `1` — обработано
+- `cardStatus` `string` — Статус операции при оплате картой: - `success` — успех - `fail` — неуспех - `pending` — в ожидании ответа - `unknown` — неизвестно
+- `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

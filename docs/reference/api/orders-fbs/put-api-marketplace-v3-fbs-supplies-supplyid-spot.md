@@ -32,6 +32,12 @@ PUT /api/marketplace/v3/fbs/supplies/{supplyId}/spot
 
 `application/json` — схема `object`, обязательно
 
+- `carrierName` `string` (обязательно) — Наименование перевозчика
+- `carrierTaxNumber` `string` (обязательно) — ИНН перевозчика
+- `carrierCountryCode` `string` (обязательно) — Код страны перевозчика по [ОКСМ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsDictionariesCountriesOksm)
+- `vehicleRegistrationNumber` `string` (обязательно) — Регистрационный номер транспортного средства
+- `trailerRegistrationNumber` `string` — Регистрационный номер прицепа
+
 ## Ответы
 
 | Код   | Описание                      | Схема        |
@@ -43,6 +49,54 @@ PUT /api/marketplace/v3/fbs/supplies/{supplyId}/spot
 | `404` | Не найдено                    | `ApiErrorV3` |
 | `409` | Ошибка добавления данных СПОТ | `ApiErrorV3` |
 | `429` | Слишком много запросов        | `object`     |
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `409`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

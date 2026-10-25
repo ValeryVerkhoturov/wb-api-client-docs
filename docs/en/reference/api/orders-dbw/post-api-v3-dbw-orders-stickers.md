@@ -48,6 +48,8 @@ Returns a list of stickers for the [assembly orders](https://dev.wildberries.ru/
 
 `application/json` — schema `object`, optional
 
+- `orders` `integer<int64>[]` — Assembly order IDs list
+
 ## Responses
 
 | Code  | Description       | Schema                               |
@@ -58,6 +60,54 @@ Returns a list of stickers for the [assembly orders](https://dev.wildberries.ru/
 | `402` | Payment required  | `object`                             |
 | `403` | Access denied     | `Error`                              |
 | `429` | Too many requests | `object`                             |
+
+**Structure `200`:**
+
+- `stickers` `object[]`
+  - `orderId` `integer<int64>` — Assembly order ID
+  - `partA` `string` — The first part of the sticker ID for printing the signature
+  - `partB` `string` — The second part of the sticker ID for printing the signature
+  - `barcode` `string` — The encoded value of the sticker
+  - `file` `string` — Base64 encoded representation of the sticker in a requested format
+
+**Structure `400`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `code` `string` — Error code
+- `message` `string` — Error description
+- `data` `object` — Additional data for the error
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 ## Call examples
 

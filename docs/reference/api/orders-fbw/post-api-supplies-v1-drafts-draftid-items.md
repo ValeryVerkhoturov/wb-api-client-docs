@@ -38,6 +38,10 @@ POST /api/supplies/v1/drafts/{draftId}/items
 
 `application/json` — схема `models.DraftAdditemsRequest`, обязательно
 
+- `items` `models.Item[]` (обязательно) — Список товаров
+  - `quantity` `integer<int64>` (обязательно) — Количество единиц товара
+  - `sku` `string` (обязательно) — Баркод из карточки товара
+
 ## Ответы
 
 | Код   | Описание               | Схема                               |
@@ -48,6 +52,63 @@ POST /api/supplies/v1/drafts/{draftId}/items
 | `403` | Доступ запрещён        | `object`                            |
 | `404` | Не найдено             | `errors.DraftError`                 |
 | `429` | Слишком много запросов | `object`                            |
+
+**Структура `200`:**
+
+- `results` `models.DraftAddItemsResultItem[]` — Список невалидных баркодов с ошибками
+  - `error` `object` — Детали ошибки
+    - `detail` `string` — Детали ошибки
+    - `title` `string` — Заголовок ошибки
+  - `sku` `string` — Баркод
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `404`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

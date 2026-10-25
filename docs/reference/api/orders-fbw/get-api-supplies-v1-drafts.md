@@ -42,6 +42,58 @@ GET /api/supplies/v1/drafts
 | `403` | Доступ запрещён        | `object`                    |
 | `429` | Слишком много запросов | `object`                    |
 
+**Структура `200`:**
+
+- `total` `integer<int64>` — Общее количество черновиков
+- `drafts` `models.DraftItem[]` — Список черновиков
+  - `draftId` `string` — ID черновика
+  - `phone` `string` — Телефон пользователя, создавшего черновик
+  - `createdAt` `string<ISO 8601>` — Дата и время создания черновика
+  - `updatedAt` `string<ISO 8601>` — Дата и время последнего обновления черновика
+  - `skuQuantity` `integer<int64>` — Количество баркодов
+  - `itemQuantity` `integer<int64>` — Количество единиц товара
+
+**Структура `400`:**
+
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

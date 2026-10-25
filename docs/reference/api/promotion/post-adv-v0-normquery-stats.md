@@ -27,6 +27,12 @@ POST /adv/v0/normquery/stats
 
 `application/json` — схема `V0GetNormQueryStatsRequest`, обязательно
 
+- `from` `string` (обязательно) — Дата начала периода
+- `to` `string` (обязательно) — Дата окончания периода
+- `items` `object[]` (обязательно)
+  - `advert_id` `integer<int64>` (обязательно) — ID кампании
+  - `nm_id` `integer<int64>` (обязательно) — Артикул WB
+
 ## Ответы
 
 | Код   | Описание               | Схема                         |
@@ -36,6 +42,63 @@ POST /adv/v0/normquery/stats
 | `401` | Не авторизован         | `object`                      |
 | `403` | Доступ запрещён        | `StandardizedBatchError`      |
 | `429` | Слишком много запросов | `object`                      |
+
+**Структура `200`:**
+
+- `stats` `V0GetNormQueryStatsItem[]`
+  - `advert_id` `integer<int64>` — ID кампании
+  - `nm_id` `integer<int64>` — Артикул WB
+  - `stats` `V0GetNormQueryStatsItemStat[]`
+    - `norm_query` `string` — Поисковый кластер
+    - `views` `integer<int64>` — Количество просмотров. Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+    - `clicks` `integer<int64>` — Количество кликов
+    - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+    - `orders` `integer<int64>` — Количество заказов
+    - `ctr` `number<double>` — Кликабельность — отношение числа кликов к количеству показов, %. Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+    - `cpc` `number<double>` — Стоимость одного клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+    - `cpm` `number<double>` — Средняя стоимость за тысячу показов в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+    - `avg_pos` `number<double>` — Средняя позиция товара на страницах поисковой выдачи
+    - `shks` `integer<int64>` — Количество заказанных товаров, шт.
+    - `spend` `number<double>` — Затраты на продвижение товаров в конкретном поисковом кластере кампании
+    - `currency` `string<ISO 4217>` — Валюта [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
+
+**Структура `400`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `403`:**
+
+- `detail` `string` — Детали ошибки
+- `origin` `string` — ID внутреннего сервиса WB
+- `request_id` `string` — Уникальный ID запроса
+- `status` `integer<int64>` — HTTP статус-код
+- `title` `string` — Заголовок ошибки
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 ## Примеры вызова
 

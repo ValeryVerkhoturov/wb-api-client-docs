@@ -42,6 +42,64 @@ GET /api/analytics/v1/warehouse-measurements
 | `403` | Доступ запрещён        | `Response403Retentions` |
 | `429` | Слишком много запросов | `object`                |
 
+**Структура `200`:**
+
+- `data` `object` — Данные ответа
+  - `reports` `object[]` — Замеры
+    - `nmId` `integer<int64>` — Артикул WB
+    - `subjectName` `string` — Предмет
+    - `dimId` `integer<int64>` — ID замера
+    - `volume` `number` — Объём, л
+    - `width` `integer<int64>` — Ширина, см
+    - `length` `integer<int64>` — Длина, см
+    - `height` `integer<int64>` — Высота, см
+    - `photoUrls` `string[]` — Фото замеров
+    - `dt` `string` — Дата и время
+  - `total` `integer<int64>` — Количество замеров в отчёте. Без учёта `limit` и `offset`
+
+**Структура `400`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `401`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
+
+**Структура `403`:**
+
+- `title` `string` — Заголовок ошибки
+- `status` `integer<int64>` — HTTP статус-код
+- `detail` `string` — Детали ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+
+**Структура `429`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
+- `requestId` `string` — Уникальный ID запроса
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
+
 ## Примеры вызова
 
 Аргументы показаны именами параметров — подставьте свои значения. Языки, в клиенте которых этой операции нет, не показаны.

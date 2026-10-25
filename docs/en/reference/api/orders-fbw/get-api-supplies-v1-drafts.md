@@ -42,6 +42,58 @@ The method returns a list of supply drafts
 | `403` | Access denied     | `object`                    |
 | `429` | Too many requests | `object`                    |
 
+**Structure `200`:**
+
+- `total` `integer<int64>` — Total number of drafts
+- `drafts` `models.DraftItem[]` — Drafts list
+  - `draftId` `string` — Draft ID
+  - `phone` `string` — Phone number of the user that created the draft
+  - `createdAt` `string<ISO 8601>` — Date and time the draft was created
+  - `updatedAt` `string<ISO 8601>` — Date and time the draft was updated
+  - `skuQuantity` `integer<int64>` — SKU quantity
+  - `itemQuantity` `integer<int64>` — Item quantity
+
+**Structure `400`:**
+
+- `status` `integer<int64>` — HTTP status code
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `requestId` `string` — Unique request ID
+- `origin` `string` — Service name
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `403`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.

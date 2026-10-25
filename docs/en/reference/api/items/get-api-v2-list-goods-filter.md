@@ -46,6 +46,68 @@ In Sandbox — maximum of 1 request per second for all **Content** methods in to
 | `403` | Access denied     | `ResponseError` |
 | `429` | Too many requests | `object`        |
 
+**Structure `200`:**
+
+- `data` `object` (required) — Response data
+  - `listGoods` `ItemsList[]` (required) — Item information
+    - `nmID` `integer<int64>` — WB item number
+    - `vendorCode` `string` — Seller item number
+    - `sizes` `object[]` — Size
+      - `sizeID` `integer<int64>` (required) — Size ID. In the Content methods this is the `chrtID` field
+      - `price` `integer<int64>` (required) — Price
+      - `discountedPrice` `number` (required) — Price with discount
+      - `clubDiscountedPrice` `number` (required) — Price with discount including WB Club discount
+      - `techSizeName` `string` (required) — Item size
+    - `currencyIsoCode4217` `string` — Currency, according to ISO 4217
+    - `discount` `integer<int64>` — Discount, %
+    - `clubDiscount` `integer<int64>` — WB Club discount, %
+    - `editableSizePrice` `boolean` — Setting of size prices (depends on item category): - `true` — available - `false` — unavailable
+    - `wholesaleDiscountThreshold` `WholesaleDiscountThresholdRes[]` — Wholesale discounts at different levels for B2B
+      - `minQuantity` `integer<int64>` (required) — Minimum number of items for discount
+      - `wholesaleDiscount` `integer<int64>` (required) — Discount (%)
+      - `level` `integer<int64>` (required) — Discount level
+- `error` `boolean` (required) — Error flag
+- `errorText` `string` (required) — Error description
+
+**Structure `400`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `401`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
+
+**Structure `403`:**
+
+- `data` `object` — Error data
+- `error` `boolean` — Error flag
+- `errorText` `string` — Error description
+
+**Structure `429`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
+- `requestId` `string` — Unique request ID
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
+
 ## Call examples
 
 Arguments are shown as parameter names — substitute your own values. Languages whose client does not expose this operation are omitted.
