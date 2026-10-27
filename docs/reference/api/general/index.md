@@ -1,11 +1,11 @@
 ---
 title: "Общее"
-description: "Операций модуля `general` — 10."
+description: "Операций модуля `general` — 11."
 ---
 
 # Общее · `general`
 
-Операций модуля `general` — 10.
+Операций модуля `general` — 11.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [Все модули](/reference/api/)
 
@@ -19,7 +19,7 @@ description: "Операций модуля `general` — 10."
 - как обратиться в [поддержку](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Podderzhka)
   С помощью методов этого раздела вы можете:
 - проверить [подключение к WB API](https://dev.wildberries.ru/openapi/api-information#tag/connectionCheck/operation/getPing)
-- получить [новости портала продавцов](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News)
+- получить [новости](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News) и [уведомления](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV1Notifications) портала продавцов
 - получить [информацию о продавце](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation/operation/getV1SellerInfo)
 - [управлять пользователями продавца](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement)
 
@@ -29,11 +29,12 @@ description: "Операций модуля `general` — 10."
 | ----- | ------- | ------------------------------------------------------- |
 | `GET` | `/ping` | [Проверка подключения](/reference/api/general/get-ping) |
 
-## API новостей
+## API коммуникаций
 
-| Метод | Путь                          | Операция                                                                                      |
-| ----- | ----------------------------- | --------------------------------------------------------------------------------------------- |
-| `GET` | `/api/communications/v2/news` | [Получение новостей портала продавцов](/reference/api/general/get-api-communications-v2-news) |
+| Метод | Путь                                   | Операция                                                                                                 |
+| ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `GET` | `/api/communications/v2/news`          | [Получить новости портала продавцов](/reference/api/general/get-api-communications-v2-news)              |
+| `GET` | `/api/communications/v1/notifications` | [Получить уведомления портала продавцов](/reference/api/general/get-api-communications-v1-notifications) |
 
 ## Информация о продавце
 

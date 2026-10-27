@@ -1,11 +1,11 @@
 ---
 title: "General"
-description: "Module `general` has 10 operations."
+description: "Module `general` has 11 operations."
 ---
 
 # General · `general`
 
-Module `general` has 10 operations.
+Module `general` has 11 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information) · [All modules](/en/reference/api/)
 
@@ -19,7 +19,7 @@ In this section:
 - how to contact [support](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Support)
   Use the methods in this section to:
 - check the [WB API connection](https://dev.wildberries.ru/openapi/api-information#tag/connectionCheck)
-- get [seller portal news](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News)
+- get seller portal [news](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News) and [notifications](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV1Notifications)
 - get [seller information](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation)
 - [manage seller users](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement)
 
@@ -29,11 +29,12 @@ In this section:
 | ------ | ------- | ------------------------------------------------------ |
 | `GET`  | `/ping` | [Connection Check](/en/reference/api/general/get-ping) |
 
-## News API
+## Communications API
 
-| Method | Path                          | Operation                                                                              |
-| ------ | ----------------------------- | -------------------------------------------------------------------------------------- |
-| `GET`  | `/api/communications/v2/news` | [Getting Seller Portal News](/en/reference/api/general/get-api-communications-v2-news) |
+| Method | Path                                   | Operation                                                                                            |
+| ------ | -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `GET`  | `/api/communications/v2/news`          | [Get Seller Portal News](/en/reference/api/general/get-api-communications-v2-news)                   |
+| `GET`  | `/api/communications/v1/notifications` | [Get Seller Portal Notifications](/en/reference/api/general/get-api-communications-v1-notifications) |
 
 ## Seller Information
 

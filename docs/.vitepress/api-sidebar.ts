@@ -20,8 +20,12 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/general/get-ping",
         },
         {
-          text: "Получение новостей портала продавцов",
+          text: "Получить новости портала продавцов",
           link: "/reference/api/general/get-api-communications-v2-news",
+        },
+        {
+          text: "Получить уведомления портала продавцов",
+          link: "/reference/api/general/get-api-communications-v1-notifications",
         },
         {
           text: "Получить информацию о продавце",
@@ -1340,8 +1344,12 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/general/get-ping",
         },
         {
-          text: "Getting Seller Portal News",
+          text: "Get Seller Portal News",
           link: "/en/reference/api/general/get-api-communications-v2-news",
+        },
+        {
+          text: "Get Seller Portal Notifications",
+          link: "/en/reference/api/general/get-api-communications-v1-notifications",
         },
         {
           text: "Get Seller Information",

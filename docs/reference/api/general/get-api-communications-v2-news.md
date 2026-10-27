@@ -1,17 +1,17 @@
 ---
-title: "Получение новостей портала продавцов"
+title: "Получить новости портала продавцов"
 description: "Метод позволяет получать новости портала продавцов. Для получения успешного ответа необходимо указать один из параметров from или fromID. За один запрос можно…"
 ---
 
-# Получение новостей портала продавцов
+# Получить новости портала продавцов
 
 ```http
 GET /api/communications/v2/news
 ```
 
-**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** API новостей · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
+**База:** `https://common-api.wildberries.ru` · **Модуль:** [`general`](/reference/api/general/) · **Раздел:** API коммуникаций · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
 
-Метод позволяет получать новости портала продавцов.
+Метод позволяет получать [новости](https://seller.wildberries.ru/news-v2) портала продавцов.
 Для получения успешного ответа необходимо указать
 один из параметров `from` или `fromID`.
 За один запрос можно получить не более 100 новостей.

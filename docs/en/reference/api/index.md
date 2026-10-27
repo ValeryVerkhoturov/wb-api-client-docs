@@ -1,15 +1,15 @@
 ---
 title: "API reference"
-description: "All 309 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
+description: "All 310 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
 ---
 
 # API reference
 
-All 309 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
+All 310 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
 
 | Module                                                  | Category                 | Operations |
 | ------------------------------------------------------- | ------------------------ | ---------- |
-| [`general`](/en/reference/api/general/)                 | General                  | 10         |
+| [`general`](/en/reference/api/general/)                 | General                  | 11         |
 | [`items`](/en/reference/api/items/)                     | Item Management          | 55         |
 | [`orders-fbs`](/en/reference/api/orders-fbs/)           | FBS Orders               | 48         |
 | [`orders-dbw`](/en/reference/api/orders-dbw/)           | DBW Orders               | 16         |

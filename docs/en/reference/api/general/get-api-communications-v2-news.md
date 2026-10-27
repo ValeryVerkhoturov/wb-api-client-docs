@@ -1,17 +1,17 @@
 ---
-title: "Getting Seller Portal News"
+title: "Get Seller Portal News"
 description: "The method allows getting news from the seller portal."
 ---
 
-# Getting Seller Portal News
+# Get Seller Portal News
 
 ```http
 GET /api/communications/v2/news
 ```
 
-**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** News API · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
+**Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Communications API · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV2News)
 
-The method allows getting news from the seller portal.
+The method allows getting [news](https://seller.wildberries.ru/news-v2) from the seller portal.
 
 To receive a successful response, one of the parameters `from` or `fromID` must be specified.
 
