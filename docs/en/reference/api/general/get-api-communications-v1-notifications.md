@@ -1,6 +1,6 @@
 ---
 title: "Get Seller Portal Notifications"
-description: "The method returns a list of notifications from the seller account in Russian. The notifications in the response are ordered from newest to oldest. Available…"
+description: "Method is available by Personal token, Service token"
 ---
 
 # Get Seller Portal Notifications
@@ -11,17 +11,19 @@ GET /api/communications/v1/notifications
 
 **Base URL:** `https://common-api.wildberries.ru` · **Module:** [`general`](/en/reference/api/general/) · **Section:** Communications API · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/api-information#tag/newsApi/operation/getV1Notifications)
 
+Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
+**Personal** token,
+**Service** token
+
 The method returns a list of notifications from the seller [account](https://seller.wildberries.ru) in Russian. The notifications in the response are ordered from newest to oldest.
 Available only for sellers from the Russian Federation.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Type             | Period | Limit     | Interval | Burst       |
-| ---------------- | ------ | --------- | -------- | ----------- |
-| Personal         | 1 min  | 1 request | 1 min    | 10 requests |
-| Service          | 1 min  | 1 request | 1 min    | 10 requests |
-| Base with secret | 1 min  | 1 request | 1 min    | 10 requests |
-| Base             | 1 h    | 1 request | 1 h      | 1 request   |
+| Type     | Period | Limit     | Interval | Burst       |
+| -------- | ------ | --------- | -------- | ----------- |
+| Personal | 1 min  | 1 request | 1 min    | 10 requests |
+| Service  | 1 min  | 1 request | 1 min    | 10 requests |
 
 ## Parameters
 
