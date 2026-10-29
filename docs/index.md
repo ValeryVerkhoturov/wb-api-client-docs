@@ -4,7 +4,7 @@ title: SDK для Wildberries Seller API
 
 hero:
   name: wb-api-client
-  text: Wildberries API на вашем языке.
+  text: Wildberries API на Вашем языке.
   tagline: Автоматически сгенерированные SDK для Python, TypeScript, Go, Java, PHP, OneScript (1С), C# и Rust. Одна версия для всех экосистем. Bearer-токен маскируется по умолчанию.
   actions:
     - theme: brand
