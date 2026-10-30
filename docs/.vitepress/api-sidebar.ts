@@ -1271,10 +1271,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         },
         {
           text: "Получить отчёт",
-          link: "/reference/api/reports/get-api-v1-analytics-goods-return",
-        },
-        {
-          text: "Получить отчёт",
           link: "/reference/api/reports/get-api-analytics-v1-item-returns",
         },
       ],
@@ -2592,10 +2588,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Get Report",
           link: "/en/reference/api/reports/get-api-v1-analytics-banned-products-blocked",
-        },
-        {
-          text: "Get Report",
-          link: "/en/reference/api/reports/get-api-v1-analytics-goods-return",
         },
         {
           text: "Get Report",

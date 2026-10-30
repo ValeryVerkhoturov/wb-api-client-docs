@@ -1,11 +1,11 @@
 ---
 title: "API reference"
-description: "All 310 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
+description: "All 309 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release."
 ---
 
 # API reference
 
-All 310 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
+All 309 Wildberries Seller API operations, grouped into the package's 13 modules. Pages are generated from the OpenAPI specs and from the generated client sources, so every call example matches the code of the same release.
 
 | Module                                                  | Category                 | Operations |
 | ------------------------------------------------------- | ------------------------ | ---------- |
@@ -20,5 +20,5 @@ All 310 Wildberries Seller API operations, grouped into the package's 13 modules
 | [`communications`](/en/reference/api/communications/)   | Customer Communication   | 25         |
 | [`rates`](/en/reference/api/rates/)                     | Rates                    | 5          |
 | [`analytics`](/en/reference/api/analytics/)             | Analytics and Data       | 20         |
-| [`reports`](/en/reference/api/reports/)                 | Reports                  | 24         |
+| [`reports`](/en/reference/api/reports/)                 | Reports                  | 23         |
 | [`finances`](/en/reference/api/finances/)               | Documents and Accounting | 11         |

@@ -9,7 +9,7 @@ description: "Метод возвращает отчёт о возвратах �
 GET /api/analytics/v1/item-returns
 ```
 
-**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о возвратах и перемещении товаров · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1GoodsReturn)
+**База:** `https://seller-analytics-api.wildberries.ru` · **Модуль:** [`reports`](/reference/api/reports/) · **Раздел:** Отчёт о возвратах и перемещении товаров · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports#tag/returnsAndItemMovementReport/operation/getV1ItemReturns)
 
 Метод возвращает отчёт о [возвратах товаров продавцу](https://seller.wildberries.ru/return-transfer-reports).
 
@@ -36,7 +36,7 @@ GET /api/analytics/v1/item-returns
 
 | Код   | Описание               | Схема                    |
 | ----- | ---------------------- | ------------------------ |
-| `200` | Успешно                | `GoodsReturn200Response` |
+| `200` | Успешно                | `ItemReturns200Response` |
 | `204` | Нет данных             | —                        |
 | `400` | Неправильный запрос    | `Http4XXResponse`        |
 | `401` | Не авторизован         | `object`                 |
@@ -108,7 +108,7 @@ from wb_api_client.reports.api import ReportsApi
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = ReportsApi(ApiClient(cfg))
 
-result = api.get_v1_goods_return(date_from=..., date_to=..., status=..., limit=..., offset=...)
+result = api.get_v1_item_returns(date_from=..., date_to=..., status=..., limit=..., offset=...)
 print(result)
 ```
 
@@ -122,7 +122,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new ReportsApi(cfg);
 
-const { data } = await api.getV1GoodsReturn(dateFrom, dateTo, status, limit, offset);
+const { data } = await api.getV1ItemReturns(dateFrom, dateTo, status, limit, offset);
 console.log(data);
 ```
 
@@ -138,7 +138,7 @@ cfg := wbreports.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbreports.NewAPIClient(cfg)
 
-result, _, err := client.ReportsAPI.GetV1GoodsReturn(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Execute()
+result, _, err := client.ReportsAPI.GetV1ItemReturns(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Execute()
 if err != nil {
     panic(err)
 }
@@ -154,7 +154,7 @@ ApiClient client = new ApiClient();
 client.setAccessToken(new SecretString("<ваш JWT WB>"));
 ReportsApi api = new ReportsApi(client);
 
-System.out.println(api.getV1GoodsReturn(dateFrom, dateTo, status, limit, offset));
+System.out.println(api.getV1ItemReturns(dateFrom, dateTo, status, limit, offset));
 ```
 
 ```php [PHP]
@@ -167,7 +167,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new ReportsApi(new Client(), $config);
 
-print_r($api->getV1GoodsReturn($date_from, $date_to));
+print_r($api->getV1ItemReturns($date_from, $date_to));
 ```
 
 ```bsl [OneScript]
@@ -177,7 +177,7 @@ print_r($api->getV1GoodsReturn($date_from, $date_to));
 Настройки.УстановитьТокен("<ваш JWT WB>");
 Клиент = Новый ReportsApi(Настройки);
 
-Сообщить(Клиент.GetV1GoodsReturn(dateFrom, dateTo).Тело);
+Сообщить(Клиент.GetV1ItemReturns(dateFrom, dateTo).Тело);
 ```
 
 ```csharp [C#]
@@ -188,7 +188,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new ReportsApi(config);
 
-Console.WriteLine(api.GetV1GoodsReturn(dateFrom, dateTo));
+Console.WriteLine(api.GetV1ItemReturns(dateFrom, dateTo));
 ```
 
 ```rust [Rust]
@@ -199,7 +199,7 @@ async fn main() {
     let mut cfg = Configuration::new();
     cfg.set_access_token("<ваш JWT WB>");
 
-    let result = reports_api::get_v1_goods_return(&cfg, date_from, date_to, status, limit, offset).await;
+    let result = reports_api::get_v1_item_returns(&cfg, date_from, date_to, status, limit, offset).await;
     println!("{:#?}", result);
 }
 ```

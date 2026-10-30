@@ -1,11 +1,11 @@
 ---
 title: "Отчёты"
-description: "Операций модуля `reports` — 24."
+description: "Операций модуля `reports` — 23."
 ---
 
 # Отчёты · `reports`
 
-Операций модуля `reports` — 24.
+Операций модуля `reports` — 23.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [Все модули](/reference/api/)
 
@@ -18,10 +18,9 @@ description: "Операций модуля `reports` — 24."
 3. [Удержаниях](https://dev.wildberries.ru/openapi/reports#tag/retentionReports)
 4. [Операциях при приёмке](https://dev.wildberries.ru/openapi/reports#tag/acceptanceExpenses)
 5. [Платном хранении](https://dev.wildberries.ru/openapi/reports#tag/paidStorage)
-6. [Продажах по регионам](https://dev.wildberries.ru/openapi/reports#tag/salesByRegions)
-7. [Доле бренда в продажах](https://dev.wildberries.ru/openapi/reports#tag/shareOfBrandInSales)
-8. [Заблокированных карточках](https://dev.wildberries.ru/openapi/reports#tag/blockedItems)
-9. [Возвратах и перемещении товаров](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport)
+6. [Доле бренда в продажах](https://dev.wildberries.ru/openapi/reports#tag/shareOfBrandInSales)
+7. [Заблокированных карточках](https://dev.wildberries.ru/openapi/reports#tag/blockedItems)
+8. [Возвратах и перемещении товаров](https://dev.wildberries.ru/openapi/reports#tag/returnsAndItemMovementReport)
 
 ## Основные отчёты
 
@@ -94,5 +93,4 @@ description: "Операций модуля `reports` — 24."
 
 | Метод | Путь                             | Операция                                                                   |
 | ----- | -------------------------------- | -------------------------------------------------------------------------- |
-| `GET` | `/api/v1/analytics/goods-return` | [Получить отчёт](/reference/api/reports/get-api-v1-analytics-goods-return) |
 | `GET` | `/api/analytics/v1/item-returns` | [Получить отчёт](/reference/api/reports/get-api-analytics-v1-item-returns) |

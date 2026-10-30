@@ -1,11 +1,11 @@
 ---
 title: "Reports"
-description: "Module `reports` has 24 operations."
+description: "Module `reports` has 23 operations."
 ---
 
 # Reports · `reports`
 
-Module `reports` has 24 operations.
+Module `reports` has 23 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [All modules](/en/reference/api/)
 
@@ -82,5 +82,4 @@ Reports on items, retentions, and paid storage
 
 | Method | Path                             | Operation                                                                 |
 | ------ | -------------------------------- | ------------------------------------------------------------------------- |
-| `GET`  | `/api/v1/analytics/goods-return` | [Get Report](/en/reference/api/reports/get-api-v1-analytics-goods-return) |
 | `GET`  | `/api/analytics/v1/item-returns` | [Get Report](/en/reference/api/reports/get-api-analytics-v1-item-returns) |
