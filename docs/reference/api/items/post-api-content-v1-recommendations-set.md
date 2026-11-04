@@ -42,6 +42,7 @@ POST /api/content/v1/recommendations/set
 | `208` | Уже отправлено         | `response208SetRecom` |
 | `400` | Неправильный запрос    | `response400SetRecom` |
 | `401` | Не авторизован         | `object`              |
+| `402` | Требуется платёж       | `object`              |
 | `403` | Доступ запрещён        | `Response4XX`         |
 | `429` | Слишком много запросов | `object`              |
 
@@ -77,6 +78,11 @@ POST /api/content/v1/recommendations/set
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

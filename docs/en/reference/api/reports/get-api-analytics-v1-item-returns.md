@@ -40,6 +40,7 @@ Returns a list of [item returns to the seller](https://seller.wildberries.ru/ret
 | `204` | No data           | —                        |
 | `400` | Bad request       | `Http4XXResponse`        |
 | `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
 | `429` | Too many requests | `object`                 |
 
 **Structure `200`:**
@@ -83,6 +84,11 @@ Returns a list of [item returns to the seller](https://seller.wildberries.ru/ret
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `429`:**
 

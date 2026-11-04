@@ -28,6 +28,7 @@ GET /api/v1/transit-tariffs
 | ----- | ---------------------- | -------------------------------- |
 | `200` | Успешно                | `GetV1TransitTariffsResponse200` |
 | `401` | Не авторизован         | `object`                         |
+| `402` | Требуется платёж       | `object`                         |
 | `403` | Доступ запрещён        | `object`                         |
 | `429` | Слишком много запросов | `object`                         |
 
@@ -52,6 +53,11 @@ GET /api/v1/transit-tariffs
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

@@ -21,7 +21,7 @@ Possible cases:
 4. The item has no size and `"include Office":false`, then the response body will be empty.
    `The item has no size` means the size of the item is the same and has `"techSize":"0"`. In responses of the method for getting data on [items](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsProducts), such items have `hasSizes':false`.
 
-The data on the seller warehouses are in an aggregated form — for all of them together without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` and `"officeName":""` in such cases.
+The data on the seller warehouses are in an aggregated form — without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` or `"regionName":"Свой склад СГТ"` and `"officeName":""` in such cases.
 
 The report data is updated once every 2 hours.
 
@@ -63,9 +63,9 @@ The report data is updated once every 2 hours.
 
 - `data` `TableSizeResponse`
   - `offices` `TableOfficeItem[]` — Set of warehouse data
-    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
-    - `officeID` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`, for WB warehouses
-    - `officeName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `""`, for WB warehouses
+    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `officeID` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `officeName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
     - `metrics` `object` — Warehouse metrics
       - `ordersCount` `integer<int64>` — Items ordered
       - `ordersSum` `integer<int64>` — Total order value
@@ -98,9 +98,9 @@ The report data is updated once every 2 hours.
     - `name` `string` — Size name
     - `chrtID` `integer<int64>` — Size ID
     - `offices` `TableOfficeItem[]` — Warehouses
-      - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
-      - `officeID` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`, for WB warehouses
-      - `officeName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `""`, for WB warehouses
+      - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
+      - `officeID` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
+      - `officeName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
       - `metrics` `object` — Warehouse metrics
         - `ordersCount` `integer<int64>` — Items ordered
         - `ordersSum` `integer<int64>` — Total order value

@@ -39,6 +39,7 @@ GET /api/common/v1/tariff-constructor/options
 | `200` | Успешно                | `PlanBuilderOptionsInfo` |
 | `400` | Неправильный запрос    | `PlanBuilderErrors`      |
 | `401` | Не авторизован         | `object`                 |
+| `402` | Требуется платёж       | `object`                 |
 | `403` | Доступ запрещён        | `Response4XX`            |
 | `404` | Не найдено             | `PlanBuilderErrors`      |
 | `429` | Слишком много запросов | `object`                 |
@@ -94,6 +95,11 @@ GET /api/common/v1/tariff-constructor/options
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

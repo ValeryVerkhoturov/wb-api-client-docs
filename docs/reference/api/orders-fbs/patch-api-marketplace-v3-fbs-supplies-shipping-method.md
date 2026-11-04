@@ -43,6 +43,7 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 | `200` | Успешно                | `UpdateSuppliesShippingMethodResponse` |
 | `400` | Неправильный запрос    | `Error`                                |
 | `401` | Не авторизован         | `object`                               |
+| `402` | Требуется платёж       | `object`                               |
 | `403` | Доступ запрещён        | `Error`                                |
 | `409` | Конфликт               | `v3.APIError`                          |
 | `429` | Слишком много запросов | `object`                               |
@@ -72,6 +73,11 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

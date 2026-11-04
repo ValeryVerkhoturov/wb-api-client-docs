@@ -43,6 +43,7 @@ POST /api/marketplace/v3/click-collect/orders/meta/details
 | `200` | Успешно                | `api.OrdersMetaDetailsResponse` |
 | `400` | Неправильный запрос    | `api.BatchError`                |
 | `401` | Не авторизован         | `object`                        |
+| `402` | Требуется платёж       | `object`                        |
 | `403` | Доступ запрещён        | `api.BatchError`                |
 | `429` | Слишком много запросов | `object`                        |
 
@@ -77,6 +78,11 @@ POST /api/marketplace/v3/click-collect/orders/meta/details
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

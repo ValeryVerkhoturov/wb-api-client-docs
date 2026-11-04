@@ -34,6 +34,7 @@ The deprecated method will be disabled on [November 20](https://dev.wildberries.
 | `200` | Success           | `ShippingPointsResponse` |
 | `400` | Bad request       | `Error`                  |
 | `401` | Unauthorized      | `object`                 |
+| `402` | Payment required  | `object`                 |
 | `403` | Access denied     | `object`                 |
 | `429` | Too many requests | `object`                 |
 
@@ -67,6 +68,11 @@ The deprecated method will be disabled on [November 20](https://dev.wildberries.
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

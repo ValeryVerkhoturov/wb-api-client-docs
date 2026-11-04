@@ -20,7 +20,7 @@ POST /api/v2/stocks-report/products/sizes
 3. Товар не имеет размера и `"includeOffice":true`, тогда в ответе будет детализация по складам. Без данных об остатках по каждому из размеров.
 4. Товар не имеет размера и `"includeOffice":false`, тогда тело ответа будет пустым.
    Товар не имеет размера, если у него единственный размер с `"techSize":"0"`. В ответах метода получения данных по [товарам](https://dev.wildberries.ru/openapi/analytics#tag/stocksReport/operation/postV2StocksReportProductsProducts) у таких товаров `"hasSizes":false`.
-   Данные по складам продавца приходят в агрегированном виде — по всем сразу, без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` и `"officeName":""`.
+   Данные по складам продавца приходят в агрегированном виде — без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` или `"regionName":"Свой склад СГТ"` и `"officeName":""`.
 
 Данные отчёта обновляются 1 раз в 2 часа.
 
@@ -62,9 +62,9 @@ POST /api/v2/stocks-report/products/sizes
 
 - `data` `TableSizeResponse`
   - `offices` `TableOfficeItem[]` — Множество данных по складам
-    - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
-    - `officeID` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `-999999`
-    - `officeName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `""`
+    - `regionName` `string` — [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
+    - `officeID` `integer<int64>` — [ID склада](https://dev.wildberries.ru/release-notes?id=605)
+    - `officeName` `string` — [Название склада](https://dev.wildberries.ru/release-notes?id=605)
     - `metrics` `object` — Метрики склада
       - `ordersCount` `integer<int64>` — Заказы, шт.
       - `ordersSum` `integer<int64>` — Заказы, сумма
@@ -97,9 +97,9 @@ POST /api/v2/stocks-report/products/sizes
     - `name` `string` — Название размера
     - `chrtID` `integer<int64>` — ID размера
     - `offices` `TableOfficeItem[]` — Склады
-      - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
-      - `officeID` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `-999999`
-      - `officeName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `""`
+      - `regionName` `string` — [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
+      - `officeID` `integer<int64>` — [ID склада](https://dev.wildberries.ru/release-notes?id=605)
+      - `officeName` `string` — [Название склада](https://dev.wildberries.ru/release-notes?id=605)
       - `metrics` `object` — Метрики склада
         - `ordersCount` `integer<int64>` — Заказы, шт.
         - `ordersSum` `integer<int64>` — Заказы, сумма

@@ -55,9 +55,9 @@ POST /api/analytics/v1/stocks-report/wb-warehouses
   - `items` `object[]` — Остатки товаров на складах WB по размерам
     - `nmId` `integer<int64>` — Артикул WB
     - `chrtId` `integer<int64>` — ID размера
-    - `warehouseId` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `-999999`
-    - `warehouseName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB`
-    - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB`
+    - `warehouseId` `integer<int64>` — [ID склада](https://dev.wildberries.ru/release-notes?id=605)
+    - `warehouseName` `string` — [Название склада](https://dev.wildberries.ru/release-notes?id=605)
+    - `regionName` `string` — [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
     - `quantity` `integer<int64>` — Количество товара на складе, доступное клиентам для добавления в корзину
     - `inWayToClient` `integer<int64>` — В пути к клиенту
     - `inWayFromClient` `integer<int64>` — В пути от клиента

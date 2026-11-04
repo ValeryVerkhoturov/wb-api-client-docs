@@ -44,6 +44,7 @@ Skus are not validated. If you submit an incorrect sku in the request, you will 
 | `200` | Success           | `models.DraftDeleteItemsErrorResponse` |
 | `400` | Bad request       | `errors.DraftError`                    |
 | `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
 | `403` | Access denied     | `object`                               |
 | `404` | Not found         | `errors.DraftError`                    |
 | `429` | Too many requests | `object`                               |
@@ -70,6 +71,11 @@ Skus are not validated. If you submit an incorrect sku in the request, you will 
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

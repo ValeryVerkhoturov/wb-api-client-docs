@@ -45,6 +45,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 | `200` | Успешно           | `api.CustomsDeclarationSetResponse` |
 | `400` | Bad request       | `api.BatchError`                    |
 | `401` | Unauthorized      | `object`                            |
+| `402` | Payment required  | `object`                            |
 | `403` | Access denied     | `Error`                             |
 | `429` | Too many requests | `object`                            |
 
@@ -75,6 +76,11 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

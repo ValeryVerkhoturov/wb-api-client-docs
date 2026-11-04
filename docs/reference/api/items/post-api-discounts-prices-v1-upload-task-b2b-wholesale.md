@@ -34,6 +34,7 @@ POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 | `208` | Такая загрузка уже есть | `object`          |
 | `400` | Неправильный запрос     | `ResponseErrorV3` |
 | `401` | Не авторизован          | `object`          |
+| `402` | Требуется платёж        | `object`          |
 | `403` | Доступ запрещён         | `ResponseErrorV3` |
 | `429` | Слишком много запросов  | `object`          |
 
@@ -75,6 +76,11 @@ POST /api/discounts-prices/v1/upload/task/b2b/wholesale
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

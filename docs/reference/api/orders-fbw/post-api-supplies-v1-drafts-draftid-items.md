@@ -49,6 +49,7 @@ POST /api/supplies/v1/drafts/{draftId}/items
 | `200` | Успешно                | `models.DraftAddItemsErrorResponse` |
 | `400` | Неправильный запрос    | `errors.DraftError`                 |
 | `401` | Не авторизован         | `object`                            |
+| `402` | Требуется платёж       | `object`                            |
 | `403` | Доступ запрещён        | `object`                            |
 | `404` | Не найдено             | `errors.DraftError`                 |
 | `429` | Слишком много запросов | `object`                            |
@@ -79,6 +80,11 @@ POST /api/supplies/v1/drafts/{draftId}/items
 - `status` `number` — HTTP статус-код
 - `statusText` `string` — Расшифровка HTTP статус-кода
 - `timestamp` `string` — Дата и время запроса
+
+**Структура `402`:**
+
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](https://dev.wildberries.ru/business-solutions)
 
 **Структура `403`:**
 

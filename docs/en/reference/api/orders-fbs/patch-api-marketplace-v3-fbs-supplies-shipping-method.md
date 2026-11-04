@@ -43,6 +43,7 @@ Available only for sellers from the Russian Federation.
 | `200` | Success           | `UpdateSuppliesShippingMethodResponse` |
 | `400` | Bad request       | `Error`                                |
 | `401` | Unauthorized      | `object`                               |
+| `402` | Payment required  | `object`                               |
 | `403` | Access denied     | `Error`                                |
 | `409` | Conflict          | `v3.APIError`                          |
 | `429` | Too many requests | `object`                               |
@@ -72,6 +73,11 @@ Available only for sellers from the Russian Federation.
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

@@ -26,6 +26,7 @@ The method returns information about auto-return settings set by the seller.
 | ----- | ------------------------------ | ---------------------------------------- |
 | `200` | Успешно                        | `GetV3FbsSettingsAutoreturnsResponse200` |
 | `401` | Unauthorized                   | `object`                                 |
+| `402` | Payment required               | `object`                                 |
 | `403` | Access denied                  | `Response4XX`                            |
 | `406` | Not applicable to this account | `ApiErrorV3`                             |
 | `429` | Too many requests              | `object`                                 |
@@ -44,6 +45,11 @@ The method returns information about auto-return settings set by the seller.
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

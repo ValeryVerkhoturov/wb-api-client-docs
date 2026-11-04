@@ -42,6 +42,7 @@ The method updates, adds or delete item [recommendations](https://seller.wildber
 | `208` | Already reported  | `response208SetRecom` |
 | `400` | Bad request       | `response400SetRecom` |
 | `401` | Unauthorized      | `object`              |
+| `402` | Payment required  | `object`              |
 | `403` | Access denied     | `Response4XX`         |
 | `429` | Too many requests | `object`              |
 
@@ -77,6 +78,11 @@ The method updates, adds or delete item [recommendations](https://seller.wildber
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

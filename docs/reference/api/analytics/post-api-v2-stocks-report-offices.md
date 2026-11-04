@@ -13,7 +13,7 @@ POST /api/v2/stocks-report/offices
 
 Метод формирует набор данных об остатках по складам.
 
-Данные по складам продавца приходят в агрегированном виде — по всем сразу, без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` и `"offices":[]`.
+Данные по складам продавца приходят в агрегированном виде — без детализации по конкретным складам — эти записи будут с `"regionName":"Свой склад"` или `"regionName":"Свой склад СГТ"` и `"offices":[]`.
 
 Данные отчёта обновляются 1 раз в 2 часа.
 
@@ -55,7 +55,7 @@ POST /api/v2/stocks-report/offices
 
 - `data` `TableShippingOfficeResponse`
   - `regions` `TableShippingOfficeItem[]` — Множество данных по регионам отгрузки
-    - `regionName` `string` — Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
+    - `regionName` `string` — [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
     - `metrics` `object` — Метрики по региону
       - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
       - `stockSum` `integer<int64>` — Остатки на текущий день, сумма
@@ -64,9 +64,9 @@ POST /api/v2/stocks-report/offices
         - `hours` `integer<int32>` — Количество часов
       - `toClientCount` `integer<int64>` — В пути к клиенту, шт.
       - `fromClientCount` `integer<int64>` — В пути от клиента, шт.
-    - `offices` `object[]` — Данные по складам. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `[]`
-      - `officeID` `integer<int64>` — ID склада
-      - `officeName` `string` — Название склада
+    - `offices` `object[]` — [Данные по складам](https://dev.wildberries.ru/release-notes?id=605)
+      - `officeID` `integer<int64>` — [ID склада](https://dev.wildberries.ru/release-notes?id=605)
+      - `officeName` `string` — [Название склада](https://dev.wildberries.ru/release-notes?id=605)
       - `metrics` `object` — Метрики по складу
         - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
         - `stockSum` `integer<int64>` — Остатки на текущий день, сумма

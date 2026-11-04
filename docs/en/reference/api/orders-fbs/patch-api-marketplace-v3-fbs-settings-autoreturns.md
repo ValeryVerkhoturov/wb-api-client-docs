@@ -33,6 +33,7 @@ The method sets seller auto-return settings for small-sized items — `"cargoTyp
 | `204` | Updated           | —             |
 | `400` | Bad request       | `ApiErrorV3`  |
 | `401` | Unauthorized      | `object`      |
+| `402` | Payment required  | `object`      |
 | `403` | Access denied     | `Response4XX` |
 | `429` | Too many requests | `object`      |
 
@@ -51,6 +52,11 @@ The method sets seller auto-return settings for small-sized items — `"cargoTyp
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

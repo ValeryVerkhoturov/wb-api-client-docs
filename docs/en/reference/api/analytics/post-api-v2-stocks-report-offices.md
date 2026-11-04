@@ -13,7 +13,7 @@ POST /api/v2/stocks-report/offices
 
 Forms a dataset for inventory by warehouses.
 
-The data on the seller warehouses are in an aggregated form — for all of them together without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` and `"offices":[]`.
+The data on the seller warehouses are in an aggregated form — without detailing specific warehouses — and responses contain `"regionName":"Свой склад"` or `"regionName":"Свой склад СГТ"` and `"offices":[]` in such cases.
 
 The report data is updated once every 2 hours.
 
@@ -55,7 +55,7 @@ The report data is updated once every 2 hours.
 
 - `data` `TableShippingOfficeResponse`
   - `regions` `TableShippingOfficeItem[]` — Set of data on shipping regions
-    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`, for WB warehouses
+    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/release-notes?id=605)
     - `metrics` `object` — Metrics by region
       - `stockCount` `integer<int64>` — Current inventory
       - `stockSum` `integer<int64>` — Current inventory value
@@ -64,9 +64,9 @@ The report data is updated once every 2 hours.
         - `hours` `integer<int32>` — Number of hours
       - `toClientCount` `integer<int64>` — On the way to user
       - `fromClientCount` `integer<int64>` — On the way from user
-    - `offices` `object[]` — Warehouse data. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `[]`
-      - `officeID` `integer<int64>` — Warehouse ID
-      - `officeName` `string` — Warehouse name
+    - `offices` `object[]` — [Warehouse data](https://dev.wildberries.ru/en/release-notes?id=605)
+      - `officeID` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
+      - `officeName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
       - `metrics` `object` — Warehouse metrics
         - `stockCount` `integer<int64>` — Current inventory
         - `stockSum` `integer<int64>` — Current inventory value

@@ -44,6 +44,7 @@ SPOT can only be added to a [supply](https://dev.wildberries.ru/openapi/orders-f
 | `204` | Added                        | —            |
 | `400` | Bad request                  | `ApiErrorV3` |
 | `401` | Unauthorized                 | `object`     |
+| `402` | Payment required             | `object`     |
 | `403` | Access denied                | `object`     |
 | `404` | Not found                    | `ApiErrorV3` |
 | `409` | Error while adding SPOT data | `ApiErrorV3` |
@@ -64,6 +65,11 @@ SPOT can only be added to a [supply](https://dev.wildberries.ru/openapi/orders-f
 - `status` `number` — HTTP status code
 - `statusText` `string` — Text of the HTTP status code
 - `timestamp` `string` — Request date and time
+
+**Structure `402`:**
+
+- `title` `string` — Error title
+- `detail` `string` — Error details. The error is only returned to services from the [Solutions for business Catalog](https://dev.wildberries.ru/business-solutions)
 
 **Structure `403`:**
 

@@ -55,9 +55,9 @@ The data is updated once every 30 minutes.
   - `items` `object[]` — WB warehouses inventory by size
     - `nmId` `integer<int64>` — WB item number
     - `chrtId` `integer<int64>` — Size ID
-    - `warehouseId` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `-999999`
-    - `warehouseName` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`
-    - `regionName` `string` — Shipping region. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB`
+    - `warehouseId` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `warehouseName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
     - `quantity` `integer<int64>` — Warehouse inventory available to clients to add to cart
     - `inWayToClient` `integer<int64>` — On way to client
     - `inWayFromClient` `integer<int64>` — On way from client
