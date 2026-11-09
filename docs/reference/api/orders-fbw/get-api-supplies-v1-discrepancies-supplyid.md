@@ -63,7 +63,7 @@ GET /api/supplies/v1/discrepancies/{supplyId}
 | `200` | Успешно                | `GetV1SuppliesSupplyIdDiscrepanciesQuantityResponse200` |
 | `400` | Неправильный запрос    | `models.ErrorModel`                                     |
 | `401` | Не авторизован         | `object`                                                |
-| `403` | Доступ запрещён        | `models.SupplyAcceptedMoreThanYearAgo`                  |
+| `403` | Доступ запрещён        | `Response4XX`                                           |
 | `404` | Не найдено             | `models.ErrorModel`                                     |
 | `429` | Слишком много запросов | `object`                                                |
 
@@ -108,11 +108,14 @@ GET /api/supplies/v1/discrepancies/{supplyId}
 
 **Структура `403`:**
 
-- `status` `integer<int64>` — HTTP-статус код
-- `title` `string` — Краткое описание ошибки
-- `detail` `string` — Подробное описание ошибки
+- `title` `string` — Заголовок ошибки
+- `detail` `string` — Детали ошибки
+- `code` `string` — Внутренний код ошибки
 - `requestId` `string` — ID запроса
-- `origin` `string` — Сервис, в котором произошла ошибка
+- `origin` `string` — ID внутреннего сервиса WB
+- `status` `number` — HTTP статус-код
+- `statusText` `string` — Расшифровка HTTP статус-кода
+- `timestamp` `string` — Дата и время запроса
 
 **Структура `404`:**
 

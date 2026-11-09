@@ -33,7 +33,7 @@ POST /api/advert/v1/normquery/bids
   - `advertId` `integer<int64>` (обязательно) — ID кампании
   - `nmId` `integer<int64>` (обязательно) — Артикул WB
   - `normQuery` `string` (обязательно) — Поисковый кластер
-  - `bidMinorUnits` `integer<int64>` (обязательно) — Ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). Допустимый шаг ставки указан в ответе метода [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+  - `bidMinorUnits` `integer<int64>` (обязательно) — Ставка в разменных единицах — 0,01 от базовой валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances). Допустимый шаг ставки указан в ответе метода получения [конфигурационных значений продвижения](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 
 ## Ответы
 

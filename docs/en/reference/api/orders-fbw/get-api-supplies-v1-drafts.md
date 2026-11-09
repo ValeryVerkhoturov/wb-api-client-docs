@@ -40,7 +40,7 @@ The method returns a list of supply drafts
 | `400` | Bad request       | `errors.DraftError`         |
 | `401` | Unauthorized      | `object`                    |
 | `402` | Payment required  | `object`                    |
-| `403` | Access denied     | `object`                    |
+| `403` | Access denied     | `Response4XX`               |
 | `429` | Too many requests | `object`                    |
 
 **Structure `200`:**

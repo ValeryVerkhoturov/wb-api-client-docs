@@ -1,6 +1,6 @@
 ---
 title: "Списки кампаний"
-description: "Метод возвращает списки всех рекламных кампаний продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения."
+description: "Метод возвращает списки всех кампаний продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения."
 ---
 
 # Списки кампаний
@@ -11,7 +11,7 @@ GET /adv/v1/promotion/count
 
 **База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Кампании · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV1PromotionCount)
 
-Метод возвращает списки всех [рекламных кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.
+Метод возвращает списки всех [кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
@@ -34,7 +34,7 @@ GET /adv/v1/promotion/count
 **Структура `200`:**
 
 - `adverts` `object[]` — Данные по кампаниям
-  - `type` `integer<int64>` — Тип кампании: - `8` — кампания с единой ставкой (**устаревший тип**) - `9` — кампания с единой или ручной ставкой. Тип ставки вы можете получить с помощью метода [Информация о кампаниях](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts), поле `bid_type`
+  - `type` `integer<int64>` — Тип кампании: - `8` — кампания с единой ставкой (**устаревший тип**) - `9` — кампания с единой или ручной ставкой. Тип ставки вы можете получить с помощью метода [Информация о кампаниях](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts), поле `bid_type`
   - `status` `integer<int64>` — Статус кампании
   - `count` `integer<int64>` — Количество кампаний
   - `advert_list` `object[]` — Список кампаний

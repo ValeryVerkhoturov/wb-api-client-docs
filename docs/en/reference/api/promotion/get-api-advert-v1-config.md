@@ -1,6 +1,6 @@
 ---
 title: "Promotion Configuration Values"
-description: "The method returns the currency, currency codes of the seller account and the allowed bid increments for the method POST /api/advert/v1/normquery/bids."
+description: "The method returns the currency, currency codes of the seller account and the allowed bid increments for the method of setting bids for search clusters in the…"
 ---
 
 # Promotion Configuration Values
@@ -11,7 +11,7 @@ GET /api/advert/v1/config
 
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 
-The method returns the currency, currency codes of the [seller account](https://cmp.wildberries.ru/campaigns/finances) and the allowed bid increments for the method [POST /api/advert/v1/normquery/bids](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids).
+The method returns the currency, currency codes of the [seller account](https://cmp.wildberries.ru/campaigns/finances) and the allowed bid increments for the method of [setting bids for search clusters in the currency of the seller account](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids).
 
 Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Rules-for-using-API-access-tokens) by
 **Personal** token,

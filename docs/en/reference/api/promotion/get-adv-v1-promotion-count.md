@@ -34,7 +34,7 @@ Method allows to get campaigns lists grouped by type and status with information
 **Structure `200`:**
 
 - `adverts` `object[]` — Campaign data
-  - `type` `integer<int64>` — Campaign type: - `8` — campaign with standard bid (**deprecated type**) - `9` — campaign with standard or custom bid. You can get the bid type with the [Campaigns Information](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) method, `bid_type` field
+  - `type` `integer<int64>` — Campaign type: - `8` — campaign with standard bid (**deprecated type**) - `9` — campaign with standard or custom bid. You can get the bid type with the [Campaigns Information](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) method, `bid_type` field
   - `status` `integer<int64>` — Campaign status
   - `count` `integer<int64>` — Campaigns number
   - `advert_list` `object[]` — Campaigns list

@@ -1,6 +1,6 @@
 ---
 title: "Информация о кампаниях"
-description: "Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID."
+description: "Метод будет отключен 10 января."
 ---
 
 # Информация о кампаниях
@@ -11,7 +11,7 @@ GET /api/advert/v2/adverts
 
 **База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Кампании · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV2Adverts)
 
-Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID.
+Метод будет отключен [10 января](https://dev.wildberries.ru/release-notes?id=597).
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
@@ -67,7 +67,6 @@ GET /api/advert/v2/adverts
     - `created` `string` — Время создания кампании
     - `updated` `string` — Время последнего изменения кампании
     - `started` `string` — Время последнего запуска кампании
-    - `deleted` `string` — Время удаления кампании. Если кампания не удалена, время указывается в будущем
 
 **Структура `400`:**
 

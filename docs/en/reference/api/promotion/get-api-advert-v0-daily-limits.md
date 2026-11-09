@@ -37,7 +37,7 @@ The method returns the current daily limit settings for CPC campaigns — the ma
 | `200` | Success           | `V0GetDailyLimitsResponse` |
 | `400` | Bad request       | `response400`              |
 | `401` | Unauthorized      | `object`                   |
-| `403` | Access denied     | `object`                   |
+| `403` | Access denied     | `Response4XX`              |
 | `429` | Too many requests | `object`                   |
 
 **Structure `200`:**

@@ -63,7 +63,7 @@ Discrepancy upwards:
 | `200` | Success           | `GetV1SuppliesSupplyIdDiscrepanciesQuantityResponse200` |
 | `400` | Bad request       | `models.ErrorModel`                                     |
 | `401` | Unauthorized      | `object`                                                |
-| `403` | Доступ запрещён   | `models.SupplyAcceptedMoreThanYearAgo`                  |
+| `403` | Access denied     | `Response4XX`                                           |
 | `404` | Not found         | `models.ErrorModel`                                     |
 | `429` | Too many requests | `object`                                                |
 
@@ -108,11 +108,14 @@ Discrepancy upwards:
 
 **Structure `403`:**
 
-- `status` `integer<int64>` — HTTP status code
-- `title` `string` — Short error description
-- `detail` `string` — Detailed error description
+- `title` `string` — Error title
+- `detail` `string` — Error details
+- `code` `string` — Internal error code
 - `requestId` `string` — Request ID
-- `origin` `string` — Service where the error occurred
+- `origin` `string` — WB internal service ID
+- `status` `number` — HTTP status code
+- `statusText` `string` — Text of the HTTP status code
+- `timestamp` `string` — Request date and time
 
 **Structure `404`:**
 

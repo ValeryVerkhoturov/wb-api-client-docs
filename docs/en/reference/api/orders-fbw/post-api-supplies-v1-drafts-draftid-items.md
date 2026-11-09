@@ -50,7 +50,7 @@ The method works on the principle of atomicity:
 | `400` | Bad request       | `errors.DraftError`                 |
 | `401` | Unauthorized      | `object`                            |
 | `402` | Payment required  | `object`                            |
-| `403` | Access denied     | `object`                            |
+| `403` | Access denied     | `Response4XX`                       |
 | `404` | Not found         | `errors.DraftError`                 |
 | `429` | Too many requests | `object`                            |
 

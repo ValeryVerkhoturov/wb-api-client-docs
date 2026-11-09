@@ -1,6 +1,6 @@
 ---
 title: "Конфигурационные значения продвижения"
-description: "Метод возвращает валюту, код валюты профиля продавца и допустимые шаги ставок для метода POST /api/advert/v1/normquery/bids"
+description: "Метод возвращает валюту, код валюты профиля продавца и допустимые шаги ставок для метода установки ставок для поисковых кластеров в валюте профиля продавца"
 ---
 
 # Конфигурационные значения продвижения
@@ -11,7 +11,7 @@ GET /api/advert/v1/config
 
 **База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Управление кампаниями · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 
-Метод возвращает валюту, код валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) и допустимые шаги ставок для метода [POST /api/advert/v1/normquery/bids](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
+Метод возвращает валюту, код валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) и допустимые шаги ставок для метода [установки ставок для поисковых кластеров в валюте профиля продавца](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)
 
 Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по
 **Персональному** токену,

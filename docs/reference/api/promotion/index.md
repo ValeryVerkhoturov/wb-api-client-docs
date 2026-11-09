@@ -1,11 +1,11 @@
 ---
 title: "Маркетинг и продвижение"
-description: "Операций модуля `promotion` — 42."
+description: "Операций модуля `promotion` — 43."
 ---
 
 # Маркетинг и продвижение · `promotion`
 
-Операций модуля `promotion` — 42.
+Операций модуля `promotion` — 43.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [Все модули](/reference/api/)
 
@@ -25,6 +25,7 @@ description: "Операций модуля `promotion` — 42."
 | Метод | Путь                      | Операция                                                                     |
 | ----- | ------------------------- | ---------------------------------------------------------------------------- |
 | `GET` | `/adv/v1/promotion/count` | [Списки кампаний](/reference/api/promotion/get-adv-v1-promotion-count)       |
+| `GET` | `/api/advert/v3/adverts`  | [Информация о кампаниях](/reference/api/promotion/get-api-advert-v3-adverts) |
 | `GET` | `/api/advert/v2/adverts`  | [Информация о кампаниях](/reference/api/promotion/get-api-advert-v2-adverts) |
 
 ## Создание кампаний

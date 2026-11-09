@@ -37,7 +37,7 @@ DELETE /api/supplies/v1/drafts/{draftId}
 | `400` | Неправильный запрос    | `errors.DraftError` |
 | `401` | Не авторизован         | `object`            |
 | `402` | Требуется платёж       | `object`            |
-| `403` | Доступ запрещён        | `object`            |
+| `403` | Доступ запрещён        | `Response4XX`       |
 | `404` | Не найдено             | `errors.DraftError` |
 | `429` | Слишком много запросов | `object`            |
 

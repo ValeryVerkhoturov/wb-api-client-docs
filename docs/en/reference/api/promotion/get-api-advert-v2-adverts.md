@@ -1,6 +1,6 @@
 ---
 title: "Campaigns Information"
-description: "The method returns information about campaigns with standard or custom bid via statuses, payment types and IDs."
+description: "The deprecated method will be disabled on 10 January."
 ---
 
 # Campaigns Information
@@ -11,7 +11,7 @@ GET /api/advert/v2/adverts
 
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV2Adverts)
 
-The method returns information about campaigns with standard or custom bid via statuses, payment types and IDs.
+The deprecated method will be disabled on [10 January](https://dev.wildberries.ru/en/release-notes?id=597).
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
@@ -67,7 +67,6 @@ The method returns information about campaigns with standard or custom bid via s
     - `created` `string` — Campaign create time
     - `updated` `string` — Campaign last update time
     - `started` `string` — Campaign launch time
-    - `deleted` `string` — Campaign delete date. If the campaign has not been deleted, the time will be indicated in the future
 
 **Structure `400`:**
 

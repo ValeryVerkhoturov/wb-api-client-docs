@@ -795,6 +795,10 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         },
         {
           text: "Информация о кампаниях",
+          link: "/reference/api/promotion/get-api-advert-v3-adverts",
+        },
+        {
+          text: "Информация о кампаниях",
           link: "/reference/api/promotion/get-api-advert-v2-adverts",
         },
         {
@@ -2112,6 +2116,10 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Campaigns Lists",
           link: "/en/reference/api/promotion/get-adv-v1-promotion-count",
+        },
+        {
+          text: "Campaigns Information",
+          link: "/en/reference/api/promotion/get-api-advert-v3-adverts",
         },
         {
           text: "Campaigns Information",

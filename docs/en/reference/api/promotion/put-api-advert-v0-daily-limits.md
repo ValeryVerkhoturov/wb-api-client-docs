@@ -30,7 +30,7 @@ The method allows you to enable, update or disable the daily budget limit.
 
 - `advertIds` `integer<int64>[]` (required) — Campaign IDs
 - `enabled` `boolean` (required) — Enable the limit: - `true` — yes - `false` — no
-- `dailyLimit` `integer<int64>` — Daily limit amount. Required when `"enabled": true`. The minimum allowed amount is specified in the `minDailyLimit` field of the [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config) method
+- `dailyLimit` `integer<int64>` — Daily limit amount. Required when `"enabled": true`. The minimum allowed amount is specified in the `minDailyLimit` field of the method for getting [promotion configuration values](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 - `carryOverEnabled` `boolean` — Carry over the unused remaining limit to the next day: - `true` — yes - `false` — no Required when `"enabled": true`
 
 ## Responses
@@ -40,7 +40,7 @@ The method allows you to enable, update or disable the daily budget limit.
 | `200` | Success           | `V0PutDailyLimitsResponse` |
 | `400` | Bad request       | `response400`              |
 | `401` | Unauthorized      | `object`                   |
-| `403` | Access denied     | `object`                   |
+| `403` | Access denied     | `Response4XX`              |
 | `429` | Too many requests | `object`                   |
 
 **Structure `200`:**

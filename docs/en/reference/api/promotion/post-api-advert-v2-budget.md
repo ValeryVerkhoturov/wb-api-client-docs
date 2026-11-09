@@ -11,7 +11,7 @@ POST /api/advert/v2/budget
 
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Finances · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/finances/operation/postV2Budget)
 
-The method returns information about [campaign](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) budget balances.
+The method returns information about [campaign](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) budget balances.
 For campaigns in [statuses](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount):
 
 - `4` — ready to be launched

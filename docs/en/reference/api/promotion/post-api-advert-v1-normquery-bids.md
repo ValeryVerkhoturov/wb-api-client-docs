@@ -33,7 +33,7 @@ You can use this method only for campaigns with manual bids and `cpm` payment mo
   - `advertId` `integer<int64>` (required) — Campaign ID
   - `nmId` `integer<int64>` (required) — WB item number
   - `normQuery` `string` (required) — Search cluster
-  - `bidMinorUnits` `integer<int64>` (required) — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. The allowed bid increment is specified in the response of the method [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+  - `bidMinorUnits` `integer<int64>` (required) — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. The allowed bid increment is specified in the response of the method for getting [promotion configuration values](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 
 ## Responses
 

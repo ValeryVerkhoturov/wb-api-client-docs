@@ -30,7 +30,7 @@ PUT /api/advert/v0/daily-limits
 
 - `advertIds` `integer<int64>[]` (обязательно) — ID кампаний
 - `enabled` `boolean` (обязательно) — Включить лимит: - `true` — да - `false` — нет
-- `dailyLimit` `integer<int64>` — Сумма дневного лимита. Параметр обязателен при `"enabled": true`. Минимально допустимая сумма указана в поле `minDailyLimit` метода [GET /api/advert/v1/config](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
+- `dailyLimit` `integer<int64>` — Сумма дневного лимита. Параметр обязателен при `"enabled": true`. Минимально допустимая сумма указана в поле `minDailyLimit` метода получения [конфигурационных значений продвижения](https://dev.wildberries.ru/openapi/promotion#tag/campaignManagement/operation/getV1Config)
 - `carryOverEnabled` `boolean` — Переносить неиспользованный остаток лимита на следующий день: - `true` — да - `false` — нет Параметр обязателен при `"enabled": true`
 
 ## Ответы
@@ -40,7 +40,7 @@ PUT /api/advert/v0/daily-limits
 | `200` | Успешно                | `V0PutDailyLimitsResponse` |
 | `400` | Неправильный запрос    | `response400`              |
 | `401` | Не авторизован         | `object`                   |
-| `403` | Доступ запрещён        | `object`                   |
+| `403` | Доступ запрещён        | `Response4XX`              |
 | `429` | Слишком много запросов | `object`                   |
 
 **Структура `200`:**

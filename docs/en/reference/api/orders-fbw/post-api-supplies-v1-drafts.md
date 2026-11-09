@@ -30,7 +30,7 @@ The method creates empty supply draft.
 | `200` | Success           | `models.DraftCreateResponse` |
 | `401` | Unauthorized      | `object`                     |
 | `402` | Payment required  | `object`                     |
-| `403` | Access denied     | `object`                     |
+| `403` | Access denied     | `Response4XX`                |
 | `429` | Too many requests | `object`                     |
 
 **Structure `200`:**
