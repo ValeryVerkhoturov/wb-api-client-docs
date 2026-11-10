@@ -1,6 +1,6 @@
 ---
 title: "Информация о кампаниях"
-description: "Метод возвращает информацию о кампаниях с единой или ручной ставкой по их статусам, типам оплаты или списку ID."
+description: "Метод возвращает информацию о кампаниях с единой или ручной ставкой по их статусам, типам оплаты или списку ID. Чтобы получить все кампании: 1. Сделайте первый…"
 ---
 
 # Информация о кампаниях
@@ -12,16 +12,18 @@ GET /api/advert/v3/adverts
 **База:** `https://advert-api.wildberries.ru` · **Модуль:** [`promotion`](/reference/api/promotion/) · **Раздел:** Кампании · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV3Adverts)
 
 Метод возвращает информацию о кампаниях с единой или ручной ставкой по их статусам, типам оплаты или списку ID.
-
 Чтобы получить все кампании:
 
 1. Сделайте первый запрос без параметра `next`.
 2. Повторяйте запрос со значением параметра `next` из ответа на предыдущий запрос, пока `next` не вернётся пустым `""`. Это будет означать, что вы получили все кампании.
+   Чтобы получить конкретные кампании, передайте их ID в параметре `advertIds`.
+   Не передавайте `advertIds` в одном запросе с другими параметрами.
 
-Чтобы получить конкретные кампании, передайте их ID в параметре `advertIds`.
-Не передавайте `advertIds` в одном запросе с другими параметрами.
+[Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
 
-RL
+| Период | Лимит | Интервал | Всплеск |
+| ------ | ----- | -------- | ------- |
+|        |       |          |         |
 
 ## Параметры
 
@@ -45,26 +47,25 @@ RL
 **Структура `200`:**
 
 - `adverts` `V3GetAdverts[]` — Кампании
-  - `id` `integer<int64>` — ID кампании
+  - `advertId` `integer<int64>` — ID кампании
   - `status` `integer<int64>` = `4` | `7` | `9` | `11` — Статус кампании: - `4` — готова к запуску - `7` — завершена - `9` — активна - `11` — на паузе
   - `timestamps` `Timestamps`
     - `created` `string` — Время создания кампании
     - `updated` `string` — Время последнего изменения кампании
     - `started` `string` — Время последнего запуска кампании
+    - `ended` `string` — Время завершения кампании
   - `settings` `V3AdvertSettings`
     - `paymentType` `string` — Тип оплаты: - `cpm` — за показы - `cpc` — за клик
     - `name` `string` — Название кампании
-    - `placements` `V3Placements`
-      - `search` `boolean` — Размещение в поиске: - `false` — выключено - `true` — включено
-      - `recommendations` `boolean` — Размещение в рекомендациях: - `false` — выключено - `true` — включено
+    - `placements` `object`
   - `nms` `V3AdvertNMsSettings[]` — Настройки товаров
     - `nmId` `integer<int64>` — Артикул WB
     - `subject` `V3AdvertSubject`
       - `id` `integer<int64>` — ID предмета
       - `name` `string` — Название предмета
-    - `bids` `V3AdvertBidsKopecks`
-      - `search` `integer<int64>` — Ставка в поиске
-      - `recommendations` `integer<int64>` — Ставка в рекомендациях
+    - `bids` `V3AdvertBidsKopecks[]` — Ставки
+      - `type` `V3Placements`
+      - `value` `integer<int64>` — Ставка
   - `currency` `string<ISO 4217>` — Код валюты
   - `restrictions` `object` — Ограничения кампании
     - `canChangeNms` `boolean` — Можно ли изменять список товаров кампании: - `true` — да - `false` — нет

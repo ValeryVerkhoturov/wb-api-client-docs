@@ -63,7 +63,7 @@ The deprecated method will be disabled on [10 January](https://dev.wildberries.r
   - `restrictions` `object` — Campaign restrictions
     - `can_change_nms` `boolean` — Can the list of campaign items be changed: - `true` — yes - `false` — no
   - `status` `integer<int64>` = `-1` | `4` | `7` | `8` | `9` | `11` — Campaign status: - `-1` — deleted, the deletion process will be completed within 10 minutes - `4` — ready to be launched - `7` — completed - `8` — declined - `9` — active - `11` — campaign is paused
-  - `timestamps` `Timestamps`
+  - `timestamps` `TimestampsV2`
     - `created` `string` — Campaign create time
     - `updated` `string` — Campaign last update time
     - `started` `string` — Campaign launch time

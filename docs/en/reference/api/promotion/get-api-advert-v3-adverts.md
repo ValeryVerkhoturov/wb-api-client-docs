@@ -1,6 +1,6 @@
 ---
 title: "Campaigns Information"
-description: "The method returns information about campaigns with a standard or custom bid by their statuses, payment types, or list of IDs."
+description: "The method returns information about campaigns with a standard or custom bid by their statuses, payment types, or list of IDs. To get all campaigns: 1. Make…"
 ---
 
 # Campaigns Information
@@ -12,16 +12,18 @@ GET /api/advert/v3/adverts
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaigns · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaigns/operation/getV3Adverts)
 
 The method returns information about campaigns with a standard or custom bid by their statuses, payment types, or list of IDs.
-
 To get all campaigns:
 
 1. Make the first request without the `next` parameter.
 2. Repeat the request with the value of the `next` parameter from the previous response until `next` returns an empty value `""`. This means you have got all campaigns.
+   To get specific campaigns, pass their IDs in the `advertIds` parameter.
+   Do not use `advertIds` in the same request with other parameters.
 
-To get specific campaigns, pass their IDs in the `advertIds` parameter.
-Do not use `advertIds` in the same request with other parameters.
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-RL
+| Period | Limit | Interval | Burst |
+| ------ | ----- | -------- | ----- |
+|        |       |          |       |
 
 ## Parameters
 
@@ -45,26 +47,25 @@ RL
 **Structure `200`:**
 
 - `adverts` `V3GetAdverts[]` — Campaigns
-  - `id` `integer<int64>` — Campaign ID
+  - `advertId` `integer<int64>` — Campaign ID
   - `status` `integer<int64>` = `4` | `7` | `9` | `11` — Campaign status: - `4` — ready to be launched - `7` — completed - `9` — active - `11` — campaign is paused
   - `timestamps` `Timestamps`
     - `created` `string` — Campaign create time
     - `updated` `string` — Campaign last update time
     - `started` `string` — Campaign launch time
+    - `ended` `string` — Campaign ended time
   - `settings` `V3AdvertSettings`
     - `paymentType` `string` — Payment type: - `cpm` — cost per mille - `cpc` — cost per click
     - `name` `string` — Campaign name
-    - `placements` `V3Placements`
-      - `search` `boolean` — Placement in search: - `false` — disabled - `true` — enabled
-      - `recommendations` `boolean` — Placement in recommendations: - `false` — disabled - `true` — enabled
+    - `placements` `object`
   - `nms` `V3AdvertNMsSettings[]` — Item settings
     - `nmId` `integer<int64>` — WB item number
     - `subject` `V3AdvertSubject`
       - `id` `integer<int64>` — Subcategory ID
       - `name` `string` — Subcategory name
-    - `bids` `V3AdvertBidsKopecks`
-      - `search` `integer<int64>` — Bid in search
-      - `recommendations` `integer<int64>` — Bid in recommendations
+    - `bids` `V3AdvertBidsKopecks[]` — Bids
+      - `type` `V3Placements`
+      - `value` `integer<int64>` — Bid in recommendations
   - `currency` `string<ISO 4217>` — Currency code
   - `restrictions` `object` — Campaign restrictions
     - `canChangeNms` `boolean` — Whether the list of campaign items can be changed: - `true` — yes - `false` — no
