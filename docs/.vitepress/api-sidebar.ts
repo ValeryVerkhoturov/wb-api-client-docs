@@ -1254,10 +1254,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-download",
         },
         {
-          text: "Получить отчёт",
-          link: "/reference/api/reports/get-api-v1-analytics-region-sale",
-        },
-        {
           text: "Бренды продавца",
           link: "/reference/api/reports/get-api-v1-analytics-brand-share-brands",
         },
@@ -2576,10 +2572,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Get the Report",
           link: "/en/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-download",
-        },
-        {
-          text: "Get Report",
-          link: "/en/reference/api/reports/get-api-v1-analytics-region-sale",
         },
         {
           text: "Seller Brands",

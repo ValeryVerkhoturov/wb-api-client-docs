@@ -1,11 +1,11 @@
 ---
 title: "Отчёты"
-description: "Операций модуля `reports` — 23."
+description: "Операций модуля `reports` — 22."
 ---
 
 # Отчёты · `reports`
 
-Операций модуля `reports` — 23.
+Операций модуля `reports` — 22.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [Все модули](/reference/api/)
 
@@ -68,12 +68,6 @@ description: "Операций модуля `reports` — 23."
 | `GET` | `/api/v1/paid_storage`                          | [Создать отчёт](/reference/api/reports/get-api-v1-paid-storage)                         |
 | `GET` | `/api/v1/paid_storage/tasks/{task_id}/status`   | [Проверить статус](/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-status) |
 | `GET` | `/api/v1/paid_storage/tasks/{task_id}/download` | [Получить отчёт](/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-download) |
-
-## Продажи по регионам
-
-| Метод | Путь                            | Операция                                                                  |
-| ----- | ------------------------------- | ------------------------------------------------------------------------- |
-| `GET` | `/api/v1/analytics/region-sale` | [Получить отчёт](/reference/api/reports/get-api-v1-analytics-region-sale) |
 
 ## Доля бренда в продажах
 

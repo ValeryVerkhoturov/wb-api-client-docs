@@ -11,10 +11,11 @@ description: "Операций модуля `orders-fbw` — 14."
 
 Узнать больше о поставках FBW можно в [справочном центре](https://seller.wildberries.ru/instructions/subcategory/5a8e1202-0865-45b7-acae-5d0afc7add56?goBackOption=prevRoute&categoryId=479385c6-de01-4b4d-ad4e-ed941e65582e)
 
-В разделе описаны методы получения:
+С помощью методов этого раздела вы можете:
 
-- [информации для формирования поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
-- [информации о поставках](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
+- получить [информации для формирования поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
+- получить [информации о поставках](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
+- управлять [черновиками поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/supplyDrafts)
 
 ## Информация для формирования поставок
 

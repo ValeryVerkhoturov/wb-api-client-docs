@@ -21,9 +21,12 @@ To get all campaigns:
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Period | Limit | Interval | Burst |
-| ------ | ----- | -------- | ----- |
-|        |       |          |       |
+| Type             | Period | Limit      | Interval | Burst      |
+| ---------------- | ------ | ---------- | -------- | ---------- |
+| Personal         | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Service          | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base with secret | 1 s    | 5 requests | 200 ms   | 5 requests |
+| Base             | 1 h    | 1 request  | 1 h      | 1 request  |
 
 ## Parameters
 

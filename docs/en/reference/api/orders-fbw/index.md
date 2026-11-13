@@ -9,10 +9,11 @@ Module `orders-fbw` has 14 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbw) · [All modules](/en/reference/api/)
 
-This section describes the methods for getting:
+Use the FBW Supplies methods to:
 
-- [information for forming supplies](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
-- [supplies information](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
+- get [information for forming supplies](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
+- get [supplies information](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
+- manage [supplies drafts](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
 
 ## Information for Forming Supplies
 

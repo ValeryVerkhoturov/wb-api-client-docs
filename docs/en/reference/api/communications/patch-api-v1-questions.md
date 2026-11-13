@@ -30,6 +30,10 @@ It is possible to edit a response to a question within 2 months (60 days), after
 | Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
 | Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
+
 ## Request body
 
 `application/json` — schema `object`, optional

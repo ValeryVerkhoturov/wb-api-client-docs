@@ -42,7 +42,7 @@ If one or several images or a video do not meet the requirements, no images and 
 
 ---
 
-In Sandbox — maximum of 1 request per second for all **Content** methods in total.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Request body
 

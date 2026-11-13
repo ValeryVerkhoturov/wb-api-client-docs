@@ -47,11 +47,23 @@ The types of documents that you can add for the item are specified in [subcatego
 
 Not all the documents that you can add are required and are being validated. You independently determine which permits are required for the item in accordance with the law.
 
-[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods in the **Content** category:
 
-| Period | Limit       | Interval | Burst      |
-| ------ | ----------- | -------- | ---------- |
-| 1 min  | 10 requests | 6 s      | 5 requests |
+| Period                      | Limit       | Interval | Burst      |
+| --------------------------- | ----------- | -------- | ---------- |
+| 1 min                       | 10 requests | 6 s      | 5 requests |
+| Exceptions are the methods: |
+
+- [creating listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUpload)
+- [creating listings with merge](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/postV2CardsUploadAdd)
+- [editing listings](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
+- [recovering product card from trash](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsRecover)
+- [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
+- [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
+
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Request body
 

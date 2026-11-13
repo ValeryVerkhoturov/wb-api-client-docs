@@ -24,6 +24,10 @@ When restoring the listing from the trash, its `imtID` — [merged](https://dev.
 | Base with secret | 1 min  | 3 requests | 20 s     | 5 requests |
 | Base             | 1 h    | 2 requests | 30 min   | 1 request  |
 
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
+
 ## Request body
 
 `application/json` — schema `object`, required

@@ -44,13 +44,13 @@ To delete listing from the errors list, repeat the request for creating or creat
 - [getting limits for the listings](https://dev.wildberries.ru/openapi/item-management#tag/listingItems/operation/getV2CardsLimits)
 - [getting failed listings with errors](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsErrorList)
 
-| Period | Limit       | Interval | Burst      |
-| ------ | ----------- | -------- | ---------- |
-| 1 min  | 10 requests | 6 s      | 5 requests |
+| Period | Limit      | Interval | Burst      |
+| ------ | ---------- | -------- | ---------- |
+| 1 min  | 8 requests | 7500 ms  | 5 requests |
 
 ---
 
-In Sandbox — maximum of 1 request per second for all **Content** methods in total.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Parameters
 

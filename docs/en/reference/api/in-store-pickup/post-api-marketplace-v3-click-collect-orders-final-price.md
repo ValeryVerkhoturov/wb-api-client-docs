@@ -16,16 +16,12 @@ The method returns:
 - seller prices excluding discounts
 - sums charged to the buyer including all discounts and cashback
 
-[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for all methods for **getting and deleting In-Store Pickup label identifiers**:
+[Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **In-Store Pickup assembly orders** methods:
 
 | Period                                                           | Limit        | Interval | Burst       |
 | ---------------------------------------------------------------- | ------------ | -------- | ----------- |
 | 1 min                                                            | 150 requests | 400 ms   | 20 requests |
 | One request with `4XX` response codes is counted as 10 requests. |
-
----
-
-In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Marketplace** methods in total.
 
 ## Request body
 

@@ -41,7 +41,8 @@ GET /api/v1/supplies/{ID}/package
 
 **Структура `200` — `models.Box[]`:**
 
-- `packageCode` `string` — Штрих-код упаковки
+- `packageCode` `string` — Закодированное значение стикера упаковки
+- `packageId` `string` — ID стикера упаковки
 - `quantity` `integer<int64>` — Суммарное количество товара в упаковке, шт
 - `barcodes` `models.GoodInBox[]` — Список упакованных товаров
   - `barcode` `string` — Баркод

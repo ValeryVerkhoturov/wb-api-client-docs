@@ -24,7 +24,7 @@ Returns seller labels list
 
 ---
 
-In Sandbox — maximum of 1 request per second for all **Content** methods in total.
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
 
 ## Responses
 

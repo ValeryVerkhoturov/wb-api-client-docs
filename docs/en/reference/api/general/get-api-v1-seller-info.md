@@ -36,7 +36,7 @@ This method allows you to obtain the seller's name and account ID.
 **Structure `200`:**
 
 - `name` `string` — Seller's name
-- `sid` `string<UUID>` — Wildberries Seller [ID](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-ustroen-token)
+- `sid` `string<UUID>` — Wildberries Seller [ID](https://dev.wildberries.ru/openapi/api-information#tag/authorization/About-the-token)
 - `tin` `string` — Taxpayer identification number of the partner (INN in Russian)
 - `tradeMark` `string` — Seller's trade name
 - `country` `string` — Seller account registration country

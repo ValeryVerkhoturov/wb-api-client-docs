@@ -27,10 +27,6 @@ The method returns a reference list of OKPD2 codes by subcategory ID. To find a 
 - [getting item recommendation list](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
 - [setting item recommendations](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
----
-
-In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all **Content** methods in total.
-
 ## Parameters
 
 | Name     | In    | Type     | Req. | Description                                                                                                                    |

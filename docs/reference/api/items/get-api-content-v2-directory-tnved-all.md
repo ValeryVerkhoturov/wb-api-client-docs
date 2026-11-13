@@ -27,10 +27,6 @@ GET /api/content/v2/directory/tnved/all
 - [получения списка рекомендаций в карточках товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsList)
 - [установки рекомендаций для товаров](https://dev.wildberries.ru/openapi/item-management#tag/recommendations/operation/postV1RecommendationsSet)
 
----
-
-В [песочнице](https://dev.wildberries.ru/sandbox) — максимум 1 запрос в секунду суммарно для всех методов **Контента**.
-
 ## Параметры
 
 | Имя      | Где   | Тип              | Обяз. | Описание                                                         |

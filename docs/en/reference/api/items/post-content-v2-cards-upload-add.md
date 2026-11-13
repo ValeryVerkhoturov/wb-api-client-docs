@@ -38,6 +38,10 @@ Not all the documents that you can add are required and are being validated. You
 | Base with secret | 1 min  | 10 requests | 6 s      | 5 requests |
 | Base             | 2 h    | 1 request   | 2 h      | 1 request  |
 
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
+
 ## Request body
 
 `application/json` — schema `object`, optional

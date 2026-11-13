@@ -1,11 +1,11 @@
 ---
 title: "Reports"
-description: "Module `reports` has 23 operations."
+description: "Module `reports` has 22 operations."
 ---
 
 # Reports · `reports`
 
-Module `reports` has 23 operations.
+Module `reports` has 22 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/reports) · [All modules](/en/reference/api/)
 
@@ -57,12 +57,6 @@ Reports on items, retentions, and paid storage
 | `GET`  | `/api/v1/paid_storage`                          | [Generate the Report](/en/reference/api/reports/get-api-v1-paid-storage)                   |
 | `GET`  | `/api/v1/paid_storage/tasks/{task_id}/status`   | [Check the Status](/en/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-status) |
 | `GET`  | `/api/v1/paid_storage/tasks/{task_id}/download` | [Get the Report](/en/reference/api/reports/get-api-v1-paid-storage-tasks-task-id-download) |
-
-## Sales by Regions
-
-| Method | Path                            | Operation                                                                |
-| ------ | ------------------------------- | ------------------------------------------------------------------------ |
-| `GET`  | `/api/v1/analytics/region-sale` | [Get Report](/en/reference/api/reports/get-api-v1-analytics-region-sale) |
 
 ## Share of Brand in Sales
 

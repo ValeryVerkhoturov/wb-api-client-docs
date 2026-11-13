@@ -52,9 +52,13 @@ To get only items that were listed or updated after the previous data export:
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
-| Period | Limit        | Interval | Burst      |
-| ------ | ------------ | -------- | ---------- |
-| 1 min  | 100 requests | 600 ms   | 5 requests |
+| Period | Limit       | Interval | Burst      |
+| ------ | ----------- | -------- | ---------- |
+| 1 min  | 80 requests | 750 ms   | 5 requests |
+
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
 
 ## Parameters
 

@@ -22,6 +22,10 @@ The method allows to get the number of feedbacks
 | Base with secret | 1 s    | 3 requests | 333 ms   | 6 requests |
 | Base             | 1 h    | 5 requests | 12 min   | 1 request  |
 
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
+
 ## Parameters
 
 | Name         | In    | Type             | Req. | Description                                                    |

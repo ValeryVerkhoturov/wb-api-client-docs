@@ -29,6 +29,10 @@ A listing will remain for sale as long as there is any inventory left, even if m
 | Base with secret | 1 min  | 100 requests | 600 ms   | 5 requests |
 | Base             | 1 h    | 2 requests   | 30 min   | 1 request  |
 
+---
+
+In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per second for all methods in total.
+
 ## Request body
 
 `application/json` — schema `object`, required

@@ -41,7 +41,8 @@ The method returns information about the package of the supply.
 
 **Structure `200` — `models.Box[]`:**
 
-- `packageCode` `string` — Package SKU
+- `packageCode` `string` — The encoded value of the packaging sticker
+- `packageId` `string` — Packaging sticker ID
 - `quantity` `integer<int64>` — Total quantity of items in the package, pieces
 - `barcodes` `models.GoodInBox[]` — List of packed items
   - `barcode` `string` — Barcode
