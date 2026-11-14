@@ -13,8 +13,8 @@ description: "Операций модуля `orders-fbw` — 14."
 
 С помощью методов этого раздела вы можете:
 
-- получить [информации для формирования поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
-- получить [информации о поставках](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
+- получить [информацию для формирования поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/informationForFormingSupplies)
+- получить [информацию о поставках](https://dev.wildberries.ru/openapi/orders-fbw#tag/suppliesInformation)
 - управлять [черновиками поставок](https://dev.wildberries.ru/openapi/orders-fbw#tag/supplyDrafts)
 
 ## Информация для формирования поставок
