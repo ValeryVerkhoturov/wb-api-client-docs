@@ -48,7 +48,7 @@ The method allows you to get a history of top-ups.
 - `type` `integer<int64>` — Type of charge-off source: - `0` — Account - `1` — Balance - `3` — Card
 - `statusId` `integer<int64>` — Status: - `0` — error - `1` — processed
 - `cardStatus` `string` — Transaction status (when paying by card): - `success` — success - `fail` — not success - `pending` — waiting for response - `unknown` — unknown
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `401`:**
 

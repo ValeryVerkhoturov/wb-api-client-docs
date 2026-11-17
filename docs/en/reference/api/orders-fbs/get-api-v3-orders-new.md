@@ -46,7 +46,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
     - `longitude` `number<float64>` — Longitude
     - `latitude` `number<float64>` — Latitude
   - `ddate` `string` — Planned delivery date of the order to the buyer. The field is displayed for assembly orders with over dimensional items `ODC`, `cargoType: 2`
-  - `sellerDate` `string` — Recommended delivery date for `ODC` items to sorting center or warehouse. The field is displayed for assembly orders with over dimensional items `ODC`, `cargoType: 2`
+  - `sellerDate` `string` — The date when [it is necessary to dispatch](https://seller.wildberries.ru/instructions/ru/ru/material/packing-and-delivery-of-oversized-items-in-fbs) the over dimensional items (ODC) to the warehouse. Time zone — UTC+3. The field is displayed for assembly orders with `ODC` items, `cargoType: 2`
   - `salePrice` `integer<int64>` — Seller price in the currency of sale, including seller discount, except the WB Club discount, multiplied by 100
   - `requiredMeta` `string[]` — List of label identifiers need to be added to the assembly order to tranfer a supply with this assembly order to the delivery
   - `optionalMeta` `string[]` — List of label identifiers that can to be added to the assembly order. A supply with the assembly order without these label identifiers can be transferred to the delivery, but label identifiers may be required, for example, when a customer returns a item

@@ -16,7 +16,7 @@ Method is [available](https://dev.wildberries.ru/openapi/api-information#tag/aut
 **Service** token
 
 The method sets bids for search clusters in the currency of the seller account.
-You can use this method only for campaigns with manual bids and `cpm` payment model — per impressions.
+You can use this method only for campaigns with manual bids and `cpm` payment model — per views.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
@@ -51,7 +51,7 @@ You can use this method only for campaigns with manual bids and `cpm` payment mo
   - `advertId` `integer<int64>` — Campaign ID
   - `nmId` `integer<int64>` — WB item number
   - `normQuery` `string` — Search cluster - a group of similar search queries by which buyers find items
-  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 - `failed` `NormQueryBidFailResponseItem[]`
   - `advertId` `integer<int64>` — Campaign ID
   - `nmId` `integer<int64>` — WB item number

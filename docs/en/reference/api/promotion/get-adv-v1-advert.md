@@ -50,8 +50,8 @@ The method allows to get information about a media campaign
 - `extended` `object`
   - `reason` `string` — Moderator's remark
   - `expenses` `integer<int64>` — Expenses
-  - `from` `string` — Media campaign impressions start date and time
-  - `to` `string` — Media campaign impressions end date and time
+  - `from` `string` — Media campaign views start date and time
+  - `to` `string` — Media campaign views end date and time
   - `updated_at` `string` — Campaign update date and time
   - `price` `integer<int64>` — Cost of placement by day for type `1`
   - `budget` `integer<int64>` — Budget balance for type `2`
@@ -63,7 +63,7 @@ The method allows to get information about a media campaign
   - `status` `integer<int64>` — Status (same as media campaign status)
   - `place` `integer<int64>` — Placement on the page
   - `budget` `integer<int64>` — Budget
-  - `daily_limit` `integer<int64>` — Daily limit (for impression banners)
+  - `daily_limit` `integer<int64>` — Daily limit (for view banners)
   - `category_name` `string` — Category name
   - `cpm` `integer<int64>` — Bid
   - `url` `string` — The URL of the page the user lands on when they click on the banner

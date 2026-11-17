@@ -36,7 +36,7 @@ The method allows to get information about the seller net, balance and bonuses
 
 - `balance` `integer<int64>` — Account in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
 - `net` `integer<int64>` — Balance in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 - `bonus` `integer<int64>` — Bonuses in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
 - `cashbacks` `object[]` — Promo bonuses
   - `sum` `integer<int64>` — Promo bonuses in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency

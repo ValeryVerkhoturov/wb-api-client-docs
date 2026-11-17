@@ -51,7 +51,7 @@ The method returns a list of search clusters with bids by:
   - `norm_query` `string` — Search cluster
   - `bid` `integer<int64>` — Current bid in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency per mille
   - `bid_kopecks` `integer<int64>` — Current bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency per mille
-  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `400`:**
 

@@ -43,7 +43,7 @@ The deprecated method will be disabled on [16 November](https://dev.wildberries.
 - `cash` `integer<int64>` — The field is not used. The value is always equal to 0.
 - `netting` `integer<int64>` — The field is not used. The value is always equal to 0.
 - `total` `integer<int64>` — Campaign budget in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `401`:**
 

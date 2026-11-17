@@ -1,11 +1,11 @@
 ---
 title: "Marketing and Promotion"
-description: "Module `promotion` has 43 operations."
+description: "Module `promotion` has 45 operations."
 ---
 
 # Marketing and Promotion · `promotion`
 
-Module `promotion` has 43 operations.
+Module `promotion` has 45 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [All modules](/en/reference/api/)
 
@@ -59,12 +59,14 @@ Data synchronization from the database occurs every 3 minutes. Status changes oc
 
 ## Statistics
 
-| Method | Path                      | Operation                                                                                   |
-| ------ | ------------------------- | ------------------------------------------------------------------------------------------- |
-| `POST` | `/adv/v0/normquery/stats` | [Search Clusters Statistics](/en/reference/api/promotion/post-adv-v0-normquery-stats)       |
-| `GET`  | `/adv/v3/fullstats`       | [Campaigns Statistics](/en/reference/api/promotion/get-adv-v3-fullstats)                    |
-| `POST` | `/adv/v1/stats`           | [Media Campaign Statistics](/en/reference/api/promotion/post-adv-v1-stats)                  |
-| `POST` | `/adv/v1/normquery/stats` | [Daily Search Clusters Statistics](/en/reference/api/promotion/post-adv-v1-normquery-stats) |
+| Method | Path                       | Operation                                                                                      |
+| ------ | -------------------------- | ---------------------------------------------------------------------------------------------- |
+| `POST` | `/adv/v0/normquery/stats`  | [Search Clusters Statistics](/en/reference/api/promotion/post-adv-v0-normquery-stats)          |
+| `GET`  | `/adv/v3/fullstats`        | [Campaigns Statistics](/en/reference/api/promotion/get-adv-v3-fullstats)                       |
+| `POST` | `/adv/v1/stats`            | [Media Campaign Statistics](/en/reference/api/promotion/post-adv-v1-stats)                     |
+| `POST` | `/adv/v1/normquery/stats`  | [Daily Search Clusters Statistics](/en/reference/api/promotion/post-adv-v1-normquery-stats)    |
+| `GET`  | `/api/advert/v4/fullstats` | [Flat Campaign Statistics](/en/reference/api/promotion/get-api-advert-v4-fullstats)            |
+| `GET`  | `/api/advert/v0/positions` | [Listing Positions in Search Results](/en/reference/api/promotion/get-api-advert-v0-positions) |
 
 ## Search Clusters
 

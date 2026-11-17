@@ -47,32 +47,32 @@ GET /adv/v3/fullstats
 **Структура `200` — `FullStatsItem[]`:**
 
 - `advertId` `integer<int64>` — ID кампании
-- `atbs` `integer<int64>` — Количество добавлений товаров в корзину
+- `atbs` `integer<int64>` — Сколько раз товар добавили в корзину
 - `boosterStats` `object[]` — Статистика по средней позиции товара (для кампаний с единой ставкой)
   - `avg_position` `integer<int64>` — Средняя позиция товара
   - `date` `string` — Дата, за которую предоставлены данные
   - `nm` `integer<int64>` — Артикул WB
-- `canceled` `integer<int64>` — Отмены, шт.
+- `canceled` `integer<int64>` — Количество отмен
 - `clicks` `integer<int64>` — Количество кликов
 - `cpc` `number<double>` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
-- `cr` `number<double>` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
-- `ctr` `number<double>` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+- `cr` `number<double>` — Отношение количества заказов к общему количеству кликов
+- `ctr` `number<double>` — Кликабельность — отношение числа кликов к количеству показов, %
 - `days` `object[]` — Статистка по дням
   - `apps` `object[]` — Блок информации о платформе
     - `appType` `integer<int64>` = `1` | `32` | `64` — Тип платформы: - `1` — сайт - `32` — Android - `64` — IOS
-    - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
-    - `canceled` `integer<int64>` — Отмены, шт.
+    - `atbs` `integer<int64>` — Сколько раз товар добавили в корзину
+    - `canceled` `integer<int64>` — Количество отмен
     - `clicks` `integer<int64>` — Количество кликов
     - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
-    - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
-    - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+    - `cr` `number` — Отношение количества заказов к общему количеству кликов
+    - `ctr` `number` — Кликабельность — отношение числа кликов к количеству показов, %
     - `nms` `object[]` — Блок статистики по артикулам WB
-      - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
-      - `canceled` `integer<int64>` — Отмены, шт.
+      - `atbs` `integer<int64>` — Сколько раз товар добавили в корзину
+      - `canceled` `integer<int64>` — Количество отмен
       - `clicks` `integer<int64>` — Количество кликов
       - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
-      - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству кликов
-      - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+      - `cr` `number` — Отношение количества заказов к общему количеству кликов
+      - `ctr` `number` — Кликабельность — отношение числа кликов к количеству показов, %
       - `name` `string` — Название товара
       - `nmId` `integer<int64>` — Артикул WB
       - `orders` `integer<int64>` — Количество заказов
@@ -85,13 +85,13 @@ GET /adv/v3/fullstats
     - `sum` `number` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
     - `sum_price` `number` — Заказов на сумму в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
     - `views` `integer<int64>` — Количество просмотров
-  - `atbs` `integer<int64>` — Количество добавлений товаров в корзину
-  - `canceled` `integer<int64>` — Отмены, шт.
+  - `atbs` `integer<int64>` — Сколько раз товар добавили в корзину
+  - `canceled` `integer<int64>` — Количество отмен
   - `date` `string` — Дата, за которую представлены данные
   - `clicks` `integer<int64>` — Количество кликов
   - `cpc` `number` — Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
   - `cr` `number` — CR (conversion rate) — отношение количества заказов к общему количеству посещений кампании
-  - `ctr` `number` — CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+  - `ctr` `number` — Кликабельность — отношение числа кликов к количеству показов, %
   - `orders` `integer<int64>` — Количество заказов
   - `shks` `integer<int64>` — Количество заказанных товаров, шт.
   - `sum` `number` — Затраты в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)

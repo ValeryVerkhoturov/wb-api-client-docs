@@ -12,7 +12,7 @@ POST /adv/v1/normquery/stats
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Statistics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV1NormqueryStats)
 
 Returns statistics (views, clicks, add-to-cart, orders, CTR, CPC, CPM, etc.) by search clusters for the specified period detailed by day.
-You can use this method for campaigns with `cpm` — for impressions, and `cpc` — for clicks payment models.
+You can use this method for campaigns with `cpm` — for views, and `cpc` — for clicks payment models.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
@@ -54,9 +54,9 @@ You can use this method for campaigns with `cpm` — for impressions, and `cpc` 
       - `normQuery` `string` — Search cluster
       - `views` `integer<int64>` — Number of views. For `cpc` campaigns (pay-per-click), the value will be `null`
       - `clicks` `integer<int64>` — Number of clicks
-      - `atbs` `integer<int64>` — Number of items added to the cart
+      - `atbs` `integer<int64>` — Number of times the item was added to the cart
       - `orders` `integer<int64>` — Number of orders
-      - `ctr` `number<float>` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage. For `cpc` campaigns (pay-per-click), the value will be `null`
+      - `ctr` `number<float>` — Click-through rate — the ratio of clicks to displays, %. For `cpc` campaigns (pay-per-click), the value will be `null`
       - `cpc` `number<float>` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
       - `cpm` `number<float>` — Average cost per mille in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. For `cpc` campaigns (pay-per-click), the value will be `null`
       - `avgPos` `number<float>` — Average item position on search results pages

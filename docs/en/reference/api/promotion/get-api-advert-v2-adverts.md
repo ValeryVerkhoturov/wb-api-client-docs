@@ -44,7 +44,7 @@ The deprecated method will be disabled on [10 January](https://dev.wildberries.r
 
 - `adverts` `object[]` — Campaigns
   - `bid_type` `string` — Bid type: - `unified` — standard bid - `manual` — custom bid
-  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+  - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
   - `id` `integer<int64>` — Campaign ID
   - `nm_settings` `AdvertNMsSettings[]` — Item settings
     - `bids_kopecks` `AdvertBidsKopecks`

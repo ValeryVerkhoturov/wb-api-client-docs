@@ -1,11 +1,11 @@
 ---
 title: "Маркетинг и продвижение"
-description: "Операций модуля `promotion` — 43."
+description: "Операций модуля `promotion` — 45."
 ---
 
 # Маркетинг и продвижение · `promotion`
 
-Операций модуля `promotion` — 43.
+Операций модуля `promotion` — 45.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [Все модули](/reference/api/)
 
@@ -67,12 +67,14 @@ description: "Операций модуля `promotion` — 43."
 
 ## Статистика
 
-| Метод  | Путь                      | Операция                                                                                                         |
-| ------ | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `POST` | `/adv/v0/normquery/stats` | [Статистика поисковых кластеров](/reference/api/promotion/post-adv-v0-normquery-stats)                           |
-| `GET`  | `/adv/v3/fullstats`       | [Статистика кампаний](/reference/api/promotion/get-adv-v3-fullstats)                                             |
-| `POST` | `/adv/v1/stats`           | [Статистика медиакампаний](/reference/api/promotion/post-adv-v1-stats)                                           |
-| `POST` | `/adv/v1/normquery/stats` | [Статистика по поисковым кластерам с детализацией по дням](/reference/api/promotion/post-adv-v1-normquery-stats) |
+| Метод  | Путь                       | Операция                                                                                                         |
+| ------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `POST` | `/adv/v0/normquery/stats`  | [Статистика поисковых кластеров](/reference/api/promotion/post-adv-v0-normquery-stats)                           |
+| `GET`  | `/adv/v3/fullstats`        | [Статистика кампаний](/reference/api/promotion/get-adv-v3-fullstats)                                             |
+| `POST` | `/adv/v1/stats`            | [Статистика медиакампаний](/reference/api/promotion/post-adv-v1-stats)                                           |
+| `POST` | `/adv/v1/normquery/stats`  | [Статистика по поисковым кластерам с детализацией по дням](/reference/api/promotion/post-adv-v1-normquery-stats) |
+| `GET`  | `/api/advert/v4/fullstats` | [Плоская статистика кампаний](/reference/api/promotion/get-api-advert-v4-fullstats)                              |
+| `GET`  | `/api/advert/v0/positions` | [Позиции карточек товаров в поисковой выдаче](/reference/api/promotion/get-api-advert-v0-positions)              |
 
 ## Поисковые кластеры
 

@@ -45,7 +45,7 @@ Method allows minimum bids for listings in minor currency units — 0.01 of the 
 
 - `bids` `object[]` — List of listings with bids
   - `bids` `object[]` — List of bids by placements
-    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
     - `type` `PlacementType`
     - `value` `integer<int64>` — Minimum bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
   - `nm_id` `integer<int64>` — WB item number

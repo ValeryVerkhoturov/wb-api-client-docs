@@ -52,7 +52,7 @@ To launch the campaign after topping up the budget, use the [Launch campaign](ht
 **Structure `200`:**
 
 - `total` `integer<int64>` — Amount of the updated budget
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `400`:**
 

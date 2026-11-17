@@ -47,32 +47,32 @@ For campaigns in statuses `7`, `9` and `11`.
 **Structure `200` — `FullStatsItem[]`:**
 
 - `advertId` `integer<int64>` — Campaign ID
-- `atbs` `integer<int64>` — Number of items added to the cart
+- `atbs` `integer<int64>` — Number of times the item was added to the cart
 - `boosterStats` `object[]` — Statistics on the average position (for campaigns with standard bid)
   - `avg_position` `integer<int64>` — Average position of the item
-  - `date` `string` — Date for which information is to be provided
+  - `date` `string` — Date the information is provided for
   - `nm` `integer<int64>` — WB item number
-- `canceled` `integer<int64>` — Cancellations, pcs
+- `canceled` `integer<int64>` — Count of cancellations
 - `clicks` `integer<int64>` — Number of clicks
 - `cpc` `number<double>` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
-- `cr` `number<double>` — CR (conversion rate) — the ratio of the number of orders to the total number of clicks
-- `ctr` `number<double>` — CTR (click-through rate) — the ratio of clicks to impressions, expressed as a percentage
+- `cr` `number<double>` — The ratio of the number of orders to the total number of clicks
+- `ctr` `number<double>` — CTR (click-through rate) — the ratio of clicks to views, expressed as a percentage
 - `days` `object[]` — Statistics by days
   - `apps` `object[]` — Information block about the platform
     - `appType` `integer<int64>` = `1` | `32` | `64` — Platform type - `1` — website - `32` — Android - `64` — IOS
-    - `atbs` `integer<int64>` — Number of items added to the cart
-    - `canceled` `integer<int64>` — Cancellations, pcs
+    - `atbs` `integer<int64>` — Number of times the item was added to the cart
+    - `canceled` `integer<int64>` — Count of cancellations
     - `clicks` `integer<int64>` — Number of clicks
     - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
     - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of clicks
-    - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+    - `ctr` `number` — Click-through rate — the ratio of clicks to displays, %
     - `nms` `object[]` — Statistics block for WB item numbers
-      - `atbs` `integer<int64>` — Number of items added to the cart
-      - `canceled` `integer<int64>` — Cancellations, pcs
+      - `atbs` `integer<int64>` — Number of times the item was added to the cart
+      - `canceled` `integer<int64>` — Count of cancellations
       - `clicks` `integer<int64>` — Number of clicks
       - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
       - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of clicks
-      - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+      - `ctr` `number` — Click-through rate — the ratio of clicks to displays, %
       - `name` `string` — Item name
       - `nmId` `integer<int64>` — WB item number
       - `orders` `integer<int64>` — Number of orders
@@ -85,13 +85,13 @@ For campaigns in statuses `7`, `9` and `11`.
     - `sum` `number` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
     - `sum_price` `number` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
     - `views` `integer<int64>` — Number of views
-  - `atbs` `integer<int64>` — Number of items added to the cart
-  - `canceled` `integer<int64>` — Cancellations, pcs
-  - `date` `string` — Date for which the data is presented
+  - `atbs` `integer<int64>` — Number of times the item was added to the cart
+  - `canceled` `integer<int64>` — Count of cancellations
+  - `date` `string` — Date the information is provided for
   - `clicks` `integer<int64>` — Number of clicks
   - `cpc` `number` — Average cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency.
   - `cr` `number` — CR (conversion rate) is the ratio of the number of orders to the total number of visits to the campaign
-  - `ctr` `number` — CTR (click-through rate) is the ratio of clicks to impressions, expressed as a percentage
+  - `ctr` `number` — Click-through rate — the ratio of clicks to displays, %
   - `orders` `integer<int64>` — Number of orders
   - `shks` `integer<int64>` — Number of ordered items, pcs
   - `sum` `number` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
@@ -102,7 +102,7 @@ For campaigns in statuses `7`, `9` and `11`.
 - `sum` `number<double>` — Costs in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
 - `sum_price` `number<double>` — Orders amount in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
 - `views` `integer<int64>` — Number of views
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `400`:**
 

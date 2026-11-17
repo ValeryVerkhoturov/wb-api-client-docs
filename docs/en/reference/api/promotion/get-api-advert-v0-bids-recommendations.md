@@ -1,6 +1,6 @@
 ---
 title: "Recommended bids for items and search clusters"
-description: "The method returns recommended bids for items and search clusters of the campaign. You can use this method for campaigns with cpm — for impressions, and cpc —…"
+description: "The method returns recommended bids for items and search clusters of the campaign. You can use this method for campaigns with cpm — for views, and cpc — for…"
 ---
 
 # Recommended bids for items and search clusters
@@ -12,7 +12,7 @@ GET /api/advert/v0/bids/recommendations
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Campaign Management · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/campaignManagement/operation/getV0BidsRecommendations)
 
 The method returns recommended bids for items and search clusters of the campaign.
-You can use this method for campaigns with `cpm` — for impressions, and `cpc` — for clicks payment models.
+You can use this method for campaigns with `cpm` — for views, and `cpc` — for clicks payment models.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 

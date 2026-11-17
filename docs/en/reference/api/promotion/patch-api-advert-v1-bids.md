@@ -61,7 +61,7 @@ Specify the placement in the request parameter `placement`:
     - `nm_id` `integer<int64>` — WB item number
     - `bid_kopecks` `integer<int64>` — Bid in minor currency units — 0.01 of the base unit of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
     - `placement` `string` — Placement: - `search` — in search - `recommendations`— in recommendations
-- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+- `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `400`:**
 

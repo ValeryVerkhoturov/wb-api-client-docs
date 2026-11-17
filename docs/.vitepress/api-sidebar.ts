@@ -961,6 +961,14 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           text: "Настройка дневных лимитов кампаний",
           link: "/reference/api/promotion/put-api-advert-v0-daily-limits",
         },
+        {
+          text: "Плоская статистика кампаний",
+          link: "/reference/api/promotion/get-api-advert-v4-fullstats",
+        },
+        {
+          text: "Позиции карточек товаров в поисковой выдаче",
+          link: "/reference/api/promotion/get-api-advert-v0-positions",
+        },
       ],
     },
     {
@@ -2280,6 +2288,14 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Set Campaign Daily Limits",
           link: "/en/reference/api/promotion/put-api-advert-v0-daily-limits",
+        },
+        {
+          text: "Flat Campaign Statistics",
+          link: "/en/reference/api/promotion/get-api-advert-v4-fullstats",
+        },
+        {
+          text: "Listing Positions in Search Results",
+          link: "/en/reference/api/promotion/get-api-advert-v0-positions",
         },
       ],
     },

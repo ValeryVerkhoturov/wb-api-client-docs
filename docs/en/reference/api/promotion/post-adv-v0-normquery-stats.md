@@ -1,6 +1,6 @@
 ---
 title: "Search Clusters Statistics"
-description: "The method returns statistics for search clusters over a specified period. You can use this method only for campaigns with a cpm payment model — for…"
+description: "The method returns statistics for search clusters over a specified period. You can use this method only for campaigns with a cpm payment model — for views."
 ---
 
 # Search Clusters Statistics
@@ -12,7 +12,7 @@ POST /adv/v0/normquery/stats
 **Base URL:** `https://advert-api.wildberries.ru` · **Module:** [`promotion`](/en/reference/api/promotion/) · **Section:** Statistics · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion#tag/statistics/operation/postV0NormqueryStats)
 
 The method returns statistics for search clusters over a specified period.
-You can use this method only for campaigns with a `cpm` payment model — for impressions.
+You can use this method only for campaigns with a `cpm` payment model — for views.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
@@ -54,13 +54,13 @@ You can use this method only for campaigns with a `cpm` payment model — for im
     - `clicks` `integer<int64>` — Number of clicks
     - `atbs` `integer<int64>` — Number of items added to the basket
     - `orders` `integer<int64>` — Orders number
-    - `ctr` `number<double>` — Click-through rate — the ratio of clicks to impressions, %. For `cpc` campaigns (pay-per-click), the value will be `null`
+    - `ctr` `number<double>` — Click-through rate — the ratio of clicks to views, %. For `cpc` campaigns (pay-per-click), the value will be `null`
     - `cpc` `number<double>` — Cost per click in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
     - `cpm` `number<double>` — Average cost per mille in the base units of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency. For `cpc` campaigns — pay-per-click, the value will be `null`
     - `avg_pos` `number<double>` — Average item position on search results pages
     - `shks` `integer<int64>` — Number of ordered items, pcs
     - `spend` `number<double>` — Item promotion costs in a specific search cluster of the campaign
-    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances) currency
+    - `currency` `string<ISO 4217>` — Currency of the [seller account](https://cmp.wildberries.ru/campaigns/finances)
 
 **Structure `400`:**
 

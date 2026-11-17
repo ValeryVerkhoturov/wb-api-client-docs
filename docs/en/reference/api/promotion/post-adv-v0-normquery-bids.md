@@ -1,6 +1,6 @@
 ---
 title: "Set Bids for Search Clusters"
-description: "The method sets the bids for search clusters. You can use this method only for campaigns with: - custom bid - a cpm payment model — per impressions"
+description: "The method sets the bids for search clusters. You can use this method only for campaigns with: - custom bid - a cpm payment model — per views"
 ---
 
 # Set Bids for Search Clusters
@@ -15,7 +15,7 @@ The method sets the bids for search clusters.
 You can use this method only for campaigns with:
 
 - custom bid
-- a `cpm` payment model — per impressions
+- a `cpm` payment model — per views
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
 
