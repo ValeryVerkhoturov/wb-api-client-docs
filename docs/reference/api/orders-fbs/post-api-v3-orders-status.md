@@ -35,8 +35,10 @@ POST /api/v3/orders/status
 - `declined\_by\_client` — покупатель отменил заказ. Отмена доступна покупателю в первый час с момента заказа, если заказ не переведён на сборку
 - `defect` — отмена заказа по причине брака
 - `ready\_for\_pickup` — заказ прибыл на пункт выдачи заказов (ПВЗ)
-- `accepted\_by\_carrier` — продавец передал заказ в службу доставки в своей стране
-- `sent\_to\_carrier` — заказ отправлен на склад службы доставки в стране продавца
+- `postponed\_delivery` — доставка курьером отложена
+- `accepted\_by\_carrier` — продавец передал заказ в службу доставки в своей стране. C [12 ноября](https://dev.wildberries.ru/release-notes?id=610) заменён на `delivering\_by\_carrier`. Только для трансграничных поставок
+- `sent\_to\_carrier` — заказ отправлен на склад службы доставки в стране продавца. C [12 ноября](https://dev.wildberries.ru/release-notes?id=610) заменён на `delivering\_by\_carrier`. Только для трансграничных поставок
+- `delivering\_by\_carrier` — заказ передан перевозчику и находится в пути на склад WB. Только для трансграничных поставок
 - `canceled\_by\_carrier` — заказ отменён перевозчиком. Только для трансграничных поставок
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
@@ -74,7 +76,7 @@ POST /api/v3/orders/status
   - `isCancellable` `boolean` — Доступна ли [отмена](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel) сборочного задания: - `false` — недоступна - `true` — доступна
   - `isTransferable` `boolean` — Можно ли [перевести сборочное задание](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) из доставки на сборку: - `false` — нет - `true` — да Сборочное задание можно перенести из доставки на сборку, если выполняются все условия: - сборочное задание находится в статусе `complete` — в доставке - поставка, в которую нужно перенести сборочное задание, не [передана в доставку](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver) - сборочное задание ранее не переносили
   - `supplierStatus` `string` = `new` | `confirm` | `complete` | `cancel` — Статус сборочного задания, установленный продавцом
-  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` — Статус сборочного задания в системе Wildberries
+  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` | `delivering_by_carrier` — Статус сборочного задания в системе Wildberries
 
 **Структура `400`:**
 

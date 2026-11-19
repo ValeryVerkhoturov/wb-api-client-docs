@@ -35,9 +35,10 @@ Possible values of `supplierStatus`:
 - `defect` — cancellation of the order due to a defect
 - `ready\_for\_pickup` — the order came at pickup point and waiting for the client
 - `postponed\_delivery` — courier delivery is postponed
-- `accepted\_by\_carrier` — accepted by carrier. The order is handed over to delivery service in the seller country
-- `sent\_to\_carrier` — dispatched to carrier. The order is on the way to delivery service's warehouse in the seller
-- `canceled\_by\_carrier` — the order was cancelled by the carrier. For crossborder only
+- `accepted\_by\_carrier` — accepted by carrier. The order is handed over to delivery service in the seller country. Since [November 12](https://dev.wildberries.ru/en/release-notes?id=610), replaced with `delivering\_by\_carrier`. For Cross-Border only
+- `sent\_to\_carrier` — dispatched to carrier. The order is on the way to delivery service's warehouse in the seller. Since [November 12](https://dev.wildberries.ru/en/release-notes?id=610), replaced with `delivering\_by\_carrier`. For Cross-Border only
+- `delivering\_by\_carrier` — the order is handed over to the carrier and is on its way to the WB warehouse. For Cross-Border only
+- `canceled\_by\_carrier` — the order was cancelled by the carrier. For Cross-Border only
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
@@ -74,7 +75,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
   - `isCancellable` `boolean` — Whether assembly order [cancellation](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/patchV3OrdersOrderIdCancel) is available: - `false` — not available - `true` — available
   - `isTransferable` `boolean` — Can be [moved](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesSupplyIdOrdersTransfer) from delivery to assembly: - `false` — not available - `true` — available An assembly order can be moved from delivery to assembly if all the following conditions are met: - the assembly order is in the `complete` status — in delivery - the supply to which the assembly order needs to be moved [is not transferred to delivery](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3SuppliesSupplyIdDeliver) - the assembly order has not been moved before
   - `supplierStatus` `string` = `new` | `confirm` | `complete` | `cancel` — Assembly order status set by the seller
-  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` — Assembly order status set by WB system
+  - `wbStatus` `string` = `waiting` | `sorted` | `sold` | `canceled` | `canceled_by_client` | `declined_by_client` | `defect` | `ready_for_pickup` | `postponed_delivery` | `accepted_by_carrier` | `sent_to_carrier` | `delivering_by_carrier` — Assembly order status set by WB system
 
 **Structure `400`:**
 
