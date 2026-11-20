@@ -1,6 +1,6 @@
 ---
 title: "Get Assembly Orders Statuses"
-description: "Returns the statuses of assembly orders from the request. supplierStatus is a status of an assembly order. Its change is always triggered only by the seller.…"
+description: "The method returns assembly order statuses by their IDs. To get the statuses of assembly orders created more than 3 months ago, use the method for getting…"
 ---
 
 # Get Assembly Orders Statuses
@@ -11,7 +11,9 @@ POST /api/v3/orders/status
 
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus)
 
-Returns the statuses of assembly orders from the request.
+The method returns assembly order statuses by their IDs.
+To get the statuses of assembly orders created more than 3 months ago, use the method for getting [archived assembly orders](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive).
+
 `supplierStatus` is a status of an assembly order. Its change is always triggered only by the seller.
 Possible values of `supplierStatus`:
 

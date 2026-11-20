@@ -1,6 +1,6 @@
 ---
 title: "Получить статусы сборочных заданий"
-description: "Метод возвращает статусы сборочных заданий по их ID."
+description: "Метод возвращает статусы сборочных заданий по их ID. Чтобы получить статусы сборочных заданий, созданных более 3 месяцев назад, используйте метод получения…"
 ---
 
 # Получить статусы сборочных заданий
@@ -12,6 +12,7 @@ POST /api/v3/orders/status
 **База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Сборочные задания FBS · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/postV3OrdersStatus)
 
 Метод возвращает статусы [сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3Orders) по их ID.
+Чтобы получить статусы сборочных заданий, созданных более 3 месяцев назад, используйте метод получения [архивных сборочных заданий](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3FbsOrdersArchive).
 
 `supplierStatus` — статус сборочного задания. Триггер его изменения — действие самого продавца.
 Возможные значения `supplierStatus`:

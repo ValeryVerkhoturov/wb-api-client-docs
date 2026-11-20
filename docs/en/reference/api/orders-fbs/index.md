@@ -1,11 +1,11 @@
 ---
 title: "FBS Orders"
-description: "Module `orders-fbs` has 48 operations."
+description: "Module `orders-fbs` has 43 operations."
 ---
 
 # FBS Orders · `orders-fbs`
 
-Module `orders-fbs` has 48 operations.
+Module `orders-fbs` has 43 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs) · [All modules](/en/reference/api/)
 
@@ -69,7 +69,6 @@ You can learn how to use methods in business cases in the [instructions](https:/
 | `DELETE` | `/api/v3/supplies/{supplyId}`                                 | [Delete the Supply](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid)                                                      |
 | `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`           | [Get Supply Assembly Order IDs](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)                       |
 | `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points` | [Get Supply Shipping Points](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points)                |
-| `GET`    | `/api/marketplace/v3/fbs/shipping-points`                     | [Get Supply Shipping Points](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points)                                  |
 | `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`            | [Set Supply Shipping Method](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method)                       |
 | `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                         | [Move the Supply to the Delivery](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                                 |
 | `GET`    | `/api/v3/supplies/{supplyId}/barcode`                         | [Get the Supply QR Code](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-barcode)                                            |
@@ -77,10 +76,6 @@ You can learn how to use methods in business cases in the [instructions](https:/
 | `POST`   | `/api/v3/supplies/{supplyId}/trbx`                            | [Add Shipping Units to the Supply](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx)                                    |
 | `DELETE` | `/api/v3/supplies/{supplyId}/trbx`                            | [Delete Shipping Units from the Supply](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid-trbx)                             |
 | `POST`   | `/api/v3/supplies/{supplyId}/trbx/stickers`                   | [Get the Supply Shipping Unit QR Code Stickers](/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx-stickers)              |
-| `GET`    | `/api/marketplace/v3/fbs/dictionaries/countries/oksm`         | [Get the OKSM Country List](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-dictionaries-countries-oksm)                       |
-| `PUT`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/spot`            | [Add SPOT Data to Supply](/en/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot)                              |
-| `POST`   | `/api/marketplace/v3/fbs/supplies/spot/list`                  | [Get SPOT Data for Supply List](/en/reference/api/orders-fbs/post-api-marketplace-v3-fbs-supplies-spot-list)                           |
-| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/stickers/spot`   | [Get the Supply SPOT QR Code](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot)                 |
 
 ## Auto-return Settings
 

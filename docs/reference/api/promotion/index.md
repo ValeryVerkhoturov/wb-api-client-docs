@@ -1,11 +1,11 @@
 ---
 title: "Маркетинг и продвижение"
-description: "Операций модуля `promotion` — 45."
+description: "Операций модуля `promotion` — 44."
 ---
 
 # Маркетинг и продвижение · `promotion`
 
-Операций модуля `promotion` — 45.
+Операций модуля `promotion` — 44.
 
 [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [Все модули](/reference/api/)
 
@@ -60,7 +60,6 @@ description: "Операций модуля `promotion` — 45."
 | ------ | ------------------------ | ---------------------------------------------------------------------------------- |
 | `GET`  | `/adv/v1/balance`        | [Баланс](/reference/api/promotion/get-adv-v1-balance)                              |
 | `POST` | `/api/advert/v2/budget`  | [Остатки бюджетов кампаний](/reference/api/promotion/post-api-advert-v2-budget)    |
-| `GET`  | `/adv/v1/budget`         | [Бюджет кампании](/reference/api/promotion/get-adv-v1-budget)                      |
 | `POST` | `/adv/v1/budget/deposit` | [Пополнение бюджета кампании](/reference/api/promotion/post-adv-v1-budget-deposit) |
 | `GET`  | `/adv/v1/upd`            | [Получение истории затрат](/reference/api/promotion/get-adv-v1-upd)                |
 | `GET`  | `/adv/v1/payments`       | [Получение истории пополнений счёта](/reference/api/promotion/get-adv-v1-payments) |

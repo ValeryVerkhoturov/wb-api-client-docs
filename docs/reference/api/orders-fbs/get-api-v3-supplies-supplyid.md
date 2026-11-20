@@ -54,7 +54,7 @@ GET /api/v3/supplies/{supplyId}
 - `shippingPointId` `integer<int64>` — ID пункта отгрузки. Можно получить в методе получения [пунктов отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
 - `shippingType` `string` = `selfShipping` | `transportCompany` — Способ доставки до пункта отгрузки: - `selfShipping` — доставка силами продавца - `transportCompany` — доставка через транспортную компанию
 - `waybillUuid` `string` — ID ЭТрН — электронной транспортной накладной
-- `spotAvailable` `boolean` — Доступен ли СПОТ для этой поставки: - `true` — да. Используйте метод [получения данных СПОТ](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) - `false` — нет
+- `spotAvailable` `boolean` — Доступен ли СПОТ для этой поставки: - `true` — да - `false` — нет
 
 **Структура `400`:**
 

@@ -416,10 +416,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points",
         },
         {
-          text: "Получить список пунктов отгрузки поставок",
-          link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points",
-        },
-        {
           text: "Установить параметры отгрузки поставок",
           link: "/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method",
         },
@@ -446,22 +442,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Получить стикеры грузомест поставки",
           link: "/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx-stickers",
-        },
-        {
-          text: "Получить список стран ОКСМ",
-          link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-dictionaries-countries-oksm",
-        },
-        {
-          text: "Добавить данные СПОТ в поставку",
-          link: "/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot",
-        },
-        {
-          text: "Получить данные СПОТ для списка поставок",
-          link: "/reference/api/orders-fbs/post-api-marketplace-v3-fbs-supplies-spot-list",
-        },
-        {
-          text: "Получить QR-код СПОТ",
-          link: "/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot",
         },
         {
           text: "Получить настройки автовозврата продавца",
@@ -852,10 +832,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Остатки бюджетов кампаний",
           link: "/reference/api/promotion/post-api-advert-v2-budget",
-        },
-        {
-          text: "Бюджет кампании",
-          link: "/reference/api/promotion/get-adv-v1-budget",
         },
         {
           text: "Пополнение бюджета кампании",
@@ -1744,10 +1720,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points",
         },
         {
-          text: "Get Supply Shipping Points",
-          link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-shipping-points",
-        },
-        {
           text: "Set Supply Shipping Method",
           link: "/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method",
         },
@@ -1774,22 +1746,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Get the Supply Shipping Unit QR Code Stickers",
           link: "/en/reference/api/orders-fbs/post-api-v3-supplies-supplyid-trbx-stickers",
-        },
-        {
-          text: "Get the OKSM Country List",
-          link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-dictionaries-countries-oksm",
-        },
-        {
-          text: "Add SPOT Data to Supply",
-          link: "/en/reference/api/orders-fbs/put-api-marketplace-v3-fbs-supplies-supplyid-spot",
-        },
-        {
-          text: "Get SPOT Data for Supply List",
-          link: "/en/reference/api/orders-fbs/post-api-marketplace-v3-fbs-supplies-spot-list",
-        },
-        {
-          text: "Get the Supply SPOT QR Code",
-          link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-stickers-spot",
         },
         {
           text: "Get Auto-Return Seller Settings",
@@ -2180,10 +2136,6 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
         {
           text: "Campaign Budget Balances",
           link: "/en/reference/api/promotion/post-api-advert-v2-budget",
-        },
-        {
-          text: "Campaign Budget",
-          link: "/en/reference/api/promotion/get-adv-v1-budget",
         },
         {
           text: "Top-up of the Campaign Budget",

@@ -55,7 +55,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
   - `shippingPointId` `integer<int64>` — Shipping point ID. You can get it using a method for getting [supply shipping points](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
   - `shippingType` `string` = `selfShipping` | `transportCompany` — Type of shipping to the shipping point: - `selfShipping` — shipping at the seller's expense - `transportCompany` — delivery via a transport company
   - `waybillUuid` `string` — Electronic waybill ID
-  - `spotAvailable` `boolean` — Whether SPOT is available for this supply: - `true` — yes. Use the method for [getting SPOT data](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList) - `false` — no
+  - `spotAvailable` `boolean` — Whether SPOT is available for this supply: - `true` — yes - `false` — no
 
 **Structure `400`:**
 

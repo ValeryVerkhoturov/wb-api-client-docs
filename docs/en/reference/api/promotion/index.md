@@ -1,11 +1,11 @@
 ---
 title: "Marketing and Promotion"
-description: "Module `promotion` has 45 operations."
+description: "Module `promotion` has 44 operations."
 ---
 
 # Marketing and Promotion · `promotion`
 
-Module `promotion` has 45 operations.
+Module `promotion` has 44 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/promotion) · [All modules](/en/reference/api/)
 
@@ -52,7 +52,6 @@ Data synchronization from the database occurs every 3 minutes. Status changes oc
 | ------ | ------------------------ | ------------------------------------------------------------------------------------------- |
 | `GET`  | `/adv/v1/balance`        | [Balance](/en/reference/api/promotion/get-adv-v1-balance)                                   |
 | `POST` | `/api/advert/v2/budget`  | [Campaign Budget Balances](/en/reference/api/promotion/post-api-advert-v2-budget)           |
-| `GET`  | `/adv/v1/budget`         | [Campaign Budget](/en/reference/api/promotion/get-adv-v1-budget)                            |
 | `POST` | `/adv/v1/budget/deposit` | [Top-up of the Campaign Budget](/en/reference/api/promotion/post-adv-v1-budget-deposit)     |
 | `GET`  | `/adv/v1/upd`            | [Receiving Costs History](/en/reference/api/promotion/get-adv-v1-upd)                       |
 | `GET`  | `/adv/v1/payments`       | [Receiving the History of Account Top-ups](/en/reference/api/promotion/get-adv-v1-payments) |

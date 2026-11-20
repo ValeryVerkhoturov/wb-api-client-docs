@@ -1,22 +1,22 @@
 ---
 title: "Справочник API"
-description: "Все 311 операций Wildberries Seller API, сгруппированные по 13 модулям пакета. Страницы генерируются из спецификаций OpenAPI и исходников сгенерированных клиентов, поэтому примеры вызова соответствуют коду той же версии."
+description: "Все 305 операций Wildberries Seller API, сгруппированные по 13 модулям пакета. Страницы генерируются из спецификаций OpenAPI и исходников сгенерированных клиентов, поэтому примеры вызова соответствуют коду той же версии."
 ---
 
 # Справочник API
 
-Все 311 операций Wildberries Seller API, сгруппированные по 13 модулям пакета. Страницы генерируются из спецификаций OpenAPI и исходников сгенерированных клиентов, поэтому примеры вызова соответствуют коду той же версии.
+Все 305 операций Wildberries Seller API, сгруппированные по 13 модулям пакета. Страницы генерируются из спецификаций OpenAPI и исходников сгенерированных клиентов, поэтому примеры вызова соответствуют коду той же версии.
 
 | Модуль                                               | Категория               | Операций |
 | ---------------------------------------------------- | ----------------------- | -------- |
 | [`general`](/reference/api/general/)                 | Общее                   | 11       |
 | [`items`](/reference/api/items/)                     | Работа с товарами       | 55       |
-| [`orders-fbs`](/reference/api/orders-fbs/)           | Заказы FBS              | 48       |
+| [`orders-fbs`](/reference/api/orders-fbs/)           | Заказы FBS              | 43       |
 | [`orders-dbw`](/reference/api/orders-dbw/)           | Заказы DBW              | 16       |
 | [`dbs`](/reference/api/dbs/)                         | DBS                     | 21       |
 | [`in-store-pickup`](/reference/api/in-store-pickup/) | Самовывоз               | 18       |
 | [`orders-fbw`](/reference/api/orders-fbw/)           | Поставки FBW            | 14       |
-| [`promotion`](/reference/api/promotion/)             | Маркетинг и продвижение | 45       |
+| [`promotion`](/reference/api/promotion/)             | Маркетинг и продвижение | 44       |
 | [`communications`](/reference/api/communications/)   | Общение с покупателями  | 25       |
 | [`rates`](/reference/api/rates/)                     | Тарифы                  | 5        |
 | [`analytics`](/reference/api/analytics/)             | Аналитика и данные      | 20       |
