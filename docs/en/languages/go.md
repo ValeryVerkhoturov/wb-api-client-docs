@@ -8,7 +8,7 @@ Module: `github.com/ValeryVerkhoturov/wb-api-client-go` — resolved from git ta
 
 - **Go:** 1.22+
 - **HTTP:** `net/http` (standard library)
-- **Secret wrapper:** [`github.com/negrel/secrecy`](https://github.com/negrel/secrecy)
+- **Secret wrapper:** internal `SecretString` type (`internal/secrecy`)
 
 ## Install
 

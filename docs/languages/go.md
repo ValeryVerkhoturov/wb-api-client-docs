@@ -8,7 +8,7 @@ description: "Go-клиент Wildberries Seller API: модуль github.com/Va
 
 - **Go:** 1.22+
 - **HTTP:** `net/http` (стандартная библиотека)
-- **Обёртка секретов:** [`github.com/negrel/secrecy`](https://github.com/negrel/secrecy)
+- **Обёртка секретов:** внутренний тип `SecretString` (`internal/secrecy`)
 
 ## Установка
 

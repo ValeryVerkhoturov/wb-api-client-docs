@@ -26,16 +26,16 @@ Every token lives 180 days from creation, after which you need to mint a new one
 
 Once you have the token, don't pass it around as a plain string. Every client stores the value in a language-native "secret string" type — in Java, PHP, C# and Rust you hand the setter a plain string and it wraps the value internally — so the token redacts under logs, `print`, debuggers, and error dumps, unless you explicitly ask for the raw value.
 
-| Language   | Wrapper                                                                                      | Setter                                  | Redacted under                                            | Explicit expose       |
-| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- | --------------------- |
-| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()` |
-| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`     |
-| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`     |
-| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setAccessToken(String)`      | `System.out.println(s)` → `<REDACTED>`                    | —                     |
-| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessToken(string)` | `var_dump($config)` → token `'<REDACTED>'`                | `getAccessToken()`    |
-| C#         | per-namespace `SecretString`                                                                 | `Configuration.SetAccessToken(string)`  | `Console.WriteLine(s)` → `<REDACTED>`                     | no getter by design   |
-| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`         | `.Раскрыть()`         |
-| Rust       | per-module `SecretString` struct                                                             | `Configuration::set_access_token(&str)` | `println!("{s:?}")` / `{}` → `<REDACTED>`                 | `.expose_secret()`    |
+| Language   | Wrapper                                                                                      | Setter                                  | Redacted under                                      | Explicit expose       |
+| ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------- | --------------------- |
+| Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`         | `print(cfg.access_token)` → `**********`            | `.get_secret_value()` |
+| TypeScript | inlined `SecretString` class                                                                 | `Configuration.setAccessToken(…)`       | `console.log(new SecretString("…"))` → `<REDACTED>` | `.exposeSecret()`     |
+| Go         | internal `SecretString` type (`internal/secrecy`)                                            | `Configuration.SetAccessToken(…)`       | `fmt.Printf("%v", cfg.AccessToken)` → `<REDACTED>`  | `.ExposeSecret()`     |
+| Java       | per-sub-module `SecretString`                                                                | `ApiClient.setAccessToken(String)`      | `System.out.println(s)` → `<REDACTED>`              | —                     |
+| PHP        | per-sub-module `SecretString`                                                                | `Configuration::setAccessToken(string)` | `var_dump($config)` → token `'<REDACTED>'`          | `getAccessToken()`    |
+| C#         | per-namespace `SecretString`                                                                 | `Configuration.SetAccessToken(string)`  | `Console.WriteLine(s)` → `<REDACTED>`               | no getter by design   |
+| OneScript  | `СекретнаяСтрока` class                                                                      | `Конфигурация.УстановитьТокен(…)`       | `Сообщить(Настройки.Токен())` → `СекретнаяСтрока`   | `.Раскрыть()`         |
+| Rust       | per-module `SecretString` struct                                                             | `Configuration::set_access_token(&str)` | `println!("{s:?}")` / `{}` → `<REDACTED>`           | `.expose_secret()`    |
 
 ### Why bother?
 
@@ -71,7 +71,7 @@ console.log(cfg.accessToken.exposeSecret()); // eyJhbGciOi...  (opt-in)
 import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("eyJhbGciOi...")
-fmt.Printf("%v\n", cfg.AccessToken)         // <!SECRET_LEAKED!>
+fmt.Printf("%v\n", cfg.AccessToken)         // <REDACTED>
 fmt.Println(cfg.AccessToken.ExposeSecret()) // eyJhbGciOi...  (opt-in)
 ```
 

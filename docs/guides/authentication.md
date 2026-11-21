@@ -30,7 +30,7 @@
 | ---------- | -------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- | --------------------------- |
 | Python     | [`pydantic.SecretStr`](https://docs.pydantic.dev/latest/api/types/#pydantic.types.SecretStr) | `Configuration(access_token=…)`         | `print(cfg.access_token)` → `**********`                  | `.get_secret_value()`       |
 | TypeScript | встроенный класс `SecretString`                                                              | `Configuration.setAccessToken(…)`       | `console.log(new SecretString("…"))` → `<REDACTED>`       | `.exposeSecret()`           |
-| Go         | [`secrecy.SecretString`](https://github.com/negrel/secrecy)                                  | `Configuration.SetAccessToken(…)`       | `fmt.Printf("%v", cfg.AccessToken)` → `<!SECRET_LEAKED!>` | `.ExposeSecret()`           |
+| Go         | внутренний тип `SecretString` (`internal/secrecy`)                                           | `Configuration.SetAccessToken(…)`       | `fmt.Printf("%v", cfg.AccessToken)` → `<REDACTED>`        | `.ExposeSecret()`           |
 | Java       | `SecretString` в каждом под-пакете                                                           | `ApiClient.setAccessToken(String)`      | `System.out.println(s)` → `<REDACTED>`                    | `.exposeSecret()`           |
 | PHP        | `SecretString` в каждом под-пространстве                                                     | `Configuration::setAccessToken(string)` | `var_dump($config)` → `'<REDACTED>'`                      | `$config->getAccessToken()` |
 | C#         | `SecretString` в каждом пространстве имён                                                    | `Configuration.SetAccessToken(…)`       | `Console.WriteLine(new SecretString("…"))` → `<REDACTED>` | `.ExposeSecret()`           |
@@ -71,7 +71,7 @@ console.log(cfg.accessToken.exposeSecret());  // eyJhbGciOi...  (по запро
 import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("eyJhbGciOi...")
-fmt.Printf("%v\n", cfg.AccessToken)           // <!SECRET_LEAKED!>
+fmt.Printf("%v\n", cfg.AccessToken)           // <REDACTED>
 fmt.Println(cfg.AccessToken.ExposeSecret())   // eyJhbGciOi...  (по запросу)
 ```
 
