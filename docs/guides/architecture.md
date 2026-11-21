@@ -5,8 +5,8 @@
 ## Пайплайн
 
 ```
-download-specs.py          →  swaggers/*.yaml         (сырой апстрим, checksummed)
-process-specs.py           →  swaggers/processed/     (13 проходов)
+download-specs.py          →  specs/unprocessed/{ru,en}/*.yaml  (сырой апстрим, checksummed)
+process-specs.py           →  specs/processed/{ru,en}/          (13 проходов)
 generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 8 языков)
     ├── inject-secrets.py          (SecretString-обёртка на каждый язык)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer|rustfmt}   (канонизация форматирования)
@@ -59,7 +59,7 @@ WB выпускает OpenAPI-спецификации. Написать 13 кл
 - Docker-тег `openapi-generator-cli` закреплён.
 - В конфиге openapi-generator для каждого языка выставлено `hideGenerationTimestamp: true`.
 - Все форматтеры закреплены на конкретных версиях.
-- PR-check-workflow перегенерирует всё с нуля и падает, если `git diff swaggers/ clients/` непустой. Это ловит любое изменение, из-за которого следующие прогоны разъедутся.
+- PR-check-workflow перегенерирует всё с нуля и падает, если `git diff specs/ clients/` непустой. Это ловит любое изменение, из-за которого следующие прогоны разъедутся.
 
 ## Публикация
 

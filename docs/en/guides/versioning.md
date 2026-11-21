@@ -106,7 +106,7 @@ wb-api-client = "=1.20260926.0"
 
 ## Release cadence
 
-New versions get cut only when upstream specs actually change. Concretely: `daily-check.yml` runs at 06:15 UTC, checksum-diffs `swaggers/` against the previous run, and only re-generates + tags if anything moved. A quiet week produces no releases; a WB portal deploy typically produces one the next morning.
+New versions get cut only when upstream specs actually change. Concretely: `daily-check.yml` runs at 06:15 UTC, checksum-diffs `specs/unprocessed/ru/checksums.txt` against the previous run, and only re-generates + tags if anything moved. A quiet week produces no releases; a WB portal deploy typically produces one the next morning.
 
 Manually forcing a release (e.g. to pick up a client-side fix): `Actions → Daily upstream check → Run workflow` with `force: true`.
 

@@ -34,7 +34,7 @@ cd wb-api-client
 
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, requests, black, flask
 ./scripts/download-specs.py                # тянет апстрим (локально может отдать 498)
-python  scripts/process-specs.py               # -> swaggers/processed/
+python  scripts/process-specs.py               # -> specs/processed/
 ./scripts/generate-clients.py 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp,rust}
 make verify                                   # сборка + проверка форматирования на каждом языке
 ```
@@ -50,7 +50,7 @@ make verify                                   # сборка + проверка 
 1. Форкните основной репозиторий.
 2. Внесите изменение в `scripts/`, `templates/`, `generator-configs/` или воркфлоу.
 3. Перегенерируйте локально, чтобы `clients/` совпало.
-4. Закоммитьте `swaggers/`, `clients/` и свои правки исходников одним коммитом.
+4. Закоммитьте `specs/`, `clients/` и свои правки исходников одним коммитом.
 5. Откройте PR. PR-check-workflow перегенерирует всё с нуля и упадёт, если `git diff` непустой относительно вашего коммита — это ловит недетерминированность.
 
 ## Участие в документации

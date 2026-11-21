@@ -5,8 +5,8 @@ A one-page tour of what's actually in the [main repo](https://github.com/ValeryV
 ## The pipeline
 
 ```
-download-specs.py          →  swaggers/*.yaml         (raw upstream, checksummed)
-process-specs.py           →  swaggers/processed/     (13 passes)
+download-specs.py          →  specs/unprocessed/{ru,en}/*.yaml  (raw upstream, checksummed)
+process-specs.py           →  specs/processed/{ru,en}/          (13 passes)
 generate-clients.py <ver>  →  clients/<lang>/…        (openapi-generator-cli, 8 langs)
     ├── inject-secrets.py          (SecretString wrapper per lang)
     ├── {black|prettier|gofmt|spotless|php-cs-fixer|rustfmt}   (canonicalize formatting)
@@ -60,7 +60,7 @@ The daily job would flap constantly if generation weren't deterministic. To keep
 - `openapi-generator-cli` Docker tag is pinned.
 - Every language's `openapi-generator` config sets `hideGenerationTimestamp: true`.
 - Every formatter is pinned to a specific version.
-- The PR-check workflow regenerates from scratch and fails the PR if `git diff swaggers/ clients/` is non-empty. This catches any change that would make subsequent runs produce drift.
+- The PR-check workflow regenerates from scratch and fails the PR if `git diff specs/ clients/` is non-empty. This catches any change that would make subsequent runs produce drift.
 
 ## Publishing
 

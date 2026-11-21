@@ -34,7 +34,7 @@ cd wb-api-client
 
 pip install -r scripts/requirements.txt       # ruamel.yaml, markdownify, requests, black, flask
 ./scripts/download-specs.py                # pull upstream (may 498 locally)
-python  scripts/process-specs.py               # -> swaggers/processed/
+python  scripts/process-specs.py               # -> specs/processed/
 ./scripts/generate-clients.py 1.20260920.0            # -> clients/{python,typescript,go,java,php,onescript,csharp,rust}
 make verify                                    # build + format check every language
 ```
@@ -50,7 +50,7 @@ The pipeline itself lives in `scripts/pipeline/`, organized by bounded context (
 1. Fork the main repo.
 2. Make your change to `scripts/`, `templates/`, `generator-configs/`, or a workflow.
 3. Regenerate locally so `clients/` matches.
-4. Commit `swaggers/`, `clients/`, and your source changes together.
+4. Commit `specs/`, `clients/`, and your source changes together.
 5. Open a PR. The PR-check workflow will regenerate from scratch and fail if `git diff` is non-empty against your commit — that catches non-determinism.
 
 ## Contributing to the docs site
