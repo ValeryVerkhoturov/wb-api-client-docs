@@ -68,7 +68,7 @@ console.log(cfg.accessToken.exposeSecret());  // eyJhbGciOi...  (по запро
 ```
 
 ```go [Go]
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("eyJhbGciOi...")
 fmt.Printf("%v\n", cfg.AccessToken)           // <REDACTED>

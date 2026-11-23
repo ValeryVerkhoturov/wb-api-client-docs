@@ -1,32 +1,28 @@
 # Versioning
 
-All eight language packages share one version string per release: **`1.YYYYMMDD.N`**.
+All eight language packages share one version string per release — full **semver `MAJOR.MINOR.PATCH`** (since `2.0.0`; earlier releases used the `1.YYYYMMDD.N` format).
 
 ## Format
 
-| Field   | Value                         | Why                                                                                                                                                                                                  |
-| ------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MAJOR` | `1` — fixed                   | Keeps Go's module path free of the `/vN` suffix that `MAJOR ≥ 2` would require. Any real breaking change to the pipeline surfaces as a major-version bump of the _code repo_, not a new module path. |
-| `MINOR` | `YYYYMMDD` (UTC release date) | Monotonic across days — `20260919 < 20260920 < 20261001`. Sorts as an integer under semver rules.                                                                                                    |
-| `PATCH` | `N` — same-day counter        | `0` for the first release of a day, `1`, `2`, … for repeats (rare).                                                                                                                                  |
+| Field   | When it increments                                                                                                                                         |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MAJOR` | Breaking changes: removed or renamed operations, parameters, fields; narrowed types; new required fields — anything that can break existing consumer code. |
+| `MINOR` | Backward-compatible additions: new operations, optional parameters and fields, new enum values.                                                            |
+| `PATCH` | Non-functional spec edits: descriptions, examples, typos.                                                                                                  |
 
-Example: `1.20260921.0` — first release cut on 21 Sep 2026 UTC.
+Example: `2.1.0` — a backward-compatible addition on top of `2.0.0`.
 
 ## Where the number comes from
 
-The daily-check workflow computes it inline:
-
-```bash
-today="$(date -u +%Y%m%d)"
-n="$(git tag --list "v1.${today}.*" | wc -l | tr -d ' ')"
-version="1.${today}.${n}"
-```
+`daily-check.yml` runs `scripts/compute-version.py`: it takes the upstream diff (`git diff HEAD -- specs/unprocessed/ru`) and asks the **DeepSeek API** to classify it as `major` / `minor` / `patch`, then increments the highest `v2+` git tag. With no `v2+` tag yet, it emits `2.0.0`. Without `DEEPSEEK_API_KEY` or on API failure it defaults to `minor` (WB upstream changes are overwhelmingly additive); an empty diff (forced re-run) means `patch`.
 
 The resulting string goes into every language's manifest — `pyproject.toml`, `package.json`, `go.mod` tag, `pom.xml`, `composer.json`, `Cargo.toml` — verbatim. No language sees a translated form.
 
+`MAJOR ≥ 2` is why the Go module path carries the `/v2` suffix: `github.com/ValeryVerkhoturov/wb-api-client-go/v2` (a Go modules requirement).
+
 ## What "latest" resolves to
 
-Because every release is a **stable** (non-prerelease) version, `@latest` / `LATEST` / `^1.0.0` all pick the highest published:
+Because every release is a **stable** (non-prerelease) version, `@latest` / `LATEST` / `^2.0.0` all pick the highest published:
 
 ::: code-group
 
@@ -39,11 +35,11 @@ npm install @valeryverkhoturov/wb-api-client
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@latest
 ```
 
 ```xml [Java]
-<version>[1.0.0,)</version>   <!-- range: any 1.x -->
+<version>[2.0.0,)</version>   <!-- range: any 2.x -->
 ```
 
 ```bash [PHP]
@@ -66,40 +62,40 @@ cargo add wb-api-client
 
 ## Pinning a version
 
-Pin the exact `1.YYYYMMDD.N` when reproducibility matters (CI, production deploys):
+Pin the exact `X.Y.Z` when reproducibility matters (CI, production deploys):
 
 ::: code-group
 
 ```txt [Python]
-valeryverkhoturov-wb-api-client==1.20260926.0
+valeryverkhoturov-wb-api-client==2.0.0
 ```
 
 ```json [TypeScript]
-"@valeryverkhoturov/wb-api-client": "1.20260926.0"
+"@valeryverkhoturov/wb-api-client": "2.0.0"
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@v2.0.0
 ```
 
 ```xml [Java]
-<version>1.20260926.0</version>
+<version>2.0.0</version>
 ```
 
 ```json [PHP]
-"valeryverkhoturov/wb-api-client": "1.20260926.0"
+"valeryverkhoturov/wb-api-client": "2.0.0"
 ```
 
 ```bsl [OneScript]
-.ЗависитОт("wb-api-client", "1.20260926.0")
+.ЗависитОт("wb-api-client", "2.0.0")
 ```
 
 ```xml [C#]
-<PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="1.20260926.0" />
+<PackageReference Include="ValeryVerkhoturov.WbApiClient" Version="2.0.0" />
 ```
 
 ```toml [Rust]
-wb-api-client = "=1.20260926.0"
+wb-api-client = "=2.0.0"
 ```
 
 :::
@@ -123,7 +119,7 @@ There is no formal deprecation window — the upstream contract is the source of
 
 ## Multi-language version drift — impossible by construction
 
-Because the same `1.YYYYMMDD.N` is stamped into every language's manifest in the same generate-clients.py invocation, and every language is regenerated in every release run, you cannot end up with "Python 1.20260921.0 but Go 1.20260919.0" from a single upstream state — they're always in lockstep.
+Because the same `X.Y.Z` is stamped into every language's manifest in the same generate-clients.py invocation, and every language is regenerated in every release run, you cannot end up with "Python 2.1.0 but Go 2.0.3" from a single upstream state — they're always in lockstep.
 
 The only way to skew: a language's publish step fails (e.g. Maven Central rejects a signature). The tag exists and the source is on GitHub; a manual re-run of the failed publish job for that specific language fixes it.
 

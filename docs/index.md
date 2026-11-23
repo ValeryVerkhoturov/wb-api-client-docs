@@ -44,7 +44,7 @@ npm install @valeryverkhoturov/wb-api-client
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@latest
 ```
 
 ```xml [Java (Maven)]
@@ -94,7 +94,7 @@ const api = new ItemsApi(cfg);
 ```
 
 ```go [Go]
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 
 cfg := wbitems.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")

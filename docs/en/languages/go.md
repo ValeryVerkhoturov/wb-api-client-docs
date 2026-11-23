@@ -1,5 +1,5 @@
 ---
-description: "Go client for the Wildberries Seller API: module github.com/ValeryVerkhoturov/wb-api-client-go, 13 API categories, redacted bearer token."
+description: "Go client for the Wildberries Seller API: module github.com/ValeryVerkhoturov/wb-api-client-go/v2, 13 API categories, redacted bearer token."
 ---
 
 # Go
@@ -13,13 +13,13 @@ Module: `github.com/ValeryVerkhoturov/wb-api-client-go` — resolved from git ta
 ## Install
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@latest
 ```
 
 Pin a specific version by tag:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@v2.0.0
 ```
 
 `proxy.golang.org` fetches directly from the pushed tag — no separate registry.
@@ -35,7 +35,7 @@ Because `MAJOR = 1` is fixed (see [versioning](/en/guides/versioning)), there's 
 One Go package per WB API category, each with its own `Configuration`, `APIClient`, and `*API` types.
 
 ```go
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 ```
 
 Alias each sub-module (`wbitems`, `wbfbs`, `wbanalytics`, …) so call sites are readable — they all export the same identifier names.
@@ -55,7 +55,7 @@ import (
     "context"
     "fmt"
 
-    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 )
 
 func main() {

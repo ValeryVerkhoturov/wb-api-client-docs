@@ -1,5 +1,5 @@
 ---
-description: "Go-клиент Wildberries Seller API: модуль github.com/ValeryVerkhoturov/wb-api-client-go, 13 категорий API, маскирование bearer-токена."
+description: "Go-клиент Wildberries Seller API: модуль github.com/ValeryVerkhoturov/wb-api-client-go/v2, 13 категорий API, маскирование bearer-токена."
 ---
 
 # Go
@@ -13,13 +13,13 @@ description: "Go-клиент Wildberries Seller API: модуль github.com/Va
 ## Установка
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@latest
 ```
 
 Зафиксировать конкретную версию по тегу:
 
 ```bash
-go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@v2.0.0
 ```
 
 `proxy.golang.org` берёт код прямо из пушнутого тега — отдельный реестр не нужен.
@@ -35,7 +35,7 @@ go get github.com/ValeryVerkhoturov/wb-api-client-go@v1.20260926.0
 По одному Go-пакету на категорию WB API, у каждого свои `Configuration`, `APIClient` и типы `*API`.
 
 ```go
-import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+import wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 ```
 
 Давайте каждому под-модулю алиас (`wbitems`, `wbfbs`, `wbanalytics`, …) — иначе имена конфликтуют: во всех модулях экспортируются одни и те же идентификаторы.
@@ -55,7 +55,7 @@ import (
     "context"
     "fmt"
 
-    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+    wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 )
 
 func main() {

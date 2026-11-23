@@ -126,7 +126,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
 )
 
 cfg := wbreports.NewConfiguration()

@@ -30,7 +30,7 @@ npm install @valeryverkhoturov/wb-api-client
 ```
 
 ```bash [Go]
-go get github.com/ValeryVerkhoturov/wb-api-client-go@latest
+go get github.com/ValeryVerkhoturov/wb-api-client-go/v2@latest
 ```
 
 ```xml [Java (Maven)]
@@ -99,7 +99,7 @@ import (
     "context"
     "fmt"
 
-    wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/general"
+    wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/v2/general"
 )
 
 func main() {

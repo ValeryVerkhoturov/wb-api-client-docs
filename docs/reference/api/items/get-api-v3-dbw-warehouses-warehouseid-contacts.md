@@ -116,7 +116,7 @@ import (
 	"context"
 	"fmt"
 
-	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/items"
+	wbitems "github.com/ValeryVerkhoturov/wb-api-client-go/v2/items"
 )
 
 cfg := wbitems.NewConfiguration()
