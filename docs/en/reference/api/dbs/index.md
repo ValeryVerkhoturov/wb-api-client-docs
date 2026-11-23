@@ -9,9 +9,11 @@ Module `dbs` has 21 operations.
 
 [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/dbs) · [All modules](/en/reference/api/)
 
-DBS orders and label identifiers management.
+Use DBS (Delivery by Seller) methods to:
 
-You can test the DBS methods in the [sandbox](https://dev.wildberries.ru/en/sandbox). Also you can use [special methods](https://dev.wildberries.ru/en/docs/openapi-other/sandbox-environment#tag/marketplaceDbs) in the sandbox for emulating user actions
+- manage [assembly orders](https://dev.wildberries.ru/openapi/dbs#tag/dbsAssemblyOrders)
+- add, update and delete [label identifiers](https://dev.wildberries.ru/openapi/dbs#tag/dbsLabelIdentifiers)
+  You can test the DBS methods in the [sandbox](https://dev.wildberries.ru/en/sandbox). Also you can use [special methods](https://dev.wildberries.ru/en/docs/openapi-other/sandbox-environment#tag/marketplaceDbs) in the sandbox for emulating user actions
 
 ## DBS Assembly Orders
 
