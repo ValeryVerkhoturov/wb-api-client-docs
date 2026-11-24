@@ -26,7 +26,7 @@ POST /api/v2/nm-report/downloads/retry
 
 `application/json` — схема `NmReportRetryReportRequest`, обязательно
 
-- `downloadId` `string<uuid>` — ID отчёта
+- `downloadId` `string<uuid>` (обязательно) — ID отчёта
 
 ## Ответы
 
@@ -114,7 +114,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

@@ -110,7 +110,7 @@ import (
 	"context"
 	"fmt"
 
-	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/v2/general"
+	wbgeneral "github.com/ValeryVerkhoturov/wb-api-client-go/v3/general"
 )
 
 cfg := wbgeneral.NewConfiguration()

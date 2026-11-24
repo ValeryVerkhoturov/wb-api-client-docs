@@ -48,21 +48,21 @@ The method returns a report with [substitutions and incorrect attachments](https
 
 - `data` `object` (required) — Response data
   - `reports` `object[]` (required) — Retentions
-    - `dtBonus` `string` — Fine date and time
-    - `nmId` `integer<int64>` — WB item number
-    - `oldShkId` `integer<int64>` — Old item No.
-    - `oldColor` `string` — Old color
-    - `oldSize` `string` — Old Size
-    - `oldSku` `string` — Old SKU
-    - `oldVendorCode` `string` — Old seller `supplierArticle`
-    - `newShkId` `integer<int64>` — New item No.
-    - `newColor` `string` — New color
-    - `newSize` `string` — New size
-    - `newSku` `string` — New SKU
-    - `newVendorCode` `string` — New seller item number
-    - `bonusSumm` `number` — Fine amount
-    - `bonusType` `string` — Fine reason
-    - `photoUrls` `string[]` — Photos of the measurements
+    - `dtBonus` `string` (required) — Fine date and time
+    - `nmId` `integer<int64>` (required) — WB item number
+    - `oldShkId` `integer<int64>` (required) — Old item No.
+    - `oldColor` `string` (required) — Old color
+    - `oldSize` `string` (required) — Old Size
+    - `oldSku` `string` (required) — Old SKU
+    - `oldVendorCode` `string` (required) — Old seller `supplierArticle`
+    - `newShkId` `integer<int64>` (required) — New item No.
+    - `newColor` `string` (required) — New color
+    - `newSize` `string` (required) — New size
+    - `newSku` `string` (required) — New SKU
+    - `newVendorCode` `string` (required) — New seller item number
+    - `bonusSumm` `number` (required) — Fine amount
+    - `bonusType` `string` (required) — Fine reason
+    - `photoUrls` `string[]` (required) — Photos of the measurements
   - `total` `integer<int64>` (required) — Number of retentions in the report. Except `limit` and `offset`
 
 **Structure `400`:**
@@ -144,7 +144,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

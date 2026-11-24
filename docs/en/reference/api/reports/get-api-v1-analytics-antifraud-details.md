@@ -37,12 +37,12 @@ Self-purchase deduction is 30% of item price. Minimum deduction is 100,000 �
 
 **Structure `200`:**
 
-- `details` `object[]`
-  - `nmID` `integer<int64>` — WB item number
-  - `sum` `integer<int64>` — Order sum
-  - `currency` `string` — Currency
-  - `dateFrom` `string` — Report start date
-  - `dateTo` `string` — Report end date
+- `details` `object[]` (required)
+  - `currency` `string` (required) — Currency
+  - `dateFrom` `string` (required) — Report start date
+  - `dateTo` `string` (required) — Report end date
+  - `nmID` `integer<int64>` (required) — WB item number
+  - `sum` `integer<int64>` (required) — Order sum
 
 **Structure `400`:**
 
@@ -125,7 +125,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

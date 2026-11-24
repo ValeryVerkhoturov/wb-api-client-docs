@@ -44,9 +44,9 @@ GET /api/v1/analytics/brand-share/parent-subjects
 
 **Структура `200`:**
 
-- `data` `object[]` — Категории бренда
-  - `parentId` `integer<int64>` — ID родительской категории
-  - `parentName` `string` — Название родительской категории
+- `data` `object[]` (обязательно) — Категории бренда
+  - `parentId` `integer<int64>` (обязательно) — ID родительской категории
+  - `parentName` `string` (обязательно) — Название родительской категории
 
 **Структура `400`:**
 
@@ -129,7 +129,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

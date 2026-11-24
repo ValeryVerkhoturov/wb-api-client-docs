@@ -72,10 +72,10 @@ POST /api/analytics/v1/order-feed
     - `srid` `string` — ID заказа
     - `createdAt` `string` — Дата и время оформления заказа
     - `updatedAt` `string` — Дата и время текущего статуса. При `"status":"created"` возвращается значение поля `createdAt`
-    - `status` `string` = `created` | `buyout` | `cancel` | `return` | `returnDefective` — [Статус заказа](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c): - `created` — оформлен - `buyout` — продан - `cancel` — отменён - `return` — возвращён - `returnDefective` — возвращён по причине брака
-    - `cancelType` `string` = `app` | `receipt` | `expire` | `other` — [Тип отмены](https://seller.wildberries.ru/instructions/ru/ru/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c) (при `"status":"cancel"`): - `app` — отказ до получения - `receipt` — отказ при получении - `expire` — истёк срок получения - `other` — иное
-    - `warehouseName` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
-    - `warehouseRegion` `string` — Федеральный округ склада. Если склад не в России, возвращается страна. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `""`
+    - `status` `string` = `created` | `buyout` | `cancel` | `return` | `returnDefective` — [Статус заказа](https://seller.wildberries.ru/instructions/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c): - `created` — оформлен - `buyout` — продан - `cancel` — отменён - `return` — возвращён - `returnDefective` — возвращён по причине брака
+    - `cancelType` `string` = `app` | `receipt` | `expire` | `other` — [Тип отмены](https://seller.wildberries.ru/instructions/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c) (при `"status":"cancel"`): - `app` — отказ до получения - `receipt` — отказ при получении - `expire` — истёк срок получения - `other` — иное
+    - `warehouseName` `string` — Название склада. Для складов WB в России может быть только `Склад WB РФ` или `Склад WB СГТ РФ`
+    - `warehouseRegion` `string` — Регион отгрузки. Если склад принадлежит WB или продавцу не в России, возвращается страна
     - `isMp` `boolean` — Тип склада: - `true` — склад продавца - `false` — склад WB
     - `destinationCity` `string` — Населённый пункт доставки
     - `destinationDistrict` `string` — Федеральный округ доставки. Если доставка не по России, возвращается страна
@@ -159,7 +159,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

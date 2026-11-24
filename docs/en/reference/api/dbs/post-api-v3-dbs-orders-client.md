@@ -52,7 +52,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
   - `additionalPhones` `string[]` — Additional phone numbers to contact the buyer. Use it to call the buyer, if the main number from `phone` is unavailable. An empty value means that the number is not specified
   - `replacementAdditionalPhones` `string[]` — Additional replacement phone numbers to contact the buyer. An empty value means that the number is not specified
   - `orderID` `integer<int64>` — Assembly order ID
-  - `phoneCode` `integer<int64>` — Extension phone code. An empty value `""` means that the code is not assigned yet
+  - `phoneCode` `integer<int64>` — Extension phone code. The `0` value means that the code is not assigned yet
   - `additionalPhoneCodes` `string[]` — Additional extension codes. Use if you couldn't reach the buyer using the extension code from `phoneCode`. An empty value `""` means that the code is not assigned yet
 
 **Structure `400`:**
@@ -136,7 +136,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

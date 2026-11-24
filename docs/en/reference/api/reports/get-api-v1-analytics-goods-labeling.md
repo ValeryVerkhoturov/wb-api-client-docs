@@ -39,14 +39,14 @@ Data can be obtained for up to 31 days, starting from March 2024
 
 **Structure `200`:**
 
-- `report` `object[]`
-  - `amount` `number` — Fine amount, rubles
-  - `date` `string` — Date
-  - `incomeId` `integer<int64>` — Income ID
-  - `nmID` `integer<int64>` — WB item number
-  - `photoUrls` `string[]` — Item photo URL
-  - `shkID` `integer<int64>` — Item No.
-  - `sku` `string` — Listing SKU
+- `report` `object[]` (required)
+  - `amount` `number` (required) — Fine amount, rubles
+  - `date` `string` (required) — Date
+  - `incomeId` `integer<int64>` (required) — Income ID
+  - `nmID` `integer<int64>` (required) — WB item number
+  - `photoUrls` `string[]` (required) — Item photo URL
+  - `shkID` `integer<int64>` (required) — Item No.
+  - `sku` `string` (required) — Listing SKU
 
 **Structure `400`:**
 
@@ -129,7 +129,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

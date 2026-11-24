@@ -31,9 +31,6 @@ POST /api/analytics/v3/sales-funnel/products
 
 Можно получить отчёт максимум за последние 365 дней.
 
-В данных предыдущего периода:
-\* Данные в `pastPeriod` указаны за такой же период, что и в `selectedPeriod`
-\* Если дата начала `pastPeriod` раньше, чем год назад от текущей даты, она будет приведена к виду: `pastPeriod.start = текущая дата — 365 дней`
 Можно использовать пагинацию.
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца:
@@ -328,7 +325,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

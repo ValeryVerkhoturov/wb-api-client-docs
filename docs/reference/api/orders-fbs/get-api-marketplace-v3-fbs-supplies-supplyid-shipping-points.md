@@ -1,6 +1,6 @@
 ---
 title: "Получить список пунктов отгрузки поставки"
-description: "Метод возвращает доступные пункты отгрузки для указанной поставки. Используйте данные этого метода, чтобы устанавливать параметры отгрузки поставок."
+description: "Метод возвращает доступные пункты отгрузки для указанной поставки. Предназначен для продавцов из РФ. Используйте данные этого метода, чтобы устанавливать…"
 ---
 
 # Получить список пунктов отгрузки поставки
@@ -12,7 +12,7 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 **База:** `https://marketplace-api.wildberries.ru` · **Модуль:** [`orders-fbs`](/reference/api/orders-fbs/) · **Раздел:** Поставки FBS · [Документация спецификации ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdShippingPoints)
 
 Метод возвращает доступные пункты отгрузки для указанной поставки.
-Используйте данные этого метода, чтобы устанавливать [параметры отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
+Предназначен для продавцов из РФ. Используйте данные этого метода, чтобы устанавливать [параметры отгрузки поставок](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
 
 [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца для методов **сборочных заданий, поставок, пропусков и настроек автовозврата FBS**:
 
@@ -142,7 +142,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

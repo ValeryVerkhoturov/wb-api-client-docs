@@ -156,7 +156,7 @@ The report data is updated once every 2 hours.
       - `brandName` `string` — Brand
       - `mainPhoto` `string` — URL of the main photo of the listing
       - `isAdvertised` `boolean` — Is the item being promoted in search results
-      - `isSubstitutedSKU` `boolean` — If the item was searched by the promo item. The field will be in the response if the request contains `includeSubstitutedSKUs` and/or `includeSearchTexts`
+      - `isSubstitutedSKU` `boolean` — If the item was searched by the promo item
       - `isCardRated` `boolean` — If the listing has a rating
       - `rating` `number<float64>` — Listing rating
       - `feedbackRating` `number<float64>` — Feedbacks rating
@@ -263,7 +263,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

@@ -43,9 +43,9 @@ Data can be obtained starting from 1 November 2022, for up to 365 days.
 
 **Structure `200`:**
 
-- `data` `object[]` — Brand categories
-  - `parentId` `integer<int64>` — Parent category ID
-  - `parentName` `string` — Parent category name
+- `data` `object[]` (required) — Brand categories
+  - `parentId` `integer<int64>` (required) — Parent category ID
+  - `parentName` `string` (required) — Parent category name
 
 **Structure `400`:**
 
@@ -128,7 +128,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

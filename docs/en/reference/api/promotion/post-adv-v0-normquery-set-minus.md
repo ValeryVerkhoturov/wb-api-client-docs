@@ -116,7 +116,7 @@ import (
 	"context"
 	"fmt"
 
-	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/v2/promotion"
+	wbpromotion "github.com/ValeryVerkhoturov/wb-api-client-go/v3/promotion"
 )
 
 cfg := wbpromotion.NewConfiguration()

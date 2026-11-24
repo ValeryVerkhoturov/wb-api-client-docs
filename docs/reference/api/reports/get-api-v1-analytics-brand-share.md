@@ -44,11 +44,11 @@ GET /api/v1/analytics/brand-share
 
 **Структура `200`:**
 
-- `report` `object[]` — Отчёт
-  - `applyDate` `string<ГГГГ-ММ-ДД>` — Дата
-  - `brandRating` `integer<int64>` — Рейтинг бренда в родительской категории
-  - `pricePercent` `number<float>` — Доля от продаж в родительской категории — цена, %
-  - `qtyPercent` `number<float>` — Доля от продаж в родительской категории — количество, %
+- `report` `object[]` (обязательно) — Отчёт
+  - `applyDate` `string<ГГГГ-ММ-ДД>` (обязательно) — Дата
+  - `brandRating` `integer<int64>` (обязательно) — Рейтинг бренда в родительской категории
+  - `pricePercent` `number<float>` (обязательно) — Доля от продаж в родительской категории — цена, %
+  - `qtyPercent` `number<float>` (обязательно) — Доля от продаж в родительской категории — количество, %
 
 **Структура `400`:**
 
@@ -131,7 +131,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

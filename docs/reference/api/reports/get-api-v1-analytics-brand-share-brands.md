@@ -39,7 +39,7 @@ GET /api/v1/analytics/brand-share/brands
 
 **Структура `200`:**
 
-- `data` `string[]` — Список брендов
+- `data` `string[]` (обязательно) — Список брендов
 
 **Структура `401`:**
 
@@ -115,7 +115,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

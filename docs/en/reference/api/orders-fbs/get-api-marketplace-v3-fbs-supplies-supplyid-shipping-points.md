@@ -1,6 +1,6 @@
 ---
 title: "Get Supply Shipping Points"
-description: "The method returns shipping points available for the supply. Use this method data to set supply shipping methods."
+description: "The method returns shipping points available for the supply. Intended for sellers from Russia. Use this method data to set supply shipping methods."
 ---
 
 # Get Supply Shipping Points
@@ -12,7 +12,7 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdShippingPoints)
 
 The method returns shipping points available for the supply.
-Use this method data to set [supply shipping methods](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
+Intended for sellers from Russia. Use this method data to set [supply shipping methods](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
@@ -142,7 +142,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

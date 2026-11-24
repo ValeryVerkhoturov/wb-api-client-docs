@@ -38,7 +38,7 @@ You can only get brands that:
 
 **Structure `200`:**
 
-- `data` `string[]` — Brands list
+- `data` `string[]` (required) — Brands list
 
 **Structure `401`:**
 
@@ -114,7 +114,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

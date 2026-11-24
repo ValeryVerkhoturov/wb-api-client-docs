@@ -26,7 +26,7 @@ The method creates a [repeated generation task](https://dev.wildberries.ru/opena
 
 `application/json` — schema `NmReportRetryReportRequest`, required
 
-- `downloadId` `string<uuid>` — Report ID
+- `downloadId` `string<uuid>` (required) — Report ID
 
 ## Responses
 
@@ -114,7 +114,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

@@ -128,7 +128,7 @@ import (
 	"context"
 	"fmt"
 
-	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/v2/rates"
+	wbrates "github.com/ValeryVerkhoturov/wb-api-client-go/v3/rates"
 )
 
 cfg := wbrates.NewConfiguration()

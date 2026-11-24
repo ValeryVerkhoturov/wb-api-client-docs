@@ -44,16 +44,16 @@ You can save the main reports in [sheets format](https://dev.wildberries.ru/en/k
 
 - `response` `models.ExciseReportResponse`
   - `data` `object[]`
-    - `name` `string` — Buyer country
-    - `price` `number` — Price including VAT
+    - `barcode` `string` — SKU
     - `currency_name_short` `string` — Currency
     - `excise_short` `string` — Labeling code
-    - `barcode` `string` — SKU
+    - `fiscal_doc_number` `integer<int64>` — Receipt number, if exists
+    - `fiscal_drive_number` `string` — Fiscal storage number, if exists
+    - `fiscal_dt` `string` — Date in the receipt, if exists, YYYY-MM-DD
+    - `name` `string` — Buyer country
     - `nm_id` `integer<int64>` — WB item number
     - `operation_type_id` `integer<int64>` — Operation type, if exists: * `1` — withdraw from circulation * `2` — return to sale
-    - `fiscal_doc_number` `integer<int64>` — Receipt number, if exists
-    - `fiscal_dt` `string` — Date in the receipt, if exists, YYYY-MM-DD
-    - `fiscal_drive_number` `string` — Fiscal storage number, if exists
+    - `price` `number` — Price including VAT
     - `rid` `integer<int64>` — `Rid`
     - `srid` `string` — `Srid`
 
@@ -138,7 +138,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

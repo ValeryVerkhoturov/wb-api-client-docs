@@ -40,12 +40,12 @@ GET /api/v1/analytics/antifraud-details
 
 **Структура `200`:**
 
-- `details` `object[]`
-  - `nmID` `integer<int64>` — Артикул WB
-  - `sum` `integer<int64>` — Сумма заказа
-  - `currency` `string` — Валюта заказа
-  - `dateFrom` `string` — Начало отчётного периода
-  - `dateTo` `string` — Конец отчётного периода
+- `details` `object[]` (обязательно)
+  - `currency` `string` (обязательно) — Валюта заказа
+  - `dateFrom` `string` (обязательно) — Начало отчётного периода
+  - `dateTo` `string` (обязательно) — Конец отчётного периода
+  - `nmID` `integer<int64>` (обязательно) — Артикул WB
+  - `sum` `integer<int64>` (обязательно) — Сумма заказа
 
 **Структура `400`:**
 
@@ -128,7 +128,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

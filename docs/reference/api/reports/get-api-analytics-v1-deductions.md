@@ -48,21 +48,21 @@ GET /api/analytics/v1/deductions
 
 - `data` `object` (обязательно) — Данные ответа
   - `reports` `object[]` (обязательно) — Удержания
-    - `dtBonus` `string` — Дата и время удержания
-    - `nmId` `integer<int64>` — Артикул WB
-    - `oldShkId` `integer<int64>` — Старый штрихкод
-    - `oldColor` `string` — Старый цвет
-    - `oldSize` `string` — Старый размер
-    - `oldSku` `string` — Старый баркод
-    - `oldVendorCode` `string` — Старый артикул продавца
-    - `newShkId` `integer<int64>` — Новый штрихкод
-    - `newColor` `string` — Новый цвет
-    - `newSize` `string` — Новый размер
-    - `newSku` `string` — Новый баркод
-    - `newVendorCode` `string` — Новый артикул продавца
-    - `bonusSumm` `number` — Сумма удержания
-    - `bonusType` `string` — Причина удержания
-    - `photoUrls` `string[]` — Фото замеров
+    - `dtBonus` `string` (обязательно) — Дата и время удержания
+    - `nmId` `integer<int64>` (обязательно) — Артикул WB
+    - `oldShkId` `integer<int64>` (обязательно) — Старый штрихкод
+    - `oldColor` `string` (обязательно) — Старый цвет
+    - `oldSize` `string` (обязательно) — Старый размер
+    - `oldSku` `string` (обязательно) — Старый баркод
+    - `oldVendorCode` `string` (обязательно) — Старый артикул продавца
+    - `newShkId` `integer<int64>` (обязательно) — Новый штрихкод
+    - `newColor` `string` (обязательно) — Новый цвет
+    - `newSize` `string` (обязательно) — Новый размер
+    - `newSku` `string` (обязательно) — Новый баркод
+    - `newVendorCode` `string` (обязательно) — Новый артикул продавца
+    - `bonusSumm` `number` (обязательно) — Сумма удержания
+    - `bonusType` `string` (обязательно) — Причина удержания
+    - `photoUrls` `string[]` (обязательно) — Фото замеров
   - `total` `integer<int64>` (обязательно) — Количество удержаний в отчёте. Без учёта `limit` и `offset`
 
 **Структура `400`:**
@@ -144,7 +144,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

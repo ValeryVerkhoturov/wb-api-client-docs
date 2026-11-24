@@ -132,7 +132,7 @@ import (
 	"context"
 	"fmt"
 
-	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/v2/in_store_pickup"
+	wbinstorepickup "github.com/ValeryVerkhoturov/wb-api-client-go/v3/in_store_pickup"
 )
 
 cfg := wbinstorepickup.NewConfiguration()

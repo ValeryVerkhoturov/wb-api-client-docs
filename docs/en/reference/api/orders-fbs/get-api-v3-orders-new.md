@@ -41,7 +41,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 **Structure `200`:**
 
 - `orders` `OrderNew[]` — New assembly orders list
-  - `address` `object` — Exact buyer's address for delivery, if applicable. Some of the fields may be empty due to the specifics of the address
+  - `address` `object` — Exact buyer address for delivery. Specified only for sellers from Turkey, in other cases `null` is returned
     - `fullAddress` `string` — Delivery address
     - `longitude` `number<float64>` — Longitude
     - `latitude` `number<float64>` — Latitude
@@ -147,7 +147,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

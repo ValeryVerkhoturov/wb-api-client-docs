@@ -52,7 +52,7 @@ POST /api/v3/dbs/orders/client
   - `additionalPhones` `string[]` — Дополнительные номера телефонов для связи с покупателем. Используйте, чтобы позвонить покупателю, если недоступен основной номер из `phone`. Пустое значение означает, что номер не указан
   - `replacementAdditionalPhones` `string[]` — Дополнительные подменные номера телефонов для связи с покупателем. Пустое значение означает, что номер не указан
   - `orderID` `integer<int64>` — ID сборочного задания
-  - `phoneCode` `integer<int64>` — Добавочный код. Пустое значение `""` указывает, что код ещё не назначен
+  - `phoneCode` `integer<int64>` — Добавочный код. Значение `0` указывает, что код ещё не назначен
   - `additionalPhoneCodes` `string[]` — Дополнительные добавочные коды. Используйте, если не получилось дозвониться по добавочному коду из `phoneCode`. Пустое значение `""` указывает, что код ещё не назначен
 
 **Структура `400`:**
@@ -136,7 +136,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

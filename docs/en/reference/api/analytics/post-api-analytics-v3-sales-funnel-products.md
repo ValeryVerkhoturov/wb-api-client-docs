@@ -31,9 +31,6 @@ If you specify multiple parameters, the response will include listings that matc
 
 You can get a report for a maximum of the last 365 days.
 
-In the previous period's data:
-\* The data in `pastPeriod` covers the same duration as in `selectedPeriod`
-\* If the `pastPeriod` start date is more than a year before the current date, it will be adjusted to: `pastPeriod.start = current date - 365 days`
 Pagination can be used.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account:
@@ -328,7 +325,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

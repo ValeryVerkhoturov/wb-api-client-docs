@@ -43,7 +43,7 @@ GET /api/v1/paid_storage/tasks/{task_id}/download
 
 **Структура `200` — `object[]`:**
 
-- `date` `string` — Дата, за которую был расчёт или перерасчёт
+- `date` `string` — Дата расчёта или перерасчёта
 - `logWarehouseCoef` `number` — Коэффициент логистики и хранения. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
 - `officeId` `integer<int64>` — ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`
 - `warehouse` `string` — Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `Склад WB РФ`
@@ -155,7 +155,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

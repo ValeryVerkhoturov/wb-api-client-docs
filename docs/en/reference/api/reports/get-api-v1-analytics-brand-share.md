@@ -43,11 +43,11 @@ Data can be obtained starting from 1 November 2022, for up to 365 days.
 
 **Structure `200`:**
 
-- `report` `object[]` — Report
-  - `applyDate` `string<ГГГГ-ММ-ДД>` — Date
-  - `brandRating` `integer<int64>` — Brand rating in parent category
-  - `pricePercent` `number<float>` — Share of sales in the parent category — price, %
-  - `qtyPercent` `number<float>` — Share of sales in the parent category — quantity, %
+- `report` `object[]` (required) — Report
+  - `applyDate` `string<ГГГГ-ММ-ДД>` (required) — Date
+  - `brandRating` `integer<int64>` (required) — Brand rating in parent category
+  - `pricePercent` `number<float>` (required) — Share of sales in the parent category — price, %
+  - `qtyPercent` `number<float>` (required) — Share of sales in the parent category — quantity, %
 
 **Structure `400`:**
 
@@ -130,7 +130,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

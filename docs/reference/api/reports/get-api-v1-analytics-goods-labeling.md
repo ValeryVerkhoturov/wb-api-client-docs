@@ -38,14 +38,14 @@ GET /api/v1/analytics/goods-labeling
 
 **Структура `200`:**
 
-- `report` `object[]`
-  - `amount` `number` — Сумма штрафа, руб
-  - `date` `string` — Дата
-  - `incomeId` `integer<int64>` — Номер поставки
-  - `nmID` `integer<int64>` — Артикул WB
-  - `photoUrls` `string[]` — URL фото товара
-  - `shkID` `integer<int64>` — Штрихкод
-  - `sku` `string` — Баркод из карточки товара
+- `report` `object[]` (обязательно)
+  - `amount` `number` (обязательно) — Сумма штрафа, руб
+  - `date` `string` (обязательно) — Дата
+  - `incomeId` `integer<int64>` (обязательно) — Номер поставки
+  - `nmID` `integer<int64>` (обязательно) — Артикул WB
+  - `photoUrls` `string[]` (обязательно) — URL фото товара
+  - `shkID` `integer<int64>` (обязательно) — Штрихкод
+  - `sku` `string` (обязательно) — Баркод из карточки товара
 
 **Структура `400`:**
 
@@ -128,7 +128,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()

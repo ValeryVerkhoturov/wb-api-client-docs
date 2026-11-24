@@ -42,7 +42,7 @@ GET /api/v3/orders/new
 **Структура `200`:**
 
 - `orders` `OrderNew[]` — Список новых сборочных заданий
-  - `address` `object` — Точный адрес покупателя для доставки, если применимо. Из-за особенностей адреса некоторые поля могут быть пустыми
+  - `address` `object` — Точный адрес покупателя для доставки. Указывается только для продавцов из Турции, в остальных случаях возвращается `null`
     - `fullAddress` `string` — Адрес доставки
     - `longitude` `number<float64>` — Долгота
     - `latitude` `number<float64>` — Широта
@@ -148,7 +148,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v2/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

@@ -102,7 +102,7 @@ POST /api/v2/search-report/table/groups
       - `brandName` `string` — Бренд
       - `mainPhoto` `string` — URL главного фото карточки товара
       - `isAdvertised` `boolean` — Находится ли товар в продвижении в Поисковой выдаче
-      - `isSubstitutedSKU` `boolean` — Искали ли товар по подменному артикулу. Поле будет в ответе при наличии в запросе `includeSubstitutedSKUs` и/или `includeSearchTexts`
+      - `isSubstitutedSKU` `boolean` — Искали ли товар по подменному артикулу
       - `isCardRated` `boolean` — Есть ли рейтинг у карточки товара
       - `rating` `number<float64>` — Рейтинг карточки товара
       - `feedbackRating` `number<float64>` — Рейтинг по отзывам
@@ -209,7 +209,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v2/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

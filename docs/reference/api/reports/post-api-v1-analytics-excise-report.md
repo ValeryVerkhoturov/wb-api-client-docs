@@ -45,16 +45,16 @@ POST /api/v1/analytics/excise-report
 
 - `response` `models.ExciseReportResponse`
   - `data` `object[]`
-    - `name` `string` — Страна покупателя
-    - `price` `number` — Цена товара, с НДС
+    - `barcode` `string` — Баркод
     - `currency_name_short` `string` — Валюта
     - `excise_short` `string` — Код маркировки
-    - `barcode` `string` — Баркод
+    - `fiscal_doc_number` `integer<int64>` — Номер фискального документа (чека полного расчёта), если есть
+    - `fiscal_drive_number` `string` — Номер фискального накопителя, если есть
+    - `fiscal_dt` `string` — Дата фискализации (дата в чеке), если есть, `ГГГГ-ММ-ДД`
+    - `name` `string` — Страна покупателя
     - `nm_id` `integer<int64>` — Артикул WB
     - `operation_type_id` `integer<int64>` — Тип операции, если есть: * `1` — вывод из оборота * `2` — возврат в оборот
-    - `fiscal_doc_number` `integer<int64>` — Номер фискального документа (чека полного расчёта), если есть
-    - `fiscal_dt` `string` — Дата фискализации (дата в чеке), если есть, `ГГГГ-ММ-ДД`
-    - `fiscal_drive_number` `string` — Номер фискального накопителя, если есть
+    - `price` `number` — Цена товара, с НДС
     - `rid` `integer<int64>` — `Rid`
     - `srid` `string` — `Srid`
 
@@ -139,7 +139,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v2/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
 )
 
 cfg := wbreports.NewConfiguration()
