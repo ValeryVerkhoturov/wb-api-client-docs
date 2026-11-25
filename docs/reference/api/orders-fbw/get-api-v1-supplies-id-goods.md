@@ -56,6 +56,7 @@ GET /api/v1/supplies/{ID}/goods
 - `readyForSaleQuantity` `integer<int64>` — Поступило в продажу, шт
 - `acceptedQuantity` `integer<int64>` — Принято, шт
 - `unloadingQuantity` `integer<int64>` — Количество товара на раскладке, шт
+- `correctedQuantity` `integer<int64>` — Количество товара по Акту корректировки, которое не входит в `acceptedQuantity`. Возвращается, если по товару есть расхождения, зафиксированные при приёмке
 
 **Структура `400`:**
 

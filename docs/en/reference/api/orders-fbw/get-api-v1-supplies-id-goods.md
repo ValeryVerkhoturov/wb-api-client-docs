@@ -51,11 +51,12 @@ The method returns information about the items in the supply.
 - `tnved` `string` — HS-code. If `"needKiz":true` and `"tnved":null`, it is required to specify the \*\*HS-codes\*\* in the [personal account](https://seller.wildberries.ru/new-goods) or through [API](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2CardsUpdate)
 - `techSize` `string` — Item size specified by the seller
 - `color` `string` — Item color
-- `supplierBoxAmount` `integer<int64>` — Specified in the package, pieces
-- `quantity` `integer<int64>` — Specified in the supply/order, pieces
-- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pieces
-- `acceptedQuantity` `integer<int64>` — Accepted, pieces
-- `unloadingQuantity` `integer<int64>` — Total items at putaway, pieces
+- `supplierBoxAmount` `integer<int64>` — Specified in the package, pcs
+- `quantity` `integer<int64>` — Specified in the supply/order, pcs
+- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pcs
+- `acceptedQuantity` `integer<int64>` — Accepted, pcs
+- `unloadingQuantity` `integer<int64>` — Total items at putaway, pcs
+- `correctedQuantity` `integer<int64>` — Number of item per Adjustment Certificate that is not included in the `acceptedQuantity`. Returned if discrepancies were found during the item acceptance
 
 **Structure `400`:**
 

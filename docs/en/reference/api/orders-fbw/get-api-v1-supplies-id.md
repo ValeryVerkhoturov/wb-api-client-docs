@@ -63,13 +63,14 @@ The method returns supply details by ID.
 - `supplierAssignName` `string` — Short seller's name
 - `storageCoef` `string` — Storage coefficient
 - `deliveryCoef` `string` — Logistics coefficient
-- `quantity` `integer<int64>` — Added to the supply/order, pieces
-- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pieces
-- `acceptedQuantity` `integer<int64>` — Accepted, pieces
-- `unloadingQuantity` `integer<int64>` — Total items at putaway, pieces
-- `depersonalizedQuantity` `integer<int64>` — Quantity of depersonalized items, pieces
+- `quantity` `integer<int64>` — Added to the supply/order, pcs
+- `readyForSaleQuantity` `integer<int64>` — Ready for sale, pcs
+- `acceptedQuantity` `integer<int64>` — Accepted, pcs
+- `unloadingQuantity` `integer<int64>` — Total items at putaway, pcs
+- `depersonalizedQuantity` `integer<int64>` — Quantity of depersonalized items, pcs
 - `discrepancies` `integer<int64>` — Discrepancies between the declared and actual quantity of the item in the supply. Only when `"statusID":5`
 - `isBoxOnPallet` `boolean` — **Pallet with Single Items** — supply type: - `true` — yes - `false` — no The field is returned only when `"boxTypeID": 2`
+- `correctedQuantity` `integer<int64>` — Number of items per Adjustment Certificate that is not included in the `acceptedQuantity`. Returned if discrepancies were found during the acceptance of the supply
 
 **Structure `400`:**
 

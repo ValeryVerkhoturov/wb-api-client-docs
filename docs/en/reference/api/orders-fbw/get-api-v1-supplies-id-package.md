@@ -43,10 +43,10 @@ The method returns information about the package of the supply.
 
 - `packageCode` `string` — The encoded value of the packaging sticker
 - `packageId` `string` — Packaging sticker ID
-- `quantity` `integer<int64>` — Total quantity of items in the package, pieces
+- `quantity` `integer<int64>` — Total quantity of items in the package, pcs
 - `barcodes` `models.GoodInBox[]` — List of packed items
   - `barcode` `string` — Barcode
-  - `quantity` `integer<int64>` — Quantity, pieces
+  - `quantity` `integer<int64>` — Quantity, pcs
 
 **Structure `400`:**
 
