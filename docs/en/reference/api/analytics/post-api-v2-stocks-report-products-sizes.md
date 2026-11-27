@@ -63,7 +63,7 @@ The report data is updated once every 2 hours.
 
 - `data` `TableSizeResponse`
   - `offices` `TableOfficeItem[]` — Set of warehouse data
-    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `regionName` `string` — [Dispatch country](https://dev.wildberries.ru/en/release-notes?id=605)
     - `officeID` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
     - `officeName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
     - `metrics` `object` — Warehouse metrics
@@ -98,7 +98,7 @@ The report data is updated once every 2 hours.
     - `name` `string` — Size name
     - `chrtID` `integer<int64>` — Size ID
     - `offices` `TableOfficeItem[]` — Warehouses
-      - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
+      - `regionName` `string` — [Dispatch country](https://dev.wildberries.ru/en/release-notes?id=605)
       - `officeID` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
       - `officeName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
       - `metrics` `object` — Warehouse metrics
@@ -248,7 +248,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

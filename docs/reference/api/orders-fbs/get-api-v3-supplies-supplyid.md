@@ -40,7 +40,7 @@ GET /api/v3/supplies/{supplyId}
 
 - `id` `string` — ID поставки
 - `isB2b` `boolean` — Признак B2B-продажи: - `true` — B2B-продажа - `false` — не B2B-продажа - `null` — признак отсутствует, сборочные задания не добавлены к поставке
-- `isPickupPointShipmentAllowed` `boolean` — Можно ли отгрузить заказ на ПВЗ: - `false` — нет - `true` — да
+- `isPickupPointDispatchAllowed` `boolean` — Можно ли отгрузить заказ на ПВЗ: - `false` — нет - `true` — да
 - `done` `boolean` — Флаг закрытия поставки: - `true` — закрыта - `false` — открыта
 - `createdAt` `string` — Дата создания поставки (RFC3339)
 - `closedAt` `string` — Дата закрытия поставки (RFC3339)
@@ -137,7 +137,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

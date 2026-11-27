@@ -79,7 +79,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
   - `isAbleSupplierFeedbackValuation` `boolean` — Is the feedback rating available to the seller - `true`— yes - `false` — no
   - `supplierFeedbackValuation` `integer<int64>` — Feedback rating left by the seller
   - `isAbleSupplierProductValuation` `boolean` — Is the item rating available to the seller (`true` - available, `false` - not available)
-  - `supplierProductValuation` `integer<int64>` — Item rating left by the seller
+  - `supplierProductValuation` `integer<int64>` — Key of the item issue
   - `isAbleReturnProductOrders` `boolean` — Item return option: - `true` — available - `false` — unavailable
   - `returnProductOrdersDate` `string` — Date and time when a response with status code 200 was received for the return request.
   - `bables` `string[]` — List of customer tags
@@ -176,7 +176,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/v3/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/v4/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

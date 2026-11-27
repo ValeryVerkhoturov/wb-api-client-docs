@@ -57,7 +57,7 @@ The data is updated once every 30 minutes.
     - `chrtId` `integer<int64>` — Size ID
     - `warehouseId` `integer<int64>` — [Warehouse ID](https://dev.wildberries.ru/en/release-notes?id=605)
     - `warehouseName` `string` — [Warehouse name](https://dev.wildberries.ru/en/release-notes?id=605)
-    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/en/release-notes?id=605)
+    - `regionName` `string` — [Dispatch country](https://dev.wildberries.ru/en/release-notes?id=605)
     - `quantity` `integer<int64>` — Warehouse inventory available to clients to add to cart
     - `inWayToClient` `integer<int64>` — On way to client
     - `inWayFromClient` `integer<int64>` — On way from client
@@ -139,7 +139,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

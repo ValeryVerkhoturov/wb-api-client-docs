@@ -74,7 +74,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
   - `cargoType` `integer<int64>` = `1` | `2` | `3` — Type of cargo: - `1` — small-sized items - `2` — over dimensional cargo (ODC) - `3` — dimensional cargo+ (CD+)
   - `crossBorderType` `integer<int32>` = `0` | `1` — Assembly order type: - `0` — Non-Cross-Border - `1` — Cross-Border
   - `isZeroOrder` `boolean` — Indicator of an order for a item with zero inventory: - `false` — the order is made for a item with a non-zero inventory - `true` — the order is made for a item with zero inventory. Such an order can be canceled without a cancellation fee
-  - `isPickupPointShipmentAllowed` `boolean` — Whether you can dispatch the order to a pickup point: - `false` — no - `true` — yes
+  - `isPickupPointDispatchAllowed` `boolean` — Whether you can dispatch the order to a pickup point: - `false` — no - `true` — yes
   - `options` `object` — Order options
     - `isB2B` `boolean` — Indicator of a B2B sale: - `false` — not B2B sale - `true` — B2B sale
 
@@ -147,7 +147,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

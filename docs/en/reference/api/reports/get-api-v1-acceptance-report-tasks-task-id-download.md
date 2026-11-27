@@ -44,8 +44,8 @@ Returns the report by task ID
 **Structure `200` — `object[]`:**
 
 - `count` `integer<int64>` — Number of items
-- `giCreateDate` `string` — Shipment creation date
-- `incomeId` `integer<int64>` — Shipment number
+- `giCreateDate` `string` — Dispatch creation date
+- `incomeId` `integer<int64>` — Dispatch number
 - `nmID` `integer<int64>` — WB item number
 - `shkCreateDate` `string` — Receiving date
 - `subjectName` `string` — Subcategory
@@ -139,7 +139,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v4/reports"
 )
 
 cfg := wbreports.NewConfiguration()

@@ -34,7 +34,7 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 
 | Код   | Описание                         | Схема                          |
 | ----- | -------------------------------- | ------------------------------ |
-| `200` | Успешно                          | `SupplyShippingPointsResponse` |
+| `200` | Успешно                          | `SupplyDispatchPointsResponse` |
 | `400` | Неправильный запрос              | `Error`                        |
 | `401` | Не авторизован                   | `object`                       |
 | `403` | Доступ запрещён                  | `object`                       |
@@ -44,7 +44,7 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 
 **Структура `200`:**
 
-- `shippingPoints` `SupplyShippingPoint[]` — Список пунктов отгрузки для указанной поставки
+- `shippingPoints` `SupplyDispatchPoint[]` — Список пунктов отгрузки для указанной поставки
   - `id` `integer<int64>` — ID пункта отгрузки
   - `name` `string` — Название
   - `address` `string` — Адрес
@@ -142,7 +142,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

@@ -1,9 +1,9 @@
 ---
-title: "Get All Assembly Orders for Re-shipment"
-description: "Returns all assembly orders that require re-shipment"
+title: "Get All Assembly Orders for Redispatch"
+description: "Returns all assembly orders that require redispatch"
 ---
 
-# Get All Assembly Orders for Re-shipment
+# Get All Assembly Orders for Redispatch
 
 ```http
 GET /api/v3/supplies/orders/reshipment
@@ -11,7 +11,7 @@ GET /api/v3/supplies/orders/reshipment
 
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Assembly Orders · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3SuppliesOrdersReshipment)
 
-Returns all assembly orders that require re-shipment
+Returns all assembly orders that require redispatch
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
@@ -116,7 +116,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

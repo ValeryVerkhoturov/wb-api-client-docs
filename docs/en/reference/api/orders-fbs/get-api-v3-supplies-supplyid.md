@@ -40,7 +40,7 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 
 - `id` `string` — Supply ID
 - `isB2b` `boolean` — Indicator of a B2B sale: - `true` — B2B sale - `false` — not B2B sale - `null` — no value, no assembly orders added to the supply
-- `isPickupPointShipmentAllowed` `boolean` — Whether you can dispatch the order to a pickup point: - `false` — no - `true` — yes
+- `isPickupPointDispatchAllowed` `boolean` — Whether you can dispatch the order to a pickup point: - `false` — no - `true` — yes
 - `done` `boolean` — An indication that the supply is closed - `true` — closed - `false` — open
 - `createdAt` `string` — Supply creation date (RFC3339)
 - `closedAt` `string` — Supply close date (RFC3339)
@@ -50,9 +50,9 @@ In [Sandbox](https://dev.wildberries.ru/en/sandbox) — maximum of 1 request per
 - `crossBorderType` `integer<int32>` = `0` | `1` — Supply type: - `0` — Non-Cross-Border - `1` — Cross-Border - `null` — no value
 - `destinationOfficeId` `integer<int64>` — ID of the office where assembly tasks for the supply are stored. If `null`, office ID is not specified
 - `recommendedWhId` `integer<int64>` — ID of the recommended warehouse for acceptance of the supply for Moscow and Moscow region. The warehouse closest to the customers chain is defined automatically when the supply is transferred to delivery, taking into account the parameters of all assembly orders in the supply. If `0`, the recommended warehouse is not determined
-- `shippingDt` `string` — Planned supply shipping date, format `YYYY-MM-DD`
-- `shippingPointId` `integer<int64>` — Shipping point ID. You can get it using a method for getting [supply shipping points](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
-- `shippingType` `string` = `selfShipping` | `transportCompany` — Type of shipping to the shipping point: - `selfShipping` — shipping at the seller's expense - `transportCompany` — delivery via a transport company
+- `shippingDt` `string` — Planned supply dispatch date, format `YYYY-MM-DD`
+- `shippingPointId` `integer<int64>` — Dispatch point ID. You can get it using a method for getting [supply dispatch points](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+- `shippingType` `string` = `selfShipping` | `transportCompany` — Type of dispatch to the dispatch point: - `selfShipping` — dispatch at the seller's expense - `transportCompany` — delivery via a transport company
 - `waybillUuid` `string` — Electronic waybill ID
 - `spotAvailable` `boolean` — Whether SPOT is available for this supply: - `true` — yes - `false` — no
 
@@ -137,7 +137,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

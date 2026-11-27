@@ -48,7 +48,7 @@ Returns the report by task ID
 - `officeId` `integer<int64>` — Warehouse ID. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `0`
 - `warehouse` `string` — Warehouse name. [At the moment](https://dev.wildberries.ru/en/release-notes?id=570), there can only be `Склад WB РФ`
 - `warehouseCoef` `number` — Storage coefficient
-- `giId` `integer<int64>` — Shipment ID
+- `giId` `integer<int64>` — Dispatch ID
 - `chrtId` `integer<int64>` — Size ID
 - `size` `string` — Size (`techSize` in listing)
 - `barcode` `string` — SKU
@@ -155,7 +155,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v4/reports"
 )
 
 cfg := wbreports.NewConfiguration()

@@ -161,7 +161,7 @@ import (
 	"context"
 	"fmt"
 
-	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/v3/communications"
+	wbcommunications "github.com/ValeryVerkhoturov/wb-api-client-go/v4/communications"
 )
 
 cfg := wbcommunications.NewConfiguration()

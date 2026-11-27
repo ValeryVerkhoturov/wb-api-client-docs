@@ -113,7 +113,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/v3/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/v4/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

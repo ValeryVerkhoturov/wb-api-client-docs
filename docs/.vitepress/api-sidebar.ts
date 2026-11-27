@@ -1628,7 +1628,7 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/orders-fbs/post-api-v3-orders-status",
         },
         {
-          text: "Get All Assembly Orders for Re-shipment",
+          text: "Get All Assembly Orders for Redispatch",
           link: "/en/reference/api/orders-fbs/get-api-v3-supplies-orders-reshipment",
         },
         {
@@ -1716,11 +1716,11 @@ export const apiSidebar: Record<string, DefaultTheme.SidebarItem[]> = {
           link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids",
         },
         {
-          text: "Get Supply Shipping Points",
+          text: "Get Supply Dispatch Points",
           link: "/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points",
         },
         {
-          text: "Set Supply Shipping Method",
+          text: "Set Supply Dispatch Method",
           link: "/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method",
         },
         {

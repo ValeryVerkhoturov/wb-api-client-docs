@@ -146,7 +146,7 @@ import (
 	"context"
 	"fmt"
 
-	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/dbs"
+	wbdbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/dbs"
 )
 
 cfg := wbdbs.NewConfiguration()

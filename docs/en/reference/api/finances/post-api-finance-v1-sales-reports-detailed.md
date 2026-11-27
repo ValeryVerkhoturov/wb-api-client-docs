@@ -58,8 +58,8 @@ You can save the report in [Google Sheets](https://dev.wildberries.ru/en/knowled
 - `currency` `string` — Report currency
 - `reportType` `integer<int64>` = `1` | `2` — Report type: - `1` — general - `2` — purchase
 - `rrdId` `integer<int64>` — Row ID
-- `giId` `integer<int64>` — Shipment ID
-- `dlvPrc` `number` — Fixed warehouse multiplier for shipments
+- `giId` `integer<int64>` — Dispatch ID
+- `dlvPrc` `number` — Fixed warehouse multiplier for dispatches
 - `fixTariffDateFrom` `string` — Warehouse multiplier fixed on
 - `fixTariffDateTo` `string` — Warehouse multiplier fixed until
 - `subjectName` `string` — Subcategory
@@ -230,7 +230,7 @@ import (
 	"context"
 	"fmt"
 
-	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/v3/finances"
+	wbfinances "github.com/ValeryVerkhoturov/wb-api-client-go/v4/finances"
 )
 
 cfg := wbfinances.NewConfiguration()

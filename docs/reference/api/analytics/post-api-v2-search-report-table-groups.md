@@ -209,7 +209,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

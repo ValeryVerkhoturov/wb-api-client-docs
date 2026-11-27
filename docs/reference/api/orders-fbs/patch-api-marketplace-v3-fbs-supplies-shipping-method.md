@@ -40,7 +40,7 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 | Код   | Описание               | Схема                                  |
 | ----- | ---------------------- | -------------------------------------- |
-| `200` | Успешно                | `UpdateSuppliesShippingMethodResponse` |
+| `200` | Успешно                | `UpdateSuppliesDispatchMethodResponse` |
 | `400` | Неправильный запрос    | `Error`                                |
 | `401` | Не авторизован         | `object`                               |
 | `402` | Требуется платёж       | `object`                               |
@@ -50,7 +50,7 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 **Структура `200`:**
 
-- `results` `UpdatedSuppliesShippingMethod[]`
+- `results` `UpdatedSuppliesDispatchMethod[]`
   - `error` `object` — Ошибка обработки запроса для поставки. Возможные варианты ошибок: - `400 IncorrectRequestBody`: - некорректный ID поставки - место отгрузки не найдено - склад назначения находится не в РФ - неизвестный `shippingType` - дата не соответствует формату `YYYY-MM-DD` - `400 FulfillmentRequired` — в месте отгрузки недоступна услуга **Фулфилмент в СЦ** - `404 NotFound` — поставка не найдена - `409 SupplyAlreadyScanned` — поставка или её короба уже отсканированы в пункте отгрузки - `409 InvalidShippingDt` — некорректная дата отгрузки поставки
     - `code` `integer<int64>` — Код ошибки
     - `detail` `string` — Дополнительная информация об ошибке
@@ -138,7 +138,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

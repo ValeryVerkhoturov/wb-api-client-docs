@@ -36,7 +36,7 @@ You can learn how to use methods in business cases in the [instructions](https:/
 | `GET`   | `/api/v3/orders/new`                     | [Get New Assembly Orders](/en/reference/api/orders-fbs/get-api-v3-orders-new)                                          |
 | `GET`   | `/api/v3/orders`                         | [Get Assembly Orders](/en/reference/api/orders-fbs/get-api-v3-orders)                                                  |
 | `POST`  | `/api/v3/orders/status`                  | [Get Assembly Orders Statuses](/en/reference/api/orders-fbs/post-api-v3-orders-status)                                 |
-| `GET`   | `/api/v3/supplies/orders/reshipment`     | [Get All Assembly Orders for Re-shipment](/en/reference/api/orders-fbs/get-api-v3-supplies-orders-reshipment)          |
+| `GET`   | `/api/v3/supplies/orders/reshipment`     | [Get All Assembly Orders for Redispatch](/en/reference/api/orders-fbs/get-api-v3-supplies-orders-reshipment)           |
 | `PATCH` | `/api/v3/orders/{orderId}/cancel`        | [Cancel the Assembly Order](/en/reference/api/orders-fbs/patch-api-v3-orders-orderid-cancel)                           |
 | `POST`  | `/api/v3/orders/stickers`                | [Get Assembly Orders Stickers](/en/reference/api/orders-fbs/post-api-v3-orders-stickers)                               |
 | `POST`  | `/api/v3/orders/stickers/cross-border`   | [Get Stickers for Cross-Border Assembly Orders](/en/reference/api/orders-fbs/post-api-v3-orders-stickers-cross-border) |
@@ -68,8 +68,8 @@ You can learn how to use methods in business cases in the [instructions](https:/
 | `GET`    | `/api/v3/supplies/{supplyId}`                                 | [Get Supply Details](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid)                                                        |
 | `DELETE` | `/api/v3/supplies/{supplyId}`                                 | [Delete the Supply](/en/reference/api/orders-fbs/delete-api-v3-supplies-supplyid)                                                      |
 | `GET`    | `/api/marketplace/v3/supplies/{supplyId}/order-ids`           | [Get Supply Assembly Order IDs](/en/reference/api/orders-fbs/get-api-marketplace-v3-supplies-supplyid-order-ids)                       |
-| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points` | [Get Supply Shipping Points](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points)                |
-| `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`            | [Set Supply Shipping Method](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method)                       |
+| `GET`    | `/api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points` | [Get Supply Dispatch Points](/en/reference/api/orders-fbs/get-api-marketplace-v3-fbs-supplies-supplyid-shipping-points)                |
+| `PATCH`  | `/api/marketplace/v3/fbs/supplies/shipping-method`            | [Set Supply Dispatch Method](/en/reference/api/orders-fbs/patch-api-marketplace-v3-fbs-supplies-shipping-method)                       |
 | `PATCH`  | `/api/v3/supplies/{supplyId}/deliver`                         | [Move the Supply to the Delivery](/en/reference/api/orders-fbs/patch-api-v3-supplies-supplyid-deliver)                                 |
 | `GET`    | `/api/v3/supplies/{supplyId}/barcode`                         | [Get the Supply QR Code](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-barcode)                                            |
 | `GET`    | `/api/v3/supplies/{supplyId}/trbx`                            | [Get Supply Shipping Units List](/en/reference/api/orders-fbs/get-api-v3-supplies-supplyid-trbx)                                       |

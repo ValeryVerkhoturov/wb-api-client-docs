@@ -56,7 +56,7 @@ The data is updated once every 30 minutes.
     - `chrtId` `integer<int64>` — Size ID
     - `warehouseId` `integer<int64>` — Warehouse ID
     - `warehouseName` `string` — Warehouse name
-    - `regionName` `string` — Shipping region
+    - `regionName` `string` — Dispatch region
     - `quantity` `integer<int64>` — Warehouse inventory available to clients to add to cart
 
 **Structure `400`:**
@@ -136,7 +136,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

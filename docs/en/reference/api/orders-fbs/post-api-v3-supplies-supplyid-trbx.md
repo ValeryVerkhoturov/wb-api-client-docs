@@ -13,7 +13,7 @@ POST /api/v3/supplies/{supplyId}/trbx
 
 Adds the required number of shipping units to the supply.
 
-You should add shipping units only to supplies shipped to the pickup points.
+You should add shipping units only to supplies dispatched to the pickup points.
 You can add shipping units to an open supply only. One shipping unit can contain several orders. For example, if a supply has 10 orders, distribute them into boxes: the system will allow creating no more than 5 shipping units. For 20 orders — no more than 10 shipping units, for 100 — no more than 50.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
@@ -130,7 +130,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

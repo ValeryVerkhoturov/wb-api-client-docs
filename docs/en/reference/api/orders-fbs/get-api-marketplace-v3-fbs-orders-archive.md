@@ -78,7 +78,7 @@ For example, this happens if the seller did not deliver one of the orders in the
     - `wbStatus` `string` — Assembly order status set by WB system
   - `stickerId` `integer<int64>` — Sticker ID
   - `supplyId` `string` — Supply ID
-  - `warehouseId` `integer<int64>` — ID of the seller warehouse from which the item was shipped
+  - `warehouseId` `integer<int64>` — ID of the seller warehouse from which the item was dispatched
 
 **Structure `400`:**
 
@@ -160,7 +160,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

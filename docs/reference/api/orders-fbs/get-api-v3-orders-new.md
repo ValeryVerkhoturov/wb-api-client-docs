@@ -75,7 +75,7 @@ GET /api/v3/orders/new
   - `cargoType` `integer<int64>` = `1` | `2` | `3` — Тип товара: - `1` — малогабаритный товар (МГТ) - `2` — сверхгабаритный товар (СГТ) - `3` — крупногабаритный товар (КГТ+)
   - `crossBorderType` `integer<int32>` = `0` | `1` — Тип сборочного задания: - `0` — внутренняя поставка - `1` — трансграничная поставка
   - `isZeroOrder` `boolean` — Признак заказа товара с нулевым остатком: - `false` — заказ сделан на товар с ненулевым остатком - `true` — заказ сделан на товар с нулевым остатком. Такой заказ можно отменить без штрафа за отмену
-  - `isPickupPointShipmentAllowed` `boolean` — Можно ли отгрузить заказ на ПВЗ: - `false` — нет - `true` — да
+  - `isPickupPointDispatchAllowed` `boolean` — Можно ли отгрузить заказ на ПВЗ: - `false` — нет - `true` — да
   - `options` `object` — Опции заказа
     - `isB2B` `boolean` — Признак B2B-продажи: - `false` — не B2B-продажа - `true` — B2B-продажа
 
@@ -148,7 +148,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

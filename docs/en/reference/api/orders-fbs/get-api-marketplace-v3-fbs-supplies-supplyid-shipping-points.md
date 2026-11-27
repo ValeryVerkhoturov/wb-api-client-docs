@@ -1,9 +1,9 @@
 ---
-title: "Get Supply Shipping Points"
-description: "The method returns shipping points available for the supply. Intended for sellers from Russia. Use this method data to set supply shipping methods."
+title: "Get Supply Dispatch Points"
+description: "The method returns dispatch points available for the supply. Intended for sellers from Russia. Use this method data to set supply dispatch methods."
 ---
 
-# Get Supply Shipping Points
+# Get Supply Dispatch Points
 
 ```http
 GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
@@ -11,8 +11,8 @@ GET /api/marketplace/v3/fbs/supplies/{supplyId}/shipping-points
 
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsSuppliesSupplyIdShippingPoints)
 
-The method returns shipping points available for the supply.
-Intended for sellers from Russia. Use this method data to set [supply shipping methods](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
+The method returns dispatch points available for the supply.
+Intended for sellers from Russia. Use this method data to set [supply dispatch methods](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod).
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
@@ -23,18 +23,18 @@ Intended for sellers from Russia. Use this method data to set [supply shipping m
 
 ## Parameters
 
-| Name         | In    | Type     | Req. | Description                                                                                                                                                                                                                                                               |
-| ------------ | ----- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `supplyId`   | path  | `string` | yes  | Supply ID                                                                                                                                                                                                                                                                 |
-| `city`       | query | `string` | yes  | Locality for shipping the supply, Cyrillic                                                                                                                                                                                                                                |
-| `officeType` | query | `string` | yes  | Shipping point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point                                                                                                               |
-| `shippingDt` | query | `string` | no   | Planned supply shipping date, format `YYYY-MM-DD`. Required for orders for small-sized items (`"cargoType":1`) and dimensional cargo+ (`"cargoType":3`). If the value passed, you will get only the shipping points where the supply can be shipped on the specified date |
+| Name         | In    | Type     | Req. | Description                                                                                                                                                                                                                                                                  |
+| ------------ | ----- | -------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `supplyId`   | path  | `string` | yes  | Supply ID                                                                                                                                                                                                                                                                    |
+| `city`       | query | `string` | yes  | Locality for supply dispatch, Cyrillic                                                                                                                                                                                                                                       |
+| `officeType` | query | `string` | yes  | Dispatch point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point                                                                                                                  |
+| `shippingDt` | query | `string` | no   | Planned supply dispatch date, format `YYYY-MM-DD`. Required for orders for small-sized items (`"cargoType":1`) and dimensional cargo+ (`"cargoType":3`). If the value passed, you will get only the dispatch points where the supply can be dispatched on the specified date |
 
 ## Responses
 
 | Code  | Description                      | Schema                         |
 | ----- | -------------------------------- | ------------------------------ |
-| `200` | Success                          | `SupplyShippingPointsResponse` |
+| `200` | Success                          | `SupplyDispatchPointsResponse` |
 | `400` | Bad request                      | `Error`                        |
 | `401` | Unauthorized                     | `object`                       |
 | `403` | Access denied                    | `object`                       |
@@ -44,16 +44,16 @@ Intended for sellers from Russia. Use this method data to set [supply shipping m
 
 **Structure `200`:**
 
-- `shippingPoints` `SupplyShippingPoint[]` — Shipping points list for the supply
-  - `id` `integer<int64>` — Shipping point ID
+- `shippingPoints` `SupplyDispatchPoint[]` — Dispatch points list for the supply
+  - `id` `integer<int64>` — Dispatch point ID
   - `name` `string` — Name
   - `address` `string` — Address
   - `city` `string` — Locality
-  - `officeType` `string` — Shipping point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point
+  - `officeType` `string` — Dispatch point type: - `sc` — sorting center - `sw` — warehouse - `pp` — pickup point - `pfc` — partner fulfillment center - `gpp` — items acceptance point
   - `latitude` `number` — Latitude
   - `longitude` `number` — Longitude
   - `fulfillment` `boolean` — Whether tne **Fulfillment in SC** service is available for FBS supplies: - `true` — available - `false` — unavailable
-  - `available` `boolean` — Whether the shipping point is available for the supply: - `true` — available - `false` — unavailable. Returns for the pickup point if it is overloaded on the planned supply shipping date
+  - `available` `boolean` — Whether the dispatch point is available for the supply: - `true` — available - `false` — unavailable. Returns for the pickup point if it is overloaded on the planned supply dispatch date
 
 **Structure `400`:**
 
@@ -142,7 +142,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

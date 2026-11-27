@@ -75,7 +75,7 @@ Pagination can be used.
     - `status` `string` = `created` | `buyout` | `cancel` | `return` | `returnDefective` — [Order status](https://seller.wildberries.ru/instructions/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c): - `created` — placed - `buyout` — purchased - `cancel` — canceled - `return` — returned - `returnDefective` — returned due to defect
     - `cancelType` `string` = `app` | `receipt` | `expire` | `other` — [Cancellation type](https://seller.wildberries.ru/instructions/material/order-feed-report#a92fa9b0-86ab-4990-b905-33f6c38b385c) (when `"status":"cancel"`): - `app` — refuse prior to receipt - `receipt` — refuse at pickup - `expire` — pickup period ended - `other` — other
     - `warehouseName` `string` — Warehouse name. There can only be `Склад WB РФ` or `Склад WB СГТ РФ` for WB warehouses in Russia
-    - `warehouseRegion` `string` — Shipping region. If the warehouse belongs to WB or the seller is located outside Russia, the country is returned
+    - `warehouseRegion` `string` — Dispatch region. If the warehouse belongs to WB or the seller is located outside Russia, the country is returned
     - `isMp` `boolean` — Warehouse type: - `true` — seller warehouse - `false` — WB warehouse
     - `destinationCity` `string` — Delivery location
     - `destinationDistrict` `string` — The federal district to which the order is delivered. If the delivery is not in Russia, the country is returned
@@ -159,7 +159,7 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()

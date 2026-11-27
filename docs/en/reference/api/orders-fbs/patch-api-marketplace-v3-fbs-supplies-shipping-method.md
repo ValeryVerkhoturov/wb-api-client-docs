@@ -1,9 +1,9 @@
 ---
-title: "Set Supply Shipping Method"
-description: "The method sets shipping method, shipping date, and shipping point for the supplies."
+title: "Set Supply Dispatch Method"
+description: "The method sets dispatch method, dispatch date, and dispatch point for the supplies."
 ---
 
-# Set Supply Shipping Method
+# Set Supply Dispatch Method
 
 ```http
 PATCH /api/marketplace/v3/fbs/supplies/shipping-method
@@ -11,9 +11,9 @@ PATCH /api/marketplace/v3/fbs/supplies/shipping-method
 
 **Base URL:** `https://marketplace-api.wildberries.ru` · **Module:** [`orders-fbs`](/en/reference/api/orders-fbs/) · **Section:** FBS Supplies · [Specification doc ↗](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod)
 
-The method sets shipping method, shipping date, and shipping point for the supplies.
+The method sets dispatch method, dispatch date, and dispatch point for the supplies.
 
-The shipping method must be specified before transferring supply to delivery. You can update the shipping method until the supply and its boxes are scanned at the shipping point. Once the supply has been scanned, this method will start returning a `409` error.
+The dispatch method must be specified before transferring supply to delivery. You can update the dispatch method until the supply and its boxes are scanned at the dispatch point. Once the supply has been scanned, this method will start returning a `409` error.
 
 You can specify a maximum of 100 supplies per request. The processing result is returned for each supply separately.
 
@@ -31,16 +31,16 @@ Available only for sellers from the Russian Federation.
 `application/json` — schema `object`, required
 
 - `data` `UpdateSupplyShippingMethod[]` (required)
-  - `shippingDt` `string` (required) — Planned supply shipping date, format `YYYY-MM-DD`
-  - `shippingPointId` `integer<int64>` (required) — Shipping point ID. You can get it using a [separate method](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
-  - `shippingType` `string` = `selfShipping` | `transportCompany` (required) — Type of shipping to the shipping point: - `selfShipping` — shipping at the seller's expense - `transportCompany` — delivery via a transport company
+  - `shippingDt` `string` (required) — Planned supply dispatch date, format `YYYY-MM-DD`
+  - `shippingPointId` `integer<int64>` (required) — Dispatch point ID. You can get it using a [separate method](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/getV3FbsShippingPoints)
+  - `shippingType` `string` = `selfShipping` | `transportCompany` (required) — Type of dispatch to the dispatch point: - `selfShipping` — dispatch at the seller's expense - `transportCompany` — delivery via a transport company
   - `supplyId` `string` (required) — Supply ID
 
 ## Responses
 
 | Code  | Description       | Schema                                 |
 | ----- | ----------------- | -------------------------------------- |
-| `200` | Success           | `UpdateSuppliesShippingMethodResponse` |
+| `200` | Success           | `UpdateSuppliesDispatchMethodResponse` |
 | `400` | Bad request       | `Error`                                |
 | `401` | Unauthorized      | `object`                               |
 | `402` | Payment required  | `object`                               |
@@ -50,8 +50,8 @@ Available only for sellers from the Russian Federation.
 
 **Structure `200`:**
 
-- `results` `UpdatedSuppliesShippingMethod[]`
-  - `error` `object` — Error processing the request for the supply. Possible errors: - `400 IncorrectRequestBody`: - incorrect supply ID - shipping point not found - destination warehouse is not located in the Russian Federation - unknown `shippingType` - date does not match the `YYYY-MM-DD` format - `400 FulfillmentRequired` — the **Fulfillment at SC** service is not available at the shipping point - `404 NotFound` — supply not found - `409 SupplyAlreadyScanned` — the supply or its boxes have already been scanned at the shipping point - `409 InvalidShippingDt` — invalid supply shipping date
+- `results` `UpdatedSuppliesDispatchMethod[]`
+  - `error` `object` — Error processing the request for the supply. Possible errors: - `400 IncorrectRequestBody`: - incorrect supply ID - dispatch point not found - destination warehouse is not located in the Russian Federation - unknown `shippingType` - date does not match the `YYYY-MM-DD` format - `400 FulfillmentRequired` — the **Fulfillment at SC** service is not available at the dispatch point - `404 NotFound` — supply not found - `409 SupplyAlreadyScanned` — the supply or its boxes have already been scanned at the dispatch point - `409 InvalidShippingDt` — invalid supply dispatch date
     - `code` `integer<int64>` — Error code
     - `detail` `string` — Additional error data
   - `success` `boolean` — Whether the request was processed successfully for this supply. Can only be `true`
@@ -138,7 +138,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

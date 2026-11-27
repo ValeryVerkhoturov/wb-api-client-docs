@@ -15,7 +15,7 @@ The method adds up to 100 [assembly orders](https://dev.wildberries.ru/openapi/o
 It can also move the assembly orders:
 
 - between active supplies
-- from a closed to an active supply, if the assembly order requires [reshipment](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3SuppliesOrdersReshipment).
+- from a closed to an active supply, if the assembly order requires [redispatch](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsAssemblyOrders/operation/getV3SuppliesOrdersReshipment).
 
 You can add any assembly orders that arrived at the same warehouse to an empty supply.
 The supply acquires the attributes of the first assembly order added to it from the [fields](https://dev.wildberries.ru/en/docs/openapi/orders-fbs#tag/fbsSupplies/operation/getV3SuppliesSupplyId):
@@ -143,7 +143,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

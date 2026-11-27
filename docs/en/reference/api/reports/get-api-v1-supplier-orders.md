@@ -57,7 +57,7 @@ If the response returns an empty array `[]`, all orders have already been retrie
 
 - `date` `string` — Date and time of order. This field equals to `dateFrom` in request if `flag=1`. If the time zone is not specified, then Moscow time UTC+3 is taken.
 - `lastChangeDate` `string` — Date and time of refreshing info of service. This field corresponds to the `dateFrom` parameter in the request if the `flag=0` parameter exist or not specified. If the time zone is not specified, then Moscow time UTC+3 is taken.
-- `warehouseName` `string` — Shipping warehouse name
+- `warehouseName` `string` — Dispatch warehouse name
 - `warehouseType` `string` = `Склад WB` | `Склад продавца` — Type of items storage warehouse: - `Склад WB` — WB warehouse - `Склад продавца` — seller warehouse
 - `countryName` `string` — Country
 - `oblastOkrugName` `string` — Area
@@ -161,7 +161,7 @@ import (
 	"context"
 	"fmt"
 
-	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v3/reports"
+	wbreports "github.com/ValeryVerkhoturov/wb-api-client-go/v4/reports"
 )
 
 cfg := wbreports.NewConfiguration()

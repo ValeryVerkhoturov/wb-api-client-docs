@@ -19,7 +19,7 @@ You can transfer the supply to delivery only if:
 - required labeling is specified for all assembly orders
 - labeling of all assembly orders passed validation
   If the supply contains assembly orders with required UIN, make sure that you have created and uploaded the Delivery Contract Specification in advance. The [GIIS DMDK](https://minfin.gov.ru/ru/perfomance/jewels/dmdk) takes about 30 minutes to process changes in UIN statuses.
-  It is required to [specify the shipping parameters](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod) for supplies from Russian sellers to Russia shipping points. If the shipping method, shipping date, or shipping point is not specified, a `409` error is returned.
+  It is required to [specify the dispatch parameters](https://dev.wildberries.ru/openapi/orders-fbs#tag/fbsSupplies/operation/patchV3FbsSuppliesShippingMethod) for supplies from Russian sellers to Russia dispatch points. If the dispatch method, dispatch date, or dispatch point is not specified, a `409` error is returned.
 
 [Request limit](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Rate-Limits) per one seller account for **FBS assembly orders, supplies, passes and auto-return settings** methods:
 
@@ -138,7 +138,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbs"
+	wbordersfbs "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbs"
 )
 
 cfg := wbordersfbs.NewConfiguration()

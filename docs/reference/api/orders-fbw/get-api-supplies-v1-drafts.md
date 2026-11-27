@@ -136,7 +136,7 @@ import (
 	"context"
 	"fmt"
 
-	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/v3/orders_fbw"
+	wbordersfbw "github.com/ValeryVerkhoturov/wb-api-client-go/v4/orders_fbw"
 )
 
 cfg := wbordersfbw.NewConfiguration()

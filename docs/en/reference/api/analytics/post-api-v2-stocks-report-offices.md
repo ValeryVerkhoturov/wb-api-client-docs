@@ -28,7 +28,7 @@ The report data is updated once every 2 hours.
 
 ## Request body
 
-`application/json` — schema `TableShippingOfficeRequest`, required
+`application/json` — schema `TableDispatchOfficeRequest`, required
 
 - `nmIDs` `integer<int64>[]` — List of WB item numbers for filtering
 - `subjectIDs` `integer<int32>[]` — List of subcategory IDs for filtering
@@ -53,9 +53,9 @@ The report data is updated once every 2 hours.
 
 **Structure `200`:**
 
-- `data` `TableShippingOfficeResponse`
-  - `regions` `TableShippingOfficeItem[]` — Set of data on shipping regions
-    - `regionName` `string` — [Shipping country](https://dev.wildberries.ru/release-notes?id=605)
+- `data` `TableDispatchOfficeResponse`
+  - `regions` `TableDispatchOfficeItem[]` — Set of data on dispatch regions
+    - `regionName` `string` — [Dispatch country](https://dev.wildberries.ru/release-notes?id=605)
     - `metrics` `object` — Metrics by region
       - `stockCount` `integer<int64>` — Current inventory
       - `stockSum` `integer<int64>` — Current inventory value
@@ -133,7 +133,7 @@ from wb_api_client.analytics.api import AnalyticsApi
 cfg = Configuration(access_token="<your WB JWT>")
 api = AnalyticsApi(ApiClient(cfg))
 
-result = api.post_v2_stocks_report_offices(table_shipping_office_request=...)
+result = api.post_v2_stocks_report_offices(table_dispatch_office_request=...)
 print(result)
 ```
 
@@ -147,7 +147,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<your WB JWT>");
 const api = new AnalyticsApi(cfg);
 
-const { data } = await api.postV2StocksReportOffices(tableShippingOfficeRequest);
+const { data } = await api.postV2StocksReportOffices(tableDispatchOfficeRequest);
 console.log(data);
 ```
 
@@ -156,14 +156,14 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<your WB JWT>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.AnalyticsAPI.PostV2StocksReportOffices(context.Background()).TableShippingOfficeRequest(tableShippingOfficeRequest).Execute()
+result, _, err := client.AnalyticsAPI.PostV2StocksReportOffices(context.Background()).TableDispatchOfficeRequest(tableDispatchOfficeRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -179,7 +179,7 @@ ApiClient client = new ApiClient();
 client.setAccessToken(new SecretString("<your WB JWT>"));
 AnalyticsApi api = new AnalyticsApi(client);
 
-System.out.println(api.postV2StocksReportOffices(tableShippingOfficeRequest));
+System.out.println(api.postV2StocksReportOffices(tableDispatchOfficeRequest));
 ```
 
 ```php [PHP]
@@ -192,7 +192,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<your WB JWT>'));
 $api = new AnalyticsApi(new Client(), $config);
 
-print_r($api->postV2StocksReportOffices($table_shipping_office_request));
+print_r($api->postV2StocksReportOffices($table_dispatch_office_request));
 ```
 
 ```bsl [OneScript]
@@ -213,7 +213,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<your WB JWT>");
 var api = new AnalyticsApi(config);
 
-Console.WriteLine(api.PostV2StocksReportOffices(tableShippingOfficeRequest));
+Console.WriteLine(api.PostV2StocksReportOffices(tableDispatchOfficeRequest));
 ```
 
 ```rust [Rust]
@@ -224,7 +224,7 @@ async fn main() {
     let mut cfg = Configuration::new();
     cfg.set_access_token("<your WB JWT>");
 
-    let result = analytics_api::post_v2_stocks_report_offices(&cfg, table_shipping_office_request).await;
+    let result = analytics_api::post_v2_stocks_report_offices(&cfg, table_dispatch_office_request).await;
     println!("{:#?}", result);
 }
 ```

@@ -28,7 +28,7 @@ POST /api/v2/stocks-report/offices
 
 ## Тело запроса
 
-`application/json` — схема `TableShippingOfficeRequest`, обязательно
+`application/json` — схема `TableDispatchOfficeRequest`, обязательно
 
 - `nmIDs` `integer<int64>[]` — Список артикулов WB для фильтрации
 - `subjectIDs` `integer<int32>[]` — Список ID предметов для фильтрации
@@ -53,8 +53,8 @@ POST /api/v2/stocks-report/offices
 
 **Структура `200`:**
 
-- `data` `TableShippingOfficeResponse`
-  - `regions` `TableShippingOfficeItem[]` — Множество данных по регионам отгрузки
+- `data` `TableDispatchOfficeResponse`
+  - `regions` `TableDispatchOfficeItem[]` — Множество данных по регионам отгрузки
     - `regionName` `string` — [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
     - `metrics` `object` — Метрики по региону
       - `stockCount` `integer<int64>` — Остатки на текущий день, шт.
@@ -133,7 +133,7 @@ from wb_api_client.analytics.api import AnalyticsApi
 cfg = Configuration(access_token="<ваш JWT WB>")
 api = AnalyticsApi(ApiClient(cfg))
 
-result = api.post_v2_stocks_report_offices(table_shipping_office_request=...)
+result = api.post_v2_stocks_report_offices(table_dispatch_office_request=...)
 print(result)
 ```
 
@@ -147,7 +147,7 @@ const cfg = new Configuration({});
 cfg.setAccessToken("<ваш JWT WB>");
 const api = new AnalyticsApi(cfg);
 
-const { data } = await api.postV2StocksReportOffices(tableShippingOfficeRequest);
+const { data } = await api.postV2StocksReportOffices(tableDispatchOfficeRequest);
 console.log(data);
 ```
 
@@ -156,14 +156,14 @@ import (
 	"context"
 	"fmt"
 
-	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v3/analytics"
+	wbanalytics "github.com/ValeryVerkhoturov/wb-api-client-go/v4/analytics"
 )
 
 cfg := wbanalytics.NewConfiguration()
 cfg.SetAccessToken("<ваш JWT WB>")
 client := wbanalytics.NewAPIClient(cfg)
 
-result, _, err := client.AnalyticsAPI.PostV2StocksReportOffices(context.Background()).TableShippingOfficeRequest(tableShippingOfficeRequest).Execute()
+result, _, err := client.AnalyticsAPI.PostV2StocksReportOffices(context.Background()).TableDispatchOfficeRequest(tableDispatchOfficeRequest).Execute()
 if err != nil {
     panic(err)
 }
@@ -179,7 +179,7 @@ ApiClient client = new ApiClient();
 client.setAccessToken(new SecretString("<ваш JWT WB>"));
 AnalyticsApi api = new AnalyticsApi(client);
 
-System.out.println(api.postV2StocksReportOffices(tableShippingOfficeRequest));
+System.out.println(api.postV2StocksReportOffices(tableDispatchOfficeRequest));
 ```
 
 ```php [PHP]
@@ -192,7 +192,7 @@ $config = (new Configuration())
     ->setAccessTokenSecret(new SecretString('<ваш JWT WB>'));
 $api = new AnalyticsApi(new Client(), $config);
 
-print_r($api->postV2StocksReportOffices($table_shipping_office_request));
+print_r($api->postV2StocksReportOffices($table_dispatch_office_request));
 ```
 
 ```bsl [OneScript]
@@ -213,7 +213,7 @@ var config = new Configuration();
 config.AccessTokenSecret = new SecretString("<ваш JWT WB>");
 var api = new AnalyticsApi(config);
 
-Console.WriteLine(api.PostV2StocksReportOffices(tableShippingOfficeRequest));
+Console.WriteLine(api.PostV2StocksReportOffices(tableDispatchOfficeRequest));
 ```
 
 ```rust [Rust]
@@ -224,7 +224,7 @@ async fn main() {
     let mut cfg = Configuration::new();
     cfg.set_access_token("<ваш JWT WB>");
 
-    let result = analytics_api::post_v2_stocks_report_offices(&cfg, table_shipping_office_request).await;
+    let result = analytics_api::post_v2_stocks_report_offices(&cfg, table_dispatch_office_request).await;
     println!("{:#?}", result);
 }
 ```
